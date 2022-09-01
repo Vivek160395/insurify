@@ -1,0 +1,149 @@
+version: "3.3"
+services:
+  rabbitmq:
+    image: rabbitmq:3.7.5-management
+    container_name: rabbitmq-container
+    network_mode: "host"
+    hostname: localhost
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_VHOST:
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  mysqlservice:
+    image: mysql:latest
+    container_name: mysql-container
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_USERNAME: authuser
+      MYSQL_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+  mongodbservice:
+    image: mongo:latest
+    container_name: mongo-container
+    network_mode: host
+    hostname: localhost
+    ports:
+      - 27017:27017
+
+  neo4j:
+    image: neo4j:4.2.3
+    container_name: neo4j
+    restart: always
+    network_mode: "host"
+    ports:
+      - 7474:7474
+      - 7687:7687
+    environment:
+      NEO4J_AUTH: neo4j/password
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    container_name: elasticsearch
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=elasticsearch
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+
+  user-service:
+    container_name: user-service
+    build: user-service/
+    hostname: localhost
+    network_mode: host
+    ports:
+      - 8090:8090
+    depends_on:
+      - mongodbservice
+    restart: always
+
+  authentication-service:
+    container_name: authentication-service
+    build: authentication-service/
+    hostname: localhost
+    network_mode: host
+    ports:
+      - 8099:8099
+    depends_on:
+      - mysqlservice
+    restart: always
+
+  insurance-service:
+    container_name: insurance-service
+    build: insurance-service/
+    hostname: localhost
+    network_mode: host
+    ports:
+      - 8095:8095
+    depends_on:
+      - elasticsearch
+    restart: always
+
+  policy-advisor-service:
+    container_name: policy-advisor-service
+    build: policy-advisor-service/
+    hostname: localhost
+    network_mode: host
+    ports:
+      - 8097:8097
+    depends_on:
+      - neo4j
+    restart: always
+
+  recommendation-service:
+    container_name: recommendation-service
+    build: recommendation-service/
+    hostname: localhost
+    network_mode: host
+    ports:
+      - 8070:8070
+    depends_on:
+      - neo4j
+    restart: always
+
+  email-service:
+    container_name: email-service
+    build: email-service/
+    hostname: localhost
+    network_mode: host
+    ports:
+      - 8075:8075
+    restart: always
+
+  eureka-server:
+    build: eureka-server/
+    container_name: eureka-server
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8761:8761
+
+  api-gateway:
+    build: api-gateway/
+    container_name: api-gateway
+    depends_on:
+      - eureka-server
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 8080:8080
+
+
+
