@@ -2,6 +2,8 @@ package com.stackroute.insuranceservice.repository;
 
 import com.stackroute.insuranceservice.model.InsurancePolicy;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.stereotype.Repository;
 
-public interface InsurancePolicyRepository extends ElasticsearchRepository<Integer, InsurancePolicy> {
+@Repository
+public interface InsurancePolicyRepository extends ElasticsearchRepository<InsurancePolicy, Integer> {
 }
