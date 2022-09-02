@@ -1,11 +1,14 @@
 package com.stackroute.insuranceservice.model;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-@Data
 @Document(indexName = "InsurancePolicy")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class InsurancePolicy {
 
     @Id
@@ -14,7 +17,4 @@ public class InsurancePolicy {
     String policyDescription;
     Integer policyDuration;
     String insuranceType;
-
-    public InsurancePolicy() {
-    }
 }

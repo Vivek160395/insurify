@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
 @Node
@@ -12,11 +11,5 @@ import org.springframework.data.neo4j.core.schema.Node;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Insurance {
-    @Id
-    private int insuranceId;
-    private String insuranceName;
-    private InsuranceType insuranceType;
-    private Occupation occupation;
-    private Age age;
+public class InsuranceType {
 }
