@@ -35,10 +35,11 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         else {
             insurance2.setInsuranceId(insurance.getInsuranceId());
             insurance2.setInsuranceName(insurance.getInsuranceName());
-            insurance_repository.createAgeRelation(insurance.getInsuranceId(),insurance.getAge());
-            insurance_repository.createInsuranceTypeRelation(insurance.getInsuranceId(),insurance.getInsuranceType());
-            insurance_repository.createOccupationRelation(insurance.getInsuranceId(),insurance.getOccupation());
-            return insurance_repository.save(insurance2);
+            insurance_repository.save(insurance2);
+            createAgeRelation(insurance.getInsuranceId(),insurance.getAge());
+            createInsuranceTypeRelation(insurance.getInsuranceId(),insurance.getInsuranceType());
+            createOccupationRelation(insurance.getInsuranceId(),insurance.getOccupation());
+            return insurance2;
         }
     }
 
@@ -60,6 +61,27 @@ public class Recommendation_Service_Impl implements Recommendation_service{
     public void addOccupation(String occupation) {
         if(occupation_repository.findById(occupation).isEmpty()){
             occupation_repository.save(new Occupation(occupation));
+        }
+    }
+
+    @Override
+    public void createInsuranceTypeRelation(int insuranceId, String insuranceType) {
+        if(!insurance_repository.checkInsuranceTypeRelationship(insuranceId,insuranceType)){
+            insurance_repository.createInsuranceTypeRelation(insuranceId,insuranceType);
+        }
+    }
+
+    @Override
+    public void createAgeRelation(int insuranceId, Integer age) {
+        if(!insurance_repository.checkAgeRelationship(insuranceId,age)){
+            insurance_repository.createAgeRelation(insuranceId,age);
+        }
+    }
+
+    @Override
+    public void createOccupationRelation(int insuranceId, String occupationName) {
+        if(!insurance_repository.checkOccupationRelation(insuranceId,occupationName)){
+            insurance_repository.createOccupationRelation(insuranceId,occupationName);
         }
     }
 }

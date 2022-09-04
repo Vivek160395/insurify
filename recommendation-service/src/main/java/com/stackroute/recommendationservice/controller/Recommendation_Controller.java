@@ -1,6 +1,8 @@
 package com.stackroute.recommendationservice.controller;
 
+import com.stackroute.recommendationservice.exception.AgeAlreadyThere;
 import com.stackroute.recommendationservice.exception.InsuranceAlreadyExists;
+import com.stackroute.recommendationservice.model.Insurance;
 import com.stackroute.recommendationservice.model.InsuranceProfile;
 import com.stackroute.recommendationservice.service.Recommendation_service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,18 @@ public class Recommendation_Controller {
         this.recommendation_service = recommendation_service;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/Insurance")
     public ResponseEntity<?> RegisterInsurance(@RequestBody InsuranceProfile insuranceProfile) {
         try {
-            return new ResponseEntity<>(recommendation_service.addInsurance(insuranceProfile),HttpStatus.OK);
+            recommendation_service.addAge(insuranceProfile.getAge());
+            recommendation_service.addInsuranceType(insuranceProfile.getInsuranceType());
+            recommendation_service.addOccupation(insuranceProfile.getOccupation());
+            Insurance insurance = recommendation_service.addInsurance(insuranceProfile);
+            if(insurance != null){
+                return new ResponseEntity<>("Insurance Added",HttpStatus.CREATED);
+            }else{
+                return new ResponseEntity<>("Insurance Added",HttpStatus.OK);
+            }
         }catch (InsuranceAlreadyExists e){
             return new ResponseEntity<>("Insurance Already Exists", HttpStatus.CONFLICT);
         }

@@ -9,4 +9,7 @@ public interface Recommendation_service {
     void addAge(Integer age);
     void addInsuranceType(String insurance_Type);
     void addOccupation(String occupation);
+    void createInsuranceTypeRelation(int insuranceId,String insuranceType);
+    void createAgeRelation(int insuranceId,Integer age);
+    void createOccupationRelation(int insuranceId,String occupationName);
 }
