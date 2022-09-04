@@ -2,8 +2,9 @@ package com.stackroute.authentication.service.model;
 
 import lombok.*;
 
+
 import javax.persistence.*;
-import java.util.List;
+
 
 @Data
 @Entity
@@ -12,5 +13,9 @@ import java.util.List;
 public class UserCredentials {
     @Id
     private String emailId;
+
     private String password;
+
+
+
 }

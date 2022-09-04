@@ -50,4 +50,5 @@ public class UserCredentialsController {
     public ResponseEntity<?> getAllUser()  {
         return new ResponseEntity<>(userCredentialsService.getAllUser(), HttpStatus.CREATED);
     }
+
 }
