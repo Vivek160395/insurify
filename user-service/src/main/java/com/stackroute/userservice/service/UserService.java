@@ -14,4 +14,5 @@ public interface UserService {
     public boolean deleteUser(String emailId) throws UserNotRegisteredException;
 
 
+
 }
