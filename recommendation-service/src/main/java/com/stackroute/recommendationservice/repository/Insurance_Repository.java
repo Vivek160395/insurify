@@ -7,4 +7,10 @@ import org.springframework.data.neo4j.repository.query.Query;
 public interface Insurance_Repository extends Neo4jRepository<Insurance,Integer> {
     @Query("MATCH (a:Insurance(id:$id)),(b:InsuranceType(insuranceType:$insuranceType)) MERGE (a)-[r:TypeOfInsurance]->(b)")
     void createInsuranceTypeRelation(int id,String insuranceType);
+
+    @Query("MATCH (a:Insurance(id:$id)),(b:Age(age:$age)) MERGE (a)-[r:TypeOfInsurance]->(b)")
+    void createAgeRelation(int id,Integer age);
+
+    @Query("MATCH (a:Insurance(id:$id)),(b:Occupation(occupationName: $occupationName)) MERGE (a)-[r:TypeOfInsurance]->(b)")
+    void createOccupationRelation(int id,String occupationName);
 }

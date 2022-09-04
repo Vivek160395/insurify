@@ -16,3 +16,5 @@ public class Occupation {
     @Id
     private String occupationName;
 }
+
+

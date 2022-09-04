@@ -1,20 +1,16 @@
 package com.stackroute.recommendationservice.service;
-
-import com.stackroute.recommendationservice.exception.AgeAlreadyExists;
 import com.stackroute.recommendationservice.exception.InsuranceAlreadyExists;
-import com.stackroute.recommendationservice.exception.InsuranceTypeAlreadyExists;
-import com.stackroute.recommendationservice.model.Age;
-import com.stackroute.recommendationservice.model.Insurance;
-import com.stackroute.recommendationservice.model.InsuranceProfile;
-import com.stackroute.recommendationservice.model.InsuranceType;
+import com.stackroute.recommendationservice.model.*;
 import com.stackroute.recommendationservice.repository.Age_Repository;
 import com.stackroute.recommendationservice.repository.Insurance_Repository;
 import com.stackroute.recommendationservice.repository.Insurance_Type_Repository;
 import com.stackroute.recommendationservice.repository.Occupation_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class Recommendation_Service_Impl implements Recommendation_service{
     private Age_Repository age_repository;
     private Insurance_Repository insurance_repository;
@@ -31,28 +27,39 @@ public class Recommendation_Service_Impl implements Recommendation_service{
 
     @Override
     public Insurance addInsurance(InsuranceProfile insurance) throws InsuranceAlreadyExists {
-        Optional<Insurance> insurance1 = insurance_repository.findById(insurance.getInsurance().getInsuranceId());
+        Insurance insurance2 = new Insurance();
+        Optional<Insurance> insurance1 = insurance_repository.findById(insurance.getInsuranceId());
         if(insurance1.isPresent()){
             throw new InsuranceAlreadyExists();
         }
         else {
-            return insurance_repository.save(insurance.getInsurance());
+            insurance2.setInsuranceId(insurance.getInsuranceId());
+            insurance2.setInsuranceName(insurance.getInsuranceName());
+            insurance_repository.createAgeRelation(insurance.getInsuranceId(),insurance.getAge());
+            insurance_repository.createInsuranceTypeRelation(insurance.getInsuranceId(),insurance.getInsuranceType());
+            insurance_repository.createOccupationRelation(insurance.getInsuranceId(),insurance.getOccupation());
+            return insurance_repository.save(insurance2);
         }
     }
 
     @Override
-    public void addAge(Integer age) throws AgeAlreadyExists {
-        if(age_repository.findById(age).isPresent()){
-            throw new AgeAlreadyExists();
+    public void addAge(Integer age) {
+        if(age_repository.findById(age).isEmpty()){
+            age_repository.save(new Age(age));
         }
-        else age_repository.save(new Age(age));
     }
 
     @Override
-    public void addInsuranceType(String insurance_Type) throws InsuranceTypeAlreadyExists {
-        if(insurance_type_repository.findById(insurance_Type).isPresent()){
-            throw new InsuranceTypeAlreadyExists();
+    public void addInsuranceType(String insurance_Type){
+        if(insurance_type_repository.findById(insurance_Type).isEmpty()){
+            insurance_type_repository.save(new InsuranceType(insurance_Type));
         }
-        else insurance_type_repository.save(new InsuranceType(insurance_Type));
+    }
+
+    @Override
+    public void addOccupation(String occupation) {
+        if(occupation_repository.findById(occupation).isEmpty()){
+            occupation_repository.save(new Occupation(occupation));
+        }
     }
 }
