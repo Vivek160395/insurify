@@ -8,6 +8,7 @@ import com.stackroute.recommendationservice.repository.Occupation_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,7 +45,7 @@ public class Recommendation_Service_Impl implements Recommendation_service{
     }
 
     @Override
-    public void addAge(Integer age) {
+    public void addAge(int age) {
         if(age_repository.findById(age).isEmpty()){
             age_repository.save(new Age(age));
         }
@@ -72,7 +73,7 @@ public class Recommendation_Service_Impl implements Recommendation_service{
     }
 
     @Override
-    public void createAgeRelation(int insuranceId, Integer age) {
+    public void createAgeRelation(int insuranceId, int age) {
         if(!insurance_repository.checkAgeRelationship(insuranceId,age)){
             insurance_repository.createAgeRelation(insuranceId,age);
         }
@@ -83,5 +84,23 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         if(!insurance_repository.checkOccupationRelation(insuranceId,occupationName)){
             insurance_repository.createOccupationRelation(insuranceId,occupationName);
         }
+    }
+
+    @Override
+    public List<Insurance> getAllInsuranceOnBasisOfAge(int age) {
+         List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithAge(age);
+        return insurances;
+    }
+
+    @Override
+    public List<Insurance> getAllInsuranceOnBasisOfOccupation(String occupationName) {
+        List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithOccupation(occupationName);
+        return insurances;
+    }
+
+    @Override
+    public List<Insurance> getAllInsuranceOnBasisOfType(String insuranceType) {
+        List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithInsuranceType(insuranceType);
+        return insurances;
     }
 }

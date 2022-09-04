@@ -8,10 +8,9 @@ import com.stackroute.recommendationservice.service.Recommendation_service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/Recommendation")
@@ -24,7 +23,7 @@ public class Recommendation_Controller {
     }
 
     @PostMapping("/Insurance")
-    public ResponseEntity<?> RegisterInsurance(@RequestBody InsuranceProfile insuranceProfile) {
+    public ResponseEntity<?> registerInsurance(@RequestBody InsuranceProfile insuranceProfile) {
         try {
             recommendation_service.addAge(insuranceProfile.getAge());
             recommendation_service.addInsuranceType(insuranceProfile.getInsuranceType());
@@ -33,11 +32,40 @@ public class Recommendation_Controller {
             if(insurance != null){
                 return new ResponseEntity<>("Insurance Added",HttpStatus.CREATED);
             }else{
-                return new ResponseEntity<>("Insurance Added",HttpStatus.OK);
+                return new ResponseEntity<>("Insurance Not added",HttpStatus.OK);
             }
         }catch (InsuranceAlreadyExists e){
             return new ResponseEntity<>("Insurance Already Exists", HttpStatus.CONFLICT);
         }
     }
 
+    @GetMapping("{age}/InsuranceByAge")
+    public ResponseEntity<?> getInsuranceByAge(@PathVariable int age){
+        List<Insurance> insurances = recommendation_service.getAllInsuranceOnBasisOfAge(age);
+        if(insurances.size() ==0){
+            return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<>(insurances,HttpStatus.FOUND);
+        }
+
+    }
+    @GetMapping("{occupation}/InsuranceByOccupation")
+    public ResponseEntity<?> getInsuranceByOccupation(@PathVariable String occupation){
+        List<Insurance> insurances = recommendation_service.getAllInsuranceOnBasisOfOccupation(occupation);
+        if(insurances.size() ==0){
+            return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<>(insurances,HttpStatus.FOUND);
+        }
+
+    }
+    @GetMapping("{insuranceType}/InsuranceByType")
+    public ResponseEntity<?> getInsuranceByType(@PathVariable String insuranceType){
+        List<Insurance> insurances = recommendation_service.getAllInsuranceOnBasisOfType(insuranceType);
+        if(insurances.size() ==0){
+            return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity<>(insurances,HttpStatus.FOUND);
+        }
+    }
 }

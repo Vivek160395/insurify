@@ -14,5 +14,5 @@ import org.springframework.data.neo4j.core.schema.Node;
 @NoArgsConstructor
 public class Age {
     @Id
-    private Integer age;
+    private int age;
 }
