@@ -1,4 +1,4 @@
-package com.stackroute.recommendationservice.model.controller;
+package com.stackroute.recommendationservice.controller;
 
 import com.stackroute.recommendationservice.exception.AgeAlreadyThere;
 import com.stackroute.recommendationservice.exception.InsuranceAlreadyExists;
