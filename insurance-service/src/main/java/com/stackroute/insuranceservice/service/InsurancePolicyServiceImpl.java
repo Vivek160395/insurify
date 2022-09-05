@@ -22,11 +22,7 @@ public class InsurancePolicyServiceImpl implements InsurancePolicyService{
 
     @Override
     public InsurancePolicy savePolicy(InsurancePolicy policy) throws PolicyAlreadyExistException {
-        if (policyRepository.findById(policy.getPolicyId()).isPresent()){
-            throw new PolicyAlreadyExistException();
-        }else{
             return policyRepository.save(policy);
-        }
     }
 
     @Override
