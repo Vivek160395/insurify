@@ -13,8 +13,8 @@ public class Consumer {
     @Autowired
     private UserCredentialsServiceImpl userCredentialsService;
 
-    @RabbitListener(queues="favourite_movie_queue")
-    public void getFavouriteDtoFromRabbitMq(UserDTO userDTO) throws UserAlreadyExistException
+    @RabbitListener(queues="queue1")
+    public void getUserDtoFromRabbitMq(UserDTO userDTO) throws UserAlreadyExistException
     {
         UserCredentials userCredentials=new UserCredentials();
         userCredentials.setEmailId(userDTO.getEmailId());
