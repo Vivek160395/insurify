@@ -5,14 +5,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 @Data
-@Document(indexName = "InsurancePolicy")
+@Document(indexName = "insurancepolicy")
 public class InsurancePolicy {
 
     @Id
     Integer policyId;
     String policyName;
     String policyDescription;
-    Integer policyDuration;
+    String policyDuration;
     String insuranceType;
 
     public InsurancePolicy() {
