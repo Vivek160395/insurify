@@ -1,5 +1,6 @@
 package com.stackroute.insuranceservice.model;
 
+import com.carrotsearch.hppc.Generated;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -7,20 +8,19 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @Document(indexName = "insurance-policy")
 public class HealthInsurancePolicy {
 
     @Id
-    Integer policyId;
-    String policyName;
-    String policyDescription;
-    String insuranceType;
-    String policyBenefits;
-    String policyDocuments;
-    List<String> sumsInsured;
-    List<String> premium;
-    List<String> policyDuration;
-    List<String> addOns;
-    List<String> addOnsPremium;
+    private Integer policyId;
+    private String policyName;
+    private String policyDescription;
+    private String insuranceType;
+    private String policyBenefits;
+    private String policyDocuments;
+    private List<String> sumInsured;
+    private List<String> premium;
+    private List<String> policyDuration;
+    private List<String> addOns;
+    private List<String> addOnsPremium;
 }
