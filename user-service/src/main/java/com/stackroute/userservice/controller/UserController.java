@@ -30,9 +30,16 @@ public class UserController {
 
     @PostMapping("/user")
     public User registerUser(@RequestBody User user) throws UserAlreadyExistsException {
-        user.setUserId(sequenceGeneratorService.getSequenceNumber(User.SEQUENCE_NAME));
-        return userService.registerUser(user);
+        try {
+            user.setUserId(sequenceGeneratorService.getSequenceNumber(User.SEQUENCE_NAME));
+            return userService.registerUser(user);
+        }
+        catch (UserAlreadyExistsException e) {
+            e.getMessage();
+            throw e;
+        }
     }
+
 
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers() {
@@ -40,20 +47,26 @@ public class UserController {
     }
 
     @PutMapping("/updateUser/{userId}")
-    public ResponseEntity<?> updateUserInfo(@PathVariable int userId, @RequestBody User user) throws UserNotRegisteredException{
-        return new ResponseEntity<>(userService.updateUser(user,userId), HttpStatus.OK);
+    public ResponseEntity<?> updateUserInfo(@PathVariable int userId, @RequestBody User user) throws UserNotRegisteredException {
+        try {
+            return new ResponseEntity<>(userService.updateUser(user, userId), HttpStatus.OK);
+        } catch (UserNotRegisteredException e) {
+            e.getMessage();
+            throw e;
+        }
     }
 
     @DeleteMapping("/removeUser/{userId}")
-    public ResponseEntity<?> deleteUser(@PathVariable int userId) throws Exception {
+    public ResponseEntity<?> deleteUser(@PathVariable int userId) throws UserNotRegisteredException {
         try {
             if (userService.deleteUser(userId))
-                return new ResponseEntity<>("User Deleted", HttpStatus.OK);
+                return new ResponseEntity<>("User with userId = "+userId+" is Deleted successfully.", HttpStatus.OK);
             else
                 return new ResponseEntity<>("User Not Deleted", HttpStatus.OK);
-        } catch (UserNotRegisteredException e) {
+        }
+        catch (UserNotRegisteredException e) {
             e.getMessage();
-            throw new Exception();
+            throw e;
         }
     }
 
