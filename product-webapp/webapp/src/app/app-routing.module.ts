@@ -16,6 +16,9 @@ const routes: Routes = [
     children: [
       {
         path: 'register', component: RegisterComponent
+      },
+      {
+        path: 'log', component: LoginComponent
       }
     ]
   }
