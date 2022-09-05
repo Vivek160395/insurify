@@ -9,7 +9,6 @@ import com.stackroute.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -19,8 +18,9 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private Producer producer;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, Producer producer) {
         this.userRepository = userRepository;
+        this.producer = producer;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService{
         userDTO.setProfilePic(user.getProfilePic());
 
 
-        if(userRepository.findById(user.getEmailId()).isPresent()){
+        if(userRepository.findById(user.getUserId()).isPresent()){
             throw new UserAlreadyExistsException();
         }
         else {
@@ -57,8 +57,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User updateUser(User user, String emailId) throws UserNotRegisteredException {
-        if(userRepository.findById(emailId).isEmpty())
+    public User updateUser(User user, int userId) throws UserNotRegisteredException {
+        if(userRepository.findById(userId).isEmpty())
         {
             throw new UserNotRegisteredException();
         }
@@ -70,9 +70,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean deleteUser(String emailId) throws UserNotRegisteredException {
-        User user = userRepository.findById(emailId).get();
-        if(userRepository.findById(user.getEmailId()).isPresent()){
+    public boolean deleteUser(int userId) throws UserNotRegisteredException {
+        User user = userRepository.findById(userId).get();
+        if(userRepository.findById(user.getUserId()).isPresent()){
             userRepository.delete(user);
             return true;
         }

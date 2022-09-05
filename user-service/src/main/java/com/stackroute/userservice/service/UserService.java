@@ -10,8 +10,8 @@ public interface UserService {
 
     public User registerUser(User user) throws UserAlreadyExistsException;
     public List<User> getAllUsers();
-    public User updateUser(User user, String emailId) throws UserNotRegisteredException;
-    public boolean deleteUser(String emailId) throws UserNotRegisteredException;
+    public User updateUser(User user, int userId) throws UserNotRegisteredException;
+    public boolean deleteUser(int userId) throws UserNotRegisteredException;
 
 
 

@@ -3,6 +3,7 @@ package com.stackroute.userservice.controller;
 import com.stackroute.userservice.exception.UserAlreadyExistsException;
 import com.stackroute.userservice.exception.UserNotRegisteredException;
 import com.stackroute.userservice.model.User;
+import com.stackroute.userservice.service.SequenceGeneratorService;
 import com.stackroute.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class UserController {
 
+    @Autowired
     private UserService userService;
+
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -22,8 +27,10 @@ public class UserController {
     }
 
 
+
     @PostMapping("/user")
     public User registerUser(@RequestBody User user) throws UserAlreadyExistsException {
+        user.setUserId(sequenceGeneratorService.getSequenceNumber(User.SEQUENCE_NAME));
         return userService.registerUser(user);
     }
 
@@ -32,15 +39,15 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @PutMapping("/updateUser/{emailId}")
-    public ResponseEntity<?> updateUserInfo(@PathVariable String emailId, @RequestBody User user) throws UserNotRegisteredException{
-        return new ResponseEntity<>(userService.updateUser(user,emailId), HttpStatus.OK);
+    @PutMapping("/updateUser/{userId}")
+    public ResponseEntity<?> updateUserInfo(@PathVariable int userId, @RequestBody User user) throws UserNotRegisteredException{
+        return new ResponseEntity<>(userService.updateUser(user,userId), HttpStatus.OK);
     }
 
-    @DeleteMapping("/removeUser/{emailId}")
-    public ResponseEntity<?> deleteUser(@PathVariable String emailId) throws Exception {
+    @DeleteMapping("/removeUser/{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable int userId) throws Exception {
         try {
-            if (userService.deleteUser(emailId))
+            if (userService.deleteUser(userId))
                 return new ResponseEntity<>("User Deleted", HttpStatus.OK);
             else
                 return new ResponseEntity<>("User Not Deleted", HttpStatus.OK);
