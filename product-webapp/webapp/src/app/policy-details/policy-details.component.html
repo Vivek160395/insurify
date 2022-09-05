@@ -1,0 +1,35 @@
+<div class="container">
+    <h2>Policy Details</h2>
+    <mat-divider></mat-divider>
+    <div class="content">
+        <div class="row">
+            <div class="col-3 Types of Insurance">
+                <mat-card class="mat-elevation-z0">
+                    <mat-card-title>Motor Insurance</mat-card-title>
+                    <mat-card-subtitle>Two wheeler</mat-card-subtitle>
+                    <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group"
+                    [(ngModel)]="Bikepolicies">
+                    <mat-radio-button class="example-radio-button" *ngFor="let policy of policies" [value]="policy">
+                      {{policy}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+
+                  <!-- <mat-card-subtitle>Four wheeler</mat-card-subtitle>
+                  <mat-radio-group
+                  aria-labelledby="example-radio-group-label"
+                  class="example-radio-group"
+                  [(ngModel)]="FourWheelPolicy">
+                  <mat-radio-button class="example-radio-button" *ngFor="let pol of fourwheelpolicies " [value]="pol">
+                    {{pol}}
+                  </mat-radio-button>
+                </mat-radio-group> -->
+                 
+
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+</div>
