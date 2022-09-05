@@ -22,7 +22,7 @@ public class User {
     private int age;
     private String dateOfBirth;
     private long mobileNo;
-    private List<Address> address;
+    private Address address;
     private long aadharNo;
     private String panNo;
     private String profilePic;
