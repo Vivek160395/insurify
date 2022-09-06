@@ -3,7 +3,6 @@ package com.stackroute.insuranceservice.service;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.AutomobileInsurancePolicy;
-import com.stackroute.insuranceservice.model.HealthInsurancePolicy;
 
 import java.util.Optional;
 

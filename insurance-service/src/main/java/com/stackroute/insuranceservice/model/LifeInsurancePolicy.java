@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.util.List;
 
 @Data
-@Document(indexName = "LifeInsurance", createIndex = true )
+@Document(indexName = "lifeinsurance", createIndex = true )
 public class LifeInsurancePolicy {
 
     @Id
