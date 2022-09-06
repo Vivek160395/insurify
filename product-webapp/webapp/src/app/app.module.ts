@@ -7,13 +7,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegisterComponent } from './register/register.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login.component';
+import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     NavBarComponent,
-    LoginComponent
+    LoginComponent,
+    AddInsurancePolicyComponent
   ],
   imports: [
     BrowserModule,
