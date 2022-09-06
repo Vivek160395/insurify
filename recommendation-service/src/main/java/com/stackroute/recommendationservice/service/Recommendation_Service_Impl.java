@@ -1,10 +1,7 @@
 package com.stackroute.recommendationservice.service;
 import com.stackroute.recommendationservice.exception.InsuranceAlreadyExists;
 import com.stackroute.recommendationservice.model.*;
-import com.stackroute.recommendationservice.repository.Age_Repository;
-import com.stackroute.recommendationservice.repository.Insurance_Repository;
-import com.stackroute.recommendationservice.repository.Insurance_Type_Repository;
-import com.stackroute.recommendationservice.repository.Occupation_Repository;
+import com.stackroute.recommendationservice.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +14,14 @@ public class Recommendation_Service_Impl implements Recommendation_service{
     private Insurance_Repository insurance_repository;
     private Insurance_Type_Repository insurance_type_repository;
     private Occupation_Repository occupation_repository;
-
+//    private Vehicle_Repository vehicle_repository;
     @Autowired
     public Recommendation_Service_Impl(Age_Repository age_repository, Insurance_Repository insurance_repository, Insurance_Type_Repository insurance_type_repository, Occupation_Repository occupation_repository) {
         this.age_repository = age_repository;
         this.insurance_repository = insurance_repository;
         this.insurance_type_repository = insurance_type_repository;
         this.occupation_repository = occupation_repository;
+//        this.vehicle_repository =vehicle_repository;
     }
 
     @Override
@@ -40,6 +38,7 @@ public class Recommendation_Service_Impl implements Recommendation_service{
             createAgeRelation(insurance.getInsuranceId(),insurance.getAge());
             createInsuranceTypeRelation(insurance.getInsuranceId(),insurance.getInsuranceType());
             createOccupationRelation(insurance.getInsuranceId(),insurance.getOccupation());
+//            createVehicleRelation(insurance.getInsuranceId(),insurance.getVehicle());
             return insurance2;
         }
     }
@@ -65,6 +64,13 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         }
     }
 
+//    @Override
+//    public void addVehicle(String vehicle) {
+//        if(vehicle_repository.findById(vehicle).isEmpty()){
+//            vehicle_repository.save(new Vehicle(vehicle));
+//        }
+//    }
+
     @Override
     public void createInsuranceTypeRelation(int insuranceId, String insuranceType) {
         if(!insurance_repository.checkInsuranceTypeRelationship(insuranceId,insuranceType)){
@@ -86,6 +92,13 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         }
     }
 
+//    @Override
+//    public void createVehicleRelation(int insuranceId, String vehicleType) {
+//        if(!insurance_repository.checkVehicleRelationship(insuranceId,vehicleType)){
+//            insurance_repository.createVehicleRelation(insuranceId,vehicleType);
+//        }
+//    }
+
     @Override
     public List<Insurance> getAllInsuranceOnBasisOfAge(int age) {
          List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithAge(age);
@@ -103,4 +116,10 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithInsuranceType(insuranceType);
         return insurances;
     }
+
+//    @Override
+//    public List<Insurance> getAllInsuranceOnBasisOfVehicle(String vehicle) {
+//        List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithVehicle(vehicle);
+//        return insurances;
+//    }
 }

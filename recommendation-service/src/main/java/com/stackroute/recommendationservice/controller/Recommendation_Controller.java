@@ -28,6 +28,7 @@ public class Recommendation_Controller {
             recommendation_service.addAge(insuranceProfile.getAge());
             recommendation_service.addInsuranceType(insuranceProfile.getInsuranceType());
             recommendation_service.addOccupation(insuranceProfile.getOccupation());
+//            recommendation_service.addVehicle(insuranceProfile.getVehicle());
             Insurance insurance = recommendation_service.addInsurance(insuranceProfile);
             if(insurance != null){
                 return new ResponseEntity<>("Insurance Added",HttpStatus.CREATED);

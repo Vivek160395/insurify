@@ -14,7 +14,7 @@ import { MaterialExampleModule } from './material/material.module';
     AppComponent,
     RegisterComponent,
     NavBarComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
