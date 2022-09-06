@@ -8,9 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
 import { MaterialExampleModule } from './material/material.module';
-import { PolicyDetailsComponent } from './policy-details/policy-details.component';
-import {MatCardModule} from '@angular/material/card';
-import {MatRadioModule} from '@angular/material/radio';
+
 
 @NgModule({
   declarations: [
@@ -20,16 +18,14 @@ import {MatRadioModule} from '@angular/material/radio';
     LoginComponent,
     AddInsurancePolicyComponent,
     LoginComponent,
-    PolicyDetailsComponent
+    // PolicyDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MaterialExampleModule,
-    MatCardModule,
-    MatRadioModule
+    MaterialExampleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
