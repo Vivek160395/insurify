@@ -8,26 +8,21 @@ import { RegisterComponent } from './register/register.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login.component';
 import { MaterialExampleModule } from './material/material.module';
-import { PolicyDetailsComponent } from './policy-details/policy-details.component';
-import {MatCardModule} from '@angular/material/card';
-import {MatRadioModule} from '@angular/material/radio';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     NavBarComponent,
-    LoginComponent,
-    PolicyDetailsComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MaterialExampleModule,
-    MatCardModule,
-    MatRadioModule
+    MaterialExampleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
