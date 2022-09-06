@@ -15,4 +15,5 @@ public class InsuranceProfile {
     private int age;
     private String insuranceType;
     private String occupation;
+    private String vehicle;
 }
