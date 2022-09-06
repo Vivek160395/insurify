@@ -102,7 +102,8 @@ import { AppRoutingModule } from '../app-routing.module';
     MatCardModule,
     AppRoutingModule,
     MaterialExampleModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+   
   ]
 })
 export class MaterialExampleModule {}
