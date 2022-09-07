@@ -1,3 +1,4 @@
+import { AnimationStyleMetadata } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -7,6 +8,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
   styleUrls: ['./add-insurance-policy.component.css']
 })
 export class AddInsurancePolicyComponent implements OnInit {
+  id=Math.floor(Math.random()*1000000+100000); 
+ 
   insuranceForms = new FormGroup({
     name: new FormControl("", [Validators.required]),
     password: new FormControl("", [Validators.required]),
@@ -26,26 +29,22 @@ export class AddInsurancePolicyComponent implements OnInit {
       }
       )
     ]),
-    
     policyBenefits: new FormArray([
       new FormGroup({
         brief: new FormControl("", [Validators.required]),
         description: new FormControl("", [Validators.required])
-      }
-      )
+      })
     ]),
     addOnDetails: new FormArray([
       new FormGroup({
         addOn: new FormControl("", [Validators.required]),
         addOnPremiums: new FormControl("", [Validators.required])
-      }
-      )
-    ]),
-     
+      })
+    ]),   
     policyDocuments: new FormControl("", [Validators.required]),
     fileSource: new FormControl("", [Validators.required])
   });
-
+ 
 
   public onFileChanged(event:any) {
     //Select File
@@ -57,14 +56,37 @@ export class AddInsurancePolicyComponent implements OnInit {
     }
   }
   display(){
+    console.log(this.id);  
     console.log(this.insuranceForms.value)
   }
-  addDetails() {
+  addDetails(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
+   
+    
+    
+    console.log(this.insuranceForms.get('policyDetails'));
     control.push(new FormGroup({
       premiums: new FormControl("", [Validators.required]),
       durations: new FormControl("", [Validators.required]),
-      sumInsure: new FormControl("", [Validators.required])
+      sumInsure: new FormControl("", [Validators.required]),
+      adults   :new FormControl(""),
+      kids     :new FormControl(""),
+      minSalary:new FormControl(""),
+      maxSalary:new FormControl("")
+    }
+    ));
+  }
+  addDetailsE() {
+    const control = <FormArray>this.insuranceForms.controls['policyDetails'];
+   
+    control.push(new FormGroup({
+      premiums: new FormControl("", [Validators.required]),
+      durations: new FormControl("", [Validators.required]),
+      sumInsure: new FormControl("", [Validators.required]),
+      adults   :new FormControl(""),
+      kids     :new FormControl(""),
+      minSalary:new FormControl(""),
+      maxSalary:new FormControl("")
     }
     ));
   }
@@ -102,9 +124,14 @@ export class AddInsurancePolicyComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
   ngOnInit(): void {
-
+  this.insuranceForms.get('policyId')?.setValue(this.id.toString())
+  this.insuranceForms.get('policyId')!.disable()
+ 
   }
-
+  get insurancex(){
+    // console.log(this.insuranceForms.get('insuranceType')?.value)
+    return this.insuranceForms.get('insuranceType')?.value!
+  }
   get policyDetailsx() {
     return (this.insuranceForms.get('policyDetails') as FormArray).controls;
   }

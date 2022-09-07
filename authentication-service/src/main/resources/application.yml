@@ -2,9 +2,13 @@ server:
   port: 8099
 spring:
   datasource:
+<<<<<<< HEAD
     url: jdbc:mysql://localhost:3306/insurifydb?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+=======
+    url: jdbc:mysql://localhost:3306/insurifyDb?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+>>>>>>> a874895cd4786e5d82c77930b45bdf2d5ad1505a
     username: root
-    password: password@123
+    password: root@123
     driver: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
