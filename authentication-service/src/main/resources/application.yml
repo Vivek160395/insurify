@@ -2,7 +2,11 @@ server:
   port: 8099
 spring:
   datasource:
+<<<<<<< HEAD
+    url: jdbc:mysql://localhost:3306/insurifydb?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+=======
     url: jdbc:mysql://localhost:3306/insurifyDb?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+>>>>>>> a874895cd4786e5d82c77930b45bdf2d5ad1505a
     username: root
     password: root@123
     driver: com.mysql.cj.jdbc.Driver
@@ -15,3 +19,14 @@ spring:
         dialect: org.hibernate.dialect.MySQL57Dialect
   application:
     name: authentication-service
+
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            clientId: 692492348685-657c7e1c0t3t05k2ch9kp5gd08mbloj3.apps.googleusercontent.com
+#            clientSecret: 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
+#            scope:
+#              - email
+#              - profile

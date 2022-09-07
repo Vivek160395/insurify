@@ -15,6 +15,16 @@ public class UserServiceApplication {
 		SpringApplication.run(UserServiceApplication.class, args);
 	}
 
+<<<<<<< HEAD
+//	@Bean
+//	FilterRegistrationBean jwtFilter(){
+//		FilterRegistrationBean frb = new FilterRegistrationBean();
+//		frb.setFilter(new JwtFilter());
+////		frb.addUrlPatterns("/api/v1/**");
+//		frb.addUrlPatterns("/api/v1/user/*");
+//		return frb;
+//	}
+=======
 	@Bean
 	FilterRegistrationBean jwtFilter(){
 		FilterRegistrationBean frb = new FilterRegistrationBean();
@@ -26,5 +36,6 @@ public class UserServiceApplication {
 		frb.addUrlPatterns("/api/v1/removeUser/*");
 		return frb;
 	}
+>>>>>>> a874895cd4786e5d82c77930b45bdf2d5ad1505a
 
 }

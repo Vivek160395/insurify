@@ -4,12 +4,14 @@ import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.HealthInsurancePolicy;
 import com.stackroute.insuranceservice.model.LifeInsurancePolicy;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public interface LifeInsurancePolicyService {
 
-    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy) throws PolicyAlreadyExistException;
+    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException;
 
     public Iterable<LifeInsurancePolicy> getAllPolicies();
 

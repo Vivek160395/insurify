@@ -8,19 +8,19 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 @Document(indexName = "insurance-policy")
 public class HealthInsurancePolicy {
 
     @Id
     private Integer policyId;
     private String policyName;
-    private String policyDescription;
     private String insuranceType;
-    private String policyBenefits;
-    private String policyDocuments;
-    private List<String> sumInsured;
-    private List<String> premium;
-    private List<String> policyDuration;
-    private List<String> addOns;
-    private List<String> addOnsPremium;
+    private List<Details> policyDetails;
+    private List<Benefits> policyBenefits;
+    private List<AddOnDetails> policyAddOnDetails;
+    private byte[] policyDocuments;
+
+    public HealthInsurancePolicy(String fileName, String contentType, byte[] bytes) {
+    }
 }
