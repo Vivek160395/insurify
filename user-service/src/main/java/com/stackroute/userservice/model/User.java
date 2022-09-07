@@ -16,9 +16,9 @@ public class User {
     public static final String SEQUENCE_NAME="user_sequence";
 
 
-    @Id
 
     private int userId;
+    @Id
     private String emailId;
     private String password;
     private String userType;

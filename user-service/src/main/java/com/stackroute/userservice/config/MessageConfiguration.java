@@ -14,8 +14,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MessageConfiguration {
 
-
-
     @Bean
     public DirectExchange directExchange(){
         return new DirectExchange("insurify-user");
@@ -30,8 +28,6 @@ public class MessageConfiguration {
     public Queue insurifyQueue(){
         return new Queue("queue2");
     }
-
-
 
     @Bean
     public Binding authBinding( DirectExchange directExchange){
@@ -61,6 +57,5 @@ public class MessageConfiguration {
         RabbitTemplate rabbitTemp=new RabbitTemplate(connectionFactory);
         rabbitTemp.setMessageConverter(producerJackson2JsonMessageConverter());
         return  rabbitTemp;
-
     }
 }
