@@ -1,8 +1,10 @@
 package com.stackroute.insuranceservice.service;
 
+import com.stackroute.insuranceservice.config.Producer;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.AutomobileInsurancePolicy;
+import com.stackroute.insuranceservice.rabbitMq.domain.DTO;
 import com.stackroute.insuranceservice.repository.AutomobilesInsurancePolicyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,17 +17,26 @@ public class AutomobileInsuranceServiceImpl implements AutoMobileInsurancePolicy
     private final AutomobilesInsurancePolicyRepository policyRepository;
 
     @Autowired
+    Producer producer;
+
+    @Autowired
     public AutomobileInsuranceServiceImpl(AutomobilesInsurancePolicyRepository policyRepository) {
         this.policyRepository = policyRepository;
     }
 
     @Override
     public AutomobileInsurancePolicy savePolicy(AutomobileInsurancePolicy policy) throws PolicyAlreadyExistException {
+        DTO dto = new DTO();
+        dto.setPolicyName(dto.getPolicyName());
+        dto.setInsuranceType(dto.getInsuranceType());
+
         if (policyRepository.findById(policy.getPolicyId()).isPresent()){
             throw new PolicyAlreadyExistException();
         }
         else {
-            return policyRepository.save(policy);
+            producer.sendingMessageToRabbitMQServer(dto);
+            policyRepository.save(policy);
+            return policy;
         }
     }
 

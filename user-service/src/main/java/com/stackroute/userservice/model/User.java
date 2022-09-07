@@ -3,11 +3,9 @@ package com.stackroute.userservice.model;
 import lombok.Data;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Transient;
 
 
 @Document
@@ -19,7 +17,7 @@ public class User {
 
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
     private int userId;
     private String emailId;
     private String password;
