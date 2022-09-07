@@ -6,11 +6,11 @@ import lombok.Data;
 @Data
 public class AddressDTO {
 
-    private String houseNo;
+    private int houseNo;
     private String street;
     private String landmark;
     private String city;
     private String state;
-    private String pinCode;
+    private int pinCode;
 
 }

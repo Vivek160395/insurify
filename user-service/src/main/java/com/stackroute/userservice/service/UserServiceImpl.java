@@ -64,22 +64,22 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User updateUser(User user, String emailId) throws UserNotRegisteredException {
-        if(userRepository.findById(emailId).isEmpty())
+        if(userRepository.findById(emailId).isPresent())
         {
-            throw new UserNotRegisteredException();
+            userRepository.save(user);
+            return user;
         }
         else
         {
-             userRepository.save(user);
+            throw new UserNotRegisteredException();
         }
-        return user;
     }
 
     @Override
     public boolean deleteUser(String emailId) throws UserNotRegisteredException {
-        User user = userRepository.findById(emailId).get();
-        if(userRepository.findById(user.getEmailId()).isPresent()){
-            userRepository.delete(user);
+//        User user = userRepository.findById(emailId).get();
+        if(userRepository.findById(emailId).isPresent()){
+            userRepository.deleteById(emailId);
             return true;
         }
         else
