@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
         recommendationDTO.setUserType(user.getUserType());
         recommendationDTO.setAge(user.getAge());
 
-        if(userRepository.findById(user.getUserId()).isPresent()){
+        if(userRepository.findById(user.getEmailId()).isPresent()){
             throw new UserAlreadyExistsException();
         }
         else {
@@ -63,8 +63,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User updateUser(User user, int userId) throws UserNotRegisteredException {
-        if(userRepository.findById(userId).isEmpty())
+    public User updateUser(User user, String emailId) throws UserNotRegisteredException {
+        if(userRepository.findById(emailId).isEmpty())
         {
             throw new UserNotRegisteredException();
         }
@@ -76,9 +76,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean deleteUser(int userId) throws UserNotRegisteredException {
-        User user = userRepository.findById(userId).get();
-        if(userRepository.findById(user.getUserId()).isPresent()){
+    public boolean deleteUser(String emailId) throws UserNotRegisteredException {
+        User user = userRepository.findById(emailId).get();
+        if(userRepository.findById(user.getEmailId()).isPresent()){
             userRepository.delete(user);
             return true;
         }
