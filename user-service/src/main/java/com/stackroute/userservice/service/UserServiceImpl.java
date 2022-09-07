@@ -4,6 +4,7 @@ import com.stackroute.userservice.config.Producer;
 import com.stackroute.userservice.exception.UserAlreadyExistsException;
 import com.stackroute.userservice.exception.UserNotRegisteredException;
 import com.stackroute.userservice.model.User;
+import com.stackroute.userservice.rabbitmq.domain.RecommendationDTO;
 import com.stackroute.userservice.rabbitmq.domain.UserDTO;
 import com.stackroute.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,11 @@ public class UserServiceImpl implements UserService{
     public User registerUser(User user) throws UserAlreadyExistsException {
 
         UserDTO userDTO = new UserDTO();
+        RecommendationDTO recommendationDTO = new RecommendationDTO();
 
         userDTO.setEmailId(user.getEmailId());
         userDTO.setPassword(user.getPassword());
+        userDTO.setUserType(user.getUserType());
         userDTO.setName(user.getName());
         userDTO.setAge(user.getAge());
         userDTO.setGender(user.getGender());
@@ -40,13 +43,16 @@ public class UserServiceImpl implements UserService{
         userDTO.setPanNo(user.getPanNo());
         userDTO.setProfilePic(user.getProfilePic());
 
+        recommendationDTO.setEmailId(user.getEmailId());
+        recommendationDTO.setUserType(user.getUserType());
+        recommendationDTO.setAge(user.getAge());
 
         if(userRepository.findById(user.getUserId()).isPresent()){
             throw new UserAlreadyExistsException();
         }
         else {
             userRepository.save(user);
-            producer.sendMessageToRabbitMq(userDTO);
+            producer.sendMessageToAuthRabbitMq(userDTO, recommendationDTO);
             return user;
         }
     }

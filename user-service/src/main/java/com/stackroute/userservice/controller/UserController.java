@@ -46,7 +46,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @PutMapping("/user/{userId}")
+    @PutMapping("/updateUser/{userId}")
     public ResponseEntity<?> updateUserInfo(@PathVariable int userId, @RequestBody User user) throws UserNotRegisteredException {
         try {
             return new ResponseEntity<>(userService.updateUser(user, userId), HttpStatus.OK);
@@ -56,7 +56,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/user/{userId}")
+    @DeleteMapping("/removeUser/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable int userId) throws UserNotRegisteredException {
         try {
             if (userService.deleteUser(userId))

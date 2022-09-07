@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisterComponent } from './register/register.component';
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import {A11yModule} from '@angular/cdk/a11y';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
@@ -50,11 +52,14 @@ import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {HttpClientModule} from'@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
+import { MatStepper } from '@angular/material/stepper';
 @NgModule({
   declarations: [
     AppComponent,
-    RecommendationComponent
+    RegisterComponent,
+    RecommendationComponent,
+    AddInsurancePolicyComponent,
   ],
   imports: [
     BrowserModule,
@@ -111,9 +116,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-
+    
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

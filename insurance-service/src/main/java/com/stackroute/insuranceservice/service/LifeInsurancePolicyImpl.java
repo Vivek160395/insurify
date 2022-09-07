@@ -8,7 +8,9 @@ import com.stackroute.insuranceservice.rabbitMq.domain.DTO;
 import com.stackroute.insuranceservice.repository.LifeInsurancePolicyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -24,7 +26,7 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
         this.policyRepository = policyRepository;
     }
     @Override
-    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy) throws PolicyAlreadyExistException {
+    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException {
         DTO dto = new DTO();
         dto.setInsuranceType(policy.getInsuranceType());
         dto.setPolicyName(policy.getPolicyName());
@@ -32,6 +34,10 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
         if (policyRepository.findById(policy.getPolicyId()).isPresent()){
             throw new PolicyAlreadyExistException();
         }else {
+            String docName= file.getOriginalFilename();
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+docName);
+
+            policy = new LifeInsurancePolicy(docName, file.getContentType(), file.getBytes());
             policyRepository.save(policy);
             producer.sendingMessageToRabbitMQServer(dto);
             return policy;

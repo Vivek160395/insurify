@@ -8,7 +8,10 @@ import com.stackroute.insuranceservice.rabbitMq.domain.DTO;
 import com.stackroute.insuranceservice.repository.HealthInsurancePolicyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -25,12 +28,16 @@ public class HealthInsurancePolicyServiceImpl implements HealthInsurancePolicySe
     }
 
     @Override
-    public HealthInsurancePolicy savePolicy(HealthInsurancePolicy policy) throws PolicyAlreadyExistException {
+    public HealthInsurancePolicy savePolicy(HealthInsurancePolicy policy,MultipartFile file) throws PolicyAlreadyExistException, IOException {
         DTO dto = new DTO();
         dto.setPolicyName(policy.getPolicyName());
         dto.setInsuranceType(policy.getInsuranceType());
 
         if (policyRepository.findById(policy.getPolicyId()).isEmpty()) {
+            String docName= file.getOriginalFilename();
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+docName);
+
+            policy = new HealthInsurancePolicy(docName, file.getContentType(), file.getBytes());
             policyRepository.save(policy);
             producer.sendingMessageToRabbitMQServer(dto);
             return policy;
