@@ -13,13 +13,13 @@ public class UserServiceApplication {
 		SpringApplication.run(UserServiceApplication.class, args);
 	}
 
-	@Bean
-	FilterRegistrationBean jwtFilter(){
-		FilterRegistrationBean frb = new FilterRegistrationBean();
-		frb.setFilter(new JwtFilter());
-//		frb.addUrlPatterns("/api/v1/**");
-		frb.addUrlPatterns("/api/v1/user/*");
-		return frb;
-	}
+//	@Bean
+//	FilterRegistrationBean jwtFilter(){
+//		FilterRegistrationBean frb = new FilterRegistrationBean();
+//		frb.setFilter(new JwtFilter());
+////		frb.addUrlPatterns("/api/v1/**");
+//		frb.addUrlPatterns("/api/v1/user/*");
+//		return frb;
+//	}
 
 }

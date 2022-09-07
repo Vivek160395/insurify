@@ -31,7 +31,7 @@ public class UserCredentialsController {
 
     @PostMapping("/user")
     public ResponseEntity<?> saveUser(@RequestBody UserCredentials user) throws UserAlreadyExistException {
-        return new ResponseEntity<>(userCredentialsService.saveUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userCredentialsService.saveUser(user), HttpStatus.OK);
     }
 
     @PostMapping("/login")
