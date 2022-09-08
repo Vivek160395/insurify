@@ -148,6 +148,11 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         return insurance_repository.getAllInsurances();
     }
 
+    @Override
+    public List<Insurance> getAllInsurancesWhichAreTrending() {
+        return insurance_repository.getAllInsurancesWhichAreTrending();
+    }
+
 //    @Override
 //    public List<Insurance> getAllInsuranceOnBasisOfVehicle(String vehicle) {
 //        List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithVehicle(vehicle);

@@ -47,6 +47,8 @@ public class Recommendation_Controller {
             return new ResponseEntity<>("User Already Exists",HttpStatus.CONFLICT);
         }
     }
+
+
     @PostMapping("/Insurance")
     public ResponseEntity<?> registerInsurance(@RequestBody InsuranceProfile insuranceProfile) {
         try {
@@ -76,6 +78,7 @@ public class Recommendation_Controller {
             return new ResponseEntity<>(insurances,HttpStatus.FOUND);
         }
     }
+
     @GetMapping("{occupation}/InsuranceByOccupation")
     public ResponseEntity<?> getInsuranceByOccupation(@PathVariable String occupation){
         List<Insurance> insurances = recommendation_service.getAllInsuranceOnBasisOfOccupation(occupation);
@@ -119,18 +122,16 @@ public class Recommendation_Controller {
             return new ResponseEntity<>("Insurance Already Bought",HttpStatus.CREATED);
         }
     }
+
     @GetMapping("/NoOfUsersBoughtInsurances")
     public ResponseEntity<?> getNoOfInsurancesBought(){
-        List<Insurance> insurances = recommendation_service.getAllInsurance();
+        List<Insurance> insurances = recommendation_service.getAllInsurancesWhichAreTrending();
         if(insurances.size() == 0){
             log.error("No Insurance Found");
             return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
         }else {
-            List<Integer> totalUsersOfEveryInsurance = new ArrayList<>();
-            for(int i=0;i<insurances.size();i++){
-                totalUsersOfEveryInsurance.add(insurances.get(i).getNoOfUsersBought());
-            }
-            return new ResponseEntity<>(totalUsersOfEveryInsurance,HttpStatus.FOUND);
+            return new ResponseEntity<>(insurances,HttpStatus.FOUND);
         }
     }
+
 }

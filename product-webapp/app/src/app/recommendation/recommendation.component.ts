@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-recommendation',
   templateUrl: './recommendation.component.html',
@@ -10,13 +9,18 @@ export class RecommendationComponent implements OnInit {
   images:any =[];
   types:any =[];
   healthNames:any=[];
+<<<<<<< HEAD
+=======
   otherNames:any=[];
   lifeNames:any=[];
+>>>>>>> 4a4da06b1cd0de736f199e900f0db36f19f36086
   count:number =0;
   countt:number=0;
   count2:number=0;
   allinsurances:any[][]=[[],[],[]];
   healthInsurance:any=[];
+<<<<<<< HEAD
+=======
   lifeInsurance:any=[];
   OtherInsurance:any=[];
   isHealth=true;
@@ -51,10 +55,44 @@ life(){
     this.isDisplay=false;
  }
 }
+>>>>>>> 4a4da06b1cd0de736f199e900f0db36f19f36086
   constructor(private http:HttpClient) { }
-
   ngOnInit(): void {
     this.getALlImages();
+<<<<<<< HEAD
+    this.getNames();
+    this.getInsurnacesAcc();
+    this.getHealthInsurances();
+  }
+  isDisplay=false;
+  isHealth=true;
+  isOther=true;
+  isLife =true;
+  display(){
+      this.isDisplay=!this.isDisplay;
+      this.isHealth=!this.isHealth;
+      this.isLife=!this.isLife;
+      this.isOther=!this.isOther;
+  }
+  health(){
+    this.isHealth=!this.isHealth;
+    this.isDisplay=!this.isDisplay;
+    this.isLife=!this.isLife;
+    this.isOther=!this.isOther;
+}
+other(){
+  this.isHealth=!this.isHealth;
+  this.isDisplay=!this.isDisplay;
+  this.isLife=!this.isLife;
+  this.isOther=!this.isOther;
+}
+life(){
+  this.isHealth=!this.isHealth;
+  this.isDisplay=!this.isDisplay;
+  this.isLife=!this.isLife;
+  this.isOther=!this.isOther;
+}
+=======
     this.getNamesHealth();
     this.getInsurnacesAcc();
     this.getHealthInsurances();
@@ -65,6 +103,7 @@ life(){
   }
   
 
+>>>>>>> 4a4da06b1cd0de736f199e900f0db36f19f36086
   getALlImages(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
       this.images = data;
@@ -78,14 +117,57 @@ life(){
       }
     })
   }
+<<<<<<< HEAD
+  getNames(){
+    this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+      this.images = data;
+for(var i=0;i<this.images.length;i++){
+=======
 
   getNamesHealth(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
     for(var i=0;i<this.images.length;i++){
+>>>>>>> 4a4da06b1cd0de736f199e900f0db36f19f36086
      if(this.images[i].type=="health"){
     this.healthNames[this.countt]=this.images[i].name;
     this.countt++;
   }
+<<<<<<< HEAD
+}
+  })
+}
+getInsurnacesAcc(){
+  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+console.log(this.images);
+console.log(this.types);
+console.log("done");
+for(var i=0;i<this.types.length;i++){
+  this.count2=0;
+  for(var j=0;j<this.images.length;j++){
+    if(this.types[i]==this.images[j].type){
+      this.allinsurances[i][this.count2]=this.images[j];
+      this.count2++;
+    }
+  }
+}
+console.log(this.allinsurances);
+  })
+}
+getHealthInsurances(){
+
+  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+     for(var i=0;i<this.allinsurances[0].length;i++){
+    this.healthInsurance[i]=this.allinsurances[0][i];
+    console.log("hello")
+    }
+  })
+}
+
+changeDiv(){
+
+}
+=======
+>>>>>>> 4a4da06b1cd0de736f199e900f0db36f19f36086
 }
 
   })
