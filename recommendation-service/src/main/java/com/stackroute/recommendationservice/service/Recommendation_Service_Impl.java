@@ -1,5 +1,6 @@
 package com.stackroute.recommendationservice.service;
 import com.stackroute.recommendationservice.exception.InsuranceAlreadyExists;
+import com.stackroute.recommendationservice.exception.UserAlreadyPosted;
 import com.stackroute.recommendationservice.model.*;
 import com.stackroute.recommendationservice.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +11,19 @@ import java.util.Optional;
 
 @Service
 public class Recommendation_Service_Impl implements Recommendation_service{
-    private Age_Repository age_repository;
-    private Insurance_Repository insurance_repository;
-    private Insurance_Type_Repository insurance_type_repository;
-    private Occupation_Repository occupation_repository;
-//    private Vehicle_Repository vehicle_repository;
+    private final Age_Repository age_repository;
+    private final Insurance_Repository insurance_repository;
+    private final Insurance_Type_Repository insurance_type_repository;
+    private final Occupation_Repository occupation_repository;
+    private final UserRepository userRepository;
+//    private final Vehicle_Repository vehicle_repository;
     @Autowired
-    public Recommendation_Service_Impl(Age_Repository age_repository, Insurance_Repository insurance_repository, Insurance_Type_Repository insurance_type_repository, Occupation_Repository occupation_repository) {
+    public Recommendation_Service_Impl(Age_Repository age_repository, Insurance_Repository insurance_repository, Insurance_Type_Repository insurance_type_repository, Occupation_Repository occupation_repository,UserRepository userRepository) {
         this.age_repository = age_repository;
         this.insurance_repository = insurance_repository;
         this.insurance_type_repository = insurance_type_repository;
         this.occupation_repository = occupation_repository;
+        this.userRepository = userRepository;
 //        this.vehicle_repository =vehicle_repository;
     }
 
@@ -64,6 +67,15 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         }
     }
 
+    @Override
+    public User addUser(User user) throws UserAlreadyPosted {
+        if(userRepository.findById(user.getUserEmail()).isEmpty()){
+          return userRepository.save(user);
+        }else {
+            throw new UserAlreadyPosted();
+        }
+    }
+
 //    @Override
 //    public void addVehicle(String vehicle) {
 //        if(vehicle_repository.findById(vehicle).isEmpty()){
@@ -92,6 +104,20 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         }
     }
 
+    @Override
+    public boolean createUserToInsuranceRelation(int insuranceId, String userEmail) {
+        System.out.println("***************************************************************************************************************");
+        System.out.println(insurance_repository.checkUserToInsuranceRelationship(insuranceId,userEmail));
+        System.out.println("***************************************************************************************************************");
+        if(!insurance_repository.checkUserToInsuranceRelationship(insuranceId,userEmail)){
+            insurance_repository.createUserToInsuranceRelationship(insuranceId,userEmail);
+            Insurance insurance = insurance_repository.findById(insuranceId).get();
+            insurance.setNoOfUsersBought(insurance.getNoOfUsersBought()+1);
+            insurance_repository.save(insurance);
+            return true;
+        }return false;
+    }
+
 //    @Override
 //    public void createVehicleRelation(int insuranceId, String vehicleType) {
 //        if(!insurance_repository.checkVehicleRelationship(insuranceId,vehicleType)){
@@ -115,6 +141,16 @@ public class Recommendation_Service_Impl implements Recommendation_service{
     public List<Insurance> getAllInsuranceOnBasisOfType(String insuranceType) {
         List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithInsuranceType(insuranceType);
         return insurances;
+    }
+
+    @Override
+    public List<Insurance> getAllInsurance() {
+        return insurance_repository.getAllInsurances();
+    }
+
+    @Override
+    public List<Insurance> getAllInsurancesWhichAreTrending() {
+        return insurance_repository.getAllInsurancesWhichAreTrending();
     }
 
 //    @Override

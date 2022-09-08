@@ -52,12 +52,14 @@ import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {HttpClientJsonpModule, HttpClientModule} from'@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
+import { MatStepper } from '@angular/material/stepper';
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     RecommendationComponent,
+    AddInsurancePolicyComponent,
   ],
   imports: [
     BrowserModule,

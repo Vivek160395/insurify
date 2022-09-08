@@ -31,8 +31,8 @@ public class UserCredentialsServiceImpl implements UserCredentialsService {
 
     @Override
     public UserCredentials findByEmailIdAndPassword(String emailId, String password) throws InvalidCredentialException {
-        System.out.println("emailId"+emailId);
-        System.out.println("password"+password);
+        System.out.println("emailId :- "+emailId);
+        System.out.println("password :- "+password);
         UserCredentials loggedInUser = userCredentialsRepository.findByEmailIdAndPassword(emailId,password);
         System.out.println(loggedInUser);
         if(loggedInUser == null)
@@ -41,9 +41,13 @@ public class UserCredentialsServiceImpl implements UserCredentialsService {
         }
         return loggedInUser;
     }
+
+
+
     @Override
     public List<UserCredentials> getAllUser() {
         List<UserCredentials>  userList= (List<UserCredentials>) userCredentialsRepository.findAll();
         return userList;
     }
+
 }

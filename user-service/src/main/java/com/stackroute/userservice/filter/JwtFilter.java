@@ -19,10 +19,10 @@ public class JwtFilter extends GenericFilter {
             filterChain.doFilter(request, response);
         } else {
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-                throw new ServletException("Missing or invalid Authorization header");
+                throw new ServletException("Missing or invalid Authorization header token");
             }
             final String token = authHeader.substring(7);
-            final Claims claims = Jwts.parser().setSigningKey("Sprint8").parseClaimsJws(token).getBody();
+            final Claims claims = Jwts.parser().setSigningKey("mysecret").parseClaimsJws(token).getBody();
             request.setAttribute("token",authHeader);
             request.setAttribute("claims", claims);
             filterChain.doFilter(request, response);

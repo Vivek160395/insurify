@@ -2,6 +2,7 @@ package com.stackroute.authentication.service.controller;
 
 import com.stackroute.authentication.service.exception.InvalidCredentialException;
 import com.stackroute.authentication.service.exception.UserAlreadyExistException;
+
 import com.stackroute.authentication.service.model.UserCredentials;
 import com.stackroute.authentication.service.security.SecurityTokenGenerator;
 import com.stackroute.authentication.service.service.UserCredentialsService;
@@ -10,10 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping()
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserCredentialsController {
 
@@ -31,7 +33,7 @@ public class UserCredentialsController {
 
     @PostMapping("/user")
     public ResponseEntity<?> saveUser(@RequestBody UserCredentials user) throws UserAlreadyExistException {
-        return new ResponseEntity<>(userCredentialsService.saveUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userCredentialsService.saveUser(user), HttpStatus.OK);
     }
 
     @PostMapping("/login")
@@ -46,9 +48,20 @@ public class UserCredentialsController {
         Map<String,String> map = securityTokenGenerator.generateToken(user);
         return new ResponseEntity<>(map,HttpStatus.OK);
     }
+
     @GetMapping("/users")
     public ResponseEntity<?> getAllUser()  {
         return new ResponseEntity<>(userCredentialsService.getAllUser(), HttpStatus.CREATED);
     }
+
+    @GetMapping("/")
+    public String hello() {
+        return "Hello World!";
+    }
+    @GetMapping("/oauth2/authorization/google")
+    public Principal prevent(Principal principal) {
+        return principal;
+    }
+
 
 }
