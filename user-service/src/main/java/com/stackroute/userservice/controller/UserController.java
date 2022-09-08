@@ -46,21 +46,21 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @PutMapping("/updateUser/{userId}")
-    public ResponseEntity<?> updateUserInfo(@PathVariable int userId, @RequestBody User user) throws UserNotRegisteredException {
+    @PutMapping("/updateUser/{emailId}")
+    public ResponseEntity<?> updateUserInfo(@PathVariable String emailId, @RequestBody User user) throws UserNotRegisteredException {
         try {
-            return new ResponseEntity<>(userService.updateUser(user, userId), HttpStatus.OK);
+            return new ResponseEntity<>(userService.updateUser(user, emailId), HttpStatus.OK);
         } catch (UserNotRegisteredException e) {
             e.getMessage();
             throw e;
         }
     }
 
-    @DeleteMapping("/removeUser/{userId}")
-    public ResponseEntity<?> deleteUser(@PathVariable int userId) throws UserNotRegisteredException {
+    @DeleteMapping("/removeUser/{emailId}")
+    public ResponseEntity<?> deleteUser(@PathVariable String emailId) throws UserNotRegisteredException {
         try {
-            if (userService.deleteUser(userId))
-                return new ResponseEntity<>("User with userId = "+userId+" is Deleted successfully.", HttpStatus.OK);
+            if (userService.deleteUser(emailId))
+                return new ResponseEntity<>("User with userId = "+emailId+" is Deleted successfully.", HttpStatus.OK);
             else
                 return new ResponseEntity<>("User Not Deleted", HttpStatus.OK);
         }
