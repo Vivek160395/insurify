@@ -42,6 +42,9 @@ public interface Insurance_Repository extends Neo4jRepository<Insurance,Integer>
 
     @Query("MATCH (a:User),(b:Insurance) WHERE b.insuranceId = $insuranceId AND a.userEmail=$userEmail RETURN exists ((b)<-[:Bought]-(a))")
     boolean checkUserToInsuranceRelationship(int insuranceId,String userEmail);
+
+    @Query("MATCH (b:Insurance) WHERE b.noOfUsersBought>= 5 RETURN b")
+    List<Insurance> getAllInsurancesWhichAreTrending();
 }
 
 //    @Query("MATCH (a:Insurance{insuranceId:$insuranceId}),(b:Vehicle{vehicleType:$vehicleType}) RETURN exists ((a)<-[:ForAge]-(b))")

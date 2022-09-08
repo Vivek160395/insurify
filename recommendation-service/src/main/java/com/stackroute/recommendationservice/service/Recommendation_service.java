@@ -24,4 +24,5 @@ public interface Recommendation_service {
     List<Insurance> getAllInsuranceOnBasisOfType(String insuranceType);
 //    List<Insurance> getAllInsuranceOnBasisOfVehicle(String vehicleType);
     List<Insurance> getAllInsurance();
+    List<Insurance> getAllInsurancesWhichAreTrending();
 }
