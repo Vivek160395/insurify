@@ -1,5 +1,6 @@
 package com.stackroute.insuranceservice.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.AddOnDetails;
@@ -28,21 +29,12 @@ public class LifeInsuranceController {
     }
 
     @PostMapping("/policy")
-    public ResponseEntity<?> addPolicy(@RequestParam("policyId") Integer policyId, @RequestParam("policyName") String policyName,
-                                       @RequestParam("policyDetails") List<Details> policyDetails, @RequestParam("insuranceType") String insuranceType,
-                                       @RequestParam("policyBenefits") List<Benefits> policyBenefits, @RequestParam("file") MultipartFile file,
-                                       @RequestParam("policyAddOnDetails") List<AddOnDetails> policyAddOnDetails) throws PolicyAlreadyExistException, IOException {
-        LifeInsurancePolicy policy = new LifeInsurancePolicy();
-        policy.setPolicyId(policyId);
-        policy.setPolicyName(policyName);
-        policy.setInsuranceType(insuranceType);
-        policy.setPolicyDetails(policyDetails);
-        policy.setPolicyBenefits(policyBenefits);
-        policy.setPolicyDocuments(file.getBytes());
-        policy.setPolicyAddOnDetails(policyAddOnDetails);
+    public ResponseEntity<?> addPolicy( @RequestParam("file") MultipartFile file,
+                                       @RequestParam("details") String policyDetails) throws PolicyAlreadyExistException, IOException {
+        LifeInsurancePolicy policy= new ObjectMapper().readValue(policyDetails,LifeInsurancePolicy.class);
 
         policyService.savePolicy(policy,file);
-        return new ResponseEntity<>("Data Saved Successfully", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(policyService.savePolicy(policy,file), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/policy")

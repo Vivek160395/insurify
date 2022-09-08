@@ -32,12 +32,9 @@ public class HealthInsurancePolicyServiceImpl implements HealthInsurancePolicySe
         DTO dto = new DTO();
         dto.setPolicyName(policy.getPolicyName());
         dto.setInsuranceType(policy.getInsuranceType());
-
-        if (policyRepository.findById(policy.getPolicyId()).isEmpty()) {
-            String docName= file.getOriginalFilename();
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+docName);
-
-            policy = new HealthInsurancePolicy(docName, file.getContentType(), file.getBytes());
+        if(policyRepository.findById(policy.getPolicyId()).isEmpty()) {
+//            policy = new HealthInsurancePolicy(docName, file.getContentType(), file.getBytes());
+            policy.setPolicyDocuments(file.getBytes());
             policyRepository.save(policy);
             producer.sendingMessageToRabbitMQServer(dto);
             return policy;
@@ -45,6 +42,7 @@ public class HealthInsurancePolicyServiceImpl implements HealthInsurancePolicySe
         else {
             throw new PolicyAlreadyExistException();
         }
+
     }
 
     @Override

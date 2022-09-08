@@ -40,8 +40,8 @@ public class ServiceTest {
     @BeforeEach
     public void setUp() {
 
-        userCredentials1 = new UserCredentials("raj@gmail.com", "1234");
-        userCredentials2 = new UserCredentials("kumar@gmail.com", "1234");
+//        userCredentials1 = new UserCredentials("raj@gmail.com", "1234");
+//        userCredentials2 = new UserCredentials("kumar@gmail.com", "1234");
 
         userList = Arrays.asList(userCredentials1, userCredentials2);
     }
