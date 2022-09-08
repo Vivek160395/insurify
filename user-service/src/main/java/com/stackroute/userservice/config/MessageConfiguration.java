@@ -14,23 +14,35 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MessageConfiguration {
 
-
-
     @Bean
     public DirectExchange directExchange(){
-        return new DirectExchange("user_exchange");
+        return new DirectExchange("insurify-user");
     }
 
     @Bean
-    public Queue registerQueue(){
+    public Queue authQueue(){
         return new Queue("queue1");
     }
 
-
+    @Bean
+    public Queue insurifyQueue(){
+        return new Queue("queue2");
+    }
 
     @Bean
-    public Binding userBinding(Queue queue, DirectExchange directExchange){
-        return BindingBuilder.bind(queue).to(directExchange).with("routing1");
+    public Binding authBinding( DirectExchange directExchange){
+        return BindingBuilder
+                .bind(authQueue())
+                .to(directExchange)
+                .with("routing1");
+    }
+
+    @Bean
+    public Binding insurifyBinding( DirectExchange directExchange){
+        return BindingBuilder
+                .bind(insurifyQueue())
+                .to(directExchange)
+                .with("routing2");
     }
 
     // Json converter that uses Json2 library
@@ -45,6 +57,5 @@ public class MessageConfiguration {
         RabbitTemplate rabbitTemp=new RabbitTemplate(connectionFactory);
         rabbitTemp.setMessageConverter(producerJackson2JsonMessageConverter());
         return  rabbitTemp;
-
     }
 }
