@@ -31,7 +31,6 @@ export class RecommendationComponent implements OnInit {
        this.isDisplay=false;
     }
   }
-
 other(){
     this.isDisplay=true;
     this.isHealth=true;
@@ -52,39 +51,7 @@ life(){
 }
   constructor(private http:HttpClient) { }
   ngOnInit(): void {
-    // this.getALlImages();
-    // this.getNames();
-    // this.getInsurnacesAcc();
-    // this.getHealthInsurances();
-  }
-  isDisplay=false;
-  isHealth=true;
-  isOther=true;
-  isLife =true;
-  display(){
-      this.isDisplay=!this.isDisplay;
-      this.isHealth=!this.isHealth;
-      this.isLife=!this.isLife;
-      this.isOther=!this.isOther;
-  }
-  health(){
-    this.isHealth=!this.isHealth;
-    this.isDisplay=!this.isDisplay;
-    this.isLife=!this.isLife;
-    this.isOther=!this.isOther;
-}
-other(){
-  this.isHealth=!this.isHealth;
-  this.isDisplay=!this.isDisplay;
-  this.isLife=!this.isLife;
-  this.isOther=!this.isOther;
-}
-life(){
-  this.isHealth=!this.isHealth;
-  this.isDisplay=!this.isDisplay;
-  this.isLife=!this.isLife;
-  this.isOther=!this.isOther;
-}
+    this.getALlImages();
     this.getNamesHealth();
     this.getInsurnacesAcc();
     this.getHealthInsurances();
@@ -93,8 +60,6 @@ life(){
     this.getNamesOther();
     this.getNamesLife();
   }
-  
-
   getALlImages(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
       this.images = data;
@@ -108,11 +73,6 @@ life(){
       }
     })
   }
-  getNames(){
-    this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-      this.images = data;
-for(var i=0;i<this.images.length;i++){
-
   getNamesHealth(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
     for(var i=0;i<this.images.length;i++){
@@ -123,41 +83,6 @@ for(var i=0;i<this.images.length;i++){
 }
   })
 }
-getInsurnacesAcc(){
-  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-console.log(this.images);
-console.log(this.types);
-console.log("done");
-for(var i=0;i<this.types.length;i++){
-  this.count2=0;
-  for(var j=0;j<this.images.length;j++){
-    if(this.types[i]==this.images[j].type){
-      this.allinsurances[i][this.count2]=this.images[j];
-      this.count2++;
-    }
-  }
-}
-console.log(this.allinsurances);
-  })
-}
-getHealthInsurances(){
-
-  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-     for(var i=0;i<this.allinsurances[0].length;i++){
-    this.healthInsurance[i]=this.allinsurances[0][i];
-    console.log("hello")
-    }
-  })
-}
-
-changeDiv(){
-
-}
-}
-
-  })
-}
-
 getNamesOther(){
   this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
   for(var i=0;i<this.images.length;i++){
@@ -166,7 +91,6 @@ getNamesOther(){
   this.countt++;
 }
 }
-
 })
 }
 getNamesLife(){
@@ -177,12 +101,10 @@ getNamesLife(){
   this.countt++;
 }
 }
-
 })
 }
 getInsurnacesAcc(){
   this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-
 for(var i=0;i<this.types.length;i++){
   this.count2=0;
   for(var j=0;j<this.images.length;j++){
@@ -192,17 +114,13 @@ for(var i=0;i<this.types.length;i++){
     }
   }
 }
-
-
   })
 }
-
 getHealthInsurances(){
   this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
     for(var i=0;i<this.allinsurances[0].length;i++){
     this.healthInsurance[i]=this.allinsurances[0][i];
     }
-
 })
 }
 getLifeInsurances(){
@@ -210,8 +128,6 @@ getLifeInsurances(){
     for(var i=0;i<this.allinsurances[2].length;i++){
     this.lifeInsurance[i]=this.allinsurances[2][i];
     }
-
-  
 })
 }
 getOtherInsurances(){
@@ -219,8 +135,6 @@ getOtherInsurances(){
     for(var i=0;i<this.allinsurances[1].length;i++){
     this.OtherInsurance[i]=this.allinsurances[1][i];
     }
-  
-  
 }
 )
 }

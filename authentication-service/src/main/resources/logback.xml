@@ -1,7 +1,11 @@
 <configuration>
 
     <property name="LOG_FILE_LOCATION" value="authentication-service" />
+<<<<<<< HEAD
+    <property name="LOG_FILE_NAME" value="authenticationService" />
+=======
     <property name="LOG_FILE_NAME" value="AuthenticationService" />
+>>>>>>> d650bc86ec32fe296bdf1d83a3254ebc1291f6ed
     <property name="LOG_FILE_EXTENSION" value=".log" />
     <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"
                timeReference="contextBirth"/>

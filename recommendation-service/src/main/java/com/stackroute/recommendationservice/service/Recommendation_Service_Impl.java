@@ -1,5 +1,6 @@
 package com.stackroute.recommendationservice.service;
 import com.stackroute.recommendationservice.exception.InsuranceAlreadyExists;
+import com.stackroute.recommendationservice.exception.NoInsurancesFound;
 import com.stackroute.recommendationservice.exception.UserAlreadyPosted;
 import com.stackroute.recommendationservice.model.*;
 import com.stackroute.recommendationservice.repository.*;
@@ -84,24 +85,27 @@ public class Recommendation_Service_Impl implements Recommendation_service{
 //    }
 
     @Override
-    public void createInsuranceTypeRelation(int insuranceId, String insuranceType) {
+    public boolean createInsuranceTypeRelation(int insuranceId, String insuranceType) {
         if(!insurance_repository.checkInsuranceTypeRelationship(insuranceId,insuranceType)){
             insurance_repository.createInsuranceTypeRelation(insuranceId,insuranceType);
-        }
+            return true;
+        }else return false;
     }
 
     @Override
-    public void createAgeRelation(int insuranceId, int age) {
+    public boolean createAgeRelation(int insuranceId, int age) {
         if(!insurance_repository.checkAgeRelationship(insuranceId,age)){
             insurance_repository.createAgeRelation(insuranceId,age);
-        }
+            return true;
+        }else return false;
     }
 
     @Override
-    public void createOccupationRelation(int insuranceId, String occupationName) {
+    public boolean createOccupationRelation(int insuranceId, String occupationName) {
         if(!insurance_repository.checkOccupationRelation(insuranceId,occupationName)){
             insurance_repository.createOccupationRelation(insuranceId,occupationName);
-        }
+            return true;
+        }else return false;
     }
 
     @Override
@@ -126,36 +130,50 @@ public class Recommendation_Service_Impl implements Recommendation_service{
 //    }
 
     @Override
-    public List<Insurance> getAllInsuranceOnBasisOfAge(int age) {
+    public List<Insurance> getAllInsuranceOnBasisOfAge(int age) throws NoInsurancesFound {
          List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithAge(age);
-        return insurances;
+         if(insurances.size() ==0){
+            throw new NoInsurancesFound();
+        }else return insurances;
     }
 
     @Override
-    public List<Insurance> getAllInsuranceOnBasisOfOccupation(String occupationName) {
+    public List<Insurance> getAllInsuranceOnBasisOfOccupation(String occupationName)throws NoInsurancesFound {
         List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithOccupation(occupationName);
-        return insurances;
+                if(insurances.size() ==0){
+            throw new NoInsurancesFound();
+        }else return insurances;
     }
 
     @Override
-    public List<Insurance> getAllInsuranceOnBasisOfType(String insuranceType) {
+    public List<Insurance> getAllInsuranceOnBasisOfType(String insuranceType) throws NoInsurancesFound{
         List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithInsuranceType(insuranceType);
-        return insurances;
+                if(insurances.size() ==0){
+            throw new NoInsurancesFound();
+        }else return insurances;
     }
 
     @Override
-    public List<Insurance> getAllInsurance() {
-        return insurance_repository.getAllInsurances();
+    public List<Insurance> getAllInsurance()throws NoInsurancesFound {
+        List<Insurance>insurances =  insurance_repository.getAllInsurances();
+        if(insurances.size() ==0){
+            throw new NoInsurancesFound();
+        }else return insurances;
     }
 
     @Override
-    public List<Insurance> getAllInsurancesWhichAreTrending() {
-        return insurance_repository.getAllInsurancesWhichAreTrending();
+    public List<Insurance> getAllInsurancesWhichAreTrending() throws NoInsurancesFound{
+        List<Insurance>insurances =  insurance_repository.getAllInsurancesWhichAreTrending();
+        if(insurances.size() ==0){
+            throw new NoInsurancesFound();
+        }else return insurances;
     }
 
 //    @Override
 //    public List<Insurance> getAllInsuranceOnBasisOfVehicle(String vehicle) {
 //        List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithVehicle(vehicle);
-//        return insurances;
+//                if(insurances.size() ==0){
+//            throw new NoInsurancesFound();
+//        }else return insurances;
 //    }
 }
