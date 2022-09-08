@@ -9,18 +9,13 @@ export class RecommendationComponent implements OnInit {
   images:any =[];
   types:any =[];
   healthNames:any=[];
-<<<<<<< HEAD
-=======
   otherNames:any=[];
   lifeNames:any=[];
->>>>>>> 4a4da06b1cd0de736f199e900f0db36f19f36086
   count:number =0;
   countt:number=0;
   count2:number=0;
   allinsurances:any[][]=[[],[],[]];
   healthInsurance:any=[];
-<<<<<<< HEAD
-=======
   lifeInsurance:any=[];
   OtherInsurance:any=[];
   isHealth=true;
@@ -55,11 +50,9 @@ life(){
     this.isDisplay=false;
  }
 }
->>>>>>> 4a4da06b1cd0de736f199e900f0db36f19f36086
   constructor(private http:HttpClient) { }
   ngOnInit(): void {
     this.getALlImages();
-<<<<<<< HEAD
     this.getNames();
     this.getInsurnacesAcc();
     this.getHealthInsurances();
@@ -92,7 +85,6 @@ life(){
   this.isLife=!this.isLife;
   this.isOther=!this.isOther;
 }
-=======
     this.getNamesHealth();
     this.getInsurnacesAcc();
     this.getHealthInsurances();
@@ -103,7 +95,6 @@ life(){
   }
   
 
->>>>>>> 4a4da06b1cd0de736f199e900f0db36f19f36086
   getALlImages(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
       this.images = data;
@@ -117,22 +108,18 @@ life(){
       }
     })
   }
-<<<<<<< HEAD
   getNames(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
       this.images = data;
 for(var i=0;i<this.images.length;i++){
-=======
 
   getNamesHealth(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
     for(var i=0;i<this.images.length;i++){
->>>>>>> 4a4da06b1cd0de736f199e900f0db36f19f36086
      if(this.images[i].type=="health"){
     this.healthNames[this.countt]=this.images[i].name;
     this.countt++;
   }
-<<<<<<< HEAD
 }
   })
 }
@@ -166,8 +153,6 @@ getHealthInsurances(){
 changeDiv(){
 
 }
-=======
->>>>>>> 4a4da06b1cd0de736f199e900f0db36f19f36086
 }
 
   })
