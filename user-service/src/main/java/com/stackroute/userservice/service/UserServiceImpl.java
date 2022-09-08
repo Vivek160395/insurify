@@ -4,6 +4,7 @@ import com.stackroute.userservice.config.Producer;
 import com.stackroute.userservice.exception.UserAlreadyExistsException;
 import com.stackroute.userservice.exception.UserNotRegisteredException;
 import com.stackroute.userservice.model.User;
+import com.stackroute.userservice.rabbitmq.domain.RecommendationDTO;
 import com.stackroute.userservice.rabbitmq.domain.UserDTO;
 import com.stackroute.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,11 @@ public class UserServiceImpl implements UserService{
     public User registerUser(User user) throws UserAlreadyExistsException {
 
         UserDTO userDTO = new UserDTO();
+        RecommendationDTO recommendationDTO = new RecommendationDTO();
 
         userDTO.setEmailId(user.getEmailId());
         userDTO.setPassword(user.getPassword());
+        userDTO.setUserType(user.getUserType());
         userDTO.setName(user.getName());
         userDTO.setAge(user.getAge());
         userDTO.setGender(user.getGender());
@@ -40,13 +43,16 @@ public class UserServiceImpl implements UserService{
         userDTO.setPanNo(user.getPanNo());
         userDTO.setProfilePic(user.getProfilePic());
 
+        recommendationDTO.setEmailId(user.getEmailId());
+        recommendationDTO.setUserType(user.getUserType());
+        recommendationDTO.setAge(user.getAge());
 
-        if(userRepository.findById(user.getUserId()).isPresent()){
+        if(userRepository.findById(user.getEmailId()).isPresent()){
             throw new UserAlreadyExistsException();
         }
         else {
             userRepository.save(user);
-            producer.sendMessageToRabbitMq(userDTO);
+            producer.sendMessageToAuthRabbitMq(userDTO, recommendationDTO);
             return user;
         }
     }
@@ -57,23 +63,23 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User updateUser(User user, int userId) throws UserNotRegisteredException {
-        if(userRepository.findById(userId).isEmpty())
+    public User updateUser(User user, String emailId) throws UserNotRegisteredException {
+        if(userRepository.findById(emailId).isPresent())
         {
-            throw new UserNotRegisteredException();
+            userRepository.save(user);
+            return user;
         }
         else
         {
-             userRepository.save(user);
+            throw new UserNotRegisteredException();
         }
-        return user;
     }
 
     @Override
-    public boolean deleteUser(int userId) throws UserNotRegisteredException {
-        User user = userRepository.findById(userId).get();
-        if(userRepository.findById(user.getUserId()).isPresent()){
-            userRepository.delete(user);
+    public boolean deleteUser(String emailId) throws UserNotRegisteredException {
+//        User user = userRepository.findById(emailId).get();
+        if(userRepository.findById(emailId).isPresent()){
+            userRepository.deleteById(emailId);
             return true;
         }
         else

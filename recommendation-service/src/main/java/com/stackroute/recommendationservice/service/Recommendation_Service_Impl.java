@@ -68,9 +68,9 @@ public class Recommendation_Service_Impl implements Recommendation_service{
     }
 
     @Override
-    public User addUser(String userEmail) throws UserAlreadyPosted {
-        if(userRepository.findById(userEmail).isEmpty()){
-          return userRepository.save(new User(userEmail));
+    public User addUser(User user) throws UserAlreadyPosted {
+        if(userRepository.findById(user.getUserEmail()).isEmpty()){
+          return userRepository.save(user);
         }else {
             throw new UserAlreadyPosted();
         }
@@ -106,8 +106,14 @@ public class Recommendation_Service_Impl implements Recommendation_service{
 
     @Override
     public boolean createUserToInsuranceRelation(int insuranceId, String userEmail) {
+        System.out.println("***************************************************************************************************************");
+        System.out.println(insurance_repository.checkUserToInsuranceRelationship(insuranceId,userEmail));
+        System.out.println("***************************************************************************************************************");
         if(!insurance_repository.checkUserToInsuranceRelationship(insuranceId,userEmail)){
             insurance_repository.createUserToInsuranceRelationship(insuranceId,userEmail);
+            Insurance insurance = insurance_repository.findById(insuranceId).get();
+            insurance.setNoOfUsersBought(insurance.getNoOfUsersBought()+1);
+            insurance_repository.save(insurance);
             return true;
         }return false;
     }
@@ -140,6 +146,11 @@ public class Recommendation_Service_Impl implements Recommendation_service{
     @Override
     public List<Insurance> getAllInsurance() {
         return insurance_repository.getAllInsurances();
+    }
+
+    @Override
+    public List<Insurance> getAllInsurancesWhichAreTrending() {
+        return insurance_repository.getAllInsurancesWhichAreTrending();
     }
 
 //    @Override

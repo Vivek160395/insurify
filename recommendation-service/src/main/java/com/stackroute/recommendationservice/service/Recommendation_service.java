@@ -12,7 +12,7 @@ public interface Recommendation_service {
     void addAge(int age);
     void addInsuranceType(String insurance_Type);
     void addOccupation(String occupation);
-    User addUser(String userEmail) throws UserAlreadyPosted;
+    User addUser(User user) throws UserAlreadyPosted;
 //    void addVehicle(String vehicle);
     void createInsuranceTypeRelation(int insuranceId,String insuranceType);
     void createAgeRelation(int insuranceId,int age);
@@ -24,4 +24,5 @@ public interface Recommendation_service {
     List<Insurance> getAllInsuranceOnBasisOfType(String insuranceType);
 //    List<Insurance> getAllInsuranceOnBasisOfVehicle(String vehicleType);
     List<Insurance> getAllInsurance();
+    List<Insurance> getAllInsurancesWhichAreTrending();
 }
