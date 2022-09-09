@@ -52,41 +52,6 @@ life(){
   constructor(private http:HttpClient) { }
   ngOnInit(): void {
     this.getALlImages();
-<<<<<<< HEAD
-    this.getNames();
-    this.getInsurnacesAcc();
-    this.getHealthInsurances();
-  }
-  isDisplay=false;
-  isHealth=true;
-  isOther=true;
-  isLife =true;
-  display(){
-      this.isDisplay=!this.isDisplay;
-      this.isHealth=!this.isHealth;
-      this.isLife=!this.isLife;
-      this.isOther=!this.isOther;
-  }
-  health(){
-    this.isHealth=!this.isHealth;
-    this.isDisplay=!this.isDisplay;
-    this.isLife=!this.isLife;
-    this.isOther=!this.isOther;
-}
-other(){
-  this.isHealth=!this.isHealth;
-  this.isDisplay=!this.isDisplay;
-  this.isLife=!this.isLife;
-  this.isOther=!this.isOther;
-}
-life(){
-  this.isHealth=!this.isHealth;
-  this.isDisplay=!this.isDisplay;
-  this.isLife=!this.isLife;
-  this.isOther=!this.isOther;
-}
-=======
->>>>>>> 5988fa92ea65225d96890e7f48baea622d343840
     this.getNamesHealth();
     this.getInsurnacesAcc();
     this.getHealthInsurances();
@@ -95,11 +60,6 @@ life(){
     this.getNamesOther();
     this.getNamesLife();
   }
-<<<<<<< HEAD
-  
-
-=======
->>>>>>> 5988fa92ea65225d96890e7f48baea622d343840
   getALlImages(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
       this.images = data;
@@ -113,14 +73,6 @@ life(){
       }
     })
   }
-<<<<<<< HEAD
-  getNames(){
-    this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-      this.images = data;
-for(var i=0;i<this.images.length;i++){
-
-=======
->>>>>>> 5988fa92ea65225d96890e7f48baea622d343840
   getNamesHealth(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
     for(var i=0;i<this.images.length;i++){
@@ -131,44 +83,6 @@ for(var i=0;i<this.images.length;i++){
 }
   })
 }
-<<<<<<< HEAD
-getInsurnacesAcc(){
-  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-console.log(this.images);
-console.log(this.types);
-console.log("done");
-for(var i=0;i<this.types.length;i++){
-  this.count2=0;
-  for(var j=0;j<this.images.length;j++){
-    if(this.types[i]==this.images[j].type){
-      this.allinsurances[i][this.count2]=this.images[j];
-      this.count2++;
-    }
-  }
-}
-console.log(this.allinsurances);
-  })
-}
-getHealthInsurances(){
-
-  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-     for(var i=0;i<this.allinsurances[0].length;i++){
-    this.healthInsurance[i]=this.allinsurances[0][i];
-    console.log("hello")
-    }
-  })
-}
-
-changeDiv(){
-
-}
-}
-
-  })
-}
-
-=======
->>>>>>> 5988fa92ea65225d96890e7f48baea622d343840
 getNamesOther(){
   this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
   for(var i=0;i<this.images.length;i++){
