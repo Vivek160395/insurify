@@ -27,14 +27,21 @@ public class AutomobileInsuranceServiceImpl implements AutoMobileInsurancePolicy
     }
 
     @Override
-    public AutomobileInsurancePolicy savePolicy(AutomobileInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException {
+    public AutomobileInsurancePolicy savePolicy(AutomobileInsurancePolicy policy) throws PolicyAlreadyExistException {
         DTO dto = new DTO();
         dto.setPolicyName(dto.getPolicyName());
         dto.setInsuranceType(dto.getInsuranceType());
 
+<<<<<<< HEAD
+        if (policyRepository.findById(policy.getPolicyId()).isPresent()){
+            throw new PolicyAlreadyExistException();
+        }
+        else {
+=======
         if(policyRepository.findById(policy.getPolicyId()).isEmpty()){
             //policy = new AutomobileInsurancePolicy(docName, file.getContentType(), file.getBytes());
             policy.setPolicyDocuments(file.getBytes());
+>>>>>>> 314499d1fb8b8a80dab1cbf2717d38510c3fc482
             producer.sendingMessageToRabbitMQServer(dto);
             policyRepository.save(policy);
             return policy;
@@ -57,7 +64,7 @@ public class AutomobileInsuranceServiceImpl implements AutoMobileInsurancePolicy
     }
 
     @Override
-    public Optional<AutomobileInsurancePolicy> getPolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public Optional<AutomobileInsurancePolicy> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isEmpty()) {
             throw new PolicyNotFoundException();
         }
@@ -65,7 +72,7 @@ public class AutomobileInsuranceServiceImpl implements AutoMobileInsurancePolicy
     }
 
     @Override
-    public boolean deletePolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isEmpty()){
             throw new PolicyNotFoundException();
         }

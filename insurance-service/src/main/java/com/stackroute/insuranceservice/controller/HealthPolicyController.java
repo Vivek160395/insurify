@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.zip.Deflater;
 
 @RestController
@@ -25,13 +24,17 @@ public class HealthPolicyController {
 
     HealthInsurancePolicyService policyService;
 
-
     @Autowired
     public HealthPolicyController(HealthInsurancePolicyService policyService) {
         this.policyService = policyService;
     }
 
     @PostMapping("/policy")
+<<<<<<< HEAD
+    public ResponseEntity<?> addPolicy(@RequestBody HealthInsurancePolicy policy) throws PolicyAlreadyExistException {
+        policyService.savePolicy(policy);
+        return new ResponseEntity<>(policyService.savePolicy(policy),HttpStatus.ACCEPTED);
+=======
     public ResponseEntity<?> addPolicy(@RequestParam("file") MultipartFile file,
                                        @RequestParam("details") String details) throws PolicyAlreadyExistException, IOException {
 
@@ -39,6 +42,7 @@ public class HealthPolicyController {
 
         policyService.savePolicy(policy,file);
         return new ResponseEntity<>(policyService.savePolicy(policy,file),HttpStatus.ACCEPTED);
+>>>>>>> 314499d1fb8b8a80dab1cbf2717d38510c3fc482
     }
 
     @GetMapping("/policy")
@@ -52,12 +56,12 @@ public class HealthPolicyController {
     }
 
     @GetMapping("/policy/{policyId}")
-    public ResponseEntity<?> getPolicyByPolicyId(@PathVariable Integer policyId) throws PolicyNotFoundException {
+    public ResponseEntity<?> getPolicyByPolicyId(@PathVariable String  policyId) throws PolicyNotFoundException {
         return new ResponseEntity<>(policyService.getPolicyByPolicyId(policyId),HttpStatus.OK);
     }
 
     @DeleteMapping("/policy/delete/{policyId}")
-    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable Integer policyId) throws PolicyNotFoundException {
+    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
         policyService.deletePolicyByPolicyId(policyId);
         return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
     }

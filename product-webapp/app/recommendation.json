@@ -1,37 +1,11 @@
 {
     "recommendation": [{
         "img": "../../assets/img/Coronavirus-Business-Insurance.png",
-<<<<<<< HEAD
-        "name": "bheema yojana",
-        "description": " The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting. ",
-        "type": "health"
-    }, {
-        "img": "../../assets/img/image (1).png",
-        "name": "bheema yojana",
-        "description": " The Shiba Inu is the smallest of the six original",
-        "type": "health"
-    }, {
-        "img": "../../assets/img/image (2).png",
-        "name": "bheema yojana",
-        "type": "other"
-    }, {
-        "img": "../../assets/img/image (3).png",
-        "name": "bheema yojana",
-        "type": "life"
-    }, {
-        "img": "../../assets/img/image (4).png",
-        "name": "bheema yojana",
-        "type": "life"
-    }, {
-        "img": "../../assets/img/image.png",
-        "name": "bheema yojana",
-        "type": "other"
-    }]
-=======
-        "name":"bheema yojana-h",
+        "name":"bheema yojana-l",
         "description":" The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting. "
-        ,"type":"health"
-    }, {
+        ,"type":"life"
+    },
+     {
         "img": "../../assets/img/image (1).png",
         "name":"bheema yojana-h",
         "description":" The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting. ",
@@ -39,21 +13,39 @@
     }, {
         "img": "../../assets/img/image (2).png",
         "name":"bheema yojana-o",
-        "description":"The Shiba Inu is ",
+        "description":"The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.",
         "type":"other"
     }, {
         "img": "../../assets/img/image (3).png",
         "name":"bheema yojana-l",
+        "description":"The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.",
         "type":"life"
     }, {
         "img": "../../assets/img/image (4).png",
         "name":"bheema yojana-l",
+        "description":"The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.",
         "type":"life"
     }, {
         "img": "../../assets/img/image.png",
         "name":"bheema yojana-o",
+        "description":"The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.",
         "type":"other"
     }
-   ]
->>>>>>> 4a4da06b1cd0de736f199e900f0db36f19f36086
+   ],
+   
+    "trends":[{
+        "img": "../../assets/img/image (4).png",
+        "name":"bheema yojana-t",
+        "description":"The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.",
+        "type":"life"
+    }, {
+        "img": "../../assets/img/image.png",
+        "name":"bheema yojana-t",
+        "description":"The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.",
+        "type":"other"
+    }
+         
+    ]
 }
+   
+
