@@ -1,5 +1,6 @@
 package com.stackroute.insuranceservice.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.AddOnDetails;
@@ -28,20 +29,8 @@ public class LifeInsuranceController {
     }
 
     @PostMapping("/policy")
-    public ResponseEntity<?> addPolicy(@RequestParam("policyId") Integer policyId, @RequestParam("policyName") String policyName,
-                                       @RequestParam("policyDetails") List<Details> policyDetails, @RequestParam("insuranceType") String insuranceType,
-                                       @RequestParam("policyBenefits") List<Benefits> policyBenefits, @RequestParam("file") MultipartFile file,
-                                       @RequestParam("policyAddOnDetails") List<AddOnDetails> policyAddOnDetails) throws PolicyAlreadyExistException, IOException {
-        LifeInsurancePolicy policy = new LifeInsurancePolicy();
-        policy.setPolicyId(policyId);
-        policy.setPolicyName(policyName);
-        policy.setInsuranceType(insuranceType);
-        policy.setPolicyDetails(policyDetails);
-        policy.setPolicyBenefits(policyBenefits);
-        policy.setPolicyDocuments(file.getBytes());
-        policy.setPolicyAddOnDetails(policyAddOnDetails);
-
-        policyService.savePolicy(policy,file);
+    public ResponseEntity<?> addPolicy(@RequestBody LifeInsurancePolicy policy) throws PolicyAlreadyExistException {
+        policyService.savePolicy(policy);
         return new ResponseEntity<>("Data Saved Successfully", HttpStatus.ACCEPTED);
     }
 
@@ -56,12 +45,12 @@ public class LifeInsuranceController {
     }
 
     @GetMapping("/policy/{policyId}")
-    public ResponseEntity<?> getPolicyByPolicyId(@PathVariable Integer policyId) throws PolicyNotFoundException {
+    public ResponseEntity<?> getPolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
         return new ResponseEntity<>(policyService.getPolicyByPolicyId(policyId),HttpStatus.OK);
     }
 
     @DeleteMapping("/policy/delete/{policyId}")
-    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable Integer policyId) throws PolicyNotFoundException {
+    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
         policyService.deletePolicyByPolicyId(policyId);
         return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
     }

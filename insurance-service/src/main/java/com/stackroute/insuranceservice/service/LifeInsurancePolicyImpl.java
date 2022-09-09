@@ -26,7 +26,7 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
         this.policyRepository = policyRepository;
     }
     @Override
-    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException {
+    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy) throws PolicyAlreadyExistException {
         DTO dto = new DTO();
         dto.setInsuranceType(policy.getInsuranceType());
         dto.setPolicyName(policy.getPolicyName());
@@ -34,10 +34,6 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
         if (policyRepository.findById(policy.getPolicyId()).isPresent()){
             throw new PolicyAlreadyExistException();
         }else {
-            String docName= file.getOriginalFilename();
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+docName);
-
-            policy = new LifeInsurancePolicy(docName, file.getContentType(), file.getBytes());
             policyRepository.save(policy);
             producer.sendingMessageToRabbitMQServer(dto);
             return policy;
@@ -55,7 +51,7 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
     }
 
     @Override
-    public Optional<LifeInsurancePolicy> getPolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public Optional<LifeInsurancePolicy> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isPresent()){
             return policyRepository.findById(policyId);
         }else {
@@ -64,7 +60,7 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
     }
 
     @Override
-    public boolean deletePolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isPresent()){
             policyRepository.deleteById(policyId);
             return true;

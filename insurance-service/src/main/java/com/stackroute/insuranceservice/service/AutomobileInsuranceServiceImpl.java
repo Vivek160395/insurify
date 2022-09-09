@@ -27,7 +27,7 @@ public class AutomobileInsuranceServiceImpl implements AutoMobileInsurancePolicy
     }
 
     @Override
-    public AutomobileInsurancePolicy savePolicy(AutomobileInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException {
+    public AutomobileInsurancePolicy savePolicy(AutomobileInsurancePolicy policy) throws PolicyAlreadyExistException {
         DTO dto = new DTO();
         dto.setPolicyName(dto.getPolicyName());
         dto.setInsuranceType(dto.getInsuranceType());
@@ -36,11 +36,6 @@ public class AutomobileInsuranceServiceImpl implements AutoMobileInsurancePolicy
             throw new PolicyAlreadyExistException();
         }
         else {
-            String docName= file.getOriginalFilename();
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+docName);
-
-            //policy = new AutomobileInsurancePolicy(docName, file.getContentType(), file.getBytes());
-            policy.setPolicyDocuments(file.getBytes());
             producer.sendingMessageToRabbitMQServer(dto);
             policyRepository.save(policy);
             return policy;
@@ -58,7 +53,7 @@ public class AutomobileInsuranceServiceImpl implements AutoMobileInsurancePolicy
     }
 
     @Override
-    public Optional<AutomobileInsurancePolicy> getPolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public Optional<AutomobileInsurancePolicy> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isEmpty()) {
             throw new PolicyNotFoundException();
         }
@@ -66,7 +61,7 @@ public class AutomobileInsuranceServiceImpl implements AutoMobileInsurancePolicy
     }
 
     @Override
-    public boolean deletePolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isEmpty()){
             throw new PolicyNotFoundException();
         }

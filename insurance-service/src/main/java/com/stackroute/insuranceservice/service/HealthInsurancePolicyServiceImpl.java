@@ -28,16 +28,12 @@ public class HealthInsurancePolicyServiceImpl implements HealthInsurancePolicySe
     }
 
     @Override
-    public HealthInsurancePolicy savePolicy(HealthInsurancePolicy policy,MultipartFile file) throws PolicyAlreadyExistException, IOException {
+    public HealthInsurancePolicy savePolicy(HealthInsurancePolicy policy) throws PolicyAlreadyExistException {
         DTO dto = new DTO();
         dto.setPolicyName(policy.getPolicyName());
         dto.setInsuranceType(policy.getInsuranceType());
 
         if (policyRepository.findById(policy.getPolicyId()).isEmpty()) {
-            String docName= file.getOriginalFilename();
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+docName);
-
-            policy = new HealthInsurancePolicy(docName, file.getContentType(), file.getBytes());
             policyRepository.save(policy);
             producer.sendingMessageToRabbitMQServer(dto);
             return policy;
@@ -59,7 +55,7 @@ public class HealthInsurancePolicyServiceImpl implements HealthInsurancePolicySe
     }
 
     @Override
-    public Optional<HealthInsurancePolicy> getPolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public Optional<HealthInsurancePolicy> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isEmpty()) {
             throw new PolicyNotFoundException();
         }
@@ -67,7 +63,7 @@ public class HealthInsurancePolicyServiceImpl implements HealthInsurancePolicySe
     }
 
     @Override
-    public boolean deletePolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isEmpty()){
             throw new PolicyNotFoundException();
         }
