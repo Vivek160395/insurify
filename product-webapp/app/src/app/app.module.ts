@@ -1,4 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { MarkdownModule } from 'ngx-markdown';
 import { AppRoutingModule } from './app-routing.module';
@@ -66,6 +67,7 @@ import { PreviewMarkupComponent } from './preview-markup/preview-markup.componen
   entryComponents: [PreviewMarkupComponent],
   imports: [
     BrowserModule,
+    FlexLayoutModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

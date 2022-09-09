@@ -67,6 +67,96 @@ trend(){
 }
   constructor(private http:HttpClient) { }
   ngOnInit(): void {
+<<<<<<< HEAD
+    this.getALlImages();
+    this.getNamesHealth();
+    this.getInsurnacesAcc();
+    this.getHealthInsurances();
+    this.getLifeInsurances();
+    this.getOtherInsurances();
+    this.getNamesOther();
+    this.getNamesLife();
+  }
+  getALlImages(){
+    this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+      this.images = data;
+      for(var i=0;i<this.images.length;i++){
+        for(var j=i+1;j<this.images.length;j++){
+           if(this.images[i].type==this.images[j].type){
+            this.types[this.count] = this.images[i].type;
+            this.count++;
+          }
+        }
+      }
+    })
+  }
+  getNamesHealth(){
+    this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+    for(var i=0;i<this.images.length;i++){
+     if(this.images[i].type=="health"){
+    this.healthNames[this.countt]=this.images[i].name;
+    this.countt++;
+  }
+}
+  })
+}
+getNamesOther(){
+  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+  for(var i=0;i<this.images.length;i++){
+   if(this.images[i].type=="other"){
+  this.otherNames[this.countt]=this.images[i].name;
+  this.countt++;
+}
+}
+})
+}
+getNamesLife(){
+  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+  for(var i=0;i<this.images.length;i++){
+   if(this.images[i].type=="life"){
+  this.lifeNames[this.countt]=this.images[i].name;
+  this.countt++;
+}
+}
+})
+}
+getInsurnacesAcc(){
+  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+for(var i=0;i<this.types.length;i++){
+  this.count2=0;
+  for(var j=0;j<this.images.length;j++){
+    if(this.types[i]==this.images[j].type){
+      this.allinsurances[i][this.count2]=this.images[j];
+      this.count2++;
+    }
+  }
+}
+  })
+}
+getHealthInsurances(){
+  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+    for(var i=0;i<this.allinsurances[0].length;i++){
+    this.healthInsurance[i]=this.allinsurances[0][i];
+    }
+})
+}
+getLifeInsurances(){
+  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+    for(var i=0;i<this.allinsurances[2].length;i++){
+    this.lifeInsurance[i]=this.allinsurances[2][i];
+    }
+})
+}
+getOtherInsurances(){
+  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+    for(var i=0;i<this.allinsurances[1].length;i++){
+    this.OtherInsurance[i]=this.allinsurances[1][i];
+    }
+}
+)
+}
+}
+=======
     this.getNames();
     this.getTrendingNames();
 
@@ -119,3 +209,4 @@ trend(){
 
 
 
+>>>>>>> 893cc0eaf9cb2435414a349d6fd0dc7038ae6ba3
