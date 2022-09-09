@@ -6,6 +6,7 @@ export class Insurance {
       constructor(
     public  insuranceType    :string,
     public  policyId         :any,
+    public  category         :string,
     public  policyName       :string,
     public  policyDescription:string,
     public  policyDetails            :PolicyDetails[],

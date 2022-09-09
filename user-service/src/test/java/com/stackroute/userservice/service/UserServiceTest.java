@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,10 +43,10 @@ public class UserServiceTest {
         @BeforeEach
         public void setUp(){
             address1=new Address(637,"gali no. 1","st mary school","panipat","haryana",132101);
-            user1=new User("ajay123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address1,123456789098l,"ABCD234","abcd.jpg");
+            user1=new User("ajay123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address1,123456789098l,"ABCD234");
 
             address2=new Address(637,"gali no. 1","st mary school","panipat","haryana",132101);
-            user2=new User("aman123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address2,123456789098l,"ABCD234","abcd.jpg");
+            user2=new User("aman123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address2,123456789098l,"ABCD234");
 
         }
 
@@ -87,10 +88,10 @@ public class UserServiceTest {
     }
 
     @Test
-    public void updateUserPass() throws UserNotRegisteredException {
+    public void updateUserPass() throws UserNotRegisteredException, IOException {
         when(userRepository.findById(user1.getEmailId())).thenReturn(Optional.ofNullable(user1));
-        userService.updateUser(user1,user1.getEmailId());
-        assertEquals(user1,userService.updateUser(user1,user1.getEmailId()));
+        userService.updateUser(user1,user1.getEmailId(),any());
+        assertEquals(user1,userService.updateUser(user1,user1.getEmailId(),any()));
         verify(userRepository,times(2)).findById(any());
         verify(userRepository,times(2)).save(any());
 //        verify(userRepository,times(0)).(any());
