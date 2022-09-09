@@ -31,7 +31,6 @@ export class RecommendationComponent implements OnInit {
        this.isDisplay=false;
     }
   }
-
 other(){
     this.isDisplay=true;
     this.isHealth=true;
@@ -53,6 +52,7 @@ life(){
   constructor(private http:HttpClient) { }
   ngOnInit(): void {
     this.getALlImages();
+<<<<<<< HEAD
     this.getNames();
     this.getInsurnacesAcc();
     this.getHealthInsurances();
@@ -85,6 +85,8 @@ life(){
   this.isLife=!this.isLife;
   this.isOther=!this.isOther;
 }
+=======
+>>>>>>> 5988fa92ea65225d96890e7f48baea622d343840
     this.getNamesHealth();
     this.getInsurnacesAcc();
     this.getHealthInsurances();
@@ -93,8 +95,11 @@ life(){
     this.getNamesOther();
     this.getNamesLife();
   }
+<<<<<<< HEAD
   
 
+=======
+>>>>>>> 5988fa92ea65225d96890e7f48baea622d343840
   getALlImages(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
       this.images = data;
@@ -108,11 +113,14 @@ life(){
       }
     })
   }
+<<<<<<< HEAD
   getNames(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
       this.images = data;
 for(var i=0;i<this.images.length;i++){
 
+=======
+>>>>>>> 5988fa92ea65225d96890e7f48baea622d343840
   getNamesHealth(){
     this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
     for(var i=0;i<this.images.length;i++){
@@ -123,6 +131,7 @@ for(var i=0;i<this.images.length;i++){
 }
   })
 }
+<<<<<<< HEAD
 getInsurnacesAcc(){
   this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
 console.log(this.images);
@@ -158,6 +167,8 @@ changeDiv(){
   })
 }
 
+=======
+>>>>>>> 5988fa92ea65225d96890e7f48baea622d343840
 getNamesOther(){
   this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
   for(var i=0;i<this.images.length;i++){
@@ -166,7 +177,6 @@ getNamesOther(){
   this.countt++;
 }
 }
-
 })
 }
 getNamesLife(){
@@ -177,12 +187,10 @@ getNamesLife(){
   this.countt++;
 }
 }
-
 })
 }
 getInsurnacesAcc(){
   this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-
 for(var i=0;i<this.types.length;i++){
   this.count2=0;
   for(var j=0;j<this.images.length;j++){
@@ -192,17 +200,13 @@ for(var i=0;i<this.types.length;i++){
     }
   }
 }
-
-
   })
 }
-
 getHealthInsurances(){
   this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
     for(var i=0;i<this.allinsurances[0].length;i++){
     this.healthInsurance[i]=this.allinsurances[0][i];
     }
-
 })
 }
 getLifeInsurances(){
@@ -210,8 +214,6 @@ getLifeInsurances(){
     for(var i=0;i<this.allinsurances[2].length;i++){
     this.lifeInsurance[i]=this.allinsurances[2][i];
     }
-
-  
 })
 }
 getOtherInsurances(){
@@ -219,8 +221,6 @@ getOtherInsurances(){
     for(var i=0;i<this.allinsurances[1].length;i++){
     this.OtherInsurance[i]=this.allinsurances[1][i];
     }
-  
-  
 }
 )
 }

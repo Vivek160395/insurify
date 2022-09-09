@@ -18,6 +18,7 @@ export interface Duration {
 })
 export class AddInsurancePolicyComponent implements OnInit {
   
+  displaytext:string='## How are you'
   
   insuranceForms = new FormGroup({
     insuranceType    : new FormControl("", [Validators.required]),
