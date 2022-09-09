@@ -68,9 +68,21 @@ public class UserServiceImpl implements UserService{
     public User updateUser(User user, String emailId, MultipartFile file) throws UserNotRegisteredException, IOException {
         if(userRepository.findById(emailId).isPresent())
         {
-            user.setProfilePic(file.getBytes());
-            userRepository.save(user);
-            return user;
+            User user1 = userRepository.findById(emailId).get();
+
+            user1.setName(user.getName());
+            user1.setName(user.getName());
+            user1.setAge(user.getAge());
+            user1.setGender(user.getGender());
+            user1.setDateOfBirth(user.getDateOfBirth());
+            user1.setMobileNo(user.getMobileNo());
+            user1.setAddress(user.getAddress());
+            user1.setAadharNo(user.getAadharNo());
+            user1.setPanNo(user.getPanNo());
+            user1.setProfilePic(file.getBytes());
+
+            userRepository.save(user1);
+            return user1;
         }
         else
         {
