@@ -114,6 +114,7 @@ public class InsuranceRecommendationControllerTest {
         mockMvc.perform(get("/Recommendation/TrendingInsurances").contentType(MediaType.APPLICATION_JSON).contentType(jsonToString(insurances))).andExpect(status().isFound());
         verify(recommendation_service,times(1)).getAllInsurancesWhichAreTrending();
     }
+
     public static String jsonToString(final Object obj) throws JsonProcessingException {
         String result;
         try{
