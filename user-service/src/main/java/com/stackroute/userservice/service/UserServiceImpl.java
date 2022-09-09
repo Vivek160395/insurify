@@ -9,7 +9,9 @@ import com.stackroute.userservice.rabbitmq.domain.UserDTO;
 import com.stackroute.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -63,9 +65,10 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User updateUser(User user, String emailId) throws UserNotRegisteredException {
+    public User updateUser(User user, String emailId, MultipartFile file) throws UserNotRegisteredException, IOException {
         if(userRepository.findById(emailId).isPresent())
         {
+            user.setProfilePic(file.getBytes());
             userRepository.save(user);
             return user;
         }
