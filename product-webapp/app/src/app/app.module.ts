@@ -54,12 +54,14 @@ import {HttpClientModule} from'@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
 import { MatStepper } from '@angular/material/stepper';
+import { SearchRecComponent } from './search-rec/search-rec.component';
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     RecommendationComponent,
     AddInsurancePolicyComponent,
+    SearchRecComponent,
   ],
   imports: [
     BrowserModule,
