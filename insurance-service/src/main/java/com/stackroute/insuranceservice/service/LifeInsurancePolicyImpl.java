@@ -31,17 +31,16 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
         dto.setInsuranceType(policy.getInsuranceType());
         dto.setPolicyName(policy.getPolicyName());
 
-        if (policyRepository.findById(policy.getPolicyId()).isPresent()){
-            throw new PolicyAlreadyExistException();
-        }else {
-            String docName= file.getOriginalFilename();
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+docName);
-
-            policy = new LifeInsurancePolicy(docName, file.getContentType(), file.getBytes());
+        if(policyRepository.findById(policy.getPolicyId()).isEmpty()) {
+            //policy = new LifeInsurancePolicy(docName, file.getContentType(), file.getBytes());
+            policy.setPolicyDocuments(file.getBytes());
             policyRepository.save(policy);
             producer.sendingMessageToRabbitMQServer(dto);
             return policy;
+        }else {
+            throw new PolicyAlreadyExistException();
         }
+
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.util.List;
 public class AutomobileInsurancePolicy {
 
     @Id
-    private Integer policyId;
+    private int policyId;
     private String policyName;
     private String insuranceType;
     private List<Details> policyDetails;

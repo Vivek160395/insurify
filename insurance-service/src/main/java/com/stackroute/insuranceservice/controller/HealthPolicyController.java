@@ -32,22 +32,13 @@ public class HealthPolicyController {
     }
 
     @PostMapping("/policy")
-    public ResponseEntity<?> addPolicy(@RequestParam("policyId") Integer policyId, @RequestParam("policyName") String policyName,
-                                       @RequestParam("policyDetails") List<Details> policyDetails, @RequestParam("insuranceType") String insuranceType,
-                                       @RequestParam("policyBenefits") List<Benefits> policyBenefits, @RequestParam("file") MultipartFile file,
-                                       @RequestParam("policyAddOnDetails") List<AddOnDetails> policyAddOnDetails) throws PolicyAlreadyExistException, IOException {
+    public ResponseEntity<?> addPolicy(@RequestParam("file") MultipartFile file,
+                                       @RequestParam("details") String details) throws PolicyAlreadyExistException, IOException {
 
-        HealthInsurancePolicy policy = new HealthInsurancePolicy();
-        policy.setPolicyId(policyId);
-        policy.setPolicyName(policyName);
-        policy.setInsuranceType(insuranceType);
-        policy.setPolicyDetails(policyDetails);
-        policy.setPolicyBenefits(policyBenefits);
-        policy.setPolicyDocuments(file.getBytes());
-        policy.setPolicyAddOnDetails(policyAddOnDetails);
+        HealthInsurancePolicy policy=new ObjectMapper().readValue(details,HealthInsurancePolicy.class);
 
         policyService.savePolicy(policy,file);
-        return new ResponseEntity<>("Data Saved Successfully",HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(policyService.savePolicy(policy,file),HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/policy")

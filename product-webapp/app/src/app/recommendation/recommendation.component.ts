@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-recommendation',
   templateUrl: './recommendation.component.html',
@@ -36,7 +35,6 @@ export class RecommendationComponent implements OnInit {
        this.isDisplay=false;
     }
   }
-
 other(){
     this.isDisplay=true;
     this.isHealth=true;
@@ -68,12 +66,14 @@ trend(){
     }
 }
   constructor(private http:HttpClient) { }
-
   ngOnInit(): void {
     this.getNames();
     this.getTrendingNames();
+
   }
-  
+ 
+   
+
  getNames(){
       this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
         this.images=data;
@@ -109,7 +109,13 @@ trend(){
       })
     
     }
-  
   }
+  
+  
+
+  
+    
+
+
 
 

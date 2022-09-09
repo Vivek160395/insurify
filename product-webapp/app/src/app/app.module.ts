@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MarkdownModule } from 'ngx-markdown';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -50,22 +50,25 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
-import {HttpClientModule} from'@angular/common/http';
+import {HttpClientJsonpModule, HttpClientModule} from'@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
 import { MatStepper } from '@angular/material/stepper';
-import { SearchRecComponent } from './search-rec/search-rec.component';
+import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     RecommendationComponent,
     AddInsurancePolicyComponent,
-    SearchRecComponent,
+    PreviewMarkupComponent,
   ],
+  entryComponents: [PreviewMarkupComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     A11yModule,
     CdkAccordionModule,
@@ -118,7 +121,7 @@ import { SearchRecComponent } from './search-rec/search-rec.component';
     MatCardModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    
+    MarkdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

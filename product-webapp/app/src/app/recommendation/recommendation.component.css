@@ -1,0 +1,8 @@
+/* mat-buttons {
+    display: flex;
+    flex-direction: column-reverse;
+} */
+
+.example-card {
+    max-width: 400px;
+}
