@@ -1,14 +1,17 @@
 package com.stackroute.userservice.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.userservice.exception.UserAlreadyExistsException;
 import com.stackroute.userservice.exception.UserNotRegisteredException;
 import com.stackroute.userservice.model.User;
-import com.stackroute.userservice.service.SequenceGeneratorService;
 import com.stackroute.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -18,8 +21,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private SequenceGeneratorService sequenceGeneratorService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -31,7 +32,6 @@ public class UserController {
     @PostMapping("/user")
     public User registerUser(@RequestBody User user) throws UserAlreadyExistsException {
         try {
-            user.setUserId(sequenceGeneratorService.getSequenceNumber(User.SEQUENCE_NAME));
             return userService.registerUser(user);
         }
         catch (UserAlreadyExistsException e) {
@@ -46,21 +46,23 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @PutMapping("/updateUser/{userId}")
-    public ResponseEntity<?> updateUserInfo(@PathVariable int userId, @RequestBody User user) throws UserNotRegisteredException {
+    @PutMapping("/updateUser/{emailId}")
+    public ResponseEntity<?> updateUserInfo(@PathVariable String emailId, @RequestParam("imageFile") MultipartFile file, @RequestParam("userDetails") String user) throws UserNotRegisteredException, IOException {
         try {
-            return new ResponseEntity<>(userService.updateUser(user, userId), HttpStatus.OK);
-        } catch (UserNotRegisteredException e) {
+            User user1 = new ObjectMapper().readValue(user,User.class);
+
+            return new ResponseEntity<>(userService.updateUser(user1, emailId, file), HttpStatus.OK);
+        } catch (UserNotRegisteredException | IOException e) {
             e.getMessage();
             throw e;
         }
     }
 
-    @DeleteMapping("/removeUser/{userId}")
-    public ResponseEntity<?> deleteUser(@PathVariable int userId) throws UserNotRegisteredException {
+    @DeleteMapping("/removeUser/{emailId}")
+    public ResponseEntity<?> deleteUser(@PathVariable String emailId) throws UserNotRegisteredException {
         try {
-            if (userService.deleteUser(userId))
-                return new ResponseEntity<>("User with userId = "+userId+" is Deleted successfully.", HttpStatus.OK);
+            if (userService.deleteUser(emailId))
+                return new ResponseEntity<>("User with userId = "+emailId+" is Deleted successfully.", HttpStatus.OK);
             else
                 return new ResponseEntity<>("User Not Deleted", HttpStatus.OK);
         }

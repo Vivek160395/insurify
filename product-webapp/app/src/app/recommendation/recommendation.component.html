@@ -1,136 +1,127 @@
+<div class="container" >
+    <div style="display: flex;justify-content: space-between; ">
+    <div>
+    <button mat-button style="color: black;background-color:skyblue;margin: 20px 0px 0px 50px;font-size: xx-large;
+ font-family: 'Times New Roman', Times, serif;font-style: italic;" (click)=" health() " *ngIf="displayHealth">Health</button>
+    <button mat-button style="color: black;background-color:skyblue;margin: 20px 0px 0 30px;font-size: xx-large;
+     font-family: 'Times New Roman', Times, serif;font-style: italic;" (click)=" other()  " *ngIf="displayOther">Other</button>
+    <button mat-button style="color: black;background-color:skyblue;margin: 20px 0px 0 30px;font-size: xx-large;
+     font-family: 'Times New Roman', Times, serif;font-style: italic;" (click)="life()" *ngIf="displayLife">Life</button>
+     </div>
+     <div>
+        <button mat-button style="color: black;background-color:skyblue;margin: 20px 0px 0 30px;font-size: xx-large;
+     font-family: 'Times New Roman', Times, serif;font-style: italic;" (click)="trend()" >Trending</button>
+     </div>
+</div>
+</div>
 <div class="row" style="background-color: white;">
-    <div class=col-2 style="margin: 40px 0px 0 40px;color: black;">
-        <h3><b>Health Insurance</b></h3>
-        <div style="margin-left:20px ;">
-            <h4>Corona Kavach</h4>
-            <h4>Heath Insurance</h4>
-            <h4>Jeevan Labh Bima</h4>
-            <h4>Jyoti Bima Ratna</h4>
-        </div>
-
-        <h3><b>Motor Insurance</b></h3>
-        <!-- <mat-icon>search</mat-icon> -->
-        <h3><b>Travel Insurance</b></h3>
-        <h3><b>Business Insurance</b></h3>
-        <h3><b>Other Insurance</b></h3>
-    </div>
-    <div class="col-9" style="display: flex;flex-wrap: wrap;">
-        <!-- <mat-card class="example-card" style="margin:50px 20px 20px 10px;width: 334.5px; height:auto;background-color: white;
-            border-color: skyblue;
-            border-style: solid;">
-            <mat-card-header style="background-color: white;">
-                <mat-card-title style="color: black;">Corona Kavach</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src="../../assets/img/Coronavirus-Business-Insurance.png" alt="Photo of a Shiba Inu" style="width: 330px; height:200px;border-color: skyblue;
-                 border-style: solid;">
-            <mat-card-content>
-                <p style="color: black;">
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-button style="color: black;background-color:skyblue;">BUY</button>
-                <button mat-button style="color: black;background-color:skyblue;">RENEW</button>
-            </mat-card-actions>
-        </mat-card>
-
-        <mat-card class="example-card" style="margin:50px 20px 20px 10px;width: 334.5px; height:auto;background-color: white;
-            border-color: skyblue;
-            border-style: solid;">
-            <mat-card-header style="background-color: white;">
-                <mat-card-title style="color: black;">Bheema yojana</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src="../../assets/img/image (1).png" alt="Photo of a Shiba Inu" style="width: 330px; height:200px;border-color: skyblue;
-                 border-style: solid;">
-            <mat-card-content>
-                <p style="color: black;">
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-button style="color: black;background-color:skyblue;">BUY</button>
-                <button mat-button style="color: black;background-color:skyblue;">RENEW</button>
-            </mat-card-actions>
-        </mat-card>
-
-        <mat-card class="example-card" style="margin:50px 20px 20px 10px;width: 334.5px; height:auto;background-color: white;
-            border-color: skyblue;
-            border-style: solid;">
-            <mat-card-header style="background-color: white;">
-                <mat-card-title style="color: black;">Bheema yojana</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src="../../assets/img/image (2).png" alt="Photo of a Shiba Inu" style="width: 330px; height:200px;border-color: skyblue;
-                border-style: solid;">
-            <mat-card-content>
-                <p style="color: black;">
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-button style="color: black;background-color:skyblue;">BUY</button>
-                <button mat-button style="color: black;background-color:skyblue;">RENEW</button>
-            </mat-card-actions>
-        </mat-card>
-
-        <mat-card class="example-card" style="margin:50px 20px 20px 10px;width: 334.5px; height:auto;background-color: white;
-            border-color: skyblue;
-            border-style: solid;">
-            <mat-card-header style="background-color: white;">
-                <mat-card-title style="color: black;">Bheema yojana</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src="../../assets/img/image (3).png" alt="Photo of a Shiba Inu" style="width: 330px; height:200px;border-color: skyblue;
-                border-style: solid;">
-            <mat-card-content>
-                <p style="color: black;">
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-button style="color: black;background-color:skyblue;">BUY</button>
-                <button mat-button style="color: black;background-color:skyblue;">RENEW</button>
-            </mat-card-actions>
-        </mat-card>
-
-        <mat-card class="example-card" style="margin:50px 20px 20px 10px;width: 334.5px; height:auto;background-color: white;
-            border-color: skyblue;
-            border-style: solid;">
-            <mat-card-header style="background-color: white;">
-                <mat-card-title style="color: black;">Bheema yojana</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src="../../assets/img/image (4).png" alt="Photo of a Shiba Inu" style="width: 330px; height:200px;border-color: skyblue;
-                border-style: solid;">
-            <mat-card-content>
-                <p style="color: black;">
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-button style="color: black;background-color:skyblue;">BUY</button>
-                <button mat-button style="color: black;background-color:skyblue;">RENEW</button>
-            </mat-card-actions>
-        </mat-card> -->
-        <mat-card class="example-card" style="margin:50px 20px 20px 10px;width: 334.5px; height:auto;background-color: white; border-color: skyblue;border-style: solid;" *ngFor="let item of images">
-            <mat-card-header style="background-color: white;">
-                <mat-card-title style="color: black;">Bheema yojana</mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src={{this.item.img}} alt="Photo of a Shiba Inu" style="width: 330px; height:200px;border-color: skyblue;
-                border-style: solid;">
-            <!-- <mat-card-content>
-                <p style="color: black;">
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-                </p>
-            </mat-card-content> -->
-            <!-- <mat-card-actions class="mat-buttons">
-
-            </mat-card-actions> -->
-            <div style="display: flex; justify-content: space-between;">
-                <div>
-                    <button mat-button style="color: black;background-color:skyblue;">BUY</button>
-                </div>
-                <div>
-                    <button mat-button style="color: black;background-color:skyblue;">RENEW</button>
-                </div>
+    <div class=col-1.75 style="margin: 40px 0px 0 40px;display: block;color: black;">
+        <div class="container">
+            <div style="color: black;margin: 30px 0px 0px 0px;font-size:xx-large;
+     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Health</div>
+            <div [hidden]="isHealth" *ngFor="let names of healthNames" style="margin: 15px 0px 0px 50px;font-size: medium;">
+                <b>{{this.names.name}}</b>
             </div>
+            <div style="color: black;margin: 30px 0px 0 0px;font-size: xx-large;
+         font-family: 'Times New Roman', Times, serif;">Other</div>
+            <div [hidden]="isOther" *ngFor="let names of otherNames" style="margin: 15px 0px 0px 50px;font-size: medium;">
+                <b>{{this.names.name}}.name</b>
+            </div>
+            <div style="color: black;margin: 30px 0px 0 0px;font-size: xx-large;
+         font-family: 'Times New Roman', Times, serif;">Life</div>
+            <div [hidden]="isLife" *ngFor="let names of lifeNames" style="margin: 15px 0px 0 50px;font-size: medium;">
+                <b>{{this.names.name}}</b>
+            </div>
+        </div>
+    </div>
+    <div class="col-9" style="display: flex;flex-wrap: wrap;" [hidden]="isHealth">
+        <mat-card class="example-card" style="margin:50px 30px 20px 10px;width: 335px; height:auto;
+     background-color: white;
+     border-color: skyblue;border-style: solid;" *ngFor="let item of healthNames" matRipple>
+            <mat-card-header style="background-color: white;">
+                <mat-card-title style="color: black;font-family: 'Times New Roman', Times, serif;"><b>{{this.item.name}}</b>
+                </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src={{this.item.img}} alt="Photo of a Shiba Inu" style="width: 330px; height:300px;
+         border-color: skyblue;
+             border-style: solid;">
+            <mat-card-content>
+                <p style="color: black;">
+                    {{this.item.description}}
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col-9" style="display: flex;flex-wrap: wrap;" [hidden]="isDisplay">
+        <mat-card class="example-card" style="margin:50px 20px 20px 20px;width: 335px; height:auto;
+     background-color: white;
+     border-color: skyblue;border-style: solid;" *ngFor="let item of images" matRipple>
+            <mat-card-header style="background-color: white;">
+                <mat-card-title style="color: black;font-family: 'Times New Roman', Times, serif;"><b>{{this.item.name}}</b>
+                </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src={{this.item.img}} alt="Photo of a Shiba Inu" style="width: 330px; height:300px;
+         border-color: skyblue;
+             border-style: solid;">
+            <mat-card-content>
+                <p style="color: black;">
+                    {{this.item.description}}
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col-9" style="display: flex;flex-wrap: wrap;" [hidden]="isOther">
+        <mat-card class="example-card" style="margin:50px 20px 20px 10px;width: 335px; height:auto;
+     background-color: white;
+     border-color: skyblue;border-style: solid;" *ngFor="let item of otherNames" matRipple>
+            <mat-card-header style="background-color: white;">
+                <mat-card-title style="color: black;font-family: 'Times New Roman', Times, serif;"><b>{{this.item.name}}</b>
+                </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src={{this.item.img}} alt="Photo of a Shiba Inu" style="width: 330px; height:300px;
+         border-color: skyblue;
+             border-style: solid;">
+            <mat-card-content>
+                <p style="color: black;">
+                    {{this.item.description}}
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col-9" style="display: flex;flex-wrap: wrap;" [hidden]="isLife">
+        <mat-card class="example-card" style="margin:50px 20px 20px 10px;width: 335px; height:auto;
+     background-color: white;
+     border-color: skyblue;border-style: solid;" *ngFor="let item of lifeNames" matRipple>
+            <mat-card-header style="background-color: white;">
+                <mat-card-title style="color: black;font-family: 'Times New Roman', Times, serif;"><b>{{this.item.name}}</b>
+                </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src={{this.item.img}} alt="Photo of a Shiba Inu" style="width: 330px; height:300px;
+         border-color: skyblue;
+             border-style: solid;">
+            <mat-card-content>
+                <p style="color: black;">
+                    {{this.item.description}}
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col-9" style="display: flex;flex-wrap: wrap;" [hidden]="isTrend">
+        <mat-card class="example-card" style="margin:50px 20px 20px 10px;width: 335px; height:auto;
+     background-color: white;
+     border-color: skyblue;border-style: solid;" *ngFor="let item of trendNames" matRipple>
+            <mat-card-header style="background-color: white;">
+                <mat-card-title style="color: black;font-family: 'Times New Roman', Times, serif;"><b>{{this.item.name}}</b>
+                </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src={{this.item.img}} alt="Photo of a Shiba Inu" style="width: 330px; height:300px;
+         border-color: skyblue;
+             border-style: solid;">
+            <mat-card-content>
+                <p style="color: black;">
+                    {{this.item.description}}
+                </p>
+            </mat-card-content>
         </mat-card>
     </div>
 </div>

@@ -1,157 +1,290 @@
 <div style="position:absolute">
-   
-    <mat-stepper #stepper>
-      <mat-step [stepControl]="insuranceForms">
-        <mat-card class="singlecard">
-          <mat-card-content style="align-content: center;">
-        <form [formGroup]="insuranceForms">
-          <ng-template matStepLabel>Enter Basic Policy Details</ng-template>
-          <mat-form-field appearance="outline" style="margin-left: 50px;width: 100px;" >
-            <mat-label>Policy Id</mat-label>
-            <input matInput placeholder="Policy Id" formControlName="policyId" required style="text-align: center;">
-          </mat-form-field>
-          <mat-form-field style="margin-left: 20px;" appearance="outline">
-            <mat-label>Insurance Type</mat-label>
-            <mat-select placeholder="Insurance Category" formControlName="insuranceType">
-              <mat-option value="LifeInsurance">Life Insurance</mat-option>
-              <mat-option value="HealthInsurance">Health Insurance</mat-option>
-              <mat-option value="AutoMobileInsurance">AutoMobile Insurance</mat-option>
-            </mat-select>
-          </mat-form-field>
-         
-          <mat-form-field appearance="outline" style="margin-left: 50px;">
-            <mat-label>Policy Name</mat-label>
-            <input matInput placeholder="Policy Name " formControlName="policyName" required>
-          </mat-form-field>
-          <mat-form-field  appearance="outline" style="width:90%;">
-            <mat-label style="width: 200px;">Policy Description</mat-label>
-            <textarea formControlName="policyDescription" matInput placeholder="Policy Description"
-              type="text" ></textarea>
-          </mat-form-field>
-          <div formArrayName="policyDetails">
-            <div *ngFor="let child of policyDetailsx;let i=index" formGroupName="{{i}}">
-              <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline">
-                <mat-label style="width: 200px;">Sum Insured</mat-label>
-                <input matInput placeholder="Sum Insured" type="number" formControlName="sumInsure">
-              </mat-form-field>
-              <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline">
-                <mat-label style="width: 200px;">Policy Duration </mat-label>
-                <input formControlName="durations" matInput placeholder="Policy Duration" type="number">
-              </mat-form-field>
-              <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline">
-                <mat-label style="width: 200px;">Policy Premium </mat-label>
-                <input formControlName="premiums" matInput placeholder="Policy Premium" type="number">
-              </mat-form-field>
-              <mat-form-field style="margin-left: 20px;width: 100px;" appearance="outline" *ngIf="insurancex==='HealthInsurance'">
-                <mat-label style="width: 200px;">Adults</mat-label>
-                <input formControlName="adults" matInput placeholder="Adults" type="number">
-              </mat-form-field>
-              <mat-form-field style="margin-left: 20px;width: 100px;" appearance="outline" *ngIf="insurancex==='HealthInsurance'">
-                <mat-label style="width: 200px;">Kids</mat-label>
-                <input formControlName="kids" matInput placeholder="Kids" type="number">
-              </mat-form-field>
-              <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline" *ngIf="insurancex==='LifeInsurance'">
-                <mat-label style="width: 200px;">Minimum Salary</mat-label>
-                <input formControlName="minSalary" matInput placeholder="Min Salary" type="number">
-              </mat-form-field>
-              <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline" *ngIf="insurancex==='LifeInsurance'">
-                <mat-label style="width: 200px;">Maximum Salary</mat-label>
-                <input formControlName="maxSalary" matInput placeholder="Max Salary" type="number">
-              </mat-form-field>
-              <a mat-raised-button (click)="removeDetails(i)" style="margin-left: 30px;" color="warn">-</a>
-              <a mat-raised-button (click)="addDetails(i)" style="margin-left: 30px;" color="accent">+</a>
+  <mat-toolbar>
+    <span style="color: orangered;font-family: cursive;">Insurify</span>
+    <div class="spacer"></div>
+    <a mat-button >Home</a>
+    <a mat-button >AutoMobile Insurance</a>
+    <a mat-button >Health Insurance</a>
+    <a mat-button >Life Insurance</a>
+    <a mat-button >Claims</a>
+    <a mat-button >Renewals</a>
+    <a mat-raised-button color="primary">Login</a>
+</mat-toolbar>
+  <mat-stepper #stepper>
+    <mat-step [stepControl]="insuranceForms">
+      <mat-card class="singlecard">
+        <mat-card-content style="align-content: center;">
+          <form [formGroup]="insuranceForms">
+            <ng-template matStepLabel>Enter Basic Policy Details</ng-template>
+            <mat-form-field appearance="outline" style="margin-left: 50px;width: 100px;">
+              <mat-label>Policy Id</mat-label>
+              <input matInput placeholder="Policy Id" formControlName="policyId" required style="text-align: center;">
+            </mat-form-field>
+            <mat-form-field style="margin-left: 20px;" appearance="outline">
+              <mat-label>Insurance Type</mat-label>
+              <mat-select placeholder="Insurance Type" formControlName="insuranceType">
+                <mat-option value="LifeInsurance">Life Insurance</mat-option>
+                <mat-option value="HealthInsurance">Health Insurance</mat-option>
+                <mat-option value="AutoMobileInsurance">AutoMobile Insurance</mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field style="margin-left: 20px;" appearance="outline" *ngIf="insurancex==='AutoMobileInsurance'">
+              <mat-label>Insurance subcategory</mat-label>
+              <mat-select placeholder="Insurance subcategory" formControlName="category">
+                <mat-option value="Bike">Bike Insurance</mat-option>
+                <mat-option value="Car">Car Insurance</mat-option>      
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="margin-left: 50px;">
+              <mat-label>Policy Name</mat-label>
+              <input matInput placeholder="Policy Name " formControlName="policyName" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width:90%;">
+              <mat-label>Policy Description</mat-label>
+              <textarea formControlName="policyDescription" matInput placeholder="Policy Description"
+                type="text"></textarea>
+            </mat-form-field>
+
+            <div formArrayName="policyBenefits">
+              <h3 style="font-family:cursive ;">Enter various Policy Benefits</h3>
+              <div *ngFor="let child of policyBenefitsx;let i=index" formGroupName="{{i}}">
+                <mat-form-field style="margin-left: 20px;" appearance="outline">
+                  <mat-label>Benefit</mat-label>
+                  <input matInput placeholder="Benefit" type="text" formControlName="brief">
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;width: 50%;" appearance="outline">
+                  <mat-label>Description</mat-label>
+                  <input matInput placeholder="Benefit" type="text" formControlName="description">
+                </mat-form-field>
+
+                <a mat-raised-button (click)="removeDetails1(i)" style="margin-left: 30px;">Remove</a>
+              </div>
+              <div>
+                <a mat-raised-button color="primary" (click)="addDetails1()" style="margin-left: 45%;"> + Add</a>
+              </div>
             </div>
-            <div> 
-              <a mat-raised-button color="primary" (click)="addDetailsE()" style="margin-left: 45%;"> + Add</a>
-            </div>
-          </div>
-        </form>
+
+          </form>
         </mat-card-content>
         <mat-card-actions class="buttonplace">
           <button mat-raised-button matStepperPrevious color="accent">Back</button>
           <button mat-raised-button matStepperNext color="primary" style="margin-left: 20px;">Next</button>
         </mat-card-actions>
-        </mat-card>
-      </mat-step>
-      
-      <mat-step [stepControl]="insuranceForms">
-        <mat-card class="singlecard">
-          <mat-card-content style="align-content: center;">
-            <form [formGroup]="insuranceForms">
-              <ng-template matStepLabel>Enter Policy Benefits</ng-template>
-              <div formArrayName="policyBenefits">
-                <div *ngFor="let child of policyBenefitsx;let i=index" formGroupName="{{i}}">
-                  <mat-form-field style="margin-left: 20px;" appearance="outline">
-                    <mat-label style="width: 200px;">Benefit</mat-label>
-                    <input matInput placeholder="Benefit" type="text" formControlName="brief">
-                  </mat-form-field>
-                  <mat-form-field style="margin-left: 20px;width: 50%;" appearance="outline">
-                    <mat-label style="width: 200px;">Description</mat-label>
-                    <input matInput placeholder="Benefit" type="text" formControlName="description">
-                  </mat-form-field>
-  
-                  <a mat-raised-button (click)="removeDetails1(i)" style="margin-left: 30px;">Remove</a>
-                </div>
-                <div>
-                  <a mat-raised-button color="primary" (click)="addDetails1()" style="margin-left: 45%;"> + Add</a>
-                </div>
-              </div>   
-            </form>
-          </mat-card-content>
-          <mat-card-actions class="buttonplace">
-            <button mat-raised-button matStepperPrevious color="accent">Back</button>
-            <button mat-raised-button matStepperNext color="primary" style="margin-left: 20px;">Next</button>
-          </mat-card-actions>
-          </mat-card>
-      </mat-step>
-      <mat-step [stepControl]="insuranceForms">
-        <mat-card class="singlecard">
-          <mat-card-content style="align-content: center;">
-        <form [formGroup]="insuranceForms">
-          <ng-template matStepLabel>Enter Additional Details</ng-template>
-          <div formArrayName="addOnDetails">
-            <div *ngFor="let child of policyAddOnsx;let i=index" formGroupName="{{i}}">
-              <mat-form-field style="margin-left: 20px;width: 40%;" appearance="outline">
-                <mat-label style="width: 200px;">Enter Add On </mat-label>
-                <input matInput placeholder="Enter Add On" type="text" formControlName="addOn">
-              </mat-form-field>
-              <mat-form-field style="margin-left: 20px;" appearance="outline">
-                <mat-label style="width: 200px;">Enter Add On Premium</mat-label>
-                <input matInput placeholder="Add On Premium" type="number" formControlName="addOnPremiums">
-              </mat-form-field>
-  
-              <a mat-raised-button (click)="removeDetails2(i)" style="margin-left: 30px;">Remove</a>
+      </mat-card>
+    </mat-step>
+
+    <mat-step [stepControl]="insuranceForms">
+      <mat-card class="singlecard">
+        <mat-card-content style="align-content: center;">
+          <form [formGroup]="insuranceForms">
+            <ng-template matStepLabel>Add policy Financial details</ng-template>
+            <mat-form-field class="example-chip-list" appearance="outline">
+              <mat-label>Allowed Sum Insured Values(Add new values below)</mat-label>
+              <mat-chip-list #chipList aria-label="Fruit selection"
+                matTooltip="To add new Sum Insured values ,add the value and press Enter">
+                <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+                  {{fruit.insuredSum}}
+                  <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip>
+                <input placeholder="Add New Insured Sum..." [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+            </mat-form-field>
+            <mat-form-field class="example-chip-list" appearance="outline" style="margin-left: 5%;">
+              <mat-label>Allowed Duration Values in Years(Add new values below)</mat-label>
+              <mat-chip-list #chipList1 matTooltip="You can add values to be available for policy duration here">
+                <mat-chip *ngFor="let x of duration" (removed)="removeduration(x)">
+                  {{x.years}}
+                  <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip>
+                <input placeholder="Add New Duration..." [matChipInputFor]="chipList1"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="addduration($event)">
+              </mat-chip-list>
+            </mat-form-field>
+
+            <div formArrayName="policyDetails">
+              <h2 style="font-family: cursive;">Enter the financial details of the policy </h2>
+              <div *ngFor="let child of policyDetailsx;let i=index" formGroupName="{{i}}">
+                <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline">
+                  <mat-label>Sum Insured</mat-label>
+                  <mat-select placeholder="Sum Insured" formControlName="sumInsure" type="number">
+                    <div *ngFor="let x of fruits">
+                      <mat-option value="{{x.insuredSum}}">{{x.insuredSum}}</mat-option>
+                    </div>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline">
+                  <mat-label>Policy Duration </mat-label>
+                  <!-- <input formControlName="durations" matInput placeholder="Policy Duration" type="number"> -->
+                  <mat-select placeholder="policy Duration" formControlName="durations" type="number">
+                    <div *ngFor="let x of duration">
+                      <mat-option value="{{x.years}}">{{x.years}}</mat-option>
+                    </div>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;width: 150px;" *ngIf="insurancex!='HealthInsurance'"
+                  appearance="outline">
+                  <mat-label>Policy Premium </mat-label>
+                  <input formControlName="premiums" matInput placeholder="Policy Premium" type="number">
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline"
+                  *ngIf="insurancex==='HealthInsurance'">
+                  <mat-label>Adults Premium</mat-label>
+                  <input formControlName="adults" matInput placeholder="Adults Premium" type="number">
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline"
+                  *ngIf="insurancex==='HealthInsurance'" matTooltip="Age limit for kids is 20 years">
+                  <mat-label>Kids Premium</mat-label>
+                  <input formControlName="kids" matInput placeholder="Kids Premium" type="number">
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline"
+                  *ngIf="insurancex==='HealthInsurance'">
+                  <mat-label>Min Age(Adult)</mat-label>
+                  <input formControlName="minAge" matInput placeholder="Min Age(Adult)" type="number">
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline"
+                  *ngIf="insurancex==='HealthInsurance'">
+                  <mat-label>Max Age(Adult)</mat-label>
+                  <input formControlName="maxAge" matInput placeholder="Max Age(Adult)" type="number">
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline"
+                  *ngIf="insurancex==='LifeInsurance'">
+                  <mat-label>Minimum Salary</mat-label>
+                  <input formControlName="minSalary" matInput placeholder="Min Salary" type="number">
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;width: 150px;" appearance="outline"
+                  *ngIf="insurancex==='LifeInsurance'">
+                  <mat-label>Maximum Salary</mat-label>
+                  <input formControlName="maxSalary" matInput placeholder="Max Salary" type="number">
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;" appearance="outline"
+                  *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Bike'">
+                  <mat-label>Bike Type</mat-label>
+                  <mat-select placeholder="Bike Type" formControlName="modelsAllowed" multiple>
+                    <mat-optgroup *ngFor="let group of bikeGroups" [label]="group.name">
+                      <mat-option *ngFor="let bike of group.bikeList" [value]="bike.value">
+                        {{bike.viewValue}}
+                      </mat-option>
+                    </mat-optgroup>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;" appearance="outline"
+                  *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Car'">
+                  <mat-label>Car Model</mat-label>
+                  <mat-select placeholder="Car Model" formControlName="modelsAllowed" multiple>
+                    <mat-optgroup *ngFor="let group of carGroups" [label]="group.name">
+                      <mat-option *ngFor="let car of group.carList" [value]="car.value">
+                        {{car.viewValue}}
+                      </mat-option>
+                    </mat-optgroup>
+                  </mat-select>
+                </mat-form-field>
+                <a mat-raised-button (click)="removeDetails(i)" style="margin-left: 30px;" color="warn">-</a>
+                <a mat-raised-button (click)="addDetails(i)" style="margin-left: 30px;" color="accent">+</a>
+              </div>
+              <div>
+                <a mat-raised-button color="primary" (click)="addDetailsE()" style="margin-left: 45%;"> + Add</a>
+              </div>
             </div>
-            <div>
-              <a mat-raised-button color="primary" (click)="addDetails2()" style="margin-left: 45%;"> + Add</a>
+          </form>
+        </mat-card-content>
+        <mat-card-actions class="buttonplace">
+          <button mat-raised-button matStepperPrevious color="accent">Back</button>
+          <button mat-raised-button matStepperNext color="primary" style="margin-left: 20px;">Next</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-step>
+    <mat-step [stepControl]="insuranceForms">
+      <mat-card class="singlecard">
+        <mat-card-content style="align-content: center;">
+          <form [formGroup]="insuranceForms">
+            <ng-template matStepLabel>Enter Additional Details</ng-template>
+            <div formArrayName="addOnDetails">
+              <div *ngFor="let child of policyAddOnsx;let i=index" formGroupName="{{i}}">
+                <mat-form-field style="margin-left: 20px;width: 20%;" appearance="outline">
+                  <mat-label>Enter AddOn Name</mat-label>
+                  <input matInput placeholder="Enter Add-On name" type="text" formControlName="addOnName">
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;width: 40%;" appearance="outline">
+                  <mat-label>Add-On Description</mat-label>
+                  <input matInput placeholder="Add-On Description" type="text" formControlName="addOnDescription">
+                </mat-form-field>
+                <mat-form-field style="margin-left: 20px;" appearance="outline">
+                  <mat-label>Enter Add On Premium</mat-label>
+                  <input matInput placeholder="Add On Premium" type="number" formControlName="addOnPremiums">
+                </mat-form-field>
+
+                <a mat-raised-button (click)="removeDetails2(i)" style="margin-left: 30px;">Remove</a>
+              </div>
+              <div>
+                <a mat-raised-button color="primary" (click)="addDetails2()" style="margin-left: 45%;"> + Add</a>
+              </div>
             </div>
+          </form>
+        </mat-card-content>
+        <mat-card-actions class="buttonplace">
+          <button mat-raised-button matStepperPrevious color="accent">Back</button>
+          <button mat-raised-button matStepperNext color="primary" style="margin-left: 20px;">Next</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-step>
+
+    <mat-step [stepControl]="insuranceForms">
+      <mat-card class="termscard">
+        <mat-card-content style="align-content: center;">
+          <ng-template matStepLabel>Terms and Conditions</ng-template>
+          <form [formGroup]="insuranceForms" style="display: flex;flex-direction: row;">
+            <div style="width: 60%;">
+              <h3>Write Terms and Conditions below</h3>
+              <textarea type="text" style="width:100%;height:70vh" formControlName="policyDocuments"
+                [(ngModel)]="valueVariable"></textarea>
+            </div>
+            <div style="border: 2px solid;margin-left: 5%;">
+              <div style="padding-left: 5%;">
+                <h2 style="margin-top: 20px;color: red;">Syntax of few elements in MarkDown</h2>
+                <p>1.Heading (Syntax :# Heading)</p>
+                <markdown ngPreserveWhitespaces>
+                  # Heading
+                </markdown>
+                <p>2.Bold (Syntax :**Text to be Bold**)</p>
+                <markdown ngPreserveWhitespaces>
+                  **Text to be Bold**
+                </markdown>
+                <p>3.Italic (Syntax :*Text to be in Italic*)</p>
+                <markdown ngPreserveWhitespaces>
+                  *Text to be Italic*
+                </markdown>
+                <p>4.Bold and Italic (Syntax :*Text to be in Bold and Italic*)</p>
+                <markdown ngPreserveWhitespaces>
+                  ***Text to be in Bold and Italic***
+                </markdown>
+                <p>5.Ordered list (Syntax :* Text to contain a bullet point)</p>
+                <markdown ngPreserveWhitespaces>
+                  * Text to contain a bullet point
+                </markdown>
+                For more info <a href="https://www.markdownguide.org/cheat-sheet/" target="_blank">MarkDown Syntax
+                  Guide</a>
+              </div>
+            </div>
+          </form>
+          <button mat-raised-button (click)="openDialog()" style="margin-left: 25%;">Preview</button>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="buttonplace">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" style="margin-left: 30px;" (click)="onSubmit()">Add
+              policy</button>
+            <button mat-button (click)="stepper.reset()" style="margin-left: 30px;">Reset</button>
           </div>
-        </form>
-      </mat-card-content>
-      <mat-card-actions class="buttonplace">
-        <button mat-raised-button matStepperPrevious color="accent">Back</button>
-        <button mat-raised-button matStepperNext color="primary" style="margin-left: 20px;">Next</button>
-      </mat-card-actions>
-    </mat-card>
-      </mat-step>
-     
-      <mat-step [stepControl]="insuranceForms">
-        <mat-card class="singlecard">
-          <mat-card-content style="align-content: center;">
-        <form [formGroup]="insuranceForms" style="margin-left:40%">
-          <ng-template matStepLabel>Upload Documents</ng-template>
-          <p>Upload Documents</p>
-          <input style="margin-top: 5px;" formControlName="policyDocuments" type="file" (change)="onFileChanged($event)">
-        </form>
-      </mat-card-content>
-      <mat-card-actions>
-        <div style="margin-left:70%" >
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-raised-button color="primary" style="margin-left: 30px;" (click)="display()">Add policy</button>
-          <button mat-button (click)="stepper.reset()" style="margin-left: 30px;">Reset</button>
-        </div>
-      </mat-card-actions>
-    </mat-card>
-      </mat-step>
-    </mat-stepper>
-  </div>
+        </mat-card-actions>
+      </mat-card>
+    </mat-step>
+  </mat-stepper>
+</div>

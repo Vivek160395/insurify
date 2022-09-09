@@ -41,9 +41,13 @@ public class UserCredentialsServiceImpl implements UserCredentialsService {
         }
         return loggedInUser;
     }
+
+
+
     @Override
     public List<UserCredentials> getAllUser() {
         List<UserCredentials>  userList= (List<UserCredentials>) userCredentialsRepository.findAll();
         return userList;
     }
+
 }

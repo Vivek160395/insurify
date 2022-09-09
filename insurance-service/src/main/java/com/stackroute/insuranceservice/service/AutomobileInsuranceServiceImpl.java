@@ -32,14 +32,25 @@ public class AutomobileInsuranceServiceImpl implements AutoMobileInsurancePolicy
         dto.setPolicyName(dto.getPolicyName());
         dto.setInsuranceType(dto.getInsuranceType());
 
+<<<<<<< HEAD
         if (policyRepository.findById(policy.getPolicyId()).isPresent()){
             throw new PolicyAlreadyExistException();
         }
         else {
+=======
+        if(policyRepository.findById(policy.getPolicyId()).isEmpty()){
+            //policy = new AutomobileInsurancePolicy(docName, file.getContentType(), file.getBytes());
+            policy.setPolicyDocuments(file.getBytes());
+>>>>>>> 314499d1fb8b8a80dab1cbf2717d38510c3fc482
             producer.sendingMessageToRabbitMQServer(dto);
             policyRepository.save(policy);
             return policy;
-        }
+    }
+    else
+    {
+        throw new PolicyAlreadyExistException();
+    }
+
     }
 
     @Override

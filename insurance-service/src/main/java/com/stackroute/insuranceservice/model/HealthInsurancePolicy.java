@@ -14,7 +14,11 @@ import java.util.List;
 public class HealthInsurancePolicy {
 
     @Id
+<<<<<<< HEAD
     private String  policyId;
+=======
+    private int policyId;
+>>>>>>> 314499d1fb8b8a80dab1cbf2717d38510c3fc482
     private String policyName;
     private String insuranceType;
     private String description;
