@@ -5,6 +5,8 @@ export class PolicyDetails {
      sumInsure:number,
      adults   :number,
      kids     :number,
+     minAge   :number,
+     maxAge   :number,
      minSalary:number,
      maxSalary:number
   ){}

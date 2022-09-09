@@ -1,10 +1,33 @@
 import { AnimationStyleMetadata } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Insurance } from '../insurance';
+import { MatDialog } from '@angular/material/dialog';
+import { Dialog } from '@angular/cdk/dialog';
+import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
+
+export interface bike {
+  value: string;
+  viewValue: string;
+}
+
+export interface bikeCompany {
+  name: string;
+  bikeList: bike[];
+}
+
+export interface car {
+  value: string;
+  viewValue: string;
+}
+
+export interface carCompany {
+  name: string;
+  carList: bike[];
+}
 export interface Fruit {
   insuredSum: number;
 }
@@ -17,22 +40,99 @@ export interface Duration {
   styleUrls: ['./add-insurance-policy.component.css']
 })
 export class AddInsurancePolicyComponent implements OnInit {
+  bikeGroups: bikeCompany[] = [
+    {
+      name: 'Honda',
+      bikeList: [
+        {value: 'Honda SP 125-0', viewValue: 'Honda SP 125'},
+        {value: 'Honda Shine-1', viewValue: 'Honda Shine'},
+        {value: 'Honda H`ness CB350-2', viewValue: 'Honda H`ness CB350'},
+      ],
+    },
+    {
+      name: 'TVS',
+      bikeList: [
+        {value: 'TVS Apache RTR 160-3', viewValue: 'TVS Apache RTR 160'},
+        {value: 'TVS Ronin-4', viewValue: 'TVS Ronin'},
+        {value: 'TVS Apache RTR 200 4V-5', viewValue: 'TVS Apache RTR 200 4V'},
+      ],
+    },
+    {
+      name: 'Hero',
+      bikeList: [
+        {value: 'Hero Splendor Plus-6', viewValue: 'Hero Splendor Plus'},
+        {value: 'Hero HF Deluxe-7', viewValue: 'Hero HF Deluxe'},
+        {value: 'Heroflareon-8', viewValue: 'Hero Flareon'},
+      ],
+    },
+    {
+      name: 'KTM',
+      bikeList: [
+        {value: 'KTM 390 Duke', viewValue: 'KTM 390 Duke'},
+        {value: 'KTM 125 Duke-10', viewValue: 'KTM 125 Duke'},
+      ],
+    },
+  ];
+
+  carGroups: carCompany[] = [
+    {
+      name: 'Hyundai',
+      carList: [
+        {value: 'Hyundai Creta-0', viewValue: 'Hyundai Creta'},
+        {value: 'Hyundai Venue-1', viewValue: 'Hyundai Venue'},
+        {value: 'Hyundai i20-2', viewValue: 'Hyundai i20'},
+      ],
+    },
+    {
+      name: 'Toyota',
+      carList: [
+        {value: 'Toyota Fortuner-3', viewValue: 'Toyota Fortuner'},
+        {value: 'Toyota Innova Crysta-4', viewValue: 'Toyota Innova Crysta'},
+        {value: 'Toyota Urban Cruiser-5', viewValue: 'Toyota Urban Cruiser'},
+      ],
+    },
+    {
+      name: 'Tata',
+      carList: [
+        {value: 'Tata Tiago-6', viewValue: 'Tata Tiago'},
+        {value: 'Tata Harrier-7', viewValue: 'Tata Harrier'},
+        {value: 'Tata Safari-8', viewValue: 'Tata Safari'},
+      ],
+    },
+    {
+      name: 'Maruti',
+      carList: [
+        {value: 'Maruti Brezza-9', viewValue: 'Maruti Brezza'},
+        {value: 'Maruti Swift-10', viewValue: 'Maruti Swift'},
+      ],
+    },
+  ];
+
+  valueVariable: string='';
   
-  displaytext:string='## How are you'
+  constructor(public http:HttpClient,public dialog:MatDialog) { }
+
+  openDialog(){
+    this.dialog.open(PreviewMarkupComponent,{data:this.valueVariable})
+  }
   
   insuranceForms = new FormGroup({
     insuranceType    : new FormControl("", [Validators.required]),
     policyId         : new FormControl("", [Validators.required]),
     policyName       : new FormControl("", [Validators.required]),
     policyDescription: new FormControl("", [Validators.required]),
+    category         : new FormControl("",[Validators.required]),
     policyDetails    : new FormArray([new FormGroup({
-      premiums : new FormControl("", [Validators.required]),
-      durations: new FormControl("", [Validators.required]),
-      sumInsure: new FormControl("", [Validators.required]),
-      adults   :new FormControl(""),
-      kids     :new FormControl(""),
-      minSalary:new FormControl(""),
-      maxSalary:new FormControl(""),
+      premiums :    new FormControl("", [Validators.required,Validators.min(0)]),
+      durations:    new FormControl("", [Validators.required,Validators.min(0)]),
+      sumInsure:    new FormControl("", [Validators.required,Validators.min(0)]),
+      adults   :    new FormControl("", [Validators.required]),
+      minAge   :    new FormControl("", [Validators.required,Validators.min(20),Validators.max(75)]),  
+      maxAge   :    new FormControl("", [Validators.required,Validators.min(20),Validators.max(75)]),  
+      kids     :    new FormControl("", [Validators.required]),
+      minSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
+      maxSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
+      modelsAllowed:new FormControl("", [Validators.required,Validators.min(0)]),
     })]),
     policyBenefits: new FormArray([
       new FormGroup({
@@ -41,8 +141,9 @@ export class AddInsurancePolicyComponent implements OnInit {
       })]),
     addOnDetails: new FormArray([
       new FormGroup({
-        addOn        : new FormControl("", [Validators.required]),
-        addOnPremiums: new FormControl("", [Validators.required])
+        addOnName        : new FormControl("", [Validators.required]),
+        addOnDescription : new FormControl("", [Validators.required]),
+        addOnPremiums    : new FormControl("", [Validators.required])
       })
     ]),   
     policyDocuments: new FormControl("", [Validators.required]),
@@ -50,7 +151,7 @@ export class AddInsurancePolicyComponent implements OnInit {
   });
   
   
-  constructor(private fb: FormBuilder,private http:HttpClient) { }
+ 
  
  
   ngOnInit(): void {
@@ -65,6 +166,7 @@ export class AddInsurancePolicyComponent implements OnInit {
     insuranceType:'',
     policyId         :'',
     policyName       :'',
+    category         :'',
     policyDescription:'',
     policyDetails    :[],
     policyBenefits   :[],
@@ -86,7 +188,7 @@ export class AddInsurancePolicyComponent implements OnInit {
   }
 
 
-  display(){
+  onSubmit(){
     console.log(this.id);  
     console.log(this.insuranceForms.value);
     this.insuranceForms.get('policyId')!.enable();
@@ -119,7 +221,7 @@ export class AddInsurancePolicyComponent implements OnInit {
     formData.append("fileSource",this.obj.fileSource);
     
     this.http.post("http://localhost:9000/apis/insurances",formData, { observe: 'response' }).subscribe((data:any)=>{console.log(data)}); 
-    console.log(this.obj)
+    console.log(this.insuranceForms.value)
     this.insuranceForms.get('policyId')!.disable()
   }
 
@@ -177,6 +279,9 @@ export class AddInsurancePolicyComponent implements OnInit {
   
   get insurancex(){
     return this.insuranceForms.get('insuranceType')?.value!
+  }
+  get categoryx(){
+    return this.insuranceForms.get('category')?.value!
   }
   get policyDetailsx() {
     return (this.insuranceForms.get('policyDetails') as FormArray).controls;

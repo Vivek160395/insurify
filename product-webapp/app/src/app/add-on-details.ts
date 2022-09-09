@@ -1,6 +1,7 @@
 export class AddOnDetails {
       constructor(
-    addOn        :string,
+    addOnName        :string,
+    addOnDescription :string,
     addOnPremiums:number
   ){}
 }
