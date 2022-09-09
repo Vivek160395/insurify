@@ -1,5 +1,6 @@
 package com.stackroute.userservice.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import lombok.NoArgsConstructor;
@@ -12,13 +13,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
-    @Transient
-    public static final String SEQUENCE_NAME="user_sequence";
-
-
-    private int userId;
     @Id
     private String emailId;
     private String password;
@@ -31,9 +28,9 @@ public class User {
     private Address address;
     private long aadharNo;
     private String panNo;
-    private String profilePic;
+    private byte[] profilePic;
 
-    public User(String emailId, String password, String userType, String name, String gender, int age, String dateOfBirth, long mobileNo, Address address, long aadharNo, String panNo, String profilePic) {
+    public User(String emailId, String password, String userType, String name, String gender, int age, String dateOfBirth, long mobileNo, Address address, long aadharNo, String panNo) {
         this.emailId = emailId;
         this.password = password;
         this.userType = userType;
@@ -45,6 +42,5 @@ public class User {
         this.address = address;
         this.aadharNo = aadharNo;
         this.panNo = panNo;
-        this.profilePic = profilePic;
     }
 }

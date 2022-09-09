@@ -28,7 +28,7 @@ public class UserRepositoryTest {
     @BeforeEach
     public void setUp(){
         address=new Address(637,"gali no. 1","st mary school","panipat","haryana",132101);
-        user=new User("ajay123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address,123456789098l,"ABCD234","abcd.jpg");
+        user=new User("ajay123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address,123456789098l,"ABCD234");
     }
 
     @AfterEach
@@ -59,7 +59,7 @@ public class UserRepositoryTest {
     public void givenProductReturnGetAllProducts(){
         userRepository.insert(user);
         Address address1=new Address(637,"gali no. 1","st mary school","panipat","haryana",132101);
-        User user1=new User("aman123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address,123456789098l,"ABCD234","abcd.jpg");
+        User user1=new User("aman123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address,123456789098l,"ABCD234");
         userRepository.insert(user1);
 
         List<User> list = userRepository.findAll();
