@@ -7,20 +7,22 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.List;
 
-@Document(indexName = "automobiles")
+@Document(indexName = "automobileinsurance")
 @Data
 @NoArgsConstructor
 public class AutomobileInsurancePolicy {
 
     @Id
+<<<<<<< HEAD
+    private String policyId;
+=======
     private int policyId;
+>>>>>>> 314499d1fb8b8a80dab1cbf2717d38510c3fc482
     private String policyName;
     private String insuranceType;
+    private String description;
     private List<Details> policyDetails;
     private List<Benefits> policyBenefits;
     private List<AddOnDetails> policyAddOnDetails;
-    private byte[] policyDocuments;
-
-    public AutomobileInsurancePolicy(String docName, String contentType, byte[] bytes) {
-    }
+    private String policyDocuments;
 }

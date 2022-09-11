@@ -1,11 +1,19 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+export interface Insurances {
+  name: string;
+}
+
 @Component({
   selector: 'app-recommendation',
   templateUrl: './recommendation.component.html',
   styleUrls: ['./recommendation.component.css']
 })
+
 export class RecommendationComponent implements OnInit {
+  allNames:any = [];
+  isActive = true;
   images:any =[];
   trendNames:any=[];
   healthNames:any=[];
@@ -33,7 +41,11 @@ export class RecommendationComponent implements OnInit {
     this.isTrend=true;
     if(this.isHealth==true){
        this.isDisplay=false;
+      this.allNames = this.images;
+    }else{
+      this.allNames = this.healthNames;
     }
+
   }
 other(){
     this.isDisplay=true;
@@ -43,7 +55,10 @@ other(){
     this.isOther=!this.isOther;
     if(this.isOther==true){
       this.isDisplay=false;
-   }
+      this.allNames = this.images;
+    }else{
+    this.allNames = this.otherNames;
+    }
   }
 life(){
   this.isDisplay=true;
@@ -53,7 +68,10 @@ life(){
   this.isLife=!this.isLife;
   if(this.isLife==true){
     this.isDisplay=false;
- }
+    this.allNames = this.images;
+  }else{
+ this.allNames = this.lifeNames;
+  }
 }
 trend(){
   this.isDisplay=true;
@@ -63,20 +81,23 @@ trend(){
   this.isTrend=!this.isTrend;
   if(this.isTrend==true){
     this.isDisplay=false;
-    }
+    this.allNames = this.images;
+  }else{
+    this.allNames = this.trendNames;
+  }
 }
   constructor(private http:HttpClient) { }
   ngOnInit(): void {
     this.getNames();
     this.getTrendingNames();
-
   }
- 
-   
+
+
 
  getNames(){
       this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
         this.images=data;
+        this.allNames = this.images;
         for(var i=0;i<this.images.length;i++){
           if(this.images[i].type=="health"){
          this.healthNames[this.healthCount]=this.images[i];
@@ -101,13 +122,12 @@ trend(){
       }
       })
     }
-  
+
     getTrendingNames(){
       this.http.get("http://localhost:3000/trends").subscribe((data)=>{
         this.trendNames=data;
         console.log(this.trendNames);
       })
-    
     }
 
 
@@ -118,11 +138,11 @@ trend(){
 
     }
   }
-  
-  
 
-  
-    
+
+
+
+
 
 
 

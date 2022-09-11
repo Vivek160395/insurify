@@ -5,6 +5,6 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface HealthInsurancePolicyRepository extends ElasticsearchRepository<HealthInsurancePolicy, Integer> {
+public interface HealthInsurancePolicyRepository extends ElasticsearchRepository<HealthInsurancePolicy, String> {
     public HealthInsurancePolicy getPolicyByPolicyName(String policyName);
 }

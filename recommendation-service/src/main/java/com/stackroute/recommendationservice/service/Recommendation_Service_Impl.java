@@ -29,19 +29,19 @@ public class Recommendation_Service_Impl implements Recommendation_service{
     }
 
     @Override
-    public Insurance addInsurance(InsuranceProfile insurance) throws InsuranceAlreadyExists {
+    public Insurance addInsurance(InsuranceProfile insuranceProfile) throws InsuranceAlreadyExists {
         Insurance insurance2 = new Insurance();
-        Optional<Insurance> insurance1 = insurance_repository.findById(insurance.getInsuranceId());
+        Optional<Insurance> insurance1 = insurance_repository.findById(insuranceProfile.getInsuranceId());
         if(insurance1.isPresent()){
             throw new InsuranceAlreadyExists();
         }
         else {
-            insurance2.setInsuranceId(insurance.getInsuranceId());
-            insurance2.setInsuranceName(insurance.getInsuranceName());
+            insurance2.setInsuranceId(insuranceProfile.getInsuranceId());
+            insurance2.setInsuranceName(insuranceProfile.getInsuranceName());
             insurance_repository.save(insurance2);
-            createAgeRelation(insurance.getInsuranceId(),insurance.getAge());
-            createInsuranceTypeRelation(insurance.getInsuranceId(),insurance.getInsuranceType());
-            createOccupationRelation(insurance.getInsuranceId(),insurance.getOccupation());
+            createAgeRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getAge());
+            createInsuranceTypeRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getInsuranceType());
+            createOccupationRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getOccupation());
 //            createVehicleRelation(insurance.getInsuranceId(),insurance.getVehicle());
             return insurance2;
         }
@@ -105,7 +105,7 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         if(!insurance_repository.checkOccupationRelation(insuranceId,occupationName)){
             insurance_repository.createOccupationRelation(insuranceId,occupationName);
             return true;
-        }else return false;
+        }return false;
     }
 
     @Override

@@ -1,4 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { MarkdownModule } from 'ngx-markdown';
 import { AppRoutingModule } from './app-routing.module';
@@ -55,6 +56,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
 import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +68,7 @@ import { PreviewMarkupComponent } from './preview-markup/preview-markup.componen
   entryComponents: [PreviewMarkupComponent],
   imports: [
     BrowserModule,
+    FlexLayoutModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -121,7 +124,8 @@ import { PreviewMarkupComponent } from './preview-markup/preview-markup.componen
     MatCardModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MarkdownModule.forRoot()
+    MarkdownModule.forRoot(),
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -13,16 +13,16 @@ public interface Insurance_Repository extends Neo4jRepository<Insurance,Integer>
     @Query("MATCH (a:Insurance{insuranceId:$insuranceId}),(b:Age{age:$age}) CREATE (a)-[r:ForAge]->(b)")
     void createAgeRelation(int insuranceId,int age);
 
-    @Query("MATCH (a:Insurance{insuranceId:$insuranceId}),(b:Occupation{occupationName: $occupationName}) CREATE (a)-[:for]->(b)")
+    @Query("MATCH (a:Insurance{insuranceId:$insuranceId}),(b:Occupation{occupationName: $occupationName}) CREATE (a)-[r:for]->(b)")
     void createOccupationRelation(int insuranceId,String occupationName);
 
-    @Query("MATCH (a:Insurance{insuranceId:$insuranceId}),(b:InsuranceType{insuranceType:$insuranceType}) RETURN exists ((a)<-[:TypeOfInsurance]-(b))")
+    @Query("MATCH (a:Insurance{insuranceId:$insuranceId}),(b:InsuranceType{insuranceType:$insuranceType}) RETURN exists ((b)<-[:TypeOfInsurance]-(a))")
     boolean checkInsuranceTypeRelationship(int insuranceId,String insuranceType);
 
-    @Query("MATCH (a:Insurance{insuranceId:$insuranceId}),(b:Age{age:$age}) RETURN exists ((a)<-[:ForAge]-(b))")
+    @Query("MATCH (a:Insurance{insuranceId:$insuranceId}),(b:Age{age:$age}) RETURN exists ((b)<-[:ForAge]-(a))")
     boolean checkAgeRelationship(int insuranceId,int age);
 
-    @Query("MATCH (a:Insurance{insuranceId:$insuranceId}),(b:Occupation{occupationName: $occupationName}) RETURN exists ((a)<-[:for]-(b))")
+    @Query("MATCH (a:Insurance{insuranceId:$insuranceId}),(b:Occupation{occupationName: $occupationName}) RETURN exists ((b)<-[:for]-(a))")
     boolean checkOccupationRelation(int insuranceId,String occupationName);
 
     @Query("MATCH (a:Insurance),(b:Age{age:$age}) WHERE (b)<-[:ForAge]-(a) RETURN a")

@@ -8,6 +8,7 @@ import { Insurance } from '../insurance';
 import { MatDialog } from '@angular/material/dialog';
 import { Dialog } from '@angular/cdk/dialog';
 import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
+import { FlexAlignDirective } from '@angular/flex-layout';
 
 export interface bike {
   value: string;
@@ -33,6 +34,17 @@ export interface Fruit {
 }
 export interface Duration {
   years: number;
+}
+export class details{
+  constructor( 
+    public briefs:string,
+    public descriptions:string){}
+}
+export class premiumdetails{
+  constructor( 
+    public addOnName       :string,
+    public addOnDescription:string,
+    public addOnPremiums   :number){}
 }
 @Component({
   selector: 'app-add-insurance-policy',
@@ -107,9 +119,21 @@ export class AddInsurancePolicyComponent implements OnInit {
       ],
     },
   ];
-
+  num:number=0;
+  policyarray:details[]=[]
+  premiumarray:premiumdetails[]=[]
+  briefInput:string='';
+  descriptionInput:string='';
   valueVariable: string='';
-  
+  xyz:details={
+    briefs:'',
+    descriptions :''
+  }
+ flags:boolean[]=[true];
+ flag:boolean[]=[true]
+ 
+ 
+
   constructor(public http:HttpClient,public dialog:MatDialog) { }
 
   openDialog(){
@@ -126,10 +150,10 @@ export class AddInsurancePolicyComponent implements OnInit {
       premiums :    new FormControl("", [Validators.required,Validators.min(0)]),
       durations:    new FormControl("", [Validators.required,Validators.min(0)]),
       sumInsure:    new FormControl("", [Validators.required,Validators.min(0)]),
-      adults   :    new FormControl("", [Validators.required]),
-      minAge   :    new FormControl("", [Validators.required,Validators.min(20),Validators.max(75)]),  
-      maxAge   :    new FormControl("", [Validators.required,Validators.min(20),Validators.max(75)]),  
-      kids     :    new FormControl("", [Validators.required]),
+      adults   :    new FormControl("", [Validators.min(0)]),
+      minAge   :    new FormControl("", [Validators.min(20),Validators.max(75)]),  
+      maxAge   :    new FormControl("", [Validators.min(20),Validators.max(75)]),  
+      kids     :    new FormControl("", [Validators.min(0)]),
       minSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
       maxSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
       modelsAllowed:new FormControl("", [Validators.required,Validators.min(0)]),
@@ -150,7 +174,9 @@ export class AddInsurancePolicyComponent implements OnInit {
     fileSource     : new FormControl("", [Validators.required])
   });
   
-  
+  get insuranceFormControl() {
+    return <FormArray>this.insuranceForms.controls['policyBenefits'];
+  }
  
  
  
@@ -189,8 +215,8 @@ export class AddInsurancePolicyComponent implements OnInit {
 
 
   onSubmit(){
-    console.log(this.id);  
-    console.log(this.insuranceForms.value);
+    console.log(this.policyarray) ;
+    // console.log(this.insuranceForms.value);
     this.insuranceForms.get('policyId')!.enable();
     this.obj.insuranceType=this.insuranceForms.controls['insuranceType'].value!;
     this.obj.policyId=this.insuranceForms.controls['policyId'].value!;
@@ -220,19 +246,32 @@ export class AddInsurancePolicyComponent implements OnInit {
     }
     formData.append("fileSource",this.obj.fileSource);
     
-    this.http.post("http://localhost:9000/apis/insurances",formData, { observe: 'response' }).subscribe((data:any)=>{console.log(data)}); 
-    console.log(this.insuranceForms.value)
+    // this.http.post("http://localhost:9000/apis/insurances",formData, { observe: 'response' }).subscribe((data:any)=>{console.log(data)}); 
+    // console.log(this.insuranceForms.value)
     this.insuranceForms.get('policyId')!.disable()
   }
 
 
   addDetails(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
+    if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
+    ((!control.at(i).value.modelsAllowed||!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
+    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
+    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
+    {
+      return
+    }
     control.push(control.controls[i]);
   }
-  addDetailsE() {
+  addDetailsE(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
-   
+    if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
+    ((!control.at(i).value.modelsAllowed||!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
+    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
+    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
+    {
+      return
+    }
     control.push(new FormGroup({
       premiums: new FormControl("", [Validators.required]),
       durations: new FormControl("", [Validators.required]),
@@ -248,29 +287,64 @@ export class AddInsurancePolicyComponent implements OnInit {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
     control.removeAt(index);
   }
-  addDetails1() {
+  addDetails1(index: any) {
     const control = <FormArray>this.insuranceForms.controls['policyBenefits'];
+    
+    if(!control.at(index).value.brief||!control.at(index).value.description)
+    {
+      return
+    }
+
+    this.flags[index]=false
+    this.flags.push(true)
     control.push(new FormGroup({
       brief: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required])
     }
     ));
+    const arr=new details('','');
+      // console.log(control.controls[index].value.brief)
+      arr.briefs=control.controls[index].value.brief;
+      // console.log(this.xyz.briefs)
+      arr.descriptions=control.controls[index].value.description;
+      this.policyarray.push(arr);
+      console.log(this.policyarray) 
   }
   removeDetails1(index: any) {
     const control = <FormArray>this.insuranceForms.controls['policyBenefits'];
     control.removeAt(index);
+    this.policyarray.splice(index, 1);
+    this.flags.splice(index,1)
+    console.log(this.policyarray) 
+    console.log(this.flags) 
+    console.log(this,this.insuranceForms.value);
+    
   }
-  addDetails2() {
+  addDetails2(index:any) {
     const control = <FormArray>this.insuranceForms.controls['addOnDetails'];
+    this.flag[index]=false
+    this.flag.push(true)
     control.push(new FormGroup({
-      addOn: new FormControl("", [Validators.required]),
+      addOnName: new FormControl("", [Validators.required]),
+      addOnDescription: new FormControl("", [Validators.required]),
       addOnPremiums: new FormControl("", [Validators.required])
-    }
-    ));
+    }));
+    const arr1=new premiumdetails('','',0);
+      
+      arr1.addOnName       =control.controls[index].value.addOnName;
+      arr1.addOnDescription=control.controls[index].value.addOnDescription;
+      arr1.addOnPremiums   =control.controls[index].value.addOnPremiums;
+      this.premiumarray.push(arr1);
+      console.log(this.premiumarray) 
   }
   removeDetails2(index: any) {
     const control = <FormArray>this.insuranceForms.controls['addOnDetails'];
     control.removeAt(index);
+    this.premiumarray.splice(index, 1);
+    this.flag.splice(index,1)
+    console.log(this.premiumarray) 
+    console.log(this.flag) 
+    console.log(this,this.insuranceForms.value);
   }
   
  
@@ -296,7 +370,7 @@ export class AddInsurancePolicyComponent implements OnInit {
 //Methods for chips component
 addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [{insuredSum: 100000}, {insuredSum: 1000000},{insuredSum: 2500000}, {insuredSum: 5000000}];
+  fruits: Fruit[] = [{insuredSum: 100000}, {insuredSum: 1000000}, {insuredSum: 5000000}];
   duration: Duration[] = [{years: 1}, {years: 5}, {years: 10}];
   add(event: MatChipInputEvent): void {
     // const value = (event.value || '').trim();
