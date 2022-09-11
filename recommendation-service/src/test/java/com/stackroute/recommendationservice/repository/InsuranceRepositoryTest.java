@@ -1,6 +1,7 @@
 package com.stackroute.recommendationservice.repository;
 
 import com.stackroute.recommendationservice.model.*;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataNeo4jTest
 @NoArgsConstructor
+@AllArgsConstructor
 public class InsuranceRepositoryTest {
 
     @Autowired
@@ -118,6 +120,4 @@ public class InsuranceRepositoryTest {
         System.out.println(insurances);
         assertEquals(allTypeInsurances.get(1).getInsuranceId(),insurances.get(0).getInsuranceId());
     }
-//    @Test
-//    public void
 }
