@@ -55,6 +55,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
 import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
+import { PoliciesComponent } from './policies/policies.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { PreviewMarkupComponent } from './preview-markup/preview-markup.componen
     RecommendationComponent,
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
+    PoliciesComponent,
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
