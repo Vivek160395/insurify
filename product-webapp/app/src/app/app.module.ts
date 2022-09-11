@@ -55,6 +55,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
 import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
@@ -121,7 +122,8 @@ import { PreviewMarkupComponent } from './preview-markup/preview-markup.componen
     MatCardModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MarkdownModule.forRoot()
+    MarkdownModule.forRoot(),
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent],
