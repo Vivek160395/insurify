@@ -9,18 +9,24 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@Document(indexName = "insurance-policy")
+@AllArgsConstructor
+@Document(indexName = "healthinsurance")
 public class HealthInsurancePolicy {
 
     @Id
+<<<<<<< HEAD
+    private String  policyId;
+=======
     private int policyId;
+>>>>>>> 314499d1fb8b8a80dab1cbf2717d38510c3fc482
     private String policyName;
     private String insuranceType;
+    private String description;
     private List<Details> policyDetails;
     private List<Benefits> policyBenefits;
     private List<AddOnDetails> policyAddOnDetails;
-    private byte[] policyDocuments;
+    private String policyDocuments;
 
-    public HealthInsurancePolicy(String fileName, String contentType, byte[] bytes) {
-    }
+
+
 }

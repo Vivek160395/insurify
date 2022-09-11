@@ -11,38 +11,51 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 public class HealthRepositoryTest {
 
     @Autowired
-    private HealthInsurancePolicyRepository healthInsurancePolicyRepository;
+    private final HealthInsurancePolicyRepository healthInsurancePolicyRepository;
 
     private HealthInsurancePolicy policy;
-    private AddOnDetails addOnDetails;
-    private Details details;
-    private Benefits benefits;
+    private List<AddOnDetails> addOnDetailsList;
+    private List<Details> detailsList;
+    private List<Benefits> benefitsList;
+
+    public HealthRepositoryTest(HealthInsurancePolicyRepository healthInsurancePolicyRepository) {
+        this.healthInsurancePolicyRepository = healthInsurancePolicyRepository;
+    }
 
     @BeforeEach
     public void setup(){
-        policy = new HealthInsurancePolicy();
-        addOnDetails = new AddOnDetails();
-        details = new Details();
-        benefits = new Benefits();
+        AddOnDetails addOnDetails = new AddOnDetails("addOn",15000);
+        addOnDetailsList.add(addOnDetails);
+
+        Details details = new Details(10000,9,1000,1,2,2550,50000);
+        detailsList.add(details);
+
+        Benefits benefits = new Benefits("desc","brief");
+        benefitsList.add(benefits);
+
+        policy = new HealthInsurancePolicy("123","NameOfThePolicy","Health","descriptionAboutThePolicy",detailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
+
     }
 
     @AfterEach
     public void tearDown(){
         policy = null;
-        addOnDetails = null;
-        details = null;
-        benefits = null;
+        addOnDetailsList = null;
+        detailsList = null;
+        benefitsList = null;
         healthInsurancePolicyRepository.deleteAll();
     }
 
     @Test
-    public void givenProductToSaveShouldReturnProduct(){
+    public void givenPolicyToSaveShouldReturnPolicy(){
         healthInsurancePolicyRepository.save(policy);
         HealthInsurancePolicy policy1 = healthInsurancePolicyRepository.findById(policy.getPolicyId()).get();
         assertEquals(policy.getPolicyId(),policy1.getPolicyId());

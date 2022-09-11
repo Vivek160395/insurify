@@ -43,10 +43,10 @@ public class UserControllerTest {
     @BeforeEach
     public void setUp(){
         address1=new Address(637,"gali no. 1","st mary school","panipat","haryana",132101);
-        user1=new User("ajay123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address1,123456789098l,"ABCD234");
+        user1=new User("ajay123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address1,123456789098l,"ABCD234",null);
 
         address2=new Address(637,"gali no. 1","st mary school","panipat","haryana",132101);
-        user2=new User("aman123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address2,123456789098l,"ABCD234");
+        user2=new User("aman123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address2,123456789098l,"ABCD234", null);
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 

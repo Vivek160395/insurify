@@ -1,5 +1,6 @@
 package com.stackroute.userservice.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.userservice.exception.UserAlreadyExistsException;
 import com.stackroute.userservice.exception.UserNotRegisteredException;
 import com.stackroute.userservice.model.User;
@@ -46,9 +47,11 @@ public class UserController {
     }
 
     @PutMapping("/updateUser/{emailId}")
-    public ResponseEntity<?> updateUserInfo(@PathVariable String emailId, MultipartFile file, @RequestBody User user) throws UserNotRegisteredException, IOException {
+    public ResponseEntity<?> updateUserInfo(@PathVariable String emailId, @RequestParam("imageFile") MultipartFile file, @RequestParam("userDetails") String user) throws UserNotRegisteredException, IOException {
         try {
-            return new ResponseEntity<>(userService.updateUser(user, emailId, file), HttpStatus.OK);
+            User user1 = new ObjectMapper().readValue(user,User.class);
+
+            return new ResponseEntity<>(userService.updateUser(user1, emailId, file), HttpStatus.OK);
         } catch (UserNotRegisteredException | IOException e) {
             e.getMessage();
             throw e;

@@ -6,3 +6,19 @@
 .example-card {
     max-width: 400px;
 }
+
+.img {
+    border-color: white;
+}
+
+mat-icon {
+    transform: scale(1);
+}
+
+mat-chip {
+    transform: scale(1.2);
+}
+
+.example-box {
+    margin-right: 20px;
+}
