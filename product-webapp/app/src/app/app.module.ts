@@ -56,11 +56,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
 import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
-<<<<<<< HEAD
+// import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
-=======
-import { FlexLayoutModule } from '@angular/flex-layout';
->>>>>>> 69327a91bb61af6c3d21854799ab982d83d41055
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,12 +65,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     RecommendationComponent,
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
-    PoliciesComponent,
+    PoliciesComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
     BrowserModule,
-    FlexLayoutModule,
+    // FlexLayoutModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -130,7 +127,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AppRoutingModule,
     BrowserAnimationsModule,
     MarkdownModule.forRoot(),
-    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent],

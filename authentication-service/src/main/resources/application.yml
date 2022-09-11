@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     username: root
-    password: password@123
+    password: root@123
     driver: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
