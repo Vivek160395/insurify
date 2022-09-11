@@ -14,16 +14,12 @@ import java.util.List;
 public class LifeInsurancePolicy {
 
     @Id
-    private Integer policyId;
+    private String policyId;
     private String policyName;
     private String insuranceType;
+    private String description;
     private List<Details> policyDetails;
     private List<Benefits> policyBenefits;
     private List<AddOnDetails> policyAddOnDetails;
-    private byte[] policyDocuments;
-
-    public LifeInsurancePolicy(String docName, String contentType, byte[] bytes) {
-    }
-
-
+    private String policyDocuments;
 }

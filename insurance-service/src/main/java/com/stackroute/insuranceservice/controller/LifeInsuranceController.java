@@ -29,12 +29,18 @@ public class LifeInsuranceController {
     }
 
     @PostMapping("/policy")
+<<<<<<< HEAD
+    public ResponseEntity<?> addPolicy(@RequestBody LifeInsurancePolicy policy) throws PolicyAlreadyExistException {
+        policyService.savePolicy(policy);
+        return new ResponseEntity<>("Data Saved Successfully", HttpStatus.ACCEPTED);
+=======
     public ResponseEntity<?> addPolicy( @RequestParam("file") MultipartFile file,
                                        @RequestParam("details") String policyDetails) throws PolicyAlreadyExistException, IOException {
         LifeInsurancePolicy policy= new ObjectMapper().readValue(policyDetails,LifeInsurancePolicy.class);
 
         policyService.savePolicy(policy,file);
         return new ResponseEntity<>(policyService.savePolicy(policy,file), HttpStatus.ACCEPTED);
+>>>>>>> 314499d1fb8b8a80dab1cbf2717d38510c3fc482
     }
 
     @GetMapping("/policy")
@@ -48,12 +54,12 @@ public class LifeInsuranceController {
     }
 
     @GetMapping("/policy/{policyId}")
-    public ResponseEntity<?> getPolicyByPolicyId(@PathVariable Integer policyId) throws PolicyNotFoundException {
+    public ResponseEntity<?> getPolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
         return new ResponseEntity<>(policyService.getPolicyByPolicyId(policyId),HttpStatus.OK);
     }
 
     @DeleteMapping("/policy/delete/{policyId}")
-    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable Integer policyId) throws PolicyNotFoundException {
+    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
         policyService.deletePolicyByPolicyId(policyId);
         return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
     }

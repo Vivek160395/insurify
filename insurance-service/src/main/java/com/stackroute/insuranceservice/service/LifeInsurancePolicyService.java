@@ -11,13 +11,13 @@ import java.util.Optional;
 
 public interface LifeInsurancePolicyService {
 
-    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException;
+    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy) throws PolicyAlreadyExistException;
 
     public Iterable<LifeInsurancePolicy> getAllPolicies();
 
     public LifeInsurancePolicy getPolicyByPolicyName(String policyName);
 
-    public Optional<LifeInsurancePolicy> getPolicyByPolicyId(Integer policyId) throws PolicyNotFoundException;
+    public Optional<LifeInsurancePolicy> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException;
 
-    public boolean deletePolicyByPolicyId(Integer policyId) throws PolicyNotFoundException;
+    public boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException;
 }

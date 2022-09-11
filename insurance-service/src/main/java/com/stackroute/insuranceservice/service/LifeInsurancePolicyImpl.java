@@ -26,14 +26,20 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
         this.policyRepository = policyRepository;
     }
     @Override
-    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException {
+    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy) throws PolicyAlreadyExistException {
         DTO dto = new DTO();
         dto.setInsuranceType(policy.getInsuranceType());
         dto.setPolicyName(policy.getPolicyName());
 
+<<<<<<< HEAD
+        if (policyRepository.findById(policy.getPolicyId()).isPresent()){
+            throw new PolicyAlreadyExistException();
+        }else {
+=======
         if(policyRepository.findById(policy.getPolicyId()).isEmpty()) {
             //policy = new LifeInsurancePolicy(docName, file.getContentType(), file.getBytes());
             policy.setPolicyDocuments(file.getBytes());
+>>>>>>> 314499d1fb8b8a80dab1cbf2717d38510c3fc482
             policyRepository.save(policy);
             producer.sendingMessageToRabbitMQServer(dto);
             return policy;
@@ -54,7 +60,7 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
     }
 
     @Override
-    public Optional<LifeInsurancePolicy> getPolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public Optional<LifeInsurancePolicy> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isPresent()){
             return policyRepository.findById(policyId);
         }else {
@@ -63,7 +69,7 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
     }
 
     @Override
-    public boolean deletePolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isPresent()){
             policyRepository.deleteById(policyId);
             return true;
