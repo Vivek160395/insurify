@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
 import { PoliciesComponent } from './policies/policies.component';
+import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import { RegisterComponent } from './register/register.component';
 
