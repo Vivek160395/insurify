@@ -105,7 +105,7 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         if(!insurance_repository.checkOccupationRelation(insuranceId,occupationName)){
             insurance_repository.createOccupationRelation(insuranceId,occupationName);
             return true;
-        }else return false;
+        }return false;
     }
 
     @Override
