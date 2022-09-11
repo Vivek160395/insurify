@@ -9,13 +9,15 @@ import com.stackroute.authentication.service.service.UserCredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+
 import java.util.Map;
 
-@RestController
-@RequestMapping()
+
+@Controller
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserCredentialsController {
 
@@ -31,12 +33,13 @@ public class UserCredentialsController {
         this.securityTokenGenerator = securityTokenGenerator;
     }
 
-    @PostMapping("/user")
-    public ResponseEntity<?> saveUser(@RequestBody UserCredentials user) throws UserAlreadyExistException {
-        return new ResponseEntity<>(userCredentialsService.saveUser(user), HttpStatus.OK);
-    }
 
-    @PostMapping("/login")
+@PostMapping("/user")
+    public ResponseEntity<?> saveUser(@RequestBody UserCredentials user) throws UserAlreadyExistException {
+        return new ResponseEntity<>(userCredentialsService.saveUser(user), HttpStatus.CREATED);
+
+    }
+    @GetMapping("/loginUser")
     public ResponseEntity<?> loginUser(@RequestBody UserCredentials user) throws InvalidCredentialException
     {
         UserCredentials retrievedUser = userCredentialsService.findByEmailIdAndPassword(user.getEmailId(),user.getPassword());
@@ -54,13 +57,15 @@ public class UserCredentialsController {
         return new ResponseEntity<>(userCredentialsService.getAllUser(), HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
-    public String hello() {
-        return "Hello World!";
+    @GetMapping("/list")
+    public String viewHomePage(Model model) {
+
+        return "products";
     }
-    @GetMapping("/oauth2/authorization/google")
-    public Principal prevent(Principal principal) {
-        return principal;
+    @GetMapping("/new")
+    public String showNewProductForm(Model model) {
+
+        return "products";
     }
 
 
