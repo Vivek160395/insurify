@@ -4,8 +4,10 @@ import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insuranc
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import { RegisterComponent } from './register/register.component';
 
+
 const routes: Routes = [
-  {path:"",component:RecommendationComponent},
+  {path:"",component:RecommendationComponent,
+},
   {path:"register",component:RegisterComponent},
   {path:"add-policy",component:AddInsurancePolicyComponent}
 ];
@@ -14,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
