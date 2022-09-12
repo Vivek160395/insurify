@@ -1,6 +1,6 @@
-<div class=" row " style=" background-color: white;display: flex;flex-wrap: wrap;">
-    <div class=col-1.75 style=" margin: 40px 0px 0 40px;display: block;color: black; ">
-        <div class=" container ">
+<div class=" row " style=" background-color: white;">
+    <div class=col-1.90 style=" margin: 40px 0px 0 40px;display: block;color: black; ">
+        <div style="display: flex;flex-direction:column">
             <div style=" color: black;margin: 30px 0px 0px 0px;font-size:x-large; font-family: 'Trebuchet MS' , 'Lucida Sans Unicode' , 'Lucida Grande' , 'Lucida Sans' , Arial, sans-serif ">
                 Health</div>
             <div [hidden]=" isHealth " *ngFor=" let names of healthNames " style=" margin: 15px 0px 0px 20px;font-size: medium; ">
@@ -18,9 +18,9 @@
             </div>
         </div>
     </div>
-    <div class=" col-9 ">
+    <div class="col-10" style="margin: auto;">
         <div class="container" style="margin: 40px 0 0 50px;">
-            <div style="display: flex;justify-content: space-between; ">
+            <div style="display: flex;justify-content: space-between;">
                 <div>
                     <mat-chip-list class="example-chip">
                         <mat-chip class="example-box" style="margin-right:20px;" (click)=" health() "> Health</mat-chip>
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div style=" display: flex;flex-wrap: wrap; ">
+        <div style=" display: flex;flex-wrap: wrap;">
             <mat-card class=" example-card " [class.mat-elevation-z2]="isActive" style=" margin:50px 20px 20px 20px;width: 330px; height:auto; background-color: white; border: 2px solid lightblue; " *ngFor=" let item of allNames " matRipple [class.mat-elevation-z8]="isActive">
                 <mat-card-header style=" background-color: white; ">
                     <mat-card-title style=" color: black;font-family: 'Times New Roman' , Times, serif; ">

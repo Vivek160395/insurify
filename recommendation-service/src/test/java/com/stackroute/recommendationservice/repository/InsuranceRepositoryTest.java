@@ -22,12 +22,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataNeo4jTest
 @NoArgsConstructor
-@AllArgsConstructor
 public class InsuranceRepositoryTest {
 
     @Autowired
     private Insurance_Repository insurance_repository;
-
     @Autowired
     private Occupation_Repository occupation_repository;
     @Autowired
@@ -58,6 +56,7 @@ public class InsuranceRepositoryTest {
     @Test
     public void createInsuranceTypeRelationshipAndCheckInsuranceTypeRelationship(){
         insurance_repository.save(insurance);
+        insurance_type_repository.save(new InsuranceType(insuranceProfile.getInsuranceType()));
         insurance_repository.createInsuranceTypeRelation(insuranceProfile.getInsuranceId(), insuranceProfile.getInsuranceType());
         boolean result = insurance_repository.checkInsuranceTypeRelationship(insuranceProfile.getInsuranceId(), insuranceProfile.getInsuranceType());
         assertEquals(true,result);

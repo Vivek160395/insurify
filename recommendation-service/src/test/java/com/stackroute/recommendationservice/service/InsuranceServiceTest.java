@@ -2,6 +2,7 @@ package com.stackroute.recommendationservice.service;
 
 import com.stackroute.recommendationservice.exception.AgeAlreadyThere;
 import com.stackroute.recommendationservice.exception.InsuranceAlreadyExists;
+import com.stackroute.recommendationservice.exception.NoInsurancesFound;
 import com.stackroute.recommendationservice.exception.UserAlreadyPosted;
 import com.stackroute.recommendationservice.model.*;
 import com.stackroute.recommendationservice.repository.*;
@@ -25,12 +26,16 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
+@NoArgsConstructor
+
 public class InsuranceServiceTest {
 
     @Mock
     private Insurance_Repository insurance_repository;
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private Insurance_Type_Repository insurance_type_repository;
 
     @InjectMocks
     private Recommendation_Service_Impl recommendation_service_Impl;
@@ -75,4 +80,16 @@ public class InsuranceServiceTest {
         verify(userRepository,times(1)).save(any());
         verify(userRepository,times(1)).findById(any());
     }
+
+    @Test
+    public void createInsuranceTypeRelationshipAndCheckInsuranceTypeRelationship(){
+        when(insurance_repository.save(insurance)).thenReturn(insurance);
+        when(insurance_type_repository.save(new InsuranceType(insuranceProfile.getInsuranceType()))).thenReturn(new InsuranceType(insuranceProfile.getInsuranceType()));
+        recommendation_service_Impl.createInsuranceTypeRelation(insuranceProfile.getInsuranceId(), insuranceProfile.getInsuranceType());
+        verify(insurance_repository,times(1)).checkInsuranceTypeRelationship(any(),any());
+        verify(insurance_repository,times(1)).createInsuranceTypeRelation(any(),any());
+
+    }
+
+
 }       
