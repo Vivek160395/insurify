@@ -156,7 +156,7 @@ export class AddInsurancePolicyComponent implements OnInit {
       kids     :    new FormControl("", [Validators.min(0)]),
       minSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
       maxSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
-      modelsAllowed:new FormControl("", [Validators.required,Validators.min(0)]),
+      modelsAllowed:new FormControl(""),
     })]),
     policyBenefits: new FormArray([
       new FormGroup({
@@ -278,6 +278,7 @@ export class AddInsurancePolicyComponent implements OnInit {
     {
       return
     }
+    console.log(control.value);
     control.push(new FormGroup({
       premiums: new FormControl("", [Validators.required]),
       durations: new FormControl("", [Validators.required]),
@@ -285,7 +286,8 @@ export class AddInsurancePolicyComponent implements OnInit {
       adults   :new FormControl(""),
       kids     :new FormControl(""),
       minSalary:new FormControl(""),
-      maxSalary:new FormControl("")
+      maxSalary:new FormControl(""),
+      modelsAllowed:new FormControl("")
     }
     ));
   }

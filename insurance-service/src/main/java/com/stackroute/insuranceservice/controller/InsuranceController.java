@@ -54,6 +54,10 @@ public class InsuranceController {
         lifePolicyObj.setAddOnDetails(insurance.getAddOnDetails());
         lifePolicyObj.setPolicyDocuments(insurance.getPolicyDocuments());
 
+        if (insurance.getInsuranceType().equalsIgnoreCase("AutomobileInsurance")) {
+            lifePolicyObj.setCategory(insurance.getCategory());
+        }
+
         return new ResponseEntity<>(insuranceService.saveInsurance(lifePolicyObj), HttpStatus.CREATED);
     }
 
@@ -73,7 +77,7 @@ public class InsuranceController {
         return new ResponseEntity<>(insuranceService.saveInsurance(lifePolicyObj), HttpStatus.CREATED);
     }
 
-    @PostMapping("/photos/update")
+    @PostMapping("/photos/update/{policyId}")
     public BodyBuilder updateImage(@RequestParam("imageFile") MultipartFile imageFile, @RequestParam("policyId") String policyId) throws IOException {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~"+imageFile.getOriginalFilename());
         System.out.println(insuranceRepo.findById(policyId));
@@ -81,6 +85,7 @@ public class InsuranceController {
         System.out.println("Original Image Byte Size - " + imageFile.getBytes().length);
 
         retrieveInsurance.setPicByte(compressBytes(imageFile.getBytes()));
+        System.out.println("PolicyId"+policyId);
         insuranceRepo.save(retrieveInsurance);
         return ResponseEntity.status(HttpStatus.OK);
     }

@@ -43,7 +43,8 @@ public class InsuranceServiceImpl implements InsuranceService{
     }
 
     @Override
-    public List<Insurance> getInsuranceByInsuranceType(String insuranceType) {
+    public List<Insurance> findInsuranceByInsuranceType(String insuranceType) {
+
         return null;
     }
 }

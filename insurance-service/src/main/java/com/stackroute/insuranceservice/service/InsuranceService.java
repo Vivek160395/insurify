@@ -11,5 +11,5 @@ public interface InsuranceService {
 
     public Insurance saveInsurance(Insurance insurance) throws PolicyAlreadyExistException, IOException;
 
-    public List<Insurance> getInsuranceByInsuranceType(String insuranceType);
+    public List<Insurance> findInsuranceByInsuranceType(String insuranceType);
 }
