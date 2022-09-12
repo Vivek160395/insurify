@@ -27,15 +27,20 @@ public class HealthInsurancePolicyServiceImpl implements HealthInsurancePolicySe
     }
 
     @Override
-    public HealthInsurancePolicy savePolicy(HealthInsurancePolicy policy) throws PolicyAlreadyExistException {
+    public HealthInsurancePolicy savePolicy(HealthInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException {
         DTO dto = new DTO();
-        dto.setPolicyName(policy.getPolicyName());
-        dto.setInsuranceType(policy.getInsuranceType());
+        dto.setPolicyId(dto.getPolicyId());
+        dto.setPolicyName(dto.getPolicyName());
+        dto.setInsuranceType(dto.getInsuranceType());
+        dto.setDescription(dto.getDescription());
 
         if(policyRepository.findById(policy.getPolicyId()).isPresent()) {
             throw new PolicyAlreadyExistException();
         }
         else {
+            String docName = file.getOriginalFilename();
+            System.out.println("Image Name is :"+docName);
+            policy.setImage(file.getBytes());
             policyRepository.save(policy);
             producer.sendingMessageToRabbitMQServer(dto);
             return policy;

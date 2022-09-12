@@ -17,7 +17,6 @@ import java.util.Optional;
 public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
 
     public LifeInsurancePolicyRepository policyRepository;
-
     @Autowired
     Producer producer;
 
@@ -26,19 +25,24 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
         this.policyRepository = policyRepository;
     }
     @Override
-    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy) throws PolicyAlreadyExistException, PolicyNotFoundException {
+    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, PolicyNotFoundException, IOException {
         DTO dto = new DTO();
-        dto.setInsuranceType(policy.getInsuranceType());
-        dto.setPolicyName(policy.getPolicyName());
+        dto.setPolicyId(dto.getPolicyId());
+        dto.setPolicyName(dto.getPolicyName());
+        dto.setInsuranceType(dto.getInsuranceType());
+        dto.setDescription(dto.getDescription());
 
         if(policyRepository.findById(policy.getPolicyId()).isEmpty()) {
+            String docName = file.getOriginalFilename();
+            System.out.println("Image name is : "+docName);
+            policy.setImage(file.getBytes());
+
             policyRepository.save(policy);
             producer.sendingMessageToRabbitMQServer(dto);
             return policy;
         }else {
             throw new PolicyAlreadyExistException();
         }
-
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface HealthInsurancePolicyService {
 
-    public HealthInsurancePolicy savePolicy(HealthInsurancePolicy policy) throws PolicyAlreadyExistException;
+    public HealthInsurancePolicy savePolicy(HealthInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException;
 
     public Iterable<HealthInsurancePolicy> getAllPolicies();
 
