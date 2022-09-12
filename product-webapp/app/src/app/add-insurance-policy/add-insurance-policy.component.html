@@ -9,12 +9,15 @@
   <a mat-button>Renewals</a>
   <a mat-raised-button color="primary">Login</a>
 </mat-toolbar>
+
 <div style="position:absolute">
   <mat-stepper #stepper>
     <mat-step [stepControl]="insuranceForms">
       <mat-card class="singlecard">
         <mat-card-content>
           <form [formGroup]="insuranceForms">
+            <p>Upload Documents</p>
+          <input style="margin-top: 5px;" formControlName="policyDocuments" type="file" (change)="onFileChanged($event)">
             <ng-template matStepLabel>Enter Basic Policy Details</ng-template>
             <div fxLayout="row" fxLayoutGap="2%">
 
@@ -111,7 +114,7 @@
       <mat-card class="singlecard">
         <mat-card-content style="align-content: center;">
           <form [formGroup]="insuranceForms">
-            <ng-template matStepLabel>Add policy Financial details</ng-template>
+            <ng-template matStepLabel>Add policy Financial policyDetails</ng-template>
             <div fxLayout="row" fxLayoutGap="2%">
               <mat-form-field class="example-chip-list" appearance="outline" fxFlex="50%">
                 <mat-label>Allowed Sum Insured Values(Add new values below)</mat-label>
@@ -144,7 +147,7 @@
               </mat-form-field>
             </div>
             <div formArrayName="policyDetails">
-              <h2 style="font-family: cursive;">Enter the financial details of the policy </h2>
+              <h2 style="font-family: cursive;">Enter the financial policyDetails of the policy </h2>
               <div *ngFor="let child of policyDetailsx;let i=index" formGroupName="{{i}}" fxFlexLayout="row"
                 fxLayoutGap="2%">
                 <mat-form-field fxFlex="15%" appearance="outline">
@@ -258,13 +261,13 @@
                   <mat-label>Add-On Premium</mat-label>
                   <input matInput placeholder="Add-On Premium" type="number" formControlName="addOnPremiums">
                 </mat-form-field>
-                
+
                   <a (click)="addDetails2(i)" fxFlexAlign="center" *ngIf="flag[i]">
                     <mat-icon>add_circle_outline</mat-icon>
                   </a>
-                
+
               </div>
-             
+
               <mat-accordion *ngFor="let addondetails of premiumarray;let i=index">
                 <mat-expansion-panel hideToggle>
                   <mat-expansion-panel-header>
@@ -284,12 +287,12 @@
                 </mat-panel-title>
                 <button mat-raised-button (click)="removeDetails2(i)"
                 style="color: orangered;">Remove</button>
-                   
+
                   </mat-expansion-panel-header>
                   <p>Add-On Name : {{addondetails.addOnName}}</p>
                   <p>Add-On Description :{{addondetails.addOnDescription}}</p>
                   <p>Add-On Premium :{{addondetails.addOnPremiums}}</p>
-                  
+
                 </mat-expansion-panel>
               </mat-accordion>
             </div>

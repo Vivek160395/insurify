@@ -1,4 +1,4 @@
-import { AddOnDetails } from './add-on-details';
+import { AddOnDetails } from './add-on-policyDetails';
 
 describe('AddOnDetails', () => {
   it('should create an instance', () => {
