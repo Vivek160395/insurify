@@ -285,6 +285,9 @@ export class AddInsurancePolicyComponent implements OnInit {
   }
   removeDetails(index: any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
+    if(control.length==1)
+    return
+
     control.removeAt(index);
   }
   addDetails1(index: any) {
@@ -322,6 +325,10 @@ export class AddInsurancePolicyComponent implements OnInit {
   }
   addDetails2(index:any) {
     const control = <FormArray>this.insuranceForms.controls['addOnDetails'];
+    if((!control.at(index).value.addOnName||!control.at(index).value.addOnDescription||!control.at(index).value.addOnPremiums))
+    {
+     return 
+    }
     this.flag[index]=false
     this.flag.push(true)
     control.push(new FormGroup({
