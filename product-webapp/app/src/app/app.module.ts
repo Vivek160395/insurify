@@ -58,6 +58,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 // import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
+import { MoreComponent } from './more/more.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { PoliciesComponent } from './policies/policies.component';
     RecommendationComponent,
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
-    PoliciesComponent
+    PoliciesComponent,
+    MoreComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [

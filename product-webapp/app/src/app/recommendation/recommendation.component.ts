@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 export interface Insurances {
   name: string;
 }
@@ -33,6 +33,7 @@ export class RecommendationComponent implements OnInit {
   displayOther=false;
   totalLength:any;
   page:number=1;
+  showMore:boolean=false;
   health(){
     this.isHealth=!this.isHealth;
     this.isOther=true;
@@ -93,6 +94,9 @@ trend(){
     this.totalLength=this.allNames.length;
   }
 }
+
+
+
   constructor(private http:HttpClient) { }
   ngOnInit(): void {
     this.getNames();
@@ -103,7 +107,6 @@ trend(){
         this.images=data;
         this.allNames = this.images;
         this.totalLength=this.allNames.length;
-        console.log(this.totalLength);
         for(var i=0;i<this.images.length;i++){
           if(this.images[i].type=="health"){
          this.healthNames[this.healthCount]=this.images[i];
