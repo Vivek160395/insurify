@@ -1,11 +1,19 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+export interface Insurances {
+  name: string;
+}
+
 @Component({
   selector: 'app-recommendation',
   templateUrl: './recommendation.component.html',
   styleUrls: ['./recommendation.component.css']
 })
+
 export class RecommendationComponent implements OnInit {
+  allNames:any = [];
+  isActive = true;
   images:any =[];
   trendNames:any=[];
   healthNames:any=[];
@@ -33,7 +41,11 @@ export class RecommendationComponent implements OnInit {
     this.isTrend=true;
     if(this.isHealth==true){
        this.isDisplay=false;
+      this.allNames = this.images;
+    }else{
+      this.allNames = this.healthNames;
     }
+
   }
 other(){
     this.isDisplay=true;
@@ -43,7 +55,10 @@ other(){
     this.isOther=!this.isOther;
     if(this.isOther==true){
       this.isDisplay=false;
-   }
+      this.allNames = this.images;
+    }else{
+    this.allNames = this.otherNames;
+    }
   }
 life(){
   this.isDisplay=true;
@@ -53,7 +68,10 @@ life(){
   this.isLife=!this.isLife;
   if(this.isLife==true){
     this.isDisplay=false;
- }
+    this.allNames = this.images;
+  }else{
+ this.allNames = this.lifeNames;
+  }
 }
 trend(){
   this.isDisplay=true;
@@ -63,110 +81,23 @@ trend(){
   this.isTrend=!this.isTrend;
   if(this.isTrend==true){
     this.isDisplay=false;
-    }
+    this.allNames = this.images;
+  }else{
+    this.allNames = this.trendNames;
+  }
 }
   constructor(private http:HttpClient) { }
   ngOnInit(): void {
-<<<<<<< HEAD
-    this.getALlImages();
-    this.getNamesHealth();
-    this.getInsurnacesAcc();
-    this.getHealthInsurances();
-    this.getLifeInsurances();
-    this.getOtherInsurances();
-    this.getNamesOther();
-    this.getNamesLife();
-  }
-  getALlImages(){
-    this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-      this.images = data;
-      for(var i=0;i<this.images.length;i++){
-        for(var j=i+1;j<this.images.length;j++){
-           if(this.images[i].type==this.images[j].type){
-            this.types[this.count] = this.images[i].type;
-            this.count++;
-          }
-        }
-      }
-    })
-  }
-  getNamesHealth(){
-    this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-    for(var i=0;i<this.images.length;i++){
-     if(this.images[i].type=="health"){
-    this.healthNames[this.countt]=this.images[i].name;
-    this.countt++;
-  }
-}
-  })
-}
-getNamesOther(){
-  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-  for(var i=0;i<this.images.length;i++){
-   if(this.images[i].type=="other"){
-  this.otherNames[this.countt]=this.images[i].name;
-  this.countt++;
-}
-}
-})
-}
-getNamesLife(){
-  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-  for(var i=0;i<this.images.length;i++){
-   if(this.images[i].type=="life"){
-  this.lifeNames[this.countt]=this.images[i].name;
-  this.countt++;
-}
-}
-})
-}
-getInsurnacesAcc(){
-  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-for(var i=0;i<this.types.length;i++){
-  this.count2=0;
-  for(var j=0;j<this.images.length;j++){
-    if(this.types[i]==this.images[j].type){
-      this.allinsurances[i][this.count2]=this.images[j];
-      this.count2++;
-    }
-  }
-}
-  })
-}
-getHealthInsurances(){
-  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-    for(var i=0;i<this.allinsurances[0].length;i++){
-    this.healthInsurance[i]=this.allinsurances[0][i];
-    }
-})
-}
-getLifeInsurances(){
-  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-    for(var i=0;i<this.allinsurances[2].length;i++){
-    this.lifeInsurance[i]=this.allinsurances[2][i];
-    }
-})
-}
-getOtherInsurances(){
-  this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
-    for(var i=0;i<this.allinsurances[1].length;i++){
-    this.OtherInsurance[i]=this.allinsurances[1][i];
-    }
-}
-)
-}
-}
-=======
     this.getNames();
     this.getTrendingNames();
-
   }
- 
-   
+
+
 
  getNames(){
       this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
         this.images=data;
+        this.allNames = this.images;
         for(var i=0;i<this.images.length;i++){
           if(this.images[i].type=="health"){
          this.healthNames[this.healthCount]=this.images[i];
@@ -191,22 +122,28 @@ getOtherInsurances(){
       }
       })
     }
-  
+
     getTrendingNames(){
       this.http.get("http://localhost:3000/trends").subscribe((data)=>{
         this.trendNames=data;
         console.log(this.trendNames);
       })
-    
+    }
+
+
+    searchText:string='';
+    onSearchTextEntered(searchValue:string){
+      this.searchText=searchValue;
+      console.log(this.searchText);
+
     }
   }
-  
-  
-
-  
-    
 
 
 
 
->>>>>>> 893cc0eaf9cb2435414a349d6fd0dc7038ae6ba3
+
+
+
+
+
