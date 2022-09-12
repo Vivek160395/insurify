@@ -1,16 +1,16 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { S } from '@angular/cdk/keycodes';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { RecommendationServiceService } from '../recommendation-service.service';
 export interface Insurances {
   name: string;
 }
-
 @Component({
   selector: 'app-recommendation',
   templateUrl: './recommendation.component.html',
   styleUrls: ['./recommendation.component.css']
 })
-
 export class RecommendationComponent implements OnInit {
   allNames:any = [];
   isActive = true;
@@ -33,6 +33,8 @@ export class RecommendationComponent implements OnInit {
   displayLife=false;
   displayCrop=false;
   displayOther=false;
+  totalLength:any;
+  page:number=1;
   health(){
     this.isHealth=!this.isHealth;
     this.isOther=true;
@@ -42,10 +44,11 @@ export class RecommendationComponent implements OnInit {
     if(this.isHealth==true){
        this.isDisplay=false;
       this.allNames = this.images;
+      this.totalLength=this.allNames.length;
     }else{
       this.allNames = this.healthNames;
+      this.totalLength=this.allNames.length;
     }
-
   }
 other(){
     this.isDisplay=true;
@@ -56,8 +59,10 @@ other(){
     if(this.isOther==true){
       this.isDisplay=false;
       this.allNames = this.images;
+      this.totalLength=this.allNames.length;
     }else{
     this.allNames = this.otherNames;
+    this.totalLength=this.allNames.length;
     }
   }
 life(){
@@ -69,8 +74,10 @@ life(){
   if(this.isLife==true){
     this.isDisplay=false;
     this.allNames = this.images;
+    this.totalLength=this.allNames.length;
   }else{
  this.allNames = this.lifeNames;
+ this.totalLength=this.allNames.length;
   }
 }
 trend(){
@@ -82,22 +89,24 @@ trend(){
   if(this.isTrend==true){
     this.isDisplay=false;
     this.allNames = this.images;
+    this.totalLength=this.allNames.length;
   }else{
     this.allNames = this.trendNames;
+    this.totalLength=this.allNames.length;
   }
 }
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private service:RecommendationServiceService) { }
   ngOnInit(): void {
     this.getNames();
     this.getTrendingNames();
+    this.checkFromBakEnd();
   }
-
-
-
  getNames(){
       this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
         this.images=data;
         this.allNames = this.images;
+        this.totalLength=this.allNames.length;
+        console.log(this.totalLength);
         for(var i=0;i<this.images.length;i++){
           if(this.images[i].type=="health"){
          this.healthNames[this.healthCount]=this.images[i];
@@ -122,20 +131,14 @@ trend(){
       }
       })
     }
-
     getTrendingNames(){
       this.http.get("http://localhost:3000/trends").subscribe((data)=>{
         this.trendNames=data;
-        console.log(this.trendNames);
+      })
+    }
+    checkFromBakEnd(){
+      this.service.getAllInsurances().subscribe((data)=>{
+        console.log(data[0]);
       })
     }
   }
-
-
-
-
-
-
-
-
-

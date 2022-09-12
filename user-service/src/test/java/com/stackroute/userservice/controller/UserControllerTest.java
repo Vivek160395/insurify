@@ -16,9 +16,15 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -31,6 +37,10 @@ public class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+
 
     @Mock
     private UserService userService;
@@ -48,6 +58,7 @@ public class UserControllerTest {
         address2=new Address(637,"gali no. 1","st mary school","panipat","haryana",132101);
         user2=new User("aman123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address2,123456789098l,"ABCD234", null);
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+
     }
 
     @AfterEach
@@ -99,11 +110,38 @@ public class UserControllerTest {
         //record the exception
         when(userService.updateUser(any(),anyString(),any())).thenReturn(user1);
         //verify the exception(matching)
-        mockMvc.perform(put("/api/v1/updateUser/ajay123@gmail.com")
+        MockMultipartFile file = new MockMultipartFile("data", "filename.txt", "text/plain", "some xml".getBytes());
+
+//        MockMvc mockMvc1 = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+
+        MockMultipartHttpServletRequestBuilder builder =
+                MockMvcRequestBuilders.multipart("/api/v1/updateUser/ajay123@gmail.com");
+        builder.with(new RequestPostProcessor() {
+            @Override
+            public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
+                request.setMethod("PUT");
+                return request;
+            }
+        });
+        mockMvc.perform(builder
+                                .file(file)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonToString(user1)))
-                .andExpect( status().isOk() )
-                .andDo(MockMvcResultHandlers.print());
+                                .content(jsonToString(user1))
+
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(jsonToString(user1))
+                )
+
+                .andExpect(status().isOk());
+//        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/v1/updateUser/ajay123@gmail.com")
+//                        .file(file)
+////                        .contentType(MediaType.APPLICATION_JSON)
+////                        .content(jsonToString(user1))
+////                        .param("some-random", "4"))
+//                )
+////                        .andExpect(status().is(200))
+//                        .andExpect(status().isOk())
+//                        .andDo(MockMvcResultHandlers.print());
         verify(userService,times(1)).updateUser(any(),anyString(),any());
     }
 

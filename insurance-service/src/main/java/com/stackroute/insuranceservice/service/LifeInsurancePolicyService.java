@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface LifeInsurancePolicyService {
 
-    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy) throws PolicyAlreadyExistException;
+    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, PolicyNotFoundException, IOException;
 
     public Iterable<LifeInsurancePolicy> getAllPolicies();
 

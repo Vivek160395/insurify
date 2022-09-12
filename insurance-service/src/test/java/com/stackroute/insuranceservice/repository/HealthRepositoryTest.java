@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,11 +21,10 @@ public class HealthRepositoryTest {
 
     @Autowired
     private final HealthInsurancePolicyRepository healthInsurancePolicyRepository;
-
-    private HealthInsurancePolicy policy;
-    private List<AddOnDetails> addOnDetailsList;
-    private List<Details> detailsList;
-    private List<Benefits> benefitsList;
+    public HealthInsurancePolicy policy;
+    List<Details> detailsList = new ArrayList<>();
+    List<AddOnDetails> addOnDetailsList = new ArrayList<>();
+    List<Benefits> benefitsList = new ArrayList<>();
 
     public HealthRepositoryTest(HealthInsurancePolicyRepository healthInsurancePolicyRepository) {
         this.healthInsurancePolicyRepository = healthInsurancePolicyRepository;
@@ -42,15 +42,11 @@ public class HealthRepositoryTest {
         benefitsList.add(benefits);
 
         policy = new HealthInsurancePolicy("123","NameOfThePolicy","Health","descriptionAboutThePolicy",detailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
-
     }
 
     @AfterEach
     public void tearDown(){
         policy = null;
-        addOnDetailsList = null;
-        detailsList = null;
-        benefitsList = null;
         healthInsurancePolicyRepository.deleteAll();
     }
 
@@ -58,6 +54,6 @@ public class HealthRepositoryTest {
     public void givenPolicyToSaveShouldReturnPolicy(){
         healthInsurancePolicyRepository.save(policy);
         HealthInsurancePolicy policy1 = healthInsurancePolicyRepository.findById(policy.getPolicyId()).get();
-        assertEquals(policy.getPolicyId(),policy1.getPolicyId());
+        assertEquals(policy1.getPolicyId(),policy1.getPolicyId());
     }
 }

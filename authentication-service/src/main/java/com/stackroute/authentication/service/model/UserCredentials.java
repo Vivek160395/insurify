@@ -17,9 +17,6 @@ public class UserCredentials {
     private String password;
      private String userType;
 
-//@Enumerated(EnumType.STRING)
-//@Column(name= "auth_provider")
-//    private AuthenticationProvider authenticationProvider;
 
 
 

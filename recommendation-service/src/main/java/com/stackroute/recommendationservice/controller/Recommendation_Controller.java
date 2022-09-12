@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("/Recommendation")
+@CrossOrigin(origins = "*",allowedHeaders = "*",methods = {})
 public class Recommendation_Controller {
     private final Recommendation_service recommendation_service;
 
@@ -66,8 +69,12 @@ public class Recommendation_Controller {
             return new ResponseEntity<>("Insurance Already Exists", HttpStatus.CONFLICT);
         }
     }
+    @PostMapping("{id}/Insurance/Image")
+    public ResponseEntity<?> setImage(@PathVariable int id,@RequestParam("file") MultipartFile file) throws IOException {
+        return new ResponseEntity<>(recommendation_service.addImage(file,id),HttpStatus.OK);
+    }
 
-    @GetMapping("{age}/InsuranceByAge")
+    @GetMapping("/InsuranceByAge/{age}")
     public ResponseEntity<?> getInsuranceByAge(@PathVariable int age) throws NoInsurancesFound {
         try {
             List<Insurance> insurances = recommendation_service.getAllInsuranceOnBasisOfAge(age);

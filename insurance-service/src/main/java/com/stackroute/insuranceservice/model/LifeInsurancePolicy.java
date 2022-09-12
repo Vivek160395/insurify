@@ -1,5 +1,6 @@
 package com.stackroute.insuranceservice.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Document(indexName = "lifeinsurance" )
 public class LifeInsurancePolicy {
 
@@ -18,6 +20,7 @@ public class LifeInsurancePolicy {
     private String policyName;
     private String insuranceType;
     private String description;
+    private byte[] image;
     private List<Details> policyDetails;
     private List<Benefits> policyBenefits;
     private List<AddOnDetails> policyAddOnDetails;

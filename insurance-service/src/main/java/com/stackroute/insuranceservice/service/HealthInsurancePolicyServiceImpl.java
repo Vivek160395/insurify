@@ -18,7 +18,6 @@ import java.util.Optional;
 public class HealthInsurancePolicyServiceImpl implements HealthInsurancePolicyService {
 
     HealthInsurancePolicyRepository policyRepository;
-
     @Autowired
     Producer producer;
 
@@ -28,24 +27,23 @@ public class HealthInsurancePolicyServiceImpl implements HealthInsurancePolicySe
     }
 
     @Override
-    public HealthInsurancePolicy savePolicy(HealthInsurancePolicy policy) throws PolicyAlreadyExistException {
+    public HealthInsurancePolicy savePolicy(HealthInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException {
         DTO dto = new DTO();
-        dto.setPolicyName(policy.getPolicyName());
-        dto.setInsuranceType(policy.getInsuranceType());
-<<<<<<< HEAD
+        dto.setPolicyId(dto.getPolicyId());
+        dto.setPolicyName(dto.getPolicyName());
+        dto.setInsuranceType(dto.getInsuranceType());
+        dto.setDescription(dto.getDescription());
 
-        if (policyRepository.findById(policy.getPolicyId()).isEmpty()) {
-=======
-        if(policyRepository.findById(policy.getPolicyId()).isEmpty()) {
-//            policy = new HealthInsurancePolicy(docName, file.getContentType(), file.getBytes());
-            policy.setPolicyDocuments(file.getBytes());
->>>>>>> 314499d1fb8b8a80dab1cbf2717d38510c3fc482
+        if(policyRepository.findById(policy.getPolicyId()).isPresent()) {
+            throw new PolicyAlreadyExistException();
+        }
+        else {
+            String docName = file.getOriginalFilename();
+            System.out.println("Image Name is :"+docName);
+            policy.setImage(file.getBytes());
             policyRepository.save(policy);
             producer.sendingMessageToRabbitMQServer(dto);
             return policy;
-        }
-        else {
-            throw new PolicyAlreadyExistException();
         }
 
     }
@@ -53,7 +51,6 @@ public class HealthInsurancePolicyServiceImpl implements HealthInsurancePolicySe
     @Override
     public Iterable<HealthInsurancePolicy> getAllPolicies() {
         return policyRepository.findAll();
-
     }
 
     @Override

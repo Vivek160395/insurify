@@ -26,6 +26,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -40,10 +41,10 @@ public class HealthInsuranceControllerTest {
     private HealthInsurancePolicyService policyService;
 
     private HealthInsurancePolicy policy1, policy2;
-//    List<HealthInsurancePolicy> policyList;
-    List<Details> detailsList;
-    List<AddOnDetails> addOnDetailsList;
-    List<Benefits> benefitsList;
+    List<HealthInsurancePolicy> policyList;
+    List<Details> detailsList = new ArrayList<>();
+    List<AddOnDetails> addOnDetailsList = new ArrayList<>();
+    List<Benefits> benefitsList = new ArrayList<>();
     @InjectMocks
     private HealthPolicyController policyController;
 
@@ -60,16 +61,18 @@ public class HealthInsuranceControllerTest {
 
         policy1 = new HealthInsurancePolicy("123","NameOfThePolicy","Health","descriptionAboutThePolicy",detailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
 
-//        AddOnDetails addOnDetails1 = new AddOnDetails("addOn",17000);
-//        addOnDetailsList.add(addOnDetails1);
-//
-//        Details details1 = new Details(20000,12,1500,1,2,2753,50000);
-//        detailsList.add(details1);
-//
-//        Benefits benefits1 = new Benefits("desc","brief");
-//        benefitsList.add(benefits1);
-//
-//        policy2 = new HealthInsurancePolicy("124","NameOfThePolicy2","Health2","descriptionAboutThePolicy",detailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
+        AddOnDetails addOnDetails1 = new AddOnDetails("addOn",17000);
+        addOnDetailsList.add(addOnDetails1);
+
+        Details details1 = new Details(20000,12,1500,1,2,2753,50000);
+        detailsList.add(details1);
+
+        Benefits benefits1 = new Benefits("desc","brief");
+        benefitsList.add(benefits1);
+
+        policy2 = new HealthInsurancePolicy("124","NameOfThePolicy2","Health2","descriptionAboutThePolicy",detailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
+
+        policyList = Arrays.asList(policy1,policy2);
 
         mockMvc = MockMvcBuilders.standaloneSetup(policyController).build();
     }
@@ -80,12 +83,13 @@ public class HealthInsuranceControllerTest {
         policy2 = null;
     }
 
-    private static String jsonToString(Object ob) throws JsonProcessingException {
+    private static String jsonToString(final Object ob) throws JsonProcessingException {
         String result;
 
         try {
             ObjectMapper mapper = new ObjectMapper();
-            result = mapper.writeValueAsString(ob);
+            String jsonContent = mapper.writeValueAsString(ob);
+            result = jsonContent;
         } catch(JsonProcessingException e) {
             result = "JSON processing error";
         }
@@ -100,10 +104,10 @@ public class HealthInsuranceControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonToString(policy1))
                         .characterEncoding("utf-8"))
-                .andExpect(status().isOk())
+                .andExpect(status().isAccepted())
                 .andDo(MockMvcResultHandlers.print());
 
-        verify(policyService,times(1)).savePolicy(any());
+        verify(policyService,times(2)).savePolicy(any());
     }
 
     @Test
@@ -117,7 +121,7 @@ public class HealthInsuranceControllerTest {
                 .andExpect(status().isConflict())
                 .andDo(MockMvcResultHandlers.print());
 
-        verify(policyService,times(0)).savePolicy(any());
+        verify(policyService,times(1)).savePolicy(any());
     }
 
     @Test
@@ -133,7 +137,7 @@ public class HealthInsuranceControllerTest {
     public void givenPolicyToDeletePolicyFailure() throws Exception {
         when(policyService.deletePolicyByPolicyId(policy1.getPolicyId())).thenReturn(false);
         mockMvc.perform(delete("/api/v1/policy/delete/123"))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print());
         verify(policyService,times(1)).deletePolicyByPolicyId(anyString());
     }
@@ -141,18 +145,37 @@ public class HealthInsuranceControllerTest {
     @Test
     public void givenPolicyToGetPolicyByIdSuccess() throws Exception {
         when(policyService.getPolicyByPolicyId(anyString())).thenReturn(Optional.ofNullable(policy1));
-        mockMvc.perform(get("/api/v1/policy"))
+        mockMvc.perform(get("/api/v1/policyid/123"))
                 .andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print());
-        verify(policyService,times(2)).getPolicyByPolicyId(anyString());
+        verify(policyService,times(1)).getPolicyByPolicyId(anyString());
     }
 
     @Test
     public void givenPolicyToGetPolicyByIdFailure() throws Exception {
         when(policyService.getPolicyByPolicyId(anyString())).thenReturn(Optional.empty());
-        mockMvc.perform(get("/api/v1/policy"))
-                .andExpect(status().isNotFound())
+        mockMvc.perform(get("/api/v1/policyid/124"))
+                .andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print());
         verify(policyService,times(1)).getPolicyByPolicyId(anyString());
+    }
+
+    @Test
+    public void givenPolicyToGetPolicyByNameSuccess() throws Exception {
+        when(policyService.getPolicyByPolicyName(anyString())).thenReturn(policy1);
+        mockMvc.perform(get("/api/v1/policyname/p7"))
+                .andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+        verify(policyService,times(1)).getPolicyByPolicyName(anyString());
+    }
+
+    @Test
+    public void givenPolicyToGetAllPolicyReturnSuccess() throws Exception {
+
+        when(policyService.getAllPolicies()).thenReturn(policyList);
+        mockMvc.perform(get("/api/v1/policy"))
+                .andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+        verify(policyService,times(1)).getAllPolicies();
     }
 }
