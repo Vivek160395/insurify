@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface AutoMobileInsurancePolicyService {
 
-    public AutomobileInsurancePolicy savePolicy(AutomobileInsurancePolicy policy) throws PolicyAlreadyExistException;
+    public AutomobileInsurancePolicy savePolicy(AutomobileInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException;
 
     public Iterable<AutomobileInsurancePolicy> getAllPolicies();
 
