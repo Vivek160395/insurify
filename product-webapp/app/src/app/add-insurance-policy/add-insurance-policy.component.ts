@@ -8,7 +8,7 @@ import { Insurance } from '../insurance';
 import { MatDialog } from '@angular/material/dialog';
 import { Dialog } from '@angular/cdk/dialog';
 import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
-import { FlexAlignDirective } from '@angular/flex-layout';
+// import { FlexAlignDirective } from '@angular/flex-layout';
 
 export interface bike {
   value: string;

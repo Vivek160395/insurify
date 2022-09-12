@@ -16,16 +16,16 @@ public class UserServiceApplication {
 	}
 
 
-//	@Bean
-//	FilterRegistrationBean jwtFilter(){
-//		FilterRegistrationBean frb = new FilterRegistrationBean();
-//		frb.setFilter(new JwtFilter());
-//
-////		frb.addUrlPatterns("/api/v1/user/*");
-//
-//		frb.addUrlPatterns("/api/v1/updateUser/*");
-//		frb.addUrlPatterns("/api/v1/removeUser/*");
-//		return frb;
-//	}
+	@Bean
+	FilterRegistrationBean jwtFilter(){
+		FilterRegistrationBean frb = new FilterRegistrationBean();
+		frb.setFilter(new JwtFilter());
+
+//		frb.addUrlPatterns("/api/v1/user/*");
+
+		frb.addUrlPatterns("/api/v1/updateUser/*");
+		frb.addUrlPatterns("/api/v1/removeUser/*");
+		return frb;
+	}
 
 }
