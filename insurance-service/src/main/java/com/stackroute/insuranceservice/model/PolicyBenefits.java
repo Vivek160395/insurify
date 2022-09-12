@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Benefits {
+public class PolicyBenefits {
 
     String description;
     String brief;

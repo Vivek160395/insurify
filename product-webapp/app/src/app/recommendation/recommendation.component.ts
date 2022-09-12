@@ -1,8 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { S } from '@angular/cdk/keycodes';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { RecommendationServiceService } from '../recommendation-service.service';
+import { Component, Input, OnInit } from '@angular/core';
 export interface Insurances {
   name: string;
 }
@@ -35,6 +34,7 @@ export class RecommendationComponent implements OnInit {
   displayOther=false;
   totalLength:any;
   page:number=1;
+  showMore:boolean=false;
   health(){
     this.isHealth=!this.isHealth;
     this.isOther=true;
@@ -95,18 +95,19 @@ trend(){
     this.totalLength=this.allNames.length;
   }
 }
-  constructor(private http:HttpClient,private service:RecommendationServiceService) { }
+
+
+
+  constructor(private http:HttpClient) { }
   ngOnInit(): void {
     this.getNames();
     this.getTrendingNames();
-    this.checkFromBakEnd();
   }
  getNames(){
       this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
         this.images=data;
         this.allNames = this.images;
         this.totalLength=this.allNames.length;
-        console.log(this.totalLength);
         for(var i=0;i<this.images.length;i++){
           if(this.images[i].type=="health"){
          this.healthNames[this.healthCount]=this.images[i];
@@ -134,11 +135,6 @@ trend(){
     getTrendingNames(){
       this.http.get("http://localhost:3000/trends").subscribe((data)=>{
         this.trendNames=data;
-      })
-    }
-    checkFromBakEnd(){
-      this.service.getAllInsurances().subscribe((data)=>{
-        console.log(data[0]);
       })
     }
   }

@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/automobiles")
-@CrossOrigin("localhost:4200")
+//@CrossOrigin("localhost:4200")
 public class AutomobileInsuranceController {
 
     private final AutoMobileInsurancePolicyService autoMobileInsurancePolicyService;
