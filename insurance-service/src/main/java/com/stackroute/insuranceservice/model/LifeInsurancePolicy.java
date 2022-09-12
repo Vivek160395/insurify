@@ -22,4 +22,15 @@ public class LifeInsurancePolicy {
     private List<Benefits> policyBenefits;
     private List<AddOnDetails> policyAddOnDetails;
     private String policyDocuments;
+
+    public LifeInsurancePolicy(String policyId, String policyName, String insuranceType, String description, List<Details> policyDetails, List<Benefits> policyBenefits, List<AddOnDetails> policyAddOnDetails, String policyDocuments) {
+        this.policyId = policyId;
+        this.policyName = policyName;
+        this.insuranceType = insuranceType;
+        this.description = description;
+        this.policyDetails = policyDetails;
+        this.policyBenefits = policyBenefits;
+        this.policyAddOnDetails = policyAddOnDetails;
+        this.policyDocuments = policyDocuments;
+    }
 }

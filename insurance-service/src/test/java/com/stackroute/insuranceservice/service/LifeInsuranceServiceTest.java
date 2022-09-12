@@ -2,11 +2,8 @@ package com.stackroute.insuranceservice.service;
 
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
-import com.stackroute.insuranceservice.model.AddOnDetails;
-import com.stackroute.insuranceservice.model.Benefits;
-import com.stackroute.insuranceservice.model.Details;
-import com.stackroute.insuranceservice.model.HealthInsurancePolicy;
-import com.stackroute.insuranceservice.repository.HealthInsurancePolicyRepository;
+import com.stackroute.insuranceservice.model.*;
+import com.stackroute.insuranceservice.repository.LifeInsurancePolicyRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,16 +19,19 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
-public class HealthInsuranceServiceTest {
+public class LifeInsuranceServiceTest {
+
     @Mock
-    private HealthInsurancePolicyRepository healthInsurancePolicyRepository;
+    private LifeInsurancePolicyRepository lifeInsurancePolicyRepository;
     @InjectMocks
-    private HealthInsurancePolicyServiceImpl policyService;
-    public HealthInsurancePolicy policy1, policy2;
-    List<HealthInsurancePolicy> policyList;
+    private LifeInsurancePolicyImpl policyService;
+    public LifeInsurancePolicy policy1, policy2;
+    List<LifeInsurancePolicy> policyList;
     List<Details> detailsList = new ArrayList<>();
     List<AddOnDetails> addOnDetailsList = new ArrayList<>();
     List<Benefits> benefitsList = new ArrayList<>();
@@ -47,7 +47,7 @@ public class HealthInsuranceServiceTest {
         Benefits benefits = new Benefits("desc","brief");
         benefitsList.add(benefits);
 
-        policy1 = new HealthInsurancePolicy("123","NameOfThePolicy","Health","descriptionAboutThePolicy",detailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
+        policy1 = new LifeInsurancePolicy("123","NameOfThePolicy","Health","descriptionAboutThePolicy",detailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
 
         AddOnDetails addOnDetails1 = new AddOnDetails("addOn",17000);
         addOnDetailsList.add(addOnDetails1);
@@ -58,7 +58,7 @@ public class HealthInsuranceServiceTest {
         Benefits benefits1 = new Benefits("desc","brief");
         benefitsList.add(benefits1);
 
-        policy2 = new HealthInsurancePolicy("124","NameOfThePolicy2","Health2","descriptionAboutThePolicy",detailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
+        policy2 = new LifeInsurancePolicy("124","NameOfThePolicy2","Health2","descriptionAboutThePolicy",detailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
 
         policyList = Arrays.asList(policy1,policy2);
     }
@@ -70,49 +70,49 @@ public class HealthInsuranceServiceTest {
     }
 
     @Test
-    public void givenPolicyToSaveReturnSuccess() throws PolicyAlreadyExistException {
-        when(healthInsurancePolicyRepository.findById(policy1.getPolicyId())).thenReturn(Optional.ofNullable(null));
-        when(healthInsurancePolicyRepository.save(any())).thenReturn(policy1);
-        HealthInsurancePolicy policy = policyService.savePolicy(policy1);
+    public void givenPolicyToSaveReturnSuccess() throws PolicyAlreadyExistException, PolicyNotFoundException {
+        when(lifeInsurancePolicyRepository.findById(policy1.getPolicyId())).thenReturn(Optional.ofNullable(null));
+        when(lifeInsurancePolicyRepository.save(any())).thenReturn(policy1);
+        LifeInsurancePolicy policy = policyService.savePolicy(policy1);
         System.out.println(policy);
         assertEquals(policy1,policy);
 
-        verify(healthInsurancePolicyRepository,times(1)).findById(policy1.getPolicyId());
-        verify(healthInsurancePolicyRepository,times(1)).save(any());
+        verify(lifeInsurancePolicyRepository,times(1)).findById(policy1.getPolicyId());
+        verify(lifeInsurancePolicyRepository,times(1)).save(any());
     }
 
     @Test
     public void givenPolicyToSaveReturnFailure(){
-        when(healthInsurancePolicyRepository.findById(policy1.getPolicyId())).thenReturn(Optional.ofNullable(policy1));
+        when(lifeInsurancePolicyRepository.findById(policy1.getPolicyId())).thenReturn(Optional.ofNullable(policy1));
 
         assertThrows(PolicyAlreadyExistException.class,()-> policyService.savePolicy(any()));
 
-        verify(healthInsurancePolicyRepository,times(1)).findById(any());
-        verify(healthInsurancePolicyRepository,times(0)).save(any());
+        verify(lifeInsurancePolicyRepository,times(1)).findById(any());
+        verify(lifeInsurancePolicyRepository,times(0)).save(any());
     }
 
     @Test
     public void givenPolicyToDeleteShouldReturnDeleteSuccess() throws PolicyNotFoundException {
-        when(healthInsurancePolicyRepository.findById(policy1.getPolicyId())).thenReturn(Optional.ofNullable(policy1));
+        when(lifeInsurancePolicyRepository.findById(policy1.getPolicyId())).thenReturn(Optional.ofNullable(policy1));
         boolean result = policyService.deletePolicyByPolicyId(policy1.getPolicyId());
         assertEquals(true,result);
 
-        verify(healthInsurancePolicyRepository,times(1)).deleteById(any());
-        verify(healthInsurancePolicyRepository,times(1)).findById(any());
+        verify(lifeInsurancePolicyRepository,times(1)).deleteById(any());
+        verify(lifeInsurancePolicyRepository,times(1)).findById(any());
     }
 
     @Test
     public void givenPolicyToDeleteShouldReturnDeleteFailure() throws PolicyNotFoundException {
-        when(healthInsurancePolicyRepository.findById(policy1.getPolicyId())).thenReturn(Optional.empty());
+        when(lifeInsurancePolicyRepository.findById(policy1.getPolicyId())).thenReturn(Optional.empty());
         assertThrows(PolicyNotFoundException.class,()-> policyService.deletePolicyByPolicyId(policy1.getPolicyId()));
 
-        verify(healthInsurancePolicyRepository,times(0)).deleteById(any());
-        verify(healthInsurancePolicyRepository,times(1)).findById(any());
+        verify(lifeInsurancePolicyRepository,times(0)).deleteById(any());
+        verify(lifeInsurancePolicyRepository,times(1)).findById(any());
     }
 
     @Test
     public void givenPolicyShouldReturnPolicyList(){
-        List<HealthInsurancePolicy> policies = policyList;
+        List<LifeInsurancePolicy> policies = policyList;
         assertEquals(2,policies.size());
     }
 }

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -29,6 +30,9 @@ public class UserServiceTest {
 
         @Mock
         private UserRepository userRepository;
+
+        @Mock
+        MockMultipartFile file;
 
         @Mock
         private Producer producer;
@@ -90,9 +94,9 @@ public class UserServiceTest {
     @Test
     public void updateUserPass() throws UserNotRegisteredException, IOException {
         when(userRepository.findById(user1.getEmailId())).thenReturn(Optional.ofNullable(user1));
-        userService.updateUser(user1,user1.getEmailId(),any());
-        assertEquals(user1,userService.updateUser(user1,user1.getEmailId(),any()));
-        verify(userRepository,times(2)).findById(any());
+        userService.updateUser(user1,user1.getEmailId(),file);
+        assertEquals(user1,userService.updateUser(user1,user1.getEmailId(),file));
+        verify(userRepository,times(4)).findById(any());
         verify(userRepository,times(2)).save(any());
 //        verify(userRepository,times(0)).(any());
 

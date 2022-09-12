@@ -29,18 +29,9 @@ public class LifeInsuranceController {
     }
 
     @PostMapping("/policy")
-<<<<<<< HEAD
-    public ResponseEntity<?> addPolicy(@RequestBody LifeInsurancePolicy policy) throws PolicyAlreadyExistException {
+    public ResponseEntity<?> addPolicy(@RequestBody LifeInsurancePolicy policy) throws PolicyAlreadyExistException, PolicyNotFoundException {
         policyService.savePolicy(policy);
         return new ResponseEntity<>("Data Saved Successfully", HttpStatus.ACCEPTED);
-=======
-    public ResponseEntity<?> addPolicy( @RequestParam("file") MultipartFile file,
-                                       @RequestParam("details") String policyDetails) throws PolicyAlreadyExistException, IOException {
-        LifeInsurancePolicy policy= new ObjectMapper().readValue(policyDetails,LifeInsurancePolicy.class);
-
-        policyService.savePolicy(policy,file);
-        return new ResponseEntity<>(policyService.savePolicy(policy,file), HttpStatus.ACCEPTED);
->>>>>>> 314499d1fb8b8a80dab1cbf2717d38510c3fc482
     }
 
     @GetMapping("/policy")
@@ -48,12 +39,12 @@ public class LifeInsuranceController {
         return new ResponseEntity<>(policyService.getAllPolicies(),HttpStatus.OK);
     }
 
-    @GetMapping("/policy/{policyName}")
+    @GetMapping("/policyname/{policyName}")
     public ResponseEntity<?> getPolicyByPolicyName(@PathVariable String policyName){
         return new ResponseEntity<>(policyService.getPolicyByPolicyName(policyName),HttpStatus.OK);
     }
 
-    @GetMapping("/policy/{policyId}")
+    @GetMapping("/policyid/{policyId}")
     public ResponseEntity<?> getPolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
         return new ResponseEntity<>(policyService.getPolicyByPolicyId(policyId),HttpStatus.OK);
     }
