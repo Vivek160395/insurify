@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserModule } from '@angular/platform-browser';
 import { MarkdownModule } from "ngx-markdown";
 import { AppRoutingModule } from './app-routing.module';
@@ -58,6 +58,8 @@ import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 // import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
+import { MoreComponent } from './more/more.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +67,8 @@ import { PoliciesComponent } from './policies/policies.component';
     RecommendationComponent,
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
-    PoliciesComponent
+    PoliciesComponent,
+    MoreComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
@@ -74,6 +77,7 @@ import { PoliciesComponent } from './policies/policies.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     BrowserAnimationsModule,
     A11yModule,
     CdkAccordionModule,
