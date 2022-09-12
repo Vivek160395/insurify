@@ -39,12 +39,12 @@ public class LifeInsuranceController {
         return new ResponseEntity<>(policyService.getAllPolicies(),HttpStatus.OK);
     }
 
-    @GetMapping("/policy/{policyName}")
+    @GetMapping("/policyname/{policyName}")
     public ResponseEntity<?> getPolicyByPolicyName(@PathVariable String policyName){
         return new ResponseEntity<>(policyService.getPolicyByPolicyName(policyName),HttpStatus.OK);
     }
 
-    @GetMapping("/policy/{policyId}")
+    @GetMapping("/policyid/{policyId}")
     public ResponseEntity<?> getPolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
         return new ResponseEntity<>(policyService.getPolicyByPolicyId(policyId),HttpStatus.OK);
     }

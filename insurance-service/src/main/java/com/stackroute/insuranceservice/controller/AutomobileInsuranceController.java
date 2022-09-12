@@ -1,21 +1,13 @@
 package com.stackroute.insuranceservice.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
-import com.stackroute.insuranceservice.model.AddOnDetails;
 import com.stackroute.insuranceservice.model.AutomobileInsurancePolicy;
-import com.stackroute.insuranceservice.model.Benefits;
-import com.stackroute.insuranceservice.model.Details;
 import com.stackroute.insuranceservice.service.AutoMobileInsurancePolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/automobiles")
@@ -39,12 +31,12 @@ public class AutomobileInsuranceController {
         return new ResponseEntity<>(autoMobileInsurancePolicyService.getAllPolicies(),HttpStatus.OK);
     }
 
-    @GetMapping("/policy/{policyName}")
+    @GetMapping("/policyname/{policyName}")
     public ResponseEntity<?> getPolicyByPolicyName(@PathVariable String policyName){
         return new ResponseEntity<>(autoMobileInsurancePolicyService.findPolicyByPolicyName(policyName),HttpStatus.OK);
     }
 
-    @GetMapping("/policy/{policyId}")
+    @GetMapping("/policyid/{policyId}")
     public ResponseEntity<?> getPolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
         return new ResponseEntity<>(autoMobileInsurancePolicyService.getPolicyByPolicyId(policyId),HttpStatus.OK);
     }
