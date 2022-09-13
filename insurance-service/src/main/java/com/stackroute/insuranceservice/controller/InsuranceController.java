@@ -73,7 +73,10 @@ public class InsuranceController {
         System.out.println("Original Image Byte Size - " + imageFile.getBytes().length);
 
         retrieveInsurance.setPicByte(compressBytes(imageFile.getBytes()));
+
         DTO dto = new DTO();
+        dto.setPolicyId(retrieveInsurance.getPolicyId());
+        dto.setPolicyName(retrieveInsurance.getPolicyName());
         dto.setPicByte(retrieveInsurance.getPicByte());
         dto.setInsuranceType(retrieveInsurance.getInsuranceType());
         dto.setDescription(retrieveInsurance.getPolicyDescription());
