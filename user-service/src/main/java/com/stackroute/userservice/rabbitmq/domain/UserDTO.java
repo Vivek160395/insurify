@@ -17,6 +17,6 @@ public class UserDTO
     private Address address;
     private long aadharNo;
     private String panNo;
-    private String profilePic;
+    private byte[] profilePic;
 
 }

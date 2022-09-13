@@ -1,0 +1,19 @@
+.singlecard{
+    width:1300px;
+    margin-left: 10px;
+}
+.termscard{
+    width:1300px;
+    /* height:80vh; */
+    margin-left: 10px;
+    
+}
+.buttonplace{
+    margin-left: 30%;
+}
+.example-chip-list {
+    width: 30%;
+  }
+  .spacer{
+    flex: 1 1  auto;
+}

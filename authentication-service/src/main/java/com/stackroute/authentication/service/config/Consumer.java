@@ -14,11 +14,11 @@ public class Consumer {
     private UserCredentialsServiceImpl userCredentialsService;
 
     @RabbitListener(queues="queue1")
-    public void getUserDtoFromRabbitMq(UserDTO userDTO) throws UserAlreadyExistException
-    {
+    public void getUserDtoFromRabbitMq(UserDTO userDTO) throws UserAlreadyExistException {
         UserCredentials userCredentials=new UserCredentials();
         userCredentials.setEmailId(userDTO.getEmailId());
         userCredentials.setPassword(userDTO.getPassword());
+        userCredentials.setUserType(userDTO.getUserType());
         userCredentialsService.saveUser(userCredentials);
     }
 }

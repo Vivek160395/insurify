@@ -8,16 +8,16 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "User")
 public class UserCredentials {
     @Id
-    private String emailId;
 
+    private String emailId;
     private String password;
-//@Enumerated(EnumType.STRING)
-//@Column(name= "auth_provider")
-//    private AuthenticationProvider authenticationProvider;
-//
+     private String userType;
+
+
 
 
 }

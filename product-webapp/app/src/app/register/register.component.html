@@ -1,50 +1,89 @@
-<div class="card m-3">
-    <h5 class="card-header">Register Here</h5>
-    <div class="card-body">
-      <form>
-          <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">First Name</label>
-              <input type= "text" class="form-control" id="First Name" name = "name">
-          </div>
-  
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-              <input type= "text" class="form-control" id="First Name" name = "name">
-            </div>
-  
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">emailId</label>
-              <input type= "email" class="form-control" id="First Name" name = "name">
-            </div>
-  
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Password</label>
-              <input type= "password" class="form-control" id="First Name" name = "name">
-            </div>
-  
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Confirm Password</label>
-              <input type= "password" class="form-control" id="First Name" name = "name">
-            </div>
-  
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Role</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Customer
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Insurance Provider
-                </label>
-              </div>
-            </div>
-            
-       <button type ="submit" class="btn btn-primary mr-1">Register</button>   
-      </form>
-  </div>
+
+<div class="background">
+  <div class="w3-container w3-padding">
+    <a href="#" class="w3-button w3-mobile w3-hover-blue" style ="color: white;"> <h3> Home</h3></a>
   </div>
 
+
+
+    <div fxLayout="row"  class= "cards"  >
+  	    <div fxFlex="35%" style="background-color: lightblue;"class = "shadow">
+            <h3 class="text-center">Welcome to insurify</h3>
+            <p>Register and find some great insurance deals.</p>
+            <img src="assets/img/sign_up.png" width="240" height="240" alt="Register">
+		    </div>
+
+		    <div fxFlex="35%" class = "col bg-light shadow" >
+              <h3 class="text-center"> Sign Up</h3>
+
+              <form [formGroup] = "registerForm" (ngSubmit) = "registerSubmitted">
+  
+                 <div class="mb-3">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" formControlName = "Role">
+                      <label class="form-check-label" for="inlineRadio1"> <b>As Insured </b> </label>
+                      <img src="assets/img/As_insured.png" width="25" height="25" style="padding-left: 1px;"> 
+                    </div>
+		      
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" formControlName = "Role">
+                      <label class="form-check-label" for="inlineRadio2"> <b>As Insurer </b> </label>
+                      <img src="assets/img/As_insurer.png" width="28" height="28" style="padding-left: 1px;"> 
+                    </div>
+                  </div>
+                  <div class= "form-text text-danger" *ngIf = "Role.errors?.['required']"> 
+                   Role is required  
+                  </div>
+
+
+                <div class= "mb-3" >
+                     <input type="email" class= "form-control" placeholder="Enter your Email Id*" id="email" name="email" formControlName = "email">
+                     <div class= "form-text text-danger" *ngIf = "email.errors?.['required'] &&
+                        (email.dirty || email.touched)"> Email is required
+                    </div>
+
+                    <div class= "form-text text-danger" *ngIf = "email.errors?.['email'] &&
+                        (email.dirty || email.touched)"> Email is invalid
+                    </div>
+
+                </div>
+          
+              
+                <div class="mb-3">
+                     <input type= "password" class= "form-control"  placeholder = "Enter your password* " id="password" name = "password" formControlName = "password">
+                </div>
+                <div class= "form-text text-danger" *ngIf = "password.errors?.['required'] &&
+                        (password.dirty || password.touched)"> Password is required
+                </div>
+                <div class= "form-text text-danger" *ngIf = "password.errors?.['minlength'] || password.errors?.['maxlength'] &&
+                        (password.dirty || password.touched)"> Password must be at least 6 characters and max 15 chars long
+                </div>
+                <div class= "form-text text-danger" *ngIf = "password.errors?.['pattern']  &&
+                        (password.dirty || password.touched)"> Valid characters: Alphabets, Numbers and '%*#' characters
+                </div>
+    
+                 <div class="mb-3">
+                     <input type= "password" class= "form-control" placeholder = " Confirm password* " id="confirmPassword" name = "confirmPassword" formControlName = "confirmPassword">
+                 </div>
+                 <div class= "form-text text-danger" [ngStyle] = "{'display': repeatPassword}"> 
+                  Password must be same
+                </div>
+
+
+                <button type ="submit" [disabled]="registerForm.invalid" class=" btn btn-primary mr-1">Register</button> 
+    
+                <p class = "mb-3">Already a member? </p>
+               <a href="#" class="text-center">Log In</a>
+
+              </form>
+          </div> 
+	    </div>
+
+    <div class="w3-container w3-padding">
+      <a href="#" class="w3-button w3-mobile w3-hover-blue" style ="color: white;">About us</a>
+    </div>
+
+</div>
+	
+
+            

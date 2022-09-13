@@ -1,5 +1,6 @@
 package com.stackroute.insuranceservice.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.AutomobileInsurancePolicy;
@@ -8,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/automobiles")
+//@CrossOrigin("localhost:4200")
 public class AutomobileInsuranceController {
 
     private final AutoMobileInsurancePolicyService autoMobileInsurancePolicyService;
@@ -21,8 +26,11 @@ public class AutomobileInsuranceController {
     }
 
     @PostMapping("/policy")
-    public ResponseEntity<?> savePolicy(@RequestBody AutomobileInsurancePolicy automobileInsurancePolicy) throws PolicyAlreadyExistException {
-        return new ResponseEntity<>(autoMobileInsurancePolicyService.savePolicy(automobileInsurancePolicy), HttpStatus.OK);
+    public ResponseEntity<?> savePolicy(@RequestParam("data") String  data, @RequestParam("file") MultipartFile file) throws PolicyAlreadyExistException, IOException {
+       AutomobileInsurancePolicy policy = new ObjectMapper().readValue(data,AutomobileInsurancePolicy.class);
+
+        autoMobileInsurancePolicyService.savePolicy(policy, file);
+        return new ResponseEntity<>(autoMobileInsurancePolicyService.savePolicy(policy, file), HttpStatus.OK);
     }
 
     @GetMapping("/policy")
@@ -30,18 +38,18 @@ public class AutomobileInsuranceController {
         return new ResponseEntity<>(autoMobileInsurancePolicyService.getAllPolicies(),HttpStatus.OK);
     }
 
-    @GetMapping("/policy/{policyName}")
+    @GetMapping("/policyname/{policyName}")
     public ResponseEntity<?> getPolicyByPolicyName(@PathVariable String policyName){
         return new ResponseEntity<>(autoMobileInsurancePolicyService.findPolicyByPolicyName(policyName),HttpStatus.OK);
     }
 
-    @GetMapping("/policy/{policyId}")
-    public ResponseEntity<?> getPolicyByPolicyId(@PathVariable Integer policyId) throws PolicyNotFoundException {
+    @GetMapping("/policyid/{policyId}")
+    public ResponseEntity<?> getPolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
         return new ResponseEntity<>(autoMobileInsurancePolicyService.getPolicyByPolicyId(policyId),HttpStatus.OK);
     }
 
     @DeleteMapping("/policy/delete/{policyId}")
-    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable Integer policyId) throws PolicyNotFoundException {
+    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
         autoMobileInsurancePolicyService.deletePolicyByPolicyId(policyId);
         return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
     }

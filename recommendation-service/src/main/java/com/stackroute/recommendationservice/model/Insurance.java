@@ -16,4 +16,6 @@ public class Insurance {
     @Id
     private int insuranceId;
     private String insuranceName;
+    private int noOfUsersBought;
+    private byte[] imageOfInsurance;
 }

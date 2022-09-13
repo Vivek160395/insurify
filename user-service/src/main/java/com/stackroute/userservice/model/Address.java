@@ -1,15 +1,19 @@
 package com.stackroute.userservice.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
 
-    private String houseNo;
+    private int houseNo;
     private String street;
     private String landmark;
     private String city;
     private String state;
-    private String pinCode;
+    private int pinCode;
 
 }

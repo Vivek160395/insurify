@@ -1,0 +1,10 @@
+
+<span *ngIf="text.length <= limit">{{text}}</span>
+<span *ngIf="text.length > limit && !showMore">
+    {{text.substring(0,limit)}}...<span (click)="showMore=true" style="font-size:smaller;color: blue;
+    font-style: italic;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"> <b>show more</b></span>
+</span>
+<span *ngIf="text.length > limit && showMore">
+    {{text}}<span (click)="showMore=false" style="font-size:smaller;color:red;
+    font-style: italic;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"> <b>show less</b></span>
+</span> 

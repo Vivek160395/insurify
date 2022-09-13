@@ -8,14 +8,15 @@ import com.stackroute.insuranceservice.rabbitMq.domain.DTO;
 import com.stackroute.insuranceservice.repository.LifeInsurancePolicyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
 public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
 
     public LifeInsurancePolicyRepository policyRepository;
-
     @Autowired
     Producer producer;
 
@@ -24,17 +25,23 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
         this.policyRepository = policyRepository;
     }
     @Override
-    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy) throws PolicyAlreadyExistException {
+    public LifeInsurancePolicy savePolicy(LifeInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, PolicyNotFoundException, IOException {
         DTO dto = new DTO();
-        dto.setInsuranceType(policy.getInsuranceType());
-        dto.setPolicyName(policy.getPolicyName());
+        dto.setPolicyId(dto.getPolicyId());
+        dto.setPolicyName(dto.getPolicyName());
+        dto.setInsuranceType(dto.getInsuranceType());
+        dto.setDescription(dto.getDescription());
 
-        if (policyRepository.findById(policy.getPolicyId()).isPresent()){
-            throw new PolicyAlreadyExistException();
-        }else {
+        if(policyRepository.findById(policy.getPolicyId()).isEmpty()) {
+            String docName = file.getOriginalFilename();
+            System.out.println("Image name is : "+docName);
+            policy.setImage(file.getBytes());
+
             policyRepository.save(policy);
             producer.sendingMessageToRabbitMQServer(dto);
             return policy;
+        }else {
+            throw new PolicyAlreadyExistException();
         }
     }
 
@@ -49,7 +56,7 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
     }
 
     @Override
-    public Optional<LifeInsurancePolicy> getPolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public Optional<LifeInsurancePolicy> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isPresent()){
             return policyRepository.findById(policyId);
         }else {
@@ -58,7 +65,7 @@ public class LifeInsurancePolicyImpl implements LifeInsurancePolicyService{
     }
 
     @Override
-    public boolean deletePolicyByPolicyId(Integer policyId) throws PolicyNotFoundException {
+    public boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (policyRepository.findById(policyId).isPresent()){
             policyRepository.deleteById(policyId);
             return true;

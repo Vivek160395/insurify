@@ -1,13 +1,16 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserModule } from '@angular/platform-browser';
+import { MarkdownModule } from "ngx-markdown";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
-import {FlexLayoutModule} from '@angular/flex-layout'
+
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterComponent } from './register/register.component';
+
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import {A11yModule} from '@angular/cdk/a11y';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
@@ -52,8 +55,16 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
-import {HttpClientModule} from'@angular/common/http';
+import {HttpClientJsonpModule, HttpClientModule} from'@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
+// import { MatStepper } from '@angular/material/stepper';
+import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { PoliciesComponent } from './policies/policies.component';
+import { LoginComponent } from './login/login.component';
+import { MoreComponent } from './more/more.component';
 
 
 @NgModule({
@@ -62,13 +73,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     RecommendationComponent,
     PolicyDetailsComponent,
-    NavBarComponent
+    NavBarComponent,
 
+    AddInsurancePolicyComponent,
+    PreviewMarkupComponent,
+    PoliciesComponent,
+    LoginComponent,
+    MoreComponent
   ],
+  entryComponents: [PreviewMarkupComponent],
   imports: [
     BrowserModule,
+    FlexLayoutModule,
     AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    // NgxPaginationModule,
     BrowserAnimationsModule,
+    HttpClientJsonpModule,
     MatCardModule,
     FlexLayoutModule,
     MatRadioModule,
@@ -125,13 +147,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    // MatStepper,
     MatCardModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatSidenavModule,
+    
 
 
+    MarkdownModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
