@@ -2,8 +2,7 @@
     flex: 1;
 
 }
-.example-card {
-    width: 800px;
-    height: 300px;
-    
-  }
+  .singlecard{
+    width:1300px;
+    height: 200px;
+}

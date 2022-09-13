@@ -60,14 +60,11 @@ import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
-<<<<<<< HEAD
 import { ClaimComponent } from './claim/claim.component';
-=======
 import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
->>>>>>> d0c1b855a278f07b55a273dc619b259da8dded12
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,12 +73,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
     PoliciesComponent,
-<<<<<<< HEAD
-    ClaimComponent
-=======
+    ClaimComponent,
     LoginComponent,
     MoreComponent
->>>>>>> d0c1b855a278f07b55a273dc619b259da8dded12
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
