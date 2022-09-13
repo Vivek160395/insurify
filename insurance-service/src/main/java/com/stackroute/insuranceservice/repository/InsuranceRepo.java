@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface InsuranceRepo extends ElasticsearchRepository<Insurance,String> {
-    public Optional<Insurance> findByPolicyName(String policyName);
+    Optional<Insurance> findPolicyByPolicyName(String policyName);
 }

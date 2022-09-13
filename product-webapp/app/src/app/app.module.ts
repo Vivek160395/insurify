@@ -5,7 +5,9 @@ import { MarkdownModule } from "ngx-markdown";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { RegisterComponent } from './register/register.component';
+
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import {A11yModule} from '@angular/cdk/a11y';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
@@ -58,7 +60,9 @@ import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
+import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -68,6 +72,7 @@ import { MoreComponent } from './more/more.component';
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
     PoliciesComponent,
+    LoginComponent,
     MoreComponent
   ],
   entryComponents: [PreviewMarkupComponent],
@@ -131,6 +136,7 @@ import { MoreComponent } from './more/more.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MarkdownModule.forRoot(),
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

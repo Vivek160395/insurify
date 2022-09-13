@@ -1,0 +1,30 @@
+<mat-toolbar>
+    <span style="color: rgb(25, 0, 255);font-family: cursive;">Insurify</span>
+    <div class="gap"></div>
+    <div fxLayout="row" fxLayoutAlign="space-around start">
+    <a mat-button>Home</a>
+    <a mat-button>Motor Insurance</a>
+    <a mat-button>Health Insurance</a>
+    <a mat-button>Life Insurance</a>
+    <a mat-button>Claims</a>
+    <a mat-button>Renewals</a>
+    <a><button mat-stroked-button color="primary">Login</button></a>
+    </div>
+</mat-toolbar>
+<div fxLayout="row" fxLayoutAlign="center center" >
+<mat-card class="example-card" >
+    <mat-card-title style="color: rgb(162, 0, 255);font-family: Georgia, 'Times New Roman', Times, serif; text-align: center;">Make a Claim</mat-card-title>
+    <mat-form-field appearance="fill">
+      <mat-label>Policy</mat-label>
+      <mat-select [formControl]="animalControl" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let animal of animals" [value]="animal">
+          {{animal.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="animalControl.hasError('required')">Please choose a Policy Type</mat-error>
+      <mat-hint>{{animalControl.value}}</mat-hint>
+    </mat-form-field>
+      
+  </mat-card>
+</div>
