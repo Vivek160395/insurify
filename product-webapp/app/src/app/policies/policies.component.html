@@ -15,7 +15,7 @@
             <div *ngFor="let policy of policies | filter:searchedKeyword" >
                 <mat-card class="example-card">
                     <mat-card-title>{{policy.name}} 
-                        <button mat-raised-button color="primary" (click)="openDialog()" style="margin-left: 50px;" >Detailes</button>
+                        <button mat-raised-button color="primary" (click)="openDialog()" style="margin-left: 50px;" >Details</button>
                     </mat-card-title>
                     <mat-divider></mat-divider>
                     <br>
@@ -41,7 +41,7 @@
                     <div *ngIf="policy.status=='active'">
                         <mat-card class="example-card" >
                             <mat-card-title>{{policy.name}} 
-                                <button mat-raised-button color="primary" (click)="openDialog()" style="margin-left: 50px;" >Detailes</button>
+                                <button mat-raised-button color="primary" (click)="openDialog()" style="margin-left: 50px;" >Details</button>
                             </mat-card-title>
                             <mat-divider></mat-divider>
                             <br>
@@ -66,7 +66,7 @@
                 <div *ngIf="policy.status=='claimed'">
                     <mat-card class="example-card" >
                         <mat-card-title>{{policy.name}} 
-                            <button mat-raised-button color="primary" (click)="openDialog()" style="margin-left: 50px;" >Detailes</button>
+                            <button mat-raised-button color="primary" (click)="openDialog()" style="margin-left: 50px;" >Details</button>
                         </mat-card-title>
                         <mat-divider></mat-divider>
                         <br>
