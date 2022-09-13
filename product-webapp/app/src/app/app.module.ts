@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-// import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserModule } from '@angular/platform-browser';
 import { MarkdownModule } from "ngx-markdown";
 import { AppRoutingModule } from './app-routing.module';
@@ -77,7 +77,7 @@ import { MoreComponent } from './more/more.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    // NgxPaginationModule,
+    NgxPaginationModule,
     BrowserAnimationsModule,
     A11yModule,
     CdkAccordionModule,

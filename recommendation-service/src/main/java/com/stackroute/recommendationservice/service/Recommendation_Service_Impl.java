@@ -41,6 +41,7 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         else {
             insurance2.setInsuranceId(insuranceProfile.getInsuranceId());
             insurance2.setInsuranceName(insuranceProfile.getInsuranceName());
+            insurance2.setDescription("The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.");
             insurance_repository.save(insurance2);
             createAgeRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getAge());
             createInsuranceTypeRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getInsuranceType());
@@ -176,6 +177,8 @@ public class Recommendation_Service_Impl implements Recommendation_service{
     public boolean addImage(MultipartFile file,int policyId) throws IOException {
         Insurance insurance = insurance_repository.findById(policyId).get();
         insurance.setImageOfInsurance(file.getBytes());
+        insurance.setImageType(file.getContentType());
+        insurance.setDescription("The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.");
         insurance_repository.save(insurance);
         if(insurance.getImageOfInsurance() == null){
             return false;
