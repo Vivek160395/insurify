@@ -101,9 +101,8 @@
             </div>
           </form>
         </mat-card-content>
-        <mat-card-actions class="buttonplace">
-          <button mat-raised-button matStepperPrevious color="accent">Back</button>
-          <button mat-raised-button matStepperNext color="primary" style="margin-left: 20px;">Next</button>
+        <mat-card-actions  fxLayout="row">
+          <button mat-raised-button matStepperNext color="primary" fxFlex="100%">Next</button>
         </mat-card-actions>
       </mat-card>
     </mat-step>
@@ -220,7 +219,7 @@
                   <mat-label>Maximum Salary</mat-label>
                   <input formControlName="maxSalary" matInput placeholder="Max Salary" type="number">
                 </mat-form-field>
-                <div>
+                <div style="display: flex;justify-content: center;align-items: center;font-family: cursive;">
                   <a mat-raised-button (click)="removeDetails(i)">
                     <mat-icon>remove_circle</mat-icon>
                   </a>
@@ -236,9 +235,9 @@
             </div>
           </form>
         </mat-card-content>
-        <mat-card-actions class="buttonplace">
-          <button mat-raised-button matStepperPrevious color="accent">Back</button>
-          <button mat-raised-button matStepperNext color="primary" style="margin-left: 20px;">Next</button>
+        <mat-card-actions fxLayout="row">
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperNext color="primary" style="margin-left: auto">Next</button>
         </mat-card-actions>
       </mat-card>
     </mat-step>
@@ -296,9 +295,9 @@
             </div>
           </form>
         </mat-card-content>
-        <mat-card-actions class="buttonplace">
-          <button mat-raised-button matStepperPrevious color="accent">Back</button>
-          <button mat-raised-button matStepperNext color="primary" style="margin-left: 20px;">Next</button>
+        <mat-card-actions fxLayout="row">
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperNext color="primary" style="margin-left: auto">Next</button>
         </mat-card-actions>
       </mat-card>
     </mat-step>
@@ -310,10 +309,10 @@
           <form [formGroup]="insuranceForms" style="display: flex;flex-direction: row;">
             <div style="width: 60%;">
               <div fxLayout="row">
-              <h3>Write Terms and Conditions below</h3>
-              <button mat-raised-button (click)="openDialog()" style="margin-left: 25%;">Preview</button>
+              <h3 style="font-family:cursive ;">Write Terms and Conditions below</h3>
+              <button mat-raised-button (click)="openDialog()" style="margin-left: auto">Preview</button>
               </div>
-              <textarea type="text" style="width:100%;height:70vh" formControlName="policyDocuments"
+              <textarea type="text" style="width:100%;height:70vh;" formControlName="policyDocuments"
                 [(ngModel)]="valueVariable"></textarea>
             </div>
             <div style="border: 2px solid;margin-left: 5%;">
@@ -347,11 +346,12 @@
           
         </mat-card-content>
         <mat-card-actions>
-          <div class="buttonplace">
+          <div fxLayout="row">
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-raised-button color="primary" style="margin-left: 30px;" (click)="onSubmit()">Add
+            <button mat-button (click)="stepper.reset()" style="margin-left: auto">Reset</button>
+            <button mat-raised-button color="primary"  (click)="onSubmit()">Add
               policy</button>
-            <button mat-button (click)="stepper.reset()" style="margin-left: 30px;">Reset</button>
+           
           </div>
         </mat-card-actions>
       </mat-card>
