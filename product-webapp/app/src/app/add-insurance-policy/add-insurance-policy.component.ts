@@ -267,7 +267,29 @@ export class AddInsurancePolicyComponent implements OnInit {
     {
       return
     }
-    control.push(control.controls[i]);
+    const x=new FormGroup({
+      premiums: new FormControl(control.controls[i].value.premiums, [Validators.required]),
+      durations: new FormControl(control.controls[i].value.durations, [Validators.required]),
+      sumInsure: new FormControl(control.controls[i].value.sumInsure, [Validators.required]),
+      adults   :new FormControl(control.controls[i].value.adults),
+      kids     :new FormControl(control.controls[i].value.kids),
+      minSalary:new FormControl(control.controls[i].value.minSalary),
+      maxSalary:new FormControl(control.controls[i].value.maxSalary),
+      modelsAllowed:new FormControl(control.controls[i].value.modelsAllowed),
+      minAge       :new FormControl(control.controls[i].value.minAge),
+      maxAge       :new FormControl(control.controls[i].value.maxAge),
+    }
+    );
+    console.log(control.controls[i].value)
+    // x.controls.premiums=control.controls[i].value.premiums
+    // x.controls.durations=control.controls[i].value.durations
+    // x.controls.sumInsure=control.controls[i].value.sumInsure
+    // x.controls.adults=control.controls[i].value.adults
+    // x.controls.kids=control.controls[i].value.kids
+    // x.controls.minSalary=control.controls[i].value.minSalary
+    // x.controls.maxSalary=control.controls[i].value.maxSalary
+    control.push(x);
+    // control.push(control.controls[i]);
   }
   addDetailsE(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
