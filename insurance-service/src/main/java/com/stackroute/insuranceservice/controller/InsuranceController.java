@@ -77,7 +77,7 @@ public class InsuranceController {
         dto.setPicByte(retrieveInsurance.getPicByte());
         dto.setInsuranceType(retrieveInsurance.getInsuranceType());
         dto.setDescription(retrieveInsurance.getPolicyDescription());
-
+        dto.setPicType(imageFile.getContentType());
         System.out.println("PolicyId"+policyId);
         insuranceRepo.save(retrieveInsurance);
         producer.sendingMessageToRabbitMQServer(dto);

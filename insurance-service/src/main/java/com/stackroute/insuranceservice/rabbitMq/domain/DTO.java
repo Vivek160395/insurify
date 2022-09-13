@@ -9,4 +9,5 @@ public class DTO {
     String insuranceType;
     String description;
     byte[] picByte;
+    String picType;
 }
