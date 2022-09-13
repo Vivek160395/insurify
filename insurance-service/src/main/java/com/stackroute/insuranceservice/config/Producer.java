@@ -1,6 +1,5 @@
 package com.stackroute.insuranceservice.config;
 
-import com.stackroute.insuranceservice.model.Insurance;
 import com.stackroute.insuranceservice.rabbitMq.domain.DTO;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

@@ -20,11 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
@@ -65,7 +63,6 @@ public class InsuranceController {
 
     @PutMapping("/photos/update/{policyId}")
     public BodyBuilder updateImage(@RequestParam("imageFile") MultipartFile imageFile, @RequestParam("policyId") String policyId) throws IOException {
-
 
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~"+imageFile.getOriginalFilename());
         System.out.println(insuranceRepo.findById(policyId));

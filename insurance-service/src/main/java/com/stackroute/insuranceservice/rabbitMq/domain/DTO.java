@@ -1,6 +1,5 @@
 package com.stackroute.insuranceservice.rabbitMq.domain;
 
-import com.stackroute.insuranceservice.model.PolicyDetails;
 import lombok.Data;
 
 @Data

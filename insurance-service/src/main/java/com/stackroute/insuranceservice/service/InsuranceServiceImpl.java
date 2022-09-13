@@ -26,19 +26,11 @@ public class InsuranceServiceImpl implements InsuranceService{
 
     @Override
     public Insurance saveInsurance(Insurance insurance) throws PolicyAlreadyExistException, IOException {
-//        DTO dto = new DTO();
-//        dto.setPolicyId(dto.getPolicyId());
-//        dto.setPolicyName(dto.getPolicyName());
-//        dto.setInsuranceType(dto.getInsuranceType());
-//        dto.setDescription(dto.getDescription());
-
         if (insuranceRepo.findById(insurance.getPolicyId()).isPresent()){
             throw new PolicyAlreadyExistException();
         }
         else {
-            insuranceRepo.save(insurance);
-//            producer.sendingMessageToRabbitMQServer(dto);
-            return insurance;
+            return insuranceRepo.save(insurance);
         }
     }
 
