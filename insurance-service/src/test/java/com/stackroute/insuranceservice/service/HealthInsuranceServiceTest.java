@@ -2,6 +2,9 @@
 //
 //import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 //import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
+//import com.stackroute.insuranceservice.model.AddOnDetails;
+//import com.stackroute.insuranceservice.model.Benefits;
+//import com.stackroute.insuranceservice.model.PolicyDetails;
 //import com.stackroute.insuranceservice.model.HealthInsurancePolicy;
 //import com.stackroute.insuranceservice.repository.HealthInsurancePolicyRepository;
 //import org.junit.Test;
@@ -12,6 +15,7 @@
 //import org.mockito.Mock;
 //import org.mockito.junit.jupiter.MockitoExtension;
 //
+//import java.util.ArrayList;
 //import java.util.Arrays;
 //import java.util.List;
 //import java.util.Optional;
@@ -24,26 +28,37 @@
 //public class HealthInsuranceServiceTest {
 //    @Mock
 //    private HealthInsurancePolicyRepository healthInsurancePolicyRepository;
-//
 //    @InjectMocks
 //    private HealthInsurancePolicyServiceImpl policyService;
-//
 //    public HealthInsurancePolicy policy1, policy2;
-//
-//    byte[] policyDocuments = null;
-//    List<String> sumInsured = List.of("fvbfevfev");
-//    List<String> premium = List.of("premium");
-//    List<String> policyDuration = List.of("7");
-//    List<String> addOns = List.of("addOns");
-//    List<String> addOnsPremium = List.of("addOnsPremium");
 //    List<HealthInsurancePolicy> policyList;
-//
+//    List<PolicyDetails> policyDetailsList = new ArrayList<>();
+//    List<AddOnDetails> addOnDetailsList = new ArrayList<>();
+//    List<Benefits> benefitsList = new ArrayList<>();
 //
 //    @BeforeEach
 //    public  void setUp(){
-//        policy1 = new HealthInsurancePolicy(101,"policy_1","desc","Health","benefits",policyDocuments,sumInsured,premium,policyDuration,addOns,addOnsPremium);
+//        AddOnDetails addOnDetails = new AddOnDetails("addOn",15000);
+//        addOnDetailsList.add(addOnDetails);
 //
-//        policy2 = new HealthInsurancePolicy(102,"policy_2","desc","Health","benefits",policyDocuments,sumInsured,premium,policyDuration,addOns,addOnsPremium);
+//        PolicyDetails policyDetails = new PolicyDetails(10000,9,1000,1,2,2550,50000);
+//        policyDetailsList.add(policyDetails);
+//
+//        Benefits benefits = new Benefits("desc","brief");
+//        benefitsList.add(benefits);
+//
+//        policy1 = new HealthInsurancePolicy("123","NameOfThePolicy","Health","descriptionAboutThePolicy", policyDetailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
+//
+//        AddOnDetails addOnDetails1 = new AddOnDetails("addOn",17000);
+//        addOnDetailsList.add(addOnDetails1);
+//
+//        PolicyDetails policyDetails1 = new PolicyDetails(20000,12,1500,1,2,2753,50000);
+//        policyDetailsList.add(policyDetails1);
+//
+//        Benefits benefits1 = new Benefits("desc","brief");
+//        benefitsList.add(benefits1);
+//
+//        policy2 = new HealthInsurancePolicy("124","NameOfThePolicy2","Health2","descriptionAboutThePolicy", policyDetailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
 //
 //        policyList = Arrays.asList(policy1,policy2);
 //    }
@@ -56,10 +71,11 @@
 //
 //    @Test
 //    public void givenPolicyToSaveReturnSuccess() throws PolicyAlreadyExistException {
-//        when(healthInsurancePolicyRepository.findById(policy1.getPolicyId())).thenReturn(Optional.empty());
+//        when(healthInsurancePolicyRepository.findById(policy1.getPolicyId())).thenReturn(Optional.ofNullable(null));
 //        when(healthInsurancePolicyRepository.save(any())).thenReturn(policy1);
-//
-//        assertEquals(policy1,policyService.savePolicy(policy1));
+//        HealthInsurancePolicy policy = policyService.savePolicy(policy1);
+//        System.out.println(policy);
+//        assertEquals(policy1,policy);
 //
 //        verify(healthInsurancePolicyRepository,times(1)).findById(policy1.getPolicyId());
 //        verify(healthInsurancePolicyRepository,times(1)).save(any());

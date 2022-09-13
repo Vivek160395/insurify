@@ -27,30 +27,24 @@ public class AutomobileInsuranceServiceImpl implements AutoMobileInsurancePolicy
     }
 
     @Override
-    public AutomobileInsurancePolicy savePolicy(AutomobileInsurancePolicy policy) throws PolicyAlreadyExistException {
+    public AutomobileInsurancePolicy savePolicy(AutomobileInsurancePolicy policy, MultipartFile file) throws PolicyAlreadyExistException, IOException {
         DTO dto = new DTO();
+        dto.setPolicyId(dto.getPolicyId());
         dto.setPolicyName(dto.getPolicyName());
         dto.setInsuranceType(dto.getInsuranceType());
+        dto.setDescription(dto.getDescription());
 
-<<<<<<< HEAD
         if (policyRepository.findById(policy.getPolicyId()).isPresent()){
             throw new PolicyAlreadyExistException();
         }
         else {
-=======
-        if(policyRepository.findById(policy.getPolicyId()).isEmpty()){
-            //policy = new AutomobileInsurancePolicy(docName, file.getContentType(), file.getBytes());
-            policy.setPolicyDocuments(file.getBytes());
->>>>>>> 314499d1fb8b8a80dab1cbf2717d38510c3fc482
+            String docName = file.getOriginalFilename();
+            System.out.println("Image Name is :"+docName);
+            policy.setImage(file.getBytes());
             producer.sendingMessageToRabbitMQServer(dto);
             policyRepository.save(policy);
             return policy;
-    }
-    else
-    {
-        throw new PolicyAlreadyExistException();
-    }
-
+        }
     }
 
     @Override

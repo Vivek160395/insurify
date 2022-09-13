@@ -5,14 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
-public class Details {
+public class PolicyBenefits {
 
-    long premium;
-    long duration;
-    long sumInsure;
-    Integer adults;
-    Integer kids;
-    long min_Salary;
-    long max_salary;
+    String description;
+    String brief;
 }
