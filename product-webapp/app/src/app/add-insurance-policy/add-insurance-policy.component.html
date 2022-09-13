@@ -16,8 +16,7 @@
       <mat-card class="singlecard">
         <mat-card-content>
           <form [formGroup]="insuranceForms">
-            <p>Upload Documents</p>
-          <input style="margin-top: 5px;" formControlName="policyDocuments" type="file" (change)="onFileChanged($event)">
+
             <ng-template matStepLabel>Enter Basic Policy Details</ng-template>
             <div fxLayout="row" fxLayoutGap="2%">
 
@@ -247,8 +246,15 @@
           <form [formGroup]="insuranceForms">
             <ng-template matStepLabel>Enter Additional Details</ng-template>
             <div formArrayName="addOnDetails">
+              <div fxLayout="row" fxLayoutGap="2%" style="display: flex;justify-content: center;align-items: center;font-family: cursive;font-weight: 600;">
+                <p>Upload Documents</p>
+                <input   type="file"
+                (change)="onFileChanged($event)">
+              </div>
+              <div style="display: flex;justify-content: center;align-items: center;font-family: cursive;font-weight: 900;">Add AddOn Details below</div>
               <div *ngFor="let child of policyAddOnsx;let i=index" formGroupName="{{i}}" fxLayout="row"
                 fxLayoutGap="2%">
+                
                 <mat-form-field appearance="outline" fxFlex="15%" *ngIf="flag[i]">
                   <mat-label>Add-On Name</mat-label>
                   <input matInput placeholder="AddOn name" type="text" formControlName="addOnName" *ngIf="flag[i]">
@@ -262,9 +268,9 @@
                   <input matInput placeholder="Add-On Premium" type="number" formControlName="addOnPremiums">
                 </mat-form-field>
 
-                  <a (click)="addDetails2(i)" fxFlexAlign="center" *ngIf="flag[i]">
-                    <mat-icon>add_circle_outline</mat-icon>
-                  </a>
+                <a (click)="addDetails2(i)" fxFlexAlign="center" *ngIf="flag[i]">
+                  <mat-icon>add_circle_outline</mat-icon>
+                </a>
 
               </div>
 
@@ -282,11 +288,10 @@
                   <p>Policy Brief : {{benefits.briefs}}</p>
                   <p>Policy Benefit :{{benefits.descriptions}}</p>
                 </mat-expansion-panel> -->
-                <mat-panel-title>
-                  <p style="text-align: center;font-family: cursive;" fxFlex="70%">{{addondetails.addOnName}}</p>
-                </mat-panel-title>
-                <button mat-raised-button (click)="removeDetails2(i)"
-                style="color: orangered;">Remove</button>
+                    <mat-panel-title>
+                      <p style="text-align: center;font-family: cursive;" fxFlex="70%">{{addondetails.addOnName}}</p>
+                    </mat-panel-title>
+                    <button mat-raised-button (click)="removeDetails2(i)" style="color: orangered;">Remove</button>
 
                   </mat-expansion-panel-header>
                   <p>Add-On Name : {{addondetails.addOnName}}</p>

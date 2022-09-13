@@ -1,14 +1,14 @@
-import { AnimationStyleMetadata } from '@angular/animations';
+
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component,  OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Insurance } from '../insurance';
 import { MatDialog } from '@angular/material/dialog';
-import { Dialog } from '@angular/cdk/dialog';
+
 import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
-// import { FlexAlignDirective } from '@angular/flex-layout';
+
 
 export interface bike {
   value: string;
