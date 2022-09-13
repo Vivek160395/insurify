@@ -8,6 +8,7 @@ export class PolicyDetails {
      minAge   :number,
      maxAge   :number,
      minSalary:number,
-     maxSalary:number
+     maxSalary:number,
+     modelsAllowed:string
   ){}
 }

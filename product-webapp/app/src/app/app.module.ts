@@ -1,11 +1,13 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserModule } from '@angular/platform-browser';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownModule } from "ngx-markdown";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { RegisterComponent } from './register/register.component';
+
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import {A11yModule} from '@angular/cdk/a11y';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
@@ -58,7 +60,14 @@ import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
+<<<<<<< HEAD
 import { ClaimComponent } from './claim/claim.component';
+=======
+import { LoginComponent } from './login/login.component';
+import { MoreComponent } from './more/more.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
+>>>>>>> d0c1b855a278f07b55a273dc619b259da8dded12
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +76,12 @@ import { ClaimComponent } from './claim/claim.component';
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
     PoliciesComponent,
+<<<<<<< HEAD
     ClaimComponent
+=======
+    LoginComponent,
+    MoreComponent
+>>>>>>> d0c1b855a278f07b55a273dc619b259da8dded12
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
@@ -76,6 +90,7 @@ import { ClaimComponent } from './claim/claim.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     BrowserAnimationsModule,
     A11yModule,
     CdkAccordionModule,
@@ -129,6 +144,7 @@ import { ClaimComponent } from './claim/claim.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MarkdownModule.forRoot(),
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,6 +7,7 @@ export class Insurance {
     public  insuranceType    :string,
     public  policyId         :any,
     public  category         :string,
+    public  modelsAllowed    :string[],
     public  policyName       :string,
     public  policyDescription:string,
     public  policyDetails            :PolicyDetails[],

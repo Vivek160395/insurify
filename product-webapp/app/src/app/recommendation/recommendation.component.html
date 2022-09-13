@@ -1,22 +1,24 @@
+<!-- 
 
-<div class=" row " style=" background-color: white;display: flex;flex-wrap: wrap;">
-    <div class=col-1.75 style=" margin: 40px 0px 0 40px;display: block;color: black; ">
-        <div class=" container ">
-            <div style=" color: black;margin: 50px 0px 0px 0px;font-size:x-large;
+
+<div  class="row" style=" display: flex;flex-wrap: wrap;background-color: beige;" >
+    <div class=col-1.7 style=" margin: 40px 0 0 70px;display: block;color: black; ">
+        <div >
+            <div style=" color: black;margin: 40px 0px 0px 0px;font-size:xx-large;
              font-family: 'Trebuchet MS' , 'Lucida Sans Unicode' , 'Lucida Grande' , 'Lucida Sans' , Arial, sans-serif "
               *ngIf="displayHealth">
                 Health</div>
             <div [hidden]=" isHealth " *ngFor=" let names of healthNames " style=" margin: 15px 0px 0px 20px;font-size: medium; ">
-               {{this.names.name}} 
+                {{this.names.name}}
             </div>
-            <div style=" color: black;margin: 30px 0px 0 0px;font-size: x-large; 
+            <div style=" color: black;margin: 30px 0px 0 0px;font-size: xx-large; 
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
             *ngIf="displayOther">
                 Other</div>
             <div [hidden]=" isOther " *ngFor=" let names of otherNames " style=" margin: 15px 0px 0px 20px;font-size: medium; ">
                 {{this.names.name}}
             </div>
-            <div style=" color: black;margin: 30px 0px 0 0px;font-size: x-large; 
+            <div style=" color: black;margin: 30px 0px 0 0px;font-size: xx-large; 
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
             *ngIf="displayLife">
                 Life</div>
@@ -25,40 +27,50 @@
             </div>
         </div>
     </div>
-    <div class=" col-9 ">
-        <div class="container" style="margin: 40px 0 0 50px;">
+    <div class=" col-10">
+        <div style="margin: 40px 0px 0 0px;">
             <div style="display: flex;justify-content: space-between; ">
-                <div>
+                <div style="margin-left: 100px;">
                     <mat-chip-list class="example-chip">
                         <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" health() "  *ngIf="displayHealth"> Health</mat-chip>
                         <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" other() "*ngIf="displayOther"> Other</mat-chip>
                         <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" life() "*ngIf="displayLife"> Life</mat-chip>
-                    </mat-chip-list>
+                        <mat-chip class="example-box"  (click)=" trend() ">Trending
+                          <mat-icon>trending_up</mat-icon>
+                      </mat-chip>
+                      </mat-chip-list>
+              </div>
+                  <div style="font-size:large;">
+                  <b style="font-family:'Times New Roman', Times, serif ;"><pagination-controls (pageChange)="page=$event"></pagination-controls></b>
+                  
                 </div>
-                <div style="margin-right:10%;">
-                    <mat-chip class="example-box" style="margin-right:20px;" (click)=" trend() ">Trending
-                        <mat-icon>arrow_right_alt</mat-icon>
-                    </mat-chip>
-                </div>
-            </div>
+            
         </div>
         <div style=" display: flex;flex-wrap: wrap; ">
-            <mat-card class=" example-card " [class.mat-elevation-z2]="isActive" style=" margin:50px 20px 20px 20px;
-            width: 335px; height:auto; background-color: white; border: 2px solid lightblue; "
-             *ngFor=" let item of allNames " matRipple [class.mat-elevation-z8]="isActive">
+            <mat-card class=" example-card " [class.mat-elevation-z2]="isActive" style=" margin:50px 15px 20px 25px;
+            width: 380px; height:auto; background-color: white; border: 2px solid lightblue; "
+             *ngFor=" let item of allNames |
+             paginate: { itemsPerPage :6,
+              currentPage :page,
+              totalItems:totalLength
+  
+             } " matRipple [class.mat-elevation-z8]="isActive">
                 <mat-card-header style=" background-color: white; ">
                     <mat-card-title style=" color: black;font-family: 'Times New Roman' , Times, serif; ">
-                       <b> {{this.item.name}}</b>
+                        <b> {{this.item.name}}</b>
                     </mat-card-title>
                 </mat-card-header>
-                <img mat-card-image class="rounded-9" src={{this.item.img}} alt=" Photo of a Shiba Inu " style=" width: 330px; 
+                <img mat-card-image class="rounded-9" src={{this.item.img}} alt=" Photo of a Shiba Inu " style=" width: 375.5px; 
                 height:300px;">
                 <mat-card-content>
                     <p style=" color: black; ">
-                        {{this.item.description}}
+                      
+  <app-more [text]="item.description"  [limit]="150"></app-more>
                     </p>
                 </mat-card-content>
             </mat-card>
         </div>
+        
     </div>
   </div>
+   -->

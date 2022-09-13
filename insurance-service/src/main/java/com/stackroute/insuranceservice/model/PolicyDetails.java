@@ -4,16 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Details {
+public class PolicyDetails {
 
-    long premium;
-    long duration;
+    long premiums;
+    long durations;
     long sumInsure;
     Integer adults;
     Integer kids;
-    long min_Salary;
-    long max_salary;
+    long minSalary;
+    long maxSalary;
+    Integer minAge;
+    Integer maxAge;
+
 }

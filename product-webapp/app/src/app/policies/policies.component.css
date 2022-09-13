@@ -1,12 +1,19 @@
 .example-card {
-    max-width: 360px;
+    max-width: 357px;
     margin-bottom: 8px;
     margin-left: 20px;
   }
   
-  div{
+  .border{
     /* padding-top: 10px; */
-    padding-left: 20px;
+    /* padding: 25px; */
+    margin: 15px;
+    /* padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px; */
+  }
+  div{
+    padding: 7px;
   }
   mat-card-subtitle{
     padding-left: 10px;
