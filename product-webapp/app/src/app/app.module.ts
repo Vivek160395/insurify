@@ -60,16 +60,13 @@ import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
-<<<<<<< HEAD
 import { ClaimComponent } from './claim/claim.component';
-=======
->>>>>>> e4b9738c6f6c944e938e2530d640eeb9e6d6013b
 import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailsComponent } from './details/details.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
-import { ClaimComponent } from './claim/claim.component';
+
 
 @NgModule({
   declarations: [
@@ -82,10 +79,7 @@ import { ClaimComponent } from './claim/claim.component';
     ClaimComponent,
     LoginComponent,
     MoreComponent,
-<<<<<<< HEAD
-=======
     InsuranceDetailsComponent,
->>>>>>> e4b9738c6f6c944e938e2530d640eeb9e6d6013b
     LoginComponent,
     MoreComponent,
     DetailsComponent
