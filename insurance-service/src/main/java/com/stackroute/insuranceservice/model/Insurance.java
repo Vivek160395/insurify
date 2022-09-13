@@ -23,5 +23,5 @@ public class Insurance {
     private PolicyBenefits[] policyBenefits;
     private AddOnDetails[] addOnDetails;
     private String policyDocuments;
-    private List<String > modelsAllowed;
+    private List<String> modelsAllowed;
 }

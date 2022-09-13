@@ -60,10 +60,12 @@ import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
+import { ClaimComponent } from './claim/claim.component';
 import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailsComponent } from './details/details.component';
+import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,10 @@ import { DetailsComponent } from './details/details.component';
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
     PoliciesComponent,
+    ClaimComponent,
+    LoginComponent,
+    MoreComponent,
+    InsuranceDetailsComponent,
     LoginComponent,
     MoreComponent,
     DetailsComponent
