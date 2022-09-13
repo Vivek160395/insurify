@@ -55,9 +55,11 @@
                 <div class= "form-text text-danger" *ngIf = "password.errors?.['required'] &&
                         (password.dirty || password.touched)"> Password is required
                 </div>
-                
+                <div class= "form-text text-danger" *ngIf = "password.errors?.['minlength'] || password.errors?.['maxlength'] &&
+                        (password.dirty || password.touched)"> Password must be at least 6 characters and max 15 chars long
+                </div>
                 <div class= "form-text text-danger" *ngIf = "password.errors?.['pattern']  &&
-                        (password.dirty || password.touched)"> Password must be minimum 8 characters long with atleast one uppercase,one lower case, one number and one special characters
+                        (password.dirty || password.touched)"> Valid characters: Alphabets, Numbers and '%*#' characters
                 </div>
     
                  <div class="mb-3">

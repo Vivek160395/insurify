@@ -60,7 +60,10 @@ public class AutomobileInsuranceServiceTest {
 
         policy2 = new AutomobileInsurancePolicy("124","NameOfThePolicy2","Health2","descriptionAboutThePolicy",detailsList, benefitsList ,addOnDetailsList,"documentsAboutThePolicy");
 
-        policyList = Arrays.asList(policy1,policy2);
+//        policyList = Arrays.asList(policy1,policy2);
+        policyList.add(policy1);
+        policyList.add(policy2);
+        System.out.println("~~~~~~~~~~~~~~~~~~"+policyList);
     }
 
     @AfterEach

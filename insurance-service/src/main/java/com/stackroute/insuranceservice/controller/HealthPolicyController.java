@@ -3,9 +3,6 @@ package com.stackroute.insuranceservice.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
-import com.stackroute.insuranceservice.model.AddOnDetails;
-import com.stackroute.insuranceservice.model.Benefits;
-import com.stackroute.insuranceservice.model.Details;
 import com.stackroute.insuranceservice.model.HealthInsurancePolicy;
 import com.stackroute.insuranceservice.service.HealthInsurancePolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.zip.Deflater;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin("localhost:4200")
 public class HealthPolicyController {
 
     HealthInsurancePolicyService policyService;
@@ -30,16 +26,17 @@ public class HealthPolicyController {
     }
 
     @PostMapping("/policy")
-
-    public ResponseEntity<?> addPolicy(@RequestBody HealthInsurancePolicy policy) {
+    public ResponseEntity<?> addPolicy(@RequestParam("data") String data,@RequestParam("file")  MultipartFile file) {
         try
         {
-            policyService.savePolicy(policy);
-            return new ResponseEntity<>(policyService.savePolicy(policy),HttpStatus.ACCEPTED);
+            HealthInsurancePolicy policy = new ObjectMapper().readValue(data,HealthInsurancePolicy.class);
+            policyService.savePolicy(policy,file);
+            return new ResponseEntity<>(policyService.savePolicy(policy,file),HttpStatus.ACCEPTED);
         }
         catch (PolicyAlreadyExistException e){
-            e.getMessage();
             return new ResponseEntity<>(e.getMessage(),HttpStatus.CONFLICT);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

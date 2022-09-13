@@ -18,6 +18,7 @@ public class HealthInsurancePolicy {
     private String policyName;
     private String insuranceType;
     private String description;
+    private byte[] image;
     private List<Details> policyDetails;
     private List<Benefits> policyBenefits;
     private List<AddOnDetails> policyAddOnDetails;

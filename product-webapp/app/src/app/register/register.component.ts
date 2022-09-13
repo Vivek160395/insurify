@@ -23,7 +23,7 @@ registerForm = new FormGroup({
     Validators.required,
     Validators.minLength(6),
     Validators.maxLength(15),
-    Validators.pattern("/^[a-zA-Z0-9%*#]*$/")
+    Validators.pattern("[a-zA-Z0-9%*#].*")
   ]),
   confirmPassword: new FormControl(''),
  });

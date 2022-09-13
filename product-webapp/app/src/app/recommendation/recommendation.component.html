@@ -1,17 +1,24 @@
+
 <div class=" row " style=" background-color: white;display: flex;flex-wrap: wrap;">
     <div class=col-1.75 style=" margin: 40px 0px 0 40px;display: block;color: black; ">
         <div class=" container ">
-            <div style=" color: black;margin: 30px 0px 0px 0px;font-size:x-large; font-family: 'Trebuchet MS' , 'Lucida Sans Unicode' , 'Lucida Grande' , 'Lucida Sans' , Arial, sans-serif ">
+            <div style=" color: black;margin: 50px 0px 0px 0px;font-size:x-large;
+             font-family: 'Trebuchet MS' , 'Lucida Sans Unicode' , 'Lucida Grande' , 'Lucida Sans' , Arial, sans-serif "
+              *ngIf="displayHealth">
                 Health</div>
             <div [hidden]=" isHealth " *ngFor=" let names of healthNames " style=" margin: 15px 0px 0px 20px;font-size: medium; ">
-                {{this.names.name}}
+               {{this.names.name}} 
             </div>
-            <div style=" color: black;margin: 30px 0px 0 0px;font-size: x-large; font-family: 'Times New Roman' , Times, serif; ">
+            <div style=" color: black;margin: 30px 0px 0 0px;font-size: x-large; 
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
+            *ngIf="displayOther">
                 Other</div>
             <div [hidden]=" isOther " *ngFor=" let names of otherNames " style=" margin: 15px 0px 0px 20px;font-size: medium; ">
                 {{this.names.name}}
             </div>
-            <div style=" color: black;margin: 30px 0px 0 0px;font-size: x-large; font-family: 'Times New Roman' , Times, serif; ">
+            <div style=" color: black;margin: 30px 0px 0 0px;font-size: x-large; 
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
+            *ngIf="displayLife">
                 Life</div>
             <div [hidden]=" isLife " *ngFor=" let names of lifeNames " style=" margin: 15px 0px 0 20px;font-size: medium; ">
                 {{this.names.name}}
@@ -23,9 +30,9 @@
             <div style="display: flex;justify-content: space-between; ">
                 <div>
                     <mat-chip-list class="example-chip">
-                        <mat-chip class="example-box" style="margin-right:20px;" (click)=" health() "> Health</mat-chip>
-                        <mat-chip class="example-box" style="margin-right:20px;" (click)=" other() "> Other</mat-chip>
-                        <mat-chip class="example-box" style="margin-right:20px;" (click)=" life() "> Life</mat-chip>
+                        <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" health() "  *ngIf="displayHealth"> Health</mat-chip>
+                        <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" other() "*ngIf="displayOther"> Other</mat-chip>
+                        <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" life() "*ngIf="displayLife"> Life</mat-chip>
                     </mat-chip-list>
                 </div>
                 <div style="margin-right:10%;">
@@ -36,13 +43,21 @@
             </div>
         </div>
         <div style=" display: flex;flex-wrap: wrap; ">
-            <mat-card class=" example-card " [class.mat-elevation-z2]="isActive" style=" margin:50px 20px 20px 20px;width: 330px; height:auto; background-color: white; border: 2px solid lightblue; " *ngFor=" let item of allNames " matRipple [class.mat-elevation-z8]="isActive">
+            <mat-card class=" example-card " [class.mat-elevation-z2]="isActive" style=" margin:50px 20px 20px 20px;
+            width: 335px; height:auto; background-color: white; border: 2px solid lightblue; "
+             *ngFor=" let item of allNames |
+             paginate: { itemsPerPage :3,
+              currentPage :page,
+              totalItems:totalLength
+  
+             } " matRipple [class.mat-elevation-z8]="isActive">
                 <mat-card-header style=" background-color: white; ">
                     <mat-card-title style=" color: black;font-family: 'Times New Roman' , Times, serif; ">
-                        {{this.item.name}}
+                       <b> {{this.item.name}}</b>
                     </mat-card-title>
                 </mat-card-header>
-                <img mat-card-image class="rounded-9" src={{this.item.img}} alt=" Photo of a Shiba Inu " style=" width: 330px; height:300px;">
+                <img mat-card-image class="rounded-9" src={{this.item.img}} alt=" Photo of a Shiba Inu " style=" width: 330px; 
+                height:300px;">
                 <mat-card-content>
                     <p style=" color: black; ">
                         {{this.item.description}}
@@ -50,5 +65,6 @@
                 </mat-card-content>
             </mat-card>
         </div>
+        <pagination-controls (pageChange)="page=$event"></pagination-controls>
     </div>
-</div>
+  </div>
