@@ -18,10 +18,11 @@ public class AutomobileInsurancePolicy {
     private String policyId;
     private String policyName;
     private String insuranceType;
-    private String description;
+    private String policyDescription;
+    private String category;
     private byte[] image;
-    private List<Details> policyDetails;
-    private List<Benefits> policyBenefits;
-    private List<AddOnDetails> policyAddOnDetails;
+    private List<PolicyDetails> policyDetails;
+    private List<PolicyBenefits> policyBenefits;
+    private List<AddOnDetails> addOnDetails;
     private String policyDocuments;
 }

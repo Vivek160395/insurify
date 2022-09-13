@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin("localhost:4200")
+//@CrossOrigin("localhost:4200")
 public class HealthPolicyController {
 
     HealthInsurancePolicyService policyService;

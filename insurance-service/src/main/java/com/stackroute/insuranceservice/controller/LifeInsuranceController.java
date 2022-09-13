@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/lifeInsurance")
-@CrossOrigin("localhost:4200")
+//@CrossOrigin("localhost:4200")
 public class LifeInsuranceController {
 
     public LifeInsurancePolicyService policyService;
