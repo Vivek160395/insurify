@@ -146,6 +146,7 @@ export class AddInsurancePolicyComponent implements OnInit {
     policyName       : new FormControl("", [Validators.required]),
     policyDescription: new FormControl("", [Validators.required]),
     category         : new FormControl("",[Validators.required]),
+    modelsAllowed    : new FormControl("",[Validators.required]),
     policyDetails    : new FormArray([new FormGroup({
       premiums :    new FormControl("", [Validators.required,Validators.min(0)]),
       durations:    new FormControl("", [Validators.required,Validators.min(0)]),
@@ -155,8 +156,7 @@ export class AddInsurancePolicyComponent implements OnInit {
       maxAge   :    new FormControl("", [Validators.min(20),Validators.max(75)]),
       kids     :    new FormControl("", [Validators.min(0)]),
       minSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
-      maxSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
-      modelsAllowed:new FormControl(""),
+      maxSalary:    new FormControl("", [Validators.required,Validators.min(0)])
     })]),
     policyBenefits: new FormArray([
       new FormGroup({
@@ -188,18 +188,18 @@ export class AddInsurancePolicyComponent implements OnInit {
 
   id=Math.floor(Math.random()*1000000+100000);
 
-  obj:Insurance={
-    insuranceType:'',
-    policyId         :'',
-    policyName       :'',
-    category         :'',
-    policyDescription:'',
-    policyDetails    :[],
-    policyBenefits   :[],
-    addOnDetails     :[],
-    policyDocuments  :'',
-    fileSource       :'',
-  } ;
+  // obj:Insurance={
+  //   insuranceType:'',
+  //   policyId         :'',
+  //   policyName       :'',
+  //   category         :'',
+  //   policyDescription:'',
+  //   policyDetails    :[],
+  //   policyBenefits   :[],
+  //   addOnDetails     :[],
+  //   policyDocuments  :'',
+  //   fileSource       :'',
+  // } ;
 
 
 
@@ -250,7 +250,7 @@ export class AddInsurancePolicyComponent implements OnInit {
     this.http.post<Insurance>("http://localhost:8010/api/vk1/life-policy",this.insuranceForms.value).subscribe(
       (data:any)=>{
         console.log(data);
-        this.http.post("http://localhost:8010/api/vk1/photos/update/"+this.id.toString(),formData, { observe: 'response' })
+        this.http.put("http://localhost:8010/api/vk1/photos/update/"+this.id.toString(),formData, { observe: 'response' })
               .subscribe((data:any)=>{console.log(data)});
       });
     console.log(this.insuranceForms.value)
@@ -260,8 +260,12 @@ export class AddInsurancePolicyComponent implements OnInit {
 
   addDetails(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
+    console.log((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
+    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
+    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
+    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
     if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-    ((!control.at(i).value.modelsAllowed||!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
+    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
     ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
     ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
     {
@@ -293,8 +297,12 @@ export class AddInsurancePolicyComponent implements OnInit {
   }
   addDetailsE(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
+    console.log((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
+    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
+    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
+    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
     if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-    ((!control.at(i).value.modelsAllowed||!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
+    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
     ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
     ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
     {
@@ -308,8 +316,7 @@ export class AddInsurancePolicyComponent implements OnInit {
       adults   :new FormControl(""),
       kids     :new FormControl(""),
       minSalary:new FormControl(""),
-      maxSalary:new FormControl(""),
-      modelsAllowed:new FormControl("")
+      maxSalary:new FormControl("")
     }
     ));
   }

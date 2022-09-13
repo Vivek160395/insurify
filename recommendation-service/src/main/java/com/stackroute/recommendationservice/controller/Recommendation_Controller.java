@@ -78,7 +78,7 @@ public class Recommendation_Controller {
     public ResponseEntity<?> getInsuranceByAge(@PathVariable int age) throws NoInsurancesFound {
         try {
             List<Insurance> insurances = recommendation_service.getAllInsuranceOnBasisOfAge(age);
-            return new ResponseEntity<>(insurances,HttpStatus.FOUND);
+            return new ResponseEntity<>(insurances,HttpStatus.OK);
         } catch(NoInsurancesFound e){
             log.error(e.getMessage());
             return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
@@ -89,7 +89,7 @@ public class Recommendation_Controller {
     public ResponseEntity<?> getInsuranceByOccupation(@PathVariable String occupation) throws NoInsurancesFound {
         try{
             List<Insurance> insurances = recommendation_service.getAllInsuranceOnBasisOfOccupation(occupation);
-            return new ResponseEntity<>(insurances,HttpStatus.FOUND);
+            return new ResponseEntity<>(insurances,HttpStatus.OK);
         }catch (NoInsurancesFound e){
             log.error(e.getMessage());
             return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
@@ -100,19 +100,18 @@ public class Recommendation_Controller {
     public ResponseEntity<?> getInsuranceByType(@PathVariable String insuranceType) throws NoInsurancesFound {
         try {
             List<Insurance> insurances = recommendation_service.getAllInsuranceOnBasisOfType(insuranceType);
-            return new ResponseEntity<>(insurances,HttpStatus.FOUND);
+            return new ResponseEntity<>(insurances,HttpStatus.OK);
         }catch (NoInsurancesFound e){
             log.error(e.getMessage());
             return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
         }
-
     }
 
     @GetMapping("/Insurances")
     public ResponseEntity<?> getAllInsurances() throws NoInsurancesFound {
         try {
             List<Insurance> insurances = recommendation_service.getAllInsurance();
-            return new ResponseEntity<>(insurances,HttpStatus.FOUND);
+            return new ResponseEntity<>(insurances,HttpStatus.OK);
         }catch (NoInsurancesFound e){
             log.error(e.getMessage());
             return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
@@ -133,7 +132,7 @@ public class Recommendation_Controller {
     public ResponseEntity<?> getNoOfInsurancesBought() throws NoInsurancesFound {
         try {
             List<Insurance> insurances = recommendation_service.getAllInsurancesWhichAreTrending();
-            return new ResponseEntity<>(insurances,HttpStatus.FOUND);
+            return new ResponseEntity<>(insurances,HttpStatus.OK);
         }catch (NoInsurancesFound e){
             log.error("No Insurance Found");
             return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
