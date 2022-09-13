@@ -1,15 +1,21 @@
 package com.stackroute.insuranceservice.service;
 
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
+import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.Insurance;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Optional;
 
 public interface InsuranceService {
 
-    public Insurance saveInsurance(Insurance insurance) throws PolicyAlreadyExistException, IOException;
+    Insurance saveInsurance(Insurance insurance) throws PolicyAlreadyExistException, IOException;
 
-    public List<Insurance> findInsuranceByInsuranceType(String insuranceType);
+    Iterable<Insurance> findAllInsurance();
+
+    Optional<Insurance> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException;
+
+    boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException;
+
+    Optional<Insurance> findPolicyByPolicyName(String policyName);
 }

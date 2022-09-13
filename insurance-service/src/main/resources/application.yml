@@ -10,6 +10,11 @@ spring:
       cluster-nodes: localhost:9300
   application:
     name: insurance-service
+  servlet:
+    multipart:
+      max-file-size: 256MB
+      max-request-size: 256MB
+      enabled: true
 #  main:
 #    web-application-type: reactive
 #  cloud:
