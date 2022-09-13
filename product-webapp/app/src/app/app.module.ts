@@ -63,6 +63,7 @@ import { PoliciesComponent } from './policies/policies.component';
 import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     PreviewMarkupComponent,
     PoliciesComponent,
     LoginComponent,
-    MoreComponent
+    MoreComponent,
+    InsuranceDetailsComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
