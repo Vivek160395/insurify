@@ -56,12 +56,17 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {HttpClientJsonpModule, HttpClientModule} from'@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
-import { MatStepper } from '@angular/material/stepper';
+// import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
+import { ClaimComponent } from './claim/claim.component';
 import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DetailsComponent } from './details/details.component';
+import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
+
 
 @NgModule({
   declarations: [
@@ -71,8 +76,13 @@ import { MoreComponent } from './more/more.component';
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
     PoliciesComponent,
+    ClaimComponent,
     LoginComponent,
-    MoreComponent
+    MoreComponent,
+    InsuranceDetailsComponent,
+    LoginComponent,
+    MoreComponent,
+    DetailsComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
@@ -135,6 +145,7 @@ import { MoreComponent } from './more/more.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MarkdownModule.forRoot(),
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

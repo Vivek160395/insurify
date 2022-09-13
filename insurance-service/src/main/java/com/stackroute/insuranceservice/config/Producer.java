@@ -15,6 +15,6 @@ public class Producer {
     private DirectExchange directExchange;
 
     public void sendingMessageToRabbitMQServer(DTO dto){
-        rabbitTemplate.convertAndSend(directExchange.getName(),"Nehitha", dto);
+        rabbitTemplate.convertAndSend(directExchange.getName(),"Nehitha",dto);
     }
 }
