@@ -1,4 +1,4 @@
-import { PolicyDetails } from './policy-details';
+import { PolicyDetails } from './policy-policyDetails';
 
 describe('PolicyDetails', () => {
   it('should create an instance', () => {

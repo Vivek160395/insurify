@@ -6,7 +6,10 @@ import com.stackroute.recommendationservice.model.*;
 import com.stackroute.recommendationservice.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -169,11 +172,14 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         }else return insurances;
     }
 
-//    @Override
-//    public List<Insurance> getAllInsuranceOnBasisOfVehicle(String vehicle) {
-//        List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithVehicle(vehicle);
-//                if(insurances.size() ==0){
-//            throw new NoInsurancesFound();
-//        }else return insurances;
-//    }
+    @Override
+    public boolean addImage(MultipartFile file,int policyId) throws IOException {
+        Insurance insurance = insurance_repository.findById(policyId).get();
+        insurance.setImageOfInsurance(file.getBytes());
+        insurance_repository.save(insurance);
+        if(insurance.getImageOfInsurance() == null){
+            return false;
+        }else return true;
+    }
+
 }

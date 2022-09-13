@@ -18,7 +18,12 @@ export class LoginComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email])
    });
   
- 
+   registerSubmitted(){
+    console.log("Submitted");
+    }
+
+
+
   get email(): FormControl{
     return this.registerForm.get('email') as FormControl;
   }

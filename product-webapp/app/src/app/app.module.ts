@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NgxPaginationModule } from 'ngx-pagination';
+// import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserModule } from '@angular/platform-browser';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownModule } from "ngx-markdown";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -61,6 +61,7 @@ import { PreviewMarkupComponent } from './preview-markup/preview-markup.componen
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
 import { LoginComponent } from './login/login.component';
+import { MoreComponent } from './more/more.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { LoginComponent } from './login/login.component';
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
     PoliciesComponent,
-    LoginComponent
+    LoginComponent,
+    MoreComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
@@ -79,7 +81,7 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule,
+    // NgxPaginationModule,
     BrowserAnimationsModule,
     A11yModule,
     CdkAccordionModule,
