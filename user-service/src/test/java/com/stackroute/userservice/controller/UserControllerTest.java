@@ -41,30 +41,31 @@ public class UserControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-
     @Mock
     private UserService userService;
-    private Address address1,address2;
+    private Address address1, address2;
     private User user1, user2;
 
     @InjectMocks
     private UserController userController;
 
     @BeforeEach
-    public void setUp(){
-        address1=new Address(637,"gali no. 1","st mary school","panipat","haryana",132101);
-        user1=new User("ajay123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address1,123456789098l,"ABCD234",null);
+    public void setUp() {
+        address1 = new Address(637, "gali no. 1", "st mary school", "panipat", "haryana", 132101);
+        user1 = new User("ajay123@gmail.com", "ajay123", "insurer", "Ajay Kumar", "male", 24, "23-01-1999", 9991119990l,
+                address1, 123456789098l, "ABCD234", null);
 
-        address2=new Address(637,"gali no. 1","st mary school","panipat","haryana",132101);
-        user2=new User("aman123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address2,123456789098l,"ABCD234", null);
+        address2 = new Address(637, "gali no. 1", "st mary school", "panipat", "haryana", 132101);
+        user2 = new User("aman123@gmail.com", "ajay123", "insurer", "Ajay Kumar", "male", 24, "23-01-1999", 9991119990l,
+                address2, 123456789098l, "ABCD234", null);
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
 
     }
 
     @AfterEach
-    public void tearDown(){
-        user1=null;
-        user2=null;
+    public void tearDown() {
+        user1 = null;
+        user2 = null;
     }
 
     private static String jsonToString(final Object ob) throws JsonProcessingException {
@@ -73,7 +74,7 @@ public class UserControllerTest {
             ObjectMapper mapper = new ObjectMapper();
             String jsonContent = mapper.writeValueAsString(ob);
             result = jsonContent;
-        } catch(JsonProcessingException e) {
+        } catch (JsonProcessingException e) {
             result = "JSON processing error";
         }
         return result;
@@ -111,8 +112,8 @@ public class UserControllerTest {
         when(userService.updateUser(any(),anyString(),any())).thenReturn(user1);
         //verify the exception(matching)
         MockMultipartFile file = new MockMultipartFile("data", "filename.txt", "text/plain", "some xml".getBytes());
-
 //        MockMvc mockMvc1 = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        MockMultipartFile user =new MockMultipartFile("userData","users.txt","text/plain","some xml".getBytes());
 
         MockMultipartHttpServletRequestBuilder builder =
                 MockMvcRequestBuilders.multipart("/api/v1/updateUser/ajay123@gmail.com");
@@ -125,14 +126,10 @@ public class UserControllerTest {
         });
         mockMvc.perform(builder
                                 .file(file)
-                        .contentType(MediaType.APPLICATION_JSON)
-                                .content(jsonToString(user1))
-
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(jsonToString(user1))
-                )
-
-                .andExpect(status().isOk());
+                                .file(user)
+                                .contentType(MediaType.MULTIPART_FORM_DATA_VALUE)
+                                .content(jsonToString(user)))
+                            .andExpect(status().isOk());
 //        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/v1/updateUser/ajay123@gmail.com")
 //                        .file(file)
 ////                        .contentType(MediaType.APPLICATION_JSON)

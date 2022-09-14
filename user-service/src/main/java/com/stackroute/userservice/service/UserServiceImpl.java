@@ -44,7 +44,6 @@ public class UserServiceImpl implements UserService {
         userDTO.setAadharNo(user.getAadharNo());
         userDTO.setPanNo(user.getPanNo());
         userDTO.setProfilePic(user.getProfilePic());
-        userDTO.setProfileType(user.getProfileType());
         recommendationDTO.setEmailId(user.getEmailId());
         recommendationDTO.setUserType(user.getUserType());
         recommendationDTO.setAge(user.getAge());
@@ -78,7 +77,6 @@ public class UserServiceImpl implements UserService {
             user1.setAadharNo(user.getAadharNo());
             user1.setPanNo(user.getPanNo());
             user1.setProfilePic(file.getBytes());
-            user1.setProfileType(file.getContentType());
             userRepository.save(user1);
             return user1;
         } else {

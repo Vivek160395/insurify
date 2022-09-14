@@ -6,17 +6,14 @@
         <mat-label>Search</mat-label>
         <input matInput type="text" class="form-control"  placeholder="Enter Keyword you want to search" [(ngModel)]="searchedKeyword">
       </mat-form-field>
-      <!-- <button mat-raised-button style="margin-left: 20px;"> <mat-icon>search</mat-icon> </button>  -->
-      <br>
+     <br>
       <br>
     <mat-tab-group>
-        <mat-tab label="All">
-        <div style="display: flex; flex-wrap: wrap;">
+        <mat-tab label="All" >
+        <div style="display: flex; flex-wrap: wrap; padding-top: 20px;" >
             <div *ngFor="let policy of policies | filter:searchedKeyword" >
-                <mat-card class="example-card">
-                    <mat-card-title>{{policy.name}} 
-                        <button mat-raised-button color="primary" (click)="openDialog()" style="margin-left: 50px;" >Details</button>
-                    </mat-card-title>
+                <mat-card class="example-card" (click)="openDialog()">
+                    <mat-card-title>{{policy.name}} </mat-card-title>
                     <mat-divider></mat-divider>
                     <br>
                     <mat-card-subtitle>
@@ -35,14 +32,12 @@
     </div>
 </mat-tab>
         <mat-tab label="Active">
-            <div style="display: flex; flex-wrap: wrap;" >
+            <div style="display: flex; flex-wrap: wrap; padding: 2px; padding-top: 20px;" >
             <div *ngFor="let policy of policies  | filter:searchedKeyword">
             
                     <div *ngIf="policy.status=='active'">
-                        <mat-card class="example-card" >
-                            <mat-card-title>{{policy.name}} 
-                                <button mat-raised-button color="primary" (click)="openDialog()" style="margin-left: 50px;" >Details</button>
-                            </mat-card-title>
+                        <mat-card class="example-card" (click)="openDialog()">
+                            <mat-card-title>{{policy.name}}  </mat-card-title>
                             <mat-divider></mat-divider>
                             <br>
                             <mat-card-subtitle>
@@ -61,13 +56,11 @@
             </div> 
         </div>
     </mat-tab>
-        <mat-tab label="Claimed"> <div style="display: flex; flex-wrap: wrap;">
+        <mat-tab label="Claimed"> <div style="display: flex; flex-wrap: wrap; padding-top: 20px;">
             <div *ngFor="let policy of policies  | filter:searchedKeyword" >
                 <div *ngIf="policy.status=='claimed'">
-                    <mat-card class="example-card" >
-                        <mat-card-title>{{policy.name}} 
-                            <button mat-raised-button color="primary" (click)="openDialog()" style="margin-left: 50px;" >Details</button>
-                        </mat-card-title>
+                    <mat-card class="example-card" (click)="openDialog()">
+                        <mat-card-title>{{policy.name}} </mat-card-title>
                         <mat-divider></mat-divider>
                         <br>
                         <mat-card-subtitle>

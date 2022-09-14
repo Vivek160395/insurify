@@ -17,6 +17,5 @@ public class UserDTO {
     private long aadharNo;
     private String panNo;
     private byte[] profilePic;
-    private String profileType;
 
 }
