@@ -1,11 +1,16 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserModule } from '@angular/platform-browser';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownModule } from "ngx-markdown";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PolicyDetailsComponent } from './policy-details/policy-details.component';
+
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { MatIconModule } from '@angular/material/icon';
 import { RegisterComponent } from './register/register.component';
+
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import {A11yModule} from '@angular/cdk/a11y';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
@@ -30,7 +35,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
@@ -53,27 +57,46 @@ import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {HttpClientJsonpModule, HttpClientModule} from'@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
-import { MatStepper } from '@angular/material/stepper';
+// import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
+import { ClaimComponent } from './claim/claim.component';
+import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 import { UpdateComponent } from './update/update.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DetailsComponent } from './details/details.component';
+import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     RecommendationComponent,
+    PolicyDetailsComponent,
+    NavBarComponent,
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
     PoliciesComponent,
     MoreComponent,
-    UpdateComponent
+    UpdateComponent,
+    ClaimComponent,
+    LoginComponent,
+    MoreComponent,
+    InsuranceDetailsComponent,
+    LoginComponent,
+    MoreComponent,
+    DetailsComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
+    IvyCarouselModule,
     BrowserModule,
     FlexLayoutModule,
     AppRoutingModule,
@@ -81,6 +104,15 @@ import { UpdateComponent } from './update/update.component';
     HttpClientModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
+    HttpClientJsonpModule,
+    MatCardModule,
+    FlexLayoutModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
     A11yModule,
     CdkAccordionModule,
     ClipboardModule,
@@ -129,10 +161,18 @@ import { UpdateComponent } from './update/update.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    // MatStepper,
     MatCardModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatSidenavModule,
+   
+    
+    
+
+
     MarkdownModule.forRoot(),
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

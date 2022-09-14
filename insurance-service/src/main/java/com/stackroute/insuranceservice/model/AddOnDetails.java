@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AddOnDetails {
 
-    String addOn;
-    long addOnPremium;
+    String addOnName;
+    String addOnDescription;
+    long addOnPremiums;
 }

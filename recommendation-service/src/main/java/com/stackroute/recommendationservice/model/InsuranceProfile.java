@@ -15,5 +15,7 @@ public class InsuranceProfile {
     private int age;
     private String insuranceType;
     private String occupation;
-    private String vehicle;
+    private String description;
+    private byte[] imageOfInsurance;
+    private String typeOfImage;
 }

@@ -6,7 +6,10 @@ import com.stackroute.recommendationservice.model.*;
 import com.stackroute.recommendationservice.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,21 +41,24 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         else {
             insurance2.setInsuranceId(insuranceProfile.getInsuranceId());
             insurance2.setInsuranceName(insuranceProfile.getInsuranceName());
+            insurance2.setDescription(insuranceProfile.getDescription());
+            insurance2.setNoOfUsersBought(0);
+            insurance2.setImageType(insuranceProfile.getTypeOfImage());
+            insurance2.setImageOfInsurance(insuranceProfile.getImageOfInsurance());
             insurance_repository.save(insurance2);
-            createAgeRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getAge());
+//            createAgeRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getAge());
             createInsuranceTypeRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getInsuranceType());
-            createOccupationRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getOccupation());
-//            createVehicleRelation(insurance.getInsuranceId(),insurance.getVehicle());
+//            createOccupationRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getOccupation());
             return insurance2;
         }
     }
 
-    @Override
-    public void addAge(int age) {
-        if(age_repository.findById(age).isEmpty()){
-            age_repository.save(new Age(age));
-        }
-    }
+//    @Override
+//    public void addAge(int age) {
+//        if(age_repository.findById(age).isEmpty()){
+//            age_repository.save(new Age(age));
+//        }
+//    }
 
     @Override
     public void addInsuranceType(String insurance_Type){
@@ -61,12 +67,12 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         }
     }
 
-    @Override
-    public void addOccupation(String occupation) {
-        if(occupation_repository.findById(occupation).isEmpty()){
-            occupation_repository.save(new Occupation(occupation));
-        }
-    }
+//    @Override
+//    public void addOccupation(String occupation) {
+//        if(occupation_repository.findById(occupation).isEmpty()){
+//            occupation_repository.save(new Occupation(occupation));
+//        }
+//    }
 
     @Override
     public User addUser(User user) throws UserAlreadyPosted {
@@ -92,27 +98,25 @@ public class Recommendation_Service_Impl implements Recommendation_service{
         }else return false;
     }
 
-    @Override
-    public boolean createAgeRelation(int insuranceId, int age) {
-        if(!insurance_repository.checkAgeRelationship(insuranceId,age)){
-            insurance_repository.createAgeRelation(insuranceId,age);
-            return true;
-        }else return false;
-    }
+//    @Override
+//    public boolean createAgeRelation(int insuranceId, int age) {
+//        if(!insurance_repository.checkAgeRelationship(insuranceId,age)){
+//            insurance_repository.createAgeRelation(insuranceId,age);
+//            return true;
+//        }else return false;
+//    }
 
-    @Override
-    public boolean createOccupationRelation(int insuranceId, String occupationName) {
-        if(!insurance_repository.checkOccupationRelation(insuranceId,occupationName)){
-            insurance_repository.createOccupationRelation(insuranceId,occupationName);
-            return true;
-        }return false;
-    }
+//    @Override
+//    public boolean createOccupationRelation(int insuranceId, String occupationName) {
+//        if(!insurance_repository.checkOccupationRelation(insuranceId,occupationName)){
+//            insurance_repository.createOccupationRelation(insuranceId,occupationName);
+//            return true;
+//        }return false;
+//    }
 
     @Override
     public boolean createUserToInsuranceRelation(int insuranceId, String userEmail) {
-        System.out.println("***************************************************************************************************************");
         System.out.println(insurance_repository.checkUserToInsuranceRelationship(insuranceId,userEmail));
-        System.out.println("***************************************************************************************************************");
         if(!insurance_repository.checkUserToInsuranceRelationship(insuranceId,userEmail)){
             insurance_repository.createUserToInsuranceRelationship(insuranceId,userEmail);
             Insurance insurance = insurance_repository.findById(insuranceId).get();
@@ -129,21 +133,21 @@ public class Recommendation_Service_Impl implements Recommendation_service{
 //        }
 //    }
 
-    @Override
-    public List<Insurance> getAllInsuranceOnBasisOfAge(int age) throws NoInsurancesFound {
-         List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithAge(age);
-         if(insurances.size() ==0){
-            throw new NoInsurancesFound();
-        }else return insurances;
-    }
+//    @Override
+//    public List<Insurance> getAllInsuranceOnBasisOfAge(int age) throws NoInsurancesFound {
+//         List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithAge(age);
+//         if(insurances.size() ==0){
+//            throw new NoInsurancesFound();
+//        }else return insurances;
+//    }
 
-    @Override
-    public List<Insurance> getAllInsuranceOnBasisOfOccupation(String occupationName)throws NoInsurancesFound {
-        List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithOccupation(occupationName);
-                if(insurances.size() ==0){
-            throw new NoInsurancesFound();
-        }else return insurances;
-    }
+//    @Override
+//    public List<Insurance> getAllInsuranceOnBasisOfOccupation(String occupationName)throws NoInsurancesFound {
+//        List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithOccupation(occupationName);
+//                if(insurances.size() ==0){
+//            throw new NoInsurancesFound();
+//        }else return insurances;
+//    }
 
     @Override
     public List<Insurance> getAllInsuranceOnBasisOfType(String insuranceType) throws NoInsurancesFound{
@@ -168,12 +172,4 @@ public class Recommendation_Service_Impl implements Recommendation_service{
             throw new NoInsurancesFound();
         }else return insurances;
     }
-
-//    @Override
-//    public List<Insurance> getAllInsuranceOnBasisOfVehicle(String vehicle) {
-//        List<Insurance> insurances = insurance_repository.getAllInsurancesMatchingWithVehicle(vehicle);
-//                if(insurances.size() ==0){
-//            throw new NoInsurancesFound();
-//        }else return insurances;
-//    }
 }

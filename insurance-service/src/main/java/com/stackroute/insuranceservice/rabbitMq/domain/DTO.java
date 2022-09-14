@@ -8,4 +8,6 @@ public class DTO {
     String policyName;
     String insuranceType;
     String description;
+    byte[] picByte;
+    String picType;
 }
