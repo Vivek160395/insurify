@@ -4,8 +4,7 @@ import com.stackroute.userservice.model.Address;
 import lombok.Data;
 
 @Data
-public class UserDTO
-{
+public class UserDTO {
     private String emailId;
     private String password;
     private String userType;
@@ -18,5 +17,6 @@ public class UserDTO
     private long aadharNo;
     private String panNo;
     private byte[] profilePic;
+    private String profileType;
 
 }

@@ -1,20 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { RecommendationServiceService } from '../recommendation-service.service';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent  {
+export class NavBarComponent implements OnInit  {
 
   email:any;
   avatarUrl:any;
   name:any;
-
+  imgurl = "";
+  imgurlType = "";
   motors: string[] = [
     'Motor Insurance',
     'Bike Insurance',
@@ -44,10 +46,19 @@ export class NavBarComponent  {
     shareReplay()
   );
 
-  constructor(private breakpointObserver: BreakpointObserver,private router: Router) { }
+  constructor(private breakpointObserver: BreakpointObserver,private router: Router,private service:RecommendationServiceService) { }
+  ngOnInit(): void {
+    this.getOneImage();
+  }
 
- 
 
-  
+  getOneImage(){
+    this.service.getAllInsurances().subscribe((data)=>{
+      this.imgurl = data[3].imageOfInsurance;
+      console.log(this.imgurl);
+      this.imgurlType = data[3].imageType;
+    })
+  }
+
 
 }

@@ -69,8 +69,7 @@ import { MoreComponent } from './more/more.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailsComponent } from './details/details.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
-
-
+import {IvyCarouselModule} from 'angular-responsive-carousel';
 
 
 
@@ -94,6 +93,7 @@ import { InsuranceDetailsComponent } from './insurance-details/insurance-details
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
+    IvyCarouselModule,
     BrowserModule,
     FlexLayoutModule,
     AppRoutingModule,
