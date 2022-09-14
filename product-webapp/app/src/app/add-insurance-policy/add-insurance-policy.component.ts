@@ -285,15 +285,9 @@ export class AddInsurancePolicyComponent implements OnInit {
     }
     );
     console.log(control.controls[i].value)
-    // x.controls.premiums=control.controls[i].value.premiums
-    // x.controls.durations=control.controls[i].value.durations
-    // x.controls.sumInsure=control.controls[i].value.sumInsure
-    // x.controls.adults=control.controls[i].value.adults
-    // x.controls.kids=control.controls[i].value.kids
-    // x.controls.minSalary=control.controls[i].value.minSalary
-    // x.controls.maxSalary=control.controls[i].value.maxSalary
+    
     control.push(x);
-    // control.push(control.controls[i]);
+    
   }
   addDetailsE(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];

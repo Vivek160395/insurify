@@ -12,13 +12,15 @@ export class PoliciesComponent {
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
+    // console.log(data);
+    
     const dialogRef = this.dialog.open(DetailsComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
-  
+
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
   from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
   originally bred for hunting.`;
