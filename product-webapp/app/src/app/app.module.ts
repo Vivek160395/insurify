@@ -67,6 +67,8 @@ import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +76,6 @@ import { MoreComponent } from './more/more.component';
     RecommendationComponent,
     PolicyDetailsComponent,
     NavBarComponent,
-
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
     PoliciesComponent,
@@ -152,6 +153,8 @@ import { MoreComponent } from './more/more.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule,
+   
+    
     
 
 
