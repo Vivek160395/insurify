@@ -18,4 +18,6 @@ public class Insurance {
     private String insuranceName;
     private int noOfUsersBought;
     private byte[] imageOfInsurance;
+    private String imageType;
+    private String description;
 }

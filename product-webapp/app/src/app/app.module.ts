@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-// import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserModule } from '@angular/platform-browser';
 import { MarkdownModule } from "ngx-markdown";
 import { AppRoutingModule } from './app-routing.module';
@@ -63,8 +63,13 @@ import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insuranc
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
+import { ClaimComponent } from './claim/claim.component';
 import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DetailsComponent } from './details/details.component';
+import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
+
 
 
 
@@ -79,8 +84,13 @@ import { MoreComponent } from './more/more.component';
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
     PoliciesComponent,
+    ClaimComponent,
     LoginComponent,
-    MoreComponent
+    MoreComponent,
+    InsuranceDetailsComponent,
+    LoginComponent,
+    MoreComponent,
+    DetailsComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
@@ -89,7 +99,7 @@ import { MoreComponent } from './more/more.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    // NgxPaginationModule,
+    NgxPaginationModule,
     BrowserAnimationsModule,
     HttpClientJsonpModule,
     MatCardModule,
@@ -159,6 +169,7 @@ import { MoreComponent } from './more/more.component';
 
 
     MarkdownModule.forRoot(),
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -20,5 +20,5 @@ public class PolicyDetails {
     long maxSalary;
     Integer minAge;
     Integer maxAge;
-    List<String> modelsAllowed;
+
 }
