@@ -111,8 +111,8 @@ public class UserControllerTest {
         when(userService.updateUser(any(),anyString(),any())).thenReturn(user1);
         //verify the exception(matching)
         MockMultipartFile file = new MockMultipartFile("data", "filename.txt", "text/plain", "some xml".getBytes());
-
 //        MockMvc mockMvc1 = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        MockMultipartFile user =new MockMultipartFile("userData","users.txt","text/plain","some xml".getBytes());
 
         MockMultipartHttpServletRequestBuilder builder =
                 MockMvcRequestBuilders.multipart("/api/v1/updateUser/ajay123@gmail.com");
@@ -125,14 +125,10 @@ public class UserControllerTest {
         });
         mockMvc.perform(builder
                                 .file(file)
-                        .contentType(MediaType.APPLICATION_JSON)
-                                .content(jsonToString(user1))
-
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(jsonToString(user1))
-                )
-
-                .andExpect(status().isOk());
+                                .file(user)
+                                .contentType(MediaType.MULTIPART_FORM_DATA_VALUE)
+                                .content(jsonToString(user)))
+                            .andExpect(status().isOk());
 //        mockMvc.perform(MockMvcRequestBuilders.multipart("/api/v1/updateUser/ajay123@gmail.com")
 //                        .file(file)
 ////                        .contentType(MediaType.APPLICATION_JSON)
