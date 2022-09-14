@@ -56,9 +56,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
 import { MatStepper } from '@angular/material/stepper';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
-// import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
 import { MoreComponent } from './more/more.component';
+import { UpdateComponent } from './update/update.component';
 
 @NgModule({
   declarations: [
@@ -68,12 +69,13 @@ import { MoreComponent } from './more/more.component';
     AddInsurancePolicyComponent,
     PreviewMarkupComponent,
     PoliciesComponent,
-    MoreComponent
+    MoreComponent,
+    UpdateComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
     BrowserModule,
-    // FlexLayoutModule,
+    FlexLayoutModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
