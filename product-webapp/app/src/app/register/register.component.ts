@@ -11,7 +11,7 @@ export class RegisterComponent implements OnInit {
 
   repeatPassword: string = "none";
 
-    
+
 constructor() {}
 
 ngOnInit():void{}

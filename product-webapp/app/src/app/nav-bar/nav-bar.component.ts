@@ -48,17 +48,20 @@ export class NavBarComponent implements OnInit  {
 
   constructor(private breakpointObserver: BreakpointObserver,private router: Router,private service:RecommendationServiceService) { }
   ngOnInit(): void {
-    this.getOneImage();
+    // this.getALlUsers();
   }
 
 
-  getOneImage(){
-    this.service.getAllInsurances().subscribe((data)=>{
-      this.imgurl = data[3].imageOfInsurance;
-      console.log(this.imgurl);
-      this.imgurlType = data[3].imageType;
-    })
-  }
+  // getALlUsers(){
+  //   this.service.getAllUsers().subscribe((data)=>{
+  //     for(var i=0;i<data.length;i++){
+  //       if(this.service.userEmail === data[i].emailId){
+  //         this.image = data.profilePic;
+  //       }
+  //     }
+  //   })
+  // }
+  // image="";
 
 
 }
