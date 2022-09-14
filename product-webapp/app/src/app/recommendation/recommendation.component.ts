@@ -121,6 +121,7 @@ motor(){
       this.service.getAllInsurances().subscribe((data)=>{
         this.images=data;
         this.allNames = this.images;
+        console.log(this.images[0].imageType);
       })
     }
     getimageOfFarmer(type:string){

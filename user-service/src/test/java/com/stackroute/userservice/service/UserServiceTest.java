@@ -28,40 +28,41 @@ import static org.mockito.internal.verification.VerificationModeFactory.times;
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
-        @Mock
-        private UserRepository userRepository;
+    @Mock
+    private UserRepository userRepository;
 
-        @Mock
-        MockMultipartFile file;
+    @Mock
+    MockMultipartFile file;
 
-        @Mock
-        private Producer producer;
+    @Mock
+    private Producer producer;
 
-        @InjectMocks
-        private UserServiceImpl userService;
+    @InjectMocks
+    private UserServiceImpl userService;
 
+    Address address1, address2;
+    User user1, user2;
 
-        Address address1, address2;
-        User user1, user2;
+    @BeforeEach
+    public void setUp() {
+        address1 = new Address(637, "gali no. 1", "st mary school", "panipat", "haryana", 132101);
+        user1 = new User("ajay123@gmail.com", "ajay123", "insurer", "Ajay Kumar", "male", 24, "23-01-1999", 9991119990l,
+                address1, 123456789098l, "ABCD234", null, "");
 
-        @BeforeEach
-        public void setUp(){
-            address1=new Address(637,"gali no. 1","st mary school","panipat","haryana",132101);
-            user1=new User("ajay123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address1,123456789098l,"ABCD234",null);
+        address2 = new Address(637, "gali no. 1", "st mary school", "panipat", "haryana", 132101);
+        user2 = new User("aman123@gmail.com", "ajay123", "insurer", "Ajay Kumar", "male", 24, "23-01-1999", 9991119990l,
+                address2, 123456789098l, "ABCD234", null, "");
 
-            address2=new Address(637,"gali no. 1","st mary school","panipat","haryana",132101);
-            user2=new User("aman123@gmail.com","ajay123","insurer","Ajay Kumar","male",24,"23-01-1999",9991119990l,address2,123456789098l,"ABCD234",null);
+    }
 
-        }
-
-        @AfterEach
-        public void tearDown(){
+    @AfterEach
+    public void tearDown() {
 
         user1 = null;
         user2 = null;
     }
 
-        @Test
+    @Test
         public void registerUserTestPass() throws UserAlreadyExistsException {
 //        when(productRepository.findById(prod1.getProductId())).thenReturn(Optional.ofNullable(null));
 
@@ -72,7 +73,7 @@ public class UserServiceTest {
         verify(userRepository,times(0)).deleteById(any());
     }
 
-        @Test
+    @Test
         public void registerUserTestFail(){
         when(userRepository.findById(user1.getEmailId())).thenReturn(Optional.ofNullable(user1));
         assertThrows(UserAlreadyExistsException.class,()->userService.registerUser(user1));
@@ -81,7 +82,7 @@ public class UserServiceTest {
         verify(userRepository,times(0)).deleteById(any());
     }
 
-        @Test
+    @Test
         public void deleteUserPass() throws UserNotRegisteredException {
         when(userRepository.findById(user1.getEmailId())).thenReturn(Optional.ofNullable(user1));
         boolean flag = userService.deleteUser(user1.getEmailId());
@@ -103,4 +104,4 @@ public class UserServiceTest {
         verify(userRepository,times(0)).deleteById(any());
     }
 
-    }
+}
