@@ -9,7 +9,7 @@
   
 .example-card:hover{
   /* transform: ; */
-  border: 2px solid #000;
+  border: 2px solid rgb(104, 44, 143);
   transform: scale(1.1);
   /* margin: 5px; */
 }
