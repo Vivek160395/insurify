@@ -19,15 +19,12 @@ const routes: Routes = [
   {path:"register",component:RegisterComponent},
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},
-<<<<<<< HEAD
   {path:"update", component:UpdateComponent},
-=======
   {path: "login", component: LoginComponent},
   {path: "nav-bar", component: NavBarComponent},
   {path:"claim",component:ClaimComponent},
   {path: "login", component: LoginComponent},
   {path:"policyDetails",component:InsuranceDetailsComponent}
->>>>>>> 241e628de88b241bd752e4900f3ef20e202f864f
 ];
 
 @NgModule({
