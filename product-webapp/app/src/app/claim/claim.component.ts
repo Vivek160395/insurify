@@ -1,9 +1,14 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { StepperOrientation } from '@angular/cdk/stepper';
+import { DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { map, Observable } from 'rxjs';
 import { Claim } from '../claim';
+import { DetailsComponent } from '../details/details.component';
+
 
 
  
@@ -12,6 +17,7 @@ import { Claim } from '../claim';
   templateUrl: './claim.component.html',
   styleUrls: ['./claim.component.css']
 })
+
 export class ClaimComponent implements OnInit {
 
   firstFormGroup = this._formBuilder.group({
@@ -25,7 +31,7 @@ export class ClaimComponent implements OnInit {
   });
   stepperOrientation: Observable<StepperOrientation>;
 
-  constructor(private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver) {
+  constructor(private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver,public dialog: MatDialog) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
@@ -44,6 +50,14 @@ export class ClaimComponent implements OnInit {
       endDate: '27-01-2023',
     },
   ]
-  
+  openDialog() {
+    const dialogRef = this.dialog.open(DetailsComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+ 
+ 
 
 }
