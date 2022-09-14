@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { T } from '@angular/cdk/keycodes';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-update',
@@ -10,9 +11,10 @@ import { T } from '@angular/cdk/keycodes';
 })
 export class UpdateComponent implements OnInit {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,private service:UserService) { }
 
   ngOnInit(): void {
+    this.getDetails();
   }
 
   selectedFile=null;
@@ -36,8 +38,14 @@ export class UpdateComponent implements OnInit {
   onSubmit(){
     console.log(this.profile.value);
   }
-
-
+  get name(){
+    return this.profile.get('name');
+  }
+  get dob(){
+    return this.profile.get('dob');
+  }  get gender(){
+    return this.profile.get('gender');
+  }
 
   onImgSelected(e:any){
    if(e.target.files){
@@ -47,4 +55,16 @@ export class UpdateComponent implements OnInit {
      this.url=event.target.result;
   }}}
 
+  details = [];
+  nameOfPerson ="";
+  getDetails(){
+    this.service.getUserDetails().subscribe(data=>{
+      for(var i=0;i<data.length;i++){
+        console.log(data[i].emailId);
+        if(data[i].emailId === this.service.email){
+          this.nameOfPerson = data[i].name;
+        }
+      }
+    })
+  }
 }
