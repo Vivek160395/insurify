@@ -1,17 +1,30 @@
+@font-face {
+    font-family: lato;
+    src: url("../../assets/caveat.regular.ttf") format("opentype");
+}
+
 .sidenav-container {
     height: 100%;
-  }
-  
-  .sidenav {
+}
+
+.sidenav {
     width: 200px;
-  }
-  
-  .sidenav .mat-toolbar {
+}
+
+.logo {
+    font-family: 'lato', Arial, Helvetica, sans-serif;
+}
+
+.sidenav .mat-toolbar {
     background: inherit;
-  }
-  
-  .mat-toolbar.mat-primary {
+}
+
+.mat-toolbar.mat-primary {
     position: sticky;
     top: 0;
     z-index: 1;
-  }
+}
+
+button {
+    border: none;
+}
