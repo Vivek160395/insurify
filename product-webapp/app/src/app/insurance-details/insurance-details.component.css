@@ -1,13 +1,12 @@
 @media screen and (max-width:800px) {
-    imgages {
-        width: 10%;
-        height: 10%;
+    .images {
+        width: 50%;
+        height: 50%;
+        align-items: center;
     }
 }
 
-.carsouel {
-    margin-top: 5%;
+.divsecond {
     display: flex;
-    width: 100%;
-    justify-content: center;
+    justify-content: space-between;
 }
