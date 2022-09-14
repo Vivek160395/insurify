@@ -1,2 +1,88 @@
 
-<h1>work</h1>
+<mat-stepper>
+    class="example-stepper"
+    [orientation]="(stepperOrientation | async)!">
+    <mat-step [stepControl]="firstFormGroup" label="User Claim profile">
+        !-- <div fxLayout="row" fxLayoutAlign="center stretch">
+            <mat-card class="example-card">
+        
+                <mat-card-title class="title">Claim Profile:</mat-card-title>
+                <div fxLayout="row" fxLayoutGap="2%">
+                    <mat-card-content appearance="outline" fxFlex="23%">
+        
+                        
+                            <mat-card class="example-content1">
+                                
+                            </mat-card>
+        
+                 
+                    </mat-card-content>
+                    <mat-card-actions>
+        
+                    </mat-card-actions>
+                    <mat-card-content appearance="outline" fxFlex="75%"  >
+        
+                        <div *ngFor="let policy of policies">
+                            <mat-card class="example-content">
+        
+                                <mat-card-subtitle>
+                                    <div class="class-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                PolicyId :<span class="font-weight-bold">{{policy.policyNo}}</span>
+        
+                                            </li>
+                                            <li class="list-group-item">
+                                                Insurance Type :<span class="font-weight-bold">{{policy.insuranceType}} </span>
+        
+                                            </li>
+                                            <li class="list-group-item">
+                                                Name of the insured person :<span
+                                                    class="font-weight-bold">{{policy.userName}}</span>
+        
+                                            </li>
+                                            <li class="list-group-item">
+                                                Contact details :<span class="font-weight-bold">{{policy.contactDetails}}</span>
+        
+                                            </li>
+                                            <li class="list-group-item">
+                                                Policy PurchaseDate :<span class="font-weight-bold">
+                                                    {{policy.purchaseDate}}</span>
+        
+                                            </li>
+                                            <li class="list-group-item">
+                                                Policy EndDate :<span class="font-weight-bold">{{policy.endDate}} </span>
+        
+                                            </li>
+        
+                                        </ul>
+        
+                                    </div>
+                                </mat-card-subtitle>
+                                <button class="btn">Proceed To Claim</button>
+        
+                            </mat-card>
+        
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+        
+                    </mat-card-actions>
+                </div>
+            </mat-card>
+        
+        </div> -->
+       
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Upload document and describe an event">
+
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>Your Claim is done</p>
+        <div>
+            <button mat-button matStepperPrevious>submit</button>
+        </div>
+
+    </mat-step>
+</mat-stepper>

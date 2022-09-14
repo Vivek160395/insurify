@@ -1,1 +1,50 @@
-
+.example-card {
+    width: 900px;
+    height:500px;
+  
+  }
+  .example-content{
+    text-align: center;
+   
+    width:600px;
+   
+    
+  }
+  .example-content1{
+    text-align: center;
+   
+    width:200px;
+    height:430px;
+    
+  }
+  .list-group-item{
+    font-family: "Lucida Console", "Courier New", monospace;
+    background-color: rgb(208, 214, 245);
+  }
+  .btn{
+  padding: 4px 10px;
+background: #59abf8;
+border: none;
+color: white;
+border-radius: 30px;
+font-size: 12px;
+text-decoration: none;
+font-weight: bold;
+transition: all .3s ease-in;
+margin-left:440px;
+  }
+  .btn:hover{
+background: transparent;
+color: #7F00FF;
+border: 2px solid #7F00FF;
+  }
+  .title{
+    font-family: "Times New Roman", Times, serif;
+  }
+  .example-stepper {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
