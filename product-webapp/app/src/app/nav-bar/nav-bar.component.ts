@@ -53,15 +53,15 @@ export class NavBarComponent implements OnInit  {
   }
   getAllUsers():void{
     this.service.getUser().subscribe((data)=>{
-      for(var i=0;i<data.length;i++){
-        if(this.service.userEmail === data[i].emailId){
-          this.image = data[i].profilePic;
-          console.log(data[i].emailId)        }
+      // for(var i=0;i<data.length;i++){
+      //   if(this.service.userEmail === data[i].emailId){
+      //     this.image = data[i].profilePic;
+      //     console.log(data[i].emailId)        }
         if(this.image===null || this.image==="")
         {
-          this.image="../../assets/img/blank-profile-picture-973460_1280.webp";
+          this.image="app\src\assets\img\blank-profile-picture-973460_1280.webp";
         }
-     }
+     //}
     })
 
   }
