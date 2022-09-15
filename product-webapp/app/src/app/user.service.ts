@@ -8,8 +8,18 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   constructor(private http:HttpClient) { }
+
+  email='';
+
   getUserDetails():Observable<any>{
     return this.http.get("http://localhost:8085/api/v1/users");
   }
-  email ="gritvik9@gmail.com";
+  
+ updateUserDetails():Observable<any>{
+  return this.http.put("http://localhost:8085/api/v1/updateUser/"+this.email,'',);
+ }
+
+ 
+
+
 }

@@ -18,7 +18,7 @@ export class UpdateComponent implements OnInit {
   }
 
   selectedFile=null;
-  url=null;
+  Imgurl=null;
 
   profile=new FormGroup({
     name:new FormControl(null,[Validators.required,Validators.pattern('[a-zA-Z0-9 ]*')]),
@@ -38,33 +38,61 @@ export class UpdateComponent implements OnInit {
   onSubmit(){
     console.log(this.profile.value);
   }
-  get name(){
-    return this.profile.get('name');
-  }
-  get dob(){
-    return this.profile.get('dob');
-  }  get gender(){
-    return this.profile.get('gender');
-  }
+
+  // get name(){
+  //   return this.profile.get('name');
+  // }
+
+  // get dob(){
+  //   return this.profile.get('dob');
+  // } 
+  
+  // get gender(){
+  //   return this.profile.get('gender');
+  // }
 
   onImgSelected(e:any){
    if(e.target.files){
      var reader=new FileReader();
      reader.readAsDataURL(e.target.files[0]);
      reader.onload=(event:any)=>{
-     this.url=event.target.result;
+     this.Imgurl=event.target.result;
   }}}
 
-  details = [];
-  nameOfPerson ="";
+  details:any = [];
+  name1:string ="";
+  number1:number=0;
+  dob1:string='';
+  gender1:string='';
+  aadhar1:number=0;
+  pan1:string='';
+  hno1:string='';
+  street1:string='';
+  land1:string='';
+  city1:string='';
+  state1:string='';
+  pin1:number=0;
+
   getDetails(){
     this.service.getUserDetails().subscribe(data=>{
       for(var i=0;i<data.length;i++){
-        console.log(data[i].emailId);
         if(data[i].emailId === this.service.email){
-          this.nameOfPerson = data[i].name;
-        }
-      }
-    })
+          this.name1 = data[i].name;
+          this.number1=data[i].mobileNo;
+          this.dob1=data[i].dateOfBirth;
+          this.gender1=data[i].gender;
+          this.aadhar1=data[i].aadharNo;
+          this.pan1=data[i].panNo;
+          this.hno1=data[i].address.houseNo;
+          this.street1=data[i].address.street;
+          this.land1=data[i].address.landmark;
+          this.city1=data[i].address.city;
+          this.state1=data[i].address.state;
+          this.pin1=data[i].address.pincode;
+         }
+      }})
   }
+
+
+  
 }
