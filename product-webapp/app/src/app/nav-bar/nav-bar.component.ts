@@ -14,7 +14,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class NavBarComponent implements OnInit  {
 
- 
+
   avatarUrl:any;
   imgurl = "";
   imgurlType = "";
@@ -59,6 +59,7 @@ export class NavBarComponent implements OnInit  {
           console.log(data[i].emailId)        }
         if(this.image===null || this.image==="")
         {
+          console.log("hello");
           this.image="../../assets/img/blank-profile-picture-973460_1280.webp";
         }
      }
@@ -67,7 +68,7 @@ export class NavBarComponent implements OnInit  {
   }
   image:any
   email:any
-  
+
 
 
 
