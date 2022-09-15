@@ -1,13 +1,11 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserModule } from '@angular/platform-browser';
 import { MarkdownModule } from "ngx-markdown";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { RegisterComponent } from './register/register.component';
-
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import {A11yModule} from '@angular/cdk/a11y';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
@@ -62,7 +60,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
 import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
+import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DialogDataComponent } from './dialog-data/dialog-data.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +73,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     PreviewMarkupComponent,
     PoliciesComponent,
     LoginComponent,
-    MoreComponent
+    MoreComponent,
+    RenewalPolicyComponent,
+    DialogDataComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
@@ -140,6 +142,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]
 })
 export class AppModule { }

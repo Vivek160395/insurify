@@ -6,6 +6,7 @@ import { PreviewMarkupComponent } from './preview-markup/preview-markup.componen
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:"register",component:RegisterComponent},
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},
-  {path: "login", component: LoginComponent}
+  {path: "login", component: LoginComponent},
+  {path: "renewal", component: RenewalPolicyComponent}
 ];
 
 @NgModule({
