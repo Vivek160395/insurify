@@ -8,8 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
-
 @Document
 @Data
 @NoArgsConstructor
@@ -30,7 +28,8 @@ public class User {
     private String panNo;
     private byte[] profilePic;
 
-    public User(String emailId, String password, String userType, String name, String gender, int age, String dateOfBirth, long mobileNo, Address address, long aadharNo, String panNo) {
+    public User(String emailId, String password, String userType, String name, String gender, int age,
+            String dateOfBirth, long mobileNo, Address address, long aadharNo, String panNo) {
         this.emailId = emailId;
         this.password = password;
         this.userType = userType;

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     @Autowired
@@ -44,15 +44,13 @@ public class UserServiceImpl implements UserService{
         userDTO.setAadharNo(user.getAadharNo());
         userDTO.setPanNo(user.getPanNo());
         userDTO.setProfilePic(user.getProfilePic());
-
         recommendationDTO.setEmailId(user.getEmailId());
         recommendationDTO.setUserType(user.getUserType());
         recommendationDTO.setAge(user.getAge());
 
-        if(userRepository.findById(user.getEmailId()).isPresent()){
+        if (userRepository.findById(user.getEmailId()).isPresent()) {
             throw new UserAlreadyExistsException();
-        }
-        else {
+        } else {
             userRepository.save(user);
             producer.sendMessageToAuthRabbitMq(userDTO, recommendationDTO);
             return user;
@@ -65,40 +63,34 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User updateUser(User user, String emailId, MultipartFile file) throws UserNotRegisteredException, IOException {
-        if(userRepository.findById(emailId).isPresent())
-        {
+    public User updateUser(User user, String emailId, MultipartFile file)
+            throws UserNotRegisteredException, IOException {
+        if (userRepository.findById(emailId).isPresent()) {
             User user1 = userRepository.findById(emailId).get();
 
             user1.setName(user.getName());
-            user1.setName(user.getName());
             user1.setAge(user.getAge());
             user1.setGender(user.getGender());
-            user1.setDateOfBirth(user.getDateOfBirth());
-            user1.setMobileNo(user.getMobileNo());
-            user1.setAddress(user.getAddress());
-            user1.setAadharNo(user.getAadharNo());
-            user1.setPanNo(user.getPanNo());
+//            user1.setDateOfBirth(user.getDateOfBirth());
+//            user1.setMobileNo(user.getMobileNo());
+//            user1.setAddress(user.getAddress());
+//            user1.setAadharNo(user.getAadharNo());
+//            user1.setPanNo(user.getPanNo());
             user1.setProfilePic(file.getBytes());
-
             userRepository.save(user1);
             return user1;
-        }
-        else
-        {
+        } else {
             throw new UserNotRegisteredException();
         }
     }
 
     @Override
     public boolean deleteUser(String emailId) throws UserNotRegisteredException {
-//        User user = userRepository.findById(emailId).get();
-        if(userRepository.findById(emailId).isPresent()){
+        // User user = userRepository.findById(emailId).get();
+        if (userRepository.findById(emailId).isPresent()) {
             userRepository.deleteById(emailId);
             return true;
-        }
-        else
-        {
+        } else {
             throw new UserNotRegisteredException();
         }
     }

@@ -1,0 +1,12 @@
+@media screen and (max-width:800px) {
+    .images {
+        width: 50%;
+        height: 50%;
+        align-items: center;
+    }
+}
+
+.divsecond {
+    display: flex;
+    justify-content: space-between;
+}

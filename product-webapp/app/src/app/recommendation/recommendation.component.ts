@@ -1,7 +1,8 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { S } from '@angular/cdk/keycodes';
+import { C, E } from '@angular/cdk/keycodes';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { RecommendationServiceService } from '../recommendation-service.service';
 export interface Insurances {
   name: string;
 }
@@ -16,75 +17,58 @@ export class RecommendationComponent implements OnInit {
   images:any =[];
   trendNames:any=[];
   healthNames:any=[];
-  otherNames:any=[];
+  motorNames:any=[];
   lifeNames:any=[];
-  cropNames:any=[];
+  otherNames:any=[];
   isHealth=true;
   isDisplay=false;
-  isOther=true;
+  isMotor=true;
   isLife=true;
   isTrend=true;
+  isother=true;
   healthCount:number=0;
   lifeCount:number=0;
   otherCount:number=0;
-  cropCount:number=0;
   displayHealth=false;
   displayLife=false;
-  displayCrop=false;
+  displayother=false;
   displayOther=false;
   totalLength:any;
   page:number=1;
   showMore:boolean=false;
   health(){
-    this.isHealth=!this.isHealth;
-    this.isOther=true;
-    this.isDisplay=true;
-    this.isLife=true;
-    this.isTrend=true;
-    if(this.isHealth==true){
-       this.isDisplay=false;
-      this.allNames = this.images;
-      this.totalLength=this.allNames.length;
-    }else{
-      this.allNames = this.healthNames;
-      this.totalLength=this.allNames.length;
-    }
-  }
-other(){
-    this.isDisplay=true;
-    this.isHealth=true;
-    this.isLife=true;
-    this.isTrend=true;
-    this.isOther=!this.isOther;
-    if(this.isOther==true){
-      this.isDisplay=false;
-      this.allNames = this.images;
-      this.totalLength=this.allNames.length;
-    }else{
-    this.allNames = this.otherNames;
-    this.totalLength=this.allNames.length;
-    }
+    // this.isHealth=!this.isHealth;
+    // this.isOther=true;
+    // this.isDisplay=true;
+    // this.isLife=true;
+    // this.isTrend=true;
+    // if(this.isHealth==true){
+    //    this.isDisplay=false;
+    //   this.allNames = this.images;
+    //   this.totalLength=this.allNames.length;
+    // }else{
+    //   this.allNames = this.healthNames;
+    //   this.totalLength=this.allNames.length;
+    // }
   }
 life(){
-  this.isDisplay=true;
-  this.isHealth=true;
-  this.isOther=true;
+  this.isother=true;
+  this.isMotor=true;
   this.isTrend=true;
   this.isLife=!this.isLife;
   if(this.isLife==true){
     this.isDisplay=false;
     this.allNames = this.images;
-    this.totalLength=this.allNames.length;
+      this.totalLength=this.allNames.length;
   }else{
- this.allNames = this.lifeNames;
- this.totalLength=this.allNames.length;
+    this.allNames = this.lifeNames;
+    this.totalLength=this.allNames.length;
   }
 }
 trend(){
-  this.isDisplay=true;
-  this.isHealth=true;
-  this.isOther=true;
-  this.isLife=true;
+  this.isother=true;
+  this.isMotor=true;
+  this.isLife = true;
   this.isTrend=!this.isTrend;
   if(this.isTrend==true){
     this.isDisplay=false;
@@ -95,46 +79,74 @@ trend(){
     this.totalLength=this.allNames.length;
   }
 }
+other(){
+  this.isMotor =true;
+  this.isTrend= true;
+  this.isLife = true;
+  this.isother = !this.isother;
+  if(this.isother == true){
+    this.isDisplay = false;
 
-
-
-  constructor(private http:HttpClient) { }
+    this.allNames = this.images;
+    this.totalLength=this.allNames.length;
+  }else{
+    this.allNames = this.otherNames;
+    this.totalLength=this.allNames.length;
+  }
+}
+motor(){
+  this.isother =true;
+  this.isTrend= true;
+  this.isLife = true;
+  this.isMotor = !this.isMotor;
+  if(this.isMotor == true){
+    this.isDisplay = false;
+    this.allNames = this.images;
+    this.totalLength=this.allNames.length;
+  }else{
+    this.allNames = this.motorNames;
+    this.totalLength=this.allNames.length;
+  }
+}
+  constructor(private http:HttpClient,private service:RecommendationServiceService) { }
   ngOnInit(): void {
     this.getNames();
-    this.getTrendingNames();
+    this.getimageOfFarmer("Farmer Insurance");
+    this.getImagesOfLife("Life Insurance");
+    this.getimagesOfMotor("Motor Insurance");
+    this.getrendingInsurances();
   }
+
  getNames(){
-      this.http.get("http://localhost:3000/recommendation").subscribe((data)=>{
+      this.service.getAllInsurances().subscribe((data)=>{
         this.images=data;
         this.allNames = this.images;
-        this.totalLength=this.allNames.length;
-        for(var i=0;i<this.images.length;i++){
-          if(this.images[i].type=="health"){
-         this.healthNames[this.healthCount]=this.images[i];
-         this.healthCount++;
-         this.displayHealth=true;
-       }
-       if(this.images[i].type=="life"){
-        this.lifeNames[this.lifeCount]=this.images[i];
-        this.lifeCount++;
-        this.displayLife=true;
-       }
-       else if(this.images[i].type=="other"){
-        this.otherNames[this.otherCount]=this.images[i];
-        this.otherCount++;
-        this.displayOther=true;
-       }
-       else if(this.images[i].type=="crop"){
-        this.cropNames[this.cropCount]=this.images[i];
-        this.cropCount++;
-        this.displayCrop=true;
-       }
-      }
+        console.log(this.images[0].imageType);
       })
     }
-    getTrendingNames(){
-      this.http.get("http://localhost:3000/trends").subscribe((data)=>{
-        this.trendNames=data;
+    getimageOfFarmer(type:string){
+      this.service.getInsuranceOnBasisOfType(type).subscribe((data)=>{
+          this.otherNames=data;
+      })
+    }
+    getImagesOfLife(type:string){
+      this.service.getInsuranceOnBasisOfType(type).subscribe((data)=>{
+          this.lifeNames=data;
+      })
+    }
+    getimagesOfMotor(type:string){
+      this.service.getInsuranceOnBasisOfType(type).subscribe((data)=>{
+          this.motorNames=data;
+      })
+    }
+    getrendingInsurances(){
+      this.service.getrendingInsurances().subscribe((data)=>{
+        this.trendNames = data;
+      })
+    }
+    getLifeInsurances(type:string){
+      this.service.getInsuranceOnBasisOfType(type).subscribe((data)=>{
+        this.lifeNames = data;
       })
     }
   }

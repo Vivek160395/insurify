@@ -1,0 +1,69 @@
+<mat-sidenav-container class="sidenav-container" style="height:5rem;">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'nav-bar'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="false" style="color: solid;">
+        <mat-toolbar style="color:black">Menu</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item href="#" style="color:black">Home</a>
+            <a mat-list-item href="#" style="color:black">Need to be Updated</a>
+            <a mat-list-item href="#" style="color:black">My Login</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar style="height: 5rem; background-image: linear-gradient(to right, #8c1dd1,#8c1dd1); ">
+            <button style="justify-content:right ;" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="400px">
+        <mat-icon aria-label="Side nav toggle icon" style="justify-content:left;">menu</mat-icon>
+
+      </button>
+            <span style="font-size: 2rem; font-weight:bold;
+         color:black; letter-spacing:0.5rem; font-family: 'caveat'; position:absolute; margin-left: 42px; margin-right: auto;" class="logo">
+        INSURIFY</span>
+            <div style="display: flex;justify-content:space-between;width:100% ;">
+                <div>
+                    <mat-form-field appearance="fill" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size:1rem; color:black; position:relative; margin-left:230px; margin-top: 40px; ">
+                        <mat-label>Motor Insurance</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let motor of motors" [value]="motor">{{motor}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size:1rem; color:black; position:relative; margin-left:2px; margin-top: 40px; ">
+                        <mat-label>Health Insurance</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let health of healths" [value]="health">{{health}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size:1rem; color:black; position:relative; margin-left:2px; margin-top: 40px; ">
+                        <mat-label>Renewals</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let renewal of renewals" [value]="renewal">{{renewal}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size:1rem; color:black; position:relative; margin-left:2px; margin-top: 40px; ">
+                        <mat-label>Claims</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let claim of claims" [value]="claim">{{claim}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- <img class="profile_pic" src="../../assets/img/image (1).png" style="border-radius:50px; height:3rem; width: 3rem;position:relative; margin-left:50px;"> -->
+                <!-- <p [matMenuTriggerFor]="beforeMenu" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size:1rem; color:black; position:relative; margin-left:2px; margin-top: 40px;">
+                My Account</p> -->
+                <div style="margin-top:15px ;">
+                    <p [matMenuTriggerFor]="beforeMenu" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size:1rem; color:black; position:relative; margin-left:2px; margin-top: 20px;">
+                        <img class="profile_pic" src="data:*;base64,{{imgurl}}" style=" border-radius:50px; height:3.5rem; width: 3.5rem;position:relative; margin-left:50px; ">
+                    </p>
+                    <mat-menu #beforeMenu="matMenu" xPosition="before" style="padding:none ; ">
+                        <p mat-menu-item style="margin: 0; ">Edit profile</p>
+                        <p mat-menu-item style="margin: 0; ">Sign out</p>
+                    </mat-menu>
+                </div>
+            </div>
+
+
+
+
+        </mat-toolbar>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

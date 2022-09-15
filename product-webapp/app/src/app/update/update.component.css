@@ -1,0 +1,18 @@
+h1{
+    font-family: 'Times New Roman', Times, serif;
+    color: blue;
+}
+hr{
+    color: blue;
+}
+input[type=submit]{
+    width: 30%;
+    background-color:skyblue;
+    color: black;
+    cursor: pointer;
+    margin: 8px 0;
+    padding: 8px 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+    
+}

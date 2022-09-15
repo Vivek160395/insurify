@@ -1,14 +1,14 @@
-import { AnimationStyleMetadata } from '@angular/animations';
+
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component,  OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Insurance } from '../insurance';
 import { MatDialog } from '@angular/material/dialog';
-import { Dialog } from '@angular/cdk/dialog';
+
 import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
-// import { FlexAlignDirective } from '@angular/flex-layout';
+
 
 export interface bike {
   value: string;
@@ -285,15 +285,9 @@ export class AddInsurancePolicyComponent implements OnInit {
     }
     );
     console.log(control.controls[i].value)
-    // x.controls.premiums=control.controls[i].value.premiums
-    // x.controls.durations=control.controls[i].value.durations
-    // x.controls.sumInsure=control.controls[i].value.sumInsure
-    // x.controls.adults=control.controls[i].value.adults
-    // x.controls.kids=control.controls[i].value.kids
-    // x.controls.minSalary=control.controls[i].value.minSalary
-    // x.controls.maxSalary=control.controls[i].value.maxSalary
+    
     control.push(x);
-    // control.push(control.controls[i]);
+    
   }
   addDetailsE(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
