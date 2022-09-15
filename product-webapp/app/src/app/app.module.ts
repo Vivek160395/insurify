@@ -57,13 +57,16 @@ import {HttpClientJsonpModule, HttpClientModule} from'@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
-// import { MatStepper } from '@angular/material/stepper';
+
+
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
 import { ClaimComponent } from './claim/claim.component';
 import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
+import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
+import { DialogDataComponent } from './dialog-data/dialog-data.component';
 import { UpdateComponent } from './update/update.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailsComponent } from './details/details.component';
@@ -87,6 +90,8 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     ClaimComponent,
     LoginComponent,
     MoreComponent,
+    RenewalPolicyComponent,
+    DialogDataComponent,
     InsuranceDetailsComponent,
     LoginComponent,
     MoreComponent,
@@ -159,16 +164,10 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    // MatStepper,
     MatCardModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSidenavModule,
-   
-    
-    
-
-
     MarkdownModule.forRoot(),
     Ng2SearchPipeModule
   ],

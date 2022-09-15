@@ -7,7 +7,7 @@ import { Observable, Observer } from 'rxjs';
 })
 export class Userservice1Service {
 
-  
+
   constructor(private httpclient:HttpClient) { }
 
   getUser():Observable<any>{
