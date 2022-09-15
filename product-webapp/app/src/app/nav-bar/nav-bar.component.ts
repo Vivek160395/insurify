@@ -68,8 +68,4 @@ export class NavBarComponent implements OnInit  {
   }
   image:any
   email:any
-
-
-
-
 }
