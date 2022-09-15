@@ -13,5 +13,5 @@ export class Userservice1Service {
   getUser():Observable<any>{
     return this.httpclient.get<any>("http://localhost:8085/api/v1/users");
     }
-    userEmail:string="gritvik97@gmail.com"
+    userEmail:string="mufees786@gmail.com"
 }

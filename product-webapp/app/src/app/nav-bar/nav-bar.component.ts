@@ -53,22 +53,41 @@ export class NavBarComponent implements OnInit  {
   }
   getAllUsers():void{
     this.service.getUser().subscribe((data)=>{
-      for(var i=0;i<data.length;i++){
-        if(this.service.userEmail === data[i].emailId){
-          this.image = data[i].profilePic;
-          console.log(data[i].emailId)        }
-        if(this.image===null || this.image==="")
+      
+        if(this.service.userEmail===null || this.service.userEmail==="")
         {
           console.log("hello");
-          this.image="../../assets/img/blank-profile-picture-973460_1280.webp";
+          this.image2="../../assets/img/blank-profile-picture-973460_1280.webp";
+          this.value=false
+          this.value2=true
         }
-     }
+        else{
+        for(var i=0;i<data.length;i++){
+          if(this.service.userEmail === data[i].emailId)
+          {
+            this.image = data[i].profilePic;
+            console.log(data[i].emailId) 
+            this.value2=false
+            this.value=true
+          }
+     }}
+
+      for(var i=0; i<data.length;i++){
+        if(this.service.userEmail=== data[i].emailId)
+        {
+          this.name1=data[i].name;
+          console.log(data[i].name) 
+        }
+      }
     })
 
   }
   image:any
+  image2:any
   email:any
-
+  value:boolean=true
+  value2:boolean=false
+  name1:any
 
 
 
