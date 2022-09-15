@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -25,8 +24,9 @@ registerForm = new FormGroup({
     Validators.maxLength(15),
     Validators.pattern("[a-zA-Z0-9%*#].*")
   ]),
-  confirmPassword: new FormControl(''),
- });
+  confirmPassword: new FormControl('',[Validators.required]),
+ },
+ );
 
 registerSubmitted(){
   if(this.password.value == this.confirmPassword.value){
@@ -50,4 +50,5 @@ get password(): FormControl{
 get confirmPassword(): FormControl{
   return this.registerForm.get('confirmPassword') as FormControl;
 }
+
 }
