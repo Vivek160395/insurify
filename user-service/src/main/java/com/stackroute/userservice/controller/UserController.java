@@ -46,6 +46,17 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
+    @PutMapping("/changePswrd/{emailId}")
+    public ResponseEntity<?> changePassword(@RequestBody User user, @PathVariable String emailId) throws UserNotRegisteredException{
+        try{
+            return new ResponseEntity<>(userService.changePswrd(user,emailId),HttpStatus.OK);
+        }
+        catch (UserNotRegisteredException e){
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
+
     @PutMapping("/updateUser/{emailId}")
     public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") String user, @PathVariable String emailId, @RequestParam("imageFile") MultipartFile file) throws UserNotRegisteredException, IOException {
         try {
@@ -53,7 +64,7 @@ public class UserController {
 
             return new ResponseEntity<>(userService.updateUser(user1, emailId, file), HttpStatus.OK);
         } catch (UserNotRegisteredException | IOException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
             throw e;
         }
     }
