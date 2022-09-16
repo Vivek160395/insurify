@@ -34,18 +34,18 @@
                   <div class="mb-3">
                        <input type= "password" class= "form-control"  placeholder = "Enter your password* " id="password" name = "password" formControlName = "password">
                   </div>
+                  <div class= "form-text text-danger" *ngIf = "password.errors?.['required']"> Password is required </div>
+                  
                  
                   <button type ="submit" [disabled]="registerForm.invalid" class=" btn btn-primary mr-1">Register</button> 
       
                   <p class = "mb-3">New member? </p>
-                 <a href="#" class="text-center">Register here</a>
+                 <a href="http://localhost:4200/register" class="text-center">Register here</a>
   
                 </form>
             </div> 
           </div>
   
-      <div class="w3-container w3-padding">
-        <a href="#" class="w3-button w3-mobile w3-hover-blue" style ="color: white;">About us</a>
-      </div>
+     
   
   </div>
