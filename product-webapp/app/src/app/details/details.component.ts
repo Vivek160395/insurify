@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsComponent implements OnInit {
 
-
-  constructor() {}
+ 
+  constructor() {
+    localStorage.getItem('policy');
+  }
 
   ngOnInit(): void {
   }

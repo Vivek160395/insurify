@@ -86,7 +86,7 @@ export class PoliciesComponent {
   openDialog() {
     // console.log(data);
     this.router.navigateByUrl('/details');
-    window.localStorage.setItem('policy',"motor");
+    localStorage.setItem('policy',"motor");
     // const dialogRef = this.dialog.open(DetailsComponent);
 
     // dialogRef.afterClosed().subscribe(result => {
