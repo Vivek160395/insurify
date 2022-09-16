@@ -34,8 +34,8 @@
                   <div class="mb-3">
                        <input type= "password" class= "form-control"  placeholder = "Enter your password* " id="password" name = "password" formControlName = "password">
                   </div>
-                  <div class= "form-text text-danger" *ngIf = "password.errors?.['required']"> Password is required
-              </div>
+                  <div class= "form-text text-danger" *ngIf = "password.errors?.['required']"> Password is required </div>
+                  
                  
                   <button type ="submit" [disabled]="registerForm.invalid" class=" btn btn-primary mr-1">Register</button> 
       

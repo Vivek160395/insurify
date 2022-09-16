@@ -28,6 +28,10 @@ export class LoginComponent implements OnInit {
   get email(): FormControl{
     return this.registerForm.get('email') as FormControl;
   }
+
+  get password(): FormControl{
+    return this.registerForm.get('password') as FormControl;
+  }
   
 
 }
