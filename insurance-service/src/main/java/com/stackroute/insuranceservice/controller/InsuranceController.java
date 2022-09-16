@@ -30,7 +30,7 @@ import java.util.zip.Inflater;
 
 @RestController
 @RequestMapping("/api/vk1")
-@CrossOrigin(origins ="*")
+@CrossOrigin(origins ="*",allowedHeaders = "*")
 public class InsuranceController {
 
     @Autowired
@@ -57,6 +57,9 @@ public class InsuranceController {
         if (insurance.getInsuranceType().equalsIgnoreCase("AutomobileInsurance")) {
             lifePolicyObj.setCategory(insurance.getCategory());
             lifePolicyObj.setModelsAllowed(insurance.getModelsAllowed());
+        }else{
+            lifePolicyObj.setCategory(null);
+            lifePolicyObj.setModelsAllowed(null);
         }
         return new ResponseEntity<>(insuranceService.saveInsurance(lifePolicyObj), HttpStatus.CREATED);
     }
@@ -68,9 +71,7 @@ public class InsuranceController {
         System.out.println(insuranceRepo.findById(policyId));
         Insurance retrieveInsurance = insuranceRepo.findById(policyId).get();
         System.out.println("Original Image Byte Size - " + imageFile.getBytes().length);
-
         retrieveInsurance.setPicByte(compressBytes(imageFile.getBytes()));
-
         DTO dto = new DTO();
         dto.setPolicyId(retrieveInsurance.getPolicyId());
         dto.setPolicyName(retrieveInsurance.getPolicyName());

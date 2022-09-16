@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DetailsComponent } from '../details/details.component';
 
 @Component({
@@ -9,17 +10,9 @@ import { DetailsComponent } from '../details/details.component';
 })
 export class PoliciesComponent {
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private router: Router) {}
 
-  openDialog() {
-    // console.log(data);
-    
-    const dialogRef = this.dialog.open(DetailsComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+  
 
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
   from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
@@ -89,4 +82,16 @@ export class PoliciesComponent {
       status:"active"
     }
   ]
+
+  openDialog() {
+    // console.log(data);
+    this.router.navigateByUrl('/details');
+    window.localStorage.setItem('policy',"motor");
+    // const dialogRef = this.dialog.open(DetailsComponent);
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log(`Dialog result: ${result}`);
+    // });
+  }
+
 }
