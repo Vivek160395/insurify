@@ -6,7 +6,88 @@
     }
 }
 
+html,
+body {
+    background-color: cyan;
+}
+
 .divsecond {
     display: flex;
     justify-content: space-between;
+}
+
+table {
+    width: 93%;
+    margin: auto;
+    border-collapse: collapse;
+    border-radius: 20px;
+    overflow: hidden !important;
+}
+
+th {
+    font-weight: bold;
+    font-size: 20px;
+    background-color: blue;
+    color: white;
+    border-top: none;
+}
+
+td:first-child,
+th:first-child {
+    border-left: none;
+}
+
+.mat-column-position,
+.mat-column-name,
+.mat-column-weight,
+.mat-column-symbol,
+.mat-column-sumInsured {
+    padding: 0 20px;
+    width: 50px;
+    text-align: center;
+}
+
+.mat-column-addOnName,
+.mat-column-addOnDescription,
+.mat-column-addOnPremiums {
+    padding: 0 20px;
+    width: 50px;
+    text-align: center;
+}
+
+mat-icon {
+    transform: scale(1.7);
+}
+
+.edit {
+    transform: scale(1);
+}
+
+.example-card {
+    max-width: 350px;
+    text-align: center;
+    border-radius: 10%;
+    border: 1px solid black;
+    margin: auto;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+mat-form-field {
+    width: 70%;
+}
+
+.row {
+    margin-right: 0;
+}
+
+.column {
+    margin-bottom: 30px;
+}
+
+.example-full-width {
+    width: 80%;
 }

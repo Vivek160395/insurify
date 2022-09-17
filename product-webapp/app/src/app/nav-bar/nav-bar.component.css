@@ -28,3 +28,8 @@
 button {
     border: none;
 }
+
+.profile_pic {
+    cursor: pointer;
+}
+

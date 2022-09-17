@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
   }
 
   registerForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email])
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
    });
   
    registerSubmitted(){
@@ -26,6 +27,10 @@ export class LoginComponent implements OnInit {
 
   get email(): FormControl{
     return this.registerForm.get('email') as FormControl;
+  }
+
+  get password(): FormControl{
+    return this.registerForm.get('password') as FormControl;
   }
   
 

@@ -146,7 +146,7 @@ export class AddInsurancePolicyComponent implements OnInit {
     policyName       : new FormControl("", [Validators.required]),
     policyDescription: new FormControl("", [Validators.required]),
     category         : new FormControl("",[Validators.required]),
-    modelsAllowed    : new FormControl("",[Validators.required]),
+    modelsAllowed    : new FormControl([],[Validators.required]),
     policyDetails    : new FormArray([new FormGroup({
       premiums :    new FormControl("", [Validators.required,Validators.min(0)]),
       durations:    new FormControl("", [Validators.required,Validators.min(0)]),
@@ -285,9 +285,9 @@ export class AddInsurancePolicyComponent implements OnInit {
     }
     );
     console.log(control.controls[i].value)
-    
+
     control.push(x);
-    
+
   }
   addDetailsE(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
