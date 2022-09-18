@@ -47,7 +47,7 @@ export class UpdateComponent implements OnInit {
   getDetails(){
     this.service.getUserDetails().subscribe(data=>{
       for(var i=0;i<data.length;i++){
-        if(data[i].emailId === this.service.email){
+        if(data[i].emailId === this.service.email1){
         console.log("done");
         console.log(data[i].emailId);
         console.log(data[i].name);
