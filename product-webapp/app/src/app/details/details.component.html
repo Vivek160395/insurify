@@ -8,39 +8,84 @@
   <mat-tab-group >
     <mat-tab label="Detailed Information">
       <div style="border: 2px solid rgb(76, 33, 168); padding: 10px; margin: 18px; font-size: 17px; font-weight: 400;">
-        <h2 style="background-color: rgb(181, 181, 245);">Customer Information</h2>
-        <div style="padding-left:15px ;"><p>email:- ajay123@gmail.com </p>    
-        <p>name :- Ajay </p>
-        <p>mobile :- 8881119991 </p>
-        <p>address :- panipat, haryana </p>
-        <p>pincode :- 132103 </p>
-        <p>city :- panipat </p>
-        <p>state :- haryana </p>
-      </div>
-      <h2 style="background-color: rgb(181, 181, 245);">Policy Information</h2>
-        <div style="padding-left:15px;"><p> customerPolicyId:- 018991 </p>
-        <p>insurancePolicyId:- 12590 </p>
-        <p>nameOfNominee :- xyz </p>
-        <p>nomineeDOB :- 11-02-1995 </p>
-        <p>relation :- son </p>
-        <p>sumInsured:- $10000 </p>
-        <p>startDate :- 23-01-2021 </p>
-        <p>endDate :- 22-01-2022</p>
-        <p>purchaseDate :- [23-01-2021] </p>
-        <p>duration :- 1 year </p>
-        <p>addOnName :- ...... </p>
-        <p>premium :- ...... </p>
-        <p>private HealthInsurance healthInsurance; </p>
-        <p>LifeInsurance lifeInsurance; </p>
-        <p>AutomobileInsurance automobileInsurance; </p>
-        <p>boolean renewalStatus=false; </p>
+        <h2 style="background-color: rgb(181, 181, 245); text-align: center;">Customer Information</h2>
+  
+        <table>
+          <!-- <tr>
+            <th></th>
+            <th></th>
+          </tr> -->
+          <tr> <td>Email Id</td> <td>ajay123@gmail.com</td> </tr>
+          <tr> <td>Name</td> <td>Ajay Kumar</td> </tr>
+          <tr> <td>Mobile No.</td> <td>8881119991</td> </tr>
+          <tr> <td>Address</td> <td>Panipat, Haryana</td> </tr>
+          <tr> <td>PinCode</td> <td>132103</td> </tr>
+          <tr> <td>City</td> <td>Panipat</td> </tr>
+          <tr> <td>State</td> <td>Haryana</td> </tr>
+          <tr> <td>Customer Policy Id</td> <td>018991</td> </tr>
+      </table>
+      <br>
+      <h2 style="background-color: rgb(181, 181, 245); text-align: center;">Policy Information</h2>
+      <table>
+        <tr> <td>Insurance Type</td> <td> {{insuranceType}}</td> </tr>
+        <tr> 
+          <td>Other Details</td>
+          <table *ngIf="insuranceType=='Automobile Insurance'">
+            <tr><td>Vehicle Registration Number</td> <td>24542364326</td></tr>
+            <tr><td>Category</td> <td>Bike</td></tr>
+            <tr><td>Engine Number</td> <td>---------------------------</td></tr>
+            <tr><td>Chassis Number</td> <td>---------</td></tr>
+          </table>
+          <table *ngIf="insuranceType=='Life Insurance'">
+            <tr><td>Identity Proof</td> <td>Aadhar</td></tr>
+            <tr><td>Marital Status</td> <td>Single</td></tr>
+            <tr><td>Occupation</td> <td>Teacher</td></tr>
+            <tr><td>Organisation Type</td> <td>Pvt school</td></tr>
+            <tr><td>Pan No. </td> <td>FGT12DS4</td></tr>
+            <tr><td>Address Proof</td> <td>Aadhar</td></tr>
+            <tr><td>Weight</td> <td> 75kg</td></tr>
+            <tr><td>Height</td> <td> 5'11"</td></tr>
+
+          </table>
+          <table *ngIf="insuranceType=='Health Insurance'">              
+              <tr><td>kids</td> <td>2</td></tr>
+              <tr><td>adults</td> <td>1</td></tr>
+              <tr><td>InsuredInfo[]</td> 
+                <table>
+                  <tr><td>Insured DOB</td> <td>25-06-1999</td></tr> 
+                  <tr><td>Relation</td> <td>Son</td> </tr>
+                  <tr><td>PreExisting Illness</td> <td>No</td></tr> 
+                </table> 
+              </tr>
+          </table>
+       </tr>
+        <tr> <td>Name Of Nominee</td> <td>xyz</td> </tr>
+        <tr> <td>Nominee DOB</td> <td>11-02-1995</td> </tr>
+        <tr> <td>Relation</td> <td>son</td> </tr>
+        <tr> <td>Sum Insured</td> <td>$10000</td> </tr>
+        <tr> <td>Start Date</td> <td>23-01-2021</td> </tr>
+        <tr> <td>End Date</td> <td>22-01-2022</td> </tr>
+        <tr> <td>Purchase Date</td> <td>[23-01-2021]</td> </tr>
+        <tr> <td>Duration</td> <td>1 year</td> </tr>
+        <tr> <td>Start Date</td> <td>23-01-2021</td> </tr>
+
+        <tr> <td>AddOn Name</td> <td>---------------------------</td> </tr>
+        <tr> <td>Premium</td> <td>------</td> </tr>
+        <tr> <td>Duration</td> <td>1 year</td> </tr>
+        <tr> <td>Start Date</td> <td>23-01-2021</td> </tr>
+    </table>
+        
+        <!-- <p>HealthInsurance </p>
+        <p>LifeInsurance </p>
+        <p>AutomobileInsurance</p> -->
+        <!-- <p>boolean renewalStatus=false; </p>
         <p>List claimSum=new Arr </p>
         <p>List claimDate=new ist </p>
         <p>List claimStatus=neyList(); </p>
-        <p>boolean status=true; </p> </div>
+        <p>boolean status=true; </p>  -->
         <br>
         <button mat-raised-button color="primary">Download as PDF <mat-icon>download</mat-icon> </button>
-    </div>
+      </div>
     </mat-tab>
     <mat-tab label="Renewal History">
       <div style="border: 2px solid rgb(76, 33, 168); padding: 10px; margin: 18px;"> 
@@ -92,26 +137,31 @@
               <th>Policy No.</th>
               <th>Claim Date</th>
               <th>Amount</th>
+              <th>Status</th>
             </tr>
             <tr>
               <td>120929</td>
               <td>25-02-2020</td>
               <td>$2000</td>
+              <td>Pending</td>
             </tr>
             <tr>
               <td>130461</td>
               <td>20-11-2022</td>
               <td>$3000</td>
+              <td>Completed</td>
             </tr>
             <tr>
               <td>320921</td>
               <td>05-12-2020</td>
               <td>$1000</td>
+              <td>Completed</td>
             </tr>
             <tr>
               <td>120928</td>
               <td>28-02-2021</td>
               <td>$7000</td>
+              <td>Pending</td>
             </tr>
           </table>
           <br>
