@@ -15,25 +15,29 @@ export class UpdateComponent implements OnInit {
 
   selectedFile=null;
   Imgurl=null;
-  name1:any='srisha';
-  number1:any=123
-  aadhar1:any=123;
-  pan1:any=123;
-  pin1:any=502032;
-  state1:any="ap";
-  city1:any="hyd";
-  dob1:any="20/08/1887";
-  hno1:any="25-34/24";
-  land1:any="opp. idbi bank";
-  street1:any="rr nagar";
-  gender1:any="Female";
-  edit:boolean=true;
-  view:boolean=false;
+  data ={
+    name:'srisha',
+    mobileNo:123,
+    aadharNo:123,
+    panNo:123,
+    dateOfBirth:"20/08/1887",
+    gender:"Female",
+    address:{
+      houseNo:"25-34/24",
+      landmark:"opp. idbi bank",
+      street:"rr nagar",
+      pinCode:502032,
+      state:"ap",
+      city:"hyd",
+    }
+  }
+  edit:any = true;
+  view:any = false;
 
   address:Address=new Address("","","","","","");
   user1:User=new User("","","","","","","","",this.address,"","");
 
- 
+
 
 
   constructor(private http:HttpClient,private service:UserService) { }
@@ -45,52 +49,53 @@ export class UpdateComponent implements OnInit {
 
 
   getDetails(){
-    this.service.getUserDetails().subscribe(data=>{
-      for(var i=0;i<data.length;i++){
-        if(data[i].emailId === this.service.email1){
+    this.service.getUserDetails().subscribe(data1=>{
+      for(var i=0;i<data1.length;i++){
+        console.log(data1);
+        if(data1[i].emailId === this.service.email1){
         console.log("done");
-        console.log(data[i].emailId);
-        console.log(data[i].name);
-        this.name1=data[i].name;
-        this.number1=data[i].mobileNo;
-        this.dob1=data[i].dateOfBirth;
-        this.gender1=data[i].gender;
-        this.aadhar1=data[i].aadharNo;
-        this.pan1=data[i].panNo;
-        if(data[i].aadharNo==0){
-          this.aadhar1=null;
+        console.log(data1[i].emailId);
+        console.log(data1[i].name);
+        this.data.name=data1[i].name;
+        this.data.mobileNo=data1[i].mobileNo;
+        this.data.dateOfBirth=data1[i].dateOfBirth;
+        this.data.gender=data1[i].gender;
+        this.data.aadharNo=data1[i].aadharNo;
+        this.data.panNo=data1[i].panNo;
+        if(data1[i].aadharNo==0){
+          this.data.aadharNo=0;
         }
-        if(data[i].mobileNo==0){
-          this.number1=null;
+        if(data1[i].mobileNo==0){
+          this.data.mobileNo=0;
         }
-        if(data[i].address==null){
+        if(data1[i].address==0 || data1[i].address == null){
         }
         else{
-        this.hno1=data[i].address.houseNo;
-        this.land1=data[i].address.landmark;
-        this.city1=data[i].address.city;
-        this.street1=data[i].address.street;
-        this.state1=data[i].address.state;
-        this.pin1=data[i].address.pinCode;
+        this.data.address.houseNo=data1[i].address.houseNo;
+        this.data.address.landmark=data1[i].address.landmark;
+        this.data.address.city=data1[i].address.city;
+        this.data.address.street=data1[i].address.street;
+        this.data.address.state=data1[i].address.state;
+        this.data.address.pinCode=data1[i].address.pinCode;
       }
          }
       }})
   }
 
-  
+
 profile=new FormGroup({
-    name:new FormControl(null,[Validators.pattern('[a-zA-Z0-9 ]*')]),
-    mobile:new FormControl(null,[Validators.pattern('[0-9]{10}')]),
-    gender:new FormControl(null,[Validators.pattern('')]),
-    dob:new FormControl(null,[Validators.pattern('([0-2][0-9]|(3)[0-1])(/)((0)[1-9]|[1][0-2])(/)([0-9]{4})')]),
-    hno:new FormControl(null),
-    street:new FormControl(null),
-    landmark:new FormControl(null),
-    city:new FormControl(null),
-    state:new FormControl(null),
-    pincode:new FormControl(null,[Validators.pattern('[1-9]{1}[0-9]{5}')]),
-    pan:new FormControl(null,[Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]),
-    aadhar:new FormControl(null,[Validators.pattern('[2-9]{1}[0-9]{11}')])
+    name:new FormControl("",[Validators.pattern('[a-zA-Z0-9 ]*')]),
+    mobile:new FormControl("",[Validators.pattern('[0-9]{10}')]),
+    gender:new FormControl("",[Validators.pattern('')]),
+    dob:new FormControl("",[Validators.pattern('([0-2][0-9]|(3)[0-1])(/)((0)[1-9]|[1][0-2])(/)([0-9]{4})')]),
+    hno:new FormControl(""),
+    street:new FormControl(""),
+    landmark:new FormControl(""),
+    city:new FormControl(""),
+    state:new FormControl(""),
+    pincode:new FormControl("",[Validators.pattern('[1-9]{1}[0-9]{5}')]),
+    pan:new FormControl("",[Validators.pattern('[A-Z]{5}[0-9]{4}[A-Z]{1}')]),
+    aadhar:new FormControl("",[Validators.pattern('[2-9]{1}[0-9]{11}')])
   });
 
 
@@ -112,7 +117,16 @@ profile=new FormGroup({
     this.user1.address.state=this.profile.value.state;
     this.user1.address.pinCode=this.profile.value.pincode;
     console.log(this.user1.address);
-    this.service.updateUserDetails(this.user1);
+    var formData:any = new FormData();
+    var formData1:any = new FormData();
+    formData.append("userDetails",this.data);
+    console.log(this.data);
+
+    formData1.append("imageFile","");
+    this.service.updateUserDetails(formData).subscribe(data=>{
+      console.log("Its Working");
+
+    });
 }
 
 onEdit(){
@@ -127,10 +141,15 @@ onEdit(){
      this.Imgurl=event.target.result;
   }}}
 
-  
-
- 
-
-
-  
 }
+
+// private String userType;
+// private String name;
+// private String gender;
+// private int age;
+// private String dateOfBirth;
+// private long mobileNo;
+// private Address address;
+// private long aadharNo;
+// private String panNo;
+// private byte[] profilePic;

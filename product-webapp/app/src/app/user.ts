@@ -13,7 +13,7 @@ export class User {
         aadharNo:any;
         panNo:any;
         address:Address;
-         
+
     constructor(emailId:any,
         password:any,
         userType:any,
@@ -41,13 +41,9 @@ export class User {
     // this.add
 
 
-    
+
 }
 
-    emailId?: string;
-    password?: string;
-    userType?: string;
 
 
-    
 }

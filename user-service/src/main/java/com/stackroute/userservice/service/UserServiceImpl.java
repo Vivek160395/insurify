@@ -68,12 +68,11 @@ public class UserServiceImpl implements UserService {
         UserDTO userDTO = new UserDTO();
         userDTO.setPassword(user.getPassword());
 
-        if(userRepository.findById(emailId).isPresent()){
+        if (userRepository.findById(emailId).isPresent()) {
             User user1 = userRepository.findById(emailId).get();
             user1.setPassword(user.getPassword());
             return user1;
-        }
-        else {
+        } else {
             throw new UserNotRegisteredException();
         }
     }

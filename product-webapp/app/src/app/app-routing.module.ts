@@ -6,7 +6,7 @@ import { ClaimComponent } from './claim/claim.component';
 import { PoliciesComponent } from './policies/policies.component';
 // import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { RecommendationComponent } from './recommendation/recommendation.component';
-import { RegisterComponent } from './register/register.component';
+// import { RegisterComponent } from './register/register.component';
 import { UpdateComponent } from './update/update.component';
 import { LoginComponent } from './login/login.component';
 import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
@@ -19,7 +19,7 @@ import { DetailsComponent } from './details/details.component';
 
 const routes: Routes = [
   {path:"",component:RecommendationComponent},
-  {path:"register",component:RegisterComponent},
+  // {path:"register",component:RegisterComponent},
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},
   {path: "login", component: LoginComponent},

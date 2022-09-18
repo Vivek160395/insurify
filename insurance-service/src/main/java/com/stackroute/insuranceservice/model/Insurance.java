@@ -19,6 +19,7 @@ public class Insurance {
     private String policyDescription;
     private String category;
     private byte[] picByte;
+    private String picType;
     private PolicyDetails[] policyDetails;
     private PolicyBenefits[] policyBenefits;
     private AddOnDetails[] addOnDetails;

@@ -12,44 +12,44 @@ import java.util.Arrays;
 @Aspect
 public class LoggerAspect {
 
-    private static final Logger logger= LoggerFactory.getLogger(LoggerAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoggerAspect.class);
 
     @Pointcut("execution(* com.stackroute.userservice.*.*.* (..) )")
-    public void serviceMethods(){
+    public void serviceMethods() {
     }
 
     @Before("serviceMethods()")
-    public void beforeServiceAdvice(JoinPoint joinPoint){
+    public void beforeServiceAdvice(JoinPoint joinPoint) {
         logger.info("**************************@Before***************************");
-        logger.debug("method Name: {}",joinPoint.getSignature().getName());
+        logger.debug("method Name: {}", joinPoint.getSignature().getName());
         logger.debug("Method Args: {}", Arrays.toString(joinPoint.getArgs()));
         logger.info("*************************************************************");
     }
 
     @After("serviceMethods()")
-    public void afterServiceAdvice(JoinPoint joinPoint){
+    public void afterServiceAdvice(JoinPoint joinPoint) {
         logger.info("**************************@After***************************");
-        logger.debug("method Name: {}",joinPoint.getSignature().getName());
+        logger.debug("method Name: {}", joinPoint.getSignature().getName());
         logger.debug("Method Args: {}", Arrays.toString(joinPoint.getArgs()));
         logger.info("*************************************************************");
     }
 
-    @AfterReturning(value = "serviceMethods()",returning = "result")
-    public void afterServiceAdvice(JoinPoint joinPoint,Object result){
+    @AfterReturning(value = "serviceMethods()", returning = "result")
+    public void afterServiceAdvice(JoinPoint joinPoint, Object result) {
 
         logger.info("*************************@AfterReturning**************************");
-        logger.debug("method Name: {}",joinPoint.getSignature().getName());
+        logger.debug("method Name: {}", joinPoint.getSignature().getName());
         logger.debug("Method Args: {}", Arrays.toString(joinPoint.getArgs()));
-        logger.debug("Return Value: {}",result);
+        logger.debug("Return Value: {}", result);
         logger.info("*************************************************************");
     }
 
-    @AfterThrowing(value = "serviceMethods()",throwing = "error")
-    public void afterServiceAdvice(JoinPoint joinPoint,Throwable error){
+    @AfterThrowing(value = "serviceMethods()", throwing = "error")
+    public void afterServiceAdvice(JoinPoint joinPoint, Throwable error) {
         logger.info("*************************@AfterThrowing**************************");
-        logger.debug("method Name: {}",joinPoint.getSignature().getName());
+        logger.debug("method Name: {}", joinPoint.getSignature().getName());
         logger.debug("Method Args: {}", Arrays.toString(joinPoint.getArgs()));
-        logger.debug("Exception: {}",error);
+        logger.debug("Exception: {}", error);
         logger.info("*************************************************************");
     }
 
