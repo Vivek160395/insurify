@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
+import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
 import { DetailsComponent } from './details/details.component';
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
@@ -21,6 +22,9 @@ const routes: Routes = [
   {path:"register",component:RegisterComponent},
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},
+  {path: "login", component: LoginComponent},
+  {path: "renewal", component: RenewalPolicyComponent},
+  {path: "renewal-home", component: RenewalPolicyHomeComponent},
   {path:"details",component:DetailsComponent},
   {path: "login", component: LoginComponent},
   {path: "renewal", component: RenewalPolicyComponent},

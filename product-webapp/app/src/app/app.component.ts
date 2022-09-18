@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -11,11 +9,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class AppComponent implements OnInit{
   title = 'app';
 
-  constructor(private httpClient:HttpClient){}
+  constructor(){}
 
-  retrieveResponse:any;
-  base64Data:any;
-  retrievedImage:any;
 
   ngOnInit() {
     // this.httpClient.get('http://localhost:8010/api/vk1/get/371265')
@@ -28,13 +23,5 @@ export class AppComponent implements OnInit{
     //   );
   }
 
-}
-
-
-
-
-
-function ngOnInit() {
-  throw new Error('Function not implemented.');
 }
 

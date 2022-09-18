@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { DialogDataComponent } from '../dialog-data/dialog-data.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-renewal-policy',
@@ -10,18 +9,15 @@ import { DialogDataComponent } from '../dialog-data/dialog-data.component';
 })
 export class RenewalPolicyComponent implements OnInit {
 
-  constructor(private formBuilder:FormBuilder, private dialog: MatDialog, private matConfig: MatDialogConfig) { }
+  constructor(private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
   }
 
   premiumCheckBoxList = this.formBuilder.group({
-    Premium1: false,
-    Premium2: false,
     Premium3: false,
     Premium4: false,
     Premium5: false,
-    Premium6: false
   });
 
   category:string= "";
@@ -43,12 +39,6 @@ export class RenewalPolicyComponent implements OnInit {
   onSubmit(){
     console.log(this.insuranceType)
     return this.insuranceType
-  }
-
-  openDialog(){
-    this.matConfig= new MatDialogConfig();
-    this.matConfig.disableClose=true;
-    this.dialog.open(DialogDataComponent);
   }
   
 }
