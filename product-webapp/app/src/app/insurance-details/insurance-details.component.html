@@ -1,42 +1,35 @@
 <div class="column" style="margin-bottom:30px ;">
     <div class=" row" style="display: flex;justify-content: space-between;padding-top:30px ;">
         <div style="margin:0 auto ;" class=" col-5">
-            <img [src]="images" width="600" height="300px" class="mat-elevation-z20 images">
+            <img src="data:{{imageType}};base64,{{pic}}" width="600" height="300px" class="mat-elevation-z20 images" style="border-radius:20px ;">
         </div>
         <div class=" col-6" style="margin:auto 0 auto -70px">
-            <div class="row">
-                <div class=" col-6" style="margin:auto 0 auto 0;">
-                    <p style="font-size:40px;text-shadow: 4px 4px 4px grey;">Health Insurance</p>
-                    <br>
-                    <br>
-                    <br>
-                    <p style="font-size:40px;margin-left: 30px;">Corona Kavach</p>
+            <mat-card class="example-card2">
+                <diV style="padding:20px ;background-color: RGB(166 246 227);text-align:center">
+                    <mat-card-title style="margin: auto;">{{this.policyName}}</mat-card-title>
+                </diV>
+                <div style="padding: 20px;">
+                    <mat-card-content>
+                        <p>{{this.description}}</p>
+                    </mat-card-content>
                 </div>
-                <!-- <div class="col-6" style="margin:auto 0 auto auto;border-left:2px solid black;">
-                    <div style="padding-left: 20px;">
-                    </div>
-                </div> -->
-            </div>
+            </mat-card>
         </div>
     </div>
     <div class="row" style="display: flex;justify-content: space-evenly;margin-top:20px ;">
         <div style="margin:auto" class="col-7">
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z20 demo-table">
-                <ng-container matColumnDef="position">
+                <ng-container matColumnDef="sumInsure">
+                    <th mat-header-cell *matHeaderCellDef> sumInsure </th>
+                    <td mat-cell *matCellDef="let element"> {{element.sumInsure}} </td>
+                </ng-container>
+                <ng-container matColumnDef="premiums">
                     <th mat-header-cell *matHeaderCellDef> No. </th>
-                    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.premiums}} </td>
                 </ng-container>
-                <ng-container matColumnDef="weight">
-                    <th mat-header-cell *matHeaderCellDef> Premium </th>
-                    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-                </ng-container>
-                <ng-container matColumnDef="symbol">
-                    <th mat-header-cell *matHeaderCellDef> Duration </th>
-                    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-                </ng-container>
-                <ng-container matColumnDef="sumInsured">
-                    <th mat-header-cell *matHeaderCellDef> sumInsured </th>
-                    <td mat-cell *matCellDef="let element"> {{element.sumInsured}} </td>
+                <ng-container matColumnDef="durations">
+                    <th mat-header-cell *matHeaderCellDef> durations </th>
+                    <td mat-cell *matCellDef="let element"> {{element.durations}} </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -54,10 +47,10 @@
                             <mat-form-field>
                                 <mat-label>Select your Gender</mat-label>
                                 <select matNativeControl required [formControl]="selectFormControl">
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Trans">Trans</option>
-                </select>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Trans">Trans</option>
+                                </select>
                             </mat-form-field>
                         </div>
                     </div>
@@ -122,10 +115,10 @@
                             <mat-form-field>
                                 <mat-label>Select your Gender</mat-label>
                                 <select matNativeControl required [formControl]="selectFormControl">
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Trans">Trans</option>
-                </select>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Trans">Trans</option>
+                                </select>
                             </mat-form-field>
                         </div>
                     </div>
@@ -133,114 +126,27 @@
             </mat-card>
         </div>
     </div>
-    <div class="row" style="display: flex;justify-content: space-evenly;margin-top:20px;">
-        <div style="margin:auto" class="col-7">
-            <table mat-table [dataSource]="dataSource1" class="mat-elevation-z20 demo-table">
-                <ng-container matColumnDef="addOnName">
-                    <th mat-header-cell *matHeaderCellDef> addOnName </th>
-                    <td mat-cell *matCellDef="let element"> {{element.addOnName}} </td>
-                </ng-container>
-                <ng-container matColumnDef="addOnDescription">
-                    <th mat-header-cell *matHeaderCellDef> addOnDescription </th>
-                    <td mat-cell *matCellDef="let element"> {{element.addOnDescription}} </td>
-                </ng-container>
-                <ng-container matColumnDef="addOnPremiums">
-                    <th mat-header-cell *matHeaderCellDef> addOnPremiums </th>
-                    <td mat-cell *matCellDef="let element"> {{element.addOnPremiums}} </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
-            </table>
-        </div>
-        <div style="margin:auto auto 30px auto" class="col-3">
-            <mat-card class="mat-elevation-z20 example-card">
-                <p>Premium Calculator</p>
-                <div class="column">
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Gender</p>
-                        </div>
-                        <div>
-                            <mat-form-field>
-                                <mat-label>Select your Gender</mat-label>
-                                <select matNativeControl required [formControl]="selectFormControl">
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Trans">Trans</option>
-                </select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Date Of Birth</p>
-                        </div>
-                        <div>
-                            <form class="example-form">
-                                <mat-form-field class="example-width">
-                                    <mat-label>Enter Your DOB</mat-label>
-                                    <input matInput placeholder="Ex. Pizza">
-                                </mat-form-field>
-                            </form>
-                        </div>
-                    </div>
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Mobile Number</p>
-                        </div>
-                        <div>
-                            <form class="example-form">
-                                <mat-form-field class="example-width">
-                                    <span matPrefix>+91 &nbsp;</span>
-                                    <mat-label>Enter Your Phone no</mat-label>
-                                    <input matInput placeholder="Ex. Pizza">
-                                </mat-form-field>
-                            </form>
-                        </div>
-                    </div>
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Email</p>
-                        </div>
-                        <div>
-                            <form class="example-form">
-                                <mat-form-field class="example-width">
-                                    <mat-label>Enter Your Email Id</mat-label>
-                                    <input matInput>
-                                </mat-form-field>
-                            </form>
-                        </div>
-                    </div>
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Income</p>
-                        </div>
-                        <div>
-                            <form class="example-form">
-                                <mat-form-field class="example-width">
-                                    <mat-label>Enter Your Annual Income</mat-label>
-                                    <input matInput>
-                                </mat-form-field>
-                            </form>
-                        </div>
-                    </div>
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Gender</p>
-                        </div>
-                        <div>
-                            <mat-form-field>
-                                <mat-label>Select your Gender</mat-label>
-                                <select matNativeControl required [formControl]="selectFormControl">
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Trans">Trans</option>
-                </select>
-                            </mat-form-field>
-                        </div>
-                    </div>
+    <div>
+        <div style="margin:auto auto 30px 7%;display:flex ;flex-wrap: wrap;">
+            <mat-card class="mat-elevation-z20 example-card1  " *ngFor="let item of addOns " style="margin:20px">
+                <!-- <div style="padding:20px ; "> -->
+                <div style="background-color: rgb(254,252,211);padding: 20px;">
+                    <mat-card-title style="text-align: center; ">
+                        {{item.addOnName}}
+                    </mat-card-title>
+                </div>
+                <div style="padding: 20px; ">
+                    <mat-card-content>
+                        <p>{{item.addOnDescription}}</p>
+                    </mat-card-content>
+                    <hr>
+                    <mat-card-footer style="display: flex;justify-content:space-between;margin:10px 20px 0 20px ">
+                        <p>Add On Premium</p>
+                        <p>{{item.addOnPremiums}}</p>
+                    </mat-card-footer>
                 </div>
             </mat-card>
         </div>
     </div>
 </div>
+<!-- <img src="data:*;base64,{{this.pic}} "> -->
