@@ -11,7 +11,7 @@
         <mat-tab label="All" >
         <div style="display: flex; flex-wrap: wrap; padding-top: 20px;" >
             <div *ngFor="let policy of policies | filter:searchedKeyword" >
-                <mat-card class="example-card" (click)="openDialog()">
+                <mat-card class="example-card" (click)="openDialog(policy)">
                     <mat-card-title>{{policy.name}} </mat-card-title>
                     <mat-divider></mat-divider>
                     <br>
@@ -35,7 +35,7 @@
             <div *ngFor="let policy of policies  | filter:searchedKeyword">
             
                     <div *ngIf="policy.status=='active'">
-                        <mat-card class="example-card" (click)="openDialog()">
+                        <mat-card class="example-card" (click)="openDialog(policy)">
                             <mat-card-title>{{policy.name}}  </mat-card-title>
                             <mat-divider></mat-divider>
                             <br>
@@ -58,7 +58,7 @@
         <mat-tab label="Completed"> <div style="display: flex; flex-wrap: wrap; padding-top: 20px;">
             <div *ngFor="let policy of policies  | filter:searchedKeyword" >
                 <div *ngIf="policy.status=='claimed'">
-                    <mat-card class="example-card" (click)="openDialog()">
+                    <mat-card class="example-card" (click)="openDialog(policy)">
                         <mat-card-title>{{policy.name}} </mat-card-title>
                         <mat-divider></mat-divider>
                         <br>
