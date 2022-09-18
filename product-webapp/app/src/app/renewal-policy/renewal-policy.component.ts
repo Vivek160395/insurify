@@ -15,12 +15,9 @@ export class RenewalPolicyComponent implements OnInit {
   }
 
   premiumCheckBoxList = this.formBuilder.group({
-    Premium1: false,
-    Premium2: false,
     Premium3: false,
     Premium4: false,
     Premium5: false,
-    Premium6: false
   });
 
   category:string= "";
