@@ -18,14 +18,14 @@ export class AppComponent implements OnInit{
   retrievedImage:any;
 
   ngOnInit() {
-    this.httpClient.get('http://localhost:8010/api/vk1/get/596883')
-      .subscribe(
-        res => {
-          this.retrieveResponse = res;
-          this.base64Data = this.retrieveResponse.picByte;
-          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-        }
-      );
+    // this.httpClient.get('http://localhost:8010/api/vk1/get/596883')
+    //   .subscribe(
+    //     res => {
+    //       this.retrieveResponse = res;
+    //       this.base64Data = this.retrieveResponse.picByte;
+    //       this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+    //     }
+    //   );
   }
    
 }

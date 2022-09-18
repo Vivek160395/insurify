@@ -10,3 +10,53 @@
     display: flex;
     justify-content: space-between;
 }
+
+table {
+    width: 100%;
+}
+
+.demo-table {
+    width: 100%;
+}
+
+.mat-column-position,
+.mat-column-name,
+.mat-column-weight,
+.mat-column-symbol,
+.mat-column-sumInsured {
+    padding: 0 20px;
+    width: 50px;
+    text-align: center;
+}
+
+mat-icon {
+    transform: scale(1.7);
+}
+
+.edit {
+    transform: scale(1);
+}
+
+.example-card {
+    max-width: 400px;
+    text-align: center;
+    border-radius: 10%;
+    border: 2px solid black;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.row {
+    margin-right: 0;
+}
+
+.column {
+    margin-bottom: 30px;
+}
+
+.example-full-width {
+    width: 80%;
+}
