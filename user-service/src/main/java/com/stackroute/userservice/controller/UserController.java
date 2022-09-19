@@ -51,6 +51,16 @@ public class UserController {
         }
     }
 
+    @PutMapping("/updateUserDetails/{emailId}")
+    public ResponseEntity<?> updateUserInfo(@RequestBody User user, @PathVariable String emailId) throws UserNotRegisteredException {
+        try {
+            return new ResponseEntity<>(userService.updateUser(user, emailId), HttpStatus.OK);
+        } catch (UserNotRegisteredException e) {
+            e.getMessage();
+            throw e;
+        }
+    }
+
     @PutMapping("/updateUser/{emailId}")
     public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") String user, @PathVariable String emailId,
             @RequestParam("imageFile") MultipartFile file) throws UserNotRegisteredException, IOException {
