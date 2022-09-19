@@ -37,6 +37,7 @@
         <module>renewal-service</module>
         <module>subscription-service</module>
         <module>chat-service</module>
+        <module>purchase-insurance-service</module>
     </modules>
 
     <dependencies>
