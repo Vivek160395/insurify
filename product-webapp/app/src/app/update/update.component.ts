@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { T } from '@angular/cdk/keycodes';
 import { UserService } from '../user.service';
-import { User } from '../user';
-import { Address } from '../address';
 
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.css']
 })
+
 export class UpdateComponent implements OnInit {
 
   selectedFile=null;
   Imgurl=null;
-  data ={
+  data:any={
     name:'srisha',
     mobileNo:123,
     aadharNo:123,
@@ -33,9 +31,25 @@ export class UpdateComponent implements OnInit {
   }
   edit:any = true;
   view:any = false;
+  user:any= {
+    name:'',
+    mobileNo:0,
+    aadharNo:0,
+    panNo:0,
+    dateOfBirth:"",
+    gender:"",
+    address:{
+      houseNo:"",
+      landmark:"",
+      street:"",
+      pinCode:0,
+      state:"",
+      city:"",
+    }
+  };
 
   // address:Address=new Address("","","","","","");
-  // user1:User=new User("","","","","","","","",this.address,"","");
+  // user:User=new User("","","","","","","","",this.address,"","");
 
   constructor(private http:HttpClient,private service:UserService) { }
 
@@ -99,28 +113,24 @@ profile=new FormGroup({
     this.edit=true;
     this.view=false;
     console.log(this.profile.value.name);
-    // this.user1.name=this.profile.value.name;
-    // this.user1.dateOfBirth=this.profile.value.dob;
-    // this.user1.gender=this.profile.value.gender;
-    // this.user1.mobileNo=this.profile.value.mobile;
-    // this.user1.aadharNo=this.profile.value.aadhar;
-    // this.user1.panNo=this.profile.value.pan;
-    // this.user1.address.city=this.profile.value.hno;
-    // this.user1.address.landmark=this.profile.value.landmark;
-    // this.user1.address.city=this.profile.value.city;
-    // this.user1.address.street=this.profile.value.street;
-    // this.user1.address.state=this.profile.value.state;
-    // this.user1.address.pinCode=this.profile.value.pincode;
-    // console.log(this.user1.address);
+    this.user.name=this.profile.value.name;
+    this.user.dateOfBirth=this.profile.value.dob;
+    this.user.gender=this.profile.value.gender;
+    this.user.mobileNo=this.profile.value.mobile;
+    this.user.aadharNo=this.profile.value.aadhar;
+    this.user.panNo=this.profile.value.pan;
+    this.user.address.city=this.profile.value.hno;
+    this.user.address.landmark=this.profile.value.landmark;
+    this.user.address.city=this.profile.value.city;
+    this.user.address.street=this.profile.value.street;
+    this.user.address.state=this.profile.value.state;
+    this.user.address.pinCode=this.profile.value.pincode;
+    console.log(this.user.address);
     var formData:any = new FormData();
-    var formData1:any = new FormData();
-    formData.append("userDetails",this.data);
-    console.log(this.data);
-
-    formData1.append("imageFile","");
+    formData.append("userDetails",this.user);
+    formData.append("imageFile",this.img);
     this.service.updateUserDetails(formData).subscribe(data=>{
       console.log("Its Working");
-
     });
 }
 
@@ -128,23 +138,13 @@ onEdit(){
   this.edit=false;
   this.view=true;
 }
+img:any="";
   onImgSelected(e:any){
    if(e.target.files){
      var reader=new FileReader();
      reader.readAsDataURL(e.target.files[0]);
      reader.onload=(event:any)=>{
+      this.img = e.target.files[0];
      this.Imgurl=event.target.result;
   }}}
-
 }
-
-// private String userType;
-// private String name;
-// private String gender;
-// private int age;
-// private String dateOfBirth;
-// private long mobileNo;
-// private Address address;
-// private long aadharNo;
-// private String panNo;
-// private byte[] profilePic;
