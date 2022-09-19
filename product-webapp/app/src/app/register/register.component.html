@@ -67,6 +67,9 @@
                  <div class= "form-text text-danger" *ngIf = "password.errors?.['required'] &&
                  (password.dirty || password.touched)" > Password is required
                 </div>
+                <div *ngIf = "confirmPassword.errors?.['confirmPasswordValidator']">Password not matching
+
+                </div>
 
 
                 <button type ="submit" [disabled]="registerForm.invalid" class=" btn btn-primary mr-1">Register</button> 

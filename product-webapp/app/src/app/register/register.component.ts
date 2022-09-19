@@ -26,7 +26,9 @@ registerForm = new FormGroup({
     Validators.maxLength(15),
     Validators.pattern("[a-zA-Z0-9%*#].*")
   ]),
-  confirmPassword: new FormControl('',[Validators.required]),
+  confirmPassword: new FormControl('',[Validators.required] 
+        //Validators.ConfirmPasswordValidator("password", "confirmPassword")]
+  ),
  },
  );
 
