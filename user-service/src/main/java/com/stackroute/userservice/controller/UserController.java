@@ -14,20 +14,17 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@CrossOrigin(origins = "*",allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
-
 
     @PostMapping("/user")
     public User registerUser(@RequestBody User user) throws UserAlreadyExistsException {
@@ -40,11 +37,20 @@ public class UserController {
         }
     }
 
-
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
+
+//    @PutMapping("/changePass/{emailId}")
+//    public ResponseEntity<?> changePswrd(User user, @PathVariable String emailId) throws UserNotRegisteredException {
+//        try {
+//            return new ResponseEntity<>(userService.changePswrd(user, emailId), HttpStatus.OK);
+//        } catch (UserNotRegisteredException e) {
+//            e.getMessage();
+//            throw e;
+//        }
+//    }
 
     @PutMapping("/updateUser/{emailId}")
     public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") String user, @PathVariable String emailId, @RequestParam("imageFile") MultipartFile file) throws UserNotRegisteredException, IOException {
