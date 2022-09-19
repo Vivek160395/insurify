@@ -1,27 +1,27 @@
 <div style="background-color:white; display: flex;justify-content: center;align-items: center;">
 
-    <mat-card style="width: 60%; margin: 30px 0 0 30px;border: 2px solid ;background-color: white;">
+    <mat-card [hidden]="edit" style="width: 60%; margin: 30px 0 0 30px;border: 2px solid ;background-color: white;">
         <mat-card-content>
-            <form [formGroup]="profile" (ngSubmit)="onSubmit()">
+            <form [formGroup]="profile">
                 <h1>Basic Personal Details</h1>
                 <div>
                     <div fxLayout="row" fxLayoutGap="2%">
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>User name</mat-label>
-                            <input matInput placeholder="Enter your user name" formControlName="name" type="text" [value]="nameOfPerson">
+                            <input matInput placeholder="Enter your user name" formControlName="name" type="text" [value]="data.name">
                             <mat-hint>No special characters</mat-hint>
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>Mobile</mat-label>
                             <mat-icon matSuffix>phone</mat-icon>
-                            <input matInput placeholder="Enter your mobile number" formControlName="mobile">
+                            <input matInput placeholder="Enter your mobile number" formControlName="mobile" [value]="data.mobileNo">
                             <mat-hint>10 digit number</mat-hint>
                         </mat-form-field>
                     </div>
                     <div fxLayout="row" fxLayoutGap="2%">
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>Gender</mat-label>
-                            <mat-select placeholder="Gender" formControlName="gender">
+                            <mat-select placeholder="Gender" formControlName="gender" [value]="data.gender">
                                 <mat-option value="Male">Male</mat-option>
                                 <mat-option value="Female">Female</mat-option>
                                 <mat-option value="Others">Others</mat-option>
@@ -30,10 +30,8 @@
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>DOB</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="dob">
-                            <mat-hint>Select from Calender</mat-hint>
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker disabled="false"></mat-datepicker>
+                            <input matInput placeholder="Enter your Dob" formControlName="dob" [value]="data.dateOfBirth">
+                            <mat-hint>DD/MM/YYYY</mat-hint>
                         </mat-form-field>
                     </div>
                 </div>
@@ -44,31 +42,31 @@
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>House No</mat-label>
                             <mat-icon matSuffix>home</mat-icon>
-                            <input matInput placeholder="Enter your house no" formControlName="hno">
+                            <input matInput placeholder="Enter your house no" formControlName="hno" [value]="data.address.houseNo">
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>Street</mat-label>
-                            <input matInput placeholder="Enter your Street name" formControlName="street">
+                            <input matInput placeholder="Enter your Street name" formControlName="street" [value]="data.address.street">
                         </mat-form-field>
                     </div>
                     <div fxLayout="row" fxLayoutGap="2%">
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>Land mark</mat-label>
-                            <input matInput placeholder="Enter your landmark" formControlName="landmark">
+                            <input matInput placeholder="Enter your landmark" formControlName="landmark" [value]="data.address.landmark">
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>City</mat-label>
-                            <input matInput placeholder="Enter your city name" formControlName="city">
+                            <input matInput placeholder="Enter your city name" formControlName="city" [value]="data.address.city">
                         </mat-form-field>
                     </div>
                     <div fxLayout="row" fxLayoutGap="2%">
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>STATE</mat-label>
-                            <input matInput placeholder="Enter your State" formControlName="state">
+                            <input matInput placeholder="Enter your State" formControlName="state" [value]="data.address.state">
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>PINCODE</mat-label>
-                            <input matInput placeholder="Enter your pincode" formControlName="pincode">
+                            <input matInput placeholder="Enter your pincode" formControlName="pincode" [value]="data.address.pinCode">
                         </mat-form-field>
                     </div>
 
@@ -79,22 +77,67 @@
                 <div fxLayout="row" fxLayoutGap="2%">
                     <mat-form-field appearance="outline" fxFlex="50%">
                         <mat-label>PAN</mat-label>
-                        <input matInput placeholder="Enter your Pan number" formControlName="pan">
+                        <input matInput placeholder="Enter your Pan number" formControlName="pan" [value]="data.panNo">
                     </mat-form-field>
                     <mat-form-field appearance="outline" fxFlex="50%">
                         <mat-label>AADHAR</mat-label>
-                        <input matInput placeholder="Enter your Aadhar number" formControlName="aadhar">
+                        <input matInput placeholder="Enter your Aadhar number" formControlName="aadhar" [value]="data.aadharNo">
                     </mat-form-field>
                 </div>
                 <div>
-                    <img [src]="url" height="200">
+                    <img [src]="Imgurl" height="200">
                     <br>
                     <input type="file" (change)="onImgSelected($event)">
-
                 </div>
-                <b><input type="submit" value="Save" id="btn" style="margin: 40px 0px;"></b>
-
+                <div style="display:inline-flex;justify-content:space-between;" fxLayout="row" fxLayoutGap="2%">
+                    <div fxFlex="50%"><b><button mat-raised-button color="primary" type="submit" [disabled]="profile.invalid"
+                style="margin: 40px 0px;" (click)="onSubmit()">Save</button></b></div>
+                    <div fxFlex="50%"><b><button mat-raised-button color="primary" (click)="onEdit()"
+                style="margin: 40px 0px;">Cancel</button></b></div>
+                </div>
             </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div [hidden]="view" style="background-color:white; display: flex;justify-content: center;align-items: center;">
+    <mat-card style="width: 70%; margin: 30px 0 0 30px;border: 2px solid ;background-color: white;">
+        <mat-card-content style="margin: 20px 30px 0 30px;">
+            <h1>Basic Personal Details</h1>
+            <div>
+                <div fxLayout="row" fxLayoutGap="2%">
+                    <div fxFlex="50%" class="c1">User Name : {{this.data.name}}</div>
+                    <div fxFlex="50%" class="c1">Mobile : {{this.data.mobileNo}}</div>
+                </div>
+                <div fxLayout="row" fxLayoutGap="2%">
+                    <div fxFlex="50%" class="c1">Gender : {{this.data.gender}}</div>
+                    <div fxFlex="50%" class="c1"> DOB : {{this.data.dateOfBirth}}</div>
+                </div>
+            </div>
+            <hr>
+            <h1>Address Details</h1>
+            <div>
+                <div fxLayout="row" fxLayoutGap="2%">
+                    <div fxFlex="50%" class="c1"> House No : {{this.data.address.houseNo}}</div>
+                    <div fxFlex="50%" class="c1">Street : {{this.data.address.street}}</div>
+                </div>
+                <div fxLayout="row" fxLayoutGap="2%">
+                    <div fxFlex="50%" class="c1">Land Mark : {{this.data.address.landmark}}</div>
+                    <div fxFlex="50%" class="c1"> City : {{this.data.address.city}}</div>
+                </div>
+                <div fxLayout="row" fxLayoutGap="2%">
+                    <div fxFlex="50%" class="c1">State : {{this.data.address.state}}</div>
+                    <div fxFlex="50%" class="c1">Pincode : {{this.data.address.pinCode}} </div>
+                </div>
+            </div>
+            <hr>
+            <h1>Additional Details</h1>
+            <div fxLayout="row" fxLayoutGap="2%">
+                <div fxFlex="50%" class="c1"> Aadhar number : {{this.data.aadharNo}}</div>
+                <div fxFlex="50%" class="c1"> Pan Number: {{this.data.panNo}}</div>
+            </div>
+            <b><button mat-raised-button color="primary" (click)="onEdit()" style="margin: 40px 0px;">Edit</button></b>
+
         </mat-card-content>
     </mat-card>
 </div>

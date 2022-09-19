@@ -18,8 +18,8 @@ constructor(private userService: UserService) {}
 ngOnInit():void{}
 
 registerForm = new FormGroup({
-  Role: new FormControl('', [Validators.required]),
-  email: new FormControl('', [Validators.required, Validators.email]),
+  userType: new FormControl('', [Validators.required]),
+  emailId: new FormControl('', [Validators.required, Validators.email]),
   password: new FormControl('',[
     Validators.required,
     Validators.minLength(6),
@@ -31,9 +31,9 @@ registerForm = new FormGroup({
  );
 
 registerSubmitted(data:any){
-  this.user.emailId = data.value.email;
+  this.user.emailId = data.value.emailId;
   this.user.password = data.value.password;
-  this.user.userType = data.value.Role;
+  this.user.userType = data.value.userType;
 
   console.log(this.user);
   this.userService.registerUser(this.user).subscribe((response)=>{
@@ -43,12 +43,12 @@ registerSubmitted(data:any){
 
 
 }
-get Role(): FormControl{
-  return this.registerForm.get('Role') as FormControl;
+get userType(): FormControl{
+  return this.registerForm.get('userType') as FormControl;
 }
 
-get email(): FormControl{
-  return this.registerForm.get('email') as FormControl;
+get emailId(): FormControl{
+  return this.registerForm.get('emailId') as FormControl;
 }
 
 get password(): FormControl{

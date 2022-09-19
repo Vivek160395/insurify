@@ -6,11 +6,6 @@
     }
 }
 
-html,
-body {
-    background-color: cyan;
-}
-
 .divsecond {
     display: flex;
     justify-content: space-between;
@@ -24,11 +19,16 @@ table {
     overflow: hidden !important;
 }
 
+.vl {
+    border-left: 4px solid black;
+    height: 230px;
+}
+
 th {
     font-weight: bold;
     font-size: 20px;
-    background-color: blue;
-    color: white;
+    background-color: aliceblue;
+    color: black;
     border-top: none;
 }
 
@@ -66,9 +66,22 @@ mat-icon {
 .example-card {
     max-width: 350px;
     text-align: center;
-    border-radius: 10%;
+    border-radius: 5%;
     border: 1px solid black;
     margin: auto;
+}
+
+.example-card1 {
+    max-width: 300px;
+    border-radius: 5%;
+    padding: 0;
+}
+
+.example-card2 {
+    padding: 0;
+    max-width: 90%;
+    height: 100%;
+    border-radius: 2%;
 }
 
 .example-header-image {

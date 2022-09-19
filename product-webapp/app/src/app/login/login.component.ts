@@ -14,23 +14,23 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  registerForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+  logInForm = new FormGroup({
+    emailId: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
    });
   
-   registerSubmitted(){
-    console.log("Submitted");
+   logIn(){
+    console.log("Log in successfull");
     }
 
 
 
-  get email(): FormControl{
-    return this.registerForm.get('email') as FormControl;
+  get emailId(): FormControl{
+    return this.logInForm.get('emailId') as FormControl;
   }
 
   get password(): FormControl{
-    return this.registerForm.get('password') as FormControl;
+    return this.logInForm.get('password') as FormControl;
   }
   
 
