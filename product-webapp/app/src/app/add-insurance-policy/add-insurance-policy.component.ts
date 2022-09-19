@@ -8,6 +8,7 @@ import { Insurance } from '../insurance';
 import { MatDialog } from '@angular/material/dialog';
 
 import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
+import { RecommendationServiceService } from '../recommendation-service.service';
 
 
 export interface bike {
@@ -134,7 +135,7 @@ export class AddInsurancePolicyComponent implements OnInit {
 
 
 
-  constructor(public http:HttpClient,public dialog:MatDialog) { }
+  constructor(public http:HttpClient,public dialog:MatDialog,private service:RecommendationServiceService) { }
 
   openDialog(){
     this.dialog.open(PreviewMarkupComponent,{data:this.valueVariable})
@@ -446,5 +447,6 @@ addOnBlur = true;
       this.duration.splice(index, 1);
     }
   }
+  // api for getting policy
 
 }

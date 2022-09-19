@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit() {
-    // this.httpClient.get('http://localhost:8010/api/vk1/get/596883')
+    // this.httpClient.get('http://localhost:8010/api/vk1/get/371265')
     //   .subscribe(
     //     res => {
     //       this.retrieveResponse = res;
