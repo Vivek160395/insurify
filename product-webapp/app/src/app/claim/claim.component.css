@@ -1,39 +1,42 @@
-.example-card {
-    width: 900px;
-    height:500px;
+;    
   
-  }
-  .example-content{
-    text-align: center;
-   
-    width:600px;
-   
     
-  }
-  .list-group-item{
-    font-family: "Lucida Console", "Courier New", monospace;
-  
-  }
-  .btn{
- 
-background: #398ad6;
-border: none;
-color: white;
+.demo-toolbar {    
+    display: flex;    
+    align-items: center;    
+    width: 100%;    
+}    
+    
+.demo-form {    
+    min-width: 150px;    
+    max-width: 500px;    
+    width: 100%;    
+}    
+    
+.demo-full-width {    
+    width: 100%;    
+}    
+    
+body {    
+    margin: 0;    
+    font-family: Roboto, sans-serif;    
+}    
+    
 
-
-text-decoration: none;
-font-weight: bold;
-transition: all .3s ease-in;
-
-  }
-  .btn:hover{
-background: transparent;
-color: #7F00FF;
-border: 2px solid #7F00FF;
-  }
-  .title{
-    font-family: "Times New Roman", Times, serif;
-  }
+    
+.done {    
+    position: fixed;    
+    bottom: 20px;    
+    right: 20px;    
+    color: white;    
+}    
+    
+.content-center {    
+    text-align: -webkit-center;    
+}    
+ .example-card {
+  width: 100%;
+}
   .example-stepper {
     margin-top: 8px;
   }
@@ -44,4 +47,8 @@ border: 2px solid #7F00FF;
   table {
     width: 100%;
   }
+  .list-group-item{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
   

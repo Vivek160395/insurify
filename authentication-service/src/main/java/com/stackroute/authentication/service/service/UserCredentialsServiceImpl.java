@@ -2,6 +2,7 @@ package com.stackroute.authentication.service.service;
 
 import com.stackroute.authentication.service.exception.InvalidCredentialException;
 import com.stackroute.authentication.service.exception.UserAlreadyExistException;
+import com.stackroute.authentication.service.exception.UserNotFoundException;
 import com.stackroute.authentication.service.model.UserCredentials;
 import com.stackroute.authentication.service.repository.UserCredentialsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,22 @@ public class UserCredentialsServiceImpl implements UserCredentialsService {
     public List<UserCredentials> getAllUser() {
         List<UserCredentials>  userList= (List<UserCredentials>) userCredentialsRepository.findAll();
         return userList;
+    }
+
+    @Override
+    public UserCredentials updateUser(UserCredentials user,String emailId) throws UserNotFoundException {
+        if(userCredentialsRepository.findById(emailId).isPresent())
+        {
+            UserCredentials user1 = userCredentialsRepository.findById(emailId).get();
+            user1.setUserType(user.getUserType());
+            userCredentialsRepository.save(user1);
+            return user1;
+        }
+        else
+        {
+            throw new UserNotFoundException();
+        }
+
     }
 
 }

@@ -3,6 +3,7 @@ package com.stackroute.authentication.service.controller;
 import com.stackroute.authentication.service.exception.InvalidCredentialException;
 import com.stackroute.authentication.service.exception.UserAlreadyExistException;
 
+import com.stackroute.authentication.service.exception.UserNotFoundException;
 import com.stackroute.authentication.service.model.UserCredentials;
 import com.stackroute.authentication.service.security.SecurityTokenGenerator;
 import com.stackroute.authentication.service.service.UserCredentialsService;
@@ -12,13 +13,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.IOException;
 import java.util.Map;
 
 
-@Controller
-@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@CrossOrigin(origins="*")
 public class UserCredentialsController {
 
     private UserCredentialsService userCredentialsService;
@@ -33,24 +36,47 @@ public class UserCredentialsController {
         this.securityTokenGenerator = securityTokenGenerator;
     }
 
+@RequestMapping("/user")
+    public UserCredentials saveUser(@RequestBody UserCredentials user) throws UserAlreadyExistException {
 
-@PostMapping("/user")
-    public ResponseEntity<?> saveUser(@RequestBody UserCredentials user) throws UserAlreadyExistException {
-        return new ResponseEntity<>(userCredentialsService.saveUser(user), HttpStatus.CREATED);
+    try {
+        return userCredentialsService.saveUser(user);
+    }
+    catch (UserAlreadyExistException e) {
+        e.getMessage();
+        throw e;
+    }
 
     }
-    @GetMapping("/loginUser")
+    @RequestMapping("/loginUser")
     public ResponseEntity<?> loginUser(@RequestBody UserCredentials user) throws InvalidCredentialException
     {
-        UserCredentials retrievedUser = userCredentialsService.findByEmailIdAndPassword(user.getEmailId(),user.getPassword());
+        try {
+            UserCredentials retrievedUser = userCredentialsService.findByEmailIdAndPassword(user.getEmailId(), user.getPassword());
 
-        if(retrievedUser==null)
-        {
-            throw new InvalidCredentialException();
+            if (retrievedUser == null) {
+                throw new InvalidCredentialException();
+            }
+            Map<String, String> map = securityTokenGenerator.generateToken(user);
+            return new ResponseEntity<>(map, HttpStatus.OK);
         }
-        Map<String,String> map = securityTokenGenerator.generateToken(user);
-        return new ResponseEntity<>(map,HttpStatus.OK);
+        catch (InvalidCredentialException e) {
+            e.getMessage();
+            throw e;
+        }
     }
+    @RequestMapping("/updateUser/{emailId}")
+    public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") UserCredentials user,@PathVariable String emailId ) throws UserNotFoundException {
+        try {
+
+            return new ResponseEntity<>(userCredentialsService.updateUser(user,emailId), HttpStatus.OK);
+        }
+        catch (UserNotFoundException e) {
+            e.getMessage();
+            throw e;
+        }
+    }
+
 
     @GetMapping("/users")
     public ResponseEntity<?> getAllUser()  {

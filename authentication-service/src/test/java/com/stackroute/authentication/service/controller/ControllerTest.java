@@ -49,8 +49,8 @@ public class ControllerTest {
     @BeforeEach
     public void setUp() {
 
-//        userCredentials1 = new UserCredentials("raj@gmail.com", "1234");
-//        userCredentials2 = new UserCredentials("kumar@gmail.com", "1234");
+        userCredentials1= new UserCredentials("rajkumar@gmail.com","1234","insurer");
+        userCredentials2= new UserCredentials("kumar@gmail.com","1234","insurer");
 
         userList = Arrays.asList(userCredentials1, userCredentials2);
 
@@ -77,25 +77,13 @@ public class ControllerTest {
         return result;
     }
 
-    @Test
-    public void givenUserToSaveReturnSaveUserSuccess() throws Exception {
-        when(userCredentialsService.saveUser(any())).thenReturn(userCredentials1);
 
-        mockMvc.perform(post("/api/v1/user")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonToString(userCredentials1))
-                        .characterEncoding("utf-8"))
-                .andExpect(status().isOk())
-                .andDo(MockMvcResultHandlers.print());
-
-        verify(userCredentialsService, times(1)).saveUser(any());
-    }
 
     @Test
     public void givenUserToSaveReturnSaveUserFailure() throws Exception {
         when(userCredentialsService.saveUser(any())).thenThrow(UserAlreadyExistException.class);
 
-        mockMvc.perform(post("/api/v1/user")
+        mockMvc.perform(post("/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonToString(userCredentials1))
                         .characterEncoding("utf-8"))
