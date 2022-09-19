@@ -10,12 +10,26 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
-  baseUrl="http://localhost:8085/api/v1/user";
+  email1='gritvik9@gmail.com';
+ baseurl:any="http://localhost:8085/api/v1/";
 
   getUserDetails():Observable<any>{
-    return this.http.get(`${this.baseUrl}`);
+    return this.http.get(this.baseurl+"users");
   }
-  email ="gritvik9@gmail.com";
+
+ updateUserDetails(formData:FormData):Observable<any>{
+  return this.http.put(this.baseurl+"updateUser/"+this.email1,formData);
+ }
+
+
+
+
+  baseUrl="http://localhost:8085/api/v1/user";
+
+  // getUserDetails():Observable<any>{
+  //   return this.http.get(`${this.baseUrl}`);
+  // }
+  // email ="gritvik9@gmail.com";
 
 
   registerUser(user: User): Observable<Object>{

@@ -26,7 +26,7 @@ export class PoliciesComponent {
 
   policies = [
     {
-      name:'Motor Insurance',
+      name:'Automobile Insurance',
       policyNo: '013298',
       purchaseDate: '28-01-2022',
       endDate: '27-01-2023',
@@ -83,10 +83,12 @@ export class PoliciesComponent {
     }
   ]
 
-  openDialog() {
-    // console.log(data);
+  openDialog(policy: any) {
+    console.log(policy);
     this.router.navigateByUrl('/details');
-    localStorage.setItem('policy',"motor");
+    localStorage.setItem('insuranceType',policy.name);
+    console.log(localStorage.getItem('insuranceType'));
+    
     // const dialogRef = this.dialog.open(DetailsComponent);
 
     // dialogRef.afterClosed().subscribe(result => {
