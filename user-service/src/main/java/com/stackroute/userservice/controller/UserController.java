@@ -41,15 +41,15 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-//    @PutMapping("/changePass/{emailId}")
-//    public ResponseEntity<?> changePswrd(User user, @PathVariable String emailId) throws UserNotRegisteredException {
-//        try {
-//            return new ResponseEntity<>(userService.changePswrd(user, emailId), HttpStatus.OK);
-//        } catch (UserNotRegisteredException e) {
-//            e.getMessage();
-//            throw e;
-//        }
-//    }
+    @PutMapping("/changePass/{emailId}")
+    public ResponseEntity<?> changePswrd(@RequestBody User user, @PathVariable String emailId) throws UserNotRegisteredException {
+        try {
+            return new ResponseEntity<>(userService.changePswrd(user, emailId), HttpStatus.OK);
+        } catch (UserNotRegisteredException e) {
+            e.getMessage();
+            throw e;
+        }
+    }
 
     @PutMapping("/updateUser/{emailId}")
     public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") String user, @PathVariable String emailId,
