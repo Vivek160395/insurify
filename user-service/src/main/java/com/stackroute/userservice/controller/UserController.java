@@ -30,8 +30,7 @@ public class UserController {
     public User registerUser(@RequestBody User user) throws UserAlreadyExistsException {
         try {
             return userService.registerUser(user);
-        }
-        catch (UserAlreadyExistsException e) {
+        } catch (UserAlreadyExistsException e) {
             e.getMessage();
             throw e;
         }
@@ -53,10 +52,10 @@ public class UserController {
 //    }
 
     @PutMapping("/updateUser/{emailId}")
-    public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") String user, @PathVariable String emailId, @RequestParam("imageFile") MultipartFile file) throws UserNotRegisteredException, IOException {
+    public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") String user, @PathVariable String emailId,
+            @RequestParam("imageFile") MultipartFile file) throws UserNotRegisteredException, IOException {
         try {
-            User user1 = new ObjectMapper().readValue(user,User.class);
-
+            User user1 = new ObjectMapper().readValue(user, User.class);
             return new ResponseEntity<>(userService.updateUser(user1, emailId, file), HttpStatus.OK);
         } catch (UserNotRegisteredException | IOException e) {
             e.getMessage();
@@ -68,11 +67,11 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@PathVariable String emailId) throws UserNotRegisteredException {
         try {
             if (userService.deleteUser(emailId))
-                return new ResponseEntity<>("User with userId = "+emailId+" is Deleted successfully.", HttpStatus.OK);
+                return new ResponseEntity<>("User with userId = " + emailId + " is Deleted successfully.",
+                        HttpStatus.OK);
             else
                 return new ResponseEntity<>("User Not Deleted", HttpStatus.OK);
-        }
-        catch (UserNotRegisteredException e) {
+        } catch (UserNotRegisteredException e) {
             e.getMessage();
             throw e;
         }

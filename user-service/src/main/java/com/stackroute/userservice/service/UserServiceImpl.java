@@ -62,21 +62,20 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-//    @Override
-//    public User changePswrd(User user, String emailId) throws UserNotRegisteredException {
-//
-//        UserDTO userDTO = new UserDTO();
-//        userDTO.setPassword(user.getPassword());
-//
-//        if(userRepository.findById(emailId).isPresent()){
-//            User user1 = userRepository.findById(emailId).get();
-////            user1.setPassword(user.getPassword());
-//            return user1;
-//        }
-//        else {
-//            throw new UserNotRegisteredException();
-//        }
-//    }
+    @Override
+    public User changePswrd(User user, String emailId) throws UserNotRegisteredException {
+
+        UserDTO userDTO = new UserDTO();
+        userDTO.setPassword(user.getPassword());
+
+        if (userRepository.findById(emailId).isPresent()) {
+            User user1 = userRepository.findById(emailId).get();
+            user1.setPassword(user.getPassword());
+            return user1;
+        } else {
+            throw new UserNotRegisteredException();
+        }
+    }
 
     @Override
     public User updateUser(User user, String emailId, MultipartFile file)

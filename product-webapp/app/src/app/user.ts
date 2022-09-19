@@ -2,35 +2,35 @@ import { D } from "@angular/cdk/keycodes";
 import { Address } from "./address";
 
 export class User {
-        emailId:any;
-        password:any;
-        userType:any;
-        // name:any;
-        // gender:any;
-        // age:any;
-        // dateOfBirth:any;
-        // mobileNo:any;
-        // aadharNo:any;
-        // panNo:any;
-        // address:Address;
-         
-//     constructor(emailId:any,
-//         password:any,
-//         userType:any,
-//         name:any,
-//         gender:any,
-//         age:any,
-//         dateOfBirth:any,
-//         mobileNo:any,
-//         address:Address ,
-//         aadharNo:any,
-//         panNo:any
+        emailId!:string;
+        password!:string;
+        userType!: string;
+        name!:string;
+        gender!:string;
+        age!:string
+        dateOfBirth!:string;
+        mobileNo!:string;
+        aadharNo!:string;
+        panNo!:string;
+        address!:string;
+
+    // constructor(emailId:any,
+    //     password:any,
+    //     userType:any,
+    //     name:any,
+    //     gender:any,
+    //     age:any,
+    //     dateOfBirth:any,
+    //     mobileNo:any,
+    //     address:Address ,
+    //     aadharNo:any,
+    //     panNo:any
 
 // ){
 //     this.address=address;
-//     // this.emailId=emailId;
-//     // this.password=password;
-//     // this.userType=userType;
+//      this.emailId=emailId;
+//     this.password=password;
+//     this.userType=userType;
 //     // this.name=name;
 //     // this.gender=gender;
 //     // this.age=age;
@@ -41,13 +41,8 @@ export class User {
 //     // this.add
 
 
-    
-// }
 
-    // emailId?: string;
-    // password?: string;
-    // userType?: string;
-
-
-    
 }
+
+
+
