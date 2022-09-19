@@ -4,7 +4,11 @@ spring:
   datasource:
     username: root
 
+<<<<<<< HEAD
     password: password@123
+=======
+    password: root
+>>>>>>> 0766884b8fe1faab9226e4dc67909f073f4fd0f6
 
     url: jdbc:mysql://localhost:3306/insurifyDb
 

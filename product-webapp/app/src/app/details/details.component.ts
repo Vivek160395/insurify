@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
+  insuranceType: string | null;
 
-  constructor() { }
+ 
+  constructor() {
+     this.insuranceType= localStorage.getItem('insuranceType');
+  }
 
   ngOnInit(): void {
   }

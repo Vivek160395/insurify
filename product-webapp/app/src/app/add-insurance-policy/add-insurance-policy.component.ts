@@ -8,6 +8,7 @@ import { Insurance } from '../insurance';
 import { MatDialog } from '@angular/material/dialog';
 
 import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
+import { RecommendationServiceService } from '../recommendation-service.service';
 
 
 export interface bike {
@@ -134,7 +135,7 @@ export class AddInsurancePolicyComponent implements OnInit {
 
 
 
-  constructor(public http:HttpClient,public dialog:MatDialog) { }
+  constructor(public http:HttpClient,public dialog:MatDialog,private service:RecommendationServiceService) { }
 
   openDialog(){
     this.dialog.open(PreviewMarkupComponent,{data:this.valueVariable})
@@ -146,7 +147,7 @@ export class AddInsurancePolicyComponent implements OnInit {
     policyName       : new FormControl("", [Validators.required]),
     policyDescription: new FormControl("", [Validators.required]),
     category         : new FormControl("",[Validators.required]),
-    modelsAllowed    : new FormControl("",[Validators.required]),
+    modelsAllowed    : new FormControl([],[Validators.required]),
     policyDetails    : new FormArray([new FormGroup({
       premiums :    new FormControl("", [Validators.required,Validators.min(0)]),
       durations:    new FormControl("", [Validators.required,Validators.min(0)]),
@@ -285,9 +286,9 @@ export class AddInsurancePolicyComponent implements OnInit {
     }
     );
     console.log(control.controls[i].value)
-    
+
     control.push(x);
-    
+
   }
   addDetailsE(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
@@ -446,5 +447,6 @@ addOnBlur = true;
       this.duration.splice(index, 1);
     }
   }
+  // api for getting policy
 
 }

@@ -1,10 +1,19 @@
 .example-card {
-    max-width: 355px;
+    max-width: 360px;
     margin-bottom: 8px;
     margin-left: 20px;
     background-color: rgb(239, 228, 247);
+    cursor: pointer;
+    
   }
   
+.example-card:hover{
+  /* transform: ; */
+  border: 2px solid rgb(104, 44, 143);
+  transform: scale(1.1);
+  /* margin: 5px; */
+}
+
   div{
     padding: 7px;
   }

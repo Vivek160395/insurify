@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DetailsComponent } from '../details/details.component';
 
 @Component({
@@ -9,16 +10,10 @@ import { DetailsComponent } from '../details/details.component';
 })
 export class PoliciesComponent {
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private router: Router) {}
 
-  openDialog() {
-    const dialogRef = this.dialog.open(DetailsComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
   
+
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
   from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
   originally bred for hunting.`;
@@ -31,7 +26,7 @@ export class PoliciesComponent {
 
   policies = [
     {
-      name:'Motor Insurance',
+      name:'Automobile Insurance',
       policyNo: '013298',
       purchaseDate: '28-01-2022',
       endDate: '27-01-2023',
@@ -87,4 +82,18 @@ export class PoliciesComponent {
       status:"active"
     }
   ]
+
+  openDialog(policy: any) {
+    console.log(policy);
+    this.router.navigateByUrl('/details');
+    localStorage.setItem('insuranceType',policy.name);
+    console.log(localStorage.getItem('insuranceType'));
+    
+    // const dialogRef = this.dialog.open(DetailsComponent);
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log(`Dialog result: ${result}`);
+    // });
+  }
+
 }

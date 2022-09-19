@@ -1,0 +1,157 @@
+@media screen and (max-width:800px) {
+    .images {
+        width: 50%;
+        height: 50%;
+        align-items: center;
+    }
+}
+
+
+/* .divsecond {
+    display: flex;
+    justify-content: space-between;
+} */
+
+.vl {
+    border-left: 4px solid black;
+    height: 230px;
+}
+
+th {
+    font-weight: bold;
+    font-size: 20px;
+    background-color: aliceblue;
+    color: black;
+    border-top: none;
+    text-align: center;
+}
+
+
+/* td:first-child,
+th:first-child {
+    border-left: none;
+} */
+
+.mat-column-addOnName,
+.mat-column-expand,
+.mat-column-addOnPremiums {
+    padding: 0 20px;
+    width: 50px;
+    text-align: center;
+}
+
+.mat-column-sumInsure,
+.mat-column-premiums,
+.mat-column-durations {
+    padding: 0 20px;
+    width: 50px;
+    text-align: center;
+}
+
+mat-icon {
+    transform: scale(1.7);
+}
+
+.edit {
+    transform: scale(1);
+}
+
+.example-card {
+    max-width: 350px;
+    text-align: center;
+    border-radius: 5%;
+    border: 1px solid black;
+    margin: auto;
+}
+
+.example-card1 {
+    max-width: 300px;
+    border-radius: 5%;
+    padding: 0;
+}
+
+.example-card2 {
+    padding: 0;
+    max-width: 70%;
+    height: 100%;
+    border-radius: 2%;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+mat-form-field {
+    width: 70%;
+}
+
+.example-full-width {
+    width: 80%;
+}
+
+.table3 {
+    width: 65%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: auto;
+    border-collapse: collapse;
+    border-radius: 20px;
+    overflow: hidden !important;
+}
+
+.demo-table,
+.demo-table1 {
+    width: 6%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: auto;
+    border-collapse: collapse;
+    border-radius: 20px;
+    overflow: hidden !important;
+}
+
+#btn {
+    margin: auto;
+}
+
+
+/* .mat-column-addOnName,
+.mat-column-addOnPremiums {
+    padding: 0 20%;
+} */
+
+tr.example-detail-row {
+    height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+}
+
+.example-element-row td {
+    border-bottom-width: 0;
+}
+
+.example-element-detail {
+    overflow: hidden;
+    display: flex;
+}
+
+.example-element-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+}
+
+.example-element-description {
+    padding: 16px;
+}
+
+.example-element-description-attribution {
+    opacity: 0.5;
+}
