@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
+import { User } from '../user';
 
 
 @Component({
@@ -9,7 +12,10 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+
+  msg = '';
+  user: User = new User();
+  constructor(private loginservice : LoginService) { }
 
   ngOnInit(): void {
   }
@@ -19,8 +25,25 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required])
    });
   
-   logIn(){
-    console.log("Log in successfull");
+   logIn(data:any){
+
+    this.user.emailId = data.value.emailId;
+    this.user.password = data.value.password;
+  
+      // this.loginservice.logInUser(this.user).subscribe((response)=> {
+      //     console.log("Log in successfull", data),  console.error("Log in failed",data)});
+
+      this.loginservice.logInUser(this.user).subscribe(
+
+        data => {
+          console.log("Log in successfull");
+        },
+        error => {
+          console.log("Log in failed");
+          this.msg = "Please enter valid credentials";
+        }
+      )
+      
     }
 
 
