@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/v1")
 public class UserController {
 
@@ -40,16 +40,6 @@ public class UserController {
     public ResponseEntity<?> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
-
-//    @PutMapping("/changePass/{emailId}")
-//    public ResponseEntity<?> changePswrd(User user, @PathVariable String emailId) throws UserNotRegisteredException {
-//        try {
-//            return new ResponseEntity<>(userService.changePswrd(user, emailId), HttpStatus.OK);
-//        } catch (UserNotRegisteredException e) {
-//            e.getMessage();
-//            throw e;
-//        }
-//    }
 
     @PutMapping("/updateUser/{emailId}")
     public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") String user, @PathVariable String emailId,
