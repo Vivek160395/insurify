@@ -14,13 +14,31 @@ export class RenewalPolicyComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  premiumCheckBoxList = this.formBuilder.group({
-    Premium3: false,
-    Premium4: false,
-    Premium5: false,
-  });
+  myModel = 0;
 
-  category:string= "";
+  // toggle1(){
+  //   this.isHidden1 = !this.isHidden1;
+  //   console.log(this.isHidden1);
+  // }
+
+  // toggle2(){
+  //   this.isHidden2 = !this.isHidden2;
+  //   console.log(this.isHidden2);
+  // }
+
+  // toggle3(){
+  //   this.isHidden3 = !this.isHidden3;
+  //   console.log(this.isHidden3)
+  // }
+
+
+  // premiumCheckBoxList = this.formBuilder.group({
+  //   Premium3: false,
+  //   Premium4: false,
+  //   Premium5: false,
+  // });
+
+  category:string | undefined;
   insuranceType:string | undefined;
 
   renewalPolicyForm = new FormGroup({

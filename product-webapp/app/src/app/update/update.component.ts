@@ -34,8 +34,8 @@ export class UpdateComponent implements OnInit {
   edit:any = true;
   view:any = false;
 
-  address:Address=new Address("","","","","","");
-  user1:User=new User("","","","","","","","",this.address,"","");
+  // address:Address=new Address("","","","","","");
+  // user1:User=new User("","","","","","","","",this.address,"","");
 
   constructor(private http:HttpClient,private service:UserService) { }
 
@@ -99,19 +99,19 @@ profile=new FormGroup({
     this.edit=true;
     this.view=false;
     console.log(this.profile.value.name);
-    this.user1.name=this.profile.value.name;
-    this.user1.dateOfBirth=this.profile.value.dob;
-    this.user1.gender=this.profile.value.gender;
-    this.user1.mobileNo=this.profile.value.mobile;
-    this.user1.aadharNo=this.profile.value.aadhar;
-    this.user1.panNo=this.profile.value.pan;
-    this.user1.address.city=this.profile.value.hno;
-    this.user1.address.landmark=this.profile.value.landmark;
-    this.user1.address.city=this.profile.value.city;
-    this.user1.address.street=this.profile.value.street;
-    this.user1.address.state=this.profile.value.state;
-    this.user1.address.pinCode=this.profile.value.pincode;
-    console.log(this.user1.address);
+    // this.user1.name=this.profile.value.name;
+    // this.user1.dateOfBirth=this.profile.value.dob;
+    // this.user1.gender=this.profile.value.gender;
+    // this.user1.mobileNo=this.profile.value.mobile;
+    // this.user1.aadharNo=this.profile.value.aadhar;
+    // this.user1.panNo=this.profile.value.pan;
+    // this.user1.address.city=this.profile.value.hno;
+    // this.user1.address.landmark=this.profile.value.landmark;
+    // this.user1.address.city=this.profile.value.city;
+    // this.user1.address.street=this.profile.value.street;
+    // this.user1.address.state=this.profile.value.state;
+    // this.user1.address.pinCode=this.profile.value.pincode;
+    // console.log(this.user1.address);
     var formData:any = new FormData();
     var formData1:any = new FormData();
     formData.append("userDetails",this.data);

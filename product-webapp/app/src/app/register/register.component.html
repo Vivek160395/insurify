@@ -1,4 +1,4 @@
-<!--
+
 <div class="background">
   <div class="w3-container w3-padding">
     <a href="#" class="w3-button w3-mobile w3-hover-blue" style ="color: white;"> <h3> Home</h3></a>
@@ -20,29 +20,29 @@
 
                  <div class="mb-3">
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="inlineRadio1" value="As Insured" formControlName = "Role">
+                      <input class="form-check-input" type="radio" id="inlineRadio1" value="As Insured" formControlName = "userType">
                       <label class="form-check-label" for="inlineRadio1"> <b>As Insured </b> </label>
                       <img src="assets/img/As_insured.png" width="25" height="25" style="padding-left: 1px;">
                     </div>
 
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="inlineRadio2" value="As Insurer" formControlName = "Role">
+                      <input class="form-check-input" type="radio" id="inlineRadio2" value="As Insurer" formControlName = "userType">
                       <label class="form-check-label" for="inlineRadio2"> <b>As Insurer </b> </label>
                       <img src="assets/img/As_insurer.png" width="28" height="28" style="padding-left: 1px;">
                     </div>
                   </div>
-                  <div class= "form-text text-danger" *ngIf = "Role.errors?.['required']"> Role is required
+                  <div class= "form-text text-danger" *ngIf = "userType.errors?.['required']"> Role is required
                   </div>
 
 
                 <div class= "mb-3" >
-                     <input type="email" class= "form-control" placeholder="Enter your Email Id*" id="email" formControlName = "email">
-                     <div class= "form-text text-danger" *ngIf = "email.errors?.['required'] &&
-                        (email.dirty || email.touched)"> Email is required
+                     <input type="emailId" class= "form-control" placeholder="Enter your Email Id*" id="emailId" formControlName = "emailId">
+                     <div class= "form-text text-danger" *ngIf = "emailId.errors?.['required'] &&
+                        (emailId.dirty || emailId.touched)"> Email is required
                     </div>
 
-                    <div class= "form-text text-danger" *ngIf = "email.errors?.['email'] &&
-                        (email.dirty || email.touched)"> Email is invalid
+                    <div class= "form-text text-danger" *ngIf = "emailId.errors?.['emailId'] &&
+                        (emailId.dirty || emailId.touched)"> Email is invalid
                     </div>
 
                 </div>
@@ -62,17 +62,18 @@
                 </div>
 
                  <div class="mb-3">
-                     <input type= "password" class= "form-control" placeholder = " Confirm password* " id="confirmPassword" formControlName = "confirmPassword">
+                     <input type= "confirmPassword" class= "form-control" placeholder = " Confirm password* " id="confirmPassword" formControlName = "confirmPassword">
                  </div>
-                 <div class= "form-text text-danger" *ngIf = "password.errors?.['required'] &&
-                 (password.dirty || password.touched)" > Password is required
-                </div>
-
+                 <div class= "form-text text-danger" *ngIf = "confirmPassword.errors?.['required'] &&
+                 (confirmPassword.dirty || confirmPassword.touched)" > Password is required</div>
+              
 
                 <button type ="submit" [disabled]="registerForm.invalid" class=" btn btn-primary mr-1">Register</button>
 
                 <p class = "mb-3">Already a member? </p>
                <a href="http://localhost:4200/login" class="text-center">Log In</a>
+
+
 
               </form>
           </div>
@@ -82,4 +83,4 @@
 </div>
 
 
-             -->
+            

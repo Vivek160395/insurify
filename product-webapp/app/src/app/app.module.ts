@@ -8,7 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MatIconModule } from '@angular/material/icon';
-// import { RegisterComponent } from './register/register.component';
+
+import { RegisterComponent } from './register/register.component';
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import {A11yModule} from '@angular/cdk/a11y';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
@@ -66,6 +67,7 @@ import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
 import { UpdateComponent } from './update/update.component';
+
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailsComponent } from './details/details.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
@@ -76,7 +78,7 @@ import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy
 @NgModule({
   declarations: [
     AppComponent,
-    // RegisterComponent,
+     RegisterComponent,
     RecommendationComponent,
     PolicyDetailsComponent,
     NavBarComponent,
