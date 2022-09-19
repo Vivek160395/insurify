@@ -1,152 +1,201 @@
-<div class="column" style="margin-bottom:30px ;">
-    <div class=" row" style="display: flex;justify-content: space-between;padding-top:30px ;">
-        <div style="margin:0 auto ;" class=" col-5">
-            <img src="data:{{imageType}};base64,{{pic}}" width="600" height="300px" class="mat-elevation-z20 images" style="border-radius:20px ;">
-        </div>
-        <div class=" col-6" style="margin:auto 0 auto -70px">
-            <mat-card class="example-card2">
-                <diV style="padding:20px ;background-color: RGB(166 246 227);text-align:center">
-                    <mat-card-title style="margin: auto;">{{this.policyName}}</mat-card-title>
-                </diV>
-                <div style="padding: 20px;">
-                    <mat-card-content>
-                        <p>{{this.description}}</p>
-                    </mat-card-content>
-                </div>
-            </mat-card>
-        </div>
+<!-- <div class=" row"> -->
+<div fxLayout="row" style="margin-top: 50px;">
+    <div fxFlex="50" fxLayoutAlign="center center">
+        <!-- <div style="margin:0 auto ;" class=" col-5"> -->
+        <img src="data:{{imageType}};base64,{{pic}}" width="600" height="300px" class="mat-elevation-z8 images" style="margin:auto;border-radius:20px ;">
     </div>
-    <div class="row" style="display: flex;justify-content: space-evenly;margin-top:20px ;">
-        <div style="margin:auto" class="col-7">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z20 demo-table">
-                <ng-container matColumnDef="sumInsure">
-                    <th mat-header-cell *matHeaderCellDef> sumInsure </th>
-                    <td mat-cell *matCellDef="let element"> {{element.sumInsure}} </td>
-                </ng-container>
-                <ng-container matColumnDef="premiums">
-                    <th mat-header-cell *matHeaderCellDef> No. </th>
-                    <td mat-cell *matCellDef="let element"> {{element.premiums}} </td>
-                </ng-container>
-                <ng-container matColumnDef="durations">
-                    <th mat-header-cell *matHeaderCellDef> durations </th>
-                    <td mat-cell *matCellDef="let element"> {{element.durations}} </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-        </div>
-        <div style="margin:auto" class="col-3">
-            <mat-card class="mat-elevation-z20 example-card">
-                <p>Premium Calculator</p>
-                <div class="column">
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Gender</p>
-                        </div>
-                        <div>
-                            <mat-form-field>
-                                <mat-label>Select your Gender</mat-label>
-                                <select matNativeControl required [formControl]="selectFormControl">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Trans">Trans</option>
-                                </select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Date Of Birth</p>
-                        </div>
-                        <div>
-                            <form class="example-form">
-                                <mat-form-field class="example-width">
-                                    <mat-label>Enter Your DOB</mat-label>
-                                    <input matInput placeholder="Ex. Pizza">
-                                </mat-form-field>
-                            </form>
-                        </div>
-                    </div>
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Mobile Number</p>
-                        </div>
-                        <div>
-                            <form class="example-form">
-                                <mat-form-field class="example-width">
-                                    <span matPrefix>+91 &nbsp;</span>
-                                    <mat-label>Enter Your Phone no</mat-label>
-                                    <input matInput placeholder="Ex. Pizza">
-                                </mat-form-field>
-                            </form>
-                        </div>
-                    </div>
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Email</p>
-                        </div>
-                        <div>
-                            <form class="example-form">
-                                <mat-form-field class="example-width">
-                                    <mat-label>Enter Your Email Id</mat-label>
-                                    <input matInput>
-                                </mat-form-field>
-                            </form>
-                        </div>
-                    </div>
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Income</p>
-                        </div>
-                        <div>
-                            <form class="example-form">
-                                <mat-form-field class="example-width">
-                                    <mat-label>Enter Your Annual Income</mat-label>
-                                    <input matInput>
-                                </mat-form-field>
-                            </form>
-                        </div>
-                    </div>
-                    <div style="display: flex;justify-content:space-between">
-                        <div style="margin:auto 0 auto 0;">
-                            <p>Gender</p>
-                        </div>
-                        <div>
-                            <mat-form-field>
-                                <mat-label>Select your Gender</mat-label>
-                                <select matNativeControl required [formControl]="selectFormControl">
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Trans">Trans</option>
-                                </select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div>
-            </mat-card>
-        </div>
-    </div>
-    <div>
-        <div style="margin:auto auto 30px 7%;display:flex ;flex-wrap: wrap;">
-            <mat-card class="mat-elevation-z20 example-card1  " *ngFor="let item of addOns " style="margin:20px">
-                <!-- <div style="padding:20px ; "> -->
-                <div style="background-color: rgb(254,252,211);padding: 20px;">
-                    <mat-card-title style="text-align: center; ">
-                        {{item.addOnName}}
-                    </mat-card-title>
-                </div>
-                <div style="padding: 20px; ">
-                    <mat-card-content>
-                        <p>{{item.addOnDescription}}</p>
-                    </mat-card-content>
-                    <hr>
-                    <mat-card-footer style="display: flex;justify-content:space-between;margin:10px 20px 0 20px ">
-                        <p>Add On Premium</p>
-                        <p>{{item.addOnPremiums}}</p>
-                    </mat-card-footer>
-                </div>
-            </mat-card>
-        </div>
+    <div fxFlex="50" fxLayoutAlign="center center">
+        <!-- <div fxFlex="40"> -->
+        <mat-card class="example-card2">
+            <diV style="padding:20px ;background-color: RGB(166 246 227);text-align:center">
+                <mat-card-title style="margin: auto;">{{this.policyName}}</mat-card-title>
+            </diV>
+            <div style="padding: 20px;">
+                <mat-card-content>
+                    <p>{{this.addOnDescription}}</p>
+                </mat-card-content>
+            </div>
+        </mat-card>
     </div>
 </div>
-<!-- <img src="data:*;base64,{{this.pic}} "> -->
+<!-- <div class="column" style="margin-bottom:30px ;"> -->
+<!-- <div class="row" style="display: flex;justify-content: space-evenly;margin-top:20px ;"> -->
+<!-- <div style="margin:auto" class="col-7"> -->
+<div fxLayout="row" fxLayoutGap="2%" style="margin-top: 50px;">
+    <div fxFlex="50%" fxLayoutAlign="center center">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+            <ng-container matColumnDef="sumInsure">
+                <th mat-header-cell *matHeaderCellDef> sumInsure </th>
+                <td mat-cell *matCellDef="let element"> {{element.sumInsure}} </td>
+            </ng-container>
+            <ng-container matColumnDef="premiums">
+                <th mat-header-cell *matHeaderCellDef> Premiums</th>
+                <td mat-cell *matCellDef="let element"> {{element.premiums}} </td>
+            </ng-container>
+            <ng-container matColumnDef="durations">
+                <th mat-header-cell *matHeaderCellDef> durations </th>
+                <td mat-cell *matCellDef="let element"> {{element.durations}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <!-- <div style="margin:auto" class="col-3"> -->
+    <div fxFlex="50%">
+        <mat-card class="mat-elevation-z8 example-card">
+            <p>Premium Calculator</p>
+            <div class="column">
+                <div style="display: flex;justify-content:space-between">
+                    <div style="margin:auto 0 auto 0;">
+                        <p>Gender</p>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Select your Gender</mat-label>
+                            <select matNativeControl required [formControl]="selectFormControl">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Trans">Trans</option>
+              </select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div style="display: flex;justify-content:space-between">
+                    <div style="margin:auto 0 auto 0;">
+                        <p>Date Of Birth</p>
+                    </div>
+                    <div>
+                        <form class="example-form">
+                            <mat-form-field class="example-width">
+                                <mat-label>Enter Your DOB</mat-label>
+                                <input matInput placeholder="Ex. Pizza">
+                            </mat-form-field>
+                        </form>
+                    </div>
+                </div>
+                <div style="display: flex;justify-content:space-between">
+                    <div style="margin:auto 0 auto 0;">
+                        <p>Mobile Number</p>
+                    </div>
+                    <div>
+                        <form class="example-form">
+                            <mat-form-field class="example-width">
+                                <span matPrefix>+91 &nbsp;</span>
+                                <mat-label>Enter Your Phone no</mat-label>
+                                <input matInput placeholder="Ex. Pizza">
+                            </mat-form-field>
+                        </form>
+                    </div>
+                </div>
+                <div style="display: flex;justify-content:space-between">
+                    <div style="margin:auto 0 auto 0;">
+                        <p>Email</p>
+                    </div>
+                    <div>
+                        <form class="example-form">
+                            <mat-form-field class="example-width">
+                                <mat-label>Enter Your Email Id</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </form>
+                    </div>
+                </div>
+                <div style="display: flex;justify-content:space-between">
+                    <div style="margin:auto 0 auto 0;">
+                        <p>Income</p>
+                    </div>
+                    <div>
+                        <form class="example-form">
+                            <mat-form-field class="example-width">
+                                <mat-label>Enter Your Annual Income</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+                        </form>
+                    </div>
+                </div>
+                <div style="display: flex;justify-content:space-between">
+                    <div style="margin:auto 0 auto 0;">
+                        <p>Gender</p>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Select your Gender</mat-label>
+                            <select matNativeControl required [formControl]="selectFormControl">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Trans">Trans</option>
+              </select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+<div fxLayout="row" fxLayoutGap="2%" style="margin: 50px 0 50px 0;">
+    <div fxFlex="50%" fxLayoutAlign="center center" style="margin:50px 0 50px 0;">
+        <table mat-table [dataSource]="dataSource1" multiTemplateDataRows class="mat-elevation-z8 table3" cellspacing="40" cellpadding="40">
+            <ng-container matColumnDef="addOnName">
+                <th mat-header-cell *matHeaderCellDef style="width:100px;text-align:center ;"> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.addOnName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="addOnPremiums">
+                <th mat-header-cell *matHeaderCellDef> Premium</th>
+                <td mat-cell *matCellDef="let element"> {{element.addOnPremiums}} </td>
+            </ng-container>
+            <ng-container matColumnDef="expand">
+                <th mat-header-cell *matHeaderCellDef aria-label="row actions">Description</th>
+                <td mat-cell *matCellDef="let element">
+                    <p mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()" id="btn">
+                        <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+                        <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+                    </p>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+                    <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                        <div class="example-element-description">
+                            {{element.addOnDescription}}
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
+    </div>
+    <!-- <div fxFlex="50%">
+        <table mat-table [dataSource]="dataSource1" multiTemplateDataRows class="mat-elevation-z8 table2">
+            <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+            </ng-container>
+            <ng-container matColumnDef="expand">
+                <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+            <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+          </button>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+                    <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                        <div class="example-element-description">
+                            {{element.addOnDescription}}
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
+    </div> -->
+</div>

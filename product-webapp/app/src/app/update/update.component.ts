@@ -37,16 +37,11 @@ export class UpdateComponent implements OnInit {
   address:Address=new Address("","","","","","");
   user1:User=new User("","","","","","","","",this.address,"","");
 
-
-
-
   constructor(private http:HttpClient,private service:UserService) { }
 
   ngOnInit(): void {
     this.getDetails();
   }
-
-
 
   getDetails(){
     this.service.getUserDetails().subscribe(data1=>{

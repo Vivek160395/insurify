@@ -39,9 +39,6 @@ export class User {
     // this.aadharNo=aadharNo;
     // this.panNo=panNo;
     // this.add
-
-
-
 }
 
 

@@ -73,7 +73,6 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
