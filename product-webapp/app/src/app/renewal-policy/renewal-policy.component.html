@@ -61,14 +61,19 @@
                             <!-- This is the automobile insurance field for two-wheeler -->
 
 <div fxLayoutAlign="center">
-    <section class="example-section" [formGroup]="premiumCheckBoxList" fxLayout="row" fxLayoutGap="9%" fxLayout.xs="column" fxLayoutGap.xs="0%">
-        <p><mat-checkbox formControlName="Premium3"><b>Total Premium</b> <br> Rs.4000 <br>(4 Years)</mat-checkbox></p>
-        <p><mat-checkbox formControlName="Premium4"><b>Total Premium</b> <br> Rs.3000 <br>(3 Years)</mat-checkbox></p>
-        <p><mat-checkbox formControlName="Premium5"><b>Total Premium</b> <br> Rs.1500 <br>(2 Years)</mat-checkbox></p>
-        
-      </section>
+    <!-- <section class="example-section"  fxLayout="row" fxLayoutGap="9%" fxLayout.xs="column" fxLayoutGap.xs="0%">
+        <p><mat-checkbox (click)="toggle1()"><b>Total Premium</b> <br> Rs.4000 <br>(4 Years)</mat-checkbox></p>
+        <p><mat-checkbox (click)="toggle2()"><b>Total Premium</b> <br> Rs.3000 <br>(3 Years)</mat-checkbox></p>
+        <p><mat-checkbox (click)="toggle3()"><b>Total Premium</b> <br> Rs.1500 <br>(2 Years)</mat-checkbox></p>
+    </section> -->
+
+    <mat-radio-group [(ngModel)]="myModel">
+        <mat-radio-button value="1" ><b>Total Premium</b> <br> Rs.4000 <br>(4 Years)</mat-radio-button>
+        <mat-radio-button value="2" ><b>Total Premium</b> <br> Rs.3000 <br>(3 Years)</mat-radio-button>
+        <mat-radio-button value="3" ><b>Total Premium</b> <br> Rs.1500 <br>(3 Years)</mat-radio-button>
+    </mat-radio-group>
 </div>
-<div fxLayout="row" fxLayoutGap="5%">
+<div fxLayout="row" fxLayoutGap="15%" >
     <div style="border: 1px solid black;" fxLayout="column"  fxLayoutAlign="center" fxFlex="45%" fxLayout.xs="column">
         <h1 style="text-align: center;"><b>Additional Covers</b></h1>
         <p style="text-align: center;"><mat-checkbox formControlName="Extra1">Road side Assistance</mat-checkbox></p>
@@ -78,35 +83,56 @@
         <p style="text-align: center;"><mat-checkbox formControlName="Extra5">Additional Discount</mat-checkbox></p>
     </div>
 
-    <div style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
+    <div *ngIf="myModel == 1" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
         <h1 style="text-align: center;"><b>Premium Summary</b></h1>
-       <p style="text-align: center;"><b>Basic Premium :</b></p>
-       <p style="text-align: center;"><b>Discounts :</b></p>
-       <p style="text-align: center;"><b>Additional Covers :</b></p> 
-       <p style="text-align: center;"><b>Premium :</b></p>
-       <p style="text-align: center;"><b>Tax :</b></p>
-       <p style="text-align: center;"><b>Total Premium :</b></p>
-       <p style="text-align: center;"><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
-       <button mat-raised-button color="accent" style="margin-left: 30%;">Submit</button>
+
+       <p style="text-align: center;"><b>Basic Premium :</b> 2500</p>
+       <p style="text-align: center;"><b>Discounts :</b> 252</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 256</p> 
+       <p style="text-align: center;"><b>Premium :</b> 2500</p>
+       <p style="text-align: center;"><b>Tax :</b> 123</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 3852</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
     </div>
 
-    <div>
+    <div *ngIf="myModel == 2" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
+        <h1 style="text-align: center;"><b>Premium Summary</b></h1>
 
+       <p style="text-align: center;"><b>Basic Premium :</b> 2800</p>
+       <p style="text-align: center;"><b>Discounts :</b> 252</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 352</p> 
+       <p style="text-align: center;"><b>Premium :</b> 2780</p>
+       <p style="text-align: center;"><b>Tax :</b> 256</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 2852</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
+    </div>
+
+    <div *ngIf="myModel == 3" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
+        <h1 style="text-align: center;"><b>Premium Summary</b></h1>
+
+       <p style="text-align: center;"><b>Basic Premium :</b> 1456</p>
+       <p style="text-align: center;"><b>Discounts :</b> 88</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 352</p> 
+       <p style="text-align: center;"><b>Premium :</b> 1235</p>
+       <p style="text-align: center;"><b>Tax :</b> 256</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 1402</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
     </div>
 </div>
                         <!-- This is the automobile insurance field for four-wheeler -->
 
 <div fxLayoutAlign="center" *ngIf="insuranceType === 'AutomobileInsurance' && category === 'four-wheeler'">
-    <section class="example-section" [formGroup]="premiumCheckBoxList" fxLayout="row" fxLayoutGap="9%" fxLayout.xs="column" fxLayoutGap.xs="0%">
-        <p><mat-checkbox formControlName="Premium3"><b>Total Premium</b> <br> Rs.4000 <br>(4 Years)</mat-checkbox></p>
-        <p><mat-checkbox formControlName="Premium4"><b>Total Premium</b> <br> Rs.3000 <br>(3 Years)</mat-checkbox></p>
-        <p><mat-checkbox formControlName="Premium5"><b>Total Premium</b> <br> Rs.1500 <br>(2 Years)</mat-checkbox></p>
-        
-      </section>
+    <mat-radio-group [(ngModel)]="myModel">
+        <mat-radio-button value="1" ><b>Total Premium</b> <br> Rs.4000 <br>(4 Years)</mat-radio-button>
+        <mat-radio-button value="2" ><b>Total Premium</b> <br> Rs.3000 <br>(3 Years)</mat-radio-button>
+        <mat-radio-button value="3" ><b>Total Premium</b> <br> Rs.1500 <br>(3 Years)</mat-radio-button>
+    </mat-radio-group>
 </div>
-<div fxLayout="row" fxLayoutGap="10%">
-    <div *ngIf="insuranceType === 'AutomobileInsurance' && category === 'four-wheeler'" style="border: 1px solid black;" fxLayout="column" 
-    fxLayoutAlign="center" fxFlex="45%" fxLayout.xs="column">
+<div fxLayout="row" fxLayoutGap="10%" *ngIf="insuranceType === 'AutomobileInsurance' && category === 'four-wheeler'">
+    <div style="border: 1px solid black;" fxLayout="column" fxLayoutAlign="center" fxFlex="45%" fxLayout.xs="column">
         <h1 style="text-align: center;"><b>Additional Covers</b></h1>
         <p style="text-align: center;"><mat-checkbox formControlName="Extra1">Road side Assistance</mat-checkbox></p>
         <p style="text-align: center;"><mat-checkbox formControlName="Extra2">Personal Protect cover</mat-checkbox></p>
@@ -115,88 +141,161 @@
         <p style="text-align: center;"><mat-checkbox formControlName="Extra5">Additional Discount</mat-checkbox></p>
     </div>
 
-    <div *ngIf="insuranceType === 'AutomobileInsurance' && category === 'four-wheeler'" style="border: 1px solid black;" fxFlex="45%">
+    <div *ngIf="myModel == 1" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center" fxLayout.xs="column">
         <h1 style="text-align: center;"><b>Premium Summary</b></h1>
-       <p>Basic Premium</p>
-       <p>Discounts</p>
-       <p>Additional Covers</p> 
-       <p>Premium</p>
-       <p>Tax</p>
-       <p>Total Premium</p>
-       <p style="text-align: center;"><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
-       <button mat-raised-button color="accent" style="margin-left: 42%;">Submit</button>
+
+       <p style="text-align: center;"><b>Basic Premium :</b> 2500</p>
+       <p style="text-align: center;"><b>Discounts :</b> 252</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 256</p> 
+       <p style="text-align: center;"><b>Premium :</b> 2500</p>
+       <p style="text-align: center;"><b>Tax :</b> 123</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 3852</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
+    </div>
+
+    <div *ngIf="myModel == 2" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center" fxLayout.xs="column">
+        <h1 style="text-align: center;"><b>Premium Summary</b></h1>
+
+       <p style="text-align: center;"><b>Basic Premium :</b> 2800</p>
+       <p style="text-align: center;"><b>Discounts :</b> 252</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 352</p> 
+       <p style="text-align: center;"><b>Premium :</b> 2780</p>
+       <p style="text-align: center;"><b>Tax :</b> 256</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 2852</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
+    </div>
+
+    <div *ngIf="myModel == 3" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center" fxLayout.xs="column">
+        <h1 style="text-align: center;"><b>Premium Summary</b></h1>
+
+       <p style="text-align: center;"><b>Basic Premium :</b> 1456</p>
+       <p style="text-align: center;"><b>Discounts :</b> 88</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 352</p> 
+       <p style="text-align: center;"><b>Premium :</b> 1235</p>
+       <p style="text-align: center;"><b>Tax :</b> 256</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 1402</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
     </div>
 </div>
                             <!-- This is the Health insurance field -->
 
 <div fxLayoutAlign="center" *ngIf="insuranceType === 'HealthInsurance'">
-    <section class="example-section" [formGroup]="premiumCheckBoxList" fxLayout="row" fxLayoutGap="9%" fxLayout.xs="column" fxLayoutGap.xs="0%">
-        <p><mat-checkbox formControlName="Premium3"><b>Total Premium</b> <br> Rs.4000 <br>(4 Years)</mat-checkbox></p>
-        <p><mat-checkbox formControlName="Premium4"><b>Total Premium</b> <br> Rs.3000 <br>(3 Years)</mat-checkbox></p>
-        <p><mat-checkbox formControlName="Premium5"><b>Total Premium</b> <br> Rs.1500 <br>(2 Years)</mat-checkbox></p>
-        
-      </section>
+    <mat-radio-group [(ngModel)]="myModel">
+        <mat-radio-button value="1" ><b>Total Premium</b> <br> Rs.4000 <br>(4 Years)</mat-radio-button>
+        <mat-radio-button value="2" ><b>Total Premium</b> <br> Rs.3000 <br>(3 Years)</mat-radio-button>
+        <mat-radio-button value="3" ><b>Total Premium</b> <br> Rs.1500 <br>(3 Years)</mat-radio-button>
+    </mat-radio-group>
 </div>
-<div fxLayout="row" fxLayoutGap="10%">
-    <div *ngIf="insuranceType === 'HealthInsurance'" style="border: 1px solid black;" fxLayout="column" 
-    fxLayoutAlign="center" fxFlex="45%" fxLayout.xs="column">
+<div fxLayout="row" fxLayoutGap="10%" *ngIf="insuranceType === 'HealthInsurance'">
+    <div  style="border: 1px solid black;" fxLayout="column" fxLayoutAlign="center" fxFlex="45%" fxLayout.xs="column">
         <h1 style="text-align: center;"><b>Additional Covers</b></h1>
-        <p style="text-align: center;"><mat-checkbox formControlName="Extra1">Road side Assistance</mat-checkbox></p>
-        <p style="text-align: center;"><mat-checkbox formControlName="Extra2">Personal Protect cover</mat-checkbox></p>
-        <p style="text-align: center;"><mat-checkbox formControlName="Extra3">Unnamed Passenger cover</mat-checkbox></p>
-        <p style="text-align: center;"><mat-checkbox formControlName="Extra4">Accessories</mat-checkbox></p>
-        <p style="text-align: center;"><mat-checkbox formControlName="Extra5">Additional Discount</mat-checkbox></p>
+        <p style="text-align: center;"><mat-checkbox formControlName="Extra1">Hospital cash cover</mat-checkbox></p>
+        <p style="text-align: center;"><mat-checkbox formControlName="Extra2">Personal Accident cover</mat-checkbox></p>
+        <p style="text-align: center;"><mat-checkbox formControlName="Extra3">Maternity cover</mat-checkbox></p>
+        <p style="text-align: center;"><mat-checkbox formControlName="Extra4">AYUSH Treatment cover</mat-checkbox></p>
     </div>
 
-    <div *ngIf="insuranceType === 'HealthInsurance'" style="border: 1px solid black;" fxFlex="45%">
+    <div *ngIf="myModel == 1" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center" fxLayout.xs="column">
         <h1 style="text-align: center;"><b>Premium Summary</b></h1>
-       <p>Basic Premium</p>
-       <p>Discounts</p>
-       <p>Additional Covers</p> 
-       <p>Premium</p>
-       <p>Tax</p>
-       <p>Total Premium</p>
-       <p style="text-align: center;"><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
-       <button mat-raised-button color="accent" style="margin-left: 42%;">Submit</button>
+
+       <p style="text-align: center;"><b>Basic Premium :</b> 2500</p>
+       <p style="text-align: center;"><b>Discounts :</b> 252</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 256</p> 
+       <p style="text-align: center;"><b>Premium :</b> 2500</p>
+       <p style="text-align: center;"><b>Tax :</b> 123</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 3852</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
+    </div>
+
+    <div *ngIf="myModel == 2" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center" fxLayout.xs="column">
+        <h1 style="text-align: center;"><b>Premium Summary</b></h1>
+
+       <p style="text-align: center;"><b>Basic Premium :</b> 2800</p>
+       <p style="text-align: center;"><b>Discounts :</b> 252</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 352</p> 
+       <p style="text-align: center;"><b>Premium :</b> 2780</p>
+       <p style="text-align: center;"><b>Tax :</b> 256</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 2852</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
+    </div>
+
+    <div *ngIf="myModel == 3" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center" fxLayout.xs="column">
+        <h1 style="text-align: center;"><b>Premium Summary</b></h1>
+
+       <p style="text-align: center;"><b>Basic Premium :</b> 1456</p>
+       <p style="text-align: center;"><b>Discounts :</b> 88</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 352</p> 
+       <p style="text-align: center;"><b>Premium :</b> 1235</p>
+       <p style="text-align: center;"><b>Tax :</b> 256</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 1402</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
     </div>
 </div>
 
                             <!-- This is the Life insurance field -->
 
 <div fxLayoutAlign="center" *ngIf="insuranceType === 'LifeInsurance'">
-    <section class="example-section" [formGroup]="premiumCheckBoxList" fxLayout="row" fxLayoutGap="9%" fxLayout.xs="column" fxLayoutGap.xs="0%">
-        <p><mat-checkbox formControlName="Premium3"><b>Total Premium</b> <br> Rs.32000 <br>(6 Years)</mat-checkbox></p>
-        <p><mat-checkbox formControlName="Premium4"><b>Total Premium</b> <br> Rs.26000 <br>(3 Years)</mat-checkbox></p>
-        <p><mat-checkbox formControlName="Premium5"><b>Total Premium</b> <br> Rs.15000 <br>(2 Years)</mat-checkbox></p>
-        
-      </section>
+    <mat-radio-group [(ngModel)]="myModel">
+        <mat-radio-button value="1" ><b>Total Premium</b> <br> Rs.4000 <br>(4 Years)</mat-radio-button>
+        <mat-radio-button value="2" ><b>Total Premium</b> <br> Rs.3000 <br>(3 Years)</mat-radio-button>
+        <mat-radio-button value="3" ><b>Total Premium</b> <br> Rs.1500 <br>(3 Years)</mat-radio-button>
+    </mat-radio-group>
 </div>
-<div fxLayout="row" fxLayoutGap="10%">
-    <div *ngIf="insuranceType === 'LifeInsurance'" style="border: 1px solid black;" fxLayout="column"
-    fxLayoutAlign="center" fxFlex="45%" fxLayout.xs="column">
+<div fxLayout="row" fxLayoutGap="10%" *ngIf="insuranceType === 'LifeInsurance'">
+    <div  style="border: 1px solid black;" fxLayout="column" fxLayoutAlign="center" fxFlex="45%" fxLayout.xs="column">
         <h1 style="text-align: center;"><b>Additional Covers</b></h1>
-        <p style="text-align: center;"><mat-checkbox formControlName="Extra1">Road side Assistance</mat-checkbox></p>
-        <p style="text-align: center;"><mat-checkbox formControlName="Extra2">Personal Protect cover</mat-checkbox></p>
-        <p style="text-align: center;"><mat-checkbox formControlName="Extra3">Unnamed Passenger cover</mat-checkbox></p>
-        <p style="text-align: center;"><mat-checkbox formControlName="Extra4">Accessories</mat-checkbox></p>
-        <p style="text-align: center;"><mat-checkbox formControlName="Extra5">Additional Discount</mat-checkbox></p>
+        <p style="text-align: center;"><mat-checkbox formControlName="Extra1">HospiCare Benefit</mat-checkbox></p>
+        <p style="text-align: center;"><mat-checkbox formControlName="Extra2">Cover against critical illness</mat-checkbox></p>
+        <p style="text-align: center;"><mat-checkbox formControlName="Extra3">Cover against Accidental Disability</mat-checkbox></p>
+        <p style="text-align: center;"><mat-checkbox formControlName="Extra4">Accidental Death Benefit</mat-checkbox></p>
     </div>
 
-    <div *ngIf="insuranceType === 'LifeInsurance'" style="border: 1px solid black;" fxFlex="45%">
+    <div *ngIf="myModel == 1" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center" fxLayout.xs="column">
         <h1 style="text-align: center;"><b>Premium Summary</b></h1>
-       <p>Basic Premium</p>
-       <p>Discounts</p>
-       <p>Additional Covers</p> 
-       <p>Premium</p>
-       <p>Tax</p>
-       <p>Total Premium</p>
-       <p style="text-align: center;"><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
-       <button mat-raised-button color="accent" style="margin-left: 42%;">Submit</button>
+
+       <p style="text-align: center;"><b>Basic Premium :</b> 2500</p>
+       <p style="text-align: center;"><b>Discounts :</b> 252</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 256</p> 
+       <p style="text-align: center;"><b>Premium :</b> 2500</p>
+       <p style="text-align: center;"><b>Tax :</b> 123</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 3852</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
+    </div>
+
+    <div *ngIf="myModel == 2" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center" fxLayout.xs="column">
+        <h1 style="text-align: center;"><b>Premium Summary</b></h1>
+
+       <p style="text-align: center;"><b>Basic Premium :</b> 2800</p>
+       <p style="text-align: center;"><b>Discounts :</b> 252</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 352</p> 
+       <p style="text-align: center;"><b>Premium :</b> 2780</p>
+       <p style="text-align: center;"><b>Tax :</b> 256</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 2852</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
+    </div>
+
+    <div *ngIf="myModel == 3" style="border: 1px solid black;" fxFlex="45%" fxLayout="column" fxLayoutAlign="center" fxLayout.xs="column">
+        <h1 style="text-align: center;"><b>Premium Summary</b></h1>
+
+       <p style="text-align: center;"><b>Basic Premium :</b> 1456</p>
+       <p style="text-align: center;"><b>Discounts :</b> 88</p>
+       <p style="text-align: center;"><b>Additional Covers :</b> 352</p> 
+       <p style="text-align: center;"><b>Premium :</b> 1235</p>
+       <p style="text-align: center;"><b>Tax :</b> 256</p>
+       <p style="text-align: center;"><b>Total Premium :</b> 1402</p>
+       <p><mat-checkbox>I hereBy declare that I have agreed to terms and conditions of the policy</mat-checkbox></p>
+       <button mat-raised-button color="accent" style="width: 100%;">Submit</button>
     </div>
 </div>
 
-
-
-<button mat-raised-button color="primary">
-    <a style="text-decoration: none; color: white;" routerLink="/renewal-home">Back</a>
+<button mat-stroked-button color="primary">
+    <a style="text-decoration: none;  color: black;" routerLink="/renewal-home">Back</a>
 </button>
