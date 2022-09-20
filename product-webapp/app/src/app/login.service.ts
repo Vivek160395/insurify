@@ -21,8 +21,12 @@ export class LoginService {
 
 
   loginUser(user:User): Observable<any>{
+
+    
     return this.httpClient.get(this.baseUrl+ "/loginUser");
   }
+
+
 
 
 }
