@@ -1,51 +1,68 @@
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, OnInit, VERSION } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-
+import { RecommendationServiceService } from '../recommendation-service.service';
 export interface PeriodicElement {
-  position: number;
-  weight: number;
-  symbol: string;
-  sumInsured: string;
+  premiums: number;
+  durations: string;
+  sumInsure: string;
 }
 export interface PeriodicElement1 {
-  addOnName: number;
-  addOnDescription: number;
-  addOnPremiums: string;
+  addOnName: string;
+  addOnPremiums: number;
+  addOnDescription: string;
 }
 interface Animal {
   name: string;
   sound: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, weight: 1.0079, symbol: 'H',sumInsured:'a'},
-  {position: 2, weight: 4.0026, symbol: 'He',sumInsured:'a'},
-  {position: 3, weight: 6.941, symbol: 'Li',sumInsured:'a'},
-  {position: 4, weight: 9.0122, symbol: 'Be',sumInsured:'a'},
-  {position: 5, weight: 10.811, symbol: 'B',sumInsured:'a'},
-  {position: 6, weight: 12.0107, symbol: 'C',sumInsured:'a'},
-];
-const ELEMENT_DATA1: PeriodicElement1[] = [
-  {addOnName: 1, addOnDescription: 1.0079, addOnPremiums: 'H'},
-  {addOnName: 2, addOnDescription: 4.0026, addOnPremiums: 'He'},
-  {addOnName: 3, addOnDescription: 6.941, addOnPremiums: 'Li'},
-];
 @Component({
   selector: 'app-insurance-details',
   templateUrl: './insurance-details.component.html',
-  styleUrls: ['./insurance-details.component.css']
+  styleUrls: ['./insurance-details.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
+
 export class InsuranceDetailsComponent implements OnInit {
   name = 'Angular ' + VERSION.major;
   images ="../../assets/img/Coronavirus-Business-Insurance.png"
-  displayedColumns: string[] = ['position', 'weight', 'symbol','sumInsured'];
-  dataSource = ELEMENT_DATA;
-  displayedColumns1: string[] = ['addOnName', 'addOnDescription', 'addOnPremiums'];
-  dataSource1 = ELEMENT_DATA1;
-  constructor() { }
-
+  displayedColumns: string[] = ['premiums', 'durations','sumInsure'];
+  addOns:any =[];
+  addOnDescription:string = "";
+  policyName:string ="";
+  policyType:string ="";
+  pic:any ="";
+  imageType:any="";
+  dataSource = [];
+  dataSource1 = [];
+  constructor(private service:RecommendationServiceService) { }
   ngOnInit(): void {
+    this.getPolicy();
   }
   animalControl = new FormControl<Animal | null>(null, Validators.required);
   selectFormControl = new FormControl('', Validators.required);
+  getPolicy(){
+    this.service.getAllPolicy("985618").subscribe(data=>{
+      this.addOns = data.addOnDetails;
+      console.log(data);
+      this.addOnDescription = data.policyDescription;
+      this.policyName = data.policyName;
+      this.policyType = data.insuranceType;
+      this.pic = data.picByte;
+      console.log(data.picByte);
+      this.dataSource = data.policyDetails;
+      this.imageType = data.picType;
+      this.dataSource1 = data.addOnDetails;
+    })
+  }
+  columnsToDisplay = ['addOnName', 'addOnPremiums'];
+  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+  expandedElement!: PeriodicElement | null;
 }
+

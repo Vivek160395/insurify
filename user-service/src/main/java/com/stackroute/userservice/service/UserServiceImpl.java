@@ -68,12 +68,11 @@ public class UserServiceImpl implements UserService {
         UserDTO userDTO = new UserDTO();
         userDTO.setPassword(user.getPassword());
 
-        if(userRepository.findById(emailId).isPresent()){
+        if (userRepository.findById(emailId).isPresent()) {
             User user1 = userRepository.findById(emailId).get();
             user1.setPassword(user.getPassword());
             return user1;
-        }
-        else {
+        } else {
             throw new UserNotRegisteredException();
         }
     }
@@ -93,6 +92,26 @@ public class UserServiceImpl implements UserService {
             user1.setAadharNo(user.getAadharNo());
             user1.setPanNo(user.getPanNo());
             user1.setProfilePic(file.getBytes());
+            userRepository.save(user1);
+            return user1;
+        } else {
+            throw new UserNotRegisteredException();
+        }
+    }
+
+    @Override
+    public User updateUser(User user, String emailId) throws UserNotRegisteredException {
+        if (userRepository.findById(emailId).isPresent()) {
+            User user1 = userRepository.findById(emailId).get();
+
+            user1.setName(user.getName());
+            user1.setAge(user.getAge());
+            user1.setGender(user.getGender());
+            user1.setDateOfBirth(user.getDateOfBirth());
+            user1.setMobileNo(user.getMobileNo());
+            user1.setAddress(user.getAddress());
+            user1.setAadharNo(user.getAadharNo());
+            user1.setPanNo(user.getPanNo());
             userRepository.save(user1);
             return user1;
         } else {

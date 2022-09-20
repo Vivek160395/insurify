@@ -6,4 +6,3 @@ spring:
       uri: ${MONGO_URI:mongodb://localhost:27017/insurifyd}
   application:
     name: user-service
-

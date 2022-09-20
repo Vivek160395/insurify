@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { T } from '@angular/cdk/keycodes';
 import { UserService } from '../user.service';
 
 @Component({
@@ -9,6 +8,7 @@ import { UserService } from '../user.service';
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.css']
 })
+
 export class UpdateComponent implements OnInit {
 
   file!:File;
@@ -40,6 +40,8 @@ export class UpdateComponent implements OnInit {
 }
 
 
+  // address:Address=new Address("","","","","","");
+  // user:User=new User("","","","","","","","",this.address,"","");
 
   constructor(private http:HttpClient,private service:UserService) { }
 
@@ -81,7 +83,7 @@ export class UpdateComponent implements OnInit {
       }})
   }
 
-  
+
 profile=new FormGroup({
     name:new FormControl(" ",[Validators.pattern('[a-zA-Z0-9 ]*')]),
     mobileNo:new FormControl('',[Validators.pattern('[0-9]{10}')]),
@@ -124,17 +126,14 @@ onEdit(){
   this.edit=false;
   this.view=true;
 }
-
-default(){
-  var reader=new FileReader();
-  
-}
-onImgSelected(e:any){
+img:any="";
+  onImgSelected(e:any){
    if(e.target.files){
      var reader=new FileReader();
      this.file=e.target.files[0];
      reader.readAsDataURL(e.target.files[0]);
      reader.onload=(event:any)=>{
+      this.img = e.target.files[0];
      this.Imgurl=event.target.result;
   }}}
 }

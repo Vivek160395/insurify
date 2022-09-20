@@ -30,7 +30,7 @@ import java.util.zip.Inflater;
 
 @RestController
 @RequestMapping("/api/vk1")
-@CrossOrigin(origins ="*",allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class InsuranceController {
 
     @Autowired
@@ -42,7 +42,8 @@ public class InsuranceController {
     Insurance lifePolicyObj;
 
     @PostMapping("/life-policy")
-    public ResponseEntity<?> addLifePolicy(@RequestBody Insurance insurance) throws PolicyAlreadyExistException, IOException {
+    public ResponseEntity<?> addLifePolicy(@RequestBody Insurance insurance)
+            throws PolicyAlreadyExistException, IOException {
 
         lifePolicyObj = new Insurance();
         lifePolicyObj.setPolicyId(insurance.getPolicyId());
@@ -57,21 +58,23 @@ public class InsuranceController {
         if (insurance.getInsuranceType().equalsIgnoreCase("AutomobileInsurance")) {
             lifePolicyObj.setCategory(insurance.getCategory());
             lifePolicyObj.setModelsAllowed(insurance.getModelsAllowed());
-        }else{
+        } else {
             lifePolicyObj.setCategory(null);
             lifePolicyObj.setModelsAllowed(null);
         }
         return new ResponseEntity<>(insuranceService.saveInsurance(lifePolicyObj), HttpStatus.CREATED);
     }
 
-    @PutMapping("/photos/update/{policyId}")
-    public BodyBuilder updateImage(@RequestParam("imageFile") MultipartFile imageFile, @RequestParam("policyId") String policyId) throws IOException {
-
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~"+imageFile.getOriginalFilename());
-        System.out.println(insuranceRepo.findById(policyId));
+    @PostMapping("/photos/update/{policyId}")
+    public ResponseEntity<?> updateImage(@RequestParam("imageFile") MultipartFile imageFile,
+            @PathVariable String policyId) throws IOException {
+        // System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~" +
+        // System.out.println(insuranceRepo.findById(policyId));
         Insurance retrieveInsurance = insuranceRepo.findById(policyId).get();
-        System.out.println("Original Image Byte Size - " + imageFile.getBytes().length);
-        retrieveInsurance.setPicByte(compressBytes(imageFile.getBytes()));
+        // System.out.println("Original Image Byte Size - " +
+        // imageFile.getBytes().length);
+        retrieveInsurance.setPicByte(imageFile.getBytes());
+        retrieveInsurance.setPicType(imageFile.getContentType());
         DTO dto = new DTO();
         dto.setPolicyId(retrieveInsurance.getPolicyId());
         dto.setPolicyName(retrieveInsurance.getPolicyName());
@@ -79,11 +82,16 @@ public class InsuranceController {
         dto.setInsuranceType(retrieveInsurance.getInsuranceType());
         dto.setDescription(retrieveInsurance.getPolicyDescription());
         dto.setPicType(imageFile.getContentType());
-        System.out.println("PolicyId"+policyId);
-        insuranceRepo.save(retrieveInsurance);
+        // System.out.println("PolicyId" + policyId);
         producer.sendingMessageToRabbitMQServer(dto);
-        return ResponseEntity.status(HttpStatus.OK);
+        Insurance insurance1 = insuranceRepo.save(retrieveInsurance);
+        if (insurance1.getPolicyId().equalsIgnoreCase(policyId)) {
+            return new ResponseEntity<>("Image Updated", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Image Not Updated", HttpStatus.BAD_GATEWAY);
+        }
     }
+
     @GetMapping(path = { "/get/{imageName}" })
     public Insurance getImage(@PathVariable("imageName") String imageName) {
 
@@ -93,29 +101,27 @@ public class InsuranceController {
         return insurance;
     }
 
-    @GetMapping(path = {"/policies"})
-    public ResponseEntity<?> getAllInsurance(){
-        return new ResponseEntity<>(insuranceService.findAllInsurance(),HttpStatus.OK);
+    @GetMapping(path = { "/policies" })
+    public ResponseEntity<?> getAllInsurance() {
+        return new ResponseEntity<>(insuranceService.findAllInsurance(), HttpStatus.OK);
     }
 
     @GetMapping("/policy-id/{policyId}")
-    public ResponseEntity<?> getPolicyByPolicyId(@PathVariable String  policyId) throws PolicyNotFoundException {
-        return new ResponseEntity<>(insuranceService.getPolicyByPolicyId(policyId),HttpStatus.OK);
+    public ResponseEntity<?> getPolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
+        return new ResponseEntity<>(insuranceService.getPolicyByPolicyId(policyId), HttpStatus.OK);
     }
 
     @DeleteMapping("/policy/delete/{policyId}")
     public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
         insuranceService.deletePolicyByPolicyId(policyId);
-        return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
 
     @GetMapping("/policy-name/{policyName}")
     public ResponseEntity<?> getPolicyByPolicyName(@PathVariable String policyName) {
         insuranceService.findPolicyByPolicyName(policyName);
-        return new ResponseEntity<>(insuranceService.findPolicyByPolicyName(policyName),HttpStatus.OK);
+        return new ResponseEntity<>(insuranceService.findPolicyByPolicyName(policyName), HttpStatus.OK);
     }
-
-
 
     // compress the image bytes before storing it in the database
     public static byte[] compressBytes(byte[] data) {

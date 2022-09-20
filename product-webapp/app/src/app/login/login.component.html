@@ -15,17 +15,17 @@
               <div fxFlex="35%" class = "col bg-light shadow" >
                 <h3 class="text-center"> Log in</h3>
   
-                <form [formGroup] = "registerForm" (ngSubmit) = "registerSubmitted">
-    
+                <form [formGroup] = "logInForm" (ngSubmit) = "logIn">
+                  <small class = "text-danger">{{msg}}</small>
   
                   <div class= "mb-3" >
-                       <input type="email" class= "form-control" placeholder="Enter your registered Email Id*" id="email" name="email" formControlName = "email">
-                       <div class= "form-text text-danger" *ngIf = "email.errors?.['required'] &&
-                          (email.dirty || email.touched)"> Email is required
+                       <input type="email" class= "form-control" placeholder="Enter your registered Email Id*" id="emailId" name="emailId" formControlName = "emailId">
+                       <div class= "form-text text-danger" *ngIf = "emailId.errors?.['required'] &&
+                          (emailId.dirty || emailId.touched)"> Email is required
                       </div>
   
-                      <div class= "form-text text-danger" *ngIf = "email.errors?.['email'] &&
-                          (email.dirty || email.touched)"> Email is invalid
+                      <div class= "form-text text-danger" *ngIf = "emailId.errors?.['emailId'] &&
+                          (emailId.dirty || emailId.touched)"> Email is invalid
                       </div>
   
                   </div>
@@ -37,10 +37,10 @@
                   <div class= "form-text text-danger" *ngIf = "password.errors?.['required']"> Password is required </div>
                   
                  
-                  <button type ="submit" [disabled]="registerForm.invalid" class=" btn btn-primary mr-1">Register</button> 
+                  <button type ="submit" [disabled]="logInForm.invalid" class=" btn btn-primary mr-1">Log in</button> 
       
                   <p class = "mb-3">New member? </p>
-                 <a href="http://localhost:4200/register" class="text-center">Register here</a>
+                 <a class="nav-link" routerLink = "./register">Register here</a>
   
                 </form>
             </div> 

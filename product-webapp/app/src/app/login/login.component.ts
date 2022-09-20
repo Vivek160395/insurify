@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
+import { User } from '../user';
 
 
 @Component({
@@ -9,28 +12,48 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+
+  msg = '';
+  user: User = new User();
+  constructor(private loginservice : LoginService) { }
 
   ngOnInit(): void {
   }
 
-  registerForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+  logInForm = new FormGroup({
+    emailId: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
    });
   
-   registerSubmitted(){
-    console.log("Submitted");
+   logIn(data:any){
+
+    this.user.emailId = data.value.emailId;
+    this.user.password = data.value.password;
+  
+      // this.loginservice.logInUser(this.user).subscribe((response)=> {
+      //     console.log("Log in successfull", data),  console.error("Log in failed",data)});
+
+      this.loginservice.logInUser(this.user).subscribe(
+
+        data => {
+          console.log("Log in successfull");
+        },
+        error => {
+          console.log("Log in failed");
+          this.msg = "Please enter valid credentials";
+        }
+      )
+      
     }
 
 
 
-  get email(): FormControl{
-    return this.registerForm.get('email') as FormControl;
+  get emailId(): FormControl{
+    return this.logInForm.get('emailId') as FormControl;
   }
 
   get password(): FormControl{
-    return this.registerForm.get('password') as FormControl;
+    return this.logInForm.get('password') as FormControl;
   }
   
 
