@@ -22,6 +22,7 @@ export class UserService {
  }
 
   baseUrl="http://localhost:8085/api/v1/user";
+  baseUrl1="http://localhost:8085/api/v1";
 
   // getUserDetails():Observable<any>{
   //   return this.http.get(`${this.baseUrl}`);
