@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
 
   msg = '';
   user: User = new User();
+  router: any;
+  registerForm: any;
   constructor(private loginservice : LoginService) { }
 
   ngOnInit(): void {
@@ -30,21 +32,36 @@ export class LoginComponent implements OnInit {
     this.user.emailId = data.value.emailId;
     this.user.password = data.value.password;
   
-      // this.loginservice.logInUser(this.user).subscribe((response)=> {
-      //     console.log("Log in successfull", data),  console.error("Log in failed",data)});
+    console.log(this.user);
 
-      this.loginservice.logInUser(this.user).subscribe(
+      //this.router.navigate(["/home"]);
 
-        data => {
-          console.log("Log in successfull");
-        },
-        error => {
-          console.log("Log in failed");
-          this.msg = "Please enter valid credentials";
-        }
+    if(this.logInForm.valid){
+        this.loginservice.getUserCredentials(this.user).subscribe((response) => {
+            console.log("Log in successfull",response);
+
+          }, error => {
+              console.log("Log in failed", error);
+              this.msg = "Please enter valid credentials";
+              this.logInForm.reset();
+           }
       )
+          }
       
-    }
+
+      this.loginservice.loginUser(this.user.emailId).subscribe((response)=>{
+      //console.table(this.loginUser.value);
+        console.log(response);
+         if (response.userType.valueOf("As Insured")) {
+            this.router.navigate(["/home"]);    
+          }
+        else {
+            this.router.navigate(["/add-policy"]); 
+            }
+      }
+      );}
+
+  
 
 
 
