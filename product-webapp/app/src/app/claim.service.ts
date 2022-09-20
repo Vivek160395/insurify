@@ -9,8 +9,11 @@ export class ClaimService {
 
   
   constructor(private http:HttpClient) { }
-  basicUrl = "http://localhost:8080/claim";
-  getUserData():Observable<any>{
-    return this.http.get<any>(`${this.basicUrl}/policyId`);
+  policyId='P87878';
+ 
+ baseurl:any="http://localhost:8080/api/v1/claim";
+
+  getUserDetails():Observable<any>{
+    return this.http.get(this.baseurl+"policyId");
   }
 }

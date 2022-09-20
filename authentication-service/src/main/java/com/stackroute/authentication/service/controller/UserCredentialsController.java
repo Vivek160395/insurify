@@ -21,11 +21,12 @@ import java.util.Map;
 
 
 @RestController
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserCredentialsController {
 
     private UserCredentialsService userCredentialsService;
     private SecurityTokenGenerator securityTokenGenerator;
+    private ResponseEntity<?> responseEntity;
 
 
 
@@ -36,7 +37,7 @@ public class UserCredentialsController {
         this.securityTokenGenerator = securityTokenGenerator;
     }
 
-@RequestMapping("/user")
+    @RequestMapping("/user")
     public UserCredentials saveUser(@RequestBody UserCredentials user) throws UserAlreadyExistException {
 
     try {
@@ -48,7 +49,7 @@ public class UserCredentialsController {
     }
 
     }
-    @RequestMapping("/loginUser")
+    @GetMapping("/loginUser")
     public ResponseEntity<?> loginUser(@RequestBody UserCredentials user) throws InvalidCredentialException
     {
         try {
@@ -83,6 +84,16 @@ public class UserCredentialsController {
         return new ResponseEntity<>(userCredentialsService.getAllUser(), HttpStatus.CREATED);
     }
 
+    @GetMapping("/{emailId}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String emailId) throws UserNotFoundException {
+        try{
+            responseEntity = new ResponseEntity<>(userCredentialsService.getUserByEmailId(emailId), HttpStatus.OK);
+        }catch(UserNotFoundException e)
+        {
+            throw new UserNotFoundException();
+        }
+        return responseEntity;
+    }
     @GetMapping("/list")
     public String viewHomePage(Model model) {
 

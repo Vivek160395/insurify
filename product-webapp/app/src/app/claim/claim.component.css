@@ -1,39 +1,4 @@
-;    
-  
-    
-.demo-toolbar {    
-    display: flex;    
-    align-items: center;    
-    width: 100%;    
-}    
-    
-.demo-form {    
-    min-width: 150px;    
-    max-width: 500px;    
-    width: 100%;    
-}    
-    
-.demo-full-width {    
-    width: 100%;    
-}    
-    
-body {    
-    margin: 0;    
-    font-family: Roboto, sans-serif;    
-}    
-    
 
-    
-.done {    
-    position: fixed;    
-    bottom: 20px;    
-    right: 20px;    
-    color: white;    
-}    
-    
-.content-center {    
-    text-align: -webkit-center;    
-}    
  .example-card {
   width: 100%;
 }
@@ -50,5 +15,23 @@ body {
   .list-group-item{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+h2{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: rgb(154, 123, 226);
+  
+}
+hr{
+  color: rgb(40, 43, 44);
+}
+
+
+.a1{
+  color: black ;
+  font-size:18px;
+  font-weight:normal;
+  font-family:'Times New Roman', Times, serif;
+  
+}
+
 
   

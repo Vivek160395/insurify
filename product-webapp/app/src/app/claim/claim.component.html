@@ -1,11 +1,49 @@
-<<<<<<< HEAD
 <mat-stepper>
   class="example-stepper"
   [orientation]="(stepperOrientation | async)!">
   <mat-step  label="Insured Details">
     <mat-card style="width: 100%;">
       <mat-card-content>
-      
+        <mat-card style="width: 100% ;background-color: rgb(183, 221, 221);">
+          <mat-card-content style="margin: 20px 30px 0 30px;">
+              <h2>Insurer Details:</h2>
+              <div >
+                  <div fxLayout="row" fxLayoutGap="2%">
+                      <div fxFlex="25%" class="a1"><b>CustomerPolicyId :</b> {{this.data.customerPolicyId}}</div>
+                      <div fxFlex="25%" class="a1"><b>InsurancePolicyId : </b>{{this.data.policyId}}</div>
+                      <div fxFlex="25%" class="a1"><b>Name :</b>{{this.data.insuredName}} </div>
+                      <div fxFlex="25%" class="a1"><b>EmailId :</b> {{this.data.insuredEmail}}</div>
+                      
+                  </div>
+                  
+              </div>
+              <br>
+              <div >
+                <div fxLayout="row" fxLayoutGap="2%">
+                    <div fxFlex="25%" class="a1"><b>StartDate :</b> {{this.data.startDate}}</div>
+                    <div fxFlex="25%" class="a1"><b>PurchaseDate : </b>{{this.data. purchaseDate}}</div>
+                    <div fxFlex="25%" class="a1"><b>EndDate :</b>{{this.data.endDate}} </div>
+                    <!-- <div fxFlex="25%" class="a1"><b>Duration :</b> {{this.data.duration}}</div> -->
+                    <div fxFlex="25%" class="a1" ><b>PolicyType :</b> {{this.data.insuranceType}}</div>
+                    
+                </div>
+                
+            </div>
+            <br>
+            <!-- <div >
+              <div fxLayout="row" fxLayoutGap="2%">
+                  
+                  
+                  
+              </div>
+              
+          </div>
+             -->
+              
+              
+  
+          </mat-card-content>
+      </mat-card>
         
 
         
@@ -14,9 +52,12 @@
       
       
       </mat-card-content>
-      <mat-card-actions fxLayout="row">
-        <button mat-flat-button color="primary" fxFlex="100%">Next</button>
+     
+      <mat-card-actions fxLayout="row" >
+        <button mat-raised-button  matStepperNext  color="primary" style="margin-left: auto" (click)="openDialog()">Show Profile</button>
+        <button mat-raised-button  matStepperNext  color="primary" style="margin-right: auto" >Proceed To Claim</button>
       </mat-card-actions>
+    
     </mat-card>
 
   </mat-step>
@@ -25,60 +66,98 @@
 
       <mat-card-content>
 
-
+        <form [formGroup]="claimForm" >
 
         <div style="justify-content: center;align-items: center;font-weight: 500;">
           <div fxLayout="row">
             <h3 style="font-family:cursive ;">Upload the document:</h3>
           </div>
-          <input class="ng-hide" id="input-file-id" multiple type="file" (change)="onFileChanged($event)">
+          <input class="ng-hide" id="input-file-id" multiple type="file" formControlName="document"  (change)="onImgSelected($event)">
 
         </div>
         <div>
-          <mat-form-field appearance="outline" fxFlex="100%">
+          <mat-form-field appearance="outline" fxFlex="100%"  *ngIf="insurancex==='autoMobileInsurance'">
             <mat-label>Describe the circumstances leading to the accident/theft:</mat-label>
-            <textarea matInput></textarea>
+            <textarea matInput formControlName="describeEventauto"></textarea>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" fxFlex="100%"  *ngIf="insurancex==='healthInsurance'">
+            <mat-label>Describe the circumstances leading to the health:</mat-label>
+            <textarea matInput formControlName="describeEventhealth"></textarea>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" fxFlex="100%"  *ngIf="insurancex==='lifeInsurance'">
+            <mat-label>Describe the circumstances leading to the life:</mat-label>
+            <textarea matInput formControlName="describeEventlife"></textarea>
           </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutGap="2%">
-          <mat-form-field appearance="outline" fxFlex="23%">
-            <mat-label>Claim</mat-label>
-            <mat-select placeholder="claimType" formControlName="claimType">
+          <mat-form-field appearance="outline" fxFlex="23%"  *ngIf="insurancex==='autoMobileInsurance'">
+            <mat-label>ClaimType</mat-label>
+            <mat-select placeholder="claimType" formControlName="claimAuto">
               <mat-option value="Accident">Accident</mat-option>
               <mat-option value="Theft">Theft</mat-option>
 
             </mat-select>
           </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="23%"  *ngIf="insurancex==='healthInsurance'">
+            <mat-label>Enter your health ID card number</mat-label>
+            <input matInput placeholder="Enter Patient ID" formControlName="claimHealth" required style="text-align: center;">
+          </mat-form-field>
+          <mat-form-field appearance="outline" fxFlex="23%"  *ngIf="insurancex==='lifeInsurance'">
+            <mat-label>claimType</mat-label>
+            <mat-select placeholder="claimType" formControlName="claimLife">
+              <mat-option value=" Living Benefits">Living Benefits</mat-option>
+              <mat-option value="Death Claims">Death Claims</mat-option>
+
+            </mat-select>
+          </mat-form-field>
+
+
 
           <mat-form-field appearance="outline" fxFlex="23%">
             <mat-label>Estimated loss amount </mat-label>
-            <input matInput placeholder="claimloss" formControlName="claimloss" required style="text-align: center;">
+            <input matInput placeholder="claimLoss" formControlName="claimLoss" required style="text-align: center;">
           </mat-form-field>
 
           <mat-form-field appearance="outline" fxFlex="23%">
             <mat-label>Intimation date</mat-label>
-            <input matInput [ngModel]="today | date:'M/dd/YYYY'" style="text-align: center;">
+            <input matInput [ngModel]="today | date:'M/dd/YYYY'" style="text-align: center;" formControlName="intimationDate">
           </mat-form-field>
           <mat-form-field appearance="outline" fxFlex="23%">
 
             <mat-label>Date of Event Occur</mat-label>
-            <input matInput [matDatepicker]="picker">
-
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #picker></mat-datepicker>
+            
+              
+            <input matInput [matDatepicker]="datepicker" formControlName="eventDate">
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+            
+            
+        
+            
 
           </mat-form-field>
 
         </div>
+        </form>
 
       </mat-card-content>
       <mat-card-actions fxLayout="row">
-        <button mat-flat-button color="primary" fxFlex="100%">submit</button>
+        <button mat-flat-button color="primary"  fxFlex="100%"  (click)="onSubmit()">submit</button>
+        <!-- <button class="alert alert-success" *ngIf="showMsg"   ><strong>Registration Success!</strong></button> -->
       </mat-card-actions>
+      
+      
     </mat-card>
 
   </mat-step>
 
 </mat-stepper>
-=======
->>>>>>> 0766884b8fe1faab9226e4dc67909f073f4fd0f6
