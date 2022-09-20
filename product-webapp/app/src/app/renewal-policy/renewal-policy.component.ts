@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-renewal-policy',
@@ -9,37 +10,25 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class RenewalPolicyComponent implements OnInit {
 
-  constructor(private formBuilder:FormBuilder) { }
+  constructor() { }
+
+  setCheckBox1 = true;
+  myModel = 0;
 
   ngOnInit(): void {
   }
 
-  myModel = 0;
+  update1(event:any){
+    console.log(event.checked)
+    event.checked = this.setCheckBox1;
+  }
 
-  // toggle1(){
-  //   this.isHidden1 = !this.isHidden1;
-  //   console.log(this.isHidden1);
-  // }
+  submit(){
+    alert("Your Policy has been renewed successfully")
+  }
 
-  // toggle2(){
-  //   this.isHidden2 = !this.isHidden2;
-  //   console.log(this.isHidden2);
-  // }
-
-  // toggle3(){
-  //   this.isHidden3 = !this.isHidden3;
-  //   console.log(this.isHidden3)
-  // }
-
-
-  // premiumCheckBoxList = this.formBuilder.group({
-  //   Premium3: false,
-  //   Premium4: false,
-  //   Premium5: false,
-  // });
-
-  category:string | undefined;
-  insuranceType:string | undefined;
+  category:string = "two-wheeler";
+  insuranceType:string = "AutomobileInsurance";
 
   renewalPolicyForm = new FormGroup({
     category: new FormControl("",Validators.required),

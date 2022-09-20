@@ -1,9 +1,10 @@
-<header style="background-color: rgb(141, 189, 227); height: 100px; margin: 5px;">
-    <h1 style="text-align-last: center; padding-top: 2%; font-size: xx-large;"><b>Policy Details</b></h1>
+<header style="background-color: #3F51B5; height: 100px; margin: 5px;">
+    <h1 style="text-align-last: center; padding-top: 2%; font-size: xx-large; color: white;"><b>Policy Details</b></h1>
 </header>
 
 <div fxLayout="row"  >
-    <div style="width: 50%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;">
+    <div style="width: 50%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;" 
+    appZoomonhover="true">
 
         <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
             <h2><b>Policy Holder Details</b></h2>
@@ -18,7 +19,8 @@
         <h3><b>Owner Email:</b> {{ownerEmail}}</h3>
     </div>
 
-    <div style="border: 2px solid rgb(204, 172, 172); text-align: center; width: 50%; border-radius: 20px; margin: 5px;">
+    <div style="border: 2px solid rgb(204, 172, 172); text-align: center; width: 50%; border-radius: 20px; margin: 5px;"
+    appZoomonhover="true">
 
         <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
             <h2><b>Vehicle Details</b></h2>
@@ -33,7 +35,8 @@
 </div>
 
 <div fxLayout="row" *ngIf="insuranceType === 'AutomobileInsurance' && category === 'four-wheeler'">
-    <div style="width: 50%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;">
+    <div style="width: 50%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;"
+    appZoomonhover="true">
 
         <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
             <h2><b>Policy Holder Details</b></h2>
@@ -48,7 +51,8 @@
         <h3><b>Owner Email:</b> {{ownerEmail}}</h3>
 </div>
 
-    <div style="border: 2px solid rgb(204, 172, 172); text-align: center; width: 50%; border-radius: 20px; margin: 5px;">
+    <div style="border: 2px solid rgb(204, 172, 172); text-align: center; width: 50%; border-radius: 20px; margin: 5px;"
+    appZoomonhover="true">
         <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
             <h2><b>Vehicle Details</b></h2>
         </header>
@@ -61,7 +65,8 @@
 </div>
 
 <div fxLayout="row" *ngIf="insuranceType === 'LifeInsurance'">
-    <div style="width: 99%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;">
+    <div style="width: 99%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;"
+    appZoomonhover="true">
 
         <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
             <h2><b>Policy Holder Details</b></h2>
@@ -79,7 +84,8 @@
 </div>
 
 <div fxLayout="row" *ngIf="insuranceType === 'HealthInsurance'">
-    <div style="width: 99%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;">
+    <div style="width: 99%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;"
+    appZoomonhover="true">
 
         <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
             <h2><b>Policy Holder Details</b></h2>
@@ -92,23 +98,11 @@
         <h3><b>Policy IssuenceDate:</b> {{policyIssuenceDate}}</h3>
         <h3><b>Owner Number:</b> {{ownerNumber}}</h3>
         <h3><b>Owner Email:</b> {{ownerEmail}}</h3>
+    </div>
 </div>
 
-<button mat-raised-button color="accent">
-    <a style="text-decoration: none; color: black;" routerLink="/renewal">Renew Now</a>
-</button>
-
-
-
-<!-- <p>Id: {{myData.policyId}}</p>
-<p>Policy Name: {{myData.policyName}}</p>
-<p>Insurance Type: {{myData.insuranceType}}</p>
-<p>Policy Description: {{myData.policyDescription}}</p>
-<table>
-    <tr *ngFor="let com of myData">
-        <td>{{com.userId}}</td>
-        <td>{{com.id}}</td>
-        <td>{{com.title}}</td>
-        <td>{{com.body}}</td>
-    </tr>
-</table> -->
+<div fxLayoutAlign="center">
+    <button mat-raised-button color="primary" fxLayout="column">
+        <a style="text-decoration: none; color: white;" routerLink="/renewal">Renew Now</a>
+    </button>
+</div>

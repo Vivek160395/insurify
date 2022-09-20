@@ -132,7 +132,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
 
          if(!(sDay.compareTo(ourDate)<0)||!(eDay.compareTo(ourDate)>=0))
          {
-             System.out.println("Cannot renew now because of policy  time interval is not vaid");
+             System.out.println("Cannot renew now because of policy  time interval is not valid");
              return false;
          }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
