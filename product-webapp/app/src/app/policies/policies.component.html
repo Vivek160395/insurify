@@ -10,21 +10,21 @@
     <mat-tab-group>
         <mat-tab label="All" >
         <div style="display: flex; flex-wrap: wrap; padding-top: 20px;" >
-            <div *ngFor="let policy of policies | filter:searchedKeyword" >
+            <div *ngFor="let policy of purchasedPolicies | filter:searchedKeyword" >
                 <mat-card class="example-card" (click)="openDialog(policy)">
-                    <mat-card-title>{{policy.name}} </mat-card-title>
+                    <mat-card-title>{{policy.policyType}} </mat-card-title>
                     <mat-divider></mat-divider>
                     <br>
                     <mat-card-subtitle>
-                        Policy No. :- {{policy.policyNo}} <br>
-                        Purchased on :- {{policy.purchaseDate}} <br>
-                        End Date :- {{policy.endDate}} <br>
+                        Policy No. :- {{policy.customerPolicyId}} <br>
+                        Purchased on :- {{policy.purchaseDate[0]}} <br>
+                        End Date :- {{policy.endDate[0]}} <br>
                         Sum Insured :- {{policy.sumInsured}}
                     </mat-card-subtitle>
                     <mat-card-content>
-                        {{longText}}
+                        <!-- {{longText}} -->
                     </mat-card-content>
-                    <button mat-raised-button color="primary" disabled>Claim</button>
+                    <button mat-raised-button color="primary" routerLink="/claim">Claim</button>
                     <button mat-raised-button color="primary" style="margin-left:180px" disabled>Renew</button>
                 </mat-card>
         </div> 
@@ -32,23 +32,23 @@
 </mat-tab>
         <mat-tab label="Active">
             <div style="display: flex; flex-wrap: wrap; padding: 2px; padding-top: 20px;" >
-            <div *ngFor="let policy of policies  | filter:searchedKeyword">
+            <div *ngFor="let policy of purchasedPolicies  | filter:searchedKeyword">
             
-                    <div *ngIf="policy.status=='active'">
+                    <div *ngIf="policy.status==true">
                         <mat-card class="example-card" (click)="openDialog(policy)">
-                            <mat-card-title>{{policy.name}}  </mat-card-title>
+                            <mat-card-title>{{policy.policyType}} </mat-card-title>
                             <mat-divider></mat-divider>
                             <br>
                             <mat-card-subtitle>
-                                Policy No. :- {{policy.policyNo}} <br>
-                                Purchased on :- {{policy.purchaseDate}} <br>
-                                End Date :- {{policy.endDate}} <br>
+                                Policy No. :- {{policy.customerPolicyId}} <br>
+                                Purchased on :- {{policy.purchaseDate[0]}} <br>
+                                End Date :- {{policy.endDate[0]}} <br>
                                 Sum Insured :- {{policy.sumInsured}}
                             </mat-card-subtitle>
                             <mat-card-content>
-                                {{longText}}
+                                <!-- {{longText}} -->
                             </mat-card-content>
-                            <button mat-raised-button color="primary">Claim</button>
+                            <button mat-raised-button color="primary" routerLink="/claim">Claim</button>
                             <button mat-raised-button color="primary" style="margin-left:180px" disabled>Renew</button>
                         </mat-card>  
                     </div>                  
@@ -56,23 +56,23 @@
         </div>
     </mat-tab>
         <mat-tab label="Completed"> <div style="display: flex; flex-wrap: wrap; padding-top: 20px;">
-            <div *ngFor="let policy of policies  | filter:searchedKeyword" >
-                <div *ngIf="policy.status=='claimed'">
+            <div *ngFor="let policy of purchasedPolicies  | filter:searchedKeyword" >
+                <div *ngIf="policy.status==false">
                     <mat-card class="example-card" (click)="openDialog(policy)">
-                        <mat-card-title>{{policy.name}} </mat-card-title>
-                        <mat-divider></mat-divider>
-                        <br>
-                        <mat-card-subtitle>
-                            Policy No. :- {{policy.policyNo}} <br>
-                            Purchased on :- {{policy.purchaseDate}} <br>
-                            End Date :- {{policy.endDate}} <br>
-                            Sum Insured :- {{policy.sumInsured}}
-                        </mat-card-subtitle>
+                        <mat-card-title>{{policy.policyType}} </mat-card-title>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <mat-card-subtitle>
+                        Policy No. :- {{policy.customerPolicyId}} <br>
+                        Purchased on :- {{policy.purchaseDate[0]}} <br>
+                        End Date :- {{policy.endDate[0]}} <br>
+                        Sum Insured :- {{policy.sumInsured}}
+                    </mat-card-subtitle>
                         <mat-card-content>
-                            {{longText}}
+                            <!-- {{longText}} -->
                         </mat-card-content>
                         <button mat-raised-button color="primary" disabled>Claim</button>
-                        <button mat-raised-button color="primary" style="margin-left:180px">Renew</button>
+                        <button mat-raised-button color="primary" style="margin-left:180px" routerLink="/renewal">Renew</button>
                     </mat-card>
                 </div>
                 
