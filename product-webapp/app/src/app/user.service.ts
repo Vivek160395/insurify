@@ -32,5 +32,11 @@ return this.http.put(this.baseurl+"updateUserDetails/"+this.email1,info);
  
   baseUrl="http://localhost:8085/api/v1/user";
 
+  
+
+  registerUser(user: User): Observable<Object>{
+    console.log(user);
+    return this.http.post(`${this.baseUrl}`,user);
+  }
 
 }
