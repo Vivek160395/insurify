@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
 })
 export class RegisterComponent implements OnInit {
 
- // repeatPassword: string = "none";
+ repeatPassword: string = "none";
 
  user: User = new User();
 constructor(private userService: UserService) {}
@@ -31,14 +31,14 @@ registerForm = new FormGroup({
  );
 
 registerSubmitted(data:any){
-  this.user.emailId = data.value.email;
-  this.user.password = data.value.password;
-  this.user.userType = data.value.Role;
+  // this.user.emailId = data.value.email;
+  // this.user.password = data.value.password;
+  // this.user.userType = data.value.Role;
 
   console.log(this.user);
-  this.userService.registerUser(this.user).subscribe((response)=>{
-    console.log("Registered data", response);
-  });
+  // this.userService.registerUser(this.user).subscribe((response)=>{
+  //   console.log("Registered data", response);
+  // });
 
 
 
