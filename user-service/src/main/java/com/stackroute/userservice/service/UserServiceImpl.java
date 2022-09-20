@@ -100,6 +100,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User updateUser(User user, String emailId) throws UserNotRegisteredException {
+        if (userRepository.findById(emailId).isPresent()) {
+            User user1 = userRepository.findById(emailId).get();
+
+            user1.setName(user.getName());
+            user1.setAge(user.getAge());
+            user1.setGender(user.getGender());
+            user1.setDateOfBirth(user.getDateOfBirth());
+            user1.setMobileNo(user.getMobileNo());
+            user1.setAddress(user.getAddress());
+            user1.setAadharNo(user.getAadharNo());
+            user1.setPanNo(user.getPanNo());
+            userRepository.save(user1);
+            return user1;
+        } else {
+            throw new UserNotRegisteredException();
+        }
+    }
+
+    @Override
     public boolean deleteUser(String emailId) throws UserNotRegisteredException {
         // User user = userRepository.findById(emailId).get();
         if (userRepository.findById(emailId).isPresent()) {

@@ -14,13 +14,9 @@ import java.util.List;
 public class UserInfo {
     private String customerPolicyId;
     private String insurancePolicyId;
-
-
     private long sumInsured;
     private List<String> startDate=new ArrayList<>();
-
     private List<String> endDate=new ArrayList<>();
-
     private List<String> purchaseDate=new ArrayList<>();
     private List<Integer> duration=new ArrayList<>();
     private List<String[]> addOnName=new ArrayList<>();
@@ -31,15 +27,10 @@ public class UserInfo {
     private HealthInsurance healthInsurance;
     private LifeInsurance lifeInsurance;
     private AutomobileInsurance automobileInsurance;
-
     private boolean renewalStatus=false;
-
     private List<Long> claimSum=new ArrayList<>();
-
     private List<String> claimDate=new ArrayList<>();
-
     private List<String> claimStatus=new ArrayList<>();
-
     private boolean status=true;
 
 
