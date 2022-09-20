@@ -23,10 +23,6 @@ export class UserService {
 
   baseUrl="http://localhost:8085/api/v1/user";
 
-  // getUserDetails():Observable<any>{
-  //   return this.http.get(`${this.baseUrl}`);
-  // }
-  // email ="gritvik9@gmail.com";
 
 
   registerUser(user: User): Observable<Object>{
