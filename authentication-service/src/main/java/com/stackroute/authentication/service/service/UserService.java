@@ -23,7 +23,7 @@ public class UserService {
            userCredentials.setEmailId(emailId);
             repo.save(userCredentials);
             userDTO.setEmailId(emailId);
-            userCredentials.setUserType("Insurer");
+            System.out.println(name);
 
             producer.sendMessageToRabbitMq(userDTO);
 

@@ -15,6 +15,7 @@ import java.io.IOException;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RequestMapping("/api/v1")
 public class UserController {
 
@@ -41,6 +42,13 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
+
+//    @PutMapping("/updateUser/{emailId}")
+//    public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") String user, @PathVariable String emailId,
+//                                            @RequestParam("imageFile") MultipartFile file) throws UserNotRegisteredException, IOException {
+//        try {
+//            User user1 = new ObjectMapper().readValue(user,User.class);
+//=======
     @PutMapping("/changePass/{emailId}")
     public ResponseEntity<?> changePswrd(@RequestBody User user, @PathVariable String emailId) throws UserNotRegisteredException {
         try {
@@ -66,6 +74,7 @@ public class UserController {
             @RequestParam("imageFile") MultipartFile file) throws UserNotRegisteredException, IOException {
         try {
             User user1 = new ObjectMapper().readValue(user, User.class);
+
             return new ResponseEntity<>(userService.updateUser(user1, emailId, file), HttpStatus.OK);
         } catch (UserNotRegisteredException | IOException e) {
             e.getMessage();

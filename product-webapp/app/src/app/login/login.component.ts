@@ -30,19 +30,23 @@ export class LoginComponent implements OnInit {
     this.user.emailId = data.value.emailId;
     this.user.password = data.value.password;
   
-      // this.loginservice.logInUser(this.user).subscribe((response)=> {
-      //     console.log("Log in successfull", data),  console.error("Log in failed",data)});
+    console.log(this.user);
 
-      this.loginservice.logInUser(this.user).subscribe(
+      //  this.loginservice.loginUser(this.user).subscribe((response)=> {
+      //     console.log("Log in successfull", data);}
+      //     (error) => {console.error("Log in failed",data);});
 
-        data => {
-          console.log("Log in successfull");
-        },
-        error => {
-          console.log("Log in failed");
+
+          
+    if(this.logInForm.valid){
+        this.loginservice.loginUser(this.user).subscribe((response) => {
+          console.log("Log in successfull",data );
+        }, error => {
+          console.log("Log in failed", data);
           this.msg = "Please enter valid credentials";
         }
       )
+      }
       
     }
 

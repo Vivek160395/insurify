@@ -1,1 +1,37 @@
 
+ .example-card {
+  width: 100%;
+}
+  .example-stepper {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+  table {
+    width: 100%;
+  }
+  .list-group-item{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+h2{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: rgb(154, 123, 226);
+  
+}
+hr{
+  color: rgb(40, 43, 44);
+}
+
+
+.a1{
+  color: black ;
+  font-size:18px;
+  font-weight:normal;
+  font-family:'Times New Roman', Times, serif;
+  
+}
+
+
+  

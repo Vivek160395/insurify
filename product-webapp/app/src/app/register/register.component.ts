@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
 })
 export class RegisterComponent implements OnInit {
 
- // repeatPassword: string = "none";
+ repeatPassword: string = "none";
 
  user: User = new User();
 constructor(private userService: UserService) {}
