@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@CrossOrigin(origins = "*",allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1")
 public class UserController {
 
@@ -47,10 +47,10 @@ public class UserController {
     }
 
     @PutMapping("/updateUser/{emailId}")
-    public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") String user, @PathVariable String emailId, @RequestParam("imageFile") MultipartFile file) throws UserNotRegisteredException, IOException {
+    public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") String user, @PathVariable String emailId,
+                                            @RequestParam("imageFile") MultipartFile file) throws UserNotRegisteredException, IOException {
         try {
             User user1 = new ObjectMapper().readValue(user,User.class);
-
             return new ResponseEntity<>(userService.updateUser(user1, emailId, file), HttpStatus.OK);
         } catch (UserNotRegisteredException | IOException e) {
             e.getMessage();
