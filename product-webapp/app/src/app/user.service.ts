@@ -11,10 +11,9 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
- email1:string='a@gmail.com';
+  email1:string='m@gmail.com';
  
- baseurl:any="http://localhost:8085/api/v1/";
-
+  baseurl:any="http://localhost:8085/api/v1/";
   getUserDetails():Observable<any>{
     return this.http.get(this.baseurl+"users");
   }
@@ -24,6 +23,10 @@ export class UserService {
   formData.append("userDetails",info);
   formData.append("imageFile",file);
   return this.http.put(this.baseurl+"updateUser/"+this.email1,formData);
+ }
+
+ updateDetails(info:any):Observable<any>{
+return this.http.put(this.baseurl+"updateUserDetails/"+this.email1,info);
  }
 
  
