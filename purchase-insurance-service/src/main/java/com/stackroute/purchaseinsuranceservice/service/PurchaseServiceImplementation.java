@@ -35,6 +35,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
             CustomerInsurance ci=new CustomerInsurance();
             ci.setCustomerPolicyId(customerInsurancePurchase.getCustomerPolicyId());
             ci.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
+            ci.setPolicyType(customerInsurancePurchase.getPolicyType());
             ci.setEmail(customerInsurancePurchase.getEmail());
             ci.setSumInsured(customerInsurancePurchase.getSumInsured());
             ci.getStartDate().add(customerInsurancePurchase.getStartDate());
