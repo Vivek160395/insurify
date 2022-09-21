@@ -49,7 +49,7 @@ public class UserCredentialsController {
     }
 
     }
-    @GetMapping("/loginUser")
+    @PostMapping("/loginUser")
     public ResponseEntity<?> loginUser(@RequestBody UserCredentials user) throws InvalidCredentialException
     {
         try {

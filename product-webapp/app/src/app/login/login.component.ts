@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       //this.router.navigate(["/home"]);
 
     if(this.logInForm.valid){
-        this.loginservice.getUserCredentials(this.user).subscribe((response) => {
+        this.loginservice.loginUser(this.user).subscribe((response) => {
             console.log("Log in successfull",response);
 
           }, error => {
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           }
       
 
-      this.loginservice.loginUser(this.user.emailId).subscribe((response)=>{
+      this.loginservice.getUserDetails(this.user.emailId).subscribe((response)=>{
       //console.table(this.loginUser.value);
         console.log(response);
          if (response.userType.valueOf("As Insured")) {
