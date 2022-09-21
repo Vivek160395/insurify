@@ -1,3 +1,5 @@
+import { D } from '@angular/cdk/keycodes';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -10,15 +12,22 @@ import { DetailsComponent } from '../details/details.component';
 })
 export class PoliciesComponent {
 
-  constructor(public dialog: MatDialog, private router: Router) {}
+  constructor(public dialog: MatDialog, private router: Router, private http: HttpClient) {}
 
-  
+  purchasedPolicies:any;
 
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
   from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
   originally bred for hunting.`;
 
   ngOnInit(): void {
+    let response= this.http.get("http://localhost:8084/api/retrieveall/customerinsurances");
+    response.subscribe((data)=>{
+      console.log(data);
+      this.purchasedPolicies=data;
+      // console.log(this.purchasedPolicies[0].policyType);
+      
+    });
   }
 
   title = 'policies-details';
@@ -86,8 +95,11 @@ export class PoliciesComponent {
   openDialog(policy: any) {
     console.log(policy);
     this.router.navigateByUrl('/details');
-    localStorage.setItem('insuranceType',policy.name);
+    localStorage.setItem('insuranceType',policy.policyType);
+    localStorage.setItem('customerPolicyId', policy.customerPolicyId)
     console.log(localStorage.getItem('insuranceType'));
+    console.log(localStorage.getItem('customerPolicyId'));
+    
     
     // const dialogRef = this.dialog.open(DetailsComponent);
 

@@ -13,16 +13,18 @@ export class LoginService {
 
   baseUrl="http://localhost:8080/";
 
-
-  logInUser(user: User): Observable<Object>{
-    //console.log(user);
-    return this.httpClient.post<any>(`${this.baseUrl}`,user);
+  loginUser(user:User): Observable<any>{
+  //getUserCredentials(user: User):Observable<any>{
+   return this.httpClient.post(this.baseUrl+"/loginUser", user);
   }
 
-  getUserCredentials():Observable<any>{
-    return this.httpClient.get(this.baseUrl+"/loginUser");
 
+  getUserDetails(emailId: string): Observable<any>{
+  //loginUser(emailId: string): Observable<any>{
+    return this.httpClient.get(this.baseUrl+ "/" +{emailId});
   }
+
+
 
 
 }

@@ -27,7 +27,6 @@ public class User {
     private long aadharNo;
     private String panNo;
     private byte[] profilePic;
-
     public User(String emailId, String password, String userType, String name, String gender, int age,
             String dateOfBirth, long mobileNo, Address address, long aadharNo, String panNo) {
         this.emailId = emailId;

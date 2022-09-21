@@ -45,8 +45,7 @@ public class UserServiceImpl implements UserService {
         userDTO.setPanNo(user.getPanNo());
         userDTO.setProfilePic(user.getProfilePic());
         recommendationDTO.setEmailId(user.getEmailId());
-        recommendationDTO.setUserType(user.getUserType());
-        recommendationDTO.setAge(user.getAge());
+        recommendationDTO.setUserName(user.getName());
 
         if (userRepository.findById(user.getEmailId()).isPresent()) {
             throw new UserAlreadyExistsException();

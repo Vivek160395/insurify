@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InsuranceProfile {
-    private int insuranceId;
+    private String insuranceId;
     private String insuranceName;
     private int age;
     private String insuranceType;

@@ -65,7 +65,7 @@ public class InsuranceController {
         return new ResponseEntity<>(insuranceService.saveInsurance(lifePolicyObj), HttpStatus.CREATED);
     }
 
-    @PostMapping("/photos/update/{policyId}")
+    @PutMapping("/photos/update/{policyId}")
     public ResponseEntity<?> updateImage(@RequestParam("imageFile") MultipartFile imageFile,
             @PathVariable String policyId) throws IOException {
         // System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~" +
@@ -76,11 +76,11 @@ public class InsuranceController {
         retrieveInsurance.setPicByte(imageFile.getBytes());
         retrieveInsurance.setPicType(imageFile.getContentType());
         DTO dto = new DTO();
+        dto.setInsuranceType(retrieveInsurance.getInsuranceType());
         dto.setPolicyId(retrieveInsurance.getPolicyId());
         dto.setPolicyName(retrieveInsurance.getPolicyName());
-        dto.setPicByte(retrieveInsurance.getPicByte());
-        dto.setInsuranceType(retrieveInsurance.getInsuranceType());
         dto.setDescription(retrieveInsurance.getPolicyDescription());
+        dto.setPicByte(imageFile.getBytes());
         dto.setPicType(imageFile.getContentType());
         // System.out.println("PolicyId" + policyId);
         producer.sendingMessageToRabbitMQServer(dto);
