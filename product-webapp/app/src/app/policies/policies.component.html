@@ -16,16 +16,18 @@
                     <mat-divider></mat-divider>
                     <br>
                     <mat-card-subtitle>
-                        Policy No. :- {{policy.customerPolicyId}} <br>
-                        Purchased on :- {{policy.purchaseDate[0]}} <br>
-                        End Date :- {{policy.endDate[0]}} <br>
-                        Sum Insured :- {{policy.sumInsured}}
+                        <mat-icon matTooltip="Policy Number" matTooltipPosition="above"> insert_drive_file </mat-icon>   {{policy.customerPolicyId}} <br>
+                        <mat-icon matTooltip="Start Date" matTooltipPosition="above">event_available</mat-icon> {{policy.purchaseDate[0]}} <br> 
+                        <!-- <mat-icon>today</mat-icon>  -->
+                        <mat-icon matTooltip="End Date" matTooltipPosition="above">event_busy</mat-icon> {{policy.endDate[0]}} <br>
+                        <!-- <mat-icon> money</mat-icon> -->
+                        <mat-icon matTooltip="Sum Insured" matTooltipPosition="above">account_balance_wallet</mat-icon> ₹{{policy.sumInsured}}
                     </mat-card-subtitle>
                     <mat-card-content>
                         <!-- {{longText}} -->
                     </mat-card-content>
                     <button mat-raised-button color="primary" routerLink="/claim">Claim</button>
-                    <button mat-raised-button color="primary" style="margin-left:180px" disabled>Renew</button>
+                    <button mat-raised-button color="primary" style="margin-left:180px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1] || policy.endDate[(policy.endDate.length)-1].month - currentDate.month>=0" routerLink="/renewal">Renew</button>
                 </mat-card>
         </div> 
     </div>
@@ -40,16 +42,18 @@
                             <mat-divider></mat-divider>
                             <br>
                             <mat-card-subtitle>
-                                Policy No. :- {{policy.customerPolicyId}} <br>
-                                Purchased on :- {{policy.purchaseDate[0]}} <br>
-                                End Date :- {{policy.endDate[0]}} <br>
-                                Sum Insured :- {{policy.sumInsured}}
+                                <mat-icon matTooltip="Policy Number" matTooltipPosition="above"> insert_drive_file </mat-icon>   {{policy.customerPolicyId}} <br>
+                                <mat-icon matTooltip="Start Date" matTooltipPosition="above">event_available</mat-icon> {{policy.purchaseDate[0]}} <br> 
+                                <!-- <mat-icon>today</mat-icon>  -->
+                                <mat-icon matTooltip="End Date" matTooltipPosition="above">event_busy</mat-icon> {{policy.endDate[0]}} <br>
+                                <!-- <mat-icon> money</mat-icon> -->
+                                <mat-icon matTooltip="Sum Insured" matTooltipPosition="above">account_balance_wallet</mat-icon> ₹{{policy.sumInsured}}
                             </mat-card-subtitle>
                             <mat-card-content>
                                 <!-- {{longText}} -->
                             </mat-card-content>
                             <button mat-raised-button color="primary" routerLink="/claim">Claim</button>
-                            <button mat-raised-button color="primary" style="margin-left:180px" disabled>Renew</button>
+                            <button mat-raised-button color="primary" style="margin-left:180px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1]" routerLink="/renewal">Renew</button>
                         </mat-card>  
                     </div>                  
             </div> 
@@ -63,16 +67,18 @@
                     <mat-divider></mat-divider>
                     <br>
                     <mat-card-subtitle>
-                        Policy No. :- {{policy.customerPolicyId}} <br>
-                        Purchased on :- {{policy.purchaseDate[0]}} <br>
-                        End Date :- {{policy.endDate[0]}} <br>
-                        Sum Insured :- {{policy.sumInsured}}
+                        <mat-icon matTooltip="Policy Number" matTooltipPosition="above"> insert_drive_file </mat-icon>   {{policy.customerPolicyId}} <br>
+                        <mat-icon matTooltip="Start Date" matTooltipPosition="above">event_available</mat-icon> {{policy.purchaseDate[0]}} <br> 
+                        <!-- <mat-icon>today</mat-icon>  -->
+                        <mat-icon matTooltip="End Date" matTooltipPosition="above">event_busy</mat-icon> {{policy.endDate[0]}} <br>
+                        <!-- <mat-icon> money</mat-icon> -->
+                        <mat-icon matTooltip="Sum Insured" matTooltipPosition="above">account_balance_wallet</mat-icon> ₹{{policy.sumInsured}}
                     </mat-card-subtitle>
                         <mat-card-content>
                             <!-- {{longText}} -->
                         </mat-card-content>
-                        <button mat-raised-button color="primary" disabled>Claim</button>
-                        <button mat-raised-button color="primary" style="margin-left:180px" routerLink="/renewal">Renew</button>
+                        <!-- <button mat-raised-button color="primary" disabled>Claim</button>
+                        <button mat-raised-button color="primary" style="margin-left:180px" routerLink="/renewal">Renew</button> -->
                     </mat-card>
                 </div>
                 
