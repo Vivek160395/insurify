@@ -14,7 +14,7 @@ import org.springframework.data.neo4j.core.schema.Node;
 @NoArgsConstructor
 public class Insurance {
     @Id
-    private int insuranceId;
+    private String insuranceId;
     private String insuranceName;
     private int noOfUsersBought;
     private byte[] imageOfInsurance;
