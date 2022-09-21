@@ -57,8 +57,6 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {HttpClientJsonpModule, HttpClientModule} from'@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
-
-
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
@@ -70,9 +68,10 @@ import { UpdateComponent } from './update/update.component';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailsComponent } from './details/details.component';
-import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
+import { InsuranceDetailsComponent,DialogElementsExampleDialog } from './insurance-details/insurance-details.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
+import { ZoomonhoverDirective } from './zoomonhover.directive';
 
 
 @NgModule({
@@ -95,11 +94,13 @@ import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy
     LoginComponent,
     MoreComponent,
     DetailsComponent,
+    DialogElementsExampleDialog,
     RenewalPolicyHomeComponent,
     InsuranceDetailsComponent,
     LoginComponent,
     MoreComponent,
-    DetailsComponent
+    DetailsComponent,
+    ZoomonhoverDirective
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [

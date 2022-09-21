@@ -34,18 +34,21 @@ th:first-child {
 
 .mat-column-addOnName,
 .mat-column-expand,
-.mat-column-addOnPremiums {
-    padding: 0 20px;
-    width: 50px;
-    text-align: center;
-}
-
+.mat-column-addOnPremiums,
+.mat-column-minSalary,
+.mat-column-maxSalary,
+.mat-column-maxAge,
+.mat-column-minAge,
+.mat-column-brief,
 .mat-column-sumInsure,
 .mat-column-premiums,
 .mat-column-durations {
     padding: 0 20px;
-    width: 50px;
     text-align: center;
+}
+
+th {
+    width: 100px;
 }
 
 mat-icon {
@@ -90,7 +93,8 @@ mat-form-field {
     width: 80%;
 }
 
-.table3 {
+.table3,
+.table2 {
     width: 65%;
     border-collapse: collapse;
     border-spacing: 0;
@@ -102,7 +106,7 @@ mat-form-field {
 
 .demo-table,
 .demo-table1 {
-    width: 6%;
+    width: 65%;
     border-collapse: collapse;
     border-spacing: 0;
     margin: auto;
@@ -154,4 +158,43 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-description-attribution {
     opacity: 0.5;
+}
+
+.cards {
+    padding: 5% 5%;
+    display: flex;
+    padding-top: 0px;
+    justify-content: space-evenly;
+    text-align: center;
+    align-items: stretch;
+}
+
+.cards div {
+    width: 20rem;
+    height: 100%;
+    margin-bottom: 20px;
+    /* display: flex; */
+    align-items: stretch;
+}
+
+.example-card1 {
+    max-width: 300px;
+    padding: 0;
+}
+
+.float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #0C9;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+.my-float {
+    margin-top: 22px;
 }

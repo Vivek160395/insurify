@@ -31,6 +31,7 @@ return this.http.put(this.baseurl+"updateUserDetails/"+this.email1,info);
 
  
   baseUrl="http://localhost:8085/api/v1/user";
+  baseUrl1="http://localhost:8085/api/v1";
 
   
 

@@ -68,7 +68,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
 
     @Override
     public CustomerInsurance getPolicyDetailsByCustomerPolicyID(String customerPolicyId) throws PolicyIdNotFoundException {
-        if(purchaseRepository.findById(customerPolicyId).isPresent())
+        if(!purchaseRepository.findById(customerPolicyId).isPresent())
         {
             throw new PolicyIdNotFoundException();
         }
@@ -133,7 +133,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
 
          if(!(sDay.compareTo(ourDate)<0)||!(eDay.compareTo(ourDate)>=0))
          {
-             System.out.println("Cannot renew now because of policy  time interval is not vaid");
+             System.out.println("Cannot renew now because of policy  time interval is not valid");
              return false;
          }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
