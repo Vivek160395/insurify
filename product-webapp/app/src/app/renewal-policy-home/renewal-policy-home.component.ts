@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { RenewalData } from '../renewal-data';
 import { RenewalService } from '../renewal.service';
 
 @Component({
@@ -12,42 +10,71 @@ export class RenewalPolicyHomeComponent implements OnInit {
 
   constructor(private renewalService: RenewalService) {}
 
-  myData!: RenewalData;
-
   category:string | undefined;
   insuranceType:string = "";
 
   ngOnInit():void {
-    // this.renewalService.getData().subscribe
-    // (
-    //   data => {
-    //     this.myData = data;
-    //     console.log(this.myData);
-    //   });
+    this.getDetails()
+    this.getPolicyDetails()
+    
   }
 
-  policyId: string = "P0123457";
-  insuredName: string = "Vivek";
-  pinCode: string = "609609";
-  insurancePeriod: string = "24 Oct 21 (00:00 hrs) to 23 Oct 22 (23:59hrs)";
-  policyIssuenceDate: string = "21 Oct 2021";
-  ownerNumber: string = "8220852467";
-  ownerEmail: string = "vivekkrishna005@gmail.com";
+  vehicle :any = {
+    registrddNo: "",
+    category: "",
+    engineNumber: "",
+    chasisNumber: ""
+  }
 
-  registrddNo: string = "PY02Q6581";
-  model   : string = "FZ Version2";
-  registrdYear: string = "2016";
-  engineNumber: string = "G3C8E0369831";
-  chasisNumber: string = "ME1RG0729G0243418";
 
-  formData:any = new FormGroup({
-    policyId : new FormControl(this.policyId),
-    insuredName: new FormControl(this.insuredName),
-    pincode: new FormControl(this.pinCode),
-    insurancePeriod: new FormControl(this.insurancePeriod),
-    policyIssuenceDate: new FormControl(this.policyIssuenceDate),
-    ownerNumber: new FormControl(this.ownerNumber),
-    ownerEmail: new FormControl(this.ownerEmail)
-  })
+  data:any = {
+    policyId : "",
+    insuredName : "",
+    pinCode : "",
+    insurancePeriod : "",
+    policyIssuenceDate : "",
+    ownerNumber : "",
+    ownerEmail : ""
+  }
+
+
+  getDetails(){
+    this.renewalService.getVehicleData().subscribe
+    (
+      data1 => {
+        console.log(data1);
+
+        for(let i=0; i<data1.length;i++){
+          console.log("inside")
+          if(data1[i].email === this.renewalService.email){
+            console.log("if condition")
+            this.vehicle.registrddNo = data1[i].vehicleRegistrationNumber;
+            console.log(data1[i].vehicleRegistrationNumber)
+          this.vehicle.category = data1[i].category;
+          this.vehicle.engineNumber = data1[i].engineNumber;
+          this.vehicle.chasisNumber = data1[i].chassisNumber;
+          }
+        }
+      });
+  }
+  getPolicyDetails(){
+    this.renewalService.getData().subscribe
+    (
+      data1 => {
+        for(var i=0; i<data1.length; i++){
+          if(data1[i].email === this.renewalService.email){
+            console.log(data1);
+          this.data.policyId = data1[i].insurancePolicyId;
+          this.data.insuredName = data1[i].nameOfNominee;
+          this.data.pinCode = data1[i].pincode;
+          this.data.insurancePeriod = data1[i].duration;
+          this.data.policyIssuenceDate = data1[i].startDate;
+          this.data.ownerNumber = data1[i].mobile;
+          this.data.ownerEmail = data1[i].email;
+          }
+        }
+      }
+    )
+  }
 
 }

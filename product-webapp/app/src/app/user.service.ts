@@ -11,6 +11,7 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   email1='gritvik9@gmail.com';
+  
  baseurl:any="http://localhost:8085/api/v1/";
 
   getUserDetails():Observable<any>{
