@@ -6,7 +6,6 @@ import lombok.Data;
 public class RecommendationDTO {
 
     private String emailId;
-    private String userType;
-    private int age;
+    private String userName;
 
 }

@@ -4,7 +4,11 @@ spring:
   datasource:
     username: root
 
-    password: root
+
+    password: password@123
+
+
+
 
     url: jdbc:mysql://localhost:3306/insurifyDb
 
@@ -26,7 +30,6 @@ spring:
           google:
             clientId: 692492348685-qpv81o821qgrrobknsffo375288t4hea.apps.googleusercontent.com
             clientSecret: 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
-            scope:
-              - email
-              - profile
+
+
 

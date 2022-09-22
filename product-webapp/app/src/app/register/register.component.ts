@@ -10,8 +10,6 @@ import { UserService } from '../user.service';
 })
 export class RegisterComponent implements OnInit {
 
- // repeatPassword: string = "none";
-
  user: User = new User();
 constructor(private userService: UserService) {}
 
@@ -57,6 +55,14 @@ get password(): FormControl{
 
 get confirmPassword(): FormControl{
   return this.registerForm.get('confirmPassword') as FormControl;
+}
+
+
+OnRegister() {
+  console.table(this.registerForm.value);
+  if (this.password.value != this.confirmPassword.value) {
+    alert("Your password confirm password should match");
+  }
 }
 
 }

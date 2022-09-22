@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-renewal-policy',
@@ -9,36 +10,45 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class RenewalPolicyComponent implements OnInit {
 
-  constructor(private formBuilder:FormBuilder) { }
+  constructor() {
+    this.myModel = 0;
+   }
+
+  setCheckBox1 = false;
+  setCheckBox2 = false;
+  setCheckBox3 = false;
+  setCheckBox4 = false;
+  myModel: any;
+
+  update(){
+  if (this.myModel === 2 || this.myModel === 3) {
+    this.setCheckBox1 = false;
+    this.setCheckBox2 = false;
+    this.setCheckBox3 = false;
+    this.setCheckBox4 = false;
+  }
+}
 
   ngOnInit(): void {
   }
 
-  premiumCheckBoxList = this.formBuilder.group({
-    Premium3: false,
-    Premium4: false,
-    Premium5: false,
-  });
+  checkBox1(event:any){this.setCheckBox1 = event.checked;}
+  checkBox2(event:any){this.setCheckBox2 = event.checked;}
+  checkBox3(event:any){this.setCheckBox3 = event.checked;}
+  checkBox4(event:any){this.setCheckBox4 = event.checked;}
 
-  category:string= "";
-  insuranceType:string | undefined;
+  submit(){alert("Your Policy has been renewed successfully")}
+
+  category:string = "";
+  insuranceType:string = "LifeInsurance";
 
   renewalPolicyForm = new FormGroup({
     category: new FormControl("",Validators.required),
     insuranceType: new FormControl("",Validators.required)
   })
 
-  getCategory(){
-    return this.renewalPolicyForm.get('category')?.value!
-  }
+  getCategory(){return this.renewalPolicyForm.get('category')?.value!}
 
-  getInsuranceType(){
-    return this.renewalPolicyForm.get('insuranceType')?.value!
-  }
+  getInsuranceType(){return this.renewalPolicyForm.get('insuranceType')?.value!}
 
-  onSubmit(){
-    console.log(this.insuranceType)
-    return this.insuranceType
-  }
-  
 }

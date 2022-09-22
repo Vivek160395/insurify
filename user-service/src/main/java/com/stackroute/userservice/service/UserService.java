@@ -14,7 +14,7 @@ public interface UserService {
     public List<User> getAllUsers();
     public User changePswrd(User user, String emailId) throws UserNotRegisteredException;
     public User updateUser(User user, String emailId, MultipartFile file) throws UserNotRegisteredException, IOException;
-
+    public User updateUser(User user, String emailId) throws UserNotRegisteredException;
     public boolean deleteUser(String emailId) throws UserNotRegisteredException;
 
 

@@ -57,32 +57,32 @@ export class AddInsurancePolicyComponent implements OnInit {
     {
       name: 'Honda',
       bikeList: [
-        {value: 'Honda SP 125-0', viewValue: 'Honda SP 125'},
-        {value: 'Honda Shine-1', viewValue: 'Honda Shine'},
-        {value: 'Honda H`ness CB350-2', viewValue: 'Honda H`ness CB350'},
+        {value: 'Honda SP 125', viewValue: 'Honda SP 125'},
+        {value: 'Honda Shine', viewValue: 'Honda Shine'},
+        {value: 'Honda H`ness CB350', viewValue: 'Honda H`ness CB350'},
       ],
     },
     {
       name: 'TVS',
       bikeList: [
-        {value: 'TVS Apache RTR 160-3', viewValue: 'TVS Apache RTR 160'},
-        {value: 'TVS Ronin-4', viewValue: 'TVS Ronin'},
-        {value: 'TVS Apache RTR 200 4V-5', viewValue: 'TVS Apache RTR 200 4V'},
+        {value: 'TVS Apache RTR 160', viewValue: 'TVS Apache RTR 160'},
+        {value: 'TVS Ronin', viewValue: 'TVS Ronin'},
+        {value: 'TVS Apache RTR 200 4V', viewValue: 'TVS Apache RTR 200 4V'},
       ],
     },
     {
       name: 'Hero',
       bikeList: [
-        {value: 'Hero Splendor Plus-6', viewValue: 'Hero Splendor Plus'},
-        {value: 'Hero HF Deluxe-7', viewValue: 'Hero HF Deluxe'},
-        {value: 'Heroflareon-8', viewValue: 'Hero Flareon'},
+        {value: 'Hero Splendor Plus', viewValue: 'Hero Splendor Plus'},
+        {value: 'Hero HF Deluxe', viewValue: 'Hero HF Deluxe'},
+        {value: 'Heroflareon', viewValue: 'Hero Flareon'},
       ],
     },
     {
       name: 'KTM',
       bikeList: [
         {value: 'KTM 390 Duke', viewValue: 'KTM 390 Duke'},
-        {value: 'KTM 125 Duke-10', viewValue: 'KTM 125 Duke'},
+        {value: 'KTM 125 Duke', viewValue: 'KTM 125 Duke'},
       ],
     },
   ];
@@ -91,32 +91,32 @@ export class AddInsurancePolicyComponent implements OnInit {
     {
       name: 'Hyundai',
       carList: [
-        {value: 'Hyundai Creta-0', viewValue: 'Hyundai Creta'},
-        {value: 'Hyundai Venue-1', viewValue: 'Hyundai Venue'},
-        {value: 'Hyundai i20-2', viewValue: 'Hyundai i20'},
+        {value: 'Hyundai Creta', viewValue: 'Hyundai Creta'},
+        {value: 'Hyundai Venue', viewValue: 'Hyundai Venue'},
+        {value: 'Hyundai i20', viewValue: 'Hyundai i20'},
       ],
     },
     {
       name: 'Toyota',
       carList: [
-        {value: 'Toyota Fortuner-3', viewValue: 'Toyota Fortuner'},
-        {value: 'Toyota Innova Crysta-4', viewValue: 'Toyota Innova Crysta'},
-        {value: 'Toyota Urban Cruiser-5', viewValue: 'Toyota Urban Cruiser'},
+        {value: 'Toyota Fortuner', viewValue: 'Toyota Fortuner'},
+        {value: 'Toyota Innova Crysta', viewValue: 'Toyota Innova Crysta'},
+        {value: 'Toyota Urban Cruiser', viewValue: 'Toyota Urban Cruiser'},
       ],
     },
     {
       name: 'Tata',
       carList: [
-        {value: 'Tata Tiago-6', viewValue: 'Tata Tiago'},
-        {value: 'Tata Harrier-7', viewValue: 'Tata Harrier'},
-        {value: 'Tata Safari-8', viewValue: 'Tata Safari'},
+        {value: 'Tata Tiago', viewValue: 'Tata Tiago'},
+        {value: 'Tata Harrier', viewValue: 'Tata Harrier'},
+        {value: 'Tata Safari', viewValue: 'Tata Safari'},
       ],
     },
     {
       name: 'Maruti',
       carList: [
-        {value: 'Maruti Brezza-9', viewValue: 'Maruti Brezza'},
-        {value: 'Maruti Swift-10', viewValue: 'Maruti Swift'},
+        {value: 'Maruti Brezza', viewValue: 'Maruti Brezza'},
+        {value: 'Maruti Swift', viewValue: 'Maruti Swift'},
       ],
     },
   ];

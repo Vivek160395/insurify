@@ -23,7 +23,7 @@ const routes: Routes = [
   {path:"register",component:RegisterComponent},
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},
-  
+
   {path: "renewal", component: RenewalPolicyComponent},
   {path: "renewal-home", component: RenewalPolicyHomeComponent},
   {path:"details",component:DetailsComponent},
@@ -32,7 +32,7 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "nav-bar", component: NavBarComponent},
   {path:"claim",component:ClaimComponent},
-  
+
   {path:"policyDetails",component:InsuranceDetailsComponent}
 ];
 

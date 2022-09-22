@@ -57,8 +57,6 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {HttpClientJsonpModule, HttpClientModule} from'@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
-
-
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
@@ -67,19 +65,20 @@ import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
 import { UpdateComponent } from './update/update.component';
-
+import { CalculatorComponent } from './calculator/calculator.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailsComponent } from './details/details.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
-
+import { ZoomonhoverDirective } from './zoomonhover.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
      RegisterComponent,
+     CalculatorComponent,
     RecommendationComponent,
     PolicyDetailsComponent,
     NavBarComponent,
@@ -93,14 +92,15 @@ import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy
     MoreComponent,
     RenewalPolicyComponent,
     InsuranceDetailsComponent,
-    LoginComponent,
+    // LoginComponent,
     MoreComponent,
     DetailsComponent,
     RenewalPolicyHomeComponent,
     InsuranceDetailsComponent,
-    LoginComponent,
+    // LoginComponent,
     MoreComponent,
-    DetailsComponent
+    DetailsComponent,
+    ZoomonhoverDirective
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [

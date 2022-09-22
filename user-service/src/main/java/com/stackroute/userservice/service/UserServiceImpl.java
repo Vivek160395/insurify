@@ -45,8 +45,7 @@ public class UserServiceImpl implements UserService {
         userDTO.setPanNo(user.getPanNo());
         userDTO.setProfilePic(user.getProfilePic());
         recommendationDTO.setEmailId(user.getEmailId());
-        recommendationDTO.setUserType(user.getUserType());
-        recommendationDTO.setAge(user.getAge());
+        recommendationDTO.setUserName(user.getName());
 
         if (userRepository.findById(user.getEmailId()).isPresent()) {
             throw new UserAlreadyExistsException();
@@ -92,6 +91,26 @@ public class UserServiceImpl implements UserService {
             user1.setAadharNo(user.getAadharNo());
             user1.setPanNo(user.getPanNo());
             user1.setProfilePic(file.getBytes());
+            userRepository.save(user1);
+            return user1;
+        } else {
+            throw new UserNotRegisteredException();
+        }
+    }
+
+    @Override
+    public User updateUser(User user, String emailId) throws UserNotRegisteredException {
+        if (userRepository.findById(emailId).isPresent()) {
+            User user1 = userRepository.findById(emailId).get();
+
+            user1.setName(user.getName());
+            user1.setAge(user.getAge());
+            user1.setGender(user.getGender());
+            user1.setDateOfBirth(user.getDateOfBirth());
+            user1.setMobileNo(user.getMobileNo());
+            user1.setAddress(user.getAddress());
+            user1.setAadharNo(user.getAadharNo());
+            user1.setPanNo(user.getPanNo());
             userRepository.save(user1);
             return user1;
         } else {
