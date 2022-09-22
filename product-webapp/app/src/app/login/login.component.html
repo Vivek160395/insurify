@@ -1,51 +1,53 @@
 <div class="background">
     <div class="w3-container w3-padding">
-      <a href="#" class="w3-button w3-mobile w3-hover-blue" style ="color: white;"> <h3> Home</h3></a>
+        <a href="#" class="w3-button w3-mobile w3-hover-blue" style="color: white;">
+            <h3> Home</h3>
+        </a>
     </div>
-  
-  
-  
-      <div fxLayout="row"  class= "cards"  >
-            <div fxFlex="35%" style="background-color: lightblue;"class = "shadow">
-              <h3 class="text-center">Welcome to insurify</h3>
-              <p>Register and find some great insurance deals.</p>
-              <img src="assets/img/sign_up.png" width="240" height="240" alt="Register">
-              </div>
-  
-              <div fxFlex="35%" class = "col bg-light shadow" >
-                <h3 class="text-center"> Log in</h3>
-  
-                <form [formGroup] = "logInForm" (ngSubmit) = "logIn">
-                  <small class = "text-danger">{{msg}}</small>
-  
-                  <div class= "mb-3" >
-                       <input type="email" class= "form-control" placeholder="Enter your registered Email Id*" id="emailId" name="emailId" formControlName = "emailId">
-                       <div class= "form-text text-danger" *ngIf = "emailId.errors?.['required'] &&
-                          (emailId.dirty || emailId.touched)"> Email is required
-                      </div>
-  
-                      <div class= "form-text text-danger" *ngIf = "emailId.errors?.['emailId'] &&
-                          (emailId.dirty || emailId.touched)"> Email is invalid
-                      </div>
-  
-                  </div>
-            
-                
-                  <div class="mb-3">
-                       <input type= "password" class= "form-control"  placeholder = "Enter your password* " id="password" name = "password" formControlName = "password">
-                  </div>
-                  <div class= "form-text text-danger" *ngIf = "password.errors?.['required']"> Password is required </div>
-                  
-                 
-                  <button type ="submit" [disabled]="logInForm.invalid" class=" btn btn-primary mr-1">Log in</button> 
-      
-                  <p class = "mb-3">New member? </p>
-                 <a class="nav-link" routerLink = "./register">Register here</a>
-  
-                </form>
-            </div> 
-          </div>
-  
-     
-  
-  </div>
+
+
+
+    <div fxLayout="row" class="cards">
+        <div fxFlex="35%" style="background-color: lightblue;" class="shadow">
+            <h3 class="text-center">Welcome to insurify</h3>
+            <p>Register and find some great insurance deals.</p>
+            <img src="assets/img/sign_up.png" width="240" height="240" alt="Register">
+        </div>
+
+        <div fxFlex="35%" class="col bg-light shadow">
+            <h3 class="text-center"> Log in</h3>
+
+            <form [formGroup]="logInForm" (ngSubmit)="logIn">
+                <small class="text-danger">{{msg}}</small>
+
+                <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Enter your registered Email Id*" id="emailId" name="emailId" formControlName="emailId">
+                    <div class="form-text text-danger" *ngIf="emailId.errors?.['required'] &&
+                        (emailId.dirty || emailId.touched)"> Email is required
+                    </div>
+
+                    <div class="form-text text-danger" *ngIf="emailId.errors?.['emailId'] &&
+                        (emailId.dirty || emailId.touched)"> Email is invalid
+                    </div>
+
+                </div>
+
+
+                <div class="mb-3">
+                    <input type="password" class="form-control" placeholder="Enter your password* " id="password" name="password" formControlName="password">
+                </div>
+                <div class="form-text text-danger" *ngIf="password.errors?.['required']"> Password is required </div>
+
+
+                <button type="submit" [disabled]="logInForm.invalid" class=" btn btn-primary mr-1">Log in</button>
+
+                <p class="mb-3">New member? </p>
+                <a class="nav-link" routerLink="./register">Register here</a>
+
+            </form>
+        </div>
+    </div>
+
+
+
+</div>
