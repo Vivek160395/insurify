@@ -71,7 +71,11 @@ import { DetailsComponent } from './details/details.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
+<<<<<<< HEAD
 import { CalculatorComponent } from './calculator/calculator.component';
+=======
+import { ZoomonhoverDirective } from './zoomonhover.directive';
+>>>>>>> 414e696654338e9048d90bd821f644871d2badf8
 
 
 @NgModule({
@@ -99,7 +103,11 @@ import { CalculatorComponent } from './calculator/calculator.component';
     // LoginComponent,
     MoreComponent,
     DetailsComponent,
+<<<<<<< HEAD
     CalculatorComponent
+=======
+    ZoomonhoverDirective
+>>>>>>> 414e696654338e9048d90bd821f644871d2badf8
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [

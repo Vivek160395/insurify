@@ -1,7 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RenewalData } from './renewal-data';
-
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,8 +8,17 @@ export class RenewalService {
 
   constructor(private http:HttpClient) { }
 
-  getData(){
-    let params1 = new HttpParams().set('userId',"1")
-    return this.http.get<RenewalData>("https://localhost:4200/renewal-home/api/vk1/policy-id",{params:params1})
+  customerPolicyId = "5032101";
+  email = "vivek@gmail.com"
+
+  getData():Observable<any>{
+    // let params1 = new HttpParams().set('userId',"1")
+    return this.http.get("http://localhost:8084/api/retrieveall/customerinsurances");
   }
+
+  getVehicleData():Observable<any>{
+    console.log(this.customerPolicyId)
+    return this.http.get("http://localhost:8084/api/retrieveall/customerinsurances");
+  }
+
 }

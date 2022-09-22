@@ -9,7 +9,7 @@ import { RecommendationComponent } from './recommendation/recommendation.compone
  import { RegisterComponent } from './register/register.component';
 import { UpdateComponent } from './update/update.component';
 
-// import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login.component';
 import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
@@ -29,7 +29,7 @@ const routes: Routes = [
   {path:"details",component:DetailsComponent},
   {path: "renewal", component: RenewalPolicyComponent},
   {path:"update", component:UpdateComponent},
-  // {path: "login", component: LoginComponent},
+  {path: "login", component: LoginComponent},
   {path: "nav-bar", component: NavBarComponent},
   {path:"claim",component:ClaimComponent},
 

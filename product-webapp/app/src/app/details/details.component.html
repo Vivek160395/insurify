@@ -7,16 +7,18 @@
   <!-- style="background-color: rgb(227, 202, 245)" -->
   <mat-tab-group >
     <mat-tab label="Detailed Information">
-      <div style="border: 2px solid rgb(76, 33, 168); padding: 10px; margin: 18px; font-size: 17px; font-weight: 400;">
+      
+      <div style="border: 2px solid rgb(76, 33, 168); padding: 15px; margin: 18px; font-size: 17px; font-weight: 400;">
+        
+      
        <div *ngFor="let policy of policies">
        <div *ngIf="policy.customerPolicyId==this.policyId">
-        <h2 style="background-color: rgb(181, 181, 245); text-align: center;">Customer Information</h2>
+        <button mat-raised-button color="primary" style="margin-left:190px" routerLink="/claim">Claim</button>
+      <button mat-raised-button color="primary" style="margin-left:650px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1]" routerLink="/renewal">Renew</button>
+      <div id="pdfFile" #pdfFile style="padding-right: 5px;"> 
+      <h2 style="background-color: rgb(181, 181, 245); text-align: center; margin-top: 15px;">Customer Information</h2>
   
         <table>
-          <!-- <tr>
-            <th></th>
-            <th></th>
-          </tr> -->
           <tr> <td>Email Id</td> <td>{{policy.email}}</td> </tr>
           <tr> <td>Name</td> <td>{{policy.name}}</td> </tr>
           <tr> <td>Mobile No.</td> <td>{{policy.mobile}}</td> </tr>
@@ -64,10 +66,10 @@
         <tr> <td>Name Of Nominee</td> <td>{{policy.nameOfNominee}}</td> </tr>
         <tr> <td>Nominee DOB</td> <td>{{policy.nomineeDOB}}</td> </tr>
         <tr> <td>Relation</td> <td>{{policy.relation}}</td> </tr>
-        <tr> <td>Sum Insured</td> <td>${{policy.sumInsured}}</td> </tr>
-        <tr> <td>Start Date</td> <td>{{policy.startDate[0]}}</td> </tr>
-        <tr> <td>End Date</td> <td>{{policy.endDate[0]}}</td> </tr>
-        <tr> <td>Purchase Date</td> <td>{{policy.purchaseDate[0]}}</td> </tr>
+        <tr> <td>Sum Insured</td> <td>₹{{policy.sumInsured}}</td> </tr>
+        <tr> <td>Start Date</td> <td>{{policy.startDate[(policy.startDate.length)-1]}}</td> </tr>
+        <tr> <td>End Date</td> <td>{{policy.endDate[(policy.endDate.length)-1]}}</td> </tr>
+        <tr> <td>Purchase Date</td> <td>{{policy.purchaseDate[(policy.purchaseDate.length)-1]}}</td> </tr>
         <tr> <td>Duration(in years)</td> <td>{{policy.duration}}</td> </tr>
         <tr> <td>AddOn Name</td> <td>{{policy.addOnName}}</td> </tr>
         <tr> <td>Premium</td> <td>{{policy.premium}}</td> </tr>
@@ -75,7 +77,8 @@
         <tr *ngIf="!policy.status"> <td>Status</td> <td>Expired</td> </tr>
         
       </table>
-        
+      <br> <br>
+    </div>
         <!-- <p>HealthInsurance </p>
         <p>LifeInsurance </p>
         <p>AutomobileInsurance</p> -->
@@ -85,7 +88,7 @@
         <p>List claimStatus=neyList(); </p>
         <p>boolean status=true; </p>  -->
         <br>
-        <button mat-raised-button color="primary">Download as PDF <mat-icon>download</mat-icon> </button>
+        <button mat-raised-button color="primary" (click)="downloadAsPDF();">Download as PDF <mat-icon>download</mat-icon> </button>
       </div>
       </div>
     </div>
@@ -139,7 +142,7 @@
       
     </table>
     <br>
-  <button mat-raised-button color="primary">Download as PDF <mat-icon>download</mat-icon> </button>
+  <!-- <button mat-raised-button color="primary" (click)="downloadMyFile()">Download as PDF <mat-icon>download</mat-icon> </button> -->
 </div> 
 </div>   
 </div>
@@ -160,30 +163,30 @@
             <tr *ngIf="policy.claimDate.length>=1">
               <td>{{policy.customerPolicyId}}</td>
               <td>{{policy.claimDate[0]}}</td>
-              <td>${{policy.claimSum[0]}}</td>
+              <td>₹{{policy.claimSum[0]}}</td>
               <td>{{policy.claimStatus[0]}}</td>
             </tr>
             <tr *ngIf="policy.claimDate.length>=2">
               <td>{{policy.customerPolicyId}}</td>
               <td>{{policy.claimDate[1]}}</td>
-              <td>${{policy.claimSum[1]}}</td>
+              <td>₹{{policy.claimSum[1]}}</td>
               <td>{{policy.claimStatus[1]}}</td>
             </tr>
             <tr *ngIf="policy.claimDate.length>=3">
               <td>{{policy.customerPolicyId}}</td>
               <td>{{policy.claimDate[2]}}</td>
-              <td>${{policy.claimSum[2]}}</td>
+              <td>₹{{policy.claimSum[2]}}</td>
               <td>{{policy.claimStatus[2]}}</td>
             </tr>
             <tr *ngIf="policy.claimDate.length>=4">
               <td>{{policy.customerPolicyId}}</td>
               <td>{{policy.claimDate[3]}}</td>
-              <td>${{policy.claimSum[3]}}</td>
+              <td>₹{{policy.claimSum[3]}}</td>
               <td>{{policy.claimStatus[3]}}</td>
             </tr>
           </table>
           <br>
-          <button mat-raised-button color="primary">Download as PDF <mat-icon>download</mat-icon> </button>
+          <!-- <button mat-raised-button color="primary" (click)="downloadMyFile()">Download as PDF <mat-icon>download</mat-icon> </button> -->
         </div>
        </div>
       </div>

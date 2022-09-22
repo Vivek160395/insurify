@@ -18,8 +18,12 @@
     padding: 7px;
   }
   mat-card-subtitle{
-    color: #000;
-    padding-left: 10px;
-    font-size: 18px; 
-    font-weight:450;
+    color: rgb(77, 77, 78);
+    padding-left: 15px;
+    font-size: 19px; 
+    font-weight:410;
+}
+mat-icon{
+  padding-top:3px;
+  margin-right: 7px;
 }
