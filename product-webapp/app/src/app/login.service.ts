@@ -14,9 +14,9 @@ export class LoginService {
   baseUrl="http://localhost:8080/";
 
 
-  getUserCredentials(user: User):Observable<any>{
-   return this.httpClient.get(this.baseUrl+"/loginUser", user);
-  }
+  // getUserCredentials(user: User):Observable<any>{
+  //  return this.httpClient.get(this.baseUrl+"/loginUser", user);
+  // }
 
   loginUser(emailId: string): Observable<any>{
     return this.httpClient.get(this.baseUrl+ "/" +{emailId});

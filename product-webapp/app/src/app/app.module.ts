@@ -61,16 +61,17 @@ import { PreviewMarkupComponent } from './preview-markup/preview-markup.componen
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
 import { ClaimComponent } from './claim/claim.component';
-import { LoginComponent } from './login/login.component';
+// import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
 import { UpdateComponent } from './update/update.component';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailsComponent } from './details/details.component';
-import { InsuranceDetailsComponent,DialogElementsExampleDialog } from './insurance-details/insurance-details.component';
+import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
+import { CalculatorComponent } from './calculator/calculator.component';
 
 
 @NgModule({
@@ -86,19 +87,19 @@ import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy
     MoreComponent,
     UpdateComponent,
     ClaimComponent,
-    LoginComponent,
+    // LoginComponent,
     MoreComponent,
     RenewalPolicyComponent,
     InsuranceDetailsComponent,
-    LoginComponent,
+    // LoginComponent,
     MoreComponent,
     DetailsComponent,
-    DialogElementsExampleDialog,
     RenewalPolicyHomeComponent,
     InsuranceDetailsComponent,
-    LoginComponent,
+    // LoginComponent,
     MoreComponent,
-    DetailsComponent
+    DetailsComponent,
+    CalculatorComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [

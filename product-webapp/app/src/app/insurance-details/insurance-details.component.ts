@@ -2,6 +2,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Component, OnInit, VERSION } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { CalculatorComponent } from '../calculator/calculator.component';
 import { RecommendationServiceService } from '../recommendation-service.service';
 export interface PeriodicElement1 {
   addOnName: string;
@@ -53,42 +54,43 @@ export class InsuranceDetailsComponent implements OnInit {
   count1:number =0;
   firstDiv:String = "";
   cars:string[] = [];
-  selectFormControl = new FormControl('', Validators.required);
+
     openDialog() {
-    this.dialog.open(DialogElementsExampleDialog);
+    this.dialog.open(CalculatorComponent);
   }
   getPolicy(){
-    // this.service.getAllPolicy("297025").subscribe(data=>{
+    this.service.getAllPolicy("297025").subscribe(data=>{
       // 197647
       // this.service.getAllPolicy("985618").subscribe(data=>{
 
-        this.service.getAllPolicy("197647").subscribe(data=>{
+        // this.service.getAllPolicy("197647").subscribe(data=>{
         console.log(data);
 
       this.addOns = data.addOnDetails;
       this.addOnDescription = data.policyDescription;
       this.policyName = data.policyName;
       this.policyType = data.insuranceType;
+      console.log(this.policyType);
+
       if(this.policyType === "AutoMobileInsurance"){
         this.displayedColumns = ['premiums', 'durations','sumInsure'];
         this.dataSource = data.policyDetails;
         this.view = false;
         this.wide = 40;
-        this.carModel = 20;
-        // this.cars = data.modelsAllowed;
-        // console.log(this.cars);
+        this.carModel = 50;
+        this.cars = data.modelsAllowed;
 
       }
       else if(this.policyType === "LifeInsurance"){
         this.displayedColumns = ['premiums', 'durations','sumInsure','minSalary','maxSalary'];
         this.dataSource = data.policyDetails;
-        this.wide = 50;
+        this.wide = 100;
         this.view = true;
         this.carModel = 0;
       }else if(this.policyType === "HealthInsurance"){
         this.displayedColumns = ['premiums', 'durations','sumInsure','kids','minAge','maxAge'];
         this.dataSource = data.policyDetails;
-        this.wide = 50;
+        this.wide = 100;
         this.carModel = 0;
         this.view = true;
       }
@@ -124,10 +126,12 @@ export class InsuranceDetailsComponent implements OnInit {
   expandedElement1!: PeriodicElement2 | null;
 }
 
-@Component({
-  selector: 'calculator',
-  templateUrl: 'calculator.html',
+// @Component({
+//   selector: 'calculator',
+//   templateUrl: 'calculator.html',
 
-})
-export class DialogElementsExampleDialog {}
+// })
+// export class DialogElementsExampleDialog {
+//   selectFormControl = new FormControl('', Validators.required);
+// }
 
