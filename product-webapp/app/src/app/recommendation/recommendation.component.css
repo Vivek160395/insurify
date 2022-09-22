@@ -1,19 +1,23 @@
+.row {
+    margin: 0;
+}
 
-  
-
-  .example-card {
+.example-card {
     max-width: 400px;
 }
+
 .img {
     border-color: white;
 }
+
 mat-icon {
     transform: scale(1);
 }
+
 mat-chip {
     transform: scale(1);
 }
 
 .example-spacer {
     flex: 1 1 auto;
-  }
+}

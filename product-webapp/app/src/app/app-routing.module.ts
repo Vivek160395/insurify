@@ -19,21 +19,19 @@ import { DetailsComponent } from './details/details.component';
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
 const routes: Routes = [
+  {path:"",component:NavBarComponent,children:[
   {path:"",component:RecommendationComponent},
   {path:"register",component:RegisterComponent},
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},
-
   {path: "renewal", component: RenewalPolicyComponent},
   {path: "renewal-home", component: RenewalPolicyHomeComponent},
   {path:"details",component:DetailsComponent},
   {path: "renewal", component: RenewalPolicyComponent},
   {path:"update", component:UpdateComponent},
   {path: "login", component: LoginComponent},
-  {path: "nav-bar", component: NavBarComponent},
-  {path:"claim",component:ClaimComponent},
+  {path:"claim",component:ClaimComponent},{path:"InsuranceDetails",component:InsuranceDetailsComponent}]},
 
-  {path:"policyDetails",component:InsuranceDetailsComponent}
 ];
 
 @NgModule({

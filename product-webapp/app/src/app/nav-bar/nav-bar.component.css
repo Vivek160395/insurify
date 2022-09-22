@@ -1,10 +1,13 @@
-@font-face {
+/* @font-face {
     font-family: lato;
     src: url("../../assets/caveat.regular.ttf") format("opentype");
 }
 
-.sidenav-container {
-    height: 100%;
+.mat-drawer-content {
+    position: relative;
+    z-index: 1;
+    display: block;
+    overflow: auto;
 }
 
 .sidenav {
@@ -31,5 +34,59 @@ button {
 
 .profile_pic {
     cursor: pointer;
+} */
+
+.example-toolbar {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    background-color: #c79d78;
 }
 
+.icon-display {
+    transform: scale(1.2);
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: 100%;
+}
+
+.example-sid-container {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    background-color: white;
+    /* border: 1px solid rgba(0, 0, 0, 0.5); */
+}
+
+.example-side {
+    flex: 1;
+}
+
+button {
+    outline: none;
+}
+
+mat-icon {
+    transform: scale(1.3);
+}
+
+.example-sidenav {
+    padding: 20px;
+}
+
+.example-sid-sidenav {
+    width: 150px;
+}
+
+.row {
+    margin: 0;
+}
