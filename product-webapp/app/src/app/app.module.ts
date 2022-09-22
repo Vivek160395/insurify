@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MatIconModule } from '@angular/material/icon';
+
 import { RegisterComponent } from './register/register.component';
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import {A11yModule} from '@angular/cdk/a11y';
@@ -55,10 +56,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {HttpClientJsonpModule, HttpClientModule} from'@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
-
-
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
@@ -66,19 +64,21 @@ import { ClaimComponent } from './claim/claim.component';
 import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
-import { DialogDataComponent } from './dialog-data/dialog-data.component';
 import { UpdateComponent } from './update/update.component';
+import { CalculatorComponent } from './calculator/calculator.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailsComponent } from './details/details.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
-
+import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
+import { ZoomonhoverDirective } from './zoomonhover.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
+     RegisterComponent,
+     CalculatorComponent,
     RecommendationComponent,
     PolicyDetailsComponent,
     NavBarComponent,
@@ -91,11 +91,16 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     LoginComponent,
     MoreComponent,
     RenewalPolicyComponent,
-    DialogDataComponent,
     InsuranceDetailsComponent,
-    LoginComponent,
+    // LoginComponent,
     MoreComponent,
-    DetailsComponent
+    DetailsComponent,
+    RenewalPolicyHomeComponent,
+    InsuranceDetailsComponent,
+    // LoginComponent,
+    MoreComponent,
+    DetailsComponent,
+    ZoomonhoverDirective
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
@@ -103,17 +108,11 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     BrowserModule,
     FlexLayoutModule,
     AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
     HttpClientJsonpModule,
-    MatCardModule,
-    FlexLayoutModule,
     MatRadioModule,
     MatButtonModule,
-    MatListModule,
-    MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
     A11yModule,
@@ -126,9 +125,7 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
-    MatButtonModule,
     MatButtonToggleModule,
-    MatCardModule,
     MatCheckboxModule,
     MatChipsModule,
     MatStepperModule,
@@ -137,7 +134,6 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     MatDividerModule,
     MatExpansionModule,
     MatGridListModule,
-    MatIconModule,
     MatInputModule,
     MatListModule,
     MatMenuModule,
@@ -145,17 +141,14 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    MatRadioModule,
     MatRippleModule,
     MatSelectModule,
-    MatSidenavModule,
     MatSliderModule,
     MatSlideToggleModule,
     MatSnackBarModule,
     MatSortModule,
     MatTableModule,
     MatTabsModule,
-    MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
     OverlayModule,
@@ -165,8 +158,6 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
     FormsModule,
     ReactiveFormsModule,
     MatCardModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
     MatSidenavModule,
     MarkdownModule.forRoot(),
     Ng2SearchPipeModule

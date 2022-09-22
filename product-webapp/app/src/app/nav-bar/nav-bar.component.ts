@@ -51,9 +51,10 @@ export class NavBarComponent implements OnInit  {
   ngOnInit(): void {
      this.getAllUsers();
   }
+  
   getAllUsers():void{
     this.service.getUser().subscribe((data)=>{
-      
+
         if(this.service.userEmail===null || this.service.userEmail==="")
         {
           console.log("hello");
@@ -66,7 +67,7 @@ export class NavBarComponent implements OnInit  {
           if(this.service.userEmail === data[i].emailId)
           {
             this.image = data[i].profilePic;
-            console.log(data[i].emailId) 
+            console.log(data[i].emailId)
             this.value2=false
             this.value=true
           }
@@ -76,7 +77,7 @@ export class NavBarComponent implements OnInit  {
         if(this.service.userEmail=== data[i].emailId)
         {
           this.name1=data[i].name;
-          console.log(data[i].name) 
+          console.log(data[i].name)
         }
       }
     })

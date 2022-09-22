@@ -4,3 +4,18 @@
     /* width: 5px; */
     /* border: 2px solid rgb(0, 0, 0); */
 }
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid rgb(181, 181, 245);
+    /* text-align: center; */
+    padding: 8px;
+  }
+  
+  th {
+    background-color: rgb(181, 181, 245);
+  }

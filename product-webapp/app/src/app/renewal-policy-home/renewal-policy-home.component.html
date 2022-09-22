@@ -1,0 +1,112 @@
+<header style="background-color: #3F51B5; height: 100px; margin: 5px;">
+    <h1 style="text-align-last: center; padding-top: 2%; font-size: xx-large; color: white;"><b>Policy Details</b></h1>
+</header>
+
+<div fxLayout="row"  >
+    <div style="width: 50%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;" 
+    appZoomonhover="true">
+
+        <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
+            <h2><b>Policy Holder Details</b></h2>
+        </header>
+
+        <h3><b>Policy Id:</b> {{this.data.policyId}}</h3> 
+        <h3><b>Insurer Name:</b> {{this.data.insuredName}}</h3>
+        <h3><b>PinCode:</b> {{this.data.pinCode}}</h3>
+        <h3><b>Insurance Period:</b> {{this.data.insurancePeriod}}</h3>
+        <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
+        <h3><b>Owner Number:</b> {{this.data.ownerNumber}}</h3>
+        <h3><b>Owner Email:</b> {{this.data.ownerEmail}}</h3>
+    </div>
+
+    <div style="border: 2px solid rgb(204, 172, 172); text-align: center; width: 50%; border-radius: 20px; margin: 5px;"
+    appZoomonhover="true">
+
+        <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
+            <h2><b>Vehicle Details</b></h2>
+        </header>
+
+        <h3><b>Registration Number:</b> {{this.vehicle.registrddNo}}</h3>
+        <h3><b>Model:</b> {{this.vehicle.model}}</h3>
+        <!-- <h3><b>Registration Year:</b>{{this.vehicle.registrdYear}}</h3> -->
+        <h3><b>Engine Number:</b>{{this.vehicle.engineNumber}}</h3>
+        <h3><b>Chasis Number:</b>{{this.vehicle.chasisNumber}}</h3>
+        <!-- <div>
+            <h1 *ngFor="let data of vehicle">
+                <h1>data:{{data.registrddNo}}</h1>
+            </h1>
+        </div> -->
+    </div>
+</div>
+
+<div fxLayout="row" *ngIf="insuranceType === 'AutomobileInsurance' && category === 'four-wheeler'">
+    <div style="width: 50%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;"
+    appZoomonhover="true">
+
+        <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
+            <h2><b>Policy Holder Details</b></h2>
+        </header>
+
+        <h3><b>Policy Id:</b> {{this.data.policyId}}</h3> 
+        <h3><b>Insurer Name:</b> {{this.data.insuredName}}</h3>
+        <h3><b>PinCode:</b> {{this.data.pinCode}}</h3>
+        <h3><b>Insurance Period:</b> {{this.data.insurancePeriod}}</h3>
+        <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
+        <h3><b>Owner Number:</b> {{this.data.ownerNumber}}</h3>
+        <h3><b>Owner Email:</b> {{this.data.ownerEmail}}</h3>
+</div>
+
+    <div style="border: 2px solid rgb(204, 172, 172); text-align: center; width: 50%; border-radius: 20px; margin: 5px;"
+    appZoomonhover="true">
+        <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
+            <h2><b>Vehicle Details</b></h2>
+        </header>
+        <h3><b>Registration Number:</b> {{this.vehicle.registrddNo}}</h3>
+        <h3><b>Model:</b> {{this.vehicle.model}}</h3>
+        <h3><b>Registration Year:</b>{{this.vehicle.registrdYear}}</h3>
+        <h3><b>Engine Number:</b>{{this.vehicle.engineNumber}}</h3>
+        <h3><b>Chasis Number:</b>{{this.vehicle.chasisNumber}}</h3>
+    </div>
+</div>
+
+<div fxLayout="row" *ngIf="insuranceType === 'LifeInsurance'">
+    <div style="width: 99%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;"
+    appZoomonhover="true">
+
+        <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
+            <h2><b>Policy Holder Details</b></h2>
+        </header>
+        
+            <h3><b>Policy Id:</b> {{this.data.policyId}}</h3> 
+            <h3><b>Insurer Name:</b> {{this.data.insuredName}}</h3>
+            <h3><b>PinCode:</b> {{this.data.pinCode}}</h3>
+            <h3><b>Insurance Period:</b> {{this.data.insurancePeriod}}</h3>
+            <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
+            <h3><b>Owner Number:</b> {{this.data.ownerNumber}}</h3>
+            <h3><b>Owner Email:</b> {{this.data.ownerEmail}}</h3>
+    </div>
+</div>
+
+<div fxLayout="row" *ngIf="insuranceType === 'HealthInsurance'">
+    <div style="width: 99%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;"
+    appZoomonhover="true">
+
+        <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
+            <h2><b>Policy Holder Details</b></h2>
+        </header>
+
+        <h3><b>Policy Id:</b> {{this.data.policyId}}</h3> 
+        <h3><b>Insurer Name:</b> {{this.data.insuredName}}</h3>
+        <h3><b>PinCode:</b> {{this.data.pinCode}}</h3>
+        <h3><b>Insurance Period:</b> {{this.data.insurancePeriod}}</h3>
+        <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
+        <h3><b>Owner Number:</b> {{this.data.ownerNumber}}</h3>
+        <h3><b>Owner Email:</b> {{this.data.ownerEmail}}</h3>
+    </div>
+</div>
+
+<div fxLayoutAlign="center">
+    <button mat-raised-button color="primary" fxLayout="column">
+        <a style="text-decoration: none; color: white;" routerLink="/renewal">Renew Now</a>
+    </button>
+</div>

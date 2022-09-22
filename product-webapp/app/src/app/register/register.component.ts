@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { User } from '../user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-register',
@@ -8,16 +10,14 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 })
 export class RegisterComponent implements OnInit {
 
-  repeatPassword: string = "none";
-
-
-constructor() {}
+ user: User = new User();
+constructor(private userService: UserService) {}
 
 ngOnInit():void{}
 
 registerForm = new FormGroup({
-  Role: new FormControl('', [Validators.required]),
-  email: new FormControl('', [Validators.required, Validators.email]),
+  userType: new FormControl('', [Validators.required]),
+  emailId: new FormControl('', [Validators.required, Validators.email]),
   password: new FormControl('',[
     Validators.required,
     Validators.minLength(6),
@@ -28,19 +28,25 @@ registerForm = new FormGroup({
  },
  );
 
-registerSubmitted(){
-  if(this.password.value == this.confirmPassword.value){
-  console.log("Submitted");
-  } else{
-    this.repeatPassword = "inline;"
-  }
+registerSubmitted(data:any){
+  this.user.emailId = data.value.emailId;
+  this.user.password = data.value.password;
+  this.user.userType = data.value.userType;
+
+  console.log(this.user);
+  this.userService.registerUser(this.user).subscribe((response)=>{
+    console.log("Registered data", response);
+  });
+
+
+
 }
-get Role(): FormControl{
-  return this.registerForm.get('Role') as FormControl;
+get userType(): FormControl{
+  return this.registerForm.get('userType') as FormControl;
 }
 
-get email(): FormControl{
-  return this.registerForm.get('email') as FormControl;
+get emailId(): FormControl{
+  return this.registerForm.get('emailId') as FormControl;
 }
 
 get password(): FormControl{
@@ -49,6 +55,14 @@ get password(): FormControl{
 
 get confirmPassword(): FormControl{
   return this.registerForm.get('confirmPassword') as FormControl;
+}
+
+
+OnRegister() {
+  console.table(this.registerForm.value);
+  if (this.password.value != this.confirmPassword.value) {
+    alert("Your password confirm password should match");
+  }
 }
 
 }

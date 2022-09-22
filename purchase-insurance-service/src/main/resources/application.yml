@@ -1,0 +1,8 @@
+server:
+  port: 8084
+spring:
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/customer_insurance_db}
+  application:
+    name: soulmate-service

@@ -8,12 +8,10 @@ import lombok.*;
 @Setter
 @ToString
 public class InsuranceDTO {
-    private String insuranceName;
-    private int insuranceId;
-    private String description;
-    private byte[] image;
-    private String imageType;
-    private String insuranceType;
-    private int age;
-    private String occupation;
+    String policyId;
+    String policyName;
+    String insuranceType;
+    String description;
+    byte[] picByte;
+    String picType;
 }
