@@ -71,6 +71,7 @@ import { DetailsComponent } from './details/details.component';
 import { InsuranceDetailsComponent,DialogElementsExampleDialog } from './insurance-details/insurance-details.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
+import { ZoomonhoverDirective } from './zoomonhover.directive';
 
 
 @NgModule({
@@ -98,7 +99,8 @@ import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy
     InsuranceDetailsComponent,
     LoginComponent,
     MoreComponent,
-    DetailsComponent
+    DetailsComponent,
+    ZoomonhoverDirective
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [

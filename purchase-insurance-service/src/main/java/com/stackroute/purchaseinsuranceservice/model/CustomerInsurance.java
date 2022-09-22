@@ -17,6 +17,7 @@ public class CustomerInsurance {
     @Id
     private String customerPolicyId;
     private String insurancePolicyId;
+    private String policyType;
 
     private String email;
 
