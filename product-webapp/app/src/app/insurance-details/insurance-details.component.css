@@ -12,6 +12,11 @@
     justify-content: space-between;
 } */
 
+.heading {
+    font-size: 35px;
+    color: orange;
+}
+
 .vl {
     border-left: 4px solid black;
     height: 230px;
@@ -169,6 +174,12 @@ tr.example-element-row:not(.example-expanded-row):active {
     align-items: stretch;
 }
 
+.addOnImg {
+    display: flex;
+    margin: auto;
+    margin: auto auto 50px auto;
+}
+
 .cards div {
     width: 20rem;
     height: 100%;
@@ -202,14 +213,45 @@ tr.example-element-row:not(.example-expanded-row):active {
 .policyName {
     text-align: center;
     font-size: 60px;
+    color: orange;
 }
 
-@media screen and (max-width:320px) {
+.row {
+    margin: 0;
+}
+
+.description {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+#insurance {
+    margin: 0 30px;
+    border-radius: 15px;
+    overflow: hidden !important;
+}
+
+@media screen and (max-width:450px) {
     .policyName {
         font-size: 30px;
     }
     .description {
-        font-size: 15px;
+        text-align: center;
+        font-size: 10px;
+    }
+    .addOnImg {
+        display: none;
+    }
+    .demo-table {
+        width: 5%;
+        border-radius: 20px;
+        overflow: hidden !important;
+    }
+    .images {
+        width: 70%;
+        height: 70%;
+        align-items: center;
     }
 }
 
@@ -220,5 +262,13 @@ tr.example-element-row:not(.example-expanded-row):active {
     }
     .description {
         font-size: 20px;
+    }
+    .addOnImg {
+        display: none;
+    }
+    .images {
+        width: 80%;
+        height: 80%;
+        align-items: center;
     }
 }

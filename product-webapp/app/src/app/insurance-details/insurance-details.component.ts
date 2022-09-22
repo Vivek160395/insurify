@@ -59,12 +59,13 @@ export class InsuranceDetailsComponent implements OnInit {
     this.dialog.open(CalculatorComponent);
   }
   differentImg:string="";
+  befnefitsImg:string ="";
   getPolicy(){
-    // this.service.getAllPolicy("297025").subscribe(data=>{
+    this.service.getAllPolicy("297025").subscribe(data=>{
       // 197647
       // this.service.getAllPolicy("985618").subscribe(data=>{
 
-        this.service.getAllPolicy("197647").subscribe(data=>{
+        // this.service.getAllPolicy("197647").subscribe(data=>{
         console.log(data);
 
       this.addOns = data.addOnDetails;
@@ -81,6 +82,7 @@ export class InsuranceDetailsComponent implements OnInit {
         this.carModel = 4;
         this.cars = data.modelsAllowed;
         this.differentImg="../../assets/img/car-insurance-add-on.jpg";
+        this.befnefitsImg = "../../assets/img/car.png"
       }
       else if(this.policyType === "LifeInsurance"){
         this.displayedColumns = ['sumInsure', 'durations','premiums','minSalary','maxSalary'];
@@ -89,6 +91,7 @@ export class InsuranceDetailsComponent implements OnInit {
         this.view = true;
         this.carModel = 0;
         this.differentImg= "../../assets/img/Health-insurance.jpg";
+        this.befnefitsImg = "../../assets/img/maxresdefault.jpg"
       }else if(this.policyType === "HealthInsurance"){
         this.displayedColumns = ['sumInsure', 'durations','premiums','kids','minAge','maxAge'];
         this.dataSource = data.policyDetails;
@@ -96,6 +99,7 @@ export class InsuranceDetailsComponent implements OnInit {
         this.carModel = 0;
         this.view = true;
         this.differentImg= "../../assets/img/health-Insurance.png";
+        this.befnefitsImg = "../../assets/img/Benefits-Health.jpg"
       }
       this.pic = data.picByte;
       this.imageType = data.picType;
