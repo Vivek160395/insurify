@@ -75,8 +75,8 @@ purchase_insurance()
     this.userForm.get('insurancePolicyId')!.value!.toString(),
     this.email,
     +this.userForm.get('sumInsured')!.value!,
-    this.userForm.get('startDate')!.value!.toString(),
-    this.userForm.get('endDate')!.value!.toString(),
+    this.userForm.get('startDate')!.value!,
+    this.userForm.get('endDate')!.value!,
     +this.userForm.get('duration')!.value!,
     this.addonnamelist,
     this.premium,
@@ -497,6 +497,12 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
     }
       on_duration_select(data:any)
       {
+        this.date=new Date()
+        this.userForm.get('startDate')?.setValue(this.date.toLocaleDateString('en-GB'))
+        this.date.setFullYear(this.date.getFullYear() + +this.selectedDuration);
+        this.userForm.get('endDate')?.setValue(this.date.toLocaleDateString('en-GB'))
+        console.log('start Date : '+this.userForm.get('startDate')!.value)
+        console.log('End Date : '+this.userForm.get('endDate')!.value);
         if(this.isAuto)
         {
           const control1=this.userForm.get('model')
@@ -598,12 +604,7 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
               this.premium=this.addonpremium+this.insuranceobj[index].premium
              }
         }
-        this.date=new Date()
-        this.userForm.get('startDate')?.setValue(this.date.toLocaleDateString('en-GB').toString())
-        this.date.setFullYear(this.date.getFullYear() + +this.selectedDuration);
-        this.userForm.get('endDate')?.setValue(this.date.toLocaleDateString('en-GB').toString())
-        console.log('start Date : '+this.userForm.get('startDate')!.value)
-        console.log('End Date : '+this.userForm.get('endDate')!.value);
+        
         
       }
       on_suminsured_select(data:any)
