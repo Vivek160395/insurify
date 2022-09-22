@@ -40,6 +40,18 @@ export class LoginComponent implements OnInit {
         this.loginservice.loginUser(this.user).subscribe((response) => {
             console.log("Log in successfull",response);
 
+            this.loginservice.getUserDetails(this.user.emailId).subscribe((response)=>{
+              //console.table(this.loginUser.value);
+                console.log(response);
+                 if (response.userType.valueOf("As Insured")) {
+                    this.router.navigate(["/home"]);    
+                  }
+                else {
+                    this.router.navigate(["/add-policy"]); 
+                    }
+              }
+              );
+
           }, error => {
               console.log("Log in failed", error);
               this.msg = "Please enter valid credentials";
@@ -49,17 +61,18 @@ export class LoginComponent implements OnInit {
           }
       
 
-      this.loginservice.getUserDetails(this.user.emailId).subscribe((response)=>{
-      //console.table(this.loginUser.value);
-        console.log(response);
-         if (response.userType.valueOf("As Insured")) {
-            this.router.navigate(["/home"]);    
-          }
-        else {
-            this.router.navigate(["/add-policy"]); 
-            }
-      }
-      );}
+    //   this.loginservice.getUserDetails(this.user.emailId).subscribe((response)=>{
+    //   //console.table(this.loginUser.value);
+    //     console.log(response);
+    //      if (response.userType.valueOf("As Insured")) {
+    //         this.router.navigate(["/home"]);    
+    //       }
+    //     else {
+    //         this.router.navigate(["/add-policy"]); 
+    //         }
+    //   }
+    //   );
+    }
 
   
 
