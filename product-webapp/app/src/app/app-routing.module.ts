@@ -20,11 +20,11 @@ import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insura
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
 const routes: Routes = [
+  {path:"",component:NavBarComponent,children:[
   {path:"",component:RecommendationComponent},
   {path:"register",component:RegisterComponent},
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},
-
   {path: "renewal", component: RenewalPolicyComponent},
   {path: "renewal-home", component: RenewalPolicyHomeComponent},
   {path:"details",component:DetailsComponent},
@@ -34,7 +34,9 @@ const routes: Routes = [
   {path: "nav-bar", component: NavBarComponent},
   {path:"claim",component:ClaimComponent},
   {path:"buy",component:PurchaseInsuranceComponent},
-  {path:"policyDetails",component:InsuranceDetailsComponent}
+  {path:"policyDetails",component:InsuranceDetailsComponent},
+  {path:"claim",component:ClaimComponent},{path:"InsuranceDetails",component:InsuranceDetailsComponent}]},
+
 ];
 
 @NgModule({

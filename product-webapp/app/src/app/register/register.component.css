@@ -1,22 +1,16 @@
 @import url("https://www.w3schools.com/w3css/4/w3.css");
-
-
-
-div.background{
-    background-color: #9370DB;
-
+.background {
+    background-color: white;
 }
 
-div.cards{
-    padding-top: 70px;
-    padding-left: 260px;
-    padding-bottom: 70px;
+div.cards {
+    /* padding-top: 70px;
+  padding-left: 260px;
+  padding-bottom: 70px; */
+    margin: 10% 0 0 20%;
     text-align: center;
-    
 }
 
-
-h1{
+h1 {
     font-size: 20px;
-
 }
