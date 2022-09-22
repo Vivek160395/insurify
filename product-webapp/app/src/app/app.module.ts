@@ -61,27 +61,24 @@ import { PreviewMarkupComponent } from './preview-markup/preview-markup.componen
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PoliciesComponent } from './policies/policies.component';
 import { ClaimComponent } from './claim/claim.component';
-// import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
 import { UpdateComponent } from './update/update.component';
-
+import { CalculatorComponent } from './calculator/calculator.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailsComponent } from './details/details.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
-<<<<<<< HEAD
-import { CalculatorComponent } from './calculator/calculator.component';
-=======
 import { ZoomonhoverDirective } from './zoomonhover.directive';
->>>>>>> 414e696654338e9048d90bd821f644871d2badf8
 
 
 @NgModule({
   declarations: [
     AppComponent,
      RegisterComponent,
+     CalculatorComponent,
     RecommendationComponent,
     PolicyDetailsComponent,
     NavBarComponent,
@@ -91,7 +88,7 @@ import { ZoomonhoverDirective } from './zoomonhover.directive';
     MoreComponent,
     UpdateComponent,
     ClaimComponent,
-    // LoginComponent,
+    LoginComponent,
     MoreComponent,
     RenewalPolicyComponent,
     InsuranceDetailsComponent,
@@ -103,11 +100,7 @@ import { ZoomonhoverDirective } from './zoomonhover.directive';
     // LoginComponent,
     MoreComponent,
     DetailsComponent,
-<<<<<<< HEAD
-    CalculatorComponent
-=======
     ZoomonhoverDirective
->>>>>>> 414e696654338e9048d90bd821f644871d2badf8
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
