@@ -1,21 +1,17 @@
-<!-- <div class=" row"> -->
 <div style="margin:30px 0">
-    <!-- <div fxLayout="row"> -->
     <div class="mat-elevation-z4 row" id="insurance">
-        <!-- <div fxFlex="50%" style="display:flex;margin: auto;"> -->
         <div class="col-lg-5 col-sm-12 col-md-10" style="display:flex;margin: auto;">
             <img src="data:{{imageType}};base64,{{pic}}" width="580px" height="350px" class="images" style="margin:auto;border-radius:20px ;">
         </div>
-        <!-- <div style="margin:4% 3% 0 0;" fxFlex="50%" fxFlex.gt-sm="100%"> -->
-        <div style="margin:auto;" class="col-lg-6 col-sm-12 col-md -10">
+        <div style="margin:auto;padding-top: 20px;" class="col-lg-6 col-sm-12 col-md -10">
             <div>
                 <h1 class="policyName">{{this.policyName}}</h1>
             </div>
-            <div>
+            <div style="margin-top:30px ;">
                 <p class="description">{{this.addOnDescription}}</p>
             </div>
-            <div style="display: flex;justify-content:right">
-                <button mat-flat-button color="primary" style="float: right;">BUY</button>
+            <div style="display: flex;justify-content: right;margin-top: 20px;">
+                <button mat-flat-button color="primary" class="buy">BUY</button>
             </div>
         </div>
     </div>
@@ -167,7 +163,7 @@
     </div>
 
     <a (click)="openDialog()" class="float">
-        <mat-icon style="margin-top: 18px;">
+        <mat-icon>
             calculate
         </mat-icon>
     </a>

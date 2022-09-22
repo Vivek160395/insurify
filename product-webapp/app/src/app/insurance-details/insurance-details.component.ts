@@ -54,7 +54,6 @@ export class InsuranceDetailsComponent implements OnInit {
   count1:number =0;
   firstDiv:String = "";
   cars:string[] = [];
-
     openDialog() {
     this.dialog.open(CalculatorComponent);
   }

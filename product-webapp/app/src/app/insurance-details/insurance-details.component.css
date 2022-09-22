@@ -201,9 +201,14 @@ tr.example-element-row:not(.example-expanded-row):active {
     right: 40px;
     background-color: #0C9;
     color: #FFF;
-    border-radius: 50px;
+    border-radius: 10px;
     text-align: center;
     box-shadow: 2px 2px 3px #999;
+}
+
+mat-icon {
+    margin-top: 18px;
+    transform: scale(2);
 }
 
 .my-float {
@@ -232,7 +237,28 @@ tr.example-element-row:not(.example-expanded-row):active {
     overflow: hidden !important;
 }
 
+.buy {
+    padding: 10px 30px;
+    font-size: 20px;
+}
+
 @media screen and (max-width:450px) {
+    .float {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        background-color: #0C9;
+        color: #FFF;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 2px 2px 3px #999;
+    }
+    mat-icon {
+        margin: 3px;
+        transform: scale(0.8);
+    }
     .policyName {
         font-size: 30px;
     }
@@ -255,7 +281,7 @@ tr.example-element-row:not(.example-expanded-row):active {
     }
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width:1024px) {
     .policyName {
         font-size: 40px;
         margin-top: 20px;
