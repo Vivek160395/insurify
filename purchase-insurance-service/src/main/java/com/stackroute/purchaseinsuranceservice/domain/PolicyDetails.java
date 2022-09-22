@@ -1,10 +1,8 @@
-package com.stackroute.insuranceservice.model;
+package com.stackroute.purchaseinsuranceservice.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,11 +12,11 @@ public class PolicyDetails {
     long premiums;
     long durations;
     long sumInsure;
-    Integer adults;
-    Integer kids;
+    int adults;
+    int kids;
     long minSalary;
     long maxSalary;
-    Integer minAge;
-    Integer maxAge;
+    int minAge;
+    int maxAge;
 
 }

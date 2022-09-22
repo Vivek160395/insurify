@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 public class InsuredInfo {
     private String insuredDOB;
     private String relation;
+    public int weight;
+    public int height;
+    public String name;
     private boolean preExistingIllness;
-    private boolean[] illnessList;
+    private String[] illnessList;
 
-//    private String[] illnessList;
 }

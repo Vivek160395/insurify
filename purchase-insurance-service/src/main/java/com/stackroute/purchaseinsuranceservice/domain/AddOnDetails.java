@@ -1,4 +1,4 @@
-package com.stackroute.insuranceservice.model;
+package com.stackroute.purchaseinsuranceservice.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

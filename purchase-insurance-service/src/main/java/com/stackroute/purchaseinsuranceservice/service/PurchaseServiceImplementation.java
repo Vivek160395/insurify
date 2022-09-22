@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -62,12 +63,13 @@ public class PurchaseServiceImplementation implements PurchaseService{
 
     @Override
     public Iterable<CustomerInsurance> getCustomerInsurances() {
+        System.out.println(purchaseRepository.findAll());
         return purchaseRepository.findAll();
     }
 
     @Override
     public CustomerInsurance getPolicyDetailsByCustomerPolicyID(String customerPolicyId) throws PolicyIdNotFoundException {
-        if(purchaseRepository.findById(customerPolicyId).isPresent())
+        if(!purchaseRepository.findById(customerPolicyId).isPresent())
         {
             throw new PolicyIdNotFoundException();
         }
@@ -78,19 +80,21 @@ public class PurchaseServiceImplementation implements PurchaseService{
     }
 
     @Override
-    public List<CustomerInsurance> getInsuranceByEmail(String email) {
-        List<CustomerInsurance> customerInsurances=purchaseRepository.getPurchasedInsuranceByEmail(email);
-        if(customerInsurances.size()==0)
-        {
-            return null;
-        }
-        else
-            return customerInsurances;
+    public  Iterable<CustomerInsurance> getInsuranceByEmail(String email) {
+        Iterable<CustomerInsurance> customerInsurances=purchaseRepository.getPurchasedInsuranceByEmail(email);
+//        if(customerInsurances.size()==0)
+//        {
+//            return null;
+//        }
+//        else
+        System.out.println(customerInsurances);
+            return  customerInsurances;
     }
 
     @Override
     public boolean checkIfAlreadyPurchased(String email,String insurancePolicyId) {
-        List<CustomerInsurance> customerInsurances=purchaseRepository.getPurchasedInsuranceByEmail(email);
+        List<CustomerInsurance> customerInsurances=new ArrayList<>();
+                purchaseRepository.getPurchasedInsuranceByEmail(email).forEach(customerInsurances::add);
         CustomerInsurance customerInsurance;
 
             for(int i=0;i<customerInsurances.size();i++)

@@ -1,18 +1,18 @@
-package com.stackroute.insuranceservice.model;
+package com.stackroute.purchaseinsuranceservice.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
+//import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(indexName = "insurance")
 public class Insurance {
 
-    @Id
     private String policyId;
     private String policyName;
     private String insuranceType;
