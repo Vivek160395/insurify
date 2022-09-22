@@ -13,30 +13,28 @@ import { User } from '../user';
 export class LoginComponent implements OnInit {
 ​
 ​
-  msg = '';
-  user: User = new User();
-  router: any;
-  registerForm: any;
-  constructor(private loginservice : LoginService) { }
+    msg = '';
+    user: User = new User();
+    router: any;
+    registerForm: any;
+    constructor(private loginservice : LoginService) { }
 ​
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 ​
-  logInForm = new FormGroup({
-    emailId: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
-   });
+    logInForm = new FormGroup({
+       emailId: new FormControl('', [Validators.required, Validators.email]),
+       password: new FormControl('', [Validators.required])
+    });
 
-   logIn(data:any){
+    logIn(data:any){
 ​
-    this.user.emailId = data.value.emailId;
-    this.user.password = data.value.password;
+       this.user.emailId = data.value.emailId;
+       this.user.password = data.value.password;
 
-    console.log(this.user);
+       console.log(this.user);
 ​
-      //this.router.navigate(["/home"]);
-​
-    if(this.logInForm.valid){
+      if(this.logInForm.valid){
         this.loginservice.loginUser(this.user).subscribe((response) => {
             console.log("Log in successfull",response);
 ​
@@ -44,10 +42,10 @@ export class LoginComponent implements OnInit {
               //console.table(this.loginUser.value);
                 console.log(response);
                  if (response.userType.valueOf("As Insured")) {
-                    this.router.navigate(["/home"]);
+                    this.router.navigate(["/home"]);    
                   }
                 else {
-                    this.router.navigate(["/add-policy"]);
+                    this.router.navigate(["/add-policy"]); 
                     }
               }
               );
@@ -56,23 +54,26 @@ export class LoginComponent implements OnInit {
               console.log("Log in failed", error);
               this.msg = "Please enter valid credentials";
               this.logInForm.reset();
-           }
-      )
-          }
+           })
+      }
+      
 
-​
     //   this.loginservice.getUserDetails(this.user.emailId).subscribe((response)=>{
     //   //console.table(this.loginUser.value);
     //     console.log(response);
     //      if (response.userType.valueOf("As Insured")) {
-    //         this.router.navigate(["/home"]);
+    //         this.router.navigate(["/home"]);    
     //       }
     //     else {
-    //         this.router.navigate(["/add-policy"]);
+    //         this.router.navigate(["/add-policy"]); 
     //         }
     //   }
     //   );
     }
+
+  
+
+
 ​
 
 ​
