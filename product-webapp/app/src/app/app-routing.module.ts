@@ -4,7 +4,7 @@ import { PolicyDetailsComponent } from './policy-details/policy-details.componen
 import { AddInsurancePolicyComponent } from './add-insurance-policy/add-insurance-policy.component';
 import { ClaimComponent } from './claim/claim.component';
 import { PoliciesComponent } from './policies/policies.component';
-// import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
+import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { RecommendationComponent } from './recommendation/recommendation.component';
  import { RegisterComponent } from './register/register.component';
 import { UpdateComponent } from './update/update.component';
@@ -15,6 +15,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
 import { DetailsComponent } from './details/details.component';
+import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
@@ -32,7 +33,7 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "nav-bar", component: NavBarComponent},
   {path:"claim",component:ClaimComponent},
-
+  {path:"buy",component:PurchaseInsuranceComponent},
   {path:"policyDetails",component:InsuranceDetailsComponent}
 ];
 
