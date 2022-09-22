@@ -198,3 +198,27 @@ tr.example-element-row:not(.example-expanded-row):active {
 .my-float {
     margin-top: 22px;
 }
+
+.policyName {
+    text-align: center;
+    font-size: 60px;
+}
+
+@media screen and (max-width:320px) {
+    .policyName {
+        font-size: 30px;
+    }
+    .description {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .policyName {
+        font-size: 40px;
+        margin-top: 20px;
+    }
+    .description {
+        font-size: 20px;
+    }
+}
