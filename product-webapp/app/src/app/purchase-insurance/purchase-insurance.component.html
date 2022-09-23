@@ -17,9 +17,9 @@
                                                     <mat-label>No of Adults</mat-label>
                                                     <mat-select placeholder="No of Adults" formControlName="adultno"
                                                         [(ngModel)]="adultValue" (selectionChange)="function_for_dob_list(adultValue)" >
-                                                        <mat-option value="{{i+1}}"
+                                                        <mat-option value="{{i}}"
                                                             *ngFor="let x of [].constructor(5);let i =index ">
-                                                            {{i+1}}
+                                                            {{i}}
                                                         </mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
@@ -32,7 +32,7 @@
                                                         <mat-select placeholder="No of Kids" [(ngModel)]="kidValue"
                                                             formControlName="kidno"
                                                             (selectionChange)="function_for_dob_list(kidValue)">
-                                                            <mat-option value="{{x}}" *ngFor="let x of [].constructor(5);let i =index">{{x}}
+                                                            <mat-option value="{{i}}" *ngFor="let x of [].constructor(5);let i =index">{{i}}
                                                             </mat-option>
                                                         </mat-select>
                                                         <small style="color: red;"
@@ -47,41 +47,21 @@
                                                 <div fxLayout="row">
                                                     <div fxFlex="30%"
                                                         style="display: flex;justify-content: center;align-items: center;">
-                                                        Adult {{i+1}} DOB*
+                                                        Adult {{i+1}} Age*
                                                     </div>
                                                     <div style="margin-left:auto">
                                                         <mat-form-field class="example-full-width" appearance="outline">
-                                                            <mat-label>Choose a date</mat-label>
-                                                            <input matInput [min]="minDate" [max]="maxDate"
-                                                                formControlName="dob" [matDatepicker]="picker"
-                                                                style="display: flex;justify-content: center;align-items: center;">
-                                                            <mat-datepicker-toggle matSuffix [for]="picker">
-                                                            </mat-datepicker-toggle>
-                                                            <mat-datepicker #picker></mat-datepicker>
+                                                            <mat-label>Age of Adult {{i+1}}</mat-label>
+                                                            <input matInput formControlName="dob" type="number"
+                                                                style="display: flex;justify-content: center;align-items: center;text-align: center;">
+                                                         
                                                         </mat-form-field>
                                                     </div>
                                                 </div>
                                             </div>
                                             
                                         </div>
-                                        <!-- <div fxLayout="column" *ngIf="checkflag">
-                                            <div *ngFor="let x of [].constructor(+adultValue);let i=index;" >
-                                                <div fxLayout="row">
-                                                    <div fxFlex="30%"
-                                                        style="display: flex;justify-content: center;align-items: center;">
-                                                        Adult {{i+1}} DOB*
-                                                    </div>
-                                                    <div style="margin-left:auto">
-                                                        <mat-form-field class="example-full-width" appearance="outline">
-                                                            <mat-label>Choose a date</mat-label>
-                                                            <input matInput [min]="minDate" type="date" [max]="maxDate"
-                                                            [(ngModel)]="dob_list[i]" style="display: flex;justify-content: center;align-items: center;">
-                                                           
-                                                        </mat-form-field>
-                                                    </div>
-                                                </div>
-                                            </div>                                
-                                        </div> -->
+                         
                                         <div style="margin-left: auto;background-color: pink;"
                                             *ngIf="adultValue>0 &&checkflag">
                                             <button mat-raised-button color="primary"
@@ -107,7 +87,9 @@
                                                 <input   matInput placeholder="Enter your salary" type="number"
                                                     formControlName="annualIncome" #salary (blur)="set_suminsured_life_insurance(salary.value)">
                                             </mat-form-field>
+                                            
                                         </div>
+                                        <div *ngIf="displaytableflag" style="color: red;">No policy Available with given Annual Income</div>
                                     </div>
 
                                 </div>
@@ -125,6 +107,41 @@
                         </div>
                     </div>
                 </mat-card-actions>
+            </mat-card>
+            <mat-card *ngIf="displaytableflag">
+                <h2 style="color: orange;justify-content: center;align-items: center;">Available Policy Details </h2>
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+                  
+                    <!-- Minimum Salary Column -->
+                    <ng-container matColumnDef="minSal">
+                      <th mat-header-cell *matHeaderCellDef> Minimum Salary </th>
+                      <td mat-cell *matCellDef="let element"> {{element.minSal}} </td>
+                    </ng-container>
+                  
+                    <!--  Max Salary  Column -->
+                    <ng-container matColumnDef="maxSal">
+                      <th mat-header-cell *matHeaderCellDef> Maximum Salary </th>
+                      <td mat-cell *matCellDef="let element"> {{element.maxSal}} </td>
+                    </ng-container>
+                  
+                    <!-- duration Column -->
+                    <ng-container matColumnDef="duration">
+                      <th mat-header-cell *matHeaderCellDef> Duration </th>
+                      <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
+                    </ng-container>
+                  
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="suminsured">
+                      <th mat-header-cell *matHeaderCellDef> Sum Insured </th>
+                      <td mat-cell *matCellDef="let element"> {{element.suminsured}} </td>
+                    </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
             </mat-card>
             <div fxLayout="row">
                 <button mat-raised-button matStepperNext style="margin-left: auto;" color="primary">Next</button>
@@ -165,6 +182,14 @@
                                         <small style="color: red;"
                                             *ngIf="userForm.controls.duration.errors?.['required'] && userForm.controls.duration.invalid && (userForm.controls.duration.touched || userForm.controls.duration.dirty)">*Required</small>
                                     </mat-form-field>
+                                    <mat-form-field appearance="outline" *ngIf="show_premiums_flag" style="display: flex;justify-content: center;align-items: center;font-family: cursive;font-weight: bold;font-size: larger;">
+                                        <mat-label>Select Premium</mat-label>
+                                        <mat-select placeholder="Select Premium" [(ngModel)]="selectedPremium" formControlName="premium" (selectionChange)="on_premium_select(selectedPremium)">
+                                            <mat-option value="{{x}}" *ngFor="let x of premiumarray">{{x}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div style="display: flex;justify-content: center;align-items: center;font-family: cursive;font-weight: bold;font-size: larger;"><mat-icon (click)="refresh()">refresh</mat-icon></div>
                                     <div style="display: flex;justify-content: center;align-items: center;font-family: cursive;font-weight: bold;font-size: larger;"
                                         *ngIf="calculate_premium()">
                                         <p> Plan provides coverage worth ₹{{times}} for every ₹1 you
@@ -176,14 +201,14 @@
                                     <div fxLayout="column">
                                         <p>What is Sum Insured and Policy duration?</p>
                                         <p>Brief description about <span
-                                                style="font-family: cursive;font-weight: bolder;font-weight: 800;"
+                                                style="font-weight: bolder;font-weight: 800;"
                                                 matTooltip="Total Amount that the insurer will provide during policy duration against claims">SUM
                                                 INSURED</span> and <span
-                                                style="font-family: cursive;font-weight: bolder;font-weight:800;"
+                                                style="font-weight: bolder;font-weight:800;"
                                                 matTooltip="The length of time during which an insurance policy remains in force">
                                                 POLICY DURATION</span> </p>
                                     </div>
-                                    <h2 style="margin-left:auto" *ngIf="selectedDuration>0&&selectedValue>0">
+                                    <h2 style="margin-left:auto" *ngIf="calculate_premium()">
                                         Total premium Rs {{premium}}
                                     </h2>
                                 </div>
@@ -333,9 +358,14 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div fxLayout="row">
+            <div fxLayout="row" *ngIf="!isAuto">
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-raised-button matStepperNext style="margin-left: auto" color="primary">Next</button>
+            </div>
+            <div fxLayout="row" *ngIf="isAuto">
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-raised-button  (click)="stepper.reset()">Reset</button>
+                <button mat-raised-button [disabled]="check_validity()"(click)="purchase_insurance()" matStepperNext style="margin-left: auto" color="primary" fxFlex="30%">Purchase</button>
             </div>
         </form>
     </mat-step>
@@ -518,7 +548,7 @@
             </div>
         </form>
     </mat-step>
-    <mat-step>
+    <mat-step *ngIf="!isAuto">
         <ng-template matStepLabel>Done</ng-template>
         <p>You are now done.</p>
         <div>

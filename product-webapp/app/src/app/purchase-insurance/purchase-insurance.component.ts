@@ -9,14 +9,33 @@ import { Insurance } from '../insurance';
 import { InsuredInfo } from '../InsuredInfo';
 import { LifeInsurance } from '../LifeInsurance';
 import { PolicyDetails } from '../policy-details';
-
+export interface LifeTable {
+  minSal: number;
+  maxSal: number;
+  duration: number;
+  suminsured: number;
+}
+let LIFE_INSURANCE_DATA: LifeTable[] = [
+  {minSal: 1, maxSal: 2, duration: 1.0079, suminsured: 10000},
+  {minSal: 2, maxSal: 3, duration: 4.0026, suminsured: 10000},
+  {minSal: 3, maxSal: 5, duration: 6.941, suminsured: 10000},
+  {minSal: 4, maxSal: 7, duration: 9.0122, suminsured: 10000},
+  {minSal: 5, maxSal: 9, duration: 10.811, suminsured: 10000},
+  {minSal: 6, maxSal: 11, duration: 12.0107, suminsured: 10000},
+  {minSal: 7, maxSal: 14, duration: 14.0067, suminsured: 10000},
+  {minSal: 8, maxSal: 17, duration: 15.9994, suminsured: 10000},
+  {minSal: 9, maxSal: 31, duration: 18.9984, suminsured: 10000},
+  {minSal: 10, maxSal: 35, duration: 20.1797, suminsured: 10000},
+];
 @Component({
   selector: 'app-purchase-insurance',
   templateUrl: './purchase-insurance.component.html',
   styleUrls: ['./purchase-insurance.component.css']
 })
 export class PurchaseInsuranceComponent implements OnInit {
-
+  displayedColumns: string[] = ['minSal', 'maxSal', 'duration', 'suminsured'];
+  dataSource = LIFE_INSURANCE_DATA;
+  displaytableflag:boolean=false
   id!:number
   email:string=''
   isAuto=false
@@ -29,12 +48,13 @@ export class PurchaseInsuranceComponent implements OnInit {
   policyDetails!:PolicyDetails
   addonnamelist:string[]=[]
   times=0
+  premiumarray:number[]=[]
   date = new Date();
   autocategory:string='' 
   addonpremium=0
   xy:number=0
   y:number=0
-  insurance_object!:Insurance 
+ 
   dis_status:string=''
   lifediseasestatus:boolean=false
   doblist:string[]=[]
@@ -263,7 +283,7 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
    kidnum=[0,1,2,3,4,5,6,7]
    premium:number=0
 
-
+   show_premiums_flag:boolean=false
    selectedDuration!:number
    suminsuredobj!:any[];
    selectedValue: number=0;
@@ -295,23 +315,24 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
    ];
    bikelist:string[]=['Honda SP 125','Honda Shine','Honda H`ness CB350','TVS Apache RTR 160','TVS Ronin','TVS Apache RTR 200 4V','Hero Splendor Plus','Hero HF Deluxe','Hero Flareon','KTM 390 Duke','KTM 125 Duke'];
    carlist:string[]=['Hyundai Creta','Hyundai Venue','Hyundai i20','Toyota Fortuner','Toyota Innova Crysta','Toyota Urban Cruiser','Tata Tiago','Tata Harrier','Tata Safari','Maruti Brezza','Maruti Swift']
-
+   selectedPremium=0
    panelOpenState = true;
    openSnackBar(message: string) {
     
     this.snackBar.open(message, 'Undo',{duration: 3000});
   }
-
+  
   // ---------------------------------------NGONIT()-------------------------------------------------------------------
   //-------------------------------------------------------------------------------------------------------------------
    ngOnInit(): void {
     
     const control1 = <FormArray>this.userForm.controls['date_list'];
-    for (let index = 1; index < 16; index++) {
+    for (let index = 0; index < 16; index++) {
       control1.push(new FormGroup({
         dob     : new FormControl("", [Validators.required])
       }))
     }
+   console.log(control1);
    
       this.httpclient.get('http://localhost:8084/api/returnobj').subscribe((data:any)=>{
       console.log('Policy ID : '+data.policyId)
@@ -341,6 +362,7 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
          if(this.flags)
          this.sortedsuminsured.push(data.policyDetails[index].sumInsure)
             }
+            this.sortedsuminsured.sort((a,b)=>a-b)
         }
         else if(data.insuranceType=='HealthInsurance')
            {
@@ -401,13 +423,30 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
       this.minDate = new Date(currentYear - 25, currentMonth, currentDay);
       this.maxDate = new Date(currentYear + 55, currentMonth,currentDay);
     }
-
+    on_premium_select(data:any){
+      this.premium=+data
+    }
     close_dob_div()
     {
-      const control = <FormArray>this.userForm.controls['insuredInfo'];
+      const control = <FormArray>this.userForm.controls['date_list'];
       for (let index = 0;index < this.adultValue; index++) {
-       if(control.controls[index].get('insuredDOB')!.value) 
-        console.log(control.controls[index].get('insuredDOB')!.value)
+        console.log(control.at(index).get('dob')!.value)
+       if(control.at(index).get('dob')?.invalid)
+       return 
+      }
+      let maxAge=0
+      //selecting maximum
+      for(let i=0;i<this.adultValue;i++)
+      {
+         if((control.at(i).get('dob')!.value>maxAge))
+         maxAge=control.at(i).get('dob')!.value
+      }
+      console.log('Maximum Age is '+maxAge);
+      
+      //check for policies which has max age satisfying maxAge condition
+      for(let i=0;i<this.insuranceobj.length;i++)
+      {
+        
       }
       this.checkflag=false
     }
@@ -488,13 +527,51 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
     this.sortedduration.sort((a, b) => a - b)  
    }
     calculate_premium(){
-      this.times
-      if(this.isHealth&&this.userForm.get('sumInsured')?.valid&&this.userForm.get('duration')?.valid)
+       const policy_duration_control=this.userForm.get('duration')
+       const policy_sum_insured_control=this.userForm.get('sumInsured')
+        const model_control=this.userForm.get('model')
+        const life_salary_control=this.userForm.get('annualIncome')
+        const adult_control=this.userForm.get('adultno')
+        const kid_control=this.userForm.get('kidno')
+        const date_array_control=this.userForm.get('date_list')
+        //Health Insurance Premium Calculation
+      if(this.isHealth&&this.userForm.get('sumInsured')?.valid&&this.userForm.get('duration')?.valid&&kid_control?.valid&&adult_control?.valid)
+      {
+        
+        this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
+        return true
+      }
+      //Life Insurance Premium Calculation
+      if(this.isLife&&this.userForm.get('sumInsured')?.valid&&this.userForm.get('duration')?.valid&&this.userForm.get('annualIncome')?.valid)
       {
         this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
+        return true
+      }
+      //Auto Insurance Premium Calculation
+      if(this.isAuto&&model_control?.valid&&policy_duration_control?.valid&&policy_sum_insured_control?.valid)
+      {
+        console.log("Inside premium calculating method of Auto Insurance");
+        
+        for(let k=0;k <this.insuranceobj.length;k++)
+        {
+          
+          if(this.insuranceobj[k].sumInsured==+policy_sum_insured_control.value!&&this.insuranceobj[k].duration==+policy_duration_control.value!)
+          {
+           this.premium=this.insuranceobj[k].premium+this.addonpremium
+           this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
+           return true
+          }
+        }
+        
+        return false
       }
     return false
     }
+
+
+
+
+
       on_duration_select(data:any)
       {
         this.date=new Date()
@@ -549,6 +626,7 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
         }
         if(this.isLife)
         {
+          console.log('Entered isLife method')
           const control1=this.userForm.get('annualIncome')
           const control2=this.userForm.get('sumInsured')
           const control3=this.userForm.get('duration')
@@ -584,25 +662,33 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
               this.sortedsuminsured.push(this.insuranceobj[index].sumInsured)
             }  
               this.insuranceobj.sort((a,b)=>b.premium-a.premium)
+              let count=0;
+              this.premiumarray=[]
            for(let i=0;i<this.insuranceobj.length;i++)
            {
             console.log('Value of result'+ (this.insuranceobj[i].duration==selected_duration&&this.insuranceobj[i].sumInsured==sum_insured&&user_salary>this.insuranceobj[i].minsal!&&user_salary<this.insuranceobj[i].maxsal!));
             
             if(this.insuranceobj[i].duration==selected_duration&&this.insuranceobj[i].sumInsured==sum_insured&&user_salary>this.insuranceobj[i].minsal!&&user_salary<this.insuranceobj[i].maxsal!)
             {
+              count++;
+              console.log(i);
+              this.premiumarray.push(this.insuranceobj[i].premium)
               this.premium=this.addonpremium+this.insuranceobj[i].premium
-              return
             }
            }
-          return 
-        }
-        for (let index = 0; index < this.insuranceobj.length; index++) {
-          console.log(this.insuranceobj[index]);
-          
-          if(this.insuranceobj[index].sumInsured==this.selectedValue&&this.insuranceobj[index].duration==this.selectedDuration)
-             {
-              this.premium=this.addonpremium+this.insuranceobj[index].premium
-             }
+           console.log('count of count : '+count);
+           
+           console.log(this.premium)
+           if(count>1)
+           {
+            this.premiumarray.sort((a,b)=>a-b)
+            this.show_premiums_flag=true
+           }
+           else
+           {
+           this.show_premiums_flag=false
+           }
+           return 
         }
         
         
@@ -672,15 +758,25 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
                       {
                         const insured_sum=+control1?.value!
                         const insured_duration=+control2.value!
-                        
+                        let count=0;
                         this.insuranceobj.sort((a, b) => -a.premium + b.premium)
+                        this.premiumarray=[]
                         for(let index=0;index<this.insuranceobj.length;index++)
                           {
                             if(insured_sum==this.insuranceobj[index].sumInsured&&insured_duration==this.insuranceobj[index].duration&&user_salary>this.insuranceobj[index].minsal!&&user_salary<this.insuranceobj[index].maxsal!)
                              {
+                              count++;
+                              this.premiumarray.push(this.insuranceobj[index].premium)
                               this.premium=this.addonpremium+this.insuranceobj[index].premium
                              }
                           }
+                          if(count>1)
+                          {
+                            this.premiumarray.sort((a,b)=>a-b)
+                            this.show_premiums_flag=true
+                          }
+                          else
+                          this.show_premiums_flag=false
                       }
                      this.sortedduration=[]
                      const select_sumInsured=+this.userForm.get('sumInsured')?.value!
@@ -721,13 +817,16 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
       }
 
       set_suminsured_life_insurance(salary:any)
-      {
-                        console.log('Inside method set_suminsured_life_insurance');
-                        console.log(this.insuranceobj);
+      {          
+                  console.log('Inside method set_suminsured_life_insurance');
+                  console.log(this.insuranceobj);
                    const user_salary=+salary
                    this.sortedsuminsured=[]
                    const control1=this.userForm.get('sumInsured')
                    const control2=this.userForm.get('duration')
+                   this.userForm.get('premium')?.reset()
+                   this.premiumarray=[]
+                   this.show_premiums_flag=false 
                    if(control1?.valid||control2?.valid)
                      {                    
                     control1?.reset()
@@ -748,6 +847,35 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
                      console.log(this.insuranceobj[index].minsal!<user_salary&&this.insuranceobj[index].maxsal!>user_salary);
                      if(this.flags&&this.insuranceobj[index].minsal!<user_salary&&this.insuranceobj[index].maxsal!>user_salary)
                      this.sortedsuminsured.push(this.insuranceobj[index].sumInsured)
+                   }
+                   if(this.sortedsuminsured.length==0)
+                   {
+                    this.dataSource=[]
+                    for(let i=0;i<this.insuranceobj.length;i++)
+                    {
+                       this.insuranceobj.sort((a,b)=>a.sumInsured-b.sumInsured)
+                       this.dataSource.push({'minSal': this.insuranceobj[i].minsal!, 'maxSal': this.insuranceobj[i].maxsal!, 'duration': this.insuranceobj[i].duration, 'suminsured': this.insuranceobj[i].sumInsured});
+                    }
+                     for(let m=0;m<this.dataSource.length-1;m++)
+                     {
+                       for(let n=m+1;n<this.dataSource.length;n++)
+                       {
+                         if(this.dataSource[m].minSal==this.dataSource[n].minSal&&this.dataSource[m].maxSal==this.dataSource[n].maxSal&&this.dataSource[m].duration==this.dataSource[n].duration&&this.dataSource[m].suminsured==this.dataSource[n].suminsured)
+                         {
+                          this.dataSource[n].minSal=-1
+                         }
+                       }
+                     }
+                     this.dataSource.filter((a)=>a.minSal>0)
+                     this.dataSource.sort((a,b)=>a.minSal-b.minSal)
+                     if(this.userForm.get('annualIncome')?.valid)
+                     this.displaytableflag=true
+                     else
+                     this.displaytableflag=false
+                   }
+                   else
+                   {
+                    this.displaytableflag=false
                    }
                    this.sortedsuminsured.sort((a,b)=>a-b)
                    console.log(this.sortedsuminsured)
@@ -792,14 +920,14 @@ display_disease(x:any){
 check_illness(i:any)
 {
   const control=<FormArray>this.userForm.controls['insuredInfo'];
-  console.log('Illness status of User  : '+i+' : '+control.at(i).get('preExistingIllness')!.value)
+  // console.log('Illness status of User  : '+i+' : '+control.at(i).get('preExistingIllness')!.value)
  if( control.at(i).get('preExistingIllness')!.value==='1')
   return true
   return false
 }
 function_to_return_status()
 {
-  console.log(this.dis_status)
+  // console.log(this.dis_status)
   if(this.dis_status==='yes')
   return true
   else{
@@ -807,6 +935,54 @@ function_to_return_status()
   return false
   }
 }     
-
+refresh()
+{
+  this.userForm.get('sumInsured')?.reset()
+  this.userForm.get('duration')?.reset()
+  this.show_premiums_flag=false
+  if(this.isAuto)
+  {
+    this.sortedsuminsured=[]
+    for (let index = 0; index < this.insuranceobj.length; index++) {
+      this.flags=true; 
+      for(let x=0;x<this.sortedsuminsured.length;x++)
+        {
+           if(this.sortedsuminsured[x] ==this.insuranceobj[index].sumInsured)
+           {
+             this.flags=false;
+             break;
+           }
+        }
+      if(this.flags)
+      this.sortedsuminsured.push(this.insuranceobj[index].sumInsured)
+      }
+      this.sortedsuminsured.sort((a,b)=>a-b)
+      this.sortedduration=[]
+  }
+  if(this.isLife)
+  {
+    this.sortedsuminsured=[]
+    this.sortedduration=[]
+    if(this.userForm.get('annualIncome')?.invalid)
+    return
+    this.sortedsuminsured=[]
+    for (let index = 0; index < this.insuranceobj.length; index++) {
+      this.flags=true; 
+      for(let x=0;x<this.sortedsuminsured.length;x++)
+        {
+           if(this.sortedsuminsured[x] ==this.insuranceobj[index].sumInsured)
+           {
+             this.flags=false;
+             break;
+           }
+        }
+      if(this.flags)
+      this.sortedsuminsured.push(this.insuranceobj[index].sumInsured)
+      }
+      this.sortedsuminsured.sort((a,b)=>a-b)
+    
+  }
+ 
+}
 
 }
