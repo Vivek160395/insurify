@@ -1,6 +1,5 @@
 package com.stackroute.purchaseinsuranceservice.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,13 +7,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerClaim {
+public class ClaimDTO {
     private String customerPolicyId;
     private String insurancePolicyId;
     private String email;
-    private long   claimAmount;
+    private String name;
+    private long  claimAmount;
     private String claimDate;
-    private String description;
+//    private String description;
     private String claimType;
-    private byte[] file;
+    private String startDate;
+    private String endDate;
+    private int duration;
+    private long balance;
+    private String status;
 }
