@@ -29,8 +29,8 @@ const routes: Routes = [
   {path:"details",component:DetailsComponent},
   {path: "renewal", component: RenewalPolicyComponent},
   {path:"update", component:UpdateComponent},
-  {path: "login", component: LoginComponent},
   {path:"claim",component:ClaimComponent},{path:"InsuranceDetails",component:InsuranceDetailsComponent}]},
+  {path: "login", component: LoginComponent},
 
 ];
 

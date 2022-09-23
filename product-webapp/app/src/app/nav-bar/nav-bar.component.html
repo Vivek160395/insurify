@@ -2,20 +2,15 @@
     <mat-toolbar class="example-toolbar">
         <div style="display: flex;">
             <div style="display: flex;margin:auto">
-                <button class="menu" type="button" mat-button (click)="drawer.toggle()" style="display: flex;justify-content: center;">
+                <button class="menu" type="button" mat-button (click)="drawer.toggle()" style="display: flex;justify-content: center;color: white;">
           <mat-icon>menu</mat-icon>
         </button>
             </div>
-            <div class="insurify" routerLink="">
+            <div class="insurify" routerLink="" style="color:white">
                 INSURIFY
             </div>
         </div>
         <div style="display: flex;">
-            <!-- <div style="margin-right: 30px;">
-                <button mat-button routerLink="">
-          <span style="font-size: 18px;color: white;">Home</span>
-        </button>
-            </div> -->
             <div style="margin-right: 30px;">
                 <button mat-button [matMenuTriggerFor]="motor">
           <span style="font-size: 18px;color: white;">Motor Insurance</span>
@@ -33,25 +28,19 @@
                 </mat-menu>
             </div>
             <div style="margin-right: 30px;">
-                <button mat-button [matMenuTriggerFor]="remewals">
+                <button mat-button>
           <span style="font-size: 18px;color: white;">Renewals</span>
         </button>
-                <mat-menu #remewals="matMenu" xPosition="after">
-                    <button mat-menu-item *ngFor="let item of renewals">{{item}}</button>
-                </mat-menu>
             </div>
             <div style="margin-right: 30px;">
-                <button mat-button [matMenuTriggerFor]="animals">
+                <button mat-button>
           <span style="font-size: 18px;color: white;">Claims</span>
         </button>
-                <mat-menu #animals="matMenu" xPosition="after">
-                    <button mat-menu-item *ngFor="let item of claims">{{item}}</button>
-                </mat-menu>
             </div>
         </div>
         <div style="display: flex;">
             <div style="margin-right: 20px;">
-                <button mat-button style="color:white;font-size: 20px;" routerLink="/login"> Login
+                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/login"> Login
         </button>
             </div>
             <div style="margin-right: 20px;">
