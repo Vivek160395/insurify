@@ -14,7 +14,7 @@
        <div *ngFor="let policy of policies">
        <div *ngIf="policy.customerPolicyId==this.policyId">
         <button mat-raised-button color="primary" style="margin-left:190px" routerLink="/claim">Claim</button>
-      <button mat-raised-button color="primary" style="margin-left:650px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1]" routerLink="/renewal">Renew</button>
+      <button mat-raised-button color="primary" style="margin-left:650px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1]" routerLink="/renewal-home">Renew</button>
       <div id="pdfFile" #pdfFile style="padding-right: 5px;"> 
       <h2 style="background-color: rgb(181, 181, 245); text-align: center; margin-top: 15px;">Customer Information</h2>
   
