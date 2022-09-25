@@ -16,12 +16,14 @@ import { InsuranceDetailsComponent } from './insurance-details/insurance-details
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
 import { DetailsComponent } from './details/details.component';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
+import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
 const routes: Routes = [
   {path:"",component:NavBarComponent,children:[
   {path:"",component:RecommendationComponent},
+  {path:"insurance-provider",component:InsuranceProviderComponent},
   {path:"register",component:RegisterComponent},
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},

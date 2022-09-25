@@ -12,22 +12,6 @@
         </div>
         <div style="display: flex;">
             <div style="margin-right: 30px;">
-                <button mat-button [matMenuTriggerFor]="motor">
-          <span style="font-size: 18px;color: white;">Motor Insurance</span>
-        </button>
-                <mat-menu #motor="matMenu" xPosition="after">
-                    <button mat-menu-item *ngFor="let motor of motors">{{motor}}</button>
-                </mat-menu>
-            </div>
-            <div style="margin-right: 30px;">
-                <button mat-button [matMenuTriggerFor]="health">
-          <span style="font-size: 18px;color: white;">Health Insurance</span>
-        </button>
-                <mat-menu #health="matMenu" xPosition="after">
-                    <button mat-menu-item *ngFor="let item of healths">{{item}}</button>
-                </mat-menu>
-            </div>
-            <div style="margin-right: 30px;">
                 <button mat-button>
           <span style="font-size: 18px;color: white;">Renewals</span>
         </button>
