@@ -30,8 +30,7 @@
                                                     <mat-form-field appearance="outline" fxFlex="100%">
                                                         <mat-label>No of Kids</mat-label>
                                                         <mat-select placeholder="No of Kids" [(ngModel)]="kidValue"
-                                                            formControlName="kidno"
-                                                            (selectionChange)="function_for_dob_list(kidValue)">
+                                                            formControlName="kidno" >
                                                             <mat-option value="{{i}}" *ngFor="let x of [].constructor(5);let i =index">{{i}}
                                                             </mat-option>
                                                         </mat-select>
@@ -53,17 +52,14 @@
                                                         <mat-form-field class="example-full-width" appearance="outline">
                                                             <mat-label>Age of Adult {{i+1}}</mat-label>
                                                             <input matInput formControlName="dob" type="number"
-                                                                style="display: flex;justify-content: center;align-items: center;text-align: center;">
-                                                         
+                                                                style="display: flex;justify-content: center;align-items: center;text-align: center;" (blur)="check_age_limit(i)">                                     
                                                         </mat-form-field>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            
+                                            </div>                    
                                         </div>
-                         
                                         <div style="margin-left: auto;background-color: pink;"
-                                            *ngIf="adultValue>0 &&checkflag">
+                                            *ngIf="(+adultValue + +kidValue)>0 &&checkflag">
                                             <button mat-raised-button color="primary"
                                                 (click)="close_dob_div()">Done</button>
                                         </div>
@@ -87,15 +83,13 @@
                                                 <input   matInput placeholder="Enter your salary" type="number"
                                                     formControlName="annualIncome" #salary (blur)="set_suminsured_life_insurance(salary.value)">
                                             </mat-form-field>
-                                            
                                         </div>
                                         <div *ngIf="displaytableflag" style="color: red;">No policy Available with given Annual Income</div>
                                     </div>
-
                                 </div>
                             </mat-card-actions>
                         </mat-card>
-                        <div fxLayout="column" class="DescriptionBox" fxFlex="60%" style="margin-left: auto;">
+                        <div fxLayout="column" class="DescriptionBox" fxFlex="60%" fxLayout.sm="column" fxLayout.xs="column" style="margin-left: auto;" >
                             <mat-card style="background-color: azure;">
                                 <mat-card-actions>
                                     <h2 style="display: flex;justify-content: center;align-items: center;">
@@ -507,27 +501,25 @@
                             </mat-form-field>
                         </div>
                         <div fxLayout="row" fxLayoutGap="2%">
-                            <mat-form-field appearance="outline" fxFlex="25%">
+                            <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-label>Weight</mat-label>
                                 <input matInput placeholder="weight" required formControlName="weight">
                                 <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
                             </mat-form-field>
-                            <mat-form-field appearance="outline" fxFlex="25%">
+                            <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-label>Height(cms)</mat-label>
                                 <input matInput placeholder="Height(in cms)" required formControlName="height">
                                 <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
                             </mat-form-field>
-                            <div fxFlex="45%" style="display: flex;justify-content: center;align-items: center;">
-                                <label style="font-family: cursive;font-style: italic;font-weight: bolder;">PreExisting
-                                    disease</label>
-                                <mat-radio-group [(ngModel)]="diseasestatus[i]" formControlName="preExistingIllness">
-                                    <mat-radio-button value="1">Yes</mat-radio-button>
-                                    <mat-radio-button value="2">No</mat-radio-button>
-                                </mat-radio-group>
-                                <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
-                            </div>
+                          
+                            <mat-form-field appearance="outline" fxFlex="33%">
+                                <mat-select placeholder="Relationship with Applicant" formControlName="preExistingIllness">
+                                    <mat-option value="Yes" >YES</mat-option>
+                                    <mat-option value= "No" >No </mat-option>
+                                 </mat-select>
+                             </mat-form-field> 
                         </div>
-                        <div fxLayout="row" *ngIf="check_illness(i)==true">
+                        <div fxLayout="row" *ngIf="check_illness(i)">
                             <mat-form-field appearance="outline" fxFlex="100%">
                                 <mat-label>Pre existing disease</mat-label>
                                 <mat-select placeholder="Choose pre existing disease" multiple
@@ -544,17 +536,20 @@
 
             <div fxLayout="row">
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-raised-button matStepperNext style="margin-left: auto" color="primary">Next</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+                <button mat-button (click)="print()">Print object</button>
+                <button mat-raised-button [disabled]="check_validity()" color="primary" (click)="purchase_insurance()" fxFlex="30%" style="margin-left: auto;">Buy</button>
             </div>
         </form>
     </mat-step>
-    <mat-step *ngIf="!isAuto">
+    <mat-step *ngIf="!(isAuto||isHealth)">
         <ng-template matStepLabel>Done</ng-template>
         <p>You are now done.</p>
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-raised-button [disabled]="check_validity()" (click)="purchase_insurance()">Buy</button>
             <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button (click)="print()">Print object</button>
         </div>
     </mat-step>
 </mat-stepper>

@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, RequiredValidator, Validators } from '@angular/forms';
@@ -16,16 +17,7 @@ export interface LifeTable {
   suminsured: number;
 }
 let LIFE_INSURANCE_DATA: LifeTable[] = [
-  {minSal: 1, maxSal: 2, duration: 1.0079, suminsured: 10000},
-  {minSal: 2, maxSal: 3, duration: 4.0026, suminsured: 10000},
-  {minSal: 3, maxSal: 5, duration: 6.941, suminsured: 10000},
-  {minSal: 4, maxSal: 7, duration: 9.0122, suminsured: 10000},
-  {minSal: 5, maxSal: 9, duration: 10.811, suminsured: 10000},
-  {minSal: 6, maxSal: 11, duration: 12.0107, suminsured: 10000},
-  {minSal: 7, maxSal: 14, duration: 14.0067, suminsured: 10000},
-  {minSal: 8, maxSal: 17, duration: 15.9994, suminsured: 10000},
-  {minSal: 9, maxSal: 31, duration: 18.9984, suminsured: 10000},
-  {minSal: 10, maxSal: 35, duration: 20.1797, suminsured: 10000},
+  {minSal: 1, maxSal: 2, duration: 1, suminsured: 10000}
 ];
 @Component({
   selector: 'app-purchase-insurance',
@@ -74,6 +66,109 @@ hei!:number
 nam!:string
 ill!:boolean
 illList!: string[];
+userForm = new FormGroup({
+  adultno                   : new FormControl("", [Validators.required]),
+  kidno                     : new FormControl("", [Validators.required]),
+  insuredInfo               : new FormArray([new FormGroup({
+    nameof                  : new FormControl("", [Validators.required]),
+    insuredDOB              : new FormControl("", [Validators.required]),
+    relation                : new FormControl("", [Validators.required]),
+    preExistingIllness      : new FormControl("", [Validators.required]),
+    illnessList             : new FormControl([], [Validators.required]),
+    weight                  : new FormControl([], [Validators.required]),
+    height                  : new FormControl([], [Validators.required])})],[Validators.required]), 
+  lifeillnessList           : new FormControl([], [Validators.required]),
+  lifeillnessStatus         : new FormControl([], [Validators.required]), 
+  vehicleRegistrationNumber : new FormControl("", [Validators.required]),
+  category                  : new FormControl("", [Validators.required]), 
+  engineNumber              : new FormControl("", [Validators.required]),
+  chassisNumber             : new FormControl("", [Validators.required]), 
+  maritalStatus             : new FormControl("", [Validators.required]),
+  occupation                : new FormControl("", [Validators.required]), 
+  organisationType          : new FormControl("", [Validators.required]),
+  Pan                       : new FormControl("", [Validators.required]),  
+  annualIncome              : new FormControl("", [Validators.required]),
+  weight                    : new FormControl("", [Validators.required]), 
+  height                    : new FormControl("", [Validators.required]),
+  aadhar                    : new FormControl("", [Validators.required]),
+  questionnaireAnswers      : new FormArray([new FormGroup({
+    answer                  : new FormControl("", [Validators.required])})],[Validators.required]), 
+  healthCondition           : new FormControl([], [Validators.required]), 
+  customerPolicyId                : new FormControl("", [Validators.required]),
+  insurancePolicyId               : new FormControl("", [Validators.required]),
+  email                           : new FormControl("", [Validators.required]),
+  sumInsured                      : new FormControl("", [Validators.required]),
+  startDate                       : new FormControl("",[Validators.required]),
+  purchaseDate                    : new FormControl("",[Validators.required]),
+  endDate                         : new FormControl("", ),
+  duration                        : new FormControl("", [Validators.required]),
+  addOnName                       : new FormArray([new FormGroup({
+    addname                       : new FormControl("", [Validators.required]),
+  })]),
+  date_list                       :new FormArray([new FormGroup({
+    dob                           : new FormControl("", [Validators.required,Validators.min(21),Validators.max(60)])})]),
+  policyname                      : new FormControl("", [Validators.required]),
+  premium                         : new FormControl("", [Validators.required]),
+  name                            : new FormControl("",[Validators.required]),
+  mobile                          : new FormControl("",[Validators.required]),
+  address               : new FormControl("",[Validators.required]),
+  pincode               : new FormControl("", [Validators.required]),
+  city                  : new FormControl("", [Validators.required]),
+  state                 : new FormControl("", [Validators.required]),
+  nameOfNominee         : new FormControl("", [Validators.required]),
+  nomineeDOB            : new FormControl("",[Validators.required]),
+  relation              : new FormControl("",[Validators.required]),
+  model                 : new FormControl("",[Validators.required]),
+});
+
+relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sister','GrandFather','GrandMother','Wife','Husband','Uncle','Aunt']
+minDate: Date;
+maxDate: Date;
+adultValue=0
+kidValue=0
+checkflag=false
+ flags=true
+ flag=true
+ DescriptionText:string=''
+ adultnum=[1,2,3,4,5,6,7]
+ kidnum=[0,1,2,3,4,5,6,7]
+ premium:number=0
+
+ show_premiums_flag:boolean=false
+ selectedDuration!:number
+ suminsuredobj!:any[];
+ selectedValue: number=0;
+ sortedduration:number[]=[]
+ sortedsuminsured:number[]=[]
+ diseaselist=["HyperTension high blood pressure history","Diabetes mellitus sugar history","Hyperlipidemia cholesterol history","Consuming alcohol or smoking","Heart related ailments"]
+ diseasestatus!:boolean[]
+ insuranceobj=[
+ {sumInsured:1000000,duration:1,premium:5000,kids:2,adults1:2,adults2:2,adults3:2,minsal:200000,maxsal:121232423,minage:25,maxage:55},
+ {sumInsured:1000000,duration:1,kids:2,adults1:2,adults2:2,adults3:2},
+ {sumInsured:1000000,duration:10,premium:4000},
+ {sumInsured:500000,duration:7,premium:7520},
+ {sumInsured:1000000,duration:5,premium:7000},
+ {sumInsured:1000000,duration:3,premium:8000},
+ {sumInsured:500000,duration:1,premium:6200},
+ {sumInsured:500000,duration:2,premium:8500},
+ {sumInsured:500000,duration:3,premium:6900},
+ {sumInsured:500000,duration:4,premium:3500},
+ {sumInsured:500000,duration:5,premium:4000},
+ ];
+ addons:any[]=[
+  {addonname:"Nursing At Home + Compassionate Visit",addondescription:"We cover expenses related to home nursing and compassionate visit We cover your expenses for availing nursing at home post hospitalisation. The limit under this benefit is ₹3,000 per day for up to a maximum of 15 days. If your hospitalisation extends beyond 5 days, we will cover expenses incurred for an economy class air ticket for your spouse/children/parent to visit you (up to ₹20000).",addonprice:"882"},
+  {addonname:"Critical Illness Cover",addondescription:"We pay out a lump sum benefit in case of a critical illness diagnosis.This benefit pays out 100% of the sum insured. The following critical illnesses are covered under this add-on",addonprice:"2500"},
+  {addonname:"Personal Accident",addondescription:"We pay the sum insured in case of death or permanent total disablement If the insured person is injured and unfortunately loses his life or is permanently disabled, we pay out this benefit to the nominee or legal heir.",addonprice:"1080"},
+  {addonname:"Worldwide Cover",addondescription:"We cover your hospitalisation expenses outside India as well You can claim for inpatient hospitalisation and day care procedures under this benefit. A co-pay of 10% will be applied to every admissible claim incurred outside India. The benefit is available for 45 consecutive days from the date of travel in a single trip and 90 days in a cumulative bases as a whole in a policy year.",addonprice:"2158"},
+  {addonname:"Hospital Daily Cash + Convalescence Benefit",addondescription:"We provide a daily cash allowance if you are hospitalised for three consecutive days or more We pay you a daily cash allowance if you are hospitalised for 3+ days, up to a maximum of 10 days. Additionally, In case your hospital stay continues for 10 days or more, we will pay you ₹10,000 as convalescence benefit. This benefit is payable only once to an insured person during each policy year of the policy period.",addonprice:"1278"},
+  {addonname:"Super No Claim Bonus",addondescription:"We increase in your sum insured by 50% at renewal, every claim-free year    This benefit applies if you renew the policy on time without any break-in period.",addonprice:"588"},
+  {addonname:"Sum Insured Protector",addondescription:"We increase your sum insured every year, based on the previous year's inflation rate You can protect your sum insured against rising inflation. Your sum insured will be increased on cumulative basis at every renewal, based on the previous year's inflation rate. Inflation rate is based on the Consumer Price index (CPI) published by the Central Statistical Organisation (CSO).The % increase will be applicable only on Annual Sum Insured under the Policy and not on additional sum insured or any other benefit which leads to increase in Sum Insured.",addonprice:"220"},
+  {addonname:"Claim Protector",addondescription:"We cover items not payable under the claim, as per IRDAI's excluded list .We cover the items related to your claim, which are not payable as per IRDAI's excluded list. These include hot packs, gauze, crepe bandages etc. Such non-payables will be covered up to sum insured if we have accepted your inpatient hospitalisation claim.",addonprice:"188"}
+ ];
+ bikelist:string[]=['Honda SP 125','Honda Shine','Honda H`ness CB350','TVS Apache RTR 160','TVS Ronin','TVS Apache RTR 200 4V','Hero Splendor Plus','Hero HF Deluxe','Hero Flareon','KTM 390 Duke','KTM 125 Duke'];
+ carlist:string[]=['Hyundai Creta','Hyundai Venue','Hyundai i20','Toyota Fortuner','Toyota Innova Crysta','Toyota Urban Cruiser','Tata Tiago','Tata Harrier','Tata Safari','Maruti Brezza','Maruti Swift']
+ selectedPremium=0
+ panelOpenState = true;
 getErrorMessage() {
   if (this.userForm.get('adultno')!.hasError('required')) {
     return 'You must enter a value';
@@ -86,7 +181,6 @@ purchase_insurance()
   console.log('-----------------------------------------------------------------------------------') 
   console.log(this.userForm)
   console.log('------------------------------------------------------------------------------------------------------------------')
-  window.alert('Fill all details')
   console.log('Disease Status of Life Insurance :'+this.lifediseasestatus)
   const pincode=this.userForm.get('pincode')?.value
   console.log(this.userForm.value) 
@@ -136,7 +230,7 @@ purchase_insurance()
     this.wei=+control.at(i).get('weight')?.value;
     this.hei=+control.at(i).get('height')?.value;
     this.nam=control.at(i).get('name')?.value.toString();
-    if(control.at(i).get('preExistingIllness')?.value=='1')
+    if(control.at(i).get('preExistingIllness')?.value=='Yes')
     this.ill=true;
     else 
     this.ill=false;
@@ -183,31 +277,45 @@ purchase_insurance()
  customerInsurancePurchase.email='testing@gmail.com'
  customerInsurancePurchase.insurancePolicyId='1232131'
  console.log(customerInsurancePurchase)
-
+ console.log('This is before posting');
+ 
  this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8084/api/add/customer-insurance',customerInsurancePurchase).subscribe(
   (data:any)=>{
     console.log(data);
   }
  );
-//  const httpOptions = {
-//   headers: new HttpHeaders({
-//     'Content-Type':  'application/json',
-//     "Access-Control-Allow-Origin": "*",
-    
-//   } ),responseType: 'text' as 'json'
-// };
-//  this.httpclient.get('http://localhost:8084/api/get/insurances/testing@gmail.com',httpOptions).subscribe((data:any)=>{console.log(data+"sdasdad")})
+ console.log('This is after posting');
 }
 check_validity(){
-
- 
   if(this.userForm.get('sumInsured')?.valid&&this.userForm.get('duration')?.valid&&this.userForm.get('name')?.valid&&this.userForm.get('address')?.valid&&this.userForm.get('pincode')?.valid&&this.userForm.get('city')?.valid
   &&this.userForm.get('state')?.valid&&this.userForm.get('nameOfNominee')?.valid&&this.userForm.get('nomineeDOB')?.valid&&this.userForm.get('relation')?.valid&&this.userForm.get('mobile')?.valid)
   {     
     if(this.userForm.get('vehicleRegistrationNumber')?.valid&&this.userForm.get('engineNumber')?.valid&&this.userForm.get('chassisNumber')?.valid&&this.userForm.get('model')?.valid)
     return false
-    if(this.userForm.get('insuredInfo')?.valid&&this.userForm.get('adultno')?.valid&&this.userForm.get('kidno')?.valid)
+    if(this.userForm.get('adultno')?.valid&&this.userForm.get('kidno')?.valid)
+    {
+      console.log(this.adultValue + this.kidValue);    
+      const control=<FormArray>this.userForm.get('insuredInfo'); 
+      for(let x=0;x<(+this.adultValue + +this.kidValue);x++)
+      { 
+                                              
+        if((control.at(x).get('insuredDOB')!.invalid)||(control.at(x).get('nameof')!.invalid)||(control.at(x).get('relation')!.invalid)||(control.at(x).get('preExistingIllness')!.invalid)||(control.at(x).get('weight')!.invalid)||(control.at(x).get('height')?.invalid))
+        {
+          
+          return true
+        }
+        else{
+          
+          if(control.at(x).get('preExistingIllness')?.value=='Yes')
+          {
+            
+            if(control.at(x).get('illnessList')?.invalid)
+            return true
+          }
+        }
+      }      
     return false
+    }
     if(this.userForm.get('maritalStatus')?.valid&&this.userForm.get('occupation')?.valid&&this.userForm.get('organisationType')?.valid&&this.userForm.get('Pan')?.valid&&this.userForm.get('aadhar')?.valid&&this.userForm.get('annualIncome')?.valid&&
     this.userForm.get('weight')?.valid&&this.userForm.get('height')?.valid&&this.userForm.get('questionnaireAnswers')?.valid&&this.userForm.get('lifeillnessStatus')?.valid)
     return false
@@ -215,113 +323,26 @@ check_validity(){
   }
   return true
 }
-  userForm = new FormGroup({
-    adultno             : new FormControl("", [Validators.required]),
-    kidno               : new FormControl("", [Validators.required]),
-    insuredInfo         : new FormArray([new FormGroup({
-      nameof            : new FormControl("", [Validators.required]),
-      insuredDOB        : new FormControl("", [Validators.required]),
-      relation          : new FormControl("", [Validators.required]),
-      preExistingIllness: new FormControl("", [Validators.required]),
-      illnessList       : new FormControl([], [Validators.required]),
-      weight            : new FormControl([], [Validators.required]),
-      height            : new FormControl([], [Validators.required])})],[Validators.required]), 
-    lifeillnessList           : new FormControl([], [Validators.required]),
-    lifeillnessStatus         : new FormControl([], [Validators.required]), 
-    vehicleRegistrationNumber : new FormControl("", [Validators.required]),
-    category                  : new FormControl("", [Validators.required]), 
-    engineNumber              : new FormControl("", [Validators.required]),
-    chassisNumber             : new FormControl("", [Validators.required]), 
-    maritalStatus             : new FormControl("", [Validators.required]),
-    occupation                : new FormControl("", [Validators.required]), 
-    organisationType          : new FormControl("", [Validators.required]),
-    Pan                       : new FormControl("", [Validators.required]),  
-    annualIncome              : new FormControl("", [Validators.required]),
-    weight                    : new FormControl("", [Validators.required]), 
-    height                    : new FormControl("", [Validators.required]),
-    aadhar                    : new FormControl("", [Validators.required]),
-    questionnaireAnswers      : new FormArray([new FormGroup({
-      answer                  : new FormControl("", [Validators.required])})],[Validators.required]), 
-    healthCondition           : new FormControl([], [Validators.required]), 
-    customerPolicyId                : new FormControl("", [Validators.required]),
-    insurancePolicyId               : new FormControl("", [Validators.required]),
-    email                           : new FormControl("", [Validators.required]),
-    sumInsured                      : new FormControl("", [Validators.required]),
-    startDate                       : new FormControl("",[Validators.required]),
-    purchaseDate                    : new FormControl("",[Validators.required]),
-    endDate                         : new FormControl("", ),
-    duration                        : new FormControl("", [Validators.required]),
-    addOnName                       : new FormArray([new FormGroup({
-      addname                       : new FormControl("", [Validators.required]),
-    })]),
-    date_list                       :new FormArray([new FormGroup({
-      dob                           : new FormControl("", [Validators.required])})]),
-    policyname                      : new FormControl("", [Validators.required]),
-    premium                         : new FormControl("", [Validators.required]),
-    name                            : new FormControl("",[Validators.required]),
-    mobile                          : new FormControl("",[Validators.required]),
-    address               : new FormControl("",[Validators.required]),
-    pincode               : new FormControl("", [Validators.required]),
-    city                  : new FormControl("", [Validators.required]),
-    state                 : new FormControl("", [Validators.required]),
-    nameOfNominee         : new FormControl("", [Validators.required]),
-    nomineeDOB            : new FormControl("",[Validators.required]),
-    relation              : new FormControl("",[Validators.required]),
-    model                 : new FormControl("",[Validators.required]),
-  });
-
-relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sister','GrandFather','GrandMother','Wife','Husband','Uncle','Aunt']
-  minDate: Date;
-  maxDate: Date;
-  adultValue=0
-  kidValue=0
-  checkflag=false
-   flags=true
-   flag=true
-   DescriptionText:string=''
-   adultnum=[1,2,3,4,5,6,7]
-   kidnum=[0,1,2,3,4,5,6,7]
-   premium:number=0
-
-   show_premiums_flag:boolean=false
-   selectedDuration!:number
-   suminsuredobj!:any[];
-   selectedValue: number=0;
-   sortedduration:number[]=[]
-   sortedsuminsured:number[]=[]
-   diseaselist=["HyperTension high blood pressure history","Diabetes mellitus sugar history","Hyperlipidemia cholesterol history","Consuming alcohol or smoking","Heart related ailments"]
-   diseasestatus!:boolean[]
-   insuranceobj=[
-   {sumInsured:1000000,duration:1,premium:5000,kids:2,adults:2,minsal:200000,maxsal:121232423,minage:25,maxage:55},
-   {sumInsured:1000000,duration:10,premium:4000},
-   {sumInsured:500000,duration:7,premium:7520},
-   {sumInsured:1000000,duration:5,premium:7000},
-   {sumInsured:1000000,duration:3,premium:8000},
-   {sumInsured:500000,duration:1,premium:6200},
-   {sumInsured:500000,duration:2,premium:8500},
-   {sumInsured:500000,duration:3,premium:6900},
-   {sumInsured:500000,duration:4,premium:3500},
-   {sumInsured:500000,duration:5,premium:4000},
-   ];
-   addons:any[]=[
-    {addonname:"Nursing At Home + Compassionate Visit",addondescription:"We cover expenses related to home nursing and compassionate visit We cover your expenses for availing nursing at home post hospitalisation. The limit under this benefit is ₹3,000 per day for up to a maximum of 15 days. If your hospitalisation extends beyond 5 days, we will cover expenses incurred for an economy class air ticket for your spouse/children/parent to visit you (up to ₹20000).",addonprice:"882"},
-    {addonname:"Critical Illness Cover",addondescription:"We pay out a lump sum benefit in case of a critical illness diagnosis.This benefit pays out 100% of the sum insured. The following critical illnesses are covered under this add-on",addonprice:"2500"},
-    {addonname:"Personal Accident",addondescription:"We pay the sum insured in case of death or permanent total disablement If the insured person is injured and unfortunately loses his life or is permanently disabled, we pay out this benefit to the nominee or legal heir.",addonprice:"1080"},
-    {addonname:"Worldwide Cover",addondescription:"We cover your hospitalisation expenses outside India as well You can claim for inpatient hospitalisation and day care procedures under this benefit. A co-pay of 10% will be applied to every admissible claim incurred outside India. The benefit is available for 45 consecutive days from the date of travel in a single trip and 90 days in a cumulative bases as a whole in a policy year.",addonprice:"2158"},
-    {addonname:"Hospital Daily Cash + Convalescence Benefit",addondescription:"We provide a daily cash allowance if you are hospitalised for three consecutive days or more We pay you a daily cash allowance if you are hospitalised for 3+ days, up to a maximum of 10 days. Additionally, In case your hospital stay continues for 10 days or more, we will pay you ₹10,000 as convalescence benefit. This benefit is payable only once to an insured person during each policy year of the policy period.",addonprice:"1278"},
-    {addonname:"Super No Claim Bonus",addondescription:"We increase in your sum insured by 50% at renewal, every claim-free year    This benefit applies if you renew the policy on time without any break-in period.",addonprice:"588"},
-    {addonname:"Sum Insured Protector",addondescription:"We increase your sum insured every year, based on the previous year's inflation rate You can protect your sum insured against rising inflation. Your sum insured will be increased on cumulative basis at every renewal, based on the previous year's inflation rate. Inflation rate is based on the Consumer Price index (CPI) published by the Central Statistical Organisation (CSO).The % increase will be applicable only on Annual Sum Insured under the Policy and not on additional sum insured or any other benefit which leads to increase in Sum Insured.",addonprice:"220"},
-    {addonname:"Claim Protector",addondescription:"We cover items not payable under the claim, as per IRDAI's excluded list .We cover the items related to your claim, which are not payable as per IRDAI's excluded list. These include hot packs, gauze, crepe bandages etc. Such non-payables will be covered up to sum insured if we have accepted your inpatient hospitalisation claim.",addonprice:"188"}
-   ];
-   bikelist:string[]=['Honda SP 125','Honda Shine','Honda H`ness CB350','TVS Apache RTR 160','TVS Ronin','TVS Apache RTR 200 4V','Hero Splendor Plus','Hero HF Deluxe','Hero Flareon','KTM 390 Duke','KTM 125 Duke'];
-   carlist:string[]=['Hyundai Creta','Hyundai Venue','Hyundai i20','Toyota Fortuner','Toyota Innova Crysta','Toyota Urban Cruiser','Tata Tiago','Tata Harrier','Tata Safari','Maruti Brezza','Maruti Swift']
-   selectedPremium=0
-   panelOpenState = true;
+ 
    openSnackBar(message: string) {
     
     this.snackBar.open(message, 'Undo',{duration: 3000});
   }
-  
+  function_check_dob(){
+    const control=this.userForm.get('adultno')
+    const dob_control=<FormArray>this.userForm.get('date_list')
+    if(control?.invalid)
+    {
+      return false
+    }
+    for(let i=0;i< +control!.value!;i++){
+       if(dob_control.at(i).get('dob')?.invalid)
+       {
+         return true
+       }
+    }
+    return false
+  }
   // ---------------------------------------NGONIT()-------------------------------------------------------------------
   //-------------------------------------------------------------------------------------------------------------------
    ngOnInit(): void {
@@ -370,8 +391,34 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
             this.isHealth=true
             for(let index=0;index<data.policyDetails.length;index++)
           {
-            this.insuranceobj.push({'sumInsured':data.policyDetails[index].sumInsure,'duration':data.policyDetails[index].durations,'premium':0,'kids':data.policyDetails[index].kids,'adults':data.policyDetails[index].adults,'minage':data.policyDetails[index].minAge,'maxage':data.policyDetails[index].maxAge})
+            this.insuranceobj.push({'sumInsured':data.policyDetails[index].sumInsure,'duration':data.policyDetails[index].durations,'kids':data.policyDetails[index].kids,'adults1':data.policyDetails[index].adults1,'adults2':data.policyDetails[index].adults2,'adults3':data.policyDetails[index].adults3})
           }
+          for (let index = 0; index < data.policyDetails.length; index++) {
+            this.flags=true; 
+            for(let x=0;x<this.sortedsuminsured.length;x++)
+              {
+                 if(this.sortedsuminsured[x] ==data.policyDetails[index].sumInsure)
+                 {
+                   this.flags=false;
+                   break;
+                 }
+              }
+         if(this.flags)
+         this.sortedsuminsured.push(data.policyDetails[index].sumInsure)
+            }
+            this.sortedsuminsured.sort((a,b)=>a-b)
+           const con=<FormArray>this.userForm.get('insuredInfo')
+            for (let index = 0; index < 10; index++) {
+              con.push(new FormGroup({
+                nameof            : new FormControl("", [Validators.required]),
+                insuredDOB        : new FormControl("", [Validators.required]),
+                relation          : new FormControl("", [Validators.required]),
+                preExistingIllness: new FormControl("1", [Validators.required]),
+                illnessList       : new FormControl([], [Validators.required]),
+                weight            : new FormControl([], [Validators.required]),
+                height            : new FormControl([], [Validators.required])
+              }));       
+            }
            }
            else if(data.insuranceType=='LifeInsurance')
            {
@@ -381,6 +428,7 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
           {
             this.insuranceobj.push({'sumInsured':data.policyDetails[index].sumInsure,'duration':data.policyDetails[index].durations,'premium':data.policyDetails[index].premiums,'minsal':data.policyDetails[index].minSalary,'maxsal':data.policyDetails[index].maxSalary})
           }
+             
            }
       if(data.insuranceType=='AutoMobile Insurance')
         this.autocategory=data.category
@@ -404,7 +452,6 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
        
     //====================================================================================================================
        this.id=Math.floor(Math.random()*100000000+10000000);
-    
        this.userForm.get('customerPolicyId')?.setValue(this.id.toString())
        this.userForm.get('customerPolicyId')!.disable();
        const control = <FormArray>this.userForm.controls['questionnaireAnswers'];
@@ -416,7 +463,7 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
       }
     
   }
-  constructor(public httpclient:HttpClient,private snackBar: MatSnackBar) {
+  constructor(public httpclient:HttpClient,public snackBar: MatSnackBar) {
       const currentYear = new Date().getFullYear();
       const currentMonth=new Date().getMonth();
       const currentDay=new Date().getDate();
@@ -432,68 +479,31 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
       for (let index = 0;index < this.adultValue; index++) {
         console.log(control.at(index).get('dob')!.value)
        if(control.at(index).get('dob')?.invalid)
-       return 
+       {
+        this.openSnackBar("Please provide age of all adults")
+       return
+       } 
       }
-      let maxAge=0
-      //selecting maximum
-      for(let i=0;i<this.adultValue;i++)
-      {
-         if((control.at(i).get('dob')!.value>maxAge))
-         maxAge=control.at(i).get('dob')!.value
-      }
-      console.log('Maximum Age is '+maxAge);
-      
-      //check for policies which has max age satisfying maxAge condition
-      for(let i=0;i<this.insuranceobj.length;i++)
-      {
-        
-      }
+     
       this.checkflag=false
+
     }
     function_for_dob_list(i:any){
-      this.xy=this.xy+ +i
-      this.userForm.get('sumInsured')?.reset();
-      this.userForm.get('duration')?.reset();
-      const control = <FormArray>this.userForm.controls['insuredInfo'];
-      console.log('current length of insuredInfo : '+control.length)
-      console.log('Value entered : '+this.adultValue);     
-      this.update_disease_status()
-      this.checkflag=true
-      // control.clear(); 
-      // +this.adultValue + +this.kidValue
-      console.log("After deleting length of user controls array :"+control.length)
-      console.log(control)
-      for (let index = 0; index < (+this.adultValue + +this.kidValue); index++) {
-        control.push(new FormGroup({
-          nameof            : new FormControl("", [Validators.required]),
-          insuredDOB        : new FormControl("", [Validators.required]),
-          relation          : new FormControl("", [Validators.required]),
-          preExistingIllness: new FormControl("1", [Validators.required]),
-          illnessList       : new FormControl([], [Validators.required]),
-          weight            : new FormControl([], [Validators.required]),
-          height            : new FormControl([], [Validators.required])
-        }));       
+      const control=<FormArray>this.userForm.get('date_list')
+      if(this.userForm.get('adultno')?.invalid)
+      {
+       this.checkflag=false  
+       return
       }
-   
-      console.log("Final length after modifying :"+control.length)
-      console.log(control)
+     control.reset()
+     this.checkflag=true      
     }
     adding_child(){ 
       const control = <FormArray>this.userForm.controls['insuredInfo'];
       if(this.adultValue>0)
       this.function_for_dob_list(2)
       
-      for (let index = this.adultValue; index < +this.adultValue + +this.kidValue; index++) {
-        control.push(new FormGroup({
-          nameof            : new FormControl("", [Validators.required]),
-          insuredDOB        : new FormControl("", [Validators.required]),
-          relation          : new FormControl("", [Validators.required]),
-          preExistingIllness: new FormControl("1", [Validators.required]),
-          illnessList       : new FormControl([], [Validators.required]),
-          weight            : new FormControl([], [Validators.required]),
-          height            : new FormControl([], [Validators.required])
-        }));       
-      }
+     
       console.log(control)
     }
    selectsuminsured(eve:any)
@@ -537,9 +547,60 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
         //Health Insurance Premium Calculation
       if(this.isHealth&&this.userForm.get('sumInsured')?.valid&&this.userForm.get('duration')?.valid&&kid_control?.valid&&adult_control?.valid)
       {
-        
-        this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
-        return true
+         if(this.userForm.get('adultno')?.invalid||this.userForm.get('kidno')?.invalid||this.userForm.get('sumInsured')||this.userForm.get('duration')?.invalid)
+         {
+          const control=<FormArray>this.userForm.controls['date_list']
+          for(let i=0;i < +this.userForm.get('adultno')?.value!;i++)
+          {
+           if(control.at(i).get('dob')?.invalid)
+           {
+             return false
+           }   
+          }
+          this.premium=0;
+          const sum=+this.userForm.get('sumInsured')!.value!
+          const dur=+this.userForm.get('duration')!.value!
+          let ins_obj_index=-1
+          for(let index=0;index<this.insuranceobj.length;index++)
+          {
+           if(sum==this.insuranceobj[index].sumInsured && dur==this.insuranceobj[index].duration)
+           {
+            ins_obj_index=index
+            break
+           }
+          }
+          for(let i=0;i < +this.userForm.get('adultno')?.value!;i++)
+          {
+           if(control.at(i).get('dob')?.value<41)
+           {
+             if(ins_obj_index>-1)
+             {
+                this.premium=this.premium+this.insuranceobj[i].adults1!    
+             }
+            continue
+           } 
+           if(control.at(i).get('dob')?.value<51)
+           {
+            if(ins_obj_index>-1)
+            {
+              this.premium=this.premium+this.insuranceobj[i].adults2!     
+            }
+             continue
+           } 
+           if(control.at(i).get('dob')?.value<61)
+           {
+            if(ins_obj_index>-1)
+            {
+              this.premium=this.premium+this.insuranceobj[i].adults3!       
+            }
+             continue
+           } 
+          }
+          this.premium=this.premium+this.insuranceobj[ins_obj_index].kids!*this.kidValue+this.addonpremium
+          this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
+          return true 
+        }
+       return false
       }
       //Life Insurance Premium Calculation
       if(this.isLife&&this.userForm.get('sumInsured')?.valid&&this.userForm.get('duration')?.valid&&this.userForm.get('annualIncome')?.valid)
@@ -557,12 +618,11 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
           
           if(this.insuranceobj[k].sumInsured==+policy_sum_insured_control.value!&&this.insuranceobj[k].duration==+policy_duration_control.value!)
           {
-           this.premium=this.insuranceobj[k].premium+this.addonpremium
+           this.premium=this.insuranceobj[k].premium!+this.addonpremium
            this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
            return true
           }
         }
-        
         return false
       }
     return false
@@ -618,8 +678,8 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
            {
             if(this.insuranceobj[i].duration==+control3?.value!&&this.insuranceobj[i].sumInsured==+control2?.value!)
             {
-              this.premium=this.addonpremium+this.insuranceobj[i].premium
-              return
+              this.premium=this.addonpremium+this.insuranceobj[i].premium!
+              break
             }
            }
           return 
@@ -661,7 +721,7 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
               if(this.flags&&this.insuranceobj[index].duration==select_duration&&user_salary>this.insuranceobj[index].minsal!&&user_salary<this.insuranceobj[index].maxsal!)
               this.sortedsuminsured.push(this.insuranceobj[index].sumInsured)
             }  
-              this.insuranceobj.sort((a,b)=>b.premium-a.premium)
+              this.insuranceobj.sort((a,b)=>b.premium!-a.premium!)
               let count=0;
               this.premiumarray=[]
            for(let i=0;i<this.insuranceobj.length;i++)
@@ -672,8 +732,8 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
             {
               count++;
               console.log(i);
-              this.premiumarray.push(this.insuranceobj[i].premium)
-              this.premium=this.addonpremium+this.insuranceobj[i].premium
+              this.premiumarray.push(this.insuranceobj[i].premium!)
+              this.premium=this.addonpremium+this.insuranceobj[i].premium!
             }
            }
            console.log('count of count : '+count);
@@ -690,7 +750,32 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
            }
            return 
         }
-        
+        if(this.isHealth)
+        {
+          const control1= this.userForm.get('adultno')
+          const control2=this.userForm.get('kidno')
+          const control3=this.userForm.get('sumInsured')
+          const control4=this.userForm.get('duration')
+          if(control1?.invalid)
+            {
+              this.openSnackBar("Select no of adults and give their age")
+                control4?.reset()
+                return
+            }
+            if(control2?.invalid)
+            {
+              this.openSnackBar("Select no of kids first")
+                control4?.reset()
+                return
+            }
+            if(control3?.invalid)
+            {
+              this.openSnackBar("Please Select Sum Insured First")
+              control4?.reset()
+              return
+            }
+            this.calculate_premium()
+        }
         
       }
       on_suminsured_select(data:any)
@@ -715,7 +800,7 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
                           {
                             if(insured_sum==this.insuranceobj[index].sumInsured&&insured_duration==this.insuranceobj[index].duration)
                              {
-                              this.premium=this.addonpremium+this.insuranceobj[index].premium
+                              this.premium=this.addonpremium+this.insuranceobj[index].premium!
                              }
                           }
                       }
@@ -759,15 +844,15 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
                         const insured_sum=+control1?.value!
                         const insured_duration=+control2.value!
                         let count=0;
-                        this.insuranceobj.sort((a, b) => -a.premium + b.premium)
+                        this.insuranceobj.sort((a, b) => -a.premium! + b.premium!)
                         this.premiumarray=[]
                         for(let index=0;index<this.insuranceobj.length;index++)
                           {
                             if(insured_sum==this.insuranceobj[index].sumInsured&&insured_duration==this.insuranceobj[index].duration&&user_salary>this.insuranceobj[index].minsal!&&user_salary<this.insuranceobj[index].maxsal!)
                              {
                               count++;
-                              this.premiumarray.push(this.insuranceobj[index].premium)
-                              this.premium=this.addonpremium+this.insuranceobj[index].premium
+                              this.premiumarray.push(this.insuranceobj[index].premium!)
+                              this.premium=this.addonpremium+this.insuranceobj[index].premium!
                              }
                           }
                           if(count>1)
@@ -803,21 +888,66 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
                      this.sortedduration.sort((a,b)=>a-b)
                      return           
         }
-        this.selectsuminsured(1)
-        if(this.selectedDuration<=0)
-        return
-        for (let index = 0; index < this.insuranceobj.length; index++) {
-          console.log(this.insuranceobj[index]);
-          
-          if(this.insuranceobj[index].sumInsured==this.selectedValue&&this.insuranceobj[index].duration==this.selectedDuration)
-             {
-              this.premium=this.addonpremium+this.insuranceobj[index].premium
-             }
+        if(this.isHealth)
+        {
+          const control1=this.userForm.get('sumInsured') 
+          const control2=this.userForm.get('duration')
+          const control3=this.userForm.get('kidno')
+          const control4=this.userForm.get('adultno')
+          const kids_no=+control3?.value!
+          const adult_no=+control4?.value!
+            console.log('Kids : '+kids_no+' Adults : '+adult_no);
+            
+              if(control3?.invalid||control4?.invalid)
+              {
+                 this.openSnackBar("Please select both no of adults and kids ")
+                 this.userForm.get('sumInsured')?.reset();
+                 return
+              }
+              else{
+                const dob_control=<FormArray>this.userForm.get('date_list')
+                for(let y=0;y<adult_no;y++)
+                {
+                  if(dob_control.at(y).get('dob')?.invalid)
+                  {
+                    this.openSnackBar("Please give ages of all adults covered in policy: Agelimit(21 to 60)")
+                    this.userForm.get('sumInsured')?.reset();
+                    return
+                  }
+                }
+              }
+              console.log("In Select Premium function");
+              if(control1?.invalid)
+              {
+                 this.openSnackBar('Select Sum Insured first')
+                control2?.reset()
+                return
+              }
+             this.sortedduration=[]
+             const select_sumInsured=+this.userForm.get('sumInsured')?.value!
+             console.log("sum Selected :"+select_sumInsured);
+             console.log(this.insuranceobj);
+             for(let index=0;index<this.insuranceobj.length;index++)
+             { 
+               this.flags=true
+               for(let vx=0;vx<this.sortedduration.length;vx++)
+               {
+                if( this.sortedduration[vx]==this.insuranceobj[index].duration)
+                {
+                  this.flags=false
+                  break
+                }
+               }
+               if(this.flags&&this.insuranceobj[index].sumInsured==select_sumInsured)
+               this.sortedduration.push(this.insuranceobj[index].duration)
+             }  
+             this.sortedduration.sort((a,b)=>a-b)
+             return 
         }
       }
-
+//----------------------------------------------------------------------------------------------------------------
       set_suminsured_life_insurance(salary:any)
-      {          
+      {         if(this.isLife){ 
                   console.log('Inside method set_suminsured_life_insurance');
                   console.log(this.insuranceobj);
                    const user_salary=+salary
@@ -879,9 +1009,10 @@ relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sist
                    }
                    this.sortedsuminsured.sort((a,b)=>a-b)
                    console.log(this.sortedsuminsured)
+                  }
+              
       }
    checked_addOn(an:any,i:any,price:any,name:string){
-    const control = <FormArray>this.userForm.controls['insuredInfo'];
     console.log("Value of "+i);
     if(an.checked==true){
       if(this.addonnamelist.findIndex(x => x === name)>-1)
@@ -921,17 +1052,21 @@ check_illness(i:any)
 {
   const control=<FormArray>this.userForm.controls['insuredInfo'];
   // console.log('Illness status of User  : '+i+' : '+control.at(i).get('preExistingIllness')!.value)
- if( control.at(i).get('preExistingIllness')!.value==='1')
+ if( control.at(i).get('preExistingIllness')!.value=='Yes')
+ {
   return true
+ }
+ if(control.at(i).get('preExistingIllness')?.value=='No')
+ {
   return false
+ }
+  return true
 }
 function_to_return_status()
 {
-  // console.log(this.dis_status)
   if(this.dis_status==='yes')
   return true
   else{
-
   return false
   }
 }     
@@ -979,10 +1114,26 @@ refresh()
       if(this.flags)
       this.sortedsuminsured.push(this.insuranceobj[index].sumInsured)
       }
-      this.sortedsuminsured.sort((a,b)=>a-b)
-    
+      this.sortedsuminsured.sort((a,b)=>a-b)    
+  }
+  if(this.isHealth)
+  {
+    this.userForm!.get('sumInsured')!.reset()
+    this.userForm!.get('duration')?.reset
   }
  
 }
-
+print(){
+  console.log(this.userForm.value)
+}
+check_age_limit(i:any)
+{
+  const control=<FormArray>this.userForm.get('date_list');
+  const age=control.at(+i).get('dob')?.value
+  if(age>60||age<21)
+  {
+  this.openSnackBar('Age should be betwee 21 and 60 for adults')
+  control.at(+i).get('dob')?.reset()
+  }
+}
 }

@@ -1,11 +1,10 @@
 .body{
-    width: 80%;
-    
+    width: 80%;   
     display: flex;
     justify-content: center;
     align-items: center;
 }
-button{
+mat-dialog-actions  {
     display: flex;
     justify-content: center;
     align-items: center;
