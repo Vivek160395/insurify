@@ -12,11 +12,12 @@ public class PolicyDetails {
     long premiums;
     long durations;
     long sumInsure;
-    int adults;
+    int adults1;
+    int adults2;
+    int adults3;
     int kids;
     long minSalary;
     long maxSalary;
-    int minAge;
-    int maxAge;
+
 
 }
