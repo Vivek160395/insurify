@@ -43,7 +43,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
             CustomerInsurance ci=new CustomerInsurance();
             ci.setCustomerPolicyId(customerInsurancePurchase.getCustomerPolicyId());
             ci.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
-            ci.setPolicyType(customerInsurancePurchase.getPolicyType());
+//            ci.setPolicyType(customerInsurancePurchase.getPolicyType());
             ci.setEmail(customerInsurancePurchase.getEmail());
             ci.setSumInsured(customerInsurancePurchase.getSumInsured());
             ci.getStartDate().add(customerInsurancePurchase.getStartDate());
@@ -70,7 +70,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
             purchaseDTO.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
             purchaseDTO.setEmail(customerInsurancePurchase.getEmail());
             purchaseDTO.setName(customerInsurancePurchase.getName());
-            purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
+//            purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
             purchaseDTO.setSumInsured(customerInsurancePurchase.getSumInsured());
             purchaseDTO.setPurchaseDate(customerInsurancePurchase.getPurchaseDate());
             purchaseDTO.setStartDate(customerInsurancePurchase.getStartDate());
@@ -200,7 +200,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
 
         renewDTO.setCustomerPolicyId(customerInsurance.getCustomerPolicyId());
         renewDTO.setInsurancePolicyId(customerInsurance.getInsurancePolicyId());
-        renewDTO.setPolicyType(customerInsurance.getPolicyType());
+//        renewDTO.setPolicyType(customerInsurance.getPolicyType());
         renewDTO.setEmail(customerInsurance.getEmail());
         renewDTO.setSumInsured(customerInsurance.getSumInsured());
         renewDTO.setStartDate(startDay);
@@ -328,7 +328,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
         List<CustomerInsurance> ci_list=purchaseRepository.getCustomerInsuranceByEmail(email);
            for(int k=0;k<ci_list.size();k++)
            {
-               System.out.println(ci_list.get(k).getPolicyType()+"  "+ci_list.get(k).getCustomerPolicyId());
+               System.out.println(ci_list.get(k).getCustomerPolicyId());
            }
         CustomerInsurance customerInsurance=new CustomerInsurance();
         Date date = new Date();
@@ -346,10 +346,10 @@ public class PurchaseServiceImplementation implements PurchaseService{
              String startDay = customerInsurance.getStartDate().get(0);
              String endDay = customerInsurance.getEndDate().get(customerInsurance.getEndDate().size() - 1);
              if (startDay.compareTo(currentDay) > 0 || endDay.compareTo(currentDay) < 0) {
-                 if (customerInsurance.getPolicyType().equalsIgnoreCase("LifeInsurance"))
-                     customerInsurance.setClaimFlag(true);
-                 else
-                     customerInsurance.setClaimFlag(false);
+//                 if (customerInsurance.getPolicyType().equalsIgnoreCase("LifeInsurance"))
+//                     customerInsurance.setClaimFlag(true);
+//                 else
+//                     customerInsurance.setClaimFlag(false);
 
                  customerInsurance.setStatus(false);
                  customerInsurance.setRenewFlag(false);
