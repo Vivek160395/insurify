@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     height: 80px;
-    background-color: #c79d78;
+    background-color: #4A2511;
 }
 
 .icon-display {
@@ -52,7 +52,7 @@ mat-icon {
 }
 
 .example-sid-sidenav {
-    width: 150px;
+    width: 120px;
 }
 
 .row {

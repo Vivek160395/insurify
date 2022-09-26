@@ -75,6 +75,7 @@ import { ZoomonhoverDirective } from './zoomonhover.directive';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 
+import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,6 @@ import { EditInsuranceComponent } from './edit-insurance/edit-insurance.componen
     MoreComponent,
     RenewalPolicyComponent,
     InsuranceDetailsComponent,
-    // LoginComponent,
     MoreComponent,
     DetailsComponent,
     RenewalPolicyHomeComponent,
@@ -104,7 +104,8 @@ import { EditInsuranceComponent } from './edit-insurance/edit-insurance.componen
     DetailsComponent,
     ZoomonhoverDirective,
     PurchaseInsuranceComponent,
-    EditInsuranceComponent
+    EditInsuranceComponent,
+    InsuranceProviderComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
