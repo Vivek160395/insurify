@@ -143,11 +143,12 @@ export class ClaimComponent implements OnInit {
   onSubmit() {
     const formData=new FormData;
     formData.append("documentFile",this.claimForm.controls['document'].value!);
-    console.log(this.claimForm.value);
+    formData.append("policyId",this.data.customerPolicyId.toString())
+    console.log(formData);
     this.service.putUser(this.claimForm.value).subscribe((
       info) => {
     console.log(this.claimForm.value);
-    this.http.put("http://localhost:8084/api/upload/documents/{policyId}"+info.insurancePolicyId,formData, { observe: 'response' })
+    this.http.put("http://localhost:8084/api/upload/documents/"+this.data.customerPolicyId,formData, { observe: 'response' })
               .subscribe((data:any)=>{console.log(data)});
     this.claimForm.reset();
     

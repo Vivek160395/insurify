@@ -20,7 +20,7 @@ export class ClaimService {
 
  
 
-  customerPolicyId:string="123456"
+  customerPolicyId:string="12345"
   baseurl:any="http://localhost:8084/api/";
   getUserDetails():Observable<any>{
     return this.http.get(this.baseurl+"get/"+this.customerPolicyId);
