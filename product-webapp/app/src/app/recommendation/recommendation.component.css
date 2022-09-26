@@ -1,19 +1,48 @@
+@font-face {
+    font-family: lato;
+    src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@689&display=swap');
+}
 
-  
+.row {
+    margin: 0;
+}
 
-  .example-card {
+.example-card {
     max-width: 400px;
 }
+
+.sideHeading {
+    color: black;
+    margin: 30px 0px 0 0px;
+    font-size: 25px;
+}
+
+.sideHeading1 {
+    color: black;
+    margin: 0px 0px 0 0px;
+    font-size: 25px;
+}
+
+.sideHead {
+    width: 100%;
+    text-align: left;
+    margin-top: 100px;
+    overflow: hidden !important;
+}
+
 .img {
     border-color: white;
 }
+
 mat-icon {
     transform: scale(1);
 }
+
 mat-chip {
-    transform: scale(1);
+    transform: scale(1.2);
+    margin-right: 10px;
 }
 
 .example-spacer {
     flex: 1 1 auto;
-  }
+}

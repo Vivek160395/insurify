@@ -1,22 +1,19 @@
 <div class="row" style=" display: flex;flex-wrap: wrap;background-color: white;">
-    <div class=col-1.7 style=" margin: 40px 0 0 70px;display: block;color: black; ">
-        <div>
-            <div style=" color: black;margin: 30px 0px 0 0px;font-size: xx-large;
-          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
-                Life</div>
-            <div [hidden]=" isLife " *ngFor=" let names of lifeNames " style=" margin: 15px 0px 0 20px;font-size: medium; ">
+    <div class=col-1 style=" margin: auto auto 0 30px;display: block;color: black; width: 100%;">
+        <div class="sideHead">
+            <div class="sideHeading1">
+                LIFE</div>
+            <div [hidden]=" isLife " *ngFor=" let names of lifeNames " style=" margin: 15px 0px 0 20px;font-size: 20px; ">
                 {{this.names.insuranceName}}
             </div>
-            <div style=" color: black;margin: 30px 0px 0 0px;font-size: xx-large;
-          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
-                Motor</div>
-            <div [hidden]=" isMotor " *ngFor=" let names of motorNames " style=" margin: 15px 0px 0px 20px;font-size: medium; ">
+            <div class="sideHeading">
+                MOTOR</div>
+            <div [hidden]=" isMotor " *ngFor=" let names of motorNames " style=" margin: 15px 0px 0px 20px;font-size: 20px; ">
                 {{this.names.insuranceName}}
             </div>
-            <div style=" color: black;margin: 40px 0px 0px 0px;font-size:xx-large;
-            font-family: 'Trebuchet MS' , 'Lucida Sans Unicode' , 'Lucida Grande' , 'Lucida Sans' , Arial, sans-serif ">
-                Other</div>
-            <div [hidden]=" isother " *ngFor=" let names of otherNames " style=" margin: 15px 0px 0px 20px;font-size: medium; ">
+            <div class="sideHeading">
+                OTHER</div>
+            <div [hidden]=" isother " *ngFor=" let names of otherNames " style=" margin: 15px 0px 0px 20px;font-size: 20px; ">
                 {{this.names.insuranceName}}
             </div>
         </div>
@@ -24,23 +21,31 @@
     <div class=" col-10">
         <div style="margin: 40px 0px 0 0px;">
             <div style="display: flex;justify-content: space-between; ">
-                <div style="margin-left: 100px;">
-                    <mat-chip-list class="example-chip">
+                <!-- <div style="margin-left: 100px;"> -->
+                <mat-chip-list class="example-chip">
+                    <div style="margin-right:15px ;">
                         <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" life() "> Life Insurances</mat-chip>
+                    </div>
+                    <div style="margin-right:15px ;">
                         <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" motor() "> Motor Insurances</mat-chip>
+                    </div>
+                    <div style="margin-right:15px ;">
                         <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" other() "> Other Insurances</mat-chip>
+                    </div>
+                    <div style="margin-right:15px ;">
                         <mat-chip class="example-box" (click)=" trend() ">Trending
                             <mat-icon>trending_up</mat-icon>
                         </mat-chip>
-                    </mat-chip-list>
-                </div>
+                    </div>
+
+                </mat-chip-list>
+                <!-- </div> -->
                 <div style="font-size:large;">
                     <b style="font-family:'Times New Roman', Times, serif ;">
             <pagination-controls (pageChange)="page=$event"></pagination-controls>
           </b>
                 </div>
             </div>
-
             <div style=" display: flex;flex-wrap: wrap; ">
                 <mat-card class=" example-card " [class.mat-elevation-z2]="isActive" style=" margin:50px 15px 20px 25px;
     width: 380px; height:auto; background-color: white; border: 2px solid lightblue; " *ngFor=" let item of allNames |

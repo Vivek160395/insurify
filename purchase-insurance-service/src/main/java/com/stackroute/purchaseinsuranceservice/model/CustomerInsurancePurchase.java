@@ -19,7 +19,6 @@ public class CustomerInsurancePurchase {
     private String startDate;
     private String purchaseDate;
     private String endDate;
-
     private int duration;
     private String[] addOnName;
     private int premium;
@@ -37,6 +36,6 @@ public class CustomerInsurancePurchase {
     private AutomobileInsurance automobileInsurance;
 
     private boolean renewalStatus=false;
-
+    private boolean status=true;
 
 }

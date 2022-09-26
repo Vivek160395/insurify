@@ -17,7 +17,7 @@ public CustomerInsurance savePurchasedInsurance(CustomerInsurancePurchase custom
 public Iterable<CustomerInsurance> getCustomerInsurances();
 
 public  CustomerInsurance getPolicyDetailsByCustomerPolicyID(String customerPolicyId) throws PolicyIdNotFoundException;
-public List<CustomerInsurance> getInsuranceByEmail(String email);
+public Iterable<CustomerInsurance> getInsuranceByEmail(String email);
 
 public boolean checkIfAlreadyPurchased(String email,String insurancePolicyId);
 
