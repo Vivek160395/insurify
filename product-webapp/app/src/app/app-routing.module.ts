@@ -16,6 +16,7 @@ import { InsuranceDetailsComponent } from './insurance-details/insurance-details
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
 import { DetailsComponent } from './details/details.component';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
+import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
@@ -27,10 +28,11 @@ const routes: Routes = [
   {path:"register",component:RegisterComponent},
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},
-  {path: "renewal", component: RenewalPolicyComponent},
+  
+  {path: "renewal-update/:id", component: RenewalPolicyComponent},
   {path: "renewal-home", component: RenewalPolicyHomeComponent},
   {path:"details",component:DetailsComponent},
-  {path: "renewal", component: RenewalPolicyComponent},
+  // {path: "renewal", component: RenewalPolicyComponent},
   {path:"update", component:UpdateComponent},
   {path: "login", component: LoginComponent},
   {path: "nav-bar", component: NavBarComponent},
@@ -38,7 +40,8 @@ const routes: Routes = [
   {path:"buy",component:PurchaseInsuranceComponent},
   {path:"policyDetails",component:InsuranceDetailsComponent},
   {path:"claim",component:ClaimComponent},{path:"InsuranceDetails",component:InsuranceDetailsComponent}]},
-  {path: "login", component: LoginComponent},
+  {path:"edit-insurance",component:EditInsuranceComponent},
+  {path: "login", component: LoginComponent}
 
 ];
 
