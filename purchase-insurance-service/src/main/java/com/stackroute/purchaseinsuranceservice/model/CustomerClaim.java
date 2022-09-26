@@ -14,6 +14,7 @@ public class CustomerClaim {
     private String email;
     private long   claimAmount;
     private String claimDate;
+    private String claimSubmissionDate;
     private String description;
     private String claimType;
     private byte[] file;

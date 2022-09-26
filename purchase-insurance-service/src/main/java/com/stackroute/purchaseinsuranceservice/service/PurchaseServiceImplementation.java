@@ -1,18 +1,27 @@
 package com.stackroute.purchaseinsuranceservice.service;
 
 import com.stackroute.purchaseinsuranceservice.config.Producer;
+import com.stackroute.purchaseinsuranceservice.exception.NoInsuranceFoundException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyExpiredException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyIdAlreadyExistsException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyIdNotFoundException;
 import com.stackroute.purchaseinsuranceservice.model.*;
 import com.stackroute.purchaseinsuranceservice.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -93,13 +102,15 @@ public class PurchaseServiceImplementation implements PurchaseService{
     }
 
     @Override
-    public  Iterable<CustomerInsurance> getInsuranceByEmail(String email) {
-        Iterable<CustomerInsurance> customerInsurances=purchaseRepository.getPurchasedInsuranceByEmail(email);
-//        if(customerInsurances.size()==0)
-//        {
-//            return null;
-//        }
-//        else
+    public  Iterable<CustomerInsurance> getInsuranceByEmail(String email) throws NoInsuranceFoundException {
+        Iterable<CustomerInsurance> customerInsurances;
+
+           customerInsurances = purchaseRepository.getCustomerInsuranceByEmail(email);
+
+
+       if(customerInsurances==null){
+           throw new NoInsuranceFoundException();
+       }
         System.out.println(customerInsurances);
             return  customerInsurances;
     }
@@ -115,6 +126,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
                 System.out.println("Inside the customerInsurances list");
 
                 customerInsurance=customerInsurances.get(i);
+
                 System.out.println(customerInsurance.getInsurancePolicyId());
                 if(customerInsurance.getInsurancePolicyId().equalsIgnoreCase(insurancePolicyId))
                 {
@@ -142,12 +154,10 @@ public class PurchaseServiceImplementation implements PurchaseService{
             throw new PolicyExpiredException();
         }
         String endDate="";
-        System.out.println("startDate"+startDay);
+        System.out.println(startDay);
          String sDay=customerInsurance.getStartDate().get(customerInsurance.getStartDate().size()-1);
          String eDay=startDay;
-        System.out.println("end date"+ eDay);
          String ourDate= customerRenewal.getDate();
-        System.out.println("coming date"+customerRenewal.getDate());
         System.out.println("Status of : "+(sDay.compareTo(ourDate)<0&&eDay.compareTo(ourDate)>0));
 
          if(!(sDay.compareTo(ourDate)<0)||!(eDay.compareTo(ourDate)>=0))
@@ -303,5 +313,145 @@ public class PurchaseServiceImplementation implements PurchaseService{
         }
          CustomerInsurance customer_insurance=purchaseRepository.findById(customerPolicyId).get();
         return customer_insurance;
+    }
+
+    @Override
+    public int startUp(String email) throws ParseException {
+           if(purchaseRepository.getCustomerInsuranceByEmail(email).size()==0)
+             {
+                return 0 ;
+              }
+        List<CustomerInsurance> ci_list=purchaseRepository.getCustomerInsuranceByEmail(email);
+        CustomerInsurance customerInsurance=new CustomerInsurance();
+        Date date = new Date();
+        String currentDay= new SimpleDateFormat("yyyy-MM-dd").format(date);
+        System.out.println(currentDay);
+        boolean flag=true;
+        for(int i=0;i<ci_list.size();i++)
+      {
+          flag=true;
+        customerInsurance=ci_list.get(i);
+        //check for policy Validity
+         if(!customerInsurance.isStatus()) {
+             String startDay = customerInsurance.getStartDate().get(0);
+             String endDay = customerInsurance.getEndDate().get(customerInsurance.getEndDate().size() - 1);
+             if (startDay.compareTo(currentDay) > 0 || endDay.compareTo(currentDay) < 0) {
+                 if (customerInsurance.getPolicyType().equalsIgnoreCase("Life Insurance"))
+                     customerInsurance.setClaimFlag(true);
+                 else
+                     customerInsurance.setClaimFlag(false);
+
+
+                 customerInsurance.setStatus(false);
+                 customerInsurance.setRenewFlag(false);
+                 purchaseRepository.save(customerInsurance);
+             }
+             if(customerInsurance.getClaimDate().size()!=0)
+             {
+              String lastClaimDate=customerInsurance.getClaimDate().get(customerInsurance.getClaimDate().size()-1);
+              String lastClaimStatus=customerInsurance.getClaimStatus().get(customerInsurance.getClaimStatus().size()-1);
+                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                 //create instance of the Calendar class and set the date to the given date
+                 Calendar cal = Calendar.getInstance();
+                 try{
+                     cal.setTime(sdf.parse(lastClaimDate));
+                 }catch(ParseException e){
+                     e.printStackTrace();
+                 }
+                 cal.add(Calendar.DAY_OF_MONTH, 60);
+                 String cutOffDate = sdf.format(cal.getTime());
+                 if(cutOffDate.compareTo(currentDay)<0)
+                 {
+                  if(lastClaimStatus.equalsIgnoreCase("pending"))
+                  {
+                      List<String> startD=customerInsurance.getStartDate();
+                      List<String> endD=customerInsurance.getEndDate();
+                      int resultIndex=-1;
+                      for(int k=0;k<startD.size();k++)
+                      {
+                          String startDate=startD.get(k);
+                          String ourDate=lastClaimDate;
+                          String endDate=endD.get(k);
+                          if(startDate.compareTo(ourDate)<0&&endDate.compareTo(ourDate)>0)
+                          {
+                              resultIndex=k;
+                              break;
+                          }
+                      }
+                      if(resultIndex==-1)
+                      {
+                          List<String> updateStatus=customerInsurance.getClaimStatus();
+                          updateStatus.remove(updateStatus.size()-1);
+                          updateStatus.add("rejected");
+                          customerInsurance.getDecisionDate().add(cutOffDate);
+                          customerInsurance.setClaimStatus(updateStatus);
+//                          customerInsurance.setClaimFlag(false);
+                          purchaseRepository.save(customerInsurance);
+                          continue;
+                      }
+                      long totalClaim=0;
+                      //checking for if the insured sum is sufficient for claimed amount
+                      for (int index = 0; index <customerInsurance.getClaimSum().size() ; index++) {
+                          if(customerInsurance.getStartDate().get(resultIndex).compareTo(customerInsurance.getClaimDate().get(index))<0&&customerInsurance.getEndDate().get(resultIndex).compareTo(customerInsurance.getClaimDate().get(index))>0)
+                          {
+                              if(customerInsurance.getClaimStatus().get(i).equalsIgnoreCase("approved"))
+                              {
+                                  totalClaim = totalClaim + customerInsurance.getClaimSum().get(index);
+                              }
+                          }
+                      }
+
+                      if(totalClaim<customerInsurance.getSumInsured())
+                      {
+                          long sum=customerInsurance.getClaimSum().get(customerInsurance.getClaimSum().size()-1);
+                          List<String> updateStatus=customerInsurance.getClaimStatus();
+                          updateStatus.remove(updateStatus.size()-1);
+                          updateStatus.add("approved");
+                          customerInsurance.getClaimSum().remove(customerInsurance.getClaimSum().size()-1);
+                          if((totalClaim+sum)<=customerInsurance.getSumInsured())
+                          {
+                              customerInsurance.getClaimSum().add(sum);
+                          }
+                          else
+                          {
+                              customerInsurance.getClaimSum().add(customerInsurance.getSumInsured()-totalClaim);
+                          }
+                          customerInsurance.getDecisionDate().add(cutOffDate);
+                          customerInsurance.setClaimStatus(updateStatus);
+//                          customerInsurance.setClaimFlag(false);
+                          purchaseRepository.save(customerInsurance);
+                      }
+                      else
+                      {
+                          List<String> updateStatus=customerInsurance.getClaimStatus();
+                          updateStatus.remove(updateStatus.size()-1);
+                          updateStatus.add("rejected");
+                          customerInsurance.getDecisionDate().add(cutOffDate);
+                          customerInsurance.setClaimStatus(updateStatus);
+//                          customerInsurance.setClaimFlag(false);
+                          purchaseRepository.save(customerInsurance);
+                          continue;
+                      }
+
+                  }
+                 }
+
+             }
+         }
+      }
+  return 1;
+    }
+
+
+@Override
+public int uploadDocument(MultipartFile documentFile,String policyId) throws IOException {
+
+        CustomerInsurance retrieveInsurance = purchaseRepository.findById(policyId).get();
+
+        if(retrieveInsurance==null)
+            return 0;
+        retrieveInsurance.getClaimDocument().add(documentFile.getBytes());
+        CustomerInsurance insurance = purchaseRepository.save(retrieveInsurance);
+      return 1;
     }
 }
