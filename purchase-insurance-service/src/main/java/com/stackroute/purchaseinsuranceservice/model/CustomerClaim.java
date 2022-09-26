@@ -9,9 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerClaim {
-    String customerPolicyId;
-    String insurancePolicyId;
-    String email;
-    long claimAmount;
-    String claimDate;
+    private String customerPolicyId;
+    private String insurancePolicyId;
+    private String email;
+    private long   claimAmount;
+    private String claimDate;
+    private String description;
+    private String claimType;
+    private byte[] file;
 }

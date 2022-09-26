@@ -36,21 +36,6 @@ export class RecommendationComponent implements OnInit {
   totalLength:any;
   page:number=1;
   showMore:boolean=false;
-  health(){
-    // this.isHealth=!this.isHealth;
-    // this.isOther=true;
-    // this.isDisplay=true;
-    // this.isLife=true;
-    // this.isTrend=true;
-    // if(this.isHealth==true){
-    //    this.isDisplay=false;
-    //   this.allNames = this.images;
-    //   this.totalLength=this.allNames.length;
-    // }else{
-    //   this.allNames = this.healthNames;
-    //   this.totalLength=this.allNames.length;
-    // }
-  }
 life(){
   this.isother=true;
   this.isMotor=true;
@@ -86,7 +71,6 @@ other(){
   this.isother = !this.isother;
   if(this.isother == true){
     this.isDisplay = false;
-
     this.allNames = this.images;
     this.totalLength=this.allNames.length;
   }else{
@@ -111,14 +95,15 @@ motor(){
   constructor(private http:HttpClient,private service:RecommendationServiceService) { }
   ngOnInit(): void {
     this.getNames();
-    this.getimageOfFarmer("Farmer Insurance");
-    this.getImagesOfLife("Life Insurance");
-    this.getimagesOfMotor("Motor Insurance");
+    // this.getimageOfFarmer("Farmer Insurance");
+    // this.getImagesOfLife("Life Insurance");
+    // this.getimagesOfMotor("Motor Insurance");
     this.getrendingInsurances();
   }
 
  getNames(){
       this.service.getAllInsurances().subscribe((data)=>{
+        console.log(data);
         this.images=data;
         this.allNames = this.images;
         console.log(this.images[0].imageType);

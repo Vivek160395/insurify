@@ -4,17 +4,26 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DetailsComponent } from '../details/details.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-policies',
   templateUrl: './policies.component.html',
-  styleUrls: ['./policies.component.css']
+  styleUrls: ['./policies.component.css'],
+  providers:[DatePipe]
 })
 export class PoliciesComponent {
 
-  constructor(public dialog: MatDialog, private router: Router, private http: HttpClient) {}
+  constructor(public dialog: MatDialog, private router: Router, private http: HttpClient, private datePipe: DatePipe) {
+    this.currentDate = this.datePipe.transform(this.sysDate, 'yyyy-MM-dd');
+     console.log(this.sysDate);
+     console.log(this.currentDate);
+  }
 
   purchasedPolicies:any;
+
+  sysDate = new Date();
+  currentDate:any;
 
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
   from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
@@ -25,7 +34,12 @@ export class PoliciesComponent {
     response.subscribe((data)=>{
       console.log(data);
       this.purchasedPolicies=data;
+      console.log(this.purchasedPolicies[0].endDate);
+      
       // console.log(this.purchasedPolicies[0].policyType);
+      var dateDiff = this.currentDate-(this.purchasedPolicies[0].endDate[0]+30);
+      console.log(dateDiff);
+      
       
     });
   }
@@ -99,7 +113,15 @@ export class PoliciesComponent {
     localStorage.setItem('customerPolicyId', policy.customerPolicyId)
     console.log(localStorage.getItem('insuranceType'));
     console.log(localStorage.getItem('customerPolicyId'));
+    console.log(policy.endDate[0]);
+    let endDateInDateFormat= this.datePipe.transform(new Date(policy.endDate[0]), 'yyyy-MM-dd');
+    // this.datePipe.transform(this.sysDate, 'yyyy-MM-dd')
+    console.log(endDateInDateFormat);
     
+    let diff=this.currentDate-policy.endDate[0];
+    console.log(diff);
+    
+    // console.log(this.currentDate-endDateInDateFormat);
     
     // const dialogRef = this.dialog.open(DetailsComponent);
 
