@@ -23,6 +23,7 @@
         "@angular/router": "^14.0.0",
         "@types/pdfmake": "^0.2.1",
         "angular-responsive-carousel": "^2.1.2",
+        "chart.js": "^3.9.1",
         "dom-to-image": "^2.6.0",
         "html-to-pdfmake": "^2.4.6",
         "jspdf": "^2.5.1",

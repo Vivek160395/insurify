@@ -1,0 +1,56 @@
+.row {
+    margin: 0;
+}
+
+#insurance {
+    margin: 0 30px;
+    border-radius: 15px;
+    overflow: hidden !important;
+}
+
+button {
+    outline: none;
+}
+
+#divChart {
+    width: 400px;
+    height: 400px;
+    display: block;
+}
+
+#insurance1 {
+    margin: 30px 30px 0 30px;
+    border-radius: 15px;
+    overflow: hidden !important;
+}
+
+#insurance2 {
+    margin: 30px 30px 0px 30px;
+    border-radius: 35px;
+    overflow: hidden !important;
+}
+
+#insurance3 {
+    margin: 30px 30px 30px 30px;
+    border-radius: 35px;
+    overflow: hidden !important;
+}
+
+.policyName {
+    text-align: center;
+    font-size: 60px;
+    color: #795c34;
+}
+
+.chart {
+    height: 200px;
+    width: 400px;
+    display: flex;
+    margin: 20px auto 10px auto;
+}
+
+.text {
+    font-size: 30px;
+    text-align: center;
+    margin: 40px 20px 30px 20px;
+}

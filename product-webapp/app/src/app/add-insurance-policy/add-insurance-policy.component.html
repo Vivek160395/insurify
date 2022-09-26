@@ -6,13 +6,10 @@
                     <form [formGroup]="insuranceForms">
                         <ng-template matStepLabel>Enter Basic Policy Details</ng-template>
                         <div fxLayout="row" fxLayoutGap="2%">
-
                             <mat-form-field appearance="outline" fxFlex="25%">
                                 <mat-label>Policy Id</mat-label>
                                 <input matInput placeholder="Policy Id" formControlName="policyId" required style="text-align: center;">
                             </mat-form-field>
-
-
                             <mat-form-field appearance="outline" fxFlex="25%">
                                 <mat-label>Insurance Type</mat-label>
                                 <mat-select placeholder="Insurance Type" formControlName="insuranceType">

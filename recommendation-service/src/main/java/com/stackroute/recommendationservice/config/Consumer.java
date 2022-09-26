@@ -19,39 +19,39 @@ public class Consumer {
     @Autowired
     private Recommendation_service recommendation_service;
 
-    // @RabbitListener(queues = "queue_3")
-    // private void gettingDataFromRabbitmq(InsuranceDTO insuranceDTO) throws
-    // InsuranceAlreadyExists {
-    // InsuranceProfile insuranceProfile = new InsuranceProfile();
-    // insuranceProfile.setInsuranceId(insuranceDTO.getPolicyId());
-    // insuranceProfile.setInsuranceName(insuranceDTO.getPolicyName());
-    // insuranceProfile.setInsuranceType(insuranceDTO.getInsuranceType());
-    // insuranceProfile.setTypeOfImage(insuranceDTO.getPicType());
-    // insuranceProfile.setImageOfInsurance(insuranceDTO.getPicByte());
-    // insuranceProfile.setDescription(insuranceDTO.getDescription());
-    // try {
-    // recommendation_service.addInsurance(insuranceProfile);
-    // System.out.println(insuranceProfile);
-    // System.out.println("HEllo");
-    // recommendation_service.addInsuranceType(insuranceProfile.getInsuranceType());
-    // } catch (InsuranceAlreadyExists e) {
-    // log.error(e.getMessage());
-    // throw new InsuranceAlreadyExists();
-    // }
-    // }
-
-    // @RabbitListener(queues = "queue2")
-    // public void gettingDataFromRabbitMQ(UserDTO userDTO) throws UserAlreadyPosted
-    // {
-    // User user = new User();
-    // user.setUserEmail(userDTO.getEmailId());
-    // user.setUserName(userDTO.getUserName());
-    // try {
-    // System.out.println("HEllo");
-    // recommendation_service.addUser(user);
-    // } catch (UserAlreadyPosted e) {
-    // log.error(e.getMessage());
-    // throw new UserAlreadyPosted();
-    // }
-    // }
+//     @RabbitListener(queues = "queue_3")
+//     private void gettingDataFromRabbitmq(InsuranceDTO insuranceDTO) throws
+//     InsuranceAlreadyExists {
+//     InsuranceProfile insuranceProfile = new InsuranceProfile();
+//     insuranceProfile.setInsuranceId(insuranceDTO.getPolicyId());
+//     insuranceProfile.setInsuranceName(insuranceDTO.getPolicyName());
+//     insuranceProfile.setInsuranceType(insuranceDTO.getInsuranceType());
+//     insuranceProfile.setTypeOfImage(insuranceDTO.getPicType());
+//     insuranceProfile.setImageOfInsurance(insuranceDTO.getPicByte());
+//     insuranceProfile.setDescription(insuranceDTO.getDescription());
+//     try {
+//     recommendation_service.addInsurance(insuranceProfile);
+//     System.out.println(insuranceProfile);
+//     System.out.println("HEllo");
+//     recommendation_service.addInsuranceType(insuranceProfile.getInsuranceType());
+//     } catch (InsuranceAlreadyExists e) {
+//     log.error(e.getMessage());
+//     throw new InsuranceAlreadyExists();
+//     }
+//     }
+//
+//     @RabbitListener(queues = "queue2")
+//     public void gettingDataFromRabbitMQ(UserDTO userDTO) throws UserAlreadyPosted
+//     {
+//     User user = new User();
+//     user.setUserEmail(userDTO.getEmailId());
+//     user.setUserName(userDTO.getUserName());
+//     try {
+//     System.out.println("HEllo");
+//     recommendation_service.addUser(user);
+//     } catch (UserAlreadyPosted e) {
+//     log.error(e.getMessage());
+//     throw new UserAlreadyPosted();
+//     }
+//     }
 }

@@ -14,11 +14,11 @@ public class PolicyDetails {
     long premiums;
     long durations;
     long sumInsure;
-    Integer adults;
-    Integer kids;
+    int adults1;
+    int adults2;
+    int adults3;
+    int kids;
     long minSalary;
     long maxSalary;
-    Integer minAge;
-    Integer maxAge;
 
 }
