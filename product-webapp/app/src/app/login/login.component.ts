@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
-import { User } from '../user';
+
+
 
 
 @Component({
@@ -12,33 +13,28 @@ import { User } from '../user';
 })
 export class LoginComponent implements OnInit {
 
-
+  authenticationToken: any = "";
   msg = '';
-  user: User = new User();
-  router: any;
+  
+
   registerForm: any;
-  constructor(private loginservice : LoginService) { }
+  constructor(private loginservice : LoginService,public router: Router) { }
 
   ngOnInit(): void {
+  
   }
-
   logInForm = new FormGroup({
     emailId: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
    });
-  
-   logIn(data:any){
-
-    this.user.emailId = data.value.emailId;
-    this.user.password = data.value.password;
-  
-    console.log(this.user);
-
-      //this.router.navigate(["/home"]);
-
+    value = this.logInForm.value;
+   logIn():void{
+   this.loginservice.emailId=this.logInForm.value.emailId;
+   this.loginservice.password=this.logInForm.value.password;
     if(this.logInForm.valid){
-        this.loginservice.getUserCredentials(this.user).subscribe((response) => {
+        this.loginservice.getUserCredentials(this.logInForm.value).subscribe((response) => {
             console.log("Log in successfull",response);
+            
 
           }, error => {
               console.log("Log in failed", error);
@@ -49,28 +45,29 @@ export class LoginComponent implements OnInit {
           }
       
 
-      this.loginservice.loginUser(this.user.emailId).subscribe((response)=>{
-      //console.table(this.loginUser.value);
+      this.loginservice.loginUser(this.logInForm.value.emailId).subscribe((response) =>  {
         console.log(response);
-         if (response.userType.valueOf("As Insured")) {
-            this.router.navigate(["/home"]);    
+         if (response.userType=="As Insured") {
+          console.log(response.userType);
+            this.router.navigate(["/policyDetails"]);    
           }
         else {
             this.router.navigate(["/add-policy"]); 
             }
       }
-      );}
+      );
+    }
 
   
 
 
 
-  get emailId(): FormControl{
-    return this.logInForm.get('emailId') as FormControl;
+  get emailId(){
+    return this.logInForm.controls['emailId'];
   }
 
-  get password(): FormControl{
-    return this.logInForm.get('password') as FormControl;
+  get password(){
+    return this.logInForm.controls['password'];
   }
   
 

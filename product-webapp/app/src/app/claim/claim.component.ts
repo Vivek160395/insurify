@@ -4,6 +4,7 @@ import { DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { getMatFormFieldMissingControlError } from '@angular/material/form-field';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
@@ -12,7 +13,7 @@ import { ClaimService } from '../claim.service';
 import { DetailsComponent } from '../details/details.component';
 
 
- 
+
 @Component({
   selector: 'app-claim',
   templateUrl: './claim.component.html',
@@ -20,106 +21,144 @@ import { DetailsComponent } from '../details/details.component';
 })
 
 export class ClaimComponent implements OnInit {
-   today: number = Date.now();
-   selectedFile=null;
-   Imgurl=null;
-  //  insuranceType: string | null;
-  showMsg: boolean = false;
+  today: number = Date.now();
+  selectedFile = null;
+  Imgurl = null;
+  insuranceType: string = "";
+  claimError='';
 
-  
+
   stepperOrientation: Observable<StepperOrientation>;
 
-  constructor(private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver,public dialog: MatDialog,private router: Router,private service:ClaimService) {
+  constructor(private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, public dialog: MatDialog, private router: Router, private service: ClaimService) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
-      .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
-      // this.insuranceType= localStorage.getItem('insuranceType');
+      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+    // this.insuranceType= localStorage.getItem('insuranceType');
   }
   ngOnInit(): void {
-    
-  }
-  
-  
-  openDialog() {
-    
-    this.router.navigateByUrl('/details');
+    this.getDetails()
+
   }
 
-  
-  
 
-    data ={
-  customerPolicyId: "P0123457",
-  policyId:  "P0123457",
-  insuredName: "george",
-  insuredEmail:  "george@gmail.com",
-  startDate:  "27/07/2022",
-  purchaseDate : "25/07/2022",
-    endDate:  "25/07/2023",
-    duration:  "3 years",
-    insuranceType:"lifeInsurance",
-    }
-    
-  
-  onImgSelected(e:any){
-    if(e.target.files){
-      var reader=new FileReader();
+  data: any = {
+    customerPolicyId: "",
+    insurancePolicyId: "",
+    insuredName: "",
+    insuredEmail: "",
+    startDate: "",
+    purchaseDate: "",
+    endDate: "",
+    duration: "",
+    premium: "",
+    sumInsured: "",
+    nomineeName: "",
+    nomineeDOB: "",
+    vehicleRegistrationNumber: "",
+    category: "",
+    engineNumber: "",
+    chassisNumber: "",
+  }
+
+
+  onImgSelected(e: any) {
+    if (e.target.files) {
+      var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
-      reader.onload=(event:any)=>{
-      this.Imgurl=event.target.result;
-   }}}
-  claimForm = new FormGroup({
-    document : new FormControl("", [Validators.required]),
-    describeEventauto : new FormControl("", [Validators.required]),
-    describeEventhealth : new FormControl("", [Validators.required]),
-    describeEventlife : new FormControl("", [Validators.required]),
-    claimType : new FormControl("", [Validators.required]),
-    claimAuto : new FormControl("", [Validators.required]),
-    claimLoss : new FormControl("", [Validators.required]),
-    claimHealth : new FormControl("", [Validators.required]),
-    claimLife : new FormControl("", [Validators.required]),
-
-    intimationDate : new FormControl("", [Validators.required]),
-    eventDate : new FormControl("", [Validators.required]),
-  })
-// contactForm = new FormGroup({
-//   firstname: new FormControl(),
-//   lastname: new FormControl(),
-//   email: new FormControl(),
-//   gender: new FormControl(),
-//   isMarried: new FormControl(),
-//   country: new FormControl()
-// })
-getDetails(){
-  this.service.getUserDetails().subscribe(info=>{
-    for(var i=0;i<info.length;i++){
-      if(info[i].policyId=== this.service.policyId){
-      this.data.customerPolicyId=info[i].customerPolicyId;
-      this.data.insuredName=info[i].insuredName;
-      this.data.insuredEmail=info[i].insuredEmail;
-      this.data.startDate=info[i].startDate;
-      this.data. purchaseDate=info[i]. purchaseDate;
-      this.data.endDate=info[i].endDate;
-      this.data.duration=info[i].duration;
-      this.data.insuranceType=info[i].insuranceType;
-      
+      reader.onload = (event: any) => {
+        this.Imgurl = event.target.result;
       }
     }
+  }
+  claimForm = new FormGroup({
+    // document: new FormControl("",),
+    // describeEventauto: new FormControl("",),
+    // describeEventhealth: new FormControl("",),
+    // describeEventlife: new FormControl("",),
+    // claimType: new FormControl("",),
+    // claimAuto: new FormControl("",),
+    claimAmount: new FormControl("",),
+    // claimHealth: new FormControl("",),
+    claimDate: new FormControl("",),
+    // eventDate: new FormControl("",),
+    customerPolicyId: new FormControl(localStorage.getItem('customerPolicyId')),
+    insurancePolicyId: new FormControl(localStorage.getItem('policyId')),
+    email:new FormControl(localStorage.getItem('email'))
+    
   })
-}
 
 
-onSubmit() {
-  console.log(this.claimForm.value);
-  console.log(this.data.customerPolicyId);
-  console.log(this.data.policyId);
-  console.log(this.data.insuredEmail);
-  this. claimForm.reset();
-  this.showMsg= true;
+ 
+ 
+  
+ 
+  
+  
+  
+
+
+  getDetails() {
+    this.service.getUserDetails().subscribe(
+      info => {
+
+
+        console.log(info);
+
+
+        // if (info.email === this.service.emailId) {
+          this.data.insurancePolicyId = info.insurancePolicyId;
+          this.data.customerPolicyId = info.customerPolicyId;
+          this.data.insuredName = info.name;
+          this.data.insuredEmail = info.email;
+          this.data.startDate = info.startDate;
+          this.data.purchaseDate = info.purchaseDate;
+          this.data.endDate = info.endDate;
+          this.data.duration = info.duration;
+          this.data.sumInsured = info.sumInsured;
+          this.data.premium = info.premium;
+          this.data.nomineeName = info.nameOfNominee;
+          this.data.nomineeDOB = info.nomineeDOB;
+          this.data.category = info.automobileInsurance.category;
+          this.data.vehicleRegistrationNumber = info.automobileInsurance.
+          vehicleRegistrationNumber;
+          this.data.engineNumber = info.automobileInsurance.engineNumber;
+          this.data.chassisNumber = info.automobileInsurance.chassisNumber;
+          
+
+
+          localStorage.setItem('policyId', info.insurancePolicyId);
+          localStorage.setItem('customerPolicyId', info.customerPolicyId);
+          localStorage.setItem('email', info.email);
+         
+
+
+        
+      });
+   
+
+
+
+  }
+
+
+
+  onSubmit() {
+    console.log(this.claimForm.value);
+    this.service.putUser(this.claimForm.value).subscribe((
+      info) => {
+    console.log(this.claimForm.value);
+    this.claimForm.reset();
+    
+
+  },
+  (err) => {
+    this.claimError=err.error.text;
+    console.log(err.error.text)});
 }
-get insurancex(){
-  return this.data.insuranceType;
-}
+  get insurancex() {
+    return "automobileInsurance";
+  }
 
 }
 

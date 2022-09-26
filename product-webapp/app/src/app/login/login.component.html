@@ -15,7 +15,7 @@
               <div fxFlex="35%" class = "col bg-light shadow" >
                 <h3 class="text-center"> Log in</h3>
   
-                <form [formGroup] = "logInForm" (ngSubmit) = "logIn">
+                <form [formGroup] = "logInForm" (ngSubmit)="logIn()">
                   <small class = "text-danger">{{msg}}</small>
   
                   <div class= "mb-3" >

@@ -67,7 +67,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
 
     @Override
     public CustomerInsurance getPolicyDetailsByCustomerPolicyID(String customerPolicyId) throws PolicyIdNotFoundException {
-        if(purchaseRepository.findById(customerPolicyId).isPresent())
+        if(!purchaseRepository.findById(customerPolicyId).isPresent())
         {
             throw new PolicyIdNotFoundException();
         }
