@@ -22,6 +22,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/api/v1")
 public class UserCredentialsController {
 
     private UserCredentialsService userCredentialsService;
@@ -37,7 +38,7 @@ public class UserCredentialsController {
         this.securityTokenGenerator = securityTokenGenerator;
     }
 
-    @RequestMapping("/user")
+    @PostMapping("/user")
     public UserCredentials saveUser(@RequestBody UserCredentials user) throws UserAlreadyExistException {
 
     try {
@@ -66,7 +67,7 @@ public class UserCredentialsController {
             throw e;
         }
     }
-    @RequestMapping("/updateUser/{emailId}")
+    @PutMapping("/updateUser/{emailId}")
     public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") UserCredentials user,@PathVariable String emailId ) throws UserNotFoundException {
         try {
 
@@ -94,16 +95,7 @@ public class UserCredentialsController {
         }
         return responseEntity;
     }
-    @GetMapping("/list")
-    public String viewHomePage(Model model) {
 
-        return "products";
-    }
-    @GetMapping("/new")
-    public String showNewProductForm(Model model) {
-
-        return "products";
-    }
 
 
 }
