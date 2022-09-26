@@ -218,6 +218,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
         ClaimDTO claimDTO=new ClaimDTO();
         if(!purchaseRepository.findById(customerClaim.getCustomerPolicyId()).isPresent())
         {
+            System.out.println("Throwing error in id not found");
             throw new PolicyIdNotFoundException();
         }
 
@@ -231,7 +232,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
             String lastClaimStatus=ci.getClaimStatus().get(ci.getClaimStatus().size()-1);
             if(lastClaimStatus.equalsIgnoreCase("pending"))
             {
-                return "Previous Claims are pending.Wait for the older claims to settle in order to claim new one";
+                return "Previous Claims are still pending.Please wait for the older claims to settle in order to raise new claim ";
             }
         }
         //check for policy in given date
@@ -270,6 +271,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
             ci.setStatus(false);
             return "Insured amount has been Exhausted.Purchase a new Policy to avail Benefits";
         }
+        ci.getClaimSubmissionDate().add(customerClaim.getClaimSubmissionDate());
         claimDTO.setCustomerPolicyId(ci.getCustomerPolicyId());
         claimDTO.setInsurancePolicyId(ci.getInsurancePolicyId());
         claimDTO.setEmail(ci.getEmail());
@@ -287,6 +289,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
             ci.getClaimSum().add(partialClaim);
             ci.getClaimDate().add(customerClaim.getClaimDate());
             ci.getClaimStatus().add("pending");
+
             purchaseRepository.save(ci);
             claimDTO.setStatus("Partial Claim");
             producer.sendMessageForClaim(claimDTO);
@@ -319,9 +322,14 @@ public class PurchaseServiceImplementation implements PurchaseService{
     public int startUp(String email) throws ParseException {
            if(purchaseRepository.getCustomerInsuranceByEmail(email).size()==0)
              {
+                 System.out.println("Inside the error method");
                 return 0 ;
               }
         List<CustomerInsurance> ci_list=purchaseRepository.getCustomerInsuranceByEmail(email);
+           for(int k=0;k<ci_list.size();k++)
+           {
+               System.out.println(ci_list.get(k).getPolicyType()+"  "+ci_list.get(k).getCustomerPolicyId());
+           }
         CustomerInsurance customerInsurance=new CustomerInsurance();
         Date date = new Date();
         String currentDay= new SimpleDateFormat("yyyy-MM-dd").format(date);
@@ -330,17 +338,18 @@ public class PurchaseServiceImplementation implements PurchaseService{
         for(int i=0;i<ci_list.size();i++)
       {
           flag=true;
+          System.out.println("Inside the for loop with value of iteration "+i);
         customerInsurance=ci_list.get(i);
         //check for policy Validity
-         if(!customerInsurance.isStatus()) {
+         if(customerInsurance.isStatus()) {
+             System.out.println("Inside 341 line entering if policy is active with policy ID "+customerInsurance.getCustomerPolicyId());
              String startDay = customerInsurance.getStartDate().get(0);
              String endDay = customerInsurance.getEndDate().get(customerInsurance.getEndDate().size() - 1);
              if (startDay.compareTo(currentDay) > 0 || endDay.compareTo(currentDay) < 0) {
-                 if (customerInsurance.getPolicyType().equalsIgnoreCase("Life Insurance"))
+                 if (customerInsurance.getPolicyType().equalsIgnoreCase("LifeInsurance"))
                      customerInsurance.setClaimFlag(true);
                  else
                      customerInsurance.setClaimFlag(false);
-
 
                  customerInsurance.setStatus(false);
                  customerInsurance.setRenewFlag(false);
@@ -350,9 +359,9 @@ public class PurchaseServiceImplementation implements PurchaseService{
              {
               String lastClaimDate=customerInsurance.getClaimDate().get(customerInsurance.getClaimDate().size()-1);
               String lastClaimStatus=customerInsurance.getClaimStatus().get(customerInsurance.getClaimStatus().size()-1);
-                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                 //create instance of the Calendar class and set the date to the given date
-                 Calendar cal = Calendar.getInstance();
+              SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+              Calendar cal = Calendar.getInstance();
+                 System.out.println("Last claim status is :"+lastClaimStatus);
                  try{
                      cal.setTime(sdf.parse(lastClaimDate));
                  }catch(ParseException e){
@@ -360,10 +369,12 @@ public class PurchaseServiceImplementation implements PurchaseService{
                  }
                  cal.add(Calendar.DAY_OF_MONTH, 60);
                  String cutOffDate = sdf.format(cal.getTime());
+                 System.out.println("Cuttoff date :"+cutOffDate);
                  if(cutOffDate.compareTo(currentDay)<0)
                  {
                   if(lastClaimStatus.equalsIgnoreCase("pending"))
                   {
+                      System.out.println("Entering with pending");
                       List<String> startD=customerInsurance.getStartDate();
                       List<String> endD=customerInsurance.getEndDate();
                       int resultIndex=-1;
@@ -389,20 +400,22 @@ public class PurchaseServiceImplementation implements PurchaseService{
                           purchaseRepository.save(customerInsurance);
                           continue;
                       }
+                      System.out.println("Found a policy matching the date and lying betwwen dates");
                       long totalClaim=0;
                       //checking for if the insured sum is sufficient for claimed amount
                       for (int index = 0; index <customerInsurance.getClaimSum().size() ; index++) {
                           if(customerInsurance.getStartDate().get(resultIndex).compareTo(customerInsurance.getClaimDate().get(index))<0&&customerInsurance.getEndDate().get(resultIndex).compareTo(customerInsurance.getClaimDate().get(index))>0)
                           {
-                              if(customerInsurance.getClaimStatus().get(i).equalsIgnoreCase("approved"))
+                              if(customerInsurance.getClaimStatus().get(index).equalsIgnoreCase("approved"))
                               {
                                   totalClaim = totalClaim + customerInsurance.getClaimSum().get(index);
                               }
                           }
                       }
-
+                      System.out.println("Total claim till now:"+totalClaim);
                       if(totalClaim<customerInsurance.getSumInsured())
                       {
+                          System.out.println("Entering inside approving for id :"+customerInsurance.getCustomerPolicyId());
                           long sum=customerInsurance.getClaimSum().get(customerInsurance.getClaimSum().size()-1);
                           List<String> updateStatus=customerInsurance.getClaimStatus();
                           updateStatus.remove(updateStatus.size()-1);

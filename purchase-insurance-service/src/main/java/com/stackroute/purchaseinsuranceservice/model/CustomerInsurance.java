@@ -19,7 +19,7 @@ public class CustomerInsurance {
     @Id
     private String customerPolicyId;
     private String insurancePolicyId;
-    private String policyType;
+//    private String policyType;
     private String email;
     private long sumInsured;
     private List<String> startDate=new ArrayList<>();
@@ -54,6 +54,5 @@ public class CustomerInsurance {
     private boolean claimFlag=true;
     private boolean renewFlag=false;
     private boolean status=true;
-
 
 }
