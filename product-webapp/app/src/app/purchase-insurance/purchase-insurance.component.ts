@@ -10,6 +10,7 @@ import { Insurance } from '../insurance';
 import { InsuredInfo } from '../InsuredInfo';
 import { LifeInsurance } from '../LifeInsurance';
 import { PolicyDetails } from '../policy-details';
+import { formatDate } from '@angular/common'; 
 export interface LifeTable {
   minSal: number;
   maxSal: number;
@@ -611,11 +612,9 @@ check_validity(){
       //Auto Insurance Premium Calculation
       if(this.isAuto&&model_control?.valid&&policy_duration_control?.valid&&policy_sum_insured_control?.valid)
       {
-        console.log("Inside premium calculating method of Auto Insurance");
-        
+        console.log("Inside premium calculating method of Auto Insurance");       
         for(let k=0;k <this.insuranceobj.length;k++)
-        {
-          
+        { 
           if(this.insuranceobj[k].sumInsured==+policy_sum_insured_control.value!&&this.insuranceobj[k].duration==+policy_duration_control.value!)
           {
            this.premium=this.insuranceobj[k].premium!+this.addonpremium
@@ -635,9 +634,10 @@ check_validity(){
       on_duration_select(data:any)
       {
         this.date=new Date()
-        this.userForm.get('startDate')?.setValue(this.date.toLocaleDateString('en-GB'))
+        // this.formattedDate = formatDate(this.date, 'yyyy-MM-dd', 'en-US');
+        this.userForm.get('startDate')?.setValue(formatDate(this.date, 'yyyy-MM-dd', 'en-IN'))
         this.date.setFullYear(this.date.getFullYear() + +this.selectedDuration);
-        this.userForm.get('endDate')?.setValue(this.date.toLocaleDateString('en-GB'))
+        this.userForm.get('endDate')?.setValue(formatDate(this.date, 'yyyy-MM-dd', 'en-IN'))
         console.log('start Date : '+this.userForm.get('startDate')!.value)
         console.log('End Date : '+this.userForm.get('endDate')!.value);
         if(this.isAuto)

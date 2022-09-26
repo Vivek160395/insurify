@@ -16,6 +16,7 @@ import { InsuranceDetailsComponent } from './insurance-details/insurance-details
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
 import { DetailsComponent } from './details/details.component';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
+import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
@@ -36,7 +37,7 @@ const routes: Routes = [
   {path:"buy",component:PurchaseInsuranceComponent},
   {path:"policyDetails",component:InsuranceDetailsComponent},
   {path:"claim",component:ClaimComponent},{path:"InsuranceDetails",component:InsuranceDetailsComponent}]},
-
+  {path:"edit-insurance",component:EditInsuranceComponent}
 ];
 
 @NgModule({
