@@ -70,7 +70,6 @@
                                 </mat-form-field>
 
                                 <div fxFlexAlign="center" fxFlex="2%" *ngIf="flags[i]">
-                                    <!-- <mat-icon><a (click)="removeDetails1(i)">remove_circle_outline</a></mat-icon> -->
                                     <mat-icon><a (click)="addDetails1(i)">add</a></mat-icon>
                                 </div>
 
@@ -106,7 +105,7 @@
                 <mat-card-content style="align-content: center;">
                     <form [formGroup]="insuranceForms">
                         <ng-template matStepLabel>Add policy Financial policyDetails</ng-template>
-                        <div fxLayout="row" fxLayoutGap="2%">
+                        <!-- <div fxLayout="row" fxLayoutGap="2%">
                             <mat-form-field class="example-chip-list" appearance="outline" fxFlex="50%">
                                 <mat-label>Allowed Sum Insured Values(Add new values below)</mat-label>
                                 <mat-chip-list #chipList aria-label="Fruit selection"
@@ -138,7 +137,7 @@
                                         (matChipInputTokenEnd)="addduration($event)">
                                 </mat-chip-list>
                             </mat-form-field>
-                        </div>
+                        </div> -->
                         <h3 fxFlexLayout="row" *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Bike'"
                             style="font-family: cursive"> Select Bike models allowed for policy</h3>
                         <h3 fxFlexLayout="row" *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Car'"
@@ -175,20 +174,22 @@
                                 fxFlexLayout="row" fxLayoutGap="2%">
                                 <mat-form-field fxFlex="15%" appearance="outline">
                                     <mat-label>Sum Insured</mat-label>
-                                    <mat-select placeholder="Sum Insured" formControlName="sumInsure" type="number">
+                                    <!-- <mat-select placeholder="Sum Insured" formControlName="sumInsure" type="number">
                                         <div *ngFor="let x of sumInsuredValues">
                                             <mat-option value="{{x.insuredSum}}">{{x.insuredSum}}</mat-option>
                                         </div>
-                                    </mat-select>
+                                    </mat-select> -->
+                                    <input formControlName="sumInsure" matInput placeholder="Sum Insured" type="number">
                                 </mat-form-field>
                                 <mat-form-field fxFlex="15%" appearance="outline">
                                     <mat-label>Policy Duration </mat-label>
                                     <!-- <input formControlName="durations" matInput placeholder="Policy Duration" type="number"> -->
-                                    <mat-select placeholder="policy Duration" formControlName="durations" type="number">
+                                    <!-- <mat-select placeholder="policy Duration" formControlName="durations" type="number">
                                         <div *ngFor="let x of duration">
                                             <mat-option value="{{x.years}}">{{x.years}}</mat-option>
                                         </div>
-                                    </mat-select>
+                                    </mat-select> -->
+                                    <input formControlName="durations" matInput placeholder="Policy Duration" type="number">
                                 </mat-form-field>
                                 <mat-form-field fxFlex="10%" *ngIf="insurancex!='HealthInsurance'" appearance="outline">
                                     <mat-label>Policy Premium </mat-label>
