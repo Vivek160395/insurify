@@ -1,16 +1,15 @@
 <div class="example-container">
     <mat-toolbar class="example-toolbar">
-        <div style="display: flex;">
+        <div style="display: flex;justify-content: space-between;">
             <div style="display: flex;margin:auto">
                 <button class="menu" type="button" mat-button (click)="drawer.toggle()" style="display: flex;justify-content: center;color: white;">
           <mat-icon>menu</mat-icon>
         </button>
             </div>
-            <div style="margin-left: -150px; margin-top: 15px; display: flex; width:100% ">
-                <p style="color: white;">{{name1}}</p>
-                <p>{{name1}}</p>
-            <div class="insurify" routerLink="" style="color:white">
-                INSURIFY
+            <div style="display: flex;">
+                <div class="insurify" routerLink="" style="color:white">
+                    INSURIFY
+                </div>
             </div>
         </div>
         <div style="display: flex;">
@@ -42,7 +41,7 @@
                 </mat-menu>
             </div>
         </div>
-
+        <!-- </div> -->
     </mat-toolbar>
     <mat-drawer-container class="example-sid-container">
         <mat-drawer #drawer class="example-sid-sidenav" mode="side">
