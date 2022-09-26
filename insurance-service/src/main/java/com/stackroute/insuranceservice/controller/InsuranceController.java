@@ -4,6 +4,7 @@ import com.stackroute.insuranceservice.config.Producer;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.Insurance;
+import com.stackroute.insuranceservice.model.User;
 import com.stackroute.insuranceservice.rabbitMq.domain.DTO;
 import com.stackroute.insuranceservice.repository.InsuranceRepo;
 import com.stackroute.insuranceservice.service.InsuranceService;
@@ -41,10 +42,9 @@ public class InsuranceController {
     private Producer producer;
     Insurance lifePolicyObj;
 
-    @PostMapping("/life-policy")
-    public ResponseEntity<?> addLifePolicy(@RequestBody Insurance insurance)
+    @PostMapping("/{userEmail}/life-policy")
+    public ResponseEntity<?> addLifePolicy(@RequestBody Insurance insurance, @PathVariable String userEmail)
             throws PolicyAlreadyExistException, IOException {
-
         lifePolicyObj = new Insurance();
         lifePolicyObj.setPolicyId(insurance.getPolicyId());
         lifePolicyObj.setPolicyName(insurance.getPolicyName());
@@ -62,7 +62,7 @@ public class InsuranceController {
             lifePolicyObj.setCategory(null);
             lifePolicyObj.setModelsAllowed(null);
         }
-        return new ResponseEntity<>(insuranceService.saveInsurance(lifePolicyObj), HttpStatus.CREATED);
+        return new ResponseEntity<>(insuranceService.saveInsurance(lifePolicyObj, userEmail), HttpStatus.CREATED);
     }
 
     @PutMapping("/photos/update/{policyId}")
@@ -159,5 +159,15 @@ public class InsuranceController {
         } catch (IOException | DataFormatException ioe) {
         }
         return outputStream.toByteArray();
+    }
+
+    @PostMapping("/user")
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        return new ResponseEntity<User>(insuranceService.addUser(user), HttpStatus.OK);
+    }
+
+    @GetMapping("/{userEmail}/life-policy")
+    public ResponseEntity<?> getUserInsurances(@PathVariable String userEmail) {
+        return new ResponseEntity<>(insuranceService.getAllInsuranceOfuser(userEmail), HttpStatus.OK);
     }
 }

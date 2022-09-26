@@ -217,7 +217,7 @@ mat-icon {
 
 .policyName {
     text-align: center;
-    font-size: 60px;
+    font-size: 50px;
     color: orange;
 }
 
@@ -238,8 +238,8 @@ mat-icon {
 }
 
 .buy {
-    padding: 10px 30px;
-    font-size: 20px;
+    padding: 5px 10px;
+    font-size: 15px;
 }
 
 @media screen and (max-width:450px) {
