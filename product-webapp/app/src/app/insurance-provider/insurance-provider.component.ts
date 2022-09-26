@@ -10,7 +10,7 @@ export class InsuranceProviderComponent implements OnInit {
   constructor(private elementRef: ElementRef) {
     Chart.register(BarElement, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
   }
-
+  
   myChart1: any = [];
 
   ngOnInit(): void {
