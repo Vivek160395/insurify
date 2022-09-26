@@ -100,7 +100,7 @@
 
         <form [formGroup]="claimForm" >
 
-        <!-- <div style="justify-content: center;align-items: center;font-weight: 500;">
+        <div style="justify-content: center;align-items: center;font-weight: 500;">
           <div fxLayout="row">
             <h3 style="font-family:cursive ;">Upload the document:</h3>
           </div>
@@ -118,10 +118,10 @@
             <mat-label>Describe the circumstances leading to the health:</mat-label>
             <textarea matInput formControlName="describeEventhealth"></textarea>
           </mat-form-field>
-        </div> -->
+        </div>
         
         <div fxLayout="row" fxLayoutGap="2%">
-          <!-- <mat-form-field appearance="outline" fxFlex="23%"  *ngIf="insurancex==='automobileInsurance'">
+          <mat-form-field appearance="outline" fxFlex="23%"  *ngIf="insurancex==='automobileInsurance'">
             <mat-label>ClaimType</mat-label>
             <mat-select placeholder="claimType" formControlName="claimAuto">
               <mat-option value="Accident">Accident</mat-option>
@@ -129,7 +129,7 @@
 
             </mat-select>
           </mat-form-field>
-           -->
+          
 
 
 
@@ -146,7 +146,7 @@
             <mat-label>Intimation date</mat-label>
             <input matInput [ngModel]="today | date:'YYYY-MM-dd'" style="text-align: left;" formControlName="claimDate">
           </mat-form-field>
-          <!-- <mat-form-field appearance="outline" fxFlex="23%" *ngIf="insurancex==='automobileInsurance'">
+          <mat-form-field appearance="outline" fxFlex="23%" *ngIf="insurancex==='automobileInsurance'">
 
             <mat-label>Date of Event Occur</mat-label>
             
@@ -158,7 +158,7 @@
 
               <mat-label>Date of Event Occur</mat-label>
               <input matInput type="date" style="text-align: left;"  placeholder="Event Date Occur"formControlName="eventDate">
-          </mat-form-field> -->
+          </mat-form-field>
 
         </div>
         </form>

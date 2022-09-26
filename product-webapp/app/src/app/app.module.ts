@@ -77,6 +77,7 @@ import { EditInsuranceComponent } from './edit-insurance/edit-insurance.componen
 
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

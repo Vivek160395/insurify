@@ -28,10 +28,11 @@ const routes: Routes = [
   {path:"register",component:RegisterComponent},
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},
-  {path: "renewal", component: RenewalPolicyComponent},
+  
+  {path: "renewal-update/:id", component: RenewalPolicyComponent},
   {path: "renewal-home", component: RenewalPolicyHomeComponent},
   {path:"details",component:DetailsComponent},
-  {path: "renewal", component: RenewalPolicyComponent},
+  // {path: "renewal", component: RenewalPolicyComponent},
   {path:"update", component:UpdateComponent},
   {path: "login", component: LoginComponent},
   {path: "nav-bar", component: NavBarComponent},
@@ -40,7 +41,7 @@ const routes: Routes = [
   {path:"policyDetails",component:InsuranceDetailsComponent},
   {path:"claim",component:ClaimComponent},{path:"InsuranceDetails",component:InsuranceDetailsComponent}]},
   {path:"edit-insurance",component:EditInsuranceComponent},
-  {path: "login", component: LoginComponent},
+  {path: "login", component: LoginComponent}
 
 ];
 

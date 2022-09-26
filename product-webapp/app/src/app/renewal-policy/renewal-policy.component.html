@@ -51,8 +51,8 @@ fxLayout="row" fxLayout.xs="column">
 
 <br><br>
 
-<div style="text-align: center;" fxLayout.xs="column" *ngIf="">
-    <h1>Choose your Plan</h1>
+<div style="text-align: center;" fxLayout.xs="column" >
+    <h1><b>Choose your Plan</b></h1>
 </div>
 
                             <!-- This is the automobile insurance field for two-wheeler -->
@@ -72,7 +72,7 @@ fxLayout="row" fxLayout.xs="column">
 </div>
 
 <div fxLayout="row" fxLayoutGap="15%" *ngIf="insuranceType === 'AutomobileInsurance' && category === 'two-wheeler'">
-    <mat-card fxFlex="45%" fxLayout.xs="column" style="position: absolute; left: 15%; top: 35%; width: 30%; height: 50%; 
+    <mat-card fxFlex="45%" fxLayout.xs="column" style="position: absolute; left: 15%; top: 42%; width: 30%; height: 50%; 
     color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" appZoomonhover="true">
         <mat-card-content fxLayout="column" fxLayoutAlign="center" fxLayoutGap="8%">
             <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -103,8 +103,8 @@ fxLayout="row" fxLayout.xs="column">
         </mat-card-content>
       </mat-card>
     
-    <div  fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black; 
+    <div *ngIf="myModel == 0" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
+        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black; 
         box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center" >
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -112,32 +112,34 @@ fxLayout="row" fxLayout.xs="column">
                 </h1>
 
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b>2500
+                    <b class="col-md-6">Premium </b>{{this.twoWheelerSummary.premium}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b>10%
+                    <b class="col-md-6">Duration </b>{{this.twoWheelerSummary.duration}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium </b>4000
+                    <b class="col-md-6">Tax </b> {{this.twoWheelerSummary.tax}}
                 </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 123
+                <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                 class="d-flex justify-content-md-center">
+                    <b class="col-md-5">(AddOns)</b>
                 </p>
                 <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">RoadSide Assistance </b> 352
+                    <b class="col-md-5">RoadSide Assistance </b> {{this.twoWheelerSummary.roadSideAssistance}}
                 </p>
                 <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Personal Protect cover </b> 150
+                    <b class="col-md-5">Personal Protect cover </b> {{this.twoWheelerSummary.personalProtectCover}}
                 </p>
                 <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Engine Protect </b> 500
+                    <b class="col-md-5">Engine Protect </b> {{this.twoWheelerSummary.engineProtect}}
                 </p>
                 <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">consumables cover </b> 100
+                    <b class="col-md-5">consumables cover </b> {{this.twoWheelerSummary.consumablesCover}}
                 </p>
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium </b> 5960.70
                 </p>
+
                 <p>
                     <mat-checkbox>
                         I hereBy declare that I have agreed to terms and conditions of the policy
@@ -148,7 +150,7 @@ fxLayout="row" fxLayout.xs="column">
     </div>
 
     <div *ngIf="myModel == 2" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black;
+        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black;
         box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);"appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center">
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -156,28 +158,29 @@ fxLayout="row" fxLayout.xs="column">
                 </h1>
 
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b> 2800
+                    <b class="col-md-6">Premium:</b> {{this.twoWheelerSummary.premium}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b> 10%
+                    <b class="col-md-6">Duration </b> {{this.twoWheelerSummary.duration}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium:</b> 3000
+                    <b class="col-md-6">Tax </b> {{this.twoWheelerSummary.tax}}
                 </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 256
+                <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                 class="d-flex justify-content-md-center">
+                    <b class="col-md-5">(AddOns)</b>
                 </p>
                 <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">RoadSide Assistance :</b> 352
+                    <b class="col-md-5">RoadSide Assistance :</b> {{this.twoWheelerSummary.roadSideAssistance}}
                 </p>
                 <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Personal Protect cover :</b> 150
+                    <b class="col-md-5">Personal Protect cover :</b> {{this.twoWheelerSummary.personalProtectCover}}
                 </p>
                 <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Engine Protect :</b> 500
+                    <b class="col-md-5">Engine Protect :</b> {{this.twoWheelerSummary.engineProtect}}
                 </p>
                 <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">consumables cover :</b> 100
+                    <b class="col-md-5">consumables cover :</b> {{this.twoWheelerSummary.consumablesCover}}
                 </p>
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium :</b> 5450.40
@@ -192,7 +195,7 @@ fxLayout="row" fxLayout.xs="column">
     </div>
 
     <div *ngIf="myModel == 3" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" 
+        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" 
         appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center">
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -200,31 +203,32 @@ fxLayout="row" fxLayout.xs="column">
                 </h1>
 
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b> 1456
+                    <b class="col-md-6">Premium </b> {{this.twoWheelerSummary.premium}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b> 10%
+                    <b class="col-md-6">Duration </b> {{this.twoWheelerSummary.duration}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium </b> 1500
+                    <b class="col-md-6">Tax </b> {{this.twoWheelerSummary.tax}}
                 </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 256
+                <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                 class="d-flex justify-content-md-center">
+                    <b class="col-md-5">(AddOns)</b>
                 </p>
                 <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">RoadSide Assistance </b> 352
+                    <b class="col-md-5">RoadSide Assistance </b> {{this.twoWheelerSummary.roadSideAssistance}}
                 </p>
                 <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Personal Protect cover </b> 150
+                    <b class="col-md-5">Personal Protect cover </b> {{this.twoWheelerSummary.personalProtectCover}}
                 </p>
                 <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Engine Protect </b> 500
+                    <b class="col-md-5">Engine Protect </b> {{this.twoWheelerSummary.engineProtect}}
                 </p>
                 <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">consumables cover </b> 100
+                    <b class="col-md-5">consumables cover </b> {{this.twoWheelerSummary.consumablesCover}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Total Premium </b> 2890.80
+                    <b class="col-md-5">Total Premium </b> 2890.80
                 </p>
                 <p>
                     <mat-checkbox>
@@ -252,7 +256,7 @@ fxLayout="row" fxLayout.xs="column">
 </div>
 
 <div fxLayout="row" fxLayoutGap="15%" *ngIf="insuranceType === 'AutomobileInsurance' && category === 'four-wheeler'">
-    <mat-card fxFlex="45%" fxLayout.xs="column" style="position: absolute; left: 15%; top: 35%; width: 30%; height: 50%; 
+    <mat-card fxFlex="45%" fxLayout.xs="column" style="position: absolute; left: 15%; top: 42%; width: 30%; height: 50%; 
     color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" appZoomonhover="true">
         <mat-card-content fxLayout="column" fxLayoutAlign="center" fxLayoutGap="8%">
             <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -284,40 +288,41 @@ fxLayout="row" fxLayout.xs="column">
       </mat-card>
     
     <div  fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black; 
+        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black; 
         box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center" >
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
                     <b>Premium Summary</b>
                 </h1>
 
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b>2500
-                </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b>10%
-                </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium </b>4000
-                </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 123
-                </p>
-                <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">RoadSide Assistance </b> 352
-                </p>
-                <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Personal Protect cover </b> 150
-                </p>
-                <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Engine Protect </b> 500
-                </p>
-                <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">consumables cover </b> 100
-                </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Total Premium </b> 5960.70
-                </p>
+                    <p class="d-flex justify-content-md-center">
+                        <b class="col-md-6">Premium </b>{{this.fourWheelerSummary.premium}}
+                    </p>
+                    <p class="d-flex justify-content-md-center">
+                        <b class="col-md-6">Duration </b>{{this.fourWheelerSummary.duration}}
+                    </p>
+                    <p class="d-flex justify-content-md-center">
+                        <b class="col-md-6">Tax </b> {{this.fourWheelerSummary.tax}}
+                    </p>
+                    <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                     class="d-flex justify-content-md-center">
+                        <b class="col-md-5">(AddOns)</b>
+                    </p>
+                    <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
+                        <b class="col-md-5">RoadSide Assistance </b> {{this.fourWheelerSummary.roadSideAssistance}}
+                    </p>
+                    <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
+                        <b class="col-md-5">Personal Protect cover </b> {{this.fourWheelerSummary.personalProtectCover}}
+                    </p>
+                    <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
+                        <b class="col-md-5">Engine Protect </b> {{this.fourWheelerSummary.engineProtect}}
+                    </p>
+                    <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
+                        <b class="col-md-5">consumables cover </b> {{this.fourWheelerSummary.consumables}}
+                    </p>
+                    <p class="d-flex justify-content-md-center">
+                        <b class="col-md-6">Total Premium </b> 5960.70
+                    </p>
                 <p>
                     <mat-checkbox>
                         I hereBy declare that I have agreed to terms and conditions of the policy
@@ -328,7 +333,7 @@ fxLayout="row" fxLayout.xs="column">
     </div>
 
     <div *ngIf="myModel == 2" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);"
+        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);"
         appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center">
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -336,28 +341,29 @@ fxLayout="row" fxLayout.xs="column">
                 </h1>
 
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b> 2800
+                    <b class="col-md-6">Premium</b> {{this.fourWheelerSummary.premium}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b> 10%
+                    <b class="col-md-6">Duration </b> {{this.fourWheelerSummary.duration}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium</b> 3000
+                    <b class="col-md-6">Tax </b> {{this.fourWheelerSummary.tax}}
                 </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 256
+                <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                 class="d-flex justify-content-md-center">
+                    <b class="col-md-5">(AddOns)</b>
                 </p>
                 <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">RoadSide Assistance </b> 352
+                    <b class="col-md-5">RoadSide Assistance </b> {{this.fourWheelerSummary.roadSideAssistance}}
                 </p>
                 <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Personal Protect cover </b> 150
+                    <b class="col-md-5">Personal Protect cover </b> {{this.fourWheelerSummary.personalProtectCover}}
                 </p>
                 <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Engine Protect </b> 500
+                    <b class="col-md-5">Engine Protect </b> {{this.fourWheelerSummary.engineProtect}}
                 </p>
                 <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">consumables cover </b> 100
+                    <b class="col-md-5">consumables cover </b> {{this.fourWheelerSummary.consumablesCover}}
                 </p>
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium </b> 5450.40
@@ -372,7 +378,7 @@ fxLayout="row" fxLayout.xs="column">
     </div>
 
     <div *ngIf="myModel == 3" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" 
+        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" 
         appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center">
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -380,28 +386,29 @@ fxLayout="row" fxLayout.xs="column">
                 </h1>
 
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b> 1456
+                    <b class="col-md-6">Premium </b> {{this.fourWheelerSummary.premium}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b> 10%
+                    <b class="col-md-6">Duration </b> {{this.fourWheelerSummary.duration}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium </b> 1500
+                    <b class="col-md-6">Tax </b> {{this.fourWheelerSummary.tax}}
                 </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 256
+                <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                 class="d-flex justify-content-md-center">
+                    <b class="col-md-5">(AddOns)</b>
                 </p>
                 <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">RoadSide Assistance </b> 352
+                    <b class="col-md-5">RoadSide Assistance </b> {{this.fourWheelerSummary.roadSideAssistance}}
                 </p>
                 <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Personal Protect cover </b> 150
+                    <b class="col-md-5">Personal Protect cover </b> {{this.fourWheelerSummary.personalProtectCover}}
                 </p>
                 <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Engine Protect </b> 500
+                    <b class="col-md-5">Engine Protect </b> {{this.fourWheelerSummary.engineProtect}}
                 </p>
                 <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">consumables cover </b> 100
+                    <b class="col-md-5">consumables cover </b> {{this.fourWheelerSummary.consumablesCover}}
                 </p>
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium </b> 2890.80
@@ -433,7 +440,7 @@ fxLayout="row" fxLayout.xs="column">
 </div>
 
 <div fxLayout="row" fxLayoutGap="15%" *ngIf="insuranceType === 'HealthInsurance'">
-    <mat-card fxFlex="45%" fxLayout.xs="column" style="position: absolute; left: 15%; top: 35%; width: 30%; height: 50%; 
+    <mat-card fxFlex="45%" fxLayout.xs="column" style="position: absolute; left: 15%; top: 42%; width: 30%; height: 50%; 
     color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" appZoomonhover="true">
         <mat-card-content fxLayout="column" fxLayoutAlign="center" fxLayoutGap="8%">
             <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -465,7 +472,7 @@ fxLayout="row" fxLayout.xs="column">
       </mat-card>
     
     <div  fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black; 
+        <mat-card style="position: absolute; top: 42%; left: 50%; width: 35%; height: 50%; color: black; 
         box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center" >
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -473,28 +480,29 @@ fxLayout="row" fxLayout.xs="column">
                 </h1>
 
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b>2800
+                    <b class="col-md-6">Premium </b>{{this.healthSummary.premium}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b>10%
+                    <b class="col-md-6">Duration </b>{{this.healthSummary.duration}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium </b>5000
+                    <b class="col-md-6">Tax </b> {{this.healthSummary.tax}}
                 </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 225
+                <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                 class="d-flex justify-content-md-center">
+                    <b class="col-md-5">(AddOns)</b>
                 </p>
                 <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Hospital cash cover </b> 500
+                    <b class="col-md-5">Hospital cash cover </b> {{this.healthSummary.hospitalCashCover}}
                 </p>
                 <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Personal Accident cover </b> 250
+                    <b class="col-md-5">Personal Accident cover </b> {{this.healthSummary.personalAccidentCover}}
                 </p>
                 <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Maternity cover </b> 650
+                    <b class="col-md-5">Maternity cover </b> {{this.healthSummary.maternityCover}}
                 </p>
                 <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">AYUSH Treatment cover </b> 1000
+                    <b class="col-md-5">AYUSH Treatment cover </b> {{this.healthSummary.AyushCover}}
                 </p>
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium </b> 5960.70
@@ -509,7 +517,7 @@ fxLayout="row" fxLayout.xs="column">
     </div>
 
     <div *ngIf="myModel == 2" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);"
+        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);"
         appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center">
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -517,28 +525,29 @@ fxLayout="row" fxLayout.xs="column">
                 </h1>
 
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b> 3600
+                    <b class="col-md-6">Premium</b> {{this.healthSummary.premium}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b> 10%
+                    <b class="col-md-6">Duration </b> {{this.healthSummary.duration}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium</b> 4500
+                    <b class="col-md-6">Tax </b> {{this.healthSummary.tax}}
                 </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 225
+                <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                 class="d-flex justify-content-md-center">
+                    <b class="col-md-5">(AddOns)</b>
                 </p>
                 <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Hospital cash cover </b> 352
+                    <b class="col-md-5">Hospital cash cover </b> {{this.healthSummary.hospitalCashCover}}
                 </p>
                 <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Personal Accident cover </b> 150
+                    <b class="col-md-5">Personal Accident cover </b> {{this.healthSummary.personalAccidentCover}}
                 </p>
                 <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Maternity cover </b> 500
+                    <b class="col-md-5">Maternity cover </b> {{this.healthSummary.maternityCover}}
                 </p>
                 <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">AYUSH Treatment cover </b> 100
+                    <b class="col-md-5">AYUSH Treatment cover </b> {{this.healthSummary.AyushCover}}
                 </p>
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium </b> 5450.40
@@ -553,7 +562,7 @@ fxLayout="row" fxLayout.xs="column">
     </div>
 
     <div *ngIf="myModel == 3" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" 
+        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" 
         appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center">
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -561,28 +570,29 @@ fxLayout="row" fxLayout.xs="column">
                 </h1>
 
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b> 2850
+                    <b class="col-md-6">Premium </b> {{this.healthSummary.premium}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b> 10%
+                    <b class="col-md-6">Duration </b> {{this.healthSummary.duration}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium </b> 3000
+                    <b class="col-md-6">Tax </b> {{this.healthSummary.tax}}
                 </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 225
+                <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                 class="d-flex justify-content-md-center">
+                    <b class="col-md-5">(AddOns)</b>
                 </p>
                 <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Hospital cash cover </b> 352
+                    <b class="col-md-5">Hospital cash cover </b> {{this.healthSummary.hospitalCashCover}}
                 </p>
                 <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Personal Accident cover </b> 150
+                    <b class="col-md-5">Personal Accident cover </b> {{this.healthSummary.personalAccidentCover}}
                 </p>
                 <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Maternity cover </b> 500
+                    <b class="col-md-5">Maternity cover </b> {{this.healthSummary.maternityCover}}
                 </p>
                 <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">AYUSH Treatment cover </b> 100
+                    <b class="col-md-5">AYUSH Treatment cover </b> {{this.healthSummary.AyushCover}}
                 </p>
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium </b> 2890.80
@@ -614,7 +624,7 @@ fxLayout="row" fxLayout.xs="column">
 </div>
 
 <div fxLayout="row" fxLayoutGap="15%" *ngIf="insuranceType === 'LifeInsurance'">
-    <mat-card fxFlex="45%" fxLayout.xs="column" style="position: absolute; left: 15%; top: 35%; width: 30%; height: 50%; 
+    <mat-card fxFlex="45%" fxLayout.xs="column" style="position: absolute; left: 15%; top: 42%; width: 30%; height: 50%; 
     color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" appZoomonhover="true">
         <mat-card-content fxLayout="column" fxLayoutAlign="center" fxLayoutGap="8%">
             <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -646,7 +656,7 @@ fxLayout="row" fxLayout.xs="column">
       </mat-card>
     
     <div fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black; 
+        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black; 
         box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center" >
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -654,28 +664,29 @@ fxLayout="row" fxLayout.xs="column">
                 </h1>
 
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b>2800
+                    <b class="col-md-6">Premium </b>{{this.lifeSummary.premium}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b>10%
+                    <b class="col-md-6">Duration </b>{{this.lifeSummary.duration}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium </b>7000
+                    <b class="col-md-6">Tax </b> {{this.lifeSummary.tax}}
                 </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 225
+                <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                 class="d-flex justify-content-md-center">
+                    <b class="col-md-5">(AddOns)</b>
                 </p>
                 <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">HospiCare Benefit </b> 450
+                    <b class="col-md-5">HospiCare Benefit </b> {{this.lifeSummary.hospiCareBenefit}}
                 </p>
                 <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Cover against critical illness </b> 900
+                    <b class="col-md-5">Cover against critical illness </b> {{this.lifeSummary.coverAgainstCriticalIllness}}
                 </p>
                 <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Cover against Accidental Disability </b> 350
+                    <b class="col-md-5">Cover against Accidental Disability </b> {{this.lifeSummary.coverAgainstCriticalDisability}}
                 </p>
                 <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Accidental Death Benefit </b> 1500
+                    <b class="col-md-5">Accidental Death Benefit </b> {{this.lifeSummary.accidentalDeathBenefit}}
                 </p>
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium </b> 5960.70
@@ -690,7 +701,7 @@ fxLayout="row" fxLayout.xs="column">
     </div>
 
     <div *ngIf="myModel == 2" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);"
+        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);"
         appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center">
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -698,28 +709,29 @@ fxLayout="row" fxLayout.xs="column">
                 </h1>
 
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b> 3600
+                    <b class="col-md-6">Premium</b> {{this.lifeSummary.premium}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b> 10%
+                    <b class="col-md-6">Duration </b> {{this.lifeSummary.duration}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium</b> 5000
+                    <b class="col-md-6">Tax </b> {{this.lifeSummary.tax}}
                 </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 225
+                <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                 class="d-flex justify-content-md-center">
+                    <b class="col-md-5">(AddOns)</b>
                 </p>
                 <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">HospiCare Benefit </b> 352
+                    <b class="col-md-5">HospiCare Benefit </b> {{this.lifeSummary.hospiCareBenefit}}
                 </p>
                 <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Cover against critical illness </b> 150
+                    <b class="col-md-5">Cover against critical illness </b> {{this.lifeSummary.coverAgainstCriticalIllness}}
                 </p>
                 <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Cover against Accidental Disability </b> 500
+                    <b class="col-md-5">Cover against Accidental Disability </b> {{this.lifeSummary.coverAgainstCriticalDisability}}
                 </p>
                 <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Accidental Death Benefit </b> 100
+                    <b class="col-md-5">Accidental Death Benefit </b> {{this.lifeSummary.accidentalDeathBenefit}}
                 </p>
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium </b> 5450.40
@@ -734,7 +746,7 @@ fxLayout="row" fxLayout.xs="column">
     </div>
 
     <div *ngIf="myModel == 3" fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 35%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" 
+        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" 
         appZoomonhover="true">
             <mat-card-content fxLayout="column" fxLayoutAlign="center">
                 <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
@@ -742,28 +754,29 @@ fxLayout="row" fxLayout.xs="column">
                 </h1>
 
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Basic Premium </b> 2850
+                    <b class="col-md-6">Premium </b> {{this.lifeSummary.premium}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Discounts </b> 10%
+                    <b class="col-md-6">Duration </b> {{this.lifeSummary.duration}}
                 </p>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Premium </b> 3000
+                    <b class="col-md-6">Tax </b> {{this.lifeSummary.tax}}
                 </p>
-                <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Tax </b> 225
+                <p *ngIf="setCheckBox1 ===true || setCheckBox2 === true || setCheckBox3 === true || setCheckBox4 === true"
+                 class="d-flex justify-content-md-center">
+                    <b class="col-md-5">(AddOns)</b>
                 </p>
                 <p *ngIf="setCheckBox1 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">HospiCare Benefit </b> 352
+                    <b class="col-md-5">HospiCare Benefit </b> {{this.lifeSummary.hospiCareBenefit}}
                 </p>
                 <p *ngIf="setCheckBox2 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Cover against critical illness </b> 150
+                    <b class="col-md-5">Cover against critical illness </b> {{this.lifeSummary.coverAgainstCriticalIllness}}
                 </p>
                 <p *ngIf="setCheckBox3 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Cover against Accidental Disability </b> 500
+                    <b class="col-md-5">Cover against Accidental Disability </b> {{this.lifeSummary.coverAgainstCriticalDisability}}
                 </p>
                 <p *ngIf="setCheckBox4 === true" class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Accidental Death Benefit </b> 100
+                    <b class="col-md-5">Accidental Death Benefit </b> {{this.lifeSummary.accidentalDeathBenefit}}
                 </p>
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium </b> 2890.80
@@ -779,7 +792,8 @@ fxLayout="row" fxLayout.xs="column">
 </div>
 
 <div fxLayoutAlign="center">
-    <button mat-raised-button color="primary" style="width: 50%; position: absolute;top: 90%;" (click)="submit()">Submit
+    <button mat-raised-button color="primary" style="width: 50%; position: absolute; top: 95%; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" 
+    (click)="submit()">Submit
     </button>
 </div>
 
