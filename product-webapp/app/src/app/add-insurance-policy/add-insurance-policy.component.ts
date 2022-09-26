@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
 import { RecommendationServiceService } from '../recommendation-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 export interface bike {
@@ -30,7 +31,7 @@ export interface carCompany {
   name: string;
   carList: bike[];
 }
-export interface Fruit {
+export interface SumInsured {
   insuredSum: number;
 }
 export interface Duration {
@@ -132,10 +133,13 @@ export class AddInsurancePolicyComponent implements OnInit {
   }
  flags:boolean[]=[true];
  flag:boolean[]=[true]
+ openSnackBar(message: string) {
+    
+  this.snackBar.open(message,'Ok',{duration: 3000});
+}
 
 
-
-  constructor(public http:HttpClient,public dialog:MatDialog,private service:RecommendationServiceService) { }
+  constructor(public snackBar:MatSnackBar,public http:HttpClient,public dialog:MatDialog,private service:RecommendationServiceService) { }
 
   openDialog(){
     this.dialog.open(PreviewMarkupComponent,{data:this.valueVariable})
@@ -149,15 +153,15 @@ export class AddInsurancePolicyComponent implements OnInit {
     category         : new FormControl("",[Validators.required]),
     modelsAllowed    : new FormControl([],[Validators.required]),
     policyDetails    : new FormArray([new FormGroup({
-      premiums :    new FormControl("", [Validators.required,Validators.min(0)]),
-      durations:    new FormControl("", [Validators.required,Validators.min(0)]),
-      sumInsure:    new FormControl("", [Validators.required,Validators.min(0)]),
-      adults   :    new FormControl("", [Validators.min(0)]),
-      minAge   :    new FormControl("", [Validators.min(20),Validators.max(75)]),
-      maxAge   :    new FormControl("", [Validators.min(20),Validators.max(75)]),
-      kids     :    new FormControl("", [Validators.min(0)]),
-      minSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
-      maxSalary:    new FormControl("", [Validators.required,Validators.min(0)])
+      premiums :    new FormControl("", [Validators.required,Validators.min(1)]),
+      durations:    new FormControl("", [Validators.required,Validators.min(1)]),
+      sumInsure:    new FormControl("", [Validators.required,Validators.min(1)]),
+      adults1   :    new FormControl("",[Validators.min(1),Validators.required]),
+      adults2   :    new FormControl("",[Validators.min(1),Validators.required]),
+      adults3   :    new FormControl("",[Validators.min(1),Validators.required]),
+      kids     :    new FormControl("", [Validators.min(1),Validators.required]),
+      minSalary:    new FormControl("", [Validators.required,Validators.min(1)]),
+      maxSalary:    new FormControl("", [Validators.required,Validators.min(1)])
     })]),
     policyBenefits: new FormArray([
       new FormGroup({
@@ -261,28 +265,83 @@ export class AddInsurancePolicyComponent implements OnInit {
 
   addDetails(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
-    console.log((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
-    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
-    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
-    if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
-    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
-    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
+    console.log('Length of policy Details Array'+ control.length);
+    for(let z=0;z<control.length-1;z++)
+        {
+          for(let zz=z+1;zz<control.length;zz++)
+          {
+            console.log(control.at(z).value);
+            console.log(control.at(zz).value)
+            console.log(control.at(z).value===control.at(zz))
+            if(JSON.stringify(control.at(z).value)===JSON.stringify(control.at(zz).value))
+            {
+              this.openSnackBar("Row "+(z+1)+" and Row "+(zz+1)+" are same please remove or change value to add new row")
+              return
+            }
+          }
+        }
+    //insuranceType,AutoMobileInsurance,HealthInsurance
+    for(let k=0;k<control.length;k++)
     {
-      return
+      if(this.insuranceForms.get('insuranceType')?.value=='LifeInsurance')
+      {
+        console.log('1');
+        
+        if(control.at(k).get('sumInsure')?.invalid||control.at(k).get('premiums')?.invalid||control.at(k).get('durations')?.invalid||control.at(k).get('minSalary')?.invalid||control.at(k).get('maxSalary')?.invalid)
+        {
+          this.openSnackBar('Fill all the details of row  '+(k + 1)+'  to add new Row')
+          return 
+        }
+        console.log('2');
+      }
+      if(this.insuranceForms.get('insuranceType')?.value=='AutoMobileInsurance')
+      {
+        console.log('Before');
+        
+        if(this.insuranceForms.get('modelsAllowed')?.invalid)
+        {
+          console.log('In method not allowed');
+          this.openSnackBar('Please select Models Allowed first')
+          return 
+        }
+       console.log('After');
+       
+        if(control.at(k).get('sumInsure')?.invalid||control.at(k).get('premiums')?.invalid||control.at(k).get('durations')?.invalid)
+        {
+          console.log('3');
+          this.openSnackBar('Fill all the details of row  '+(k + 1)+'  to add new Row')
+          return 
+        }
+      }
+       //premiums,durations,sumInsure,adults1,adults2,adults3,kids,minSalary,maxSalary
+      if(this.insuranceForms.get('insuranceType')?.value=='HealthInsurance')
+      {
+        console.log('4');        
+        if(control.at(k).get('sumInsure')?.invalid||control.at(k).get('durations')?.invalid||control.at(k).get('adults2')?.invalid||control.at(k).get('adults3')?.invalid||control.at(k).get('adults1')?.invalid||control.at(k).get('kids')?.invalid)
+        {
+          console.log('5');
+          this.openSnackBar('Fill all the details of row  '+(k + 1)+'  to add new Row')
+          return 
+        }
+      }
     }
+    // if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
+    // ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
+    // ||(!control.at(i).value.adults1||!control.at(i).value.adults2||!control.at(i).value.adults3)
+    // ||(!control.at(i).value.kids||control.at(i).value.adults2||control.at(i).value.adults3||control.at(i).value.adults1)))
+    // {
+    //   return
+    // }
     const x=new FormGroup({
-      premiums: new FormControl(control.controls[i].value.premiums, [Validators.required]),
-      durations: new FormControl(control.controls[i].value.durations, [Validators.required]),
-      sumInsure: new FormControl(control.controls[i].value.sumInsure, [Validators.required]),
-      adults   :new FormControl(control.controls[i].value.adults),
-      kids     :new FormControl(control.controls[i].value.kids),
-      minSalary:new FormControl(control.controls[i].value.minSalary),
-      maxSalary:new FormControl(control.controls[i].value.maxSalary),
-      modelsAllowed:new FormControl(control.controls[i].value.modelsAllowed),
-      minAge       :new FormControl(control.controls[i].value.minAge),
-      maxAge       :new FormControl(control.controls[i].value.maxAge),
+      premiums :    new FormControl(control.at(i)!.get('premiums')!.value, [Validators.required,Validators.min(0)]),
+      durations:    new FormControl(control.at(i).get('durations')?.value, [Validators.required,Validators.min(0)]),
+      sumInsure:    new FormControl(control.at(i).get('sumInsure')?.value, [Validators.required,Validators.min(0)]),
+      adults1   :    new FormControl(control.at(i).get('adults1')?.value, [Validators.min(1),Validators.required]),
+      adults2   :    new FormControl(control.at(i).get('adults2')?.value, [Validators.min(20),Validators.max(60)]),
+      adults3   :    new FormControl(control.at(i).get('adults3')?.value, [Validators.min(20),Validators.max(60)]),
+      kids     :    new FormControl(control.at(i).get('kids')?.value, [Validators.min(1),Validators.required]),
+      minSalary:    new FormControl(control.at(i).get('minSalary')?.value, [Validators.required,Validators.min(0)]),
+      maxSalary:    new FormControl(control.at(i).get('maxSalary')?.value, [Validators.required,Validators.min(0)])
     }
     );
     console.log(control.controls[i].value)
@@ -290,28 +349,85 @@ export class AddInsurancePolicyComponent implements OnInit {
     control.push(x);
 
   }
+//--------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
   addDetailsE(i:any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
-    console.log((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
-    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
-    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
-    if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
-    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
-    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
+    for(let z=0;z<control.length-1;z++)
     {
-      return
+      for(let zz=z+1;zz<control.length;zz++)
+      {
+        console.log(control.at(z).value);
+        console.log(control.at(zz).value)
+        console.log(control.at(z).value===control.at(zz))
+        if(JSON.stringify(control.at(z).value)===JSON.stringify(control.at(zz).value))
+        {
+          this.openSnackBar("Row "+(z+1)+" and Row "+(zz+1)+" are same please remove or change value to add new row")
+          return
+        }
+      }
     }
+    for(let k=0;k<control.length;k++)
+    {
+      if(this.insuranceForms.get('insuranceType')?.value=='LifeInsurance')
+      {
+        console.log('1');        
+        if(control.at(k).get('sumInsure')?.invalid||control.at(k).get('premiums')?.invalid||control.at(k).get('durations')?.invalid||control.at(k).get('minSalary')?.invalid||control.at(k).get('maxSalary')?.invalid)
+        {
+          this.openSnackBar('Fill all the details of row  '+(k + 1)+'  to add new Row')
+          return 
+        }
+      }
+      if(this.insuranceForms.get('insuranceType')?.value=='AutoMobileInsurance')
+      {
+        console.log('Before');
+        console.log('2');
+        if(this.insuranceForms.get('modelsAllowed')?.invalid)
+        {
+          console.log('In method not allowed');
+          this.insuranceForms.get('modelsAllowed')?.markAsTouched
+          this.openSnackBar('Please select Models Allowed first')
+          return 
+        }
+       console.log('After');
+       
+        if(control.at(k).get('sumInsure')?.invalid||control.at(k).get('premiums')?.invalid||control.at(k).get('durations')?.invalid)
+        {
+          this.openSnackBar('Fill all the details of row  '+(k + 1)+'  to add new Row')
+          return 
+        }
+      }
+       //premiums,durations,sumInsure,adults1,adults2,adults3,kids,minSalary,maxSalary
+      if(this.insuranceForms.get('insuranceType')?.value=='HealthInsurance')
+      {
+        if(control.at(k).get('sumInsure')?.invalid||control.at(k).get('durations')?.invalid||control.at(k).get('adults2')?.invalid||control.at(k).get('adults3')?.invalid||control.at(k).get('adults')?.invalid||control.at(k).get('kids')?.invalid)
+        {
+          this.openSnackBar('Fill all the details of row  '+(k + 1)+'  to add new Row')
+          return 
+        }
+      }
+    }
+  //  if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
+  //   ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
+  //   ||(!control.at(i).value.adults1||!control.at(i).value.adults2||!control.at(i).value.adults3)
+  //   ||(!control.at(i).value.kids||control.at(i).value.adults2||control.at(i).value.adults3||control.at(i).value.adults1)))
+  //   {
+  //     return
+  //   }
+    
     console.log(control.value);
     control.push(new FormGroup({
-      premiums: new FormControl("", [Validators.required]),
-      durations: new FormControl("", [Validators.required]),
-      sumInsure: new FormControl("", [Validators.required]),
-      adults   :new FormControl(""),
-      kids     :new FormControl(""),
-      minSalary:new FormControl(""),
-      maxSalary:new FormControl("")
+      premiums :    new FormControl("", [Validators.required,Validators.min(0)]),
+      durations:    new FormControl("", [Validators.required,Validators.min(0)]),
+      sumInsure:    new FormControl("", [Validators.required,Validators.min(0)]),
+      adults1   :    new FormControl("", [Validators.min(1),Validators.required]),
+      adults2   :    new FormControl("", [Validators.min(20),Validators.max(60)]),
+      adults3   :    new FormControl("", [Validators.min(20),Validators.max(60)]),
+      kids     :    new FormControl("", [Validators.min(1),Validators.required]),
+      minSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
+      maxSalary:    new FormControl("", [Validators.required,Validators.min(0)])      
     }
     ));
   }
@@ -409,33 +525,35 @@ export class AddInsurancePolicyComponent implements OnInit {
 //Methods for chips component
 addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [{insuredSum: 100000}, {insuredSum: 1000000}, {insuredSum: 5000000}];
+  sumInsuredValues: SumInsured[] = [{insuredSum: 100000}, {insuredSum: 1000000}, {insuredSum: 5000000}];
   duration: Duration[] = [{years: 1}, {years: 5}, {years: 10}];
   add(event: MatChipInputEvent): void {
     // const value = (event.value || '').trim();
     const value = +event.value ;
     // Add our fruit
-    if (value) {
-      this.fruits.push({insuredSum: value});
+    if (value && this.sumInsuredValues.filter((a)=>a.insuredSum==value).length>1) {
+      this.sumInsuredValues.push({insuredSum: value});
+      this.sumInsuredValues.sort((a,b)=>a.insuredSum-b.insuredSum)
     }
 
     // Clear the input value
     event.chipInput!.clear();
   }
 
-  remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
+  remove(fruit: SumInsured): void {
+    const index = this.sumInsuredValues.indexOf(fruit);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.sumInsuredValues.splice(index, 1);
     }
   }
   addduration(event: MatChipInputEvent): void {
 
     const value = +event.value ;
 
-    if (value) {
+    if (value && this.duration.filter((a)=>a.years==value).length>1) {
       this.duration.push({years: value});
+      this.duration.sort((a,b)=>a.years-b.years)
     }
     event.chipInput!.clear();
   }

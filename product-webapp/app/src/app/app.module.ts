@@ -72,7 +72,8 @@ import { InsuranceDetailsComponent } from './insurance-details/insurance-details
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
 import { ZoomonhoverDirective } from './zoomonhover.directive';
-
+import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
+import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,6 @@ import { ZoomonhoverDirective } from './zoomonhover.directive';
     MoreComponent,
     RenewalPolicyComponent,
     InsuranceDetailsComponent,
-    // LoginComponent,
     MoreComponent,
     DetailsComponent,
     RenewalPolicyHomeComponent,
@@ -100,7 +100,9 @@ import { ZoomonhoverDirective } from './zoomonhover.directive';
     // LoginComponent,
     MoreComponent,
     DetailsComponent,
-    ZoomonhoverDirective
+    ZoomonhoverDirective,
+    PurchaseInsuranceComponent,
+    InsuranceProviderComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [

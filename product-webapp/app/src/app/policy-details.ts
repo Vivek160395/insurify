@@ -3,10 +3,10 @@ export class PolicyDetails {
      premiums :number,
      durations:number,
      sumInsure:number,
-     adults   :number,
+     adults1   :number,
+     adults2   :number,
+     adults3   :number,
      kids     :number,
-     minAge   :number,
-     maxAge   :number,
      minSalary:number,
      maxSalary:number,
      modelsAllowed:string
