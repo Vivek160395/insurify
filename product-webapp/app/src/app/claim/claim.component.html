@@ -100,30 +100,30 @@
 
         <form [formGroup]="claimForm" >
 
-        <div style="justify-content: center;align-items: center;font-weight: 500;">
+        <!-- <div style="justify-content: center;align-items: center;font-weight: 500;">
           <div fxLayout="row">
             <h3 style="font-family:cursive ;">Upload the document:</h3>
           </div>
           <input class="ng-hide" id="input-file-id" multiple type="file" formControlName="document"  (change)="onImgSelected($event)">
 
-        </div>
+        </div> -->
         <div>
           <mat-form-field appearance="outline" fxFlex="100%"  *ngIf="insurancex==='automobileInsurance'">
             <mat-label>Describe the circumstances leading to the accident/theft:</mat-label>
-            <textarea matInput formControlName="describeEventauto"></textarea>
+            <textarea matInput formControlName="description"></textarea>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="outline" fxFlex="100%"  *ngIf="insurancex==='healthInsurance'">
             <mat-label>Describe the circumstances leading to the health:</mat-label>
-            <textarea matInput formControlName="describeEventhealth"></textarea>
+            <textarea matInput formControlName="description"></textarea>
           </mat-form-field>
         </div>
         
         <div fxLayout="row" fxLayoutGap="2%">
           <mat-form-field appearance="outline" fxFlex="23%"  *ngIf="insurancex==='automobileInsurance'">
             <mat-label>ClaimType</mat-label>
-            <mat-select placeholder="claimType" formControlName="claimAuto">
+            <mat-select placeholder="claimType" formControlName="claimType">
               <mat-option value="Accident">Accident</mat-option>
               <mat-option value="Theft">Theft</mat-option>
 
@@ -150,14 +150,14 @@
 
             <mat-label>Date of Event Occur</mat-label>
             
-            <input matInput type="date" style="text-align: left;"  placeholder="Event Date Occur"formControlName="eventDate">
+            <input matInput type="date" style="text-align: left;"  placeholder="Event Date Occur"formControlName="claimSubmissionDate">
             
             </mat-form-field>
 
             <mat-form-field appearance="outline" fxFlex="23%" *ngIf="insurancex==='lifeInsurance'">
 
               <mat-label>Date of Event Occur</mat-label>
-              <input matInput type="date" style="text-align: left;"  placeholder="Event Date Occur"formControlName="eventDate">
+              <input matInput type="date" style="text-align: left;"  placeholder="Event Date Occur"formControlName="claimSubmissionDate">
           </mat-form-field>
 
         </div>

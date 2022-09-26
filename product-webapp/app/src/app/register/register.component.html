@@ -1,4 +1,4 @@
-<!-- <div class="background">
+<div class="background">
     <div fxLayout="row" class="cards">
         <div fxFlex="35%" style="background-color: lightblue;" class="shadow">
             <p style="font-size: 30px;margin-top:30px" class="text-center">Welcome to insurify</p>
@@ -12,62 +12,37 @@
                 </div>
             </div>
         </div>
-
         <div fxFlex="35%" class="col bg-light shadow">
             <h3 class="text-center"> Sign Up</h3>
-
             <form [formGroup]="registerForm" (ngSubmit)="registerSubmitted(registerForm)">
-
-    <div fxLayout="row"  class= "cards"  >
-  	    <div fxFlex="35%" style="background-color: lightblue;"class = "shadow">
-            <h3 class="text-center">Welcome to insurify</h3>
-            <p>Register and find some great insurance deals.</p>
-            Our friendly customer support team is your extended family. Speak your heart out. They listen with undivided attention to resolve your concerns. 
-            Give us a call, request a callback or drop us an email, we are here to help.
-            <img src="assets/img/sign_up.png" width="120" height="100" alt="Register">
-		    </div>
-
-		    <div fxFlex="35%" class = "col bg-light shadow" >
-              <h3 class="text-center"> Sign Up</h3>
-
-              <form [formGroup] = "registerForm" (ngSubmit) = "registerSubmitted(registerForm)">
-
-                 <div class="mb-3">
                 <div class="mb-3">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="inlineRadio1" value="As Insured" formControlName="userType">
                         <label class="form-check-label" for="inlineRadio1"> <b>As Insured </b> </label>
                         <img src="assets/img/As_insured.png" width="25" height="25" style="padding-left: 1px;">
                     </div>
-
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="inlineRadio2" value="As Insurer" formControlName="userType">
                         <label class="form-check-label" for="inlineRadio2"> <b>As Insurer </b> </label>
                         <img src="assets/img/As_insurer.png" width="28" height="28" style="padding-left: 1px;">
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" id="inlineRadio3" value="As Policy Advisor" formControlName = "userType">
-                      <label class="form-check-label" for="inlineRadio2"> <b>As Policy Advisor </b> </label>
-                     <!-- <img src="assets/img/As_insurer.png" width="28" height="28" style="padding-left: 1px;"> -->
-                    <!-- </div>
+                        <input class="form-check-input" type="radio" id="inlineRadio2" value="As Policy Advisor" formControlName="userType">
+                        <label class="form-check-label" for="inlineRadio2"> <b>As Policy Advisor </b> </label>
+                        <!-- <img src="assets/img/As_insurer.png" width="28" height="28" style="padding-left: 1px;"> -->
+                    </div>
                 </div>
                 <div class="form-text text-danger" *ngIf="userType.errors?.['required']"> Role is required
                 </div>
-
-
                 <div class="mb-3">
                     <input type="emailId" class="form-control" placeholder="Enter your Email Id*" id="emailId" formControlName="emailId">
                     <div class="form-text text-danger" *ngIf="emailId.errors?.['required'] &&
                         (emailId.dirty || emailId.touched)"> Email is required
                     </div>
-
                     <div class="form-text text-danger" *ngIf="emailId.errors?.['emailId'] &&
                         (emailId.dirty || emailId.touched)"> Email is invalid
                     </div>
-
                 </div>
-
-
                 <div class="mb-3">
                     <input type="password" class="form-control" placeholder="Enter your password* " id="password" formControlName="password">
                 </div>
@@ -80,25 +55,15 @@
                 <div class="form-text text-danger" *ngIf="password.errors?.['pattern']  &&
                         (password.dirty || password.touched)"> Valid characters: Alphabets, Numbers and '%*#' characters
                 </div>
-
-                 <div class="mb-3">
-                     <input type= "password" class= "form-control" placeholder = " Confirm password* " id="confirmPassword" formControlName = "confirmPassword">
-                 </div>
-                 <div class= "form-text text-danger" *ngIf = "confirmPassword.errors?.['required'] &&
-                 (confirmPassword.dirty || confirmPassword.touched)" > Confirm Password is required</div>
-              
-
-
+                <div class="mb-3">
+                    <input type="confirmPassword" class="form-control" placeholder=" Confirm password* " id="confirmPassword" formControlName="confirmPassword">
+                </div>
+                <div class="form-text text-danger" *ngIf="confirmPassword.errors?.['required'] &&
+                 (confirmPassword.dirty || confirmPassword.touched)"> Password is required</div>
                 <button type="submit" [disabled]="registerForm.invalid" class=" btn btn-primary mr-1">Register</button>
-
                 <p class="mb-3">Already a member? </p>
                 <a href="http://localhost:4200/login" class="text-center">Log In</a>
-
-
-
             </form>
         </div>
     </div>
-
-
-</div> --> -->
+    </div>

@@ -72,16 +72,15 @@ export class ClaimComponent implements OnInit {
     }
   }
   claimForm = new FormGroup({
-    document: new FormControl("",),
-    describeEventauto: new FormControl("",),
-    describeEventhealth: new FormControl("",),
-    describeEventlife: new FormControl("",),
+    // document: new FormControl("",),
+    description: new FormControl("",),
+   
     claimType: new FormControl("",),
-    claimAuto: new FormControl("",),
+    
     claimAmount: new FormControl("",),
-    claimHealth: new FormControl("",),
+   
     claimDate: new FormControl("",),
-    eventDate: new FormControl("",),
+    claimSubmissionDate: new FormControl("",),
     customerPolicyId: new FormControl(localStorage.getItem('customerPolicyId')),
     insurancePolicyId: new FormControl(localStorage.getItem('policyId')),
     email:new FormControl(localStorage.getItem('email'))
