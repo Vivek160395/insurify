@@ -1,21 +1,18 @@
 <div class="row" style=" display: flex;flex-wrap: wrap;background-color: white;">
     <div class=col-1.7 style=" margin: 40px 0 0 70px;display: block;color: black; ">
-        <div>
-            <div style=" color: black;margin: 30px 0px 0 0px;font-size: xx-large;
-          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
-                Life</div>
+        <div class="mat-elevation-z8 sideHead">
+            <div class="sideHeading1">
+                LIFE</div>
             <div [hidden]=" isLife " *ngFor=" let names of lifeNames " style=" margin: 15px 0px 0 20px;font-size: medium; ">
                 {{this.names.insuranceName}}
             </div>
-            <div style=" color: black;margin: 30px 0px 0 0px;font-size: xx-large;
-          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
-                Motor</div>
+            <div class="sideHeading">
+                MOTOR</div>
             <div [hidden]=" isMotor " *ngFor=" let names of motorNames " style=" margin: 15px 0px 0px 20px;font-size: medium; ">
                 {{this.names.insuranceName}}
             </div>
-            <div style=" color: black;margin: 40px 0px 0px 0px;font-size:xx-large;
-            font-family: 'Trebuchet MS' , 'Lucida Sans Unicode' , 'Lucida Grande' , 'Lucida Sans' , Arial, sans-serif ">
-                Other</div>
+            <div class="sideHeading">
+                OTHER</div>
             <div [hidden]=" isother " *ngFor=" let names of otherNames " style=" margin: 15px 0px 0px 20px;font-size: medium; ">
                 {{this.names.insuranceName}}
             </div>

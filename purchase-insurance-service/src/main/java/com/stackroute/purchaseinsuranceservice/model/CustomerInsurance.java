@@ -17,13 +17,10 @@ public class CustomerInsurance {
     @Id
     private String customerPolicyId;
     private String insurancePolicyId;
-    private String policyType;
-
+//    private String policyType;
     private String email;
-
     private long sumInsured;
     private List<String> startDate=new ArrayList<>();
-
     private List<String> endDate=new ArrayList<>();
 
     private List<String> purchaseDate=new ArrayList<>();
@@ -48,7 +45,8 @@ public class CustomerInsurance {
     private List<Long> claimSum=new ArrayList<>();
 
     private List<String> claimDate=new ArrayList<>();
-
+    private List<String> claimType=new ArrayList<>();
+    private List<String> claimDescription=new ArrayList<>();
     private List<String> claimStatus=new ArrayList<>();
 
     private boolean status=true;

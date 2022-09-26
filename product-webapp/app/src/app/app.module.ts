@@ -65,19 +65,21 @@ import { LoginComponent } from './login/login.component';
 import { MoreComponent } from './more/more.component';
 import { RenewalPolicyComponent } from './renewal-policy/renewal-policy.component';
 import { UpdateComponent } from './update/update.component';
-
+import { CalculatorComponent } from './calculator/calculator.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DetailsComponent } from './details/details.component';
-import { InsuranceDetailsComponent,DialogElementsExampleDialog } from './insurance-details/insurance-details.component';
+import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
 import { ZoomonhoverDirective } from './zoomonhover.directive';
+import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
      RegisterComponent,
+     CalculatorComponent,
     RecommendationComponent,
     PolicyDetailsComponent,
     NavBarComponent,
@@ -91,16 +93,16 @@ import { ZoomonhoverDirective } from './zoomonhover.directive';
     MoreComponent,
     RenewalPolicyComponent,
     InsuranceDetailsComponent,
-    LoginComponent,
+    // LoginComponent,
     MoreComponent,
     DetailsComponent,
-    DialogElementsExampleDialog,
     RenewalPolicyHomeComponent,
     InsuranceDetailsComponent,
-    LoginComponent,
+    // LoginComponent,
     MoreComponent,
     DetailsComponent,
-    ZoomonhoverDirective
+    ZoomonhoverDirective,
+    PurchaseInsuranceComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
