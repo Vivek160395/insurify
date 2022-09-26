@@ -43,7 +43,11 @@ public class PurchaseServiceImplementation implements PurchaseService{
             CustomerInsurance ci=new CustomerInsurance();
             ci.setCustomerPolicyId(customerInsurancePurchase.getCustomerPolicyId());
             ci.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
+<<<<<<< HEAD
 
+=======
+//            ci.setPolicyType(customerInsurancePurchase.getPolicyType());
+>>>>>>> f4ba162e5444dfba0bdb36920b67f981eef905a5
             ci.setEmail(customerInsurancePurchase.getEmail());
             ci.setSumInsured(customerInsurancePurchase.getSumInsured());
             ci.getStartDate().add(customerInsurancePurchase.getStartDate());
@@ -70,7 +74,11 @@ public class PurchaseServiceImplementation implements PurchaseService{
             purchaseDTO.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
             purchaseDTO.setEmail(customerInsurancePurchase.getEmail());
             purchaseDTO.setName(customerInsurancePurchase.getName());
+<<<<<<< HEAD
 
+=======
+//            purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
+>>>>>>> f4ba162e5444dfba0bdb36920b67f981eef905a5
             purchaseDTO.setSumInsured(customerInsurancePurchase.getSumInsured());
             purchaseDTO.setPurchaseDate(customerInsurancePurchase.getPurchaseDate());
             purchaseDTO.setStartDate(customerInsurancePurchase.getStartDate());
@@ -200,7 +208,11 @@ public class PurchaseServiceImplementation implements PurchaseService{
 
         renewDTO.setCustomerPolicyId(customerInsurance.getCustomerPolicyId());
         renewDTO.setInsurancePolicyId(customerInsurance.getInsurancePolicyId());
+<<<<<<< HEAD
 
+=======
+//        renewDTO.setPolicyType(customerInsurance.getPolicyType());
+>>>>>>> f4ba162e5444dfba0bdb36920b67f981eef905a5
         renewDTO.setEmail(customerInsurance.getEmail());
         renewDTO.setSumInsured(customerInsurance.getSumInsured());
         renewDTO.setStartDate(startDay);

@@ -124,7 +124,7 @@ public class PurchaseInsuranceController {
      int result=0;
            try {
                result=purchaseService.uploadDocument(documentFile, policyId);
-               return new ResponseEntity<>(purchaseService.uploadDocument(documentFile, policyId),HttpStatus.OK);
+
            }
            catch(IOException e)
            {
