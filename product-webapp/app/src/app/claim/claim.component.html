@@ -51,7 +51,7 @@
               <div  *ngIf="insurancex==='healthInsurance'">
                 <h2>Vehicle Details:</h2>
                 <div fxLayout="row" fxLayoutGap="2%">
-                  <div fxFlex="25%" class="a1"><b>Vehicle Reg No:</b> {{this.data.vehicleRegistrationNumber}}</div>
+                  <div fxFlex="25%" class="a1"><b>Vehicle h Reg No:</b> {{this.data.vehicleRegistrationNumber}}</div>
                   <div fxFlex="25%" class="a1"><b>Category:</b>{{this.data.category}}</div>
                   <div fxFlex="25%" class="a1"><b>Engine Number:</b>{{ this.data.engineNumber}}</div>
                   <div fxFlex="25%" class="a1"><b>Chassis Number:</b>{{this.data.chassisNumber}}</div>
@@ -60,7 +60,7 @@
                 <div  *ngIf="insurancex==='lifeInsurance'">
                   <h2>Vehicle Details:</h2>
                   <div fxLayout="row" fxLayoutGap="2%">
-                    <div fxFlex="25%" class="a1"><b>Vehicle Reg No:</b> {{this.data.vehicleRegistrationNumber}}</div>
+                    <div fxFlex="25%" class="a1"><b>Vehicle l Reg No:</b> {{this.data.vehicleRegistrationNumber}}</div>
                     <div fxFlex="25%" class="a1"><b>Category:</b>{{this.data.category}}</div>
                     <div fxFlex="25%" class="a1"><b>Engine Number:</b>{{ this.data.engineNumber}}</div>
                     <div fxFlex="25%" class="a1"><b>Chassis Number:</b>{{this.data.chassisNumber}}</div>
@@ -100,13 +100,13 @@
 
         <form [formGroup]="claimForm" >
 
-        <!-- <div style="justify-content: center;align-items: center;font-weight: 500;">
+        <div style="justify-content: center;align-items: center;font-weight: 500;">
           <div fxLayout="row">
             <h3 style="font-family:cursive ;">Upload the document:</h3>
           </div>
-          <input class="ng-hide" id="input-file-id" multiple type="file" formControlName="document"  (change)="onImgSelected($event)">
+          <input class="ng-hide" id="input-file-id" multiple type="file"   (change)="onFileChanged($event)">
 
-        </div> -->
+        </div>
         <div>
           <mat-form-field appearance="outline" fxFlex="100%"  *ngIf="insurancex==='automobileInsurance'">
             <mat-label>Describe the circumstances leading to the accident/theft:</mat-label>
@@ -119,6 +119,12 @@
             <textarea matInput formControlName="description"></textarea>
           </mat-form-field>
         </div>
+        <div>
+          <mat-form-field appearance="outline" fxFlex="100%"  *ngIf="insurancex==='lifeInsurance'">
+            <mat-label>Describe the circumstances leading to the life:</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
         
         <div fxLayout="row" fxLayoutGap="2%">
           <mat-form-field appearance="outline" fxFlex="23%"  *ngIf="insurancex==='automobileInsurance'">
@@ -127,7 +133,7 @@
               <mat-option value="Accident">Accident</mat-option>
               <mat-option value="Theft">Theft</mat-option>
 
-            </mat-select>
+          </mat-select>
           </mat-form-field>
           
 
