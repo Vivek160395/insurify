@@ -24,10 +24,10 @@ const routes: Routes = [
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},
   
-  {path: "renewal", component: RenewalPolicyComponent},
+  {path: "renewal-update/:id", component: RenewalPolicyComponent},
   {path: "renewal-home", component: RenewalPolicyHomeComponent},
   {path:"details",component:DetailsComponent},
-  {path: "renewal", component: RenewalPolicyComponent},
+  // {path: "renewal", component: RenewalPolicyComponent},
   {path:"update", component:UpdateComponent},
   {path: "login", component: LoginComponent},
   {path: "nav-bar", component: NavBarComponent},

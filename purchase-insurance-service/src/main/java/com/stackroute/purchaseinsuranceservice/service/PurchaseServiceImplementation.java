@@ -125,10 +125,12 @@ public class PurchaseServiceImplementation implements PurchaseService{
             throw new PolicyExpiredException();
         }
         String endDate="";
-        System.out.println(startDay);
+        System.out.println("startDate"+startDay);
          String sDay=customerInsurance.getStartDate().get(customerInsurance.getStartDate().size()-1);
          String eDay=startDay;
+        System.out.println("end date"+ eDay);
          String ourDate= customerRenewal.getDate();
+        System.out.println("coming date"+customerRenewal.getDate());
         System.out.println("Status of : "+(sDay.compareTo(ourDate)<0&&eDay.compareTo(ourDate)>0));
 
          if(!(sDay.compareTo(ourDate)<0)||!(eDay.compareTo(ourDate)>=0))
