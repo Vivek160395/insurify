@@ -317,6 +317,24 @@ public class PurchaseServiceImplementation implements PurchaseService{
          CustomerInsurance customer_insurance=purchaseRepository.findById(customerPolicyId).get();
         return customer_insurance;
     }
+    public long returnUserCount(String insuranceID){
+        long count=0;
+        long total=0;
+        List<CustomerInsurance> customer_insurance_list=purchaseRepository.findAll();
+        if(customer_insurance_list==null)
+            return 0;
+//        customer_insurance_list.stream().filter((a)->a.getInsurancePolicyId().equalsIgnoreCase(insuranceID));
+        for(int i=0;i<customer_insurance_list.size();i++)
+        {
+            if(customer_insurance_list.get(i).getInsurancePolicyId().equalsIgnoreCase(insuranceID))
+            {
+                count++;
+            }
+        }
+        total=customer_insurance_list.size();
+        return count;
+    }
+
 
     @Override
     public int startUp(String email) throws ParseException {
@@ -346,18 +364,14 @@ public class PurchaseServiceImplementation implements PurchaseService{
              String startDay = customerInsurance.getStartDate().get(0);
              String endDay = customerInsurance.getEndDate().get(customerInsurance.getEndDate().size() - 1);
              if (startDay.compareTo(currentDay) > 0 || endDay.compareTo(currentDay) < 0) {
-//                 if (customerInsurance.getPolicyType().equalsIgnoreCase("LifeInsurance"))
-//                     customerInsurance.setClaimFlag(true);
-//                 else
-//                     customerInsurance.setClaimFlag(false);
+
 
                  customerInsurance.setStatus(false);
-                 customerInsurance.setRenewFlag(false);
                  purchaseRepository.save(customerInsurance);
              }
              if(customerInsurance.getClaimDate().size()!=0)
              {
-              String lastClaimDate=customerInsurance.getClaimDate().get(customerInsurance.getClaimDate().size()-1);
+              String lastClaimDate=customerInsurance.getClaimDate().get(customerInsurance.getClaimSubmissionDate().size()-1);
               String lastClaimStatus=customerInsurance.getClaimStatus().get(customerInsurance.getClaimStatus().size()-1);
               SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
               Calendar cal = Calendar.getInstance();
@@ -400,7 +414,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
                           purchaseRepository.save(customerInsurance);
                           continue;
                       }
-                      System.out.println("Found a policy matching the date and lying betwwen dates");
+                      System.out.println("Found a policy matching the date and lying between dates");
                       long totalClaim=0;
                       //checking for if the insured sum is sufficient for claimed amount
                       for (int index = 0; index <customerInsurance.getClaimSum().size() ; index++) {

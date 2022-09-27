@@ -170,17 +170,17 @@ public class PurchaseInsuranceController {
         modelsAllowed.add("XYZ-2");
         result.setPolicyId("123456");
         result.setPolicyName("ABCDEFGH");
-        result.setInsuranceType("HealthInsurance");
-//        result.setInsuranceType("AutoMobile Insurance");
+//        result.setInsuranceType("HealthInsurance");
+        result.setInsuranceType("AutoMobileInsurance");
 //        result.setInsuranceType("LifeInsurance");
         result.setPolicyDescription("This is a message describing the policy");
-//        result.setCategory("Bike");
+        result.setCategory("Bike");
         result.setPolicyDocuments("This is terms and conditions");
         result.setModelsAllowed(modelsAllowed);
         result.setPolicyDetails(pd);
         result.setPolicyBenefits(pb);
         result.setAddOnDetails(add);
-
+        System.out.println(result.getCategory());
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 }

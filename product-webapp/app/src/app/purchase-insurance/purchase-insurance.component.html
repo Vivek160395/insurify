@@ -63,7 +63,7 @@
                                             <button mat-raised-button color="primary"
                                                 (click)="close_dob_div()">Done</button>
                                         </div>
-                                        <mat-form-field appearance="outline" fxLayout="row" *ngIf="isAuto&&autocategory=='Bike'">
+                                        <mat-form-field appearance="outline" fxLayout="row" *ngIf="(isAuto)&&(autocategory=='Bike')">
                                             <mat-label>Bike Model</mat-label>
                                             <mat-select placeholder="Bike Model" formControlName="model">
                                                 <mat-option value="{{x}}" *ngFor="let x of bikelist">{{x}}

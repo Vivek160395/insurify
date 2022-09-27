@@ -359,12 +359,14 @@ check_validity(){
       this.httpclient.get('http://localhost:8084/api/returnobj').subscribe((data:any)=>{
       console.log('Policy ID : '+data.policyId)
       console.log('Policy Name : '+data.policyName)
-      if(data.insuranceType=='AutoMobile Insurance') 
+      
+      if(data.insuranceType=='AutoMobileInsurance') 
         {
-          console.log('Inside Automobile Insurance');
+          console.log('Inside AutomobileInsurance');
           
           this.insuranceobj=[]
           this.isAuto=true
+         console.log(data.category);
          
          this.autocategory=data.category
           for(let index=0;index<data.policyDetails.length;index++)
@@ -431,8 +433,11 @@ check_validity(){
           }
              
            }
-      if(data.insuranceType=='AutoMobile Insurance')
-        this.autocategory=data.category
+     
+        console.log(this.isAuto);
+        console.log(this.autocategory)
+        console.log((this.autocategory==="Bike"))
+        
       this.userForm.get('policyname')?.setValue(data.policyName)
       this.userForm.get('policyname')!.disable();
       this.DescriptionText=data.policyDescription;

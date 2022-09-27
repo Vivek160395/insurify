@@ -31,5 +31,7 @@ public String claimInsurance(CustomerClaim customerClaim) throws PolicyIdNotFoun
 public CustomerInsurance returnUserPolicyInformation(String customerPolicyId) throws PolicyIdNotFoundException;
     public int startUp(String email) throws ParseException;
     public int uploadDocument(MultipartFile documentFile, String policyId) throws IOException;
+public long returnUserCount(String insuranceID);
+
 
 }

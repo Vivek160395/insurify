@@ -2,8 +2,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Insurance } from '../insurance';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -346,8 +344,8 @@ export class EditInsuranceComponent implements OnInit {
       durations: new FormControl(control.at(i).get('durations')?.value, [Validators.required, Validators.min(0)]),
       sumInsure: new FormControl(control.at(i).get('sumInsure')?.value, [Validators.required, Validators.min(0)]),
       adults1: new FormControl(control.at(i).get('adults1')?.value, [Validators.min(1), Validators.required]),
-      adults2: new FormControl(control.at(i).get('adults2')?.value, [Validators.min(20), Validators.max(60)]),
-      adults3: new FormControl(control.at(i).get('adults3')?.value, [Validators.min(20), Validators.max(60)]),
+      adults2: new FormControl(control.at(i).get('adults2')?.value, [Validators.min(1),Validators.required]),
+      adults3: new FormControl(control.at(i).get('adults3')?.value, [Validators.min(1), Validators.required]),
       kids: new FormControl(control.at(i).get('kids')?.value, [Validators.min(1), Validators.required]),
       minSalary: new FormControl(control.at(i).get('minSalary')?.value, [Validators.required, Validators.min(0)]),
       maxSalary: new FormControl(control.at(i).get('maxSalary')?.value, [Validators.required, Validators.min(0)])
@@ -513,48 +511,6 @@ export class EditInsuranceComponent implements OnInit {
     return (this.insuranceForms.get('addOnDetails') as FormArray).controls;
   }
   //=========================================================================================================
-  //Methods for chips component
-  // addOnBlur = true;
-  //   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  //   sumInsuredValues: SumInsured[] = [{insuredSum: 100000}, {insuredSum: 1000000}, {insuredSum: 5000000}];
-  //   duration: Duration[] = [{years: 1}, {years: 5}, {years: 10}];
-  //   add(event: MatChipInputEvent): void {
-  //     // const value = (event.value || '').trim();
-  //     const value = +event.value ;
-  //     // Add our fruit
-  //     if (value && !(this.sumInsuredValues.filter((a)=>a.insuredSum==value).length>0)) {
-  //       this.sumInsuredValues.push({insuredSum: value});
-  //       this.sumInsuredValues.sort((a,b)=>a.insuredSum-b.insuredSum)
-  //     }
-  //     // Clear the input value
-  //     event.chipInput!.clear();
-  //   }
-
-  //   remove(fruit: SumInsured): void {
-  //     const index = this.sumInsuredValues.indexOf(fruit);
-
-  //     if (index >= 0) {
-  //       this.sumInsuredValues.splice(index, 1);
-  //     }
-  //   }
-  //   addduration(event: MatChipInputEvent): void {
-
-  //     const value = +event.value ;
-
-  //     if (value && !(this.duration.filter((a)=>a.years==value).length>0)) {
-  //       this.duration.push({years: value});
-  //       this.duration.sort((a,b)=>a.years-b.years)
-  //     }
-  //     event.chipInput!.clear();
-  //   }
-
-  //   removeduration(x: Duration): void {
-  //     const index = this.duration.indexOf(x);
-
-  //     if (index >= 0) {
-  //       this.duration.splice(index, 1);
-  //     }
-  //   }
-  // api for getting policy
+  
 
 }
