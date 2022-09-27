@@ -27,5 +27,5 @@ export class RecommendationServiceService {
     return this.http.get(this.policyUrl + `/policy-id/${policyId}`);
   }
   policyNo: any;
-  userEmail: any = "gritvik99@gmail.com";
+  userEmail: any = "gritvik97@gmail.com";
 }

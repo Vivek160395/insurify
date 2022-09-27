@@ -42,6 +42,10 @@ export class InsuranceDetailsComponent implements OnInit {
   demo: any = [];
   demo1: any = [];
   // dialog: any;
+  buyPolicy() {
+    localStorage.setItem('insurance_id', this.service.policyNo);
+    console.log(localStorage.getItem('insurance_id'));
+  }
   constructor(private service: RecommendationServiceService, public dialog: MatDialog) { }
   ngOnInit(): void {
     this.getPolicy();
@@ -88,7 +92,7 @@ export class InsuranceDetailsComponent implements OnInit {
         this.differentImg = "../../assets/img/Health-insurance.jpg";
         this.befnefitsImg = "../../assets/img/maxresdefault.jpg"
       } else if (this.policyType === "HealthInsurance") {
-        this.displayedColumns = ['sumInsure', 'durations', 'premiums', 'kids', 'minAge', 'maxAge'];
+        this.displayedColumns = ['sumInsure', 'durations', 'adults1', 'adults2', 'adults3', 'kids'];
         this.dataSource = data.policyDetails;
         this.wide = 12;
         this.carModel = 0;

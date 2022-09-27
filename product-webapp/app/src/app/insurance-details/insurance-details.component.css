@@ -42,8 +42,10 @@ th:first-child {
 .mat-column-addOnPremiums,
 .mat-column-minSalary,
 .mat-column-maxSalary,
-.mat-column-maxAge,
-.mat-column-minAge,
+.mat-column-adults1,
+.mat-column-adults2,
+.mat-column-adults3,
+.mat-column-kids,
 .mat-column-brief,
 .mat-column-sumInsure,
 .mat-column-premiums,
@@ -109,9 +111,18 @@ mat-form-field {
     overflow: hidden !important;
 }
 
-.demo-table,
 .demo-table1 {
     width: 65%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: auto;
+    border-collapse: collapse;
+    border-radius: 20px;
+    overflow: hidden !important;
+}
+
+.demo-table {
+    width: 90%;
     border-collapse: collapse;
     border-spacing: 0;
     margin: auto;

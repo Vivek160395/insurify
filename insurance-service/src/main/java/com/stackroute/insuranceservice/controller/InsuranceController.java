@@ -110,9 +110,10 @@ public class InsuranceController {
         return new ResponseEntity<>(insuranceService.getPolicyByPolicyId(policyId), HttpStatus.OK);
     }
 
-    @DeleteMapping("/policy/delete/{policyId}/{userEmail}")
-    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable String policyId, @PathVariable String userEmail)
+    @DeleteMapping("/policy/delete/{policyId}")
+    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable String policyId)
             throws PolicyNotFoundException {
+        insuranceService.deletePolicyByPolicyId(policyId);
         return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
 

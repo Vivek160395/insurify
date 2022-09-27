@@ -57,17 +57,24 @@ export class InsuranceProviderComponent implements OnInit {
       }
     });
   }
+  policies: any = [];
+  count = 0;
   getAllPolicies() {
     this.service.getAllPolicies().subscribe(data => {
-      this.policies = data.content;
-      console.log(this.policies);
+      for (var i = 0; i < data.content.length; i++) {
+        if (data.content[i].userEmail == this.service.userEmail) {
+          this.policies[this.count] = data.content[i];
+          this.count = this.count + 1;
+        }
+      }
     })
+    console.log(this.policies);
   }
   policyName: any;
   policyType: any;
   pic: any;
   imageType: any;
-  policies: any;
+
   // getPolicy() {
   //   this.service.getPolicyDetails("297025").subscribe(data => {
   //     console.log(data);
