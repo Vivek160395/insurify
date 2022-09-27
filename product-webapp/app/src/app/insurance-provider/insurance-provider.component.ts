@@ -21,7 +21,7 @@ export class InsuranceProviderComponent implements OnInit {
   ngOnInit(): void {
     this.getAllPolicies();
     // this.getPolicy();
-    var ctx = this.elementRef.nativeElement.querySelector("#myChart").getContext('2d');
+    var ctx = this.elementRef.nativeElement.querySelector("#myChart ").getContext('2d');
     this.myChart1 = new Chart(ctx, {
       type: 'line',
       data: {

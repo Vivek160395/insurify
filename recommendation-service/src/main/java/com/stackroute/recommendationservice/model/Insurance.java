@@ -14,10 +14,10 @@ import org.springframework.data.neo4j.core.schema.Node;
 @NoArgsConstructor
 public class Insurance {
     @Id
-    private String insuranceId;
-    private String insuranceName;
-    private int noOfUsersBought;
-    private byte[] imageOfInsurance;
-    private String imageType;
-    private String description;
+    String policyId;
+    String policyName;
+    int noOfUsersBought;
+    byte[] picByte;
+    String picType;
+    String description;
 }

@@ -28,23 +28,27 @@ public class Recommendation_Service_Impl implements Recommendation_service {
     }
 
     @Override
-    public Insurance addInsurance(InsuranceProfile insuranceProfile) throws InsuranceAlreadyExists {
+    public Insurance addInsurance(Insurance insurance) throws InsuranceAlreadyExists {
         Insurance insurance2 = new Insurance();
-        Optional<Insurance> insurance1 = insurance_repository.findById(insuranceProfile.getInsuranceId());
+        Optional<Insurance> insurance1 = insurance_repository.findById(insurance.getPolicyId());
         if (insurance1.isPresent()) {
             throw new InsuranceAlreadyExists();
         } else {
-            insurance2.setInsuranceId(insuranceProfile.getInsuranceId());
-            insurance2.setInsuranceName(insuranceProfile.getInsuranceName());
-            insurance2.setDescription(insuranceProfile.getDescription());
-            insurance2.setNoOfUsersBought(0);
-            insurance2.setImageType(insuranceProfile.getTypeOfImage());
-            insurance2.setImageOfInsurance(insuranceProfile.getImageOfInsurance());
-            insurance_repository.save(insurance2);
+            return insurance_repository.save(insurance);
+            // insurance2.setInsuranceId(insuranceProfile.getInsuranceId());
+            // insurance2.setInsuranceName(insuranceProfile.getInsuranceName());
+            // insurance2.setDescription(insuranceProfile.getDescription());
+            // insurance2.setNoOfUsersBought(0);
+            // insurance2.setImageType(insuranceProfile.getTypeOfImage());
+            // insurance2.setImageOfInsurance(insuranceProfile.getImageOfInsurance());
+            // insurance_repository.save(insurance2);
+            // //
             // createAgeRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getAge());
-            createInsuranceTypeRelation(insuranceProfile.getInsuranceId(), insuranceProfile.getInsuranceType());
+            // createInsuranceTypeRelation(insuranceProfile.getInsuranceId(),
+            // insuranceProfile.getInsuranceType());
+            // //
             // createOccupationRelation(insuranceProfile.getInsuranceId(),insuranceProfile.getOccupation());
-            return insurance2;
+            // return insurance2;
         }
     }
 
@@ -56,9 +60,9 @@ public class Recommendation_Service_Impl implements Recommendation_service {
     // }
 
     @Override
-    public void addInsuranceType(String insurance_Type) {
-        if (insurance_type_repository.findById(insurance_Type).isEmpty()) {
-            insurance_type_repository.save(new InsuranceType(insurance_Type));
+    public void addInsuranceType(String insuranceType) {
+        if (insurance_type_repository.findById(insuranceType).isEmpty()) {
+            insurance_type_repository.save(new InsuranceType(insuranceType));
         }
     }
 
@@ -86,37 +90,37 @@ public class Recommendation_Service_Impl implements Recommendation_service {
     // }
 
     @Override
-    public boolean createInsuranceTypeRelation(String insuranceId, String insuranceType) {
-        if (!insurance_repository.checkInsuranceTypeRelationship(insuranceId, insuranceType)) {
-            insurance_repository.createInsuranceTypeRelation(insuranceId, insuranceType);
+    public boolean createInsuranceTypeRelation(String policyId, String insuranceType) {
+        if (!insurance_repository.checkInsuranceTypeRelationship(policyId, insuranceType)) {
+            insurance_repository.createInsuranceTypeRelation(policyId, insuranceType);
             return true;
         } else
             return false;
     }
 
     // @Override
-    // public boolean createAgeRelation(String insuranceId, int age) {
-    // if(!insurance_repository.checkAgeRelationship(insuranceId,age)){
-    // insurance_repository.createAgeRelation(insuranceId,age);
+    // public boolean createAgeRelation(String policyId, int age) {
+    // if(!insurance_repository.checkAgeRelationship(policyId,age)){
+    // insurance_repository.createAgeRelation(policyId,age);
     // return true;
     // }else return false;
     // }
 
     // @Override
-    // public boolean createOccupationRelation(String insuranceId, String
+    // public boolean createOccupationRelation(String policyId, String
     // occupationName) {
-    // if(!insurance_repository.checkOccupationRelation(insuranceId,occupationName)){
-    // insurance_repository.createOccupationRelation(insuranceId,occupationName);
+    // if(!insurance_repository.checkOccupationRelation(policyId,occupationName)){
+    // insurance_repository.createOccupationRelation(policyId,occupationName);
     // return true;
     // }return false;
     // }
 
     @Override
-    public boolean createUserToInsuranceRelation(String insuranceId, String userEmail) {
-        System.out.println(insurance_repository.checkUserToInsuranceRelationship(insuranceId, userEmail));
-        if (!insurance_repository.checkUserToInsuranceRelationship(insuranceId, userEmail)) {
-            insurance_repository.createUserToInsuranceRelationship(insuranceId, userEmail);
-            Insurance insurance = insurance_repository.findById(insuranceId).get();
+    public boolean createUserToInsuranceRelation(String policyId, String userEmail) {
+        System.out.println(insurance_repository.checkUserToInsuranceRelationship(policyId, userEmail));
+        if (!insurance_repository.checkUserToInsuranceRelationship(policyId, userEmail)) {
+            insurance_repository.createUserToInsuranceRelationship(policyId, userEmail);
+            Insurance insurance = insurance_repository.findById(policyId).get();
             insurance.setNoOfUsersBought(insurance.getNoOfUsersBought() + 1);
             insurance_repository.save(insurance);
             return true;
@@ -125,9 +129,9 @@ public class Recommendation_Service_Impl implements Recommendation_service {
     }
 
     // @Override
-    // public void createVehicleRelation(String insuranceId, String vehicleType) {
-    // if(!insurance_repository.checkVehicleRelationship(insuranceId,vehicleType)){
-    // insurance_repository.createVehicleRelation(insuranceId,vehicleType);
+    // public void createVehicleRelation(String policyId, String vehicleType) {
+    // if(!insurance_repository.checkVehicleRelationship(policyId,vehicleType)){
+    // insurance_repository.createVehicleRelation(policyId,vehicleType);
     // }
     // }
 
