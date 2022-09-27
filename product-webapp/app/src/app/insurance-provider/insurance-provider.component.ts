@@ -18,10 +18,9 @@ export class InsuranceProviderComponent implements OnInit {
     this.service.policyNo = id;
     this.route.navigateByUrl("/policyDetails");
   }
-
   ngOnInit(): void {
     this.getAllPolicies();
-    this.getPolicy();
+    // this.getPolicy();
     var ctx = this.elementRef.nativeElement.querySelector("#myChart").getContext('2d');
     this.myChart1 = new Chart(ctx, {
       type: 'line',
@@ -69,14 +68,14 @@ export class InsuranceProviderComponent implements OnInit {
   pic: any;
   imageType: any;
   policies: any;
-  getPolicy() {
-    this.service.getPolicyDetails("297025").subscribe(data => {
-      console.log(data);
-      this.policyName = data.policyName;
-      this.policyType = data.insuranceType;
-      this.pic = data.picByte;
-      this.imageType = data.picType;
-    })
-  }
+  // getPolicy() {
+  //   this.service.getPolicyDetails("297025").subscribe(data => {
+  //     console.log(data);
+  //     this.policyName = data.policyName;
+  //     this.policyType = data.insuranceType;
+  //     this.pic = data.picByte;
+  //     this.imageType = data.picType;
+  //   })
+  // }
 }
 

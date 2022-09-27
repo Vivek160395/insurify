@@ -20,11 +20,12 @@ export class RecommendationServiceService {
     return this.http.get(`http://localhost:9999/Recommendation/TrendingInsurances`);
   }
   getAllPolicies(): Observable<any> {
-    return this.http.get(this.policyUrl + "policies");
+    return this.http.get("http://localhost:8010/api/vk1/policies");
   }
   // insurance-details ui code below
   getPolicyDetails(policyId: string): Observable<any> {
     return this.http.get(this.policyUrl + `/policy-id/${policyId}`);
   }
   policyNo: any;
+  userEmail: any = "gritvik99@gmail.com";
 }

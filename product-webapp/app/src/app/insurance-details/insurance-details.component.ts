@@ -61,10 +61,6 @@ export class InsuranceDetailsComponent implements OnInit {
   befnefitsImg: string = "";
   getPolicy() {
     this.service.getPolicyDetails(this.service.policyNo).subscribe(data => {
-      // 197647
-      // this.service.getPolicyDetails("985618").subscribe(data=>{
-
-      // this.service.getPolicyDetails("197647").subscribe(data=>{
       console.log(data);
 
       this.addOns = data.addOnDetails;

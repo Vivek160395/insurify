@@ -4,7 +4,6 @@ import com.stackroute.insuranceservice.config.Producer;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.Insurance;
-import com.stackroute.insuranceservice.model.User;
 import com.stackroute.insuranceservice.rabbitMq.domain.DTO;
 import com.stackroute.insuranceservice.repository.InsuranceRepo;
 import com.stackroute.insuranceservice.service.InsuranceService;
@@ -42,8 +41,8 @@ public class InsuranceController {
     private Producer producer;
     Insurance lifePolicyObj;
 
-    @PostMapping("/{userEmail}/life-policy")
-    public ResponseEntity<?> addLifePolicy(@RequestBody Insurance insurance, @PathVariable String userEmail)
+    @PostMapping("/life-policy")
+    public ResponseEntity<?> addLifePolicy(@RequestBody Insurance insurance)
             throws PolicyAlreadyExistException, IOException {
         lifePolicyObj = new Insurance();
         lifePolicyObj.setPolicyId(insurance.getPolicyId());
@@ -54,7 +53,7 @@ public class InsuranceController {
         lifePolicyObj.setPolicyBenefits(insurance.getPolicyBenefits());
         lifePolicyObj.setAddOnDetails(insurance.getAddOnDetails());
         lifePolicyObj.setPolicyDocuments(insurance.getPolicyDocuments());
-
+        lifePolicyObj.setUserEmail(insurance.getUserEmail());
         if (insurance.getInsuranceType().equalsIgnoreCase("AutomobileInsurance")) {
             lifePolicyObj.setCategory(insurance.getCategory());
             lifePolicyObj.setModelsAllowed(insurance.getModelsAllowed());
@@ -62,7 +61,7 @@ public class InsuranceController {
             lifePolicyObj.setCategory(null);
             lifePolicyObj.setModelsAllowed(null);
         }
-        return new ResponseEntity<>(insuranceService.saveInsurance(lifePolicyObj, userEmail), HttpStatus.CREATED);
+        return new ResponseEntity<>(insuranceService.saveInsurance(lifePolicyObj), HttpStatus.CREATED);
     }
 
     @PutMapping("/photos/update/{policyId}")
@@ -86,7 +85,7 @@ public class InsuranceController {
         producer.sendingMessageToRabbitMQServer(dto);
         Insurance insurance1 = insuranceRepo.save(retrieveInsurance);
         if (insurance1.getPolicyId().equalsIgnoreCase(policyId)) {
-            return new ResponseEntity<>("Image Updated", HttpStatus.OK);
+            return new ResponseEntity<>(insuranceRepo.save(retrieveInsurance), HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Image Not Updated", HttpStatus.BAD_GATEWAY);
         }
@@ -111,9 +110,9 @@ public class InsuranceController {
         return new ResponseEntity<>(insuranceService.getPolicyByPolicyId(policyId), HttpStatus.OK);
     }
 
-    @DeleteMapping("/policy/delete/{policyId}")
-    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable String policyId) throws PolicyNotFoundException {
-        insuranceService.deletePolicyByPolicyId(policyId);
+    @DeleteMapping("/policy/delete/{policyId}/{userEmail}")
+    public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable String policyId, @PathVariable String userEmail)
+            throws PolicyNotFoundException {
         return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
     }
 
@@ -161,13 +160,4 @@ public class InsuranceController {
         return outputStream.toByteArray();
     }
 
-    @PostMapping("/user")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
-        return new ResponseEntity<User>(insuranceService.addUser(user), HttpStatus.OK);
-    }
-
-    @GetMapping("/{userEmail}/life-policy")
-    public ResponseEntity<?> getUserInsurances(@PathVariable String userEmail) {
-        return new ResponseEntity<>(insuranceService.getAllInsuranceOfuser(userEmail), HttpStatus.OK);
-    }
 }
