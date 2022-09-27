@@ -29,10 +29,10 @@ const routes: Routes = [
   {path:"add-policy",component:AddInsurancePolicyComponent},
   {path:"policies", component:PoliciesComponent},
   
-  {path: "renewal-update/:id", component: RenewalPolicyComponent},
-  {path: "renewal-home", component: RenewalPolicyHomeComponent},
+  // {path: "renewal-update/:id", component: RenewalPolicyComponent},
+  {path: "renewal", component: RenewalPolicyComponent},
   {path:"details",component:DetailsComponent},
-  // {path: "renewal", component: RenewalPolicyComponent},
+  {path: "renewal-home", component: RenewalPolicyHomeComponent},
   {path:"update", component:UpdateComponent},
   {path: "login", component: LoginComponent},
   {path: "nav-bar", component: NavBarComponent},

@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { Chart, BarElement, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip, LinearScale, LineController, LineElement, PointElement } from 'chart.js';
 
 @Component({
@@ -7,16 +8,18 @@ import { Chart, BarElement, BarController, CategoryScale, Decimation, Filler, Le
   styleUrls: ['./insurance-provider.component.css']
 })
 export class InsuranceProviderComponent implements OnInit {
-  constructor(private elementRef: ElementRef) {
+  constructor(private elementRef: ElementRef, private route: Router) {
     Chart.register(BarElement, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
   }
   
   myChart1: any = [];
-
+  goto() {
+    this.route.navigateByUrl("/policyDetails")
+  }
   ngOnInit(): void {
     var ctx = this.elementRef.nativeElement.querySelector("#myChart").getContext('2d');
     this.myChart1 = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{

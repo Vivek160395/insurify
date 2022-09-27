@@ -22,7 +22,6 @@ public class CustomerInsurance {
     private long sumInsured;
     private List<String> startDate=new ArrayList<>();
     private List<String> endDate=new ArrayList<>();
-
     private List<String> purchaseDate=new ArrayList<>();
     private List<Integer> duration=new ArrayList<>();
     private List<String[]> addOnName=new ArrayList<>();

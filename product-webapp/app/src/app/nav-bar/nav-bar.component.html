@@ -1,49 +1,48 @@
 <div class="example-container">
     <mat-toolbar class="example-toolbar">
-        <div style="display: flex;">
+        <div style="display: flex;justify-content: space-between;">
             <div style="display: flex;margin:auto">
                 <button class="menu" type="button" mat-button (click)="drawer.toggle()"
                     style="display: flex;justify-content: center;color: white;">
                     <mat-icon>menu</mat-icon>
                 </button>
             </div>
-            <div style="margin-left: -150px; margin-top: 15px; display: flex; width:100% ">
+            <div style="display: flex;">
                 <div class="insurify" routerLink="" style="color:white">
                     INSURIFY
                 </div>
             </div>
-            <div style="display: flex;">
-                <div style="margin-right: 30px;">
-                    <button mat-button>
-                        <span style="font-size: 18px;color: white;">Renewals</span>
-                    </button>
-                </div>
-                <div style="margin-right: 30px;">
-                    <button mat-button>
-                        <span style="font-size: 18px;color: white;">Claims</span>
-                    </button>
-                </div>
+        </div>
+        <div style="display: flex;">
+            <div style="margin-right: 30px;">
+                <button mat-button>
+          <span style="font-size: 18px;color: white;">Renewals</span>
+        </button>
             </div>
-            <div style="display: flex;">
-                <div style="margin-right: 20px;">
-                    <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;"
-                        routerLink="/login"> Login
-                    </button>
-                </div>
-                <div style="margin-right: 20px;">
-                    <button mat-button [matMenuTriggerFor]="menu4" aria-label="Example icon-button with a menu"
-                        matTooltip="Profile" color="white">
-                        <mat-icon class="icon-display">account_circle</mat-icon>
-                    </button>
-                    <mat-menu #menu4="matMenu">
-                        <button mat-menu-item>
-                            <mat-icon>edit</mat-icon>
-                            <span>Edit Profile</span>
-                        </button>
-                    </mat-menu>
-                </div>
+            <div style="margin-right: 30px;">
+                <button mat-button>
+          <span style="font-size: 18px;color: white;">Claims</span>
+        </button>
             </div>
         </div>
+        <div style="display: flex;">
+            <div style="margin-right: 20px;">
+                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/login"> Login
+        </button>
+            </div>
+            <div style="margin-right: 20px;">
+                <button mat-button [matMenuTriggerFor]="menu4" aria-label="Example icon-button with a menu" matTooltip="Profile" color="white">
+          <mat-icon class="icon-display">account_circle</mat-icon>
+        </button>
+                <mat-menu #menu4="matMenu">
+                    <button mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            <span>Edit Profile</span>
+          </button>
+                </mat-menu>
+            </div>
+        </div>
+        <!-- </div> -->
     </mat-toolbar>
     <mat-drawer-container class="example-sid-container">
         <mat-drawer #drawer class="example-sid-sidenav" mode="side">
