@@ -11,7 +11,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
 
   constructor(private renewalService: RenewalService, private router: ActivatedRoute) {}
 
-  category:string | undefined;
+  category:string = "";
   insuranceType:string = "";
 
   ngOnInit():void {
@@ -41,7 +41,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
   }
 
   getPolicyDetails(){
-    this.renewalService.getData().subscribe
+    this.renewalService.userPolicyDetails().subscribe
     (
       data1 => {
         if(data1.policyType === "Automobile Insurance" && data1.automobileInsurance.category === "car"){

@@ -8,25 +8,21 @@ export class RenewalService {
 
   constructor(private http:HttpClient) { }
 
-  customerPolicyId = "5032102";
+  customerPolicyId = "321";
   email = "vijayy@gmail.com"
 
-  getData():Observable<any>{
+  userPolicyDetails():Observable<any>{
     return this.http.get("http://localhost:8084/api/get/"+this.customerPolicyId);
   }
 
-  getVehicleData():Observable<any>{
-    console.log(this.customerPolicyId)
-    return this.http.get("http://localhost:8084/api/get/"+this.customerPolicyId);
-  }
-
-  getTwoWheelerData(data:any):Observable<any>{
-    console.log(this.customerPolicyId)
-    return this.http.get("http://localhost:8084/api/get/"+this.customerPolicyId);
+  getPolicyDetails():Observable<any>{
+    return this.http.get("http://localhost:8010/api/vk1/policy-id/189989");
   }
 
   updateData(data: any): Observable<any>{
     return this.http.put("http://localhost:8084/api/renew",data);
   }
+
+  
 
 }

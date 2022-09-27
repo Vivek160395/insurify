@@ -38,10 +38,10 @@ public class PaymentController {
             Order order = createRazorPayOrder(details.getAmount());
             System.out.println("---------------------------------");
             String orderId = (String) order.get("id");
-            System.out.println("Order ID: "+orderId);
+            System.out.println("Order ID:- "+orderId);
             LocalDate date= java.time.LocalDate.now();
             LocalTime time= java.time.LocalTime.now();
-            System.out.println("Date :- "+date+", Time :- "+time);
+            System.out.println("Date :- "+date+"\nTime :- "+time);
             System.out.println("---------------------------------");
 
             response.setEmailId(details.getEmailId());
