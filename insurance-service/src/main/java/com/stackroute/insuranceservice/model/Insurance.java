@@ -25,4 +25,5 @@ public class Insurance {
     private AddOnDetails[] addOnDetails;
     private String policyDocuments;
     private List<String> modelsAllowed;
+    private String userEmail;
 }
