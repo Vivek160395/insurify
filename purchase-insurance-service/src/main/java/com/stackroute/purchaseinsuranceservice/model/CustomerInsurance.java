@@ -2,6 +2,7 @@ package com.stackroute.purchaseinsuranceservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,11 +14,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class CustomerInsurance {
     @Id
     private String customerPolicyId;
     private String insurancePolicyId;
-    private String policyType;
+//    private String policyType;
     private String email;
     private long sumInsured;
     private List<String> startDate=new ArrayList<>();
@@ -42,11 +44,15 @@ public class CustomerInsurance {
     private boolean renewalStatus=false;
 
     private List<Long> claimSum=new ArrayList<>();
-
     private List<String> claimDate=new ArrayList<>();
+    private List<String> claimSubmissionDate=new ArrayList<>();
+    private List<String> decisionDate=new ArrayList<>();
     private List<String> claimType=new ArrayList<>();
     private List<String> claimDescription=new ArrayList<>();
     private List<String> claimStatus=new ArrayList<>();
-
+    private List<byte[]> claimDocument=new ArrayList<>();
+    private boolean claimFlag=true;
+    private boolean renewFlag=false;
     private boolean status=true;
+
 }

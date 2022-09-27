@@ -14,11 +14,7 @@
     </appender>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-<<<<<<< HEAD
-        <!-- encoders are assigned the type
-             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
-=======
->>>>>>> 0766884b8fe1faab9226e4dc67909f073f4fd0f6
+
         <encoder>
             <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>

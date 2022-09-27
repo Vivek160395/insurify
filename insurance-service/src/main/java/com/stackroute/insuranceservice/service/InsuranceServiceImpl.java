@@ -6,16 +6,19 @@ import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.Insurance;
 import com.stackroute.insuranceservice.rabbitMq.domain.DTO;
 import com.stackroute.insuranceservice.repository.InsuranceRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class InsuranceServiceImpl implements InsuranceService{
+public class InsuranceServiceImpl implements InsuranceService {
 
     InsuranceRepo insuranceRepo;
+
     @Autowired
     Producer producer;
 
@@ -25,11 +28,11 @@ public class InsuranceServiceImpl implements InsuranceService{
     }
 
     @Override
-    public Insurance saveInsurance(Insurance insurance) throws PolicyAlreadyExistException, IOException {
-        if (insuranceRepo.findById(insurance.getPolicyId()).isPresent()){
+    public Insurance saveInsurance(Insurance insurance)
+            throws PolicyAlreadyExistException, IOException {
+        if (insuranceRepo.findById(insurance.getPolicyId()).isPresent()) {
             throw new PolicyAlreadyExistException();
-        }
-        else {
+        } else {
             return insuranceRepo.save(insurance);
         }
     }
@@ -41,19 +44,19 @@ public class InsuranceServiceImpl implements InsuranceService{
 
     @Override
     public Optional<Insurance> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException {
-        if (insuranceRepo.findById(policyId).isPresent()){
+        if (insuranceRepo.findById(policyId).isPresent()) {
             return insuranceRepo.findById(policyId);
-        }else {
+        } else {
             throw new PolicyNotFoundException();
         }
     }
 
     @Override
     public boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException {
-        if (insuranceRepo.findById(policyId).isPresent()){
+        if (insuranceRepo.findById(policyId).isPresent()) {
             insuranceRepo.deleteById(policyId);
             return true;
-        }else {
+        } else {
             throw new PolicyNotFoundException();
         }
     }

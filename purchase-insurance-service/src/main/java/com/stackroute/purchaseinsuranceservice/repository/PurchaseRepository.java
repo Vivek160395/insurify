@@ -11,4 +11,6 @@ import java.util.List;
 public interface PurchaseRepository extends MongoRepository<CustomerInsurance,String> {
     @Query(value = "{email:?0}")
     public Iterable<CustomerInsurance> getPurchasedInsuranceByEmail(String email);
+    public List<CustomerInsurance> getCustomerInsuranceByEmail(String email);
+
 }
