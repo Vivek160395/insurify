@@ -117,10 +117,10 @@ export class PoliciesComponent {
     }
   ]
 
-  openDialog(policy: any) {
+  openDialog(policy: any, i:any) {
     console.log(policy);
     this.router.navigateByUrl('/details');
-    localStorage.setItem('insuranceType',policy.policyType);
+    localStorage.setItem('insuranceType',this.policyTitle[i]);
     localStorage.setItem('customerPolicyId', policy.customerPolicyId)
     console.log(localStorage.getItem('insuranceType'));
     console.log(localStorage.getItem('customerPolicyId'));

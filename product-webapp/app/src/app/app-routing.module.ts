@@ -39,14 +39,9 @@ const routes: Routes = [
   {path:"claim",component:ClaimComponent},
   {path:"buy",component:PurchaseInsuranceComponent},
   {path:"policyDetails",component:InsuranceDetailsComponent},
-<<<<<<< HEAD
-  {path:"claim",component:ClaimComponent},
-  {path:"InsuranceDetails",component:InsuranceDetailsComponent}]},
-=======
   {path:"claim",component:ClaimComponent},{path:"InsuranceDetails",component:InsuranceDetailsComponent}]},
   {path:"edit-insurance",component:EditInsuranceComponent},
   {path: "login", component: LoginComponent}
->>>>>>> f4ba162e5444dfba0bdb36920b67f981eef905a5
 
 ];
 

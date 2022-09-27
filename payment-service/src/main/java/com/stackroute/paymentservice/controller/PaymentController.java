@@ -10,6 +10,10 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 
 @RestController
 @RequestMapping("/pg")
@@ -24,7 +28,6 @@ public class PaymentController {
 
     public PaymentController(PaymentService service) {
         this.service = service;
-//        this.client = client;
     }
 
     @PostMapping("/createOrder")
@@ -33,24 +36,21 @@ public class PaymentController {
         try{
             client = new RazorpayClient(SECRET_ID, SECRET_KEY);
             Order order = createRazorPayOrder(details.getAmount());
-            System.out.println("--------------------");
+            System.out.println("---------------------------------");
             String orderId = (String) order.get("id");
             System.out.println("Order ID: "+orderId);
-            System.out.println("--------------------");
+            LocalDate date= java.time.LocalDate.now();
+            LocalTime time= java.time.LocalTime.now();
+            System.out.println("Date :- "+date+", Time :- "+time);
+            System.out.println("---------------------------------");
 
-//            response.setName(details.getName());
             response.setEmailId(details.getEmailId());
             response.setMobileNo(details.getMobileNo());
             response.setCustomerPolicyId(details.getCustomerPolicyId());
-            response.setPolicyType(details.getPolicyType());
             response.setRazorpayOrderId(orderId);
-            response.setCurrency(details.getCurrency());
             response.setAmount(details.getAmount());
-            response.setDiscount(details.getDiscount());
-            response.setTax(details.getTax());
-            response.setPaymentMode(details.getPaymentMode());
-            response.setPaymentDate(details.getPaymentDate());
-            response.setPaymentTime(details.getPaymentTime());
+            response.setPaymentDate(date);
+            response.setPaymentTime(time);
 
 //            response.setSecretKey(SECRET_KEY);
 //            response.setSecretId(SECRET_ID);
@@ -65,10 +65,10 @@ public class PaymentController {
     }
 
 
-    private Order createRazorPayOrder(float amount) throws RazorpayException{
+    private Order createRazorPayOrder(int amount) throws RazorpayException{
 
         JSONObject options = new JSONObject();
-        options.put("amount", amount);
+        options.put("amount", amount*100);
         options.put("currency","INR");
         options.put("receipt","txn_123456");
         options.put("payment_capture",1); // to enable auto capture
