@@ -12,7 +12,7 @@ export class InsuranceProviderComponent implements OnInit {
   constructor(private elementRef: ElementRef, private route: Router, private service: RecommendationServiceService) {
     Chart.register(BarElement, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
   }
-
+  
   myChart1: any = [];
   goto(id: any) {
     this.service.policyNo = id;

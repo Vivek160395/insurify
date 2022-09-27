@@ -35,6 +35,7 @@ public class InsuranceController {
 
     @Autowired
     private InsuranceService insuranceService;
+
     @Autowired
     private InsuranceRepo insuranceRepo;
     @Autowired

@@ -6,7 +6,7 @@ import { ClaimComponent } from './claim/claim.component';
 import { PoliciesComponent } from './policies/policies.component';
 import { PreviewMarkupComponent } from './preview-markup/preview-markup.component';
 import { RecommendationComponent } from './recommendation/recommendation.component';
-import { RegisterComponent } from './register/register.component';
+ import { RegisterComponent } from './register/register.component';
 import { UpdateComponent } from './update/update.component';
 
 import { LoginComponent } from './login/login.component';
@@ -22,28 +22,26 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
 const routes: Routes = [
-  {
-    path: "", component: NavBarComponent, children: [
-      { path: "", component: RecommendationComponent },
-      { path: "insurance-provider", component: InsuranceProviderComponent },
-      { path: "register", component: RegisterComponent },
-      { path: "add-policy", component: AddInsurancePolicyComponent },
-      { path: "policies", component: PoliciesComponent },
-
-      { path: "renewal-update/:id", component: RenewalPolicyComponent },
-      { path: "renewal-home", component: RenewalPolicyHomeComponent },
-      { path: "details", component: DetailsComponent },
-      // {path: "renewal", component: RenewalPolicyComponent},
-      { path: "update", component: UpdateComponent },
-      { path: "login", component: LoginComponent },
-      { path: "nav-bar", component: NavBarComponent },
-      { path: "claim", component: ClaimComponent },
-      { path: "buy", component: PurchaseInsuranceComponent },
-      { path: "policyDetails", component: InsuranceDetailsComponent },
-      { path: "claim", component: ClaimComponent }, { path: "InsuranceDetails", component: InsuranceDetailsComponent }]
-  },
-  { path: "edit-insurance", component: EditInsuranceComponent },
-  { path: "login", component: LoginComponent }
+  {path:"",component:NavBarComponent,children:[
+  {path:"",component:RecommendationComponent},
+  {path:"insurance-provider",component:InsuranceProviderComponent},
+  {path:"register",component:RegisterComponent},
+  {path:"add-policy",component:AddInsurancePolicyComponent},
+  {path:"policies", component:PoliciesComponent},
+  
+  {path: "renewal-update/:id", component: RenewalPolicyComponent},
+  {path: "renewal-home", component: RenewalPolicyHomeComponent},
+  {path:"details",component:DetailsComponent},
+  // {path: "renewal", component: RenewalPolicyComponent},
+  {path:"update", component:UpdateComponent},
+  {path: "login", component: LoginComponent},
+  {path: "nav-bar", component: NavBarComponent},
+  {path:"claim",component:ClaimComponent},
+  {path:"buy",component:PurchaseInsuranceComponent},
+  {path:"policyDetails",component:InsuranceDetailsComponent},
+  {path:"claim",component:ClaimComponent},{path:"InsuranceDetails",component:InsuranceDetailsComponent}]},
+  {path:"edit-insurance",component:EditInsuranceComponent},
+  {path: "login", component: LoginComponent}
 
 ];
 
@@ -51,4 +49,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
