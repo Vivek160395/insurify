@@ -20,7 +20,7 @@ public class MessageConfiguration {
 
     @Bean
     public Queue queue(){
-        return new Queue("queue_3");
+        return new Queue("queue_4");
     }
 
     @Bean

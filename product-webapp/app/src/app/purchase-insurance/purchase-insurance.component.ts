@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, RequiredValidator, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AutomobileInsurance } from '../AutomobileInsurance';
@@ -11,6 +11,7 @@ import { InsuredInfo } from '../InsuredInfo';
 import { LifeInsurance } from '../LifeInsurance';
 import { PolicyDetails } from '../policy-details';
 import { formatDate } from '@angular/common'; 
+import { PaymentService } from '../payment.service';
 export interface LifeTable {
   minSal: number;
   maxSal: number;
@@ -20,12 +21,69 @@ export interface LifeTable {
 let LIFE_INSURANCE_DATA: LifeTable[] = [
   {minSal: 1, maxSal: 2, duration: 1, suminsured: 10000}
 ];
+
+
+
+
+declare var Razorpay: any;
+
+
+
+
+
+
 @Component({
   selector: 'app-purchase-insurance',
   templateUrl: './purchase-insurance.component.html',
   styleUrls: ['./purchase-insurance.component.css']
 })
 export class PurchaseInsuranceComponent implements OnInit {
+
+  purchaseForm: any = {}; 
+
+  paymentId: string | undefined;
+  error: string | undefined;
+  razorpay_payment_id: string | undefined;
+  razorpay_order_id: string | undefined;
+  razorpay_signature: string | undefined;
+  // amount:string='2000';
+  paymentStatus:boolean = false;
+  options = {
+    "key": "",
+    "amount": "", 
+    "currency":"",
+    "name": "Insurify",
+    "description": "One-Stop Insurance Solutions",
+    "image": "",
+    "order_id":"",
+    "handler": function (response: any){
+      var event = new CustomEvent("payment.success", 
+        {
+          detail: response,
+          bubbles: true,
+          cancelable: true
+        }
+      );	  
+      window.dispatchEvent(event);
+    }
+    ,
+    "prefill": {
+    "name": "",
+    "email": "",
+    "contact": ""
+    },
+    "notes": {
+    "address": ""
+    },
+    "theme": {
+    "color": "#3399cc"
+    }
+    };
+  
+
+  // --------------------------------------------------------------------------------------------------------------------------
+
+
   displayedColumns: string[] = ['minSal', 'maxSal', 'duration', 'suminsured'];
   dataSource = LIFE_INSURANCE_DATA;
   displaytableflag:boolean=false
@@ -179,6 +237,91 @@ getErrorMessage() {
 }
 purchase_insurance()
 {
+
+  // ---------------------------------------------------------------------------------------------------------------------------------------------------
+ console.log("-------------------------------------RAZORPAY PAYMENT CODE----------------------------------------------------------------");
+ 
+ console.log("hello from buy method.");
+      
+ this.paymentId = ''; 
+ this.error = ''; 
+ let amt=this.premium*100; 
+
+ this.order.createOrder({amount:this.premium.toString(),
+   customerPolicyId:this.id.toString(),
+  //  emailId:localStorage.getItem('email'),
+   emailId:this.userForm.get('email')!.value!,
+   name:this.userForm.get('name')!.value!,
+  //  paymentDate:this.userForm.get('startDate')!.value!,
+   mobileNo:("+91"+(this.userForm.get('mobile')!.value!).toString()),
+  }).subscribe(
+ data => {
+   console.log(data);
+   console.log(this.options);
+   
+  //  this.paymentStatus=true;
+   
+   this.options.key = data.secretId;
+   // this.options.key = "uQmSyGAgNqCHHT7AWCN94pOZ";
+   this.options.order_id = data.razorpayOrderId;
+   this.options.amount = data.amount //paise
+   this.options.currency ="INR";
+   this.options.prefill.name = data.name;
+   this.options.prefill.email = data.emailId;
+   this.options.prefill.contact = data.mobileNo;
+   
+   // if(data.pgName ==='razor2') {
+     // this.options.image=data.image;
+     var rzp = new Razorpay(this.options);
+     rzp.open();
+
+   // } else {
+   //   var rzp2 = new Razorpay(this.options);
+   //   rzp2.open();
+   // }
+  
+           
+   rzp.on('payment.failed', function (response: { error: { code: any; description: any; source: any; step: any; reason: any; metadata: { order_id: any; payment_id: any; }; }; }){    
+     // Todo - store this information in the server
+  
+     
+     console.log(response);
+     console.log(response.error.code);    
+     console.log(response.error.description);    
+     console.log(response.error.source);    
+     console.log(response.error.step);    
+     console.log(response.error.reason);    
+     console.log(response.error.metadata.order_id);    
+     console.log(response.error.metadata.payment_id);
+     // this.error = response.error.reason;
+   }
+   );
+ }
+ ,
+   ( err: { error: { message: string | undefined; }; }) => {
+   this.error = err.error.message;
+ }
+ );
+
+ console.log("-----------------------------------------------------------------------------------------------------------------------------------");
+ 
+
+}
+
+
+@HostListener('window:payment.success', ['$event']) 
+onPaymentSuccess(event: { detail: any; }): void {
+   console.log(event.detail);
+   this.proceedPayment();
+   this.razorpay_payment_id= event.detail.razorpay_payment_id;
+   this.razorpay_order_id= event.detail.razorpay_order_id;
+   this.razorpay_signature= event.detail.razorpay_signature;
+  
+
+   
+}
+
+proceedPayment(){
   console.log('-----------------------------------------------------------------------------------') 
   console.log(this.userForm)
   console.log('------------------------------------------------------------------------------------------------------------------')
@@ -287,6 +430,20 @@ purchase_insurance()
  );
  console.log('This is after posting');
 }
+
+ 
+
+
+
+
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
 check_validity(){
   if(this.userForm.get('sumInsured')?.valid&&this.userForm.get('duration')?.valid&&this.userForm.get('name')?.valid&&this.userForm.get('address')?.valid&&this.userForm.get('pincode')?.valid&&this.userForm.get('city')?.valid
   &&this.userForm.get('state')?.valid&&this.userForm.get('nameOfNominee')?.valid&&this.userForm.get('nomineeDOB')?.valid&&this.userForm.get('relation')?.valid&&this.userForm.get('mobile')?.valid)
@@ -295,7 +452,7 @@ check_validity(){
     return false
     if(this.userForm.get('adultno')?.valid&&this.userForm.get('kidno')?.valid)
     {
-      console.log(this.adultValue + this.kidValue);    
+      // console.log(this.adultValue + this.kidValue);    
       const control=<FormArray>this.userForm.get('insuredInfo'); 
       for(let x=0;x<(+this.adultValue + +this.kidValue);x++)
       { 
@@ -464,7 +621,7 @@ check_validity(){
       }
     
   }
-  constructor(public httpclient:HttpClient,public snackBar: MatSnackBar) {
+  constructor(public httpclient:HttpClient,public snackBar: MatSnackBar, public order: PaymentService ) {
       const currentYear = new Date().getFullYear();
       const currentMonth=new Date().getMonth();
       const currentDay=new Date().getDate();
