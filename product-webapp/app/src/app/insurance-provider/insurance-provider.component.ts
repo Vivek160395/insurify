@@ -12,7 +12,7 @@ export class InsuranceProviderComponent implements OnInit {
   constructor(private elementRef: ElementRef, private route: Router, private service: RecommendationServiceService) {
     Chart.register(BarElement, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
   }
-
+  
   myChart1: any = [];
   goto(id: any) {
     this.service.policyNo = id;
@@ -21,7 +21,7 @@ export class InsuranceProviderComponent implements OnInit {
   ngOnInit(): void {
     this.getAllPolicies();
     // this.getPolicy();
-    var ctx = this.elementRef.nativeElement.querySelector("#myChart").getContext('2d');
+    var ctx = this.elementRef.nativeElement.querySelector("#myChart ").getContext('2d');
     this.myChart1 = new Chart(ctx, {
       type: 'line',
       data: {
