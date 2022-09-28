@@ -14,7 +14,6 @@ public class ClaimDTO {
     private String name;
     private long  claimAmount;
     private String claimDate;
-//    private String description;
     private String claimType;
     private String startDate;
     private String endDate;

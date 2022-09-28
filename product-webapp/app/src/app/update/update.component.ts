@@ -112,6 +112,7 @@ profile=new FormGroup({
 
 
   onSubmit(){
+    console.log(this.profile.value.dateOfBirth);
     this.edit=true;
     this.view=false;
     this.info.name=this.profile.value.name;

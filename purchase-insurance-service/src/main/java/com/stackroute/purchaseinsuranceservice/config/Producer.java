@@ -1,9 +1,6 @@
 package com.stackroute.purchaseinsuranceservice.config;
 
-import com.stackroute.purchaseinsuranceservice.model.ClaimDTO;
-import com.stackroute.purchaseinsuranceservice.model.CustomerInsurance;
-import com.stackroute.purchaseinsuranceservice.model.PurchaseDTO;
-import com.stackroute.purchaseinsuranceservice.model.RenewDTO;
+import com.stackroute.purchaseinsuranceservice.model.*;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +24,8 @@ public class Producer {
     }
     public void sendMessageForClaim(ClaimDTO claimDTO){
         rabbitTemplate.convertAndSend(directExchange.getName(),"claim_routing",claimDTO);
+    }
+    public void sendMessageForDecision(DecisionDTO decisionDTO){
+        rabbitTemplate.convertAndSend(directExchange.getName(),"decision_routing",decisionDTO);
     }
 }

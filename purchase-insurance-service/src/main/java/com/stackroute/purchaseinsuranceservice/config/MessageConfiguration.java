@@ -35,6 +35,10 @@ public class MessageConfiguration {
     public Queue renewQueue(){
         return new Queue("renew_queue");
     }
+    @Bean
+    public Queue decisionQueue(){
+        return new Queue("decision_queue");
+    }
 
     @Bean
     public Binding userbinding(Queue registerQueue, DirectExchange directExchange){
@@ -51,6 +55,10 @@ public class MessageConfiguration {
     @Bean
     public Binding claim_binding(Queue claimQueue, DirectExchange directExchange){
         return BindingBuilder.bind(claimQueue).to(directExchange).with("claim_routing");
+    }
+    @Bean
+    public Binding decision_binding(Queue decisionQueue, DirectExchange directExchange){
+        return BindingBuilder.bind(decisionQueue).to(directExchange).with("decision_routing");
     }
     // Json converter that uses Json2 library
     @Bean

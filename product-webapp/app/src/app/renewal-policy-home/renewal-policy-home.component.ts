@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RenewalService } from '../renewal.service';
-import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-renewal-policy-home',
@@ -9,16 +8,13 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class RenewalPolicyHomeComponent implements OnInit {
 
-  constructor(private renewalService: RenewalService, private router: ActivatedRoute) {}
+  constructor(private renewalService: RenewalService) {}
 
-  category:string | undefined;
+  category:string = "";
   insuranceType:string = "";
 
   ngOnInit():void {
-    this.getPolicyDetails()
-
-    console.warn(this.router.snapshot.params['customerPolicyId'])
-    
+    this.getPolicyDetails()    
   }
 
   vehicle :any = {
@@ -41,11 +37,19 @@ export class RenewalPolicyHomeComponent implements OnInit {
   }
 
   getPolicyDetails(){
-    this.renewalService.getData().subscribe
+    this.renewalService.getPolicyDetails().subscribe(
+      res => 
+      {
+        this.insuranceType = res.insuranceType;
+        this.category = res.category;
+        console.log(this.category);
+        console.log(this.insuranceType);
+      }
+    )
+    this.renewalService.userPolicyDetails().subscribe
     (
-      data1 => {
-        if(data1.policyType === "Automobile Insurance" && data1.automobileInsurance.category === "car"){
-          console.log(data1);
+      data1 => { console.log(data1)
+        if(this.insuranceType === "AutomobileInsurance" && this.category === "car"){
           this.data.customerPolicyId = data1.customerPolicyId;
           this.data.policyId = data1.insurancePolicyId;
           this.data.insuredName = data1.nameOfNominee;
@@ -55,13 +59,11 @@ export class RenewalPolicyHomeComponent implements OnInit {
           this.data.ownerNumber = data1.mobile;
           this.data.ownerEmail = data1.email;
           this.vehicle.registrddNo = data1.automobileInsurance.vehicleRegistrationNumber;
-          console.log(data1.automobileInsurance.vehicleRegistrationNumber)
           this.vehicle.category = data1.automobileInsurance.category;
           this.vehicle.engineNumber = data1.automobileInsurance.engineNumber;
           this.vehicle.chasisNumber = data1.automobileInsurance.chassisNumber;
           }
-          else if(data1.policyType === "Automobile Insurance" && data1.automobileInsurance.category === "bike"){
-            console.log(data1);
+          else if(this.insuranceType === "AutomobileInsurance" && this.category === "bike"){
             this.data.customerPolicyId = data1.customerPolicyId;
             this.data.policyId = data1.insurancePolicyId;
             this.data.insuredName = data1.nameOfNominee;
@@ -71,35 +73,32 @@ export class RenewalPolicyHomeComponent implements OnInit {
             this.data.ownerNumber = data1.mobile;
             this.data.ownerEmail = data1.email;
             this.vehicle.registrddNo = data1.automobileInsurance.vehicleRegistrationNumber;
-            console.log(data1.automobileInsurance.vehicleRegistrationNumber)
             this.vehicle.category = data1.automobileInsurance.category;
             this.vehicle.engineNumber = data1.automobileInsurance.engineNumber;
             this.vehicle.chasisNumber = data1.automobileInsurance.chassisNumber;
           }
-          else if(data1.policyType === "Health Insurance"){
+          else if(this.insuranceType === "HealthInsurance"){
             console.log(data1);
             this.data.customerPolicyId = data1.customerPolicyId;
             this.data.policyId = data1.insurancePolicyId;
             this.data.insuredName = data1.nameOfNominee;
             this.data.pinCode = data1.pincode;
             this.data.insurancePeriod = data1.duration;
-            this.data.policyIssuenceDate = data1.startDate;
+            this.data.policyIssuenceDate = data1.startDate[0];
             this.data.ownerNumber = data1.mobile;
             this.data.ownerEmail = data1.email;
           }
-          else if(data1.policyType === "Life Insurance"){
-            console.log(data1);
+          else if(this.insuranceType === "LifeInsurance"){
             this.data.customerPolicyId = data1.customerPolicyId;
             this.data.policyId = data1.insurancePolicyId;
             this.data.insuredName = data1.nameOfNominee;
             this.data.pinCode = data1.pincode;
             this.data.insurancePeriod = data1.duration;
-            this.data.policyIssuenceDate = data1.startDate;
+            this.data.policyIssuenceDate = data1.startDate[0];
             this.data.ownerNumber = data1.mobile;
             this.data.ownerEmail = data1.email;
           }
         }
     )
   }
-
 }

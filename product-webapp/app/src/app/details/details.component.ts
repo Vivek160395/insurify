@@ -3,15 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-import * as pdfMake from "pdfmake/build/pdfmake";  
-import * as pdfFonts from "pdfmake/build/vfs_fonts";  
+// import * as pdfMake from "pdfmake/build/pdfmake";  
+// import * as pdfFonts from "pdfmake/build/vfs_fonts";  
 
 import domtoimage from 'dom-to-image';
 import  jsPDF from 'jspdf';
 
-declare var require: any;
-const htmlToPdfmake = require("html-to-pdfmake");
-(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+// declare var require: any;
+// const htmlToPdfmake = require("html-to-pdfmake");
+// (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 // import * as pdfMake from "pdfmake/build/pdfmake";  
 // import * as pdfFonts from "pdfmake/build/vfs_fonts";  
