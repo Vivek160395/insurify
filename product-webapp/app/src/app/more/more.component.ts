@@ -10,6 +10,7 @@ export class MoreComponent implements OnInit {
   @Input() text:string='';
   @Input() limit:number=0;
 showMore:boolean;
+
   constructor() {
     this.showMore=false;
    }

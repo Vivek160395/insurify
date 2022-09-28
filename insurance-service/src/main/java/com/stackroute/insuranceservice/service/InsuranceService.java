@@ -3,6 +3,7 @@ package com.stackroute.insuranceservice.service;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.Insurance;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,4 +20,7 @@ public interface InsuranceService {
     boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException;
 
     Optional<Insurance> findPolicyByPolicyName(String policyName);
+
+
+    Insurance editInsurance(@RequestBody Insurance insurance);
 }

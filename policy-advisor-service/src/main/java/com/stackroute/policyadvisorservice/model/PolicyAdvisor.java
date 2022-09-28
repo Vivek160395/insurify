@@ -25,7 +25,7 @@ public class PolicyAdvisor {
 
     private String phoneNumber;
 
-    private String gender;
+    private char gender;
 
     private String dateOfBirth;
 
@@ -39,9 +39,7 @@ public class PolicyAdvisor {
 
     private byte[] profilePic;
 
-    private List<Rating> rating;
-
-
-
+    private List<Rating> ratings;
+    private float averageRating;
 
 }
