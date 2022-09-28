@@ -7,17 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClaimDTO {
+public class DecisionDTO {
     private String customerPolicyId;
     private String insurancePolicyId;
     private String email;
     private String name;
     private long  claimAmount;
     private String claimDate;
-    private String claimType;
-    private String startDate;
-    private String endDate;
-    private int duration;
-    private long balance;
     private String status;
 }

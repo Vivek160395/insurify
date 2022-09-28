@@ -1,9 +1,7 @@
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Insurance } from '../insurance';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -162,7 +160,8 @@ export class EditInsuranceComponent implements OnInit {
       adults3: new FormControl("", [Validators.min(1), Validators.required]),
       kids: new FormControl("", [Validators.min(1), Validators.required]),
       minSalary: new FormControl("", [Validators.required, Validators.min(1)]),
-      maxSalary: new FormControl("", [Validators.required, Validators.min(1)])
+      maxSalary: new FormControl("", [Validators.required, Validators.min(1)]),
+      
     })]),
     policyBenefits: new FormArray([
       new FormGroup({
@@ -177,7 +176,8 @@ export class EditInsuranceComponent implements OnInit {
       })
     ]),
     policyDocuments: new FormControl("", [Validators.required]),
-    fileSource: new FormControl("", [Validators.required])
+    fileSource: new FormControl("", [Validators.required]),
+    userEmail: new FormControl("", [Validators.required])
   });
 
   get insuranceFormControl() {
@@ -187,7 +187,7 @@ export class EditInsuranceComponent implements OnInit {
   insuranceobj: any
 
   ngOnInit(): void {
-    this.http.get('http://localhost:8084/api/returnobj').subscribe((data: any) => {
+    this.http.get('http://localhost:8010/api/vk1/policy-id/123456').subscribe((data: any) => {
       this.insuranceobj = data
 
       console.log(this.insuranceobj)
@@ -199,6 +199,7 @@ export class EditInsuranceComponent implements OnInit {
         category: this.insuranceobj.category,
         modelsAllowed: this.insuranceobj.modelsAllowed,
         policyDocuments: this.insuranceobj.policyDocuments,
+        userEmail:localStorage.getItem('email')
       })
       const control1 = <FormArray>this.insuranceForms.get('policyBenefits')
 
@@ -207,10 +208,9 @@ export class EditInsuranceComponent implements OnInit {
           brief: this.insuranceobj.policyBenefits[i].brief,
           description: this.insuranceobj.policyBenefits[i].description,
         })
-
         this.addDetails1(i)
       }
-      this.addDetails1(this.insuranceobj.policyBenefits.length)
+      // this.addDetails1(this.insuranceobj.policyBenefits.length-1)
       console.log(this.flags)
       const control2 = <FormArray>this.insuranceForms.controls['addOnDetails'];
 
@@ -239,6 +239,7 @@ export class EditInsuranceComponent implements OnInit {
           maxSalary: this.insuranceobj.policyDetails[i].maxSalary,
         })
         console.log('No Error for ' + i);
+        if(i<(this.insuranceobj.policyDetails.length-1))
         this.addDetailsE(i)
       }
 
@@ -268,19 +269,56 @@ export class EditInsuranceComponent implements OnInit {
       });
     }
   }
-
+modifyform(){
+  let control=<FormArray>this.insuranceForms.get('policyBenefits')
+  for(let i=0;i<control.length;i++)
+  {
+    if(control.at(i).invalid)
+    {
+      control.removeAt(i)
+    }   
+  }
+  control=<FormArray>this.insuranceForms.get('addOnDetails')
+  for(let i=0;i<control.length;i++)
+  {
+    if(control.at(i).invalid)
+    {
+      control.removeAt(i)
+    }   
+  }
+  control=<FormArray>this.insuranceForms.get('policyDetails')
+  for(let i=0;i<control.length;i++)
+  {
+    if(control.at(i).invalid)
+    {
+      control.removeAt(i)
+    }   
+  }
+}
 
   onSubmit() {
+    this.modifyform();
     console.log(this.policyarray);
     this.insuranceForms.get('policyId')!.enable();
     const formData = new FormData;
 
     formData.append("imageFile", this.insuranceForms.controls['fileSource'].value!);
-    formData.append("policyId", this.id.toString())
-
-    this.http.post<Insurance>("http://localhost:8010/api/vk1/life-policy", this.insuranceForms.value).subscribe(
+    formData.append("policyId", this.insuranceForms.controls['policyId'].value!)
+  //   const httpOptions = {
+  //     headers: new HttpHeaders(
+  //     { 
+  //        'Authorization': 'Your Token',
+  //        'Content-Type': 'application/json'
+  //     })
+    this.insuranceForms.get('policyId')!.enable()
+    this.insuranceForms.get('policyName')!.enable()
+    this.insuranceForms.get('insuranceType')!.enable()
+  // }
+   console.log(this.insuranceForms.get('insuranceType')!.value)
+    this.http.put<Insurance>("http://localhost:8010/api/vk1/update", this.insuranceForms.value).subscribe(
       (data: any) => {
         console.log(data);
+        if(this.insuranceForms.controls['fileSource'].valid)
         this.http.put("http://localhost:8010/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
           .subscribe((data: any) => { console.log(data) });
       });
@@ -346,8 +384,8 @@ export class EditInsuranceComponent implements OnInit {
       durations: new FormControl(control.at(i).get('durations')?.value, [Validators.required, Validators.min(0)]),
       sumInsure: new FormControl(control.at(i).get('sumInsure')?.value, [Validators.required, Validators.min(0)]),
       adults1: new FormControl(control.at(i).get('adults1')?.value, [Validators.min(1), Validators.required]),
-      adults2: new FormControl(control.at(i).get('adults2')?.value, [Validators.min(20), Validators.max(60)]),
-      adults3: new FormControl(control.at(i).get('adults3')?.value, [Validators.min(20), Validators.max(60)]),
+      adults2: new FormControl(control.at(i).get('adults2')?.value, [Validators.min(1),Validators.required]),
+      adults3: new FormControl(control.at(i).get('adults3')?.value, [Validators.min(1), Validators.required]),
       kids: new FormControl(control.at(i).get('kids')?.value, [Validators.min(1), Validators.required]),
       minSalary: new FormControl(control.at(i).get('minSalary')?.value, [Validators.required, Validators.min(0)]),
       maxSalary: new FormControl(control.at(i).get('maxSalary')?.value, [Validators.required, Validators.min(0)])
@@ -513,48 +551,6 @@ export class EditInsuranceComponent implements OnInit {
     return (this.insuranceForms.get('addOnDetails') as FormArray).controls;
   }
   //=========================================================================================================
-  //Methods for chips component
-  // addOnBlur = true;
-  //   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  //   sumInsuredValues: SumInsured[] = [{insuredSum: 100000}, {insuredSum: 1000000}, {insuredSum: 5000000}];
-  //   duration: Duration[] = [{years: 1}, {years: 5}, {years: 10}];
-  //   add(event: MatChipInputEvent): void {
-  //     // const value = (event.value || '').trim();
-  //     const value = +event.value ;
-  //     // Add our fruit
-  //     if (value && !(this.sumInsuredValues.filter((a)=>a.insuredSum==value).length>0)) {
-  //       this.sumInsuredValues.push({insuredSum: value});
-  //       this.sumInsuredValues.sort((a,b)=>a.insuredSum-b.insuredSum)
-  //     }
-  //     // Clear the input value
-  //     event.chipInput!.clear();
-  //   }
-
-  //   remove(fruit: SumInsured): void {
-  //     const index = this.sumInsuredValues.indexOf(fruit);
-
-  //     if (index >= 0) {
-  //       this.sumInsuredValues.splice(index, 1);
-  //     }
-  //   }
-  //   addduration(event: MatChipInputEvent): void {
-
-  //     const value = +event.value ;
-
-  //     if (value && !(this.duration.filter((a)=>a.years==value).length>0)) {
-  //       this.duration.push({years: value});
-  //       this.duration.sort((a,b)=>a.years-b.years)
-  //     }
-  //     event.chipInput!.clear();
-  //   }
-
-  //   removeduration(x: Duration): void {
-  //     const index = this.duration.indexOf(x);
-
-  //     if (index >= 0) {
-  //       this.duration.splice(index, 1);
-  //     }
-  //   }
-  // api for getting policy
+  
 
 }

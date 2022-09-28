@@ -82,6 +82,8 @@ public class UserController {
         }
     }
 
+
+
     @DeleteMapping("/removeUser/{emailId}")
     public ResponseEntity<?> deleteUser(@PathVariable String emailId) throws UserNotRegisteredException {
         try {

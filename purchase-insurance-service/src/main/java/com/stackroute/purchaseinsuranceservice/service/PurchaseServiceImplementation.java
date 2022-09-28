@@ -1,6 +1,8 @@
 package com.stackroute.purchaseinsuranceservice.service;
 
 import com.stackroute.purchaseinsuranceservice.config.Producer;
+import com.stackroute.purchaseinsuranceservice.domain.Insurance;
+import com.stackroute.purchaseinsuranceservice.domain.PolicyDetails;
 import com.stackroute.purchaseinsuranceservice.exception.NoInsuranceFoundException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyExpiredException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyIdAlreadyExistsException;
@@ -19,10 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PurchaseServiceImplementation implements PurchaseService {
@@ -114,7 +113,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
     @Override
     public boolean checkIfAlreadyPurchased(String email, String insurancePolicyId) {
         List<CustomerInsurance> customerInsurances = new ArrayList<>();
-        purchaseRepository.getPurchasedInsuranceByEmail(email).forEach(customerInsurances::add);
+        purchaseRepository.getCustomerInsuranceByEmail(email).forEach(customerInsurances::add);
         CustomerInsurance customerInsurance;
 
         for (int i = 0; i < customerInsurances.size(); i++) {
@@ -300,6 +299,101 @@ public class PurchaseServiceImplementation implements PurchaseService {
         return customer_insurance;
     }
 
+    public long returnUserCount(String insuranceID) {
+        long count = 0;
+        long total = 0;
+        List<CustomerInsurance> customer_insurance_list = purchaseRepository.findAll();
+        if (customer_insurance_list == null)
+            return 0;
+        // customer_insurance_list.stream().filter((a)->a.getInsurancePolicyId().equalsIgnoreCase(insuranceID));
+        for (int i = 0; i < customer_insurance_list.size(); i++) {
+            if (customer_insurance_list.get(i).getInsurancePolicyId().equalsIgnoreCase(insuranceID)) {
+                count++;
+            }
+        }
+        total = customer_insurance_list.size();
+        return count;
+    }
+
+    @Override
+    public boolean updateClaimStatus(String customerPolicyId, String status) {
+        if (purchaseRepository.findById(customerPolicyId).isPresent()) {
+            CustomerInsurance customerInsurance = purchaseRepository.findById(customerPolicyId).get();
+            int index = customerInsurance.getClaimStatus().size() - 1;
+            List<String> claimStatus = customerInsurance.getClaimStatus();
+
+            List<String> decisionDate = customerInsurance.getDecisionDate();
+            String last = claimStatus.get(claimStatus.size() - 1);
+            if (last.equalsIgnoreCase("pending")) {
+                last = status;
+                claimStatus.remove(claimStatus.size() - 1);
+                claimStatus.add(last);
+                java.util.Date date = new Date();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String date_decision = formatter.format(date);
+                decisionDate.add(date_decision);
+                customerInsurance.setClaimStatus(claimStatus);
+                customerInsurance.setDecisionDate(decisionDate);
+                DecisionDTO decisionDTO = new DecisionDTO();
+                decisionDTO.setCustomerPolicyId(customerInsurance.getCustomerPolicyId());
+                decisionDTO.setInsurancePolicyId(customerInsurance.getInsurancePolicyId());
+                decisionDTO.setEmail(customerInsurance.getEmail());
+                decisionDTO.setName(customerInsurance.getName());
+                decisionDTO.setClaimAmount(customerInsurance.getClaimSum().get(index));
+                decisionDTO.setClaimDate(customerInsurance.getClaimSubmissionDate().get(index));
+                decisionDTO.setStatus(status);
+                producer.sendMessageForDecision(decisionDTO);
+                purchaseRepository.save(customerInsurance);
+
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Insurance returnInsuranceForRenewal(Insurance insurance, String customerPolicyId) {
+        System.out.println(insurance);
+        CustomerInsurance customerInsurance;
+        Insurance modifiedInsurance;
+        List<String> startDate = new ArrayList<>();
+        List<String> endDate = new ArrayList<>();
+
+        if (purchaseRepository.findById(customerPolicyId).isPresent()) {
+            customerInsurance = purchaseRepository.findById(customerPolicyId).get();
+            modifiedInsurance = insurance;
+            int lastIndex = customerInsurance.getEndDate().size() - 1;
+            String policyEndDate = customerInsurance.getEndDate().get(lastIndex);
+            long sum = customerInsurance.getSumInsured();
+            List<PolicyDetails> policyDetails = new ArrayList<>();
+            for (int i = 0; i < insurance.getPolicyDetails().length; i++) {
+                if (insurance.getPolicyDetails()[i].getSumInsure() == sum)
+                    policyDetails.add(insurance.getPolicyDetails()[i]);
+            }
+            if (policyDetails.size() == 0) {
+                // No Policy with Given SumInsured
+                return null;
+            }
+            if (!insurance.getInsuranceType().equalsIgnoreCase("HealthInsurance")) {
+                PolicyDetails[] updatePolicyDetails = new PolicyDetails[policyDetails.size()];
+                for (int i = 0; i < policyDetails.size(); i++) {
+                    updatePolicyDetails[i] = policyDetails.get(i);
+                }
+                modifiedInsurance.setPolicyDetails(updatePolicyDetails);
+                return modifiedInsurance;
+            }
+            // updating policy Details for Health Insurance
+            List<InsuredInfo> usersInfo = new ArrayList<>();
+            int user_no = customerInsurance.getHealthInsurance().getInsuredInfo().length;
+            for (int i = 0; i < user_no; i++) {
+                usersInfo.add(customerInsurance.getHealthInsurance().getInsuredInfo()[i]);
+            }
+            InsuredInfo[] availableUsersInfo = customerInsurance.getHealthInsurance().getInsuredInfo();
+            int age[] = new int[user_no];
+        }
+        return null;
+    }
+
     @Override
     public int startUp(String email) throws ParseException {
         if (purchaseRepository.getCustomerInsuranceByEmail(email).size() == 0) {
@@ -326,18 +420,12 @@ public class PurchaseServiceImplementation implements PurchaseService {
                 String startDay = customerInsurance.getStartDate().get(0);
                 String endDay = customerInsurance.getEndDate().get(customerInsurance.getEndDate().size() - 1);
                 if (startDay.compareTo(currentDay) > 0 || endDay.compareTo(currentDay) < 0) {
-                    // if (customerInsurance.getPolicyType().equalsIgnoreCase("LifeInsurance"))
-                    // customerInsurance.setClaimFlag(true);
-                    // else
-                    // customerInsurance.setClaimFlag(false);
-
                     customerInsurance.setStatus(false);
-                    customerInsurance.setRenewFlag(false);
                     purchaseRepository.save(customerInsurance);
                 }
                 if (customerInsurance.getClaimDate().size() != 0) {
                     String lastClaimDate = customerInsurance.getClaimDate()
-                            .get(customerInsurance.getClaimDate().size() - 1);
+                            .get(customerInsurance.getClaimSubmissionDate().size() - 1);
                     String lastClaimStatus = customerInsurance.getClaimStatus()
                             .get(customerInsurance.getClaimStatus().size() - 1);
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -376,7 +464,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
                                 purchaseRepository.save(customerInsurance);
                                 continue;
                             }
-                            System.out.println("Found a policy matching the date and lying betwwen dates");
+                            System.out.println("Found a policy matching the date and lying between dates");
                             long totalClaim = 0;
                             // checking for if the insured sum is sufficient for claimed amount
                             for (int index = 0; index < customerInsurance.getClaimSum().size(); index++) {
@@ -397,7 +485,18 @@ public class PurchaseServiceImplementation implements PurchaseService {
                                         .get(customerInsurance.getClaimSum().size() - 1);
                                 List<String> updateStatus = customerInsurance.getClaimStatus();
                                 updateStatus.remove(updateStatus.size() - 1);
+
                                 updateStatus.add("approved");
+                                int index = customerInsurance.getClaimStatus().size() - 1;
+                                DecisionDTO decisionDTO = new DecisionDTO();
+                                decisionDTO.setCustomerPolicyId(customerInsurance.getCustomerPolicyId());
+                                decisionDTO.setInsurancePolicyId(customerInsurance.getInsurancePolicyId());
+                                decisionDTO.setEmail(customerInsurance.getEmail());
+                                decisionDTO.setName(customerInsurance.getName());
+                                decisionDTO.setClaimAmount(customerInsurance.getClaimSum().get(index));
+                                decisionDTO.setClaimDate(customerInsurance.getClaimSubmissionDate().get(index));
+                                decisionDTO.setStatus("approved");
+                                producer.sendMessageForDecision(decisionDTO);
                                 customerInsurance.getClaimSum().remove(customerInsurance.getClaimSum().size() - 1);
                                 if ((totalClaim + sum) <= customerInsurance.getSumInsured()) {
                                     customerInsurance.getClaimSum().add(sum);
@@ -416,7 +515,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
                                 customerInsurance.setClaimStatus(updateStatus);
                                 // customerInsurance.setClaimFlag(false);
                                 purchaseRepository.save(customerInsurance);
-                                continue;
+
                             }
 
                         }
@@ -432,7 +531,6 @@ public class PurchaseServiceImplementation implements PurchaseService {
     public int uploadDocument(MultipartFile documentFile, String policyId) throws IOException {
 
         CustomerInsurance retrieveInsurance = purchaseRepository.findById(policyId).get();
-
         if (retrieveInsurance == null)
             return 0;
         retrieveInsurance.getClaimDocument().add(documentFile.getBytes());

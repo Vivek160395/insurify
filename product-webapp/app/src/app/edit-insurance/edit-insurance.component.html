@@ -1,8 +1,6 @@
 <div fxLayout="column">
     <div style="border-radius: 20px;display: flex;justify-content: center;align-items: center;">
-        <button mat-raised-button color="primary" fxFlex="40%"
-            style="border-radius: 20px;display: flex;justify-content: center;align-items: center;">Edit
-            Insurance</button>
+
     </div>
     <mat-stepper #stepper>
 
@@ -105,39 +103,7 @@
                 <mat-card-content style="align-content: center;">
                     <form [formGroup]="insuranceForms">
                         <ng-template matStepLabel>Add policy Financial policyDetails</ng-template>
-                        <!-- <div fxLayout="row" fxLayoutGap="2%">
-                            <mat-form-field class="example-chip-list" appearance="outline" fxFlex="50%">
-                                <mat-label>Allowed Sum Insured Values(Add new values below)</mat-label>
-                                <mat-chip-list #chipList aria-label="Fruit selection"
-                                    matTooltip="To add new Sum Insured values ,add the value and press Enter">
-                                    <mat-chip *ngFor="let fruit of sumInsuredValues" (removed)="remove(fruit)">
-                                        {{fruit.insuredSum}}
-                                        <button matChipRemove>
-                                            <mat-icon>cancel</mat-icon>
-                                        </button>
-                                    </mat-chip>
-                                    <input placeholder="Add New Insured Sum..." [matChipInputFor]="chipList"
-                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                        [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
-                                </mat-chip-list>
-                            </mat-form-field>
-                            <mat-form-field class="example-chip-list" appearance="outline" fxFlex="50%">
-                                <mat-label>Allowed Duration Values in Years(Add new values below)</mat-label>
-                                <mat-chip-list #chipList1
-                                    matTooltip="You can add values to be available for policy duration here">
-                                    <mat-chip *ngFor="let x of duration" (removed)="removeduration(x)">
-                                        {{x.years}}
-                                        <button matChipRemove>
-                                            <mat-icon>cancel</mat-icon>
-                                        </button>
-                                    </mat-chip>
-                                    <input placeholder="Add New Duration..." [matChipInputFor]="chipList1"
-                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                        [matChipInputAddOnBlur]="addOnBlur"
-                                        (matChipInputTokenEnd)="addduration($event)">
-                                </mat-chip-list>
-                            </mat-form-field>
-                        </div> -->
+                    
                         <h3 fxFlexLayout="row" *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Bike'"
                             style="font-family: cursive"> Select Bike models allowed for policy</h3>
                         <h3 fxFlexLayout="row" *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Car'"

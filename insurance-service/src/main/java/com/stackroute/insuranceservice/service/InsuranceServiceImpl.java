@@ -4,14 +4,15 @@ import com.stackroute.insuranceservice.config.Producer;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.Insurance;
-import com.stackroute.insuranceservice.rabbitMq.domain.DTO;
 import com.stackroute.insuranceservice.repository.InsuranceRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -64,5 +65,30 @@ public class InsuranceServiceImpl implements InsuranceService {
     @Override
     public Optional<Insurance> findPolicyByPolicyName(String policyName) {
         return insuranceRepo.findPolicyByPolicyName(policyName);
+    }
+
+    @Override
+    public Insurance editInsurance(@RequestBody Insurance insurance)
+    {
+        if(!insuranceRepo.findById(insurance.getPolicyId()).isPresent())
+        {
+            return null;
+        }
+        Insurance insurancePolicyObj = insuranceRepo.findById(insurance.getPolicyId()).get();
+        insurancePolicyObj.setPolicyDescription(insurance.getPolicyDescription());
+        insurancePolicyObj.setPolicyDetails(insurance.getPolicyDetails());
+        insurancePolicyObj.setPolicyBenefits(insurance.getPolicyBenefits());
+        insurancePolicyObj.setAddOnDetails(insurance.getAddOnDetails());
+        insurancePolicyObj.setPolicyDocuments(insurance.getPolicyDocuments());
+        insurancePolicyObj.setUserEmail(insurance.getUserEmail());
+        if (insurance.getInsuranceType().equalsIgnoreCase("AutomobileInsurance")) {
+            insurancePolicyObj.setCategory(insurance.getCategory());
+            insurancePolicyObj.setModelsAllowed(insurance.getModelsAllowed());
+        } else {
+            insurancePolicyObj.setCategory(null);
+            insurancePolicyObj.setModelsAllowed(null);
+        }
+        insuranceRepo.save(insurance);
+        return insuranceRepo.save(insurance);
     }
 }
