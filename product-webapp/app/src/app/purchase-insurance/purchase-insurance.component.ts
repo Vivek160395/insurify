@@ -333,7 +333,7 @@ export class PurchaseInsuranceComponent implements OnInit {
     customerInsurancePurchase.insurancePolicyId = '1232131'
     console.log(customerInsurancePurchase)
     console.log('This is before posting');
-
+  
     this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8084/api/add/customer-insurance', customerInsurancePurchase).subscribe(
       (data: any) => {
         console.log(data);
@@ -479,8 +479,8 @@ export class PurchaseInsuranceComponent implements OnInit {
       }))
     }
    console.log(control1);
-   
-      this.httpclient.get('http://localhost:8084/api/returnobj').subscribe((data:any)=>{
+         this.sortedsuminsured=[]   
+      this.httpclient.get('http://localhost:8010/api/vk1/policy-id/567890').subscribe((data:any)=>{
       console.log('Policy ID : '+data.policyId)
       console.log('Policy Name : '+data.policyName)
       
@@ -512,6 +512,50 @@ export class PurchaseInsuranceComponent implements OnInit {
             }
             this.sortedsuminsured.sort((a,b)=>a-b)
         }
+        else if(data.insuranceType=='HealthInsurance')
+           {
+            this.insuranceobj=[]
+            this.isHealth=true
+            for(let index=0;index<data.policyDetails.length;index++)
+          {
+            this.insuranceobj.push({'sumInsured':data.policyDetails[index].sumInsure,'duration':data.policyDetails[index].durations,'kids':data.policyDetails[index].kids,'adults1':data.policyDetails[index].adults1,'adults2':data.policyDetails[index].adults2,'adults3':data.policyDetails[index].adults3})
+          }
+          for (let index = 0; index < data.policyDetails.length; index++) {
+            this.flags=true; 
+            for(let x=0;x<this.sortedsuminsured.length;x++)
+              {
+                 if(this.sortedsuminsured[x] ==data.policyDetails[index].sumInsure)
+                 {
+                   this.flags=false;
+                   break;
+                 }
+              }
+         if(this.flags)
+         this.sortedsuminsured.push(data.policyDetails[index].sumInsure)
+            }
+            this.sortedsuminsured.sort((a,b)=>a-b)
+           const con=<FormArray>this.userForm.get('insuredInfo')
+            for (let index = 0; index < 10; index++) {
+              con.push(new FormGroup({
+                nameof            : new FormControl("", [Validators.required]),
+                insuredDOB        : new FormControl("", [Validators.required]),
+                relation          : new FormControl("", [Validators.required]),
+                preExistingIllness: new FormControl("1", [Validators.required]),
+                illnessList       : new FormControl([], [Validators.required]),
+                weight            : new FormControl([], [Validators.required]),
+                height            : new FormControl([], [Validators.required])
+              }));       
+            }
+           }
+           else if(data.insuranceType=='LifeInsurance')
+           {
+            this.insuranceobj=[]
+            this.isLife=true
+            for(let index=0;index<data.policyDetails.length;index++)
+          {
+            this.insuranceobj.push({'sumInsured':data.policyDetails[index].sumInsure,'duration':data.policyDetails[index].durations,'premium':data.policyDetails[index].premiums,'minsal':data.policyDetails[index].minSalary,'maxsal':data.policyDetails[index].maxSalary})
+          }
+
         for (let index = 0; index < data.policyDetails.length; index++) {
           this.flags = true;
           for (let x = 0; x < this.sortedsuminsured.length; x++) {
@@ -520,12 +564,11 @@ export class PurchaseInsuranceComponent implements OnInit {
               break;
             }
           }
-             
+          if(this.flags)
+          this.sortedsuminsured.push(data.policyDetails[index].sumInsure)
            }
-     
-        console.log(this.isAuto);
-        console.log(this.autocategory)
-        console.log((this.autocategory==="Bike"))
+          }
+       
         
       this.userForm.get('policyname')?.setValue(data.policyName)
       this.userForm.get('policyname')!.disable();
