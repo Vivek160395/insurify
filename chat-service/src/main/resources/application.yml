@@ -1,0 +1,8 @@
+server:
+  port: 9090
+spring:
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/insurifyd}
+  application:
+    name: chat-service

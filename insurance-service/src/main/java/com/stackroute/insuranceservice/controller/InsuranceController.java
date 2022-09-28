@@ -162,4 +162,9 @@ public class InsuranceController {
         return outputStream.toByteArray();
     }
 
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateInsurance(@RequestBody Insurance insurance) {
+        return new ResponseEntity<>(insuranceService.editInsurance(insurance), HttpStatus.OK);
+    }
 }

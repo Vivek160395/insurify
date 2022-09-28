@@ -8,7 +8,10 @@ import com.stackroute.policyadvisorservice.repository.PolicyAdvisorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.ArrayList;
+import java.util.List;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,26 +48,43 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService{
     }
 
 
+//
+
     @Override
-    public PolicyAdvisor updatePolicyAdvisor(PolicyAdvisor policyAdvisor, String emailId) throws PolicyAdvisorNotRegisteredException {
+    public PolicyAdvisor update(PolicyAdvisor policyAdvisor, String emailId, MultipartFile file)
+            throws PolicyAdvisorNotRegisteredException, IOException {
 
         if (policyAdvisorRepository.findById(emailId).isPresent()) {
             PolicyAdvisor policyAdvisor1 = policyAdvisorRepository.findById(emailId).get();
 
-            policyAdvisor1.setName(policyAdvisor1.getName());
-            policyAdvisor1.setGender(policyAdvisor1.getGender());
-            policyAdvisor1.setDateOfBirth(policyAdvisor1.getDateOfBirth());
-            policyAdvisor1.setPhoneNumber(policyAdvisor1.getPhoneNumber());
+            policyAdvisor1.setProfilePic(file.getBytes());
+            policyAdvisorRepository.save(policyAdvisor1);
+            return policyAdvisor1;
+        } else {
+            throw new PolicyAdvisorNotRegisteredException();
+        }
+    }
+
+    @Override
+    public PolicyAdvisor update(PolicyAdvisor policyAdvisor, String emailId)
+            throws PolicyAdvisorNotRegisteredException {
+
+        if (policyAdvisorRepository.findById(emailId).isPresent()) {
+            PolicyAdvisor policyAdvisor1 = policyAdvisorRepository.findById(emailId).get();
+
+            policyAdvisor1.setName(policyAdvisor.getName());
+            policyAdvisor1.setPhoneNumber(policyAdvisor.getPhoneNumber());
+            policyAdvisor1.setGender(policyAdvisor.getGender());
+            policyAdvisor1.setPhoneNumber(policyAdvisor.getPhoneNumber());
             policyAdvisor1.setAadharNo(policyAdvisor.getAadharNo());
-            policyAdvisor1.setPanNo(policyAdvisor1.getPanNo());
-            // policyAdvisor1.setProfilePic(file);
-            policyAdvisor1.setCategory(policyAdvisor1.getCategory());
-            policyAdvisor1.setYearsOfExperience(policyAdvisor1.getYearsOfExperience());
+            policyAdvisor1.setPanNo(policyAdvisor.getPanNo());
+            policyAdvisor1.setYearsOfExperience(policyAdvisor.getYearsOfExperience());
+            policyAdvisor1.setCategory(policyAdvisor.getCategory());
+            policyAdvisor1.setRatings(policyAdvisor.getRatings());
 
             policyAdvisorRepository.save(policyAdvisor1);
             return policyAdvisor1;
-        }
-        else{
+        } else {
             throw new PolicyAdvisorNotRegisteredException();
         }
     }
@@ -80,15 +100,42 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService{
     }
 
     @Override
-    public float calculateRating(Rating rating) {
-        float average;
-        return 0;
+    public PolicyAdvisor calculateRating(Rating ratings,String emailId ) throws PolicyAdvisorNotRegisteredException {
+        float sum= 0F;
+        float average = 0.0F;
+
+        if( policyAdvisorRepository.findById(emailId).isPresent()) {
+
+            PolicyAdvisor policyAdvisor1 = policyAdvisorRepository.findById(emailId).get();
+            List<Rating> ratingList = policyAdvisor1.getRatings();
+           // Rating rating = new Rating();
+            if (ratingList!= null){
+                ratingList.add(ratings);
+                for (Rating r: ratingList){
+                    sum = sum + r.getRating();
+                }
+
+                average = sum/ ratingList.size();
+                policyAdvisor1.setAverageRating(average);
+                policyAdvisorRepository.save(policyAdvisor1);
+
+                return policyAdvisor1;
+            }
+            List<Rating> ratingList1 = new ArrayList<>();
+            ratingList1.add(ratings);
+            policyAdvisor1.setAverageRating(ratings.getRating());
+            policyAdvisor1.setRatings(ratingList1);
+            policyAdvisorRepository.save(policyAdvisor1);
+            return policyAdvisor1;
+        }
+        else
+            throw new PolicyAdvisorNotRegisteredException();
     }
 
 
     @Override
-    public Optional<PolicyAdvisor> getPolicyAdvisorByName(String name) {
-        return policyAdvisorRepository.findById(name);
+    public Optional<PolicyAdvisor> getPolicyAdvisorByEmail(String emailId) {
+        return policyAdvisorRepository.findById(emailId);
     }
 
 }

@@ -63,7 +63,7 @@
                                             <button mat-raised-button color="primary"
                                                 (click)="close_dob_div()">Done</button>
                                         </div>
-                                        <mat-form-field appearance="outline" fxLayout="row" *ngIf="isAuto&&autocategory=='Bike'">
+                                        <mat-form-field appearance="outline" fxLayout="row" *ngIf="(isAuto)&&(autocategory=='Bike')">
                                             <mat-label>Bike Model</mat-label>
                                             <mat-select placeholder="Bike Model" formControlName="model">
                                                 <mat-option value="{{x}}" *ngFor="let x of bikelist">{{x}}
@@ -311,8 +311,9 @@
 
                     <mat-form-field appearance="outline" fxFlex="33%">
                         <mat-label>Nominee DOB</mat-label>
-                        <input matInput placeholder="Nominee Date Of Birth" type="date" formControlName="nomineeDOB"
+                        <input matInput min="minDate" max="maxDate" placeholder="Nominee Date Of Birth" type="date" formControlName="nomineeDOB"
                             required>
+                            
                         <!-- <input type="date" formControlname="nomineeDOB"> -->
                         <small style="color: red;"
                             *ngIf="userForm.controls.nomineeDOB.errors?.['required'] && userForm.controls.nomineeDOB.invalid && (userForm.controls.nomineeDOB.touched || userForm.controls.nomineeDOB.dirty)">*Required</small>
@@ -459,8 +460,14 @@
 
                 <div fxLayout="row">
                     <button mat-button matStepperPrevious>Back</button>
-                    <button mat-raised-button matStepperNext style="margin-left: auto" color="primary">Next</button>
+                    <button mat-button (click)="stepper.reset()">Reset</button>
+                    <button mat-button (click)="print()">Print object</button>
+                    <button mat-raised-button [disabled]="check_validity()" color="primary" (click)="purchase_insurance()" fxFlex="30%" style="margin-left: auto;">Buy</button>
                 </div>
+                <!-- <div fxLayout="row">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-raised-button matStepperNext style="margin-left: auto" color="primary">Next</button>
+                </div> -->
             </div>
         </form>
     </mat-step>
@@ -493,9 +500,10 @@
 
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex="33%">
-                                <mat-label>Nominee DOB</mat-label>
-                                <input matInput placeholder="Nominee Date Of Birth" type="date"
+                                <mat-label>Date of Birth</mat-label>
+                                <input [min]="minDate" [max]="maxDate" placeholder="Nominee Date Of Birth" type="date"
                                     formControlName="insuredDOB" required>
+                                    
                                 <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
 
                             </mat-form-field>
@@ -513,7 +521,7 @@
                             </mat-form-field>
                           
                             <mat-form-field appearance="outline" fxFlex="33%">
-                                <mat-select placeholder="Relationship with Applicant" formControlName="preExistingIllness">
+                                <mat-select placeholder="Pre Existing Illness?" formControlName="preExistingIllness">
                                     <mat-option value="Yes" >YES</mat-option>
                                     <mat-option value= "No" >No </mat-option>
                                  </mat-select>
