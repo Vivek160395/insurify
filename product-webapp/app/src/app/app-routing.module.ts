@@ -15,6 +15,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
 import { DetailsComponent } from './details/details.component';
+import { ChatComponent } from './chat/chat.component';
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
@@ -33,7 +34,8 @@ const routes: Routes = [
   {path: "nav-bar", component: NavBarComponent},
   {path:"claim",component:ClaimComponent},
   
-  {path:"policyDetails",component:InsuranceDetailsComponent}
+  {path:"policyDetails",component:InsuranceDetailsComponent},
+  {path:"chat",component:ChatComponent}
 ];
 
 @NgModule({

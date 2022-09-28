@@ -73,6 +73,9 @@ import { DetailsComponent } from './details/details.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
+import { ChatComponent } from './chat/chat.component';
+
+
 
 
 @NgModule({
@@ -99,7 +102,8 @@ import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy
     InsuranceDetailsComponent,
     LoginComponent,
     MoreComponent,
-    DetailsComponent
+    DetailsComponent,
+    ChatComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [

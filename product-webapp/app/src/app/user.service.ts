@@ -39,4 +39,29 @@ return this.http.put(this.baseurl+"updateUserDetails/"+this.email1,info);
     return this.http.post(`${this.baseUrl}`,user);
   }
 
+  postUserId(s1:string):Observable<any>{
+    return this.http.post("http://localhost:9090/api/userId",s1);
+
+  }
+
+  postAdvisorId(s1:string):Observable<any>{
+     return this.http.post("http://localhost:9090/api/advisorId",s1);
+  }
+
+  getMsgs(chatRoom:string):Observable<any>{
+  return this.http.get("http://localhost:9090/api/msg/"+chatRoom);
+  }
+
+  registerChatRoom(msg:any):Observable<any>{
+  return this.http.post("http://localhost:9090/api/register/chatroom",msg)
+  }
+
+  updateMsgList(chatMsg:any,chatRoom:string):Observable<any>{
+   return this.http.put("http://localhost:9090/api/update/msg/"+chatRoom,chatMsg)
+  }
+
+  getNames(id:any):Observable<any>{
+    return this.http.get("http://localhost:9090/api/names/"+id)
+  }
+
 }
