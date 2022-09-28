@@ -10,12 +10,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InsuranceProfile {
-    private int insuranceId;
-    private String insuranceName;
-    private int age;
-    private String insuranceType;
-    private String occupation;
-    private String description;
-    private byte[] imageOfInsurance;
-    private String typeOfImage;
+    String policyId;
+    String policyName;
+    String insuranceType;
+    String description;
+    byte[] picByte;
+    String picType;
 }

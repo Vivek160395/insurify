@@ -1,5 +1,7 @@
 package com.stackroute.purchaseinsuranceservice.service;
 
+import com.stackroute.purchaseinsuranceservice.domain.Insurance;
+import com.stackroute.purchaseinsuranceservice.exception.NoInsuranceFoundException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyExpiredException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyIdAlreadyExistsException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyIdNotFoundException;
@@ -7,24 +9,40 @@ import com.stackroute.purchaseinsuranceservice.model.CustomerClaim;
 import com.stackroute.purchaseinsuranceservice.model.CustomerInsurance;
 import com.stackroute.purchaseinsuranceservice.model.CustomerInsurancePurchase;
 import com.stackroute.purchaseinsuranceservice.model.CustomerRenewal;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
 public interface PurchaseService {
 
-public CustomerInsurance savePurchasedInsurance(CustomerInsurancePurchase customerInsurancePurchase) throws PolicyIdAlreadyExistsException;
-public Iterable<CustomerInsurance> getCustomerInsurances();
+    public CustomerInsurance savePurchasedInsurance(CustomerInsurancePurchase customerInsurancePurchase)
+            throws PolicyIdAlreadyExistsException;
 
-public  CustomerInsurance getPolicyDetailsByCustomerPolicyID(String customerPolicyId) throws PolicyIdNotFoundException;
-public List<CustomerInsurance> getInsuranceByEmail(String email);
+    public Iterable<CustomerInsurance> getCustomerInsurances();
 
-public boolean checkIfAlreadyPurchased(String email,String insurancePolicyId);
+    public CustomerInsurance getPolicyDetailsByCustomerPolicyID(String customerPolicyId)
+            throws PolicyIdNotFoundException;
 
-public boolean renewCustomerPolicy(CustomerRenewal customerRenewal) throws PolicyIdNotFoundException, ParseException, PolicyExpiredException;
+    public Iterable<CustomerInsurance> getInsuranceByEmail(String email) throws NoInsuranceFoundException;
 
-public String claimInsurance(CustomerClaim customerClaim) throws PolicyIdNotFoundException;
+    public boolean checkIfAlreadyPurchased(String email, String insurancePolicyId);
 
-public CustomerInsurance returnUserPolicyInformation(String customerPolicyId) throws PolicyIdNotFoundException;
+    public boolean renewCustomerPolicy(CustomerRenewal customerRenewal)
+            throws PolicyIdNotFoundException, ParseException, PolicyExpiredException;
 
+    public String claimInsurance(CustomerClaim customerClaim) throws PolicyIdNotFoundException;
+
+    public CustomerInsurance returnUserPolicyInformation(String customerPolicyId) throws PolicyIdNotFoundException;
+
+    public int startUp(String email) throws ParseException;
+
+    public int uploadDocument(MultipartFile documentFile, String policyId) throws IOException;
+
+    public long returnUserCount(String insuranceID);
+
+    public boolean updateClaimStatus(String customerId, String status);
+
+    public Insurance returnInsuranceForRenewal(Insurance insurance, String customerPolicyId);
 }

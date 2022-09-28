@@ -9,6 +9,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class MessageConfiguration {
@@ -22,13 +23,43 @@ public class MessageConfiguration {
         return new Queue("recommendation_queue");
     }
 
-//    @Bean
-//    public Queue insurerQueue(){return new Queue("insurer_queue");}
     @Bean
-    public Binding userbinding(Queue queue, DirectExchange directExchange){
-        return BindingBuilder.bind(queue).to(directExchange).with("recommendation_routing");
+    public Queue purchaseQueue(){
+        return new Queue("purchase_queue");
+    }
+    @Bean
+    public Queue claimQueue(){
+        return new Queue("claim_queue");
+    }
+    @Bean
+    public Queue renewQueue(){
+        return new Queue("renew_queue");
+    }
+    @Bean
+    public Queue decisionQueue(){
+        return new Queue("decision_queue");
     }
 
+    @Bean
+    public Binding userbinding(Queue registerQueue, DirectExchange directExchange){
+        return BindingBuilder.bind(registerQueue).to(directExchange).with("recommendation_routing");
+    }
+    @Bean
+    public Binding purchase_binding(Queue purchaseQueue, DirectExchange directExchange){
+        return BindingBuilder.bind(purchaseQueue).to(directExchange).with("purchase_routing");
+    }
+    @Bean
+    public Binding renew_binding(Queue renewQueue, DirectExchange directExchange){
+        return BindingBuilder.bind(renewQueue).to(directExchange).with("renew_routing");
+    }
+    @Bean
+    public Binding claim_binding(Queue claimQueue, DirectExchange directExchange){
+        return BindingBuilder.bind(claimQueue).to(directExchange).with("claim_routing");
+    }
+    @Bean
+    public Binding decision_binding(Queue decisionQueue, DirectExchange directExchange){
+        return BindingBuilder.bind(decisionQueue).to(directExchange).with("decision_routing");
+    }
     // Json converter that uses Json2 library
     @Bean
     public Jackson2JsonMessageConverter producerJackson2JsonMessageConverter(){

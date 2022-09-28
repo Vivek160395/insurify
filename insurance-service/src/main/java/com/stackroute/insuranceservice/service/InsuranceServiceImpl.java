@@ -4,18 +4,22 @@ import com.stackroute.insuranceservice.config.Producer;
 import com.stackroute.insuranceservice.exceptions.PolicyAlreadyExistException;
 import com.stackroute.insuranceservice.exceptions.PolicyNotFoundException;
 import com.stackroute.insuranceservice.model.Insurance;
-import com.stackroute.insuranceservice.rabbitMq.domain.DTO;
 import com.stackroute.insuranceservice.repository.InsuranceRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 import java.util.Optional;
 
 @Service
-public class InsuranceServiceImpl implements InsuranceService{
+public class InsuranceServiceImpl implements InsuranceService {
 
     InsuranceRepo insuranceRepo;
+
     @Autowired
     Producer producer;
 
@@ -25,11 +29,11 @@ public class InsuranceServiceImpl implements InsuranceService{
     }
 
     @Override
-    public Insurance saveInsurance(Insurance insurance) throws PolicyAlreadyExistException, IOException {
-        if (insuranceRepo.findById(insurance.getPolicyId()).isPresent()){
+    public Insurance saveInsurance(Insurance insurance)
+            throws PolicyAlreadyExistException, IOException {
+        if (insuranceRepo.findById(insurance.getPolicyId()).isPresent()) {
             throw new PolicyAlreadyExistException();
-        }
-        else {
+        } else {
             return insuranceRepo.save(insurance);
         }
     }
@@ -41,19 +45,19 @@ public class InsuranceServiceImpl implements InsuranceService{
 
     @Override
     public Optional<Insurance> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException {
-        if (insuranceRepo.findById(policyId).isPresent()){
+        if (insuranceRepo.findById(policyId).isPresent()) {
             return insuranceRepo.findById(policyId);
-        }else {
+        } else {
             throw new PolicyNotFoundException();
         }
     }
 
     @Override
     public boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException {
-        if (insuranceRepo.findById(policyId).isPresent()){
+        if (insuranceRepo.findById(policyId).isPresent()) {
             insuranceRepo.deleteById(policyId);
             return true;
-        }else {
+        } else {
             throw new PolicyNotFoundException();
         }
     }
@@ -61,5 +65,30 @@ public class InsuranceServiceImpl implements InsuranceService{
     @Override
     public Optional<Insurance> findPolicyByPolicyName(String policyName) {
         return insuranceRepo.findPolicyByPolicyName(policyName);
+    }
+
+    @Override
+    public Insurance editInsurance(@RequestBody Insurance insurance)
+    {
+        if(!insuranceRepo.findById(insurance.getPolicyId()).isPresent())
+        {
+            return null;
+        }
+        Insurance insurancePolicyObj = insuranceRepo.findById(insurance.getPolicyId()).get();
+        insurancePolicyObj.setPolicyDescription(insurance.getPolicyDescription());
+        insurancePolicyObj.setPolicyDetails(insurance.getPolicyDetails());
+        insurancePolicyObj.setPolicyBenefits(insurance.getPolicyBenefits());
+        insurancePolicyObj.setAddOnDetails(insurance.getAddOnDetails());
+        insurancePolicyObj.setPolicyDocuments(insurance.getPolicyDocuments());
+        insurancePolicyObj.setUserEmail(insurance.getUserEmail());
+        if (insurance.getInsuranceType().equalsIgnoreCase("AutomobileInsurance")) {
+            insurancePolicyObj.setCategory(insurance.getCategory());
+            insurancePolicyObj.setModelsAllowed(insurance.getModelsAllowed());
+        } else {
+            insurancePolicyObj.setCategory(null);
+            insurancePolicyObj.setModelsAllowed(null);
+        }
+        insuranceRepo.save(insurance);
+        return insuranceRepo.save(insurance);
     }
 }

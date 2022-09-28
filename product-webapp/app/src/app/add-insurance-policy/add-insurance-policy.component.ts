@@ -1,14 +1,15 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Component,  OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { COMMA, ENTER, X } from '@angular/cdk/keycodes';
 import { Insurance } from '../insurance';
 import { MatDialog } from '@angular/material/dialog';
 
 import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
 import { RecommendationServiceService } from '../recommendation-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 export interface bike {
@@ -30,22 +31,22 @@ export interface carCompany {
   name: string;
   carList: bike[];
 }
-export interface Fruit {
+export interface SumInsured {
   insuredSum: number;
 }
 export interface Duration {
   years: number;
 }
-export class policyDetails{
+export class policyDetails {
   constructor(
-    public briefs:string,
-    public descriptions:string){}
+    public briefs: string,
+    public descriptions: string) { }
 }
-export class premiumdetails{
+export class premiumdetails {
   constructor(
-    public addOnName       :string,
-    public addOnDescription:string,
-    public addOnPremiums   :number){}
+    public addOnName: string,
+    public addOnDescription: string,
+    public addOnPremiums: number) { }
 }
 @Component({
   selector: 'app-add-insurance-policy',
@@ -57,32 +58,32 @@ export class AddInsurancePolicyComponent implements OnInit {
     {
       name: 'Honda',
       bikeList: [
-        {value: 'Honda SP 125-0', viewValue: 'Honda SP 125'},
-        {value: 'Honda Shine-1', viewValue: 'Honda Shine'},
-        {value: 'Honda H`ness CB350-2', viewValue: 'Honda H`ness CB350'},
+        { value: 'Honda SP 125', viewValue: 'Honda SP 125' },
+        { value: 'Honda Shine', viewValue: 'Honda Shine' },
+        { value: 'Honda H`ness CB350', viewValue: 'Honda H`ness CB350' },
       ],
     },
     {
       name: 'TVS',
       bikeList: [
-        {value: 'TVS Apache RTR 160-3', viewValue: 'TVS Apache RTR 160'},
-        {value: 'TVS Ronin-4', viewValue: 'TVS Ronin'},
-        {value: 'TVS Apache RTR 200 4V-5', viewValue: 'TVS Apache RTR 200 4V'},
+        { value: 'TVS Apache RTR 160', viewValue: 'TVS Apache RTR 160' },
+        { value: 'TVS Ronin', viewValue: 'TVS Ronin' },
+        { value: 'TVS Apache RTR 200 4V', viewValue: 'TVS Apache RTR 200 4V' },
       ],
     },
     {
       name: 'Hero',
       bikeList: [
-        {value: 'Hero Splendor Plus-6', viewValue: 'Hero Splendor Plus'},
-        {value: 'Hero HF Deluxe-7', viewValue: 'Hero HF Deluxe'},
-        {value: 'Heroflareon-8', viewValue: 'Hero Flareon'},
+        { value: 'Hero Splendor Plus', viewValue: 'Hero Splendor Plus' },
+        { value: 'Hero HF Deluxe', viewValue: 'Hero HF Deluxe' },
+        { value: 'Heroflareon', viewValue: 'Hero Flareon' },
       ],
     },
     {
       name: 'KTM',
       bikeList: [
-        {value: 'KTM 390 Duke', viewValue: 'KTM 390 Duke'},
-        {value: 'KTM 125 Duke-10', viewValue: 'KTM 125 Duke'},
+        { value: 'KTM 390 Duke', viewValue: 'KTM 390 Duke' },
+        { value: 'KTM 125 Duke', viewValue: 'KTM 125 Duke' },
       ],
     },
   ];
@@ -91,88 +92,92 @@ export class AddInsurancePolicyComponent implements OnInit {
     {
       name: 'Hyundai',
       carList: [
-        {value: 'Hyundai Creta-0', viewValue: 'Hyundai Creta'},
-        {value: 'Hyundai Venue-1', viewValue: 'Hyundai Venue'},
-        {value: 'Hyundai i20-2', viewValue: 'Hyundai i20'},
+        { value: 'Hyundai Creta', viewValue: 'Hyundai Creta' },
+        { value: 'Hyundai Venue', viewValue: 'Hyundai Venue' },
+        { value: 'Hyundai i20', viewValue: 'Hyundai i20' },
       ],
     },
     {
       name: 'Toyota',
       carList: [
-        {value: 'Toyota Fortuner-3', viewValue: 'Toyota Fortuner'},
-        {value: 'Toyota Innova Crysta-4', viewValue: 'Toyota Innova Crysta'},
-        {value: 'Toyota Urban Cruiser-5', viewValue: 'Toyota Urban Cruiser'},
+        { value: 'Toyota Fortuner', viewValue: 'Toyota Fortuner' },
+        { value: 'Toyota Innova Crysta', viewValue: 'Toyota Innova Crysta' },
+        { value: 'Toyota Urban Cruiser', viewValue: 'Toyota Urban Cruiser' },
       ],
     },
     {
       name: 'Tata',
       carList: [
-        {value: 'Tata Tiago-6', viewValue: 'Tata Tiago'},
-        {value: 'Tata Harrier-7', viewValue: 'Tata Harrier'},
-        {value: 'Tata Safari-8', viewValue: 'Tata Safari'},
+        { value: 'Tata Tiago', viewValue: 'Tata Tiago' },
+        { value: 'Tata Harrier', viewValue: 'Tata Harrier' },
+        { value: 'Tata Safari', viewValue: 'Tata Safari' },
       ],
     },
     {
       name: 'Maruti',
       carList: [
-        {value: 'Maruti Brezza-9', viewValue: 'Maruti Brezza'},
-        {value: 'Maruti Swift-10', viewValue: 'Maruti Swift'},
+        { value: 'Maruti Brezza', viewValue: 'Maruti Brezza' },
+        { value: 'Maruti Swift', viewValue: 'Maruti Swift' },
       ],
     },
   ];
-  num:number=0;
-  policyarray:policyDetails[]=[]
-  premiumarray:premiumdetails[]=[]
-  briefInput:string='';
-  descriptionInput:string='';
-  valueVariable: string='';
-  xyz:policyDetails={
-    briefs:'',
-    descriptions :''
+  num: number = 0;
+  policyarray: policyDetails[] = []
+  premiumarray: premiumdetails[] = []
+  briefInput: string = '';
+  descriptionInput: string = '';
+  valueVariable: string = '';
+  xyz: policyDetails = {
+    briefs: '',
+    descriptions: ''
   }
- flags:boolean[]=[true];
- flag:boolean[]=[true]
+  flags: boolean[] = [true];
+  flag: boolean[] = [true]
+  openSnackBar(message: string) {
+
+    this.snackBar.open(message, 'Ok', { duration: 3000 });
+  }
 
 
+  constructor(public snackBar: MatSnackBar, public http: HttpClient, public dialog: MatDialog, private service: RecommendationServiceService) { }
 
-  constructor(public http:HttpClient,public dialog:MatDialog,private service:RecommendationServiceService) { }
-
-  openDialog(){
-    this.dialog.open(PreviewMarkupComponent,{data:this.valueVariable})
+  openDialog() {
+    this.dialog.open(PreviewMarkupComponent, { data: this.valueVariable })
   }
 
   insuranceForms = new FormGroup({
-    insuranceType    : new FormControl("", [Validators.required]),
-    policyId         : new FormControl("", [Validators.required]),
-    policyName       : new FormControl("", [Validators.required]),
+    insuranceType: new FormControl("", [Validators.required]),
+    policyId: new FormControl("", ),
+    policyName: new FormControl("", [Validators.required]),
     policyDescription: new FormControl("", [Validators.required]),
-    category         : new FormControl("",[Validators.required]),
-    modelsAllowed    : new FormControl([],[Validators.required]),
-    policyDetails    : new FormArray([new FormGroup({
-      premiums :    new FormControl("", [Validators.required,Validators.min(0)]),
-      durations:    new FormControl("", [Validators.required,Validators.min(0)]),
-      sumInsure:    new FormControl("", [Validators.required,Validators.min(0)]),
-      adults   :    new FormControl("", [Validators.min(0)]),
-      minAge   :    new FormControl("", [Validators.min(20),Validators.max(75)]),
-      maxAge   :    new FormControl("", [Validators.min(20),Validators.max(75)]),
-      kids     :    new FormControl("", [Validators.min(0)]),
-      minSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
-      maxSalary:    new FormControl("", [Validators.required,Validators.min(0)])
+    category: new FormControl("", [Validators.required]),
+    modelsAllowed: new FormControl([], [Validators.required]),
+    policyDetails: new FormArray([new FormGroup({
+      premiums: new FormControl("", [Validators.required, Validators.min(1)]),
+      durations: new FormControl("", [Validators.required, Validators.min(1)]),
+      sumInsure: new FormControl("", [Validators.required, Validators.min(1)]),
+      adults1: new FormControl("", [Validators.min(1), Validators.required]),
+      adults2: new FormControl("", [Validators.min(1), Validators.required]),
+      adults3: new FormControl("", [Validators.min(1), Validators.required]),
+      kids: new FormControl("", [Validators.min(1), Validators.required]),
+      minSalary: new FormControl("", [Validators.required, Validators.min(1)]),
+      maxSalary: new FormControl("", [Validators.required, Validators.min(1)])
     })]),
     policyBenefits: new FormArray([
       new FormGroup({
-        brief      : new FormControl("", [Validators.required]),
+        brief: new FormControl("", [Validators.required]),
         description: new FormControl("", [Validators.required])
-      })]),
+      })],[Validators.required]),
     addOnDetails: new FormArray([
       new FormGroup({
-        addOnName        : new FormControl("", [Validators.required]),
-        addOnDescription : new FormControl("", [Validators.required]),
-        addOnPremiums    : new FormControl("", [Validators.required])
+        addOnName: new FormControl("", [Validators.required]),
+        addOnDescription: new FormControl("", [Validators.required]),
+        addOnPremiums: new FormControl("", [Validators.required])
       })
-    ]),
+    ],[Validators.required]),
     policyDocuments: new FormControl("", [Validators.required]),
-    fileSource     : new FormControl("", [Validators.required])
+    fileSource: new FormControl("", ),
+    userEmail: new FormControl("", [Validators.required])
   });
 
   get insuranceFormControl() {
@@ -182,28 +187,11 @@ export class AddInsurancePolicyComponent implements OnInit {
 
 
   ngOnInit(): void {
-  this.insuranceForms.get('policyId')?.setValue(this.id.toString())
-  this.insuranceForms.get('policyId')!.disable()
+    this.insuranceForms.get('policyId')?.setValue(this.id.toString())
+    this.insuranceForms.get('userEmail')?.setValue(this.service.userEmail);
+    this.insuranceForms.get('policyId')!.disable()
   }
-
-
   id=Math.floor(Math.random()*1000000+100000);
-
-  // obj:Insurance={
-  //   insuranceType:'',
-  //   policyId         :'',
-  //   policyName       :'',
-  //   category         :'',
-  //   policyDescription:'',
-  //   policyDetails    :[],
-  //   policyBenefits   :[],
-  //   addOnDetails     :[],
-  //   policyDocuments  :'',
-  //   fileSource       :'',
-  // } ;
-
-
-
   public onFileChanged(event:any) {
     //Select File
     if (event.target.files.length > 0) {
@@ -213,23 +201,482 @@ export class AddInsurancePolicyComponent implements OnInit {
       });
     }
   }
+  modifyform(){
+    const obj=this.insuranceForms
+    let control=<FormArray>this.insuranceForms.get('policyBenefits')
+    console.log("Inside method");
+    
+    for(let i=0;i<control.length;i++)
+    {
+      if(control.at(i).valid)
+      {
+        for(let j=0;j<i;j++)
+        {
+          if(JSON.stringify(control.at(i).value) === JSON.stringify(control.at(j).value))
+          {
+            console.log("Inside method1");
+            control.removeAt(i)
+            continue
+          }
+        }
+      }   
+    }
+    for(let i=0;i<control.length;i++)
+    {
+      if(control.at(i).invalid)
+      {
+        console.log("Removing method");
+        control.removeAt(i)
+      }   
+    }
+     let  control1=<FormArray>this.insuranceForms.get('addOnDetails')
+    for(let i=0;i<control1.length;i++)
+    {
+      if(control1.at(i).invalid)
+      {
+        control1.removeAt(i)
+      }  
+      for(let j=0;j<i;j++)
+      {
+        if(JSON.stringify(control1.at(i).value) === JSON.stringify(control1.at(j).value))
+        {
+          control1.removeAt(i)
+        }
+      } 
+    }
+    console.log("After removing add on details");
+    let x=<FormArray>this.insuranceForms.get('policyDetails')
+    let remove=[]
+    for(let i=0;i<x.length;i++)
+    {
+      console.log('Automobile INSURANCE:'+(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&(obj.get('insuranceType')!.value=='AutoMobileInsurance')));
+      console.log('Health INSURANCE:'+(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid));
+      console.log('Life INSURANCE:'+(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid));
+      if(!((x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&(obj.get('insuranceType')!.value=='AutoMobileInsurance'))
+      ||(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid)
+      ||(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid)))
+      {
+        // if(!(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid)){
+        //   if(!(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid)){
+            
+        //     remove.push(i)
+        //   }
+        // }
+        console.log(x.at(i).value);
+        
+        remove.push(i)
+      }
+      else{
+        console.log('Entering else');
 
+        for(let j=0;j<i;j++)
+        {
+          console.log('Durations :'+x.at(i).get('durations')!.value+","+x.at(j).get('durations')!.value);
+          console.log('sumInsure :'+x.at(i).get('sumInsure')!.value+","+x.at(j).get('sumInsure')!.value); 
+          if((x.at(i).get('durations')!.value == x.at(j).get('durations')!.value)&&(x.at(i).get('sumInsure')!.value == x.at(j).get('sumInsure')!.value))
+          {
+            console.log("I: "+i+"J: "+j)
+            if(remove.indexOf(i)==-1)
+            remove.push(i)
+          }
+        } 
+      } 
+      // else if(!(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid)){
+      //   // x.removeAt(i)
+      //   remove.push(i)
+      // }
+      // else if(!(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid)){
+      //   // x.removeAt(i)
+      //   remove.push(i)
+      // }
+      
+    }
+    
+    console.log("After removing add on details");
+    let count=0
+    console.log(remove);
+    for(let ij=0;ij<remove.length;ij++)
+    {
+      let z=remove[ij]-count
+      x.removeAt(z);
+      count++
+    }
 
-  onSubmit(){
-    console.log(this.policyarray) ;
+  }
+  check_validity()
+  {
+    const obj=this.insuranceForms
+    let validity1=obj.get('insuranceType')?.valid&&obj.get('policyName')?.valid&&obj.get('policyDescription')?.valid
+    let validity2=this.check_validity2()
+    let validity3=obj.get('policyDocuments')?.valid&&obj.get('fileSource')?.valid&&obj.get('userEmail')?.valid
+   
+    if(obj.get('insuranceType')?.value==='AutoMobileInsurance')
+    {
+     let validity4=obj.get('modelsAllowed')?.valid&&obj.get('category')?.valid
+     return !(validity1&&validity2&&validity3&&validity4)
+    }
+    return !(validity1&&validity2&&validity3)
+  }
+  check_validity1(){
+    const obj=this.insuranceForms
+    let validity1=obj.get('insuranceType')?.valid&&obj.get('policyName')?.valid&&obj.get('policyDescription')?.valid
+    return validity1
+  }
+  check_validity2(){
+    const obj=this.insuranceForms
+    let x=<FormArray>obj.get('policyDetails')
+    let flag1=false,flag2=false,flag3=false
+    for(let i=0;i<x.length;i++)
+    {
+      if(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&(obj.get('insuranceType')!.value=='AutoMobileInsurance'))
+      {
+        flag1=true
+        break
+      }
+      if(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid)
+      {
+        flag1=true
+        break
+      }
+      if(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid)
+      {
+        flag1=true
+        break
+      }
+    }
+     x=<FormArray>obj.get('policyBenefits')
+     for(let j=0;j<x.length;j++)
+     {
+       if(x.at(j).valid)
+       {
+        flag2=true
+        break
+      }
+     }
+     x=<FormArray>obj.get('addOnDetails')
+     for(let k=0;k<x.length;k++)
+     {
+       if(x.at(k).valid)
+       {
+        flag3=true
+        break
+      }
+     }
+     return flag1&&flag2&&flag3
+  }
+  check_validity3(){
+    const obj=this.insuranceForms
+    let validity3=obj.get('policyDocuments')?.valid&&obj.get('fileSource')?.valid&&obj.get('userEmail')?.valid
+    return validity3
+  }
+  onSubmit() {
+    this.modifyform()
+    console.log(this.policyarray);
     // console.log(this.insuranceForms.value);
     this.insuranceForms.get('policyId')!.enable();
-    // this.obj.insuranceType=this.insuranceForms.controls['insuranceType'].value!;
-    // this.obj.policyId=this.insuranceForms.controls['policyId'].value!;
-    // this.obj.policyName=this.insuranceForms.controls['policyName'].value!;
-    // this.obj.policyDescription=this.insuranceForms.controls['policyDescription'].value!;
-    // this.obj.policyDetails=this.insuranceForms.controls['policyDetails'].value;
-    // this.obj.policyBenefits=this.insuranceForms.controls['policyBenefits'].value;
-    // this.obj.addOnDetails=this.insuranceForms.controls['addOnDetails'].value;
-    // this.obj.fileSource=this.insuranceForms.controls['fileSource'].value;
+
 
     const formData=new FormData;
-    // formData.append("insuranceType",this.obj.insuranceType);
+   
+    formData.append("imageFile",this.insuranceForms.controls['fileSource'].value!);
+    formData.append("policyId",this.id.toString())
+    console.log(formData)
+    this.http.post<Insurance>("http://localhost:8010/api/vk1/life-policy",this.insuranceForms.value).subscribe(
+      (data:any)=>{
+        console.log(data);
+        this.http.put("http://localhost:8010/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
+          .subscribe((data: any) => { console.log(data) });
+      });
+    console.log(this.insuranceForms.value)
+    this.insuranceForms.get('policyId')!.disable()
+  }
+
+
+  addDetails(i: any) {
+    const control = <FormArray>this.insuranceForms.controls['policyDetails'];
+    console.log('Length of policy Details Array' + control.length);
+    for (let z = 0; z < control.length - 1; z++) {
+      for (let zz = z + 1; zz < control.length; zz++) {
+        console.log(control.at(z).value);
+        console.log(control.at(zz).value)
+        console.log(control.at(z).value === control.at(zz))
+        if (JSON.stringify(control.at(z).value) === JSON.stringify(control.at(zz).value)) {
+          this.openSnackBar("Row " + (z + 1) + " and Row " + (zz + 1) + " are same please remove or change value to add new row")
+          return
+        }
+      }
+    }
+    //insuranceType,AutoMobileInsurance,HealthInsurance
+    for (let k = 0; k < control.length; k++) {
+      if (this.insuranceForms.get('insuranceType')?.value == 'LifeInsurance') {
+        console.log('1');
+
+        if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('premiums')?.invalid || control.at(k).get('durations')?.invalid || control.at(k).get('minSalary')?.invalid || control.at(k).get('maxSalary')?.invalid) {
+          this.openSnackBar('Fill all the details of row  ' + (k + 1) + '  to add new Row')
+          return
+        }
+        console.log('2');
+      }
+      if (this.insuranceForms.get('insuranceType')?.value == 'AutoMobileInsurance') {
+        console.log('Before');
+
+        if (this.insuranceForms.get('modelsAllowed')?.invalid) {
+          console.log('In method not allowed');
+          this.openSnackBar('Please select Models Allowed first')
+          return
+        }
+        console.log('After');
+
+        if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('premiums')?.invalid || control.at(k).get('durations')?.invalid) {
+          console.log('3');
+          this.openSnackBar('Fill all the details of row  ' + (k + 1) + '  to add new Row')
+          return
+        }
+      }
+      //premiums,durations,sumInsure,adults1,adults2,adults3,kids,minSalary,maxSalary
+      if (this.insuranceForms.get('insuranceType')?.value == 'HealthInsurance') {
+        console.log('4');
+        if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('durations')?.invalid || control.at(k).get('adults2')?.invalid || control.at(k).get('adults3')?.invalid || control.at(k).get('adults1')?.invalid || control.at(k).get('kids')?.invalid) {
+          console.log('5');
+          this.openSnackBar('Fill all the details of row  ' + (k + 1) + '  to add new Row')
+          return
+        }
+      }
+    }
+
+    const x=new FormGroup({
+      premiums :    new FormControl(control.at(i)!.get('premiums')!.value, [Validators.required,Validators.min(0)]),
+      durations:    new FormControl(control.at(i).get('durations')?.value, [Validators.required,Validators.min(0)]),
+      sumInsure:    new FormControl(control.at(i).get('sumInsure')?.value, [Validators.required,Validators.min(0)]),
+      adults1   :    new FormControl(control.at(i).get('adults1')?.value, [Validators.min(1),Validators.required]),
+      adults2   :    new FormControl(control.at(i).get('adults2')?.value, [Validators.min(1),Validators.required]),
+      adults3   :    new FormControl(control.at(i).get('adults3')?.value, [Validators.min(1),Validators.required]),
+      kids     :    new FormControl(control.at(i).get('kids')?.value, [Validators.min(1),Validators.required]),
+      minSalary:    new FormControl(control.at(i).get('minSalary')?.value, [Validators.required,Validators.min(0)]),
+      maxSalary:    new FormControl(control.at(i).get('maxSalary')?.value, [Validators.required,Validators.min(0)])
+    }
+    );
+    console.log(control.controls[i].value)
+
+    control.push(x);
+
+  }
+  //--------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------
+  addDetailsE(i: any) {
+    const control = <FormArray>this.insuranceForms.controls['policyDetails'];
+    for (let z = 0; z < control.length - 1; z++) {
+      for (let zz = z + 1; zz < control.length; zz++) {
+        console.log(control.at(z).value);
+        console.log(control.at(zz).value)
+        console.log(control.at(z).value === control.at(zz))
+        if (JSON.stringify(control.at(z).value) === JSON.stringify(control.at(zz).value)) {
+          this.openSnackBar("Row " + (z + 1) + " and Row " + (zz + 1) + " are same please remove or change value to add new row")
+          return
+        }
+      }
+    }
+    for (let k = 0; k < control.length; k++) {
+      if (this.insuranceForms.get('insuranceType')?.value == 'LifeInsurance') {
+        console.log('1');
+        if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('premiums')?.invalid || control.at(k).get('durations')?.invalid || control.at(k).get('minSalary')?.invalid || control.at(k).get('maxSalary')?.invalid) {
+          this.openSnackBar('Fill all the details of row  ' + (k + 1) + '  to add new Row')
+          return
+        }
+      }
+      if (this.insuranceForms.get('insuranceType')?.value == 'AutoMobileInsurance') {
+        console.log('Before');
+        console.log('2');
+        if (this.insuranceForms.get('modelsAllowed')?.invalid) {
+          console.log('In method not allowed');
+          this.insuranceForms.get('modelsAllowed')?.markAsTouched
+          this.openSnackBar('Please select Models Allowed first')
+          return
+        }
+        console.log('After');
+
+        if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('premiums')?.invalid || control.at(k).get('durations')?.invalid) {
+          this.openSnackBar('Fill all the details of row  ' + (k + 1) + '  to add new Row')
+          return
+        }
+      }
+      //premiums,durations,sumInsure,adults1,adults2,adults3,kids,minSalary,maxSalary
+      if (this.insuranceForms.get('insuranceType')?.value == 'HealthInsurance') {
+        if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('durations')?.invalid || control.at(k).get('adults2')?.invalid || control.at(k).get('adults3')?.invalid || control.at(k).get('adults')?.invalid || control.at(k).get('kids')?.invalid) {
+          this.openSnackBar('Fill all the details of row  ' + (k + 1) + '  to add new Row')
+          return
+        }
+      }
+    }
+
+    
+    console.log(control.value);
+    control.push(new FormGroup({
+      premiums :    new FormControl("", [Validators.required,Validators.min(0)]),
+      durations:    new FormControl("", [Validators.required,Validators.min(0)]),
+      sumInsure:    new FormControl("", [Validators.required,Validators.min(0)]),
+      adults1   :    new FormControl("", [Validators.min(1),Validators.required]),
+      adults2   :    new FormControl("", [Validators.min(1),Validators.required]),
+      adults3   :    new FormControl("", [Validators.min(1),Validators.required]),
+      kids     :    new FormControl("", [Validators.min(1),Validators.required]),
+      minSalary:    new FormControl("", [Validators.required,Validators.min(0)]),
+      maxSalary:    new FormControl("", [Validators.required,Validators.min(0)])      
+    }
+    ));
+  }
+  removeDetails(index: any) {
+    const control = <FormArray>this.insuranceForms.controls['policyDetails'];
+    if (control.length == 1)
+      return
+
+    control.removeAt(index);
+  }
+  addDetails1(index: any) {
+    const control = <FormArray>this.insuranceForms.controls['policyBenefits'];
+
+    if (!control.at(index).value.brief || !control.at(index).value.description) {
+      return
+    }
+
+    this.flags[index] = false
+    this.flags.push(true)
+    control.push(new FormGroup({
+      brief: new FormControl("", [Validators.required]),
+      description: new FormControl("", [Validators.required])
+    }
+    ));
+    const arr = new policyDetails('', '');
+    // console.log(control.controls[index].value.brief)
+    arr.briefs = control.controls[index].value.brief;
+    // console.log(this.xyz.briefs)
+    arr.descriptions = control.controls[index].value.description;
+    this.policyarray.push(arr);
+    console.log(this.policyarray)
+  }
+  removeDetails1(index: any) {
+    const control = <FormArray>this.insuranceForms.controls['policyBenefits'];
+    control.removeAt(index);
+    this.policyarray.splice(index, 1);
+    this.flags.splice(index, 1)
+    console.log(this.policyarray)
+    console.log(this.flags)
+    console.log(this, this.insuranceForms.value);
+
+  }
+  addDetails2(index: any) {
+    const control = <FormArray>this.insuranceForms.controls['addOnDetails'];
+    if ((!control.at(index).value.addOnName || !control.at(index).value.addOnDescription || !control.at(index).value.addOnPremiums)) {
+      return
+    }
+    this.flag[index] = false
+    this.flag.push(true)
+    control.push(new FormGroup({
+      addOnName: new FormControl("", [Validators.required]),
+      addOnDescription: new FormControl("", [Validators.required]),
+      addOnPremiums: new FormControl("", [Validators.required])
+    }));
+    const arr1 = new premiumdetails('', '', 0);
+
+    arr1.addOnName = control.controls[index].value.addOnName;
+    arr1.addOnDescription = control.controls[index].value.addOnDescription;
+    arr1.addOnPremiums = control.controls[index].value.addOnPremiums;
+    this.premiumarray.push(arr1);
+    console.log(this.premiumarray)
+  }
+  removeDetails2(index: any) {
+    const control = <FormArray>this.insuranceForms.controls['addOnDetails'];
+    control.removeAt(index);
+    this.premiumarray.splice(index, 1);
+    this.flag.splice(index, 1)
+    console.log(this.premiumarray)
+    console.log(this.flag)
+    console.log(this, this.insuranceForms.value);
+  }
+
+
+
+
+
+  get insurancex() {
+    return this.insuranceForms.get('insuranceType')?.value!
+  }
+  get categoryx() {
+    return this.insuranceForms.get('category')?.value!
+  }
+  get policyDetailsx() {
+    return (this.insuranceForms.get('policyDetails') as FormArray).controls;
+  }
+  get policyBenefitsx() {
+    return (this.insuranceForms.get('policyBenefits') as FormArray).controls;
+  }
+  get policyAddOnsx() {
+    return (this.insuranceForms.get('addOnDetails') as FormArray).controls;
+  }
+  //=========================================================================================================
+  //Methods for chips component
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  sumInsuredValues: SumInsured[] = [{ insuredSum: 100000 }, { insuredSum: 1000000 }, { insuredSum: 5000000 }];
+  duration: Duration[] = [{ years: 1 }, { years: 5 }, { years: 10 }];
+  add(event: MatChipInputEvent): void {
+    // const value = (event.value || '').trim();
+    const value = +event.value;
+    // Add our fruit
+    if (value && !(this.sumInsuredValues.filter((a)=>a.insuredSum==value).length>0)) {
+      this.sumInsuredValues.push({insuredSum: value});
+      this.sumInsuredValues.sort((a,b)=>a.insuredSum-b.insuredSum)
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  remove(fruit: SumInsured): void {
+    const index = this.sumInsuredValues.indexOf(fruit);
+
+    if (index >= 0) {
+      this.sumInsuredValues.splice(index, 1);
+    }
+  }
+  addduration(event: MatChipInputEvent): void {
+
+    const value = +event.value;
+
+    if (value && !(this.duration.filter((a)=>a.years==value).length>0)) {
+      this.duration.push({years: value});
+      this.duration.sort((a,b)=>a.years-b.years)
+    }
+    event.chipInput!.clear();
+  }
+
+  removeduration(x: Duration): void {
+    const index = this.duration.indexOf(x);
+
+    if (index >= 0) {
+      this.duration.splice(index, 1);
+    }
+  }
+  // api for getting policy
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // formData.append("insuranceType",this.obj.insuranceType);
     // formData.append("policyId",this.obj.policyId);
     // formData.append("policyName",this.obj.policyName);
     // formData.append("policyDescription",this.obj.policyDescription);
@@ -245,208 +692,38 @@ export class AddInsurancePolicyComponent implements OnInit {
     // {
     //   formData.append("addOnDetails",x as Blob);
     // }
-    formData.append("imageFile",this.insuranceForms.controls['fileSource'].value!);
-    formData.append("policyId",this.id.toString())
+      //  if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
+  //   ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
+  //   ||(!control.at(i).value.adults1||!control.at(i).value.adults2||!control.at(i).value.adults3)
+  //   ||(!control.at(i).value.kids||control.at(i).value.adults2||control.at(i).value.adults3||control.at(i).value.adults1)))
+  //   {
+  //     return
+  //   }
 
-    this.http.post<Insurance>("http://localhost:8010/api/vk1/life-policy",this.insuranceForms.value).subscribe(
-      (data:any)=>{
-        console.log(data);
-        this.http.put("http://localhost:8010/api/vk1/photos/update/"+this.id.toString(),formData, { observe: 'response' })
-              .subscribe((data:any)=>{console.log(data)});
-      });
-    console.log(this.insuranceForms.value)
-    this.insuranceForms.get('policyId')!.disable()
-  }
-
-
-  addDetails(i:any) {
-    const control = <FormArray>this.insuranceForms.controls['policyDetails'];
-    console.log((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
-    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
-    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
-    if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
-    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
-    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
-    {
-      return
-    }
-    const x=new FormGroup({
-      premiums: new FormControl(control.controls[i].value.premiums, [Validators.required]),
-      durations: new FormControl(control.controls[i].value.durations, [Validators.required]),
-      sumInsure: new FormControl(control.controls[i].value.sumInsure, [Validators.required]),
-      adults   :new FormControl(control.controls[i].value.adults),
-      kids     :new FormControl(control.controls[i].value.kids),
-      minSalary:new FormControl(control.controls[i].value.minSalary),
-      maxSalary:new FormControl(control.controls[i].value.maxSalary),
-      modelsAllowed:new FormControl(control.controls[i].value.modelsAllowed),
-      minAge       :new FormControl(control.controls[i].value.minAge),
-      maxAge       :new FormControl(control.controls[i].value.maxAge),
-    }
-    );
-    console.log(control.controls[i].value)
-
-    control.push(x);
-
-  }
-  addDetailsE(i:any) {
-    const control = <FormArray>this.insuranceForms.controls['policyDetails'];
-    console.log((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
-    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
-    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
-    if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-    ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
-    ||(!control.at(i).value.adults||!control.at(i).value.minAge||!control.at(i).value.maxAge)
-    ||(!control.at(i).value.kids||control.at(i).value.minAge||control.at(i).value.maxAge||control.at(i).value.adults)))
-    {
-      return
-    }
-    console.log(control.value);
-    control.push(new FormGroup({
-      premiums: new FormControl("", [Validators.required]),
-      durations: new FormControl("", [Validators.required]),
-      sumInsure: new FormControl("", [Validators.required]),
-      adults   :new FormControl(""),
-      kids     :new FormControl(""),
-      minSalary:new FormControl(""),
-      maxSalary:new FormControl("")
-    }
-    ));
-  }
-  removeDetails(index: any) {
-    const control = <FormArray>this.insuranceForms.controls['policyDetails'];
-    if(control.length==1)
-    return
-
-    control.removeAt(index);
-  }
-  addDetails1(index: any) {
-    const control = <FormArray>this.insuranceForms.controls['policyBenefits'];
-
-    if(!control.at(index).value.brief||!control.at(index).value.description)
-    {
-      return
-    }
-
-    this.flags[index]=false
-    this.flags.push(true)
-    control.push(new FormGroup({
-      brief: new FormControl("", [Validators.required]),
-      description: new FormControl("", [Validators.required])
-    }
-    ));
-    const arr=new policyDetails('','');
-      // console.log(control.controls[index].value.brief)
-      arr.briefs=control.controls[index].value.brief;
-      // console.log(this.xyz.briefs)
-      arr.descriptions=control.controls[index].value.description;
-      this.policyarray.push(arr);
-      console.log(this.policyarray)
-  }
-  removeDetails1(index: any) {
-    const control = <FormArray>this.insuranceForms.controls['policyBenefits'];
-    control.removeAt(index);
-    this.policyarray.splice(index, 1);
-    this.flags.splice(index,1)
-    console.log(this.policyarray)
-    console.log(this.flags)
-    console.log(this,this.insuranceForms.value);
-
-  }
-  addDetails2(index:any) {
-    const control = <FormArray>this.insuranceForms.controls['addOnDetails'];
-    if((!control.at(index).value.addOnName||!control.at(index).value.addOnDescription||!control.at(index).value.addOnPremiums))
-    {
-     return
-    }
-    this.flag[index]=false
-    this.flag.push(true)
-    control.push(new FormGroup({
-      addOnName: new FormControl("", [Validators.required]),
-      addOnDescription: new FormControl("", [Validators.required]),
-      addOnPremiums: new FormControl("", [Validators.required])
-    }));
-    const arr1=new premiumdetails('','',0);
-
-      arr1.addOnName       =control.controls[index].value.addOnName;
-      arr1.addOnDescription=control.controls[index].value.addOnDescription;
-      arr1.addOnPremiums   =control.controls[index].value.addOnPremiums;
-      this.premiumarray.push(arr1);
-      console.log(this.premiumarray)
-  }
-  removeDetails2(index: any) {
-    const control = <FormArray>this.insuranceForms.controls['addOnDetails'];
-    control.removeAt(index);
-    this.premiumarray.splice(index, 1);
-    this.flag.splice(index,1)
-    console.log(this.premiumarray)
-    console.log(this.flag)
-    console.log(this,this.insuranceForms.value);
-  }
-
-
-
-
-
-  get insurancex(){
-    return this.insuranceForms.get('insuranceType')?.value!
-  }
-  get categoryx(){
-    return this.insuranceForms.get('category')?.value!
-  }
-  get policyDetailsx() {
-    return (this.insuranceForms.get('policyDetails') as FormArray).controls;
-  }
-  get policyBenefitsx() {
-    return (this.insuranceForms.get('policyBenefits') as FormArray).controls;
-  }
-  get policyAddOnsx(){
-    return (this.insuranceForms.get('addOnDetails') as FormArray).controls;
-  }
-//=========================================================================================================
-//Methods for chips component
-addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [{insuredSum: 100000}, {insuredSum: 1000000}, {insuredSum: 5000000}];
-  duration: Duration[] = [{years: 1}, {years: 5}, {years: 10}];
-  add(event: MatChipInputEvent): void {
-    // const value = (event.value || '').trim();
-    const value = +event.value ;
-    // Add our fruit
-    if (value) {
-      this.fruits.push({insuredSum: value});
-    }
-
-    // Clear the input value
-    event.chipInput!.clear();
-  }
-
-  remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-    }
-  }
-  addduration(event: MatChipInputEvent): void {
-
-    const value = +event.value ;
-
-    if (value) {
-      this.duration.push({years: value});
-    }
-    event.chipInput!.clear();
-  }
-
-  removeduration(x: Duration): void {
-    const index = this.duration.indexOf(x);
-
-    if (index >= 0) {
-      this.duration.splice(index, 1);
-    }
-  }
-  // api for getting policy
-
-}
+      // if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
+    // ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
+    // ||(!control.at(i).value.adults1||!control.at(i).value.adults2||!control.at(i).value.adults3)
+    // ||(!control.at(i).value.kids||control.at(i).value.adults2||control.at(i).value.adults3||control.at(i).value.adults1)))
+    // {
+    //   return
+    // }
+        // this.obj.insuranceType=this.insuranceForms.controls['insuranceType'].value!;
+    // this.obj.policyId=this.insuranceForms.controls['policyId'].value!;
+    // this.obj.policyName=this.insuranceForms.controls['policyName'].value!;
+    // this.obj.policyDescription=this.insuranceForms.controls['policyDescription'].value!;
+    // this.obj.policyDetails=this.insuranceForms.controls['policyDetails'].value;
+    // this.obj.policyBenefits=this.insuranceForms.controls['policyBenefits'].value;
+    // this.obj.addOnDetails=this.insuranceForms.controls['addOnDetails'].value;
+    // this.obj.fileSource=this.insuranceForms.controls['fileSource'].value;
+      // obj:Insurance={
+  //   insuranceType:'',
+  //   policyId         :'',
+  //   policyName       :'',
+  //   category         :'',
+  //   policyDescription:'',
+  //   policyDetails    :[],
+  //   policyBenefits   :[],
+  //   addOnDetails     :[],
+  //   policyDocuments  :'',
+  //   fileSource       :'',
+  // } ;

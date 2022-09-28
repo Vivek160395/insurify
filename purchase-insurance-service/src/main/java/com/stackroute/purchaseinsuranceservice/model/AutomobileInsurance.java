@@ -13,4 +13,5 @@ public class AutomobileInsurance {
     private String category;
     private String engineNumber;
     private String chassisNumber;
+    private String model;
 }

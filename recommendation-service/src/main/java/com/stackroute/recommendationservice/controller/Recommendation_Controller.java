@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("/Recommendation")
-@CrossOrigin(origins = "*",allowedHeaders = "*",methods = {})
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class Recommendation_Controller {
     private final Recommendation_service recommendation_service;
 
@@ -26,71 +26,76 @@ public class Recommendation_Controller {
         this.recommendation_service = recommendation_service;
     }
 
-//    @PostMapping("/user")
-//    public ResponseEntity<?> registerUser(@RequestBody User user){
-//        try {
-//            User user1 = recommendation_service.addUser(user);
-//            if(user1 !=null){
-//                return new ResponseEntity<>(user1,HttpStatus.CREATED);
-//            }else {
-//                return new ResponseEntity<>("User Not Registered",HttpStatus.BAD_GATEWAY);
-//            }
-//        }
-//        catch (UserAlreadyPosted e){
-//            log.error(e.getMessage());
-//            return new ResponseEntity<>("User Already Exists",HttpStatus.CONFLICT);
-//        }
-//    }
-//
-//
-//    @PostMapping("/Insurance")
-//    public ResponseEntity<?> registerInsurance(@RequestBody InsuranceProfile insuranceProfile) {
-//        try {
-////            recommendation_service.addAge(insuranceProfile.getAge());
-//            recommendation_service.addInsuranceType(insuranceProfile.getInsuranceType());
-////            recommendation_service.addOccupation(insuranceProfile.getOccupation());
-//            Insurance insurance = recommendation_service.addInsurance(insuranceProfile);
-//            if(insurance != null){
-//                return new ResponseEntity<>("Insurance Added",HttpStatus.CREATED);
-//            }else{
-//                return new ResponseEntity<>("Insurance Not added",HttpStatus.OK);
-//            }
-//        }catch (InsuranceAlreadyExists e){
-//            log.error(e.getMessage());
-//            return new ResponseEntity<>("Insurance Already Exists", HttpStatus.CONFLICT);
-//        }
-//    }
+    // @PostMapping("/user")
+    // public ResponseEntity<?> registerUser(@RequestBody User user){
+    // try {
+    // User user1 = recommendation_service.addUser(user);
+    // if(user1 !=null){
+    // return new ResponseEntity<>(user1,HttpStatus.CREATED);
+    // }else {
+    // return new ResponseEntity<>("User Not Registered",HttpStatus.BAD_GATEWAY);
+    // }
+    // }
+    // catch (UserAlreadyPosted e){
+    // log.error(e.getMessage());
+    // return new ResponseEntity<>("User Already Exists",HttpStatus.CONFLICT);
+    // }
+    // }
+    //
+    //
+    // @PostMapping("/Insurance")
+    // public ResponseEntity<?> registerInsurance(@RequestBody InsuranceProfile
+    // insuranceProfile) {
+    // try {
+    //// recommendation_service.addAge(insuranceProfile.getAge());
+    // recommendation_service.addInsuranceType(insuranceProfile.getInsuranceType());
+    //// recommendation_service.addOccupation(insuranceProfile.getOccupation());
+    // Insurance insurance = recommendation_service.addInsurance(insuranceProfile);
+    // if(insurance != null){
+    // return new ResponseEntity<>("Insurance Added",HttpStatus.CREATED);
+    // }else{
+    // return new ResponseEntity<>("Insurance Not added",HttpStatus.OK);
+    // }
+    // }catch (InsuranceAlreadyExists e){
+    // log.error(e.getMessage());
+    // return new ResponseEntity<>("Insurance Already Exists", HttpStatus.CONFLICT);
+    // }
+    // }
 
-//    @GetMapping("/InsuranceByAge/{age}")
-//    public ResponseEntity<?> getInsuranceByAge(@PathVariable int age) throws NoInsurancesFound {
-//        try {
-//            List<Insurance> insurances = recommendation_service.getAllInsuranceOnBasisOfAge(age);
-//            return new ResponseEntity<>(insurances,HttpStatus.OK);
-//        } catch(NoInsurancesFound e){
-//            log.error(e.getMessage());
-//            return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
-//        }
-//    }
+    // @GetMapping("/InsuranceByAge/{age}")
+    // public ResponseEntity<?> getInsuranceByAge(@PathVariable int age) throws
+    // NoInsurancesFound {
+    // try {
+    // List<Insurance> insurances =
+    // recommendation_service.getAllInsuranceOnBasisOfAge(age);
+    // return new ResponseEntity<>(insurances,HttpStatus.OK);
+    // } catch(NoInsurancesFound e){
+    // log.error(e.getMessage());
+    // return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
+    // }
+    // }
 
-//    @GetMapping("{occupation}/InsuranceByOccupation")
-//    public ResponseEntity<?> getInsuranceByOccupation(@PathVariable String occupation) throws NoInsurancesFound {
-//        try{
-//            List<Insurance> insurances = recommendation_service.getAllInsuranceOnBasisOfOccupation(occupation);
-//            return new ResponseEntity<>(insurances,HttpStatus.OK);
-//        }catch (NoInsurancesFound e){
-//            log.error(e.getMessage());
-//            return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
-//        }
-//    }
+    // @GetMapping("{occupation}/InsuranceByOccupation")
+    // public ResponseEntity<?> getInsuranceByOccupation(@PathVariable String
+    // occupation) throws NoInsurancesFound {
+    // try{
+    // List<Insurance> insurances =
+    // recommendation_service.getAllInsuranceOnBasisOfOccupation(occupation);
+    // return new ResponseEntity<>(insurances,HttpStatus.OK);
+    // }catch (NoInsurancesFound e){
+    // log.error(e.getMessage());
+    // return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
+    // }
+    // }
 
     @GetMapping("{insuranceType}/InsuranceByType")
-    public ResponseEntity<?> getInsuranceByType(@PathVariable String insuranceType)  {
+    public ResponseEntity<?> getInsuranceByType(@PathVariable String insuranceType) {
         try {
             List<Insurance> insurances = recommendation_service.getAllInsuranceOnBasisOfType(insuranceType);
-            return new ResponseEntity<>(insurances,HttpStatus.OK);
-        }catch (NoInsurancesFound e){
+            return new ResponseEntity<>(insurances, HttpStatus.OK);
+        } catch (NoInsurancesFound e) {
             log.error(e.getMessage());
-            return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No Insurance Found", HttpStatus.NOT_FOUND);
         }
     }
 
@@ -98,31 +103,31 @@ public class Recommendation_Controller {
     public ResponseEntity<?> getAllInsurances() {
         try {
             List<Insurance> insurances = recommendation_service.getAllInsurance();
-            return new ResponseEntity<>(insurances,HttpStatus.OK);
-        }catch (NoInsurancesFound e){
+            return new ResponseEntity<>(insurances, HttpStatus.OK);
+        } catch (NoInsurancesFound e) {
             log.error(e.getMessage());
-            return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No Insurance Found", HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("{userEmail}/{insuranceId}/buyInsurance")
-    public ResponseEntity<?> userBuyInsurance(@PathVariable int insuranceId,@PathVariable String userEmail){
-        if(recommendation_service.createUserToInsuranceRelation(insuranceId,userEmail)){
-            return new ResponseEntity<>("Insurance Bought Successfully",HttpStatus.CREATED);
-        }else {
+    public ResponseEntity<?> userBuyInsurance(@PathVariable String insuranceId, @PathVariable String userEmail) {
+        if (recommendation_service.createUserToInsuranceRelation(insuranceId, userEmail)) {
+            return new ResponseEntity<>("Insurance Bought Successfully", HttpStatus.CREATED);
+        } else {
             log.error("Insurance Already Bought");
-            return new ResponseEntity<>("Insurance Already Bought",HttpStatus.CREATED);
+            return new ResponseEntity<>("Insurance Already Bought", HttpStatus.CREATED);
         }
     }
 
     @GetMapping("/TrendingInsurances")
-    public ResponseEntity<?> getNoOfInsurancesBought(){
+    public ResponseEntity<?> getNoOfInsurancesBought() {
         try {
             List<Insurance> insurances = recommendation_service.getAllInsurancesWhichAreTrending();
-            return new ResponseEntity<>(insurances,HttpStatus.OK);
-        }catch (NoInsurancesFound e){
+            return new ResponseEntity<>(insurances, HttpStatus.OK);
+        } catch (NoInsurancesFound e) {
             log.error("No Insurance Found");
-            return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No Insurance Found", HttpStatus.NOT_FOUND);
         }
     }
 

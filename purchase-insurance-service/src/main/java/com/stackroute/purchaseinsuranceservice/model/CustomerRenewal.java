@@ -11,6 +11,6 @@ public class CustomerRenewal {
     String customerPolicyId;
     int duration;
     int premium;
-    String addOnName[];
+    String[] addOnName;
     String date;
 }
