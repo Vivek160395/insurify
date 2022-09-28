@@ -1,6 +1,7 @@
 package com.stackroute.purchaseinsuranceservice.service;
 
 import com.stackroute.purchaseinsuranceservice.config.Producer;
+import com.stackroute.purchaseinsuranceservice.domain.Insurance;
 import com.stackroute.purchaseinsuranceservice.exception.NoInsuranceFoundException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyExpiredException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyIdAlreadyExistsException;
@@ -118,7 +119,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
     @Override
     public boolean checkIfAlreadyPurchased(String email,String insurancePolicyId) {
         List<CustomerInsurance> customerInsurances=new ArrayList<>();
-                purchaseRepository.getPurchasedInsuranceByEmail(email).forEach(customerInsurances::add);
+                purchaseRepository.getCustomerInsuranceByEmail(email).forEach(customerInsurances::add);
         CustomerInsurance customerInsurance;
 
             for(int i=0;i<customerInsurances.size();i++)
@@ -335,7 +336,48 @@ public class PurchaseServiceImplementation implements PurchaseService{
         return count;
     }
 
+    @Override
+    public boolean updateClaimStatus(String customerPolicyId, String status) {
+        if(purchaseRepository.findById(customerPolicyId).isPresent())
+        {
+            CustomerInsurance customerInsurance=purchaseRepository.findById(customerPolicyId).get();
+            int index=customerInsurance.getClaimStatus().size()-1;
+            List<String> claimStatus=customerInsurance.getClaimStatus();
 
+            List<String> decisionDate=customerInsurance.getDecisionDate();
+            String last=claimStatus.get(claimStatus.size()-1);
+            if(last.equalsIgnoreCase("pending"))
+            {
+                last=status;
+                claimStatus.remove(claimStatus.size()-1);
+                claimStatus.add(last);
+                java.util.Date date = new Date();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String date_decision = formatter.format(date);
+                decisionDate.add(date_decision);
+                customerInsurance.setClaimStatus(claimStatus);
+                customerInsurance.setDecisionDate(decisionDate);
+                DecisionDTO decisionDTO=new DecisionDTO();
+                decisionDTO.setCustomerPolicyId(customerInsurance.getCustomerPolicyId());
+                decisionDTO.setInsurancePolicyId(customerInsurance.getInsurancePolicyId());
+                decisionDTO.setEmail(customerInsurance.getEmail());
+                decisionDTO.setName(customerInsurance.getName());
+                decisionDTO.setClaimAmount(customerInsurance.getClaimSum().get(index));
+                decisionDTO.setClaimDate(customerInsurance.getClaimSubmissionDate().get(index));
+                decisionDTO.setStatus(status);
+                producer.sendMessageForDecision(decisionDTO);
+                purchaseRepository.save(customerInsurance);
+
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Insurance returnInsuranceForRenewal(Insurance insurance, CustomerInsurance customerInsurance){
+        return null;
+    }
     @Override
     public int startUp(String email) throws ParseException {
            if(purchaseRepository.getCustomerInsuranceByEmail(email).size()==0)
@@ -364,8 +406,6 @@ public class PurchaseServiceImplementation implements PurchaseService{
              String startDay = customerInsurance.getStartDate().get(0);
              String endDay = customerInsurance.getEndDate().get(customerInsurance.getEndDate().size() - 1);
              if (startDay.compareTo(currentDay) > 0 || endDay.compareTo(currentDay) < 0) {
-
-
                  customerInsurance.setStatus(false);
                  purchaseRepository.save(customerInsurance);
              }
@@ -433,7 +473,18 @@ public class PurchaseServiceImplementation implements PurchaseService{
                           long sum=customerInsurance.getClaimSum().get(customerInsurance.getClaimSum().size()-1);
                           List<String> updateStatus=customerInsurance.getClaimStatus();
                           updateStatus.remove(updateStatus.size()-1);
+
                           updateStatus.add("approved");
+                          int index=customerInsurance.getClaimStatus().size()-1;
+                          DecisionDTO decisionDTO=new DecisionDTO();
+                          decisionDTO.setCustomerPolicyId(customerInsurance.getCustomerPolicyId());
+                          decisionDTO.setInsurancePolicyId(customerInsurance.getInsurancePolicyId());
+                          decisionDTO.setEmail(customerInsurance.getEmail());
+                          decisionDTO.setName(customerInsurance.getName());
+                          decisionDTO.setClaimAmount(customerInsurance.getClaimSum().get(index));
+                          decisionDTO.setClaimDate(customerInsurance.getClaimSubmissionDate().get(index));
+                          decisionDTO.setStatus("approved");
+                          producer.sendMessageForDecision(decisionDTO);
                           customerInsurance.getClaimSum().remove(customerInsurance.getClaimSum().size()-1);
                           if((totalClaim+sum)<=customerInsurance.getSumInsured())
                           {
@@ -457,7 +508,7 @@ public class PurchaseServiceImplementation implements PurchaseService{
                           customerInsurance.setClaimStatus(updateStatus);
 //                          customerInsurance.setClaimFlag(false);
                           purchaseRepository.save(customerInsurance);
-                          continue;
+
                       }
 
                   }
@@ -474,7 +525,6 @@ public class PurchaseServiceImplementation implements PurchaseService{
 public int uploadDocument(MultipartFile documentFile,String policyId) throws IOException {
 
         CustomerInsurance retrieveInsurance = purchaseRepository.findById(policyId).get();
-
         if(retrieveInsurance==null)
             return 0;
         retrieveInsurance.getClaimDocument().add(documentFile.getBytes());

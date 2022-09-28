@@ -1,5 +1,6 @@
 package com.stackroute.insuranceservice.config;
 
+import com.stackroute.insuranceservice.model.Insurance;
 import com.stackroute.insuranceservice.rabbitMq.domain.DTO;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -16,5 +17,10 @@ public class Producer {
 
     public void sendingMessageToRabbitMQServer(DTO dto){
         rabbitTemplate.convertAndSend(directExchange.getName(),"Nehitha",dto);
+    }
+
+    public void sendMessageToPurchaseInsuranceService(Insurance insurance)
+    {
+        rabbitTemplate.convertAndSend(insurance);
     }
 }

@@ -1,5 +1,6 @@
 package com.stackroute.purchaseinsuranceservice.service;
 
+import com.stackroute.purchaseinsuranceservice.domain.Insurance;
 import com.stackroute.purchaseinsuranceservice.exception.NoInsuranceFoundException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyExpiredException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyIdAlreadyExistsException;
@@ -33,5 +34,6 @@ public CustomerInsurance returnUserPolicyInformation(String customerPolicyId) th
     public int uploadDocument(MultipartFile documentFile, String policyId) throws IOException;
 public long returnUserCount(String insuranceID);
 
-
+public boolean updateClaimStatus(String customerId,String status);
+public Insurance returnInsuranceForRenewal(Insurance insurance,CustomerInsurance customerInsurance);
 }

@@ -132,6 +132,20 @@ public class PurchaseInsuranceController {
            }
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
+    @PutMapping("/update/claim/{customerId}/{status}")
+    public ResponseEntity<?> updateClaims(@PathVariable String customerId,@PathVariable String status)  {
+
+        return new ResponseEntity<>(purchaseService.updateClaimStatus(customerId,status),HttpStatus.OK);
+    }
+ @GetMapping("/get/count/{insuranceId}")
+ public ResponseEntity<?> returnUserCountForPolicy(@PathVariable String insuranceId)  {
+
+     return new ResponseEntity<>(purchaseService.returnUserCount(insuranceId),HttpStatus.OK);
+ }
+@GetMapping("/get/renew/{customerPolicyId}")
+public ResponseEntity<?> returnInsurancePolicyOptionsForRenew(@PathVariable String customerPolicyId){
+    return new ResponseEntity<>(purchaseService.returnUserCount(customerPolicyId),HttpStatus.OK);
+}
     @GetMapping("/returnobj")
     public ResponseEntity<?> returnobjasd(){
         Insurance result=new Insurance();
@@ -171,10 +185,10 @@ public class PurchaseInsuranceController {
         result.setPolicyId("123456");
         result.setPolicyName("ABCDEFGH");
 //        result.setInsuranceType("HealthInsurance");
-        result.setInsuranceType("AutoMobileInsurance");
-//        result.setInsuranceType("LifeInsurance");
+//        result.setInsuranceType("AutoMobileInsurance");
+        result.setInsuranceType("LifeInsurance");
         result.setPolicyDescription("This is a message describing the policy");
-        result.setCategory("Bike");
+//        result.setCategory("Bike");
         result.setPolicyDocuments("This is terms and conditions");
         result.setModelsAllowed(modelsAllowed);
         result.setPolicyDetails(pd);
