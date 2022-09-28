@@ -22,28 +22,6 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
 const routes: Routes = [
-<<<<<<< HEAD
-  {path:"",component:NavBarComponent,children:[
-  {path:"",component:RecommendationComponent},
-  {path:"insurance-provider",component:InsuranceProviderComponent},
-  {path:"register",component:RegisterComponent},
-  {path:"add-policy",component:AddInsurancePolicyComponent},
-  {path:"policies", component:PoliciesComponent},
-  
-  // {path: "renewal-update/:id", component: RenewalPolicyComponent},
-  {path: "renewal", component: RenewalPolicyComponent},
-  {path:"details",component:DetailsComponent},
-  {path: "renewal-home", component: RenewalPolicyHomeComponent},
-  {path:"update", component:UpdateComponent},
-  {path: "login", component: LoginComponent},
-  {path: "nav-bar", component: NavBarComponent},
-  {path:"claim",component:ClaimComponent},
-  {path:"buy",component:PurchaseInsuranceComponent},
-  {path:"policyDetails",component:InsuranceDetailsComponent},
-  {path:"claim",component:ClaimComponent},{path:"InsuranceDetails",component:InsuranceDetailsComponent}]},
-  {path:"edit-insurance",component:EditInsuranceComponent},
-  {path: "login", component: LoginComponent}
-=======
   {
     path: "", component: NavBarComponent, children: [
       { path: "", component: RecommendationComponent },
@@ -52,10 +30,9 @@ const routes: Routes = [
       { path: "add-policy", component: AddInsurancePolicyComponent },
       { path: "policies", component: PoliciesComponent },
 
-      { path: "renewal-update/:id", component: RenewalPolicyComponent },
+      { path: "renewal", component: RenewalPolicyComponent },
       { path: "renewal-home", component: RenewalPolicyHomeComponent },
       { path: "details", component: DetailsComponent },
-      // {path: "renewal", component: RenewalPolicyComponent},
       { path: "update", component: UpdateComponent },
       { path: "login", component: LoginComponent },
       { path: "nav-bar", component: NavBarComponent },
@@ -66,7 +43,6 @@ const routes: Routes = [
   },
   { path: "edit-insurance", component: EditInsuranceComponent },
   { path: "login", component: LoginComponent }
->>>>>>> 1cbc20b72e8e5ae608a6fc34ab0a8d30b5f89e7e
 
 ];
 

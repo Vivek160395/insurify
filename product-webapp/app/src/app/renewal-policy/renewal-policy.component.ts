@@ -22,6 +22,8 @@ export class RenewalPolicyComponent implements OnInit {
 
   setCheckBox: boolean[] = [];
   myModel: any;
+  selectedItems: any[] = []
+
   
   constructor(private renewalService: RenewalService) {
     this.myModel = 0;
@@ -32,12 +34,13 @@ export class RenewalPolicyComponent implements OnInit {
    date = this.pipe.transform(this.today,'yyyy-MM-dd')
 
   ngOnInit(): void {
-    // localStorage.getItem("insuranceId",);
+    // localStorage.getItem(customerPolicyId);
     this.renewalService.getPolicyDetails().subscribe((data:any)=> 
     {
       this.policyDescription = data.policyDescription;
       this.policyTitle = data.policyName;
       this.policyType = data.insuranceType;
+      console.log(this.policyType)
 
       if(this.policyType == "AutoMobileInsurance"){
         this.policySubType = data.category;
@@ -49,12 +52,6 @@ export class RenewalPolicyComponent implements OnInit {
       for(let i=0;i<data.addOnDetails.length;i++){
         this.addOnName.push(data.addOnDetails[i].addOnName);
         this.addOnPrice.push(data.addOnDetails[i].addOnPremiums);
-
-        // this.totalPremium = this.addOnPrice.reduce(function(a,b)
-        // {
-        //   return a+b;
-        // },0)
-        console.log(this.totalPremium);
         this.setCheckBox.push(false);
       }
     })
@@ -68,18 +65,19 @@ export class RenewalPolicyComponent implements OnInit {
     "date": null
   }
 
-  checkBox(event:any,i:any){
+  checkBox(event:any, i:any){
     this.setCheckBox[i] = event.checked;
-    console.log(this.setCheckBox[i]);
-    if(this.setCheckBox[i] == event.checked && this.setCheckBox[i+1] == event.checked){
-      this.data.addOnName[0] = this.addOnName[0];
-      this.data.addOnName[1] = this.addOnName[1];
-      this.totalPremium = this.addOnPrice[0] + this.addOnPrice[1] + this.premium[0];
+    console.log(i);
+    if(event.checked){
+      console.log("checked");
+      this.selectedItems.push(i);
     }
-
-    if(this.setCheckBox[0] == false){
-        this.totalPremium = this.premium[0];
+    else{
+      console.log("unchecked");
+      this.selectedItems = this.selectedItems.filter(m => m!=i)
     }
+    console.log(this.selectedItems);
+    // console.log(this.setCheckBox)
   }
 
   onSubmit(){

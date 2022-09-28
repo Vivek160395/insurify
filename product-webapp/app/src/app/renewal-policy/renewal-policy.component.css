@@ -1,5 +1,73 @@
-/* .mat-card {
-    box-shadow: 0px 0px 10px 0px #9b9b9b,
-        0 1px 1px 0 #9b9b9b,
-        0 1px 3px 0 #9b9b9b;
-} */
+.heading{
+    margin: 0px;
+    text-align: center; 
+    padding-top: 10px; 
+    background-color: #3f8cb586; 
+    color: white;
+}
+.description{
+    text-shadow: 2px 2px rgb(158, 141, 141);
+    color: black;
+}
+
+.one{
+    text-shadow: 2px 2px rgb(158, 141, 141);
+    padding-top: 30px;
+    color: black;
+    font-size: 40px;
+}
+.two{
+    text-shadow: 2px 2px rgb(158, 141, 141); 
+    padding-top: 25px;
+    color: black;
+    font-size: 40px;
+}
+.three{
+    text-shadow: 2px 2px rgb(158, 141, 141); 
+    padding-top: 5px;
+    color: black;
+    font-size: 30px;
+}
+.choose_plan{
+    text-align: center; 
+    padding-top: 5px;
+    font-size: 20px;
+}
+.first_card{
+    position: absolute; 
+    left: 15%; 
+    top: 42%; 
+    width: 30%; 
+    height: 50%; 
+    color: black; 
+    box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);
+}
+.second_card{
+    position: absolute; 
+    top: 42%; 
+    left:50%; 
+    width: 35%; 
+    height: 50%; 
+    color: black; 
+    box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);
+}
+.terms{
+    width: 50%; 
+    position: absolute; 
+    top: 92%; 
+    left: 35%;
+}
+.submit{
+    width: 50%; 
+    position: absolute; 
+    top: 95%; 
+    box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);
+}
+.summary{
+    text-align: center; 
+    text-shadow: 2px 2px rgb(158, 141, 141);
+}
+.additional{
+    text-align: center; 
+    text-shadow: 2px 2px rgb(158, 141, 141);
+}
