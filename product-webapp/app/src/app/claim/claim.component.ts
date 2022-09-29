@@ -25,13 +25,14 @@ export class ClaimComponent implements OnInit {
   today: number = Date.now();
   selectedFile = null;
   Imgurl = null;
-  insuranceType: string = "";
-  claimError='';
-
+  claimError = '';
+  today1 = new Date();
+  claimLife: string="";
+  
 
   stepperOrientation: Observable<StepperOrientation>;
 
-  constructor(private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, public dialog: MatDialog, private router: Router, private service: ClaimService,public http:HttpClient) {
+  constructor(private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, public dialog: MatDialog, private router: Router, private service: ClaimService, public http: HttpClient) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
@@ -39,8 +40,11 @@ export class ClaimComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getDetails()
+    this.getpolicy()
 
-  }
+    }
+    
+  
 
 
   data: any = {
@@ -60,106 +64,168 @@ export class ClaimComponent implements OnInit {
     category: "",
     engineNumber: "",
     chassisNumber: "",
+    insuranceType: '' ,
+    kids:"",
+    adults:"",
+    relation:"",
+    name:"",
+    
+maritalStatus:"",
+annualIncome:"",
+organisationType:"",
+occupation:""
+
+
+
   }
 
 
- 
+
   claimForm = new FormGroup({
-    document: new FormControl("",),
-    description: new FormControl("",),
-    claimType: new FormControl("",),
-    claimAmount: new FormControl("",),
-    claimDate: new FormControl("",),
-    claimSubmissionDate: new FormControl("",),
-    customerPolicyId: new FormControl(localStorage.getItem('customerPolicyId')),
-    insurancePolicyId: new FormControl(localStorage.getItem('policyId')),
-    email:new FormControl(localStorage.getItem('email'))
+    document: new FormControl("", [Validators.required]),
+    description: new FormControl("", [Validators.required]),
+    claimType: new FormControl("", [Validators.required]),
+    claimAmount: new FormControl("", [Validators.required]),
+    claimDate: new FormControl("",[Validators.required]),
+    claimSubmissionDate: new FormControl("", [Validators.required]),
+    customerPolicyId: new FormControl(localStorage.getItem('customerPolicyId'), [Validators.required]),
+    insurancePolicyId: new FormControl(localStorage.getItem('policyId'), [Validators.required]),
+    email: new FormControl(localStorage.getItem('email'), [Validators.required]),
     
   })
 
 
-  public onFileChanged(event:any) {
+  public onFileChanged(event: any) {
+    console.log(event)
     //Select File
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
+      const file1 = event.target.files[0];
       this.claimForm.patchValue({
-        document: file
+        document: file1
+
       });
     }
   }
- 
-  
- 
   
   
   
+
+
+
+
 
 
   getDetails() {
     this.service.getUserDetails().subscribe(
       info => {
-
-
         console.log(info);
 
-
-        // if (info.email === this.service.emailId) {
-          this.data.insurancePolicyId = info.insurancePolicyId;
-          this.data.customerPolicyId = info.customerPolicyId;
-          this.data.insuredName = info.name;
-          this.data.insuredEmail = info.email;
-          this.data.startDate = info.startDate;
-          this.data.purchaseDate = info.purchaseDate;
-          this.data.endDate = info.endDate;
-          this.data.duration = info.duration;
-          this.data.sumInsured = info.sumInsured;
-          this.data.premium = info.premium;
-          this.data.nomineeName = info.nameOfNominee;
-          this.data.nomineeDOB = info.nomineeDOB;
-          this.data.category = info.automobileInsurance.category;
-          this.data.vehicleRegistrationNumber = info.automobileInsurance.
-          vehicleRegistrationNumber;
-          this.data.engineNumber = info.automobileInsurance.engineNumber;
-          this.data.chassisNumber = info.automobileInsurance.chassisNumber;
-          
-
-
-          localStorage.setItem('policyId', info.insurancePolicyId);
-          localStorage.setItem('customerPolicyId', info.customerPolicyId);
-          localStorage.setItem('email', info.email);
-         
-
-
+        this.data.insurancePolicyId = info.insurancePolicyId;
+            this.data.customerPolicyId = info.customerPolicyId;
+            this.data.insuredName = info.name;
+            this.data.insuredEmail = info.email;
+            this.data.startDate = info.startDate;
+            this.data.purchaseDate = info.purchaseDate;
+            this.data.endDate = info.endDate;
+            this.data.duration = info.duration;
+            this.data.sumInsured = info.sumInsured;
+            this.data.premium = info.premium;
+            this.data.nomineeName = info.nameOfNominee;
+            this.data.nomineeDOB = info.nomineeDOB;
+            localStorage.setItem('policyId', info.insurancePolicyId);
+        localStorage.setItem('customerPolicyId', info.customerPolicyId);
+        localStorage.setItem('email', info.email);
         
+        if(this.data.insuranceType==='AutoMobileInsurance'){
+        this.data.category = info.automobileInsurance.category;
+        this.data.vehicleRegistrationNumber = info.automobileInsurance.
+          vehicleRegistrationNumber;
+        this.data.engineNumber = info.automobileInsurance.engineNumber;
+        this.data.chassisNumber = info.automobileInsurance.chassisNumber;
+        }
+        else if(this.data.insuranceType==='HealthInsurance')
+        {
+          
+          this.data.kids = info.healthInsurance.kids;
+          this.data.adults = info.healthInsurance.adults;
+          this.data.name = info.healthInsurance.insuredInfo[0].name;
+          this.data.relation = info.healthInsurance.insuredInfo[0].relation;
+        }
+        this.data.maritalStatus = info.lifeInsurance.maritalStatus;
+        this.data.occupation = info.lifeInsurance.occupation;
+        this.data.organisationType = info.lifeInsurance.organisationType;
+        this.data.annualIncome = info.lifeInsurance.annualIncome;
+          
+        
+        
+          
+                
+              
+          
+              
+        
+      
+      
+
+      
+        
+        
+            
+            
+      
+  
+
       });
-   
+    
+
 
 
 
   }
+  getpolicy() {
+    this.service.getPolicyDetails().subscribe(
+      info => {
+
+
+        console.log(info);
+        this.data.insuranceType = info.insuranceType;
+        
+        
+      });
+  
+
+    }
+
 
 
 
   onSubmit() {
-    const formData=new FormData;
-    formData.append("documentFile",this.claimForm.controls['document'].value!);
-    formData.append("policyId",this.data.customerPolicyId.toString())
-    console.log(formData);
+    const formData: FormData = new FormData();
+
+    formData.append("imageFile", this.claimForm.controls['document'].value!);
+    formData.append("policyId", this.data.customerPolicyId.toString())
+    formData.forEach((value, key) => {
+      console.log(key + " " + value)
+    });
+    
     this.service.putUser(this.claimForm.value).subscribe((
       info) => {
-    console.log(this.claimForm.value);
-    this.http.put("http://localhost:8084/api/upload/documents/"+this.data.customerPolicyId,formData, { observe: 'response' })
-              .subscribe((data:any)=>{console.log(data)});
-    this.claimForm.reset();
-    
+      
 
-  },
-  (err) => {
-    this.claimError=err.error.text;
-    console.log(err.error.text)});
-}
+      this.claimForm.reset();
+
+
+    },
+      (err) => {
+        this.claimError = err.error.text;
+        this.http.put("http://localhost:8084/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
+          .subscribe((data: any) => { console.log(data) });
+        console.log(err.error.text)
+        console.log(this.claimForm.value);
+      });
+  }
   get insurancex() {
-    return "automobileInsurance";
+    return this.data.insuranceType;
   }
 
 }

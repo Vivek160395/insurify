@@ -119,11 +119,11 @@ public class PurchaseInsuranceController {
         return new ResponseEntity<>(purchaseService.startUp(email), HttpStatus.ACCEPTED);
     }
     @PutMapping("/upload/documents/{policyId}")
-    public ResponseEntity<?> updateImage(@RequestParam("documentFile") MultipartFile documentFile,
+    public ResponseEntity<?> updateImage(@RequestParam("imageFile") MultipartFile imageFile,
                                          @PathVariable String policyId)  {
      int result=0;
            try {
-               result=purchaseService.uploadDocument(documentFile, policyId);
+               result=purchaseService.uploadDocument(imageFile, policyId);
 
            }
            catch(IOException e)
@@ -199,4 +199,6 @@ public ResponseEntity<?> returnInsurancePolicyOptionsForRenew(@RequestBody Insur
         System.out.println(result.getCategory());
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
+
 }
+

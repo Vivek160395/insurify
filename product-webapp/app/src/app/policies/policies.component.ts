@@ -26,6 +26,7 @@ export class PoliciesComponent {
   currentDate:any;
   description: string[]=[];
   policyTitle: string[]=[];
+  insuranceTitle: string[]=[];
 
 
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
@@ -39,6 +40,16 @@ export class PoliciesComponent {
       console.log(data);
       this.purchasedPolicies=data;
       for(let i=0; i<this.purchasedPolicies.length;i++){
+        if(this.purchasedPolicies[i].healthInsurance==null && this.purchasedPolicies[i].lifeInsurance==null){
+          this.insuranceTitle.push('Automobile Insurance');}
+        else if(this.purchasedPolicies[i].healthInsurance==null && this.purchasedPolicies[i].automobileInsurance==null){
+          this.insuranceTitle.push('Life Insurance');}
+        else if(this.purchasedPolicies[i].automobileInsurance==null && this.purchasedPolicies[i].lifeInsurance==null){
+          this.insuranceTitle.push('Health Insurance');}
+        else {
+          this.insuranceTitle.push('NA');
+        }
+
         this.http.get("http://localhost:8010/api/vk1/policy-id/"+this.purchasedPolicies[i].insurancePolicyId).subscribe((x:any)=>{
             this.description.push(x.policyDescription);
             this.policyTitle.push(x.policyName)
@@ -120,7 +131,8 @@ export class PoliciesComponent {
   openDialog(policy: any, i:any) {
     console.log(policy);
     this.router.navigateByUrl('/details');
-    localStorage.setItem('insuranceType',this.policyTitle[i]);
+    // localStorage.setItem('insuranceType',this.policyTitle[i]);
+    localStorage.setItem('insuranceType','Automobile Insurance');
     localStorage.setItem('customerPolicyId', policy.customerPolicyId)
     console.log(localStorage.getItem('insuranceType'));
     console.log(localStorage.getItem('customerPolicyId'));
