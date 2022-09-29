@@ -253,6 +253,11 @@ mat-icon {
     font-size: 15px;
 }
 
+.edit {
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
 @media screen and (max-width:450px) {
     .float {
         position: fixed;

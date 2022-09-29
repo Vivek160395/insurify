@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+// import * as Stomp from 'stompjs';
+// import * as SockJS from 'sockjs-client';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../user.service';
 
