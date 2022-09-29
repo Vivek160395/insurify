@@ -124,6 +124,11 @@ public class InsuranceController {
         return new ResponseEntity<>(insuranceService.findPolicyByPolicyName(policyName), HttpStatus.OK);
     }
 
+    @GetMapping("/policies/{email}")
+    public ResponseEntity<?> getPoliciesByEmail(@PathVariable String email) throws PolicyNotFoundException {
+        return new ResponseEntity<>(insuranceService.findAllPolicyByEmail(email), HttpStatus.OK);
+    }
+
     // compress the image bytes before storing it in the database
     public static byte[] compressBytes(byte[] data) {
         Deflater deflater = new Deflater();

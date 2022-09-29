@@ -46,6 +46,18 @@ public class PurchaseInsuranceController {
         return new ResponseEntity<>(purchaseService.getCustomerInsurances(),HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/policies/{insuranceId}")
+    public ResponseEntity<?> getPolicyByInsurancePolicyId(@PathVariable String insuranceId)
+    {
+        try{
+            return new ResponseEntity<>(purchaseService.getCustomerInsurancesByInusranceId(insuranceId),HttpStatus.ACCEPTED);
+        }
+        catch ( NoInsuranceFoundException noInsuranceFoundException)
+        {
+            return new ResponseEntity<>("No Insurance Found",HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/get/{customerPolicyId}")
     public ResponseEntity<?> getPolicyDetailsByCustomerPolicyID(@PathVariable String customerPolicyId)
     {
