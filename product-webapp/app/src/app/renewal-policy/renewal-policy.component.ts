@@ -1,4 +1,5 @@
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RenewalService } from '../renewal.service';
 
@@ -25,7 +26,7 @@ export class RenewalPolicyComponent implements OnInit {
   selectedItems: any[] = []
 
   
-  constructor(private renewalService: RenewalService) {
+  constructor(private renewalService: RenewalService,private http: HttpClient) {
     this.myModel = 0;
    }
 
@@ -35,12 +36,14 @@ export class RenewalPolicyComponent implements OnInit {
 
   ngOnInit(): void {
     // localStorage.getItem(customerPolicyId);
-    this.renewalService.getPolicyDetails().subscribe((data:any)=> 
+    // this.renewalService.getPolicyDetails().subscribe((data:any)=> 
+    this.http.get("http://localhost:8010/api/vk1/policy-id/789452").subscribe((x:any)=>{
+    this.http.put("http://localhost:8084/api/testing/321",x).subscribe((data:any)=> 
     {
       this.policyDescription = data.policyDescription;
       this.policyTitle = data.policyName;
       this.policyType = data.insuranceType;
-      console.log(this.policyType)
+      console.log(this.policyType);
 
       if(this.policyType == "AutoMobileInsurance"){
         this.policySubType = data.category;
@@ -54,7 +57,7 @@ export class RenewalPolicyComponent implements OnInit {
         this.addOnPrice.push(data.addOnDetails[i].addOnPremiums);
         this.setCheckBox.push(false);
       }
-    })
+    })})
   }
 
   data: any = {
