@@ -4,6 +4,7 @@ import com.stackroute.emailservice.model.Email;
 
 public interface EmailService {
 
-    Email sendEmail(Email email);
+     Email sendEmail(Email email);
+
 
 }

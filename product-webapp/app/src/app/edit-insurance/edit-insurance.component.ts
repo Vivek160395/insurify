@@ -187,6 +187,22 @@ export class EditInsuranceComponent implements OnInit {
   insuranceobj: any
 
   ngOnInit(): void {
+    this.http.get('http://localhost:8010/api/vk1/policy-id/800233').subscribe((data:any)=>{
+      this.insuranceobj=data
+     
+     console.log(this.insuranceobj);
+    //  const formData=new FormData;
+     // formData.append("insurance","ins");
+      // formData.append("customerPolicyId","123123")
+      this.http.put<Insurance>('http://localhost:8084/api/testing/123123',data).subscribe((data:any)=>
+      {
+        console.log(data);
+        console.log("inside success");
+      },
+      (error:any)=>{console.log(error);
+      }
+      )
+    })
     this.http.get('http://localhost:8010/api/vk1/policy-id/123456').subscribe((data: any) => {
       this.insuranceobj = data
 
@@ -211,7 +227,7 @@ export class EditInsuranceComponent implements OnInit {
         this.addDetails1(i)
       }
       // this.addDetails1(this.insuranceobj.policyBenefits.length-1)
-      console.log(this.flags)
+      // console.log(this.flags)
       const control2 = <FormArray>this.insuranceForms.controls['addOnDetails'];
 
       for (let i = 0; i < this.insuranceobj.addOnDetails.length; i++) {
@@ -226,7 +242,7 @@ export class EditInsuranceComponent implements OnInit {
       const control3 = <FormArray>this.insuranceForms.get('policyDetails')
 
       for (let i = 0; i < this.insuranceobj.policyDetails.length; i++) {
-        console.log('Error for ' + i);
+        // console.log('Error for ' + i);
         control3.at(i).patchValue({
           premiums: this.insuranceobj.policyDetails[i].premiums,
           durations: this.insuranceobj.policyDetails[i].durations,
@@ -238,7 +254,7 @@ export class EditInsuranceComponent implements OnInit {
           minSalary: this.insuranceobj.policyDetails[i].minSalary,
           maxSalary: this.insuranceobj.policyDetails[i].maxSalary,
         })
-        console.log('No Error for ' + i);
+        // console.log('No Error for ' + i);
         if(i<(this.insuranceobj.policyDetails.length-1))
         this.addDetailsE(i)
       }
@@ -270,29 +286,88 @@ export class EditInsuranceComponent implements OnInit {
     }
   }
 modifyform(){
+  const obj=this.insuranceForms
   let control=<FormArray>this.insuranceForms.get('policyBenefits')
+  console.log("Inside method");
+  let arr=[]
+  
   for(let i=0;i<control.length;i++)
   {
     if(control.at(i).invalid)
     {
-      control.removeAt(i)
+      console.log("Removing method");
+      arr.push(i)
     }   
   }
-  control=<FormArray>this.insuranceForms.get('addOnDetails')
-  for(let i=0;i<control.length;i++)
+  let count1=0
+  for(let ij=0;ij<arr.length;ij++)
   {
-    if(control.at(i).invalid)
-    {
-      control.removeAt(i)
-    }   
+    let z=arr[ij]-count1
+    control.removeAt(z);
+    count1++
   }
-  control=<FormArray>this.insuranceForms.get('policyDetails')
-  for(let i=0;i<control.length;i++)
+
+   let  control1=<FormArray>this.insuranceForms.get('addOnDetails')
+   let arr1=[]
+  for(let i=0;i<control1.length;i++)
   {
-    if(control.at(i).invalid)
+    if(control1.at(i).invalid)
     {
-      control.removeAt(i)
-    }   
+      arr1.push(i)
+    }  
+ 
+  }
+  let count2=0
+  for(let ij=0;ij<arr.length;ij++)
+  {
+    let z=arr1[ij]-count2
+    control1.removeAt(z);
+    count2++
+  }
+  console.log("After removing add on details");
+  let x=<FormArray>this.insuranceForms.get('policyDetails')
+  let remove=[]
+  for(let i=0;i<x.length;i++)
+  {
+    console.log('Automobile INSURANCE:'+(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&(obj.get('insuranceType')!.value=='AutoMobileInsurance')));
+    console.log('Health INSURANCE:'+(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid));
+    console.log('Life INSURANCE:'+(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid));
+    if(!((x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&(obj.get('insuranceType')!.value=='AutoMobileInsurance'))
+    ||(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid)
+    ||(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid)))
+    {
+ 
+      console.log(x.at(i).value);
+      
+      remove.push(i)
+    }
+    else{
+      console.log('Entering else');
+
+      for(let j=0;j<i;j++)
+      {
+        console.log('Durations :'+x.at(i).get('durations')!.value+","+x.at(j).get('durations')!.value);
+        console.log('sumInsure :'+x.at(i).get('sumInsure')!.value+","+x.at(j).get('sumInsure')!.value); 
+        if((x.at(i).get('durations')!.value == x.at(j).get('durations')!.value)&&(x.at(i).get('sumInsure')!.value == x.at(j).get('sumInsure')!.value))
+        {
+          console.log("I: "+i+"J: "+j)
+          if(remove.indexOf(i)==-1)
+          remove.push(i)
+        }
+      } 
+    } 
+    
+    
+  }
+  
+  console.log("After removing add on details");
+  let count=0
+  console.log(remove);
+  for(let ij=0;ij<remove.length;ij++)
+  {
+    let z=remove[ij]-count
+    x.removeAt(z);
+    count++
   }
 }
 
@@ -344,23 +419,23 @@ modifyform(){
     //insuranceType,AutoMobileInsurance,HealthInsurance
     for (let k = 0; k < control.length; k++) {
       if (this.insuranceForms.get('insuranceType')?.value == 'LifeInsurance') {
-        console.log('1');
+        // console.log('1');
 
         if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('premiums')?.invalid || control.at(k).get('durations')?.invalid || control.at(k).get('minSalary')?.invalid || control.at(k).get('maxSalary')?.invalid) {
           this.openSnackBar('Fill all the details of row  ' + (k + 1) + '  to add new Row')
           return
         }
-        console.log('2');
+        // console.log('2');
       }
       if (this.insuranceForms.get('insuranceType')?.value == 'AutoMobileInsurance') {
-        console.log('Before');
+        // console.log('Before');
 
         if (this.insuranceForms.get('modelsAllowed')?.invalid) {
           console.log('In method not allowed');
           this.openSnackBar('Please select Models Allowed first')
           return
         }
-        console.log('After');
+        // console.log('After');
 
         if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('premiums')?.invalid || control.at(k).get('durations')?.invalid) {
           console.log('3');
@@ -405,9 +480,9 @@ modifyform(){
     if (this.init_flag) {
       for (let z = 0; z < control.length - 1; z++) {
         for (let zz = z + 1; zz < control.length; zz++) {
-          console.log(control.at(z).value);
-          console.log(control.at(zz).value)
-          console.log(control.at(z).value === control.at(zz))
+          // console.log(control.at(z).value);
+          // console.log(control.at(zz).value)
+          // console.log(control.at(z).value === control.at(zz))
           if (JSON.stringify(control.at(z).value) === JSON.stringify(control.at(zz).value)) {
             this.openSnackBar("Row " + (z + 1) + " and Row " + (zz + 1) + " are same please remove or change value to add new row")
             return
@@ -416,22 +491,22 @@ modifyform(){
       }
       for (let k = 0; k < control.length; k++) {
         if (this.insuranceForms.get('insuranceType')?.value == 'LifeInsurance') {
-          console.log('1');
+          // console.log('1');
           if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('premiums')?.invalid || control.at(k).get('durations')?.invalid || control.at(k).get('minSalary')?.invalid || control.at(k).get('maxSalary')?.invalid) {
             this.openSnackBar('Fill all the details of row  ' + (k + 1) + '  to add new Row')
             return
           }
         }
         if (this.insuranceForms.get('insuranceType')?.value == 'AutoMobileInsurance') {
-          console.log('Before');
-          console.log('2');
+          // console.log('Before');
+          // console.log('2');
           if (this.insuranceForms.get('modelsAllowed')?.invalid) {
-            console.log('In method not allowed');
+            // console.log('In method not allowed');
             this.insuranceForms.get('modelsAllowed')?.markAsTouched
             this.openSnackBar('Please select Models Allowed first')
             return
           }
-          console.log('After');
+          // console.log('After');
 
           if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('premiums')?.invalid || control.at(k).get('durations')?.invalid) {
             this.openSnackBar('Fill all the details of row  ' + (k + 1) + '  to add new Row')
@@ -448,7 +523,7 @@ modifyform(){
       }
 
     }
-    console.log(control.value);
+    // console.log(control.value);
     control.push(new FormGroup({
       premiums: new FormControl("", [Validators.required, Validators.min(0)]),
       durations: new FormControl("", [Validators.required, Validators.min(0)]),
@@ -489,7 +564,7 @@ modifyform(){
 
     arr.descriptions = control.controls[index].value.description;
     this.policyarray.push(arr);
-    console.log(this.policyarray)
+    // console.log(this.policyarray)
   }
   removeDetails1(index: any) {
     const control = <FormArray>this.insuranceForms.controls['policyBenefits'];
@@ -519,7 +594,7 @@ modifyform(){
     arr1.addOnDescription = control.controls[index].value.addOnDescription;
     arr1.addOnPremiums = control.controls[index].value.addOnPremiums;
     this.premiumarray.push(arr1);
-    console.log(this.premiumarray)
+    // console.log(this.premiumarray)
   }
   removeDetails2(index: any) {
     const control = <FormArray>this.insuranceForms.controls['addOnDetails'];
