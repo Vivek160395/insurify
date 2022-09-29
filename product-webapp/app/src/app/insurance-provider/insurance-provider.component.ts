@@ -58,7 +58,7 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
   pic: any;
   imageType: any;
   count2 = 0;
-  displayedColumns: string[] = ['policyName'];
+  displayedColumns: string[] = ['policyName', 'policyId'];
   dataSource: any = [];
   countOfInsurances: any = [];
 
