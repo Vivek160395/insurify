@@ -1,30 +1,60 @@
-<div style="margin: 10px; text-align: center; padding-top: 10px; background-color: #3f8cb586; color: white;" 
-fxLayout="row" fxLayout.xs="column">
+<div class="heading" fxLayout="row" fxLayout.xs="column">
     <div fxFlex="30%">
-        <h1 *ngIf="policySubType == '' " style="text-shadow: 2px 2px rgb(158, 141, 141); padding-top: 30px;">
+        <h1 class="one" *ngIf="policySubType == '' ">
             <b>{{policyType}}</b>
         </h1>
-        <h1 *ngIf="policySubType != '' " style="text-shadow: 2px 2px rgb(158, 141, 141); padding-top: 25px;">
+        <h1 class="two" *ngIf="policySubType != '' ">
             <b>{{policyType}}</b>
             <b>{{policySubType}}</b>
         </h1>
     </div>
     <div fxFlex="60%">
-        <h1 style="text-shadow: 2px 2px rgb(158, 141, 141); padding-top: 5px;">
+        <h1 class="three">
             <b>{{policyTitle}}</b>
         </h1>
-        <p style="text-shadow: 2px 2px rgb(158, 141, 141);">{{policyDescription}}</p>
+        <p class="description">{{policyDescription}}</p>
+    </div>
+</div>
+<div fxLayout="column">
+    <div class="choose_plan">
+        <h1><b>Choose your Plan</b></h1>
     </div>
 </div>
 
 <br><br>
+<div fxLayout="row" *ngIf="policyType === 'HealthInsurance'">
+    
+    <div fxLayoutAlign="center" class="col-md-6">
+        <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="50px" >
+            <mat-radio-button [value]="i" appZoomonhover="true" *ngFor="let p of premium;let i=index ">
+                <b> Premium</b><br> Rs.{{p}} <br>({{duration[i]}} Years)
+            </mat-radio-button>
+            <!-- <mat-radio-button [value]="1" appZoomonhover="true">
+                <b>Adult Premium</b> <br> Rs.7500 <br>(1 Years)
+            </mat-radio-button>
+            <mat-radio-button [value]="2" appZoomonhover="true">
+                <b>Adult Premium</b> <br> Rs.5000 <br>(10 Years)
+            </mat-radio-button> -->
+        </mat-radio-group>
+    </div>
 
-<div style="text-align: center;" fxLayout.xs="column" >
-    <h1><b>Choose your Plan</b></h1>
+    <!-- <div fxLayoutAlign="center" class="col-md-6">
+        <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="50px">
+            <mat-radio-button [value]="0" appZoomonhover="true">
+                <b>Kids Premium</b> <br> Rs.9500 <br>(10 Years)
+            </mat-radio-button>
+            <mat-radio-button [value]="1" appZoomonhover="true">
+                <b>Kids Premium</b> <br> Rs.8500 <br>(5 Years)
+            </mat-radio-button>
+            <mat-radio-button [value]="2" appZoomonhover="true">
+                <b>Kids Premium</b> <br> Rs.4500 <br>(3 Years)
+            </mat-radio-button>
+        </mat-radio-group>
+    </div> -->
 </div>
 
 
-<div fxLayoutAlign="center">
+<div fxLayoutAlign="center" *ngIf="policyType === 'LifeInsurance' || policyType === 'AutomobileInsurance'">
     <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="50px">
         <mat-radio-button [value]="0" appZoomonhover="true">
             <b>Total Premium</b> <br> Rs.4000 <br>(5 Years)
@@ -38,19 +68,18 @@ fxLayout="row" fxLayout.xs="column">
     </mat-radio-group>
 </div>
 
-<div fxLayout="row" fxLayoutGap="15%">
-    <mat-card fxFlex="45%" fxLayout.xs="column" style="position: absolute; left: 15%; top: 42%; width: 30%; height: 50%; 
-    color: black; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" appZoomonhover="true">
+<div style="height: 495px;" fxLayout="row" fxLayoutGap="15%" >
+    <mat-card class="first_card" fxFlex="45%" appZoomonhover="true" >
         <mat-card-content fxLayout="column" fxLayoutAlign="center" >
 
-            <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
+            <h1 class="additional">
                 <b>Additional Covers</b>
             </h1>
             
             <div *ngFor="let data of addOnName; let i=index">
-                <p style="text-align: center;" class="col-md-6">
-                    <mat-checkbox (change)="checkBox($event,i)" [checked]="setCheckBox[i]" class="col-md-6">
-                        <b>{{data}}</b> ({{addOnPrice[i]}})
+                <p style="padding-left: 125px;">
+                    <mat-checkbox (change)="checkBox($event,i)" >
+                        <b>{{data}}</b>({{addOnPrice[i]}})
                     </mat-checkbox>
                 </p>
             </div>
@@ -58,36 +87,33 @@ fxLayout="row" fxLayout.xs="column">
         </mat-card-content>
       </mat-card>
     
-    <div  fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-        <mat-card style="position: absolute; top: 42%; left:50%; width: 35%; height: 50%; color: black; 
-        box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" appZoomonhover="true">
+    <div fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
+        <mat-card class="second_card" appZoomonhover="true">
         
-        <h1 style="text-align: center; text-shadow: 2px 2px rgb(158, 141, 141);">
-            <b>Premium Summary</b>
-        </h1>
-
-            <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngIf="myModel == 0">
+        <h1 class="summary"><b>Premium Summary</b></h1>
+        <div *ngFor="let d of duration;let i=index">
+            <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngIf="myModel == i">
                 <div>
                     <p class="d-flex justify-content-md-center">
-                        <b class="col-md-6">Premium </b>{{premium[0]}}
+                        <b class="col-md-6">Premium </b>{{premium[myModel]}}
                     </p>
                 </div>
                 <div>
                     <p class="d-flex justify-content-md-center">
-                        <b class="col-md-6">Duration </b>{{duration[0]}}
+                        <b class="col-md-6">Duration </b>{{duration[myModel]}}
                     </p>
-                </div>                    
+                </div>
                 <div *ngFor="let name of addOnName; let i=index">
                     <p *ngIf="setCheckBox[i] === true" class="d-flex justify-content-md-center">
                         <b class="col-md-6">{{name}} (AddOns)</b> {{addOnPrice[i]}}
                     </p>
                 </div>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Total Premium </b> {{totalPremium}}
+                    <b class="col-md-6">Total Premium </b> {{calculate_premium()}}
                 </p>
             </mat-card-content>
-
-            <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngIf="myModel == 1">
+        </div>
+            <!-- <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngIf="myModel == 1">
                 <div>
                     <p class="d-flex justify-content-md-center">
                         <b class="col-md-6">Premium </b>{{premium[1]}}
@@ -105,7 +131,7 @@ fxLayout="row" fxLayout.xs="column">
                     </p>
                 </div>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Total Premium </b> {{totalPremium}}
+                    <b class="col-md-6">Total Premium </b> {{calculate_premium()}}
                 </p>
             </mat-card-content>
 
@@ -113,12 +139,12 @@ fxLayout="row" fxLayout.xs="column">
 
                 <div>
                     <p class="d-flex justify-content-md-center">
-                        <b class="col-md-6">Premium </b>{{premium[2]}}
+                        <b class="col-md-6">Premium</b>{{premium[2]}}
                     </p>
                 </div>
                 <div>
                     <p class="d-flex justify-content-md-center">
-                        <b class="col-md-6">Duration </b>{{duration[2]}}
+                        <b class="col-md-6">Duration</b>{{duration[2]}}
                     </p>
                 </div>
                 <div *ngFor="let name of addOnName; let i=index">
@@ -129,22 +155,19 @@ fxLayout="row" fxLayout.xs="column">
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium </b> {{totalPremium}}
                 </p>
-            </mat-card-content>
+            </mat-card-content> -->
           </mat-card>
     </div>
 </div>
 
-
-<div style="width: 50%; position: absolute; top: 92%; left: 35%;" >
+<div class="terms">
     <mat-checkbox>
         <b>I hereBy declare that I have agreed to terms and conditions of the policy</b>
     </mat-checkbox>
 </div>
 
 <div fxLayoutAlign="center">
-    <button mat-raised-button color="primary" style="width: 50%; position: absolute; top: 95%; box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);" 
-    (click)="onSubmit()">Submit
-    </button>
+    <button class="submit" mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
 </div>
 
 <!-- <button mat-mini-fab color="accent" style="position: absolute; top: 8%; left: 93%; width: 60px;" appZoomonhover="true">

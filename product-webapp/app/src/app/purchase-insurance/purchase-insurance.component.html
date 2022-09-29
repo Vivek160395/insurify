@@ -1,4 +1,4 @@
-<!-- <mat-stepper linear #stepper>
+<mat-stepper linear #stepper>
     <mat-step>
         <ng-template matStepLabel>Enter details</ng-template>
         <form [formGroup]="userForm">
@@ -96,22 +96,28 @@
                 <h2 style="color: orange;justify-content: center;align-items: center;">Available Policy Details </h2>
                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
+                    <!--- Note that these columns can be defined in any order.
+                        The actual rendered columns are set as a property on the row definition" -->
 
+                    <!-- Minimum Salary Column -->
                     <ng-container matColumnDef="minSal">
                         <th mat-header-cell *matHeaderCellDef> Minimum Salary </th>
                         <td mat-cell *matCellDef="let element"> {{element.minSal}} </td>
                     </ng-container>
 
+                    <!--  Max Salary  Column -->
                     <ng-container matColumnDef="maxSal">
                         <th mat-header-cell *matHeaderCellDef> Maximum Salary </th>
                         <td mat-cell *matCellDef="let element"> {{element.maxSal}} </td>
                     </ng-container>
 
+                    <!-- duration Column -->
                     <ng-container matColumnDef="duration">
                         <th mat-header-cell *matHeaderCellDef> Duration </th>
                         <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
                     </ng-container>
 
+                    <!-- Symbol Column -->
                     <ng-container matColumnDef="suminsured">
                         <th mat-header-cell *matHeaderCellDef> Sum Insured </th>
                         <td mat-cell *matCellDef="let element"> {{element.suminsured}} </td>
@@ -172,8 +178,8 @@
                                     <div fxLayout="column">
                                         <p>What is Sum Insured and Policy duration?</p>
                                         <p>Brief description about <span style="font-weight: bolder;font-weight: 800;" matTooltip="Total Amount that the insurer will provide during policy duration against claims">SUM
-                        INSURED</span> and <span style="font-weight: bolder;font-weight:800;" matTooltip="The length of time during which an insurance policy remains in force">
-                        POLICY DURATION</span> </p>
+                                              INSURED</span> and <span style="font-weight: bolder;font-weight:800;" matTooltip="The length of time during which an insurance policy remains in force">
+                                              POLICY DURATION</span> </p>
                                     </div>
                                     <h2 style="margin-left:auto" *ngIf="calculate_premium()">
                                         Total premium Rs {{premium}}
@@ -194,6 +200,7 @@
                                         <mat-checkbox (change)="checked_addOn($event,i,add.addonprice,add.addonname)">
                                             Add
                                         </mat-checkbox>
+                                        <!-- <button mat-raised-button color="primary">Add</button> -->
                                         <p style="text-align: center;font-family: cursive;" fxFlex="70%">
                                             {{add.addonname}} | {{add.addonprice}}
                                         </p>
@@ -277,6 +284,7 @@
                         <mat-label>Nominee DOB</mat-label>
                         <input matInput min="minDate" max="maxDate" placeholder="Nominee Date Of Birth" type="date" formControlName="nomineeDOB" required>
 
+                        <!-- <input type="date" formControlname="nomineeDOB"> -->
                         <small style="color: red;" *ngIf="userForm.controls.nomineeDOB.errors?.['required'] && userForm.controls.nomineeDOB.invalid && (userForm.controls.nomineeDOB.touched || userForm.controls.nomineeDOB.dirty)">*Required</small>
                     </mat-form-field>
 
@@ -375,7 +383,7 @@
                 </mat-form-field>
                 <div fxFlex="50%" style="display: flex;justify-content: center;align-items: center;">
                     <label style="font-family: cursive;font-style: italic;font-weight: bolder;">PreExisting
-            disease</label>
+                      disease</label>
                     <mat-radio-group [(ngModel)]="dis_status" formControlName="lifeillnessStatus">
                         <mat-radio-button value='yes'>Yes</mat-radio-button>
                         <mat-radio-button value='no'>No</mat-radio-button>
@@ -411,8 +419,10 @@
                     <button mat-button (click)="print()">Print object</button>
                     <button mat-raised-button [disabled]="check_validity()" color="primary" (click)="purchase_insurance()" fxFlex="30%" style="margin-left: auto;">Buy</button>
                 </div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-raised-button matStepperNext style="margin-left: auto" color="primary">Next</button>
+                <!-- <div fxLayout="row">
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-raised-button matStepperNext style="margin-left: auto" color="primary">Next</button>
+              </div> -->
             </div>
         </form>
     </mat-step>
@@ -423,6 +433,7 @@
                 <div *ngFor="let x of [].constructor(+adultValue + +kidValue);let i = index;" formGroupName="{{i}}">
                     <ng-template matStepLabel>Health details</ng-template>
                     <mat-card>
+                        <!-- <div>{{i+xy}}</div> -->
                         <div fxLayout="row" *ngIf="i<adultValue">
                             <h3 style="font-family: cursive;">Adult {{i+1}} details</h3>
                         </div>
@@ -435,16 +446,19 @@
                                 <mat-select placeholder="Relationship with Applicant" formControlName="relation">
                                     <mat-option value="{{x}}" *ngFor="let x of relationlist">{{x}}</mat-option>
                                 </mat-select>
+                                <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-label>Name</mat-label>
                                 <input matInput placeholder="Name" required formControlName="nameof">
+                                <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
 
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-label>Date of Birth</mat-label>
-                                <input [min]="minDate" [max]="maxDate" placeholder="Nominee Date Of Birth" type="date" formControlName="insuredDOB" required>
+                                <input matInput placeholder="Nominee Date Of Birth" type="date" formControlName="insuredDOB" required>
 
+                                <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
 
                             </mat-form-field>
                         </div>
@@ -452,10 +466,12 @@
                             <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-label>Weight</mat-label>
                                 <input matInput placeholder="weight" required formControlName="weight">
+                                <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-label>Height(cms)</mat-label>
                                 <input matInput placeholder="Height(in cms)" required formControlName="height">
+                                <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex="33%">
@@ -471,6 +487,7 @@
                                 <mat-select placeholder="Choose pre existing disease" multiple formControlName="illnessList">
                                     <mat-option value="{{x}}" *ngFor="let x of diseaselist">{{x}}</mat-option>
                                 </mat-select>
+                                <!-- <small  style="color: red;" *ngIf="userForm.controls.illnessList.errors?.['required'] && userForm.controls.illnessList.invalid && (userForm.controls.illnessList.touched || userForm.controls.illnessList.dirty)">*Required</small> -->
                             </mat-form-field>
                         </div>
 
@@ -482,7 +499,7 @@
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button (click)="stepper.reset()">Reset</button>
                 <button mat-button (click)="print()">Print object</button>
-                <button mat-raised-button [disabled]="check_validity()" color="primary" (click)="purchase_insurance()" fxFlex="30%" style="margin-left: auto;">Buy</button>
+                <button mat-raised-button [disabled]="check_validity()" color="primary" (click)="proceedPayment()" fxFlex="30%" style="margin-left: auto;">Buy</button>
             </div>
         </form>
     </mat-step>
@@ -491,9 +508,9 @@
         <p>You are now done.</p>
         <div>
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-raised-button [disabled]="check_validity()" (click)="purchase_insurance()">Buy</button>
+            <button mat-raised-button [disabled]="check_validity()" (click)="proceedPayment()">Buy</button>
             <button mat-button (click)="stepper.reset()">Reset</button>
             <button mat-button (click)="print()">Print object</button>
         </div>
     </mat-step>
-</mat-stepper> -->
+</mat-stepper>

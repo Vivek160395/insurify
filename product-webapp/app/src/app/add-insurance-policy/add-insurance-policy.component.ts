@@ -133,6 +133,7 @@ export class AddInsurancePolicyComponent implements OnInit {
   }
   flags: boolean[] = [true];
   flag: boolean[] = [true]
+  filestatus:boolean=false
   openSnackBar(message: string) {
 
     this.snackBar.open(message, 'Ok', { duration: 3000 });
@@ -199,50 +200,67 @@ export class AddInsurancePolicyComponent implements OnInit {
       this.insuranceForms.patchValue({
         fileSource: file
       });
+      this.filestatus=true
     }
   }
   modifyform(){
     const obj=this.insuranceForms
     let control=<FormArray>this.insuranceForms.get('policyBenefits')
     console.log("Inside method");
-    
-    for(let i=0;i<control.length;i++)
-    {
-      if(control.at(i).valid)
-      {
-        for(let j=0;j<i;j++)
-        {
-          if(JSON.stringify(control.at(i).value) === JSON.stringify(control.at(j).value))
-          {
-            console.log("Inside method1");
-            control.removeAt(i)
-            continue
-          }
-        }
-      }   
-    }
+    let arr=[]
+    // for(let i=0;i<control.length;i++)
+    // {
+    //   if(control.at(i).valid)
+    //   {
+    //     for(let j=0;j<i;j++)
+    //     {
+    //       if(JSON.stringify(control.at(i).value) === JSON.stringify(control.at(j).value))
+    //       {
+    //         console.log("Inside method1");
+    //         arr.push(i)
+    //         continue
+    //       }
+    //     }
+    //   }   
+    // }
     for(let i=0;i<control.length;i++)
     {
       if(control.at(i).invalid)
       {
         console.log("Removing method");
-        control.removeAt(i)
+        arr.push(i)
       }   
     }
+    let count1=0
+    for(let ij=0;ij<arr.length;ij++)
+    {
+      let z=arr[ij]-count1
+      control.removeAt(z);
+      count1++
+    }
+
      let  control1=<FormArray>this.insuranceForms.get('addOnDetails')
+     let arr1=[]
     for(let i=0;i<control1.length;i++)
     {
       if(control1.at(i).invalid)
       {
-        control1.removeAt(i)
+        arr1.push(i)
       }  
-      for(let j=0;j<i;j++)
-      {
-        if(JSON.stringify(control1.at(i).value) === JSON.stringify(control1.at(j).value))
-        {
-          control1.removeAt(i)
-        }
-      } 
+      // for(let j=0;j<i;j++)
+      // {
+      //   if(JSON.stringify(control1.at(i).value) === JSON.stringify(control1.at(j).value))
+      //   {
+      //     control1.removeAt(i)
+      //   }
+      // } 
+    }
+    let count2=0
+    for(let ij=0;ij<arr.length;ij++)
+    {
+      let z=arr1[ij]-count2
+      control1.removeAt(z);
+      count2++
     }
     console.log("After removing add on details");
     let x=<FormArray>this.insuranceForms.get('policyDetails')
@@ -384,6 +402,7 @@ export class AddInsurancePolicyComponent implements OnInit {
     this.http.post<Insurance>("http://localhost:8010/api/vk1/life-policy",this.insuranceForms.value).subscribe(
       (data:any)=>{
         console.log(data);
+        if(this.filestatus)
         this.http.put("http://localhost:8010/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
           .subscribe((data: any) => { console.log(data) });
       });

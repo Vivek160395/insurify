@@ -51,17 +51,16 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
       }
       this.dataSource = this.policies;
       console.log(this.dataSource);
-
     })
   }
   policyName: any;
   policyType: any;
   pic: any;
   imageType: any;
-
+  count2 = 0;
   displayedColumns: string[] = ['policyName'];
   dataSource: any = [];
-
+  countOfInsurances: any = [];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

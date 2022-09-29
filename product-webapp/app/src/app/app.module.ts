@@ -71,10 +71,10 @@ import { DetailsComponent } from './details/details.component';
 import { InsuranceDetailsComponent } from './insurance-details/insurance-details.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { RenewalPolicyHomeComponent } from './renewal-policy-home/renewal-policy-home.component';
+import { ChatComponent } from './chat/chat.component';
 import { ZoomonhoverDirective } from './zoomonhover.directive';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
-
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 
 
@@ -103,6 +103,7 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
     // LoginComponent,
     MoreComponent,
     DetailsComponent,
+    ChatComponent,
     ZoomonhoverDirective,
     PurchaseInsuranceComponent,
     EditInsuranceComponent,
