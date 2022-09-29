@@ -19,6 +19,8 @@ import { ChatComponent } from './chat/chat.component';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
+import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
+import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
@@ -46,12 +48,8 @@ const routes: Routes = [
       { path: "register", component: RegisterComponent },
       { path: "add-policy", component: AddInsurancePolicyComponent },
       { path: "policies", component: PoliciesComponent },
-<<<<<<< HEAD
-
       { path: "renewal", component: RenewalPolicyComponent },
-=======
       { path: "renewal-update/:id", component: RenewalPolicyComponent },
->>>>>>> fbae014cfe38dd31d0b7e1abd944325cfdaa8dd4
       { path: "renewal-home", component: RenewalPolicyHomeComponent },
       { path: "details", component: DetailsComponent },
       { path: "update", component: UpdateComponent },
@@ -63,7 +61,10 @@ const routes: Routes = [
       { path: "claim", component: ClaimComponent }, { path: "InsuranceDetails", component: InsuranceDetailsComponent }]
   },
   { path: "edit-insurance", component: EditInsuranceComponent },
-  { path: "login", component: LoginComponent }
+  { path: "login", component: LoginComponent },
+  {path:'registeredPolicies', component: RegisteredPoliciesComponent},
+  {path:'policyBuyers', component: RegisteredPolicyBuyersComponent},
+  
 
 ];
 

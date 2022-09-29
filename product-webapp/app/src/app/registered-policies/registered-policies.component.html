@@ -1,0 +1,35 @@
+
+<div style="background-color: white;">
+    <br>
+    <h1 style="font-size: 60px; font-weight:450; padding-top: 10px; padding-left: 15px;">Policies added by Insurer </h1>
+    <br>
+
+    <div style="display: flex; flex-wrap: wrap; padding: 10px; margin: 10px; border: solid 2px rgb(48, 48, 132);"  >
+            <div *ngFor="let policy of registeredPolicies; let i=index;" >
+                <mat-card class="example-card" (click)="openDialog(policy, i)">
+                    <mat-card-title> {{policy.insuranceType}}</mat-card-title>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <mat-card-subtitle>
+                        <mat-icon matTooltip="Policy Number" matTooltipPosition="above"> insert_drive_file </mat-icon>   {{policy.policyId}} <br>
+                        
+                        <mat-icon matTooltip="Policy Name" matTooltipPosition="above">subject</mat-icon> {{policy.policyName}} <br>
+                        <!-- <mat-icon matTooltip="Start Date" matTooltipPosition="above">event_available</mat-icon> {{policy.purchaseDate[0]}} <br>  -->
+                       
+                        <!-- <mat-icon matTooltip="End Date" matTooltipPosition="above">event_busy</mat-icon> {{policy.endDate[0]}} <br> -->
+                        
+                        <!-- <mat-icon matTooltip="Sum Insured" matTooltipPosition="above">account_balance_wallet</mat-icon> ₹{{policy.sumInsured}} -->
+                    </mat-card-subtitle>
+                    <mat-card-content>
+                        <!-- {{longText}} -->
+                        {{policy.policyDescription}}
+                    </mat-card-content>
+                    <!-- <button mat-raised-button color="primary" routerLink="/claim">Claim</button> -->
+                    <!-- <button mat-raised-button color="primary" style="margin-left:180px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1] || (policy.endDate[(policy.endDate.length-1)].year==currentDate.year && policy.endDate[(policy.endDate.length)-1].month - currentDate.month)>=1" routerLink="/renewal-home">Renew</button> -->
+                </mat-card>
+        </div> 
+    </div>
+
+
+
+</div>
