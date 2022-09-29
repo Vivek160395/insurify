@@ -76,6 +76,7 @@ import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insura
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
+import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 
 
 @NgModule({
@@ -100,13 +101,13 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
     DetailsComponent,
     RenewalPolicyHomeComponent,
     InsuranceDetailsComponent,
-    // LoginComponent,
     MoreComponent,
     DetailsComponent,
     ZoomonhoverDirective,
     PurchaseInsuranceComponent,
     EditInsuranceComponent,
-    InsuranceProviderComponent
+    InsuranceProviderComponent,
+    PolicyAdvisorComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
