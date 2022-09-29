@@ -22,7 +22,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v2")
 public class UserCredentialsController {
 
     private UserCredentialsService userCredentialsService;

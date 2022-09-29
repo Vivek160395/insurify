@@ -41,15 +41,15 @@ public class PurchaseServiceImplementation implements PurchaseService {
             CustomerInsurance ci = new CustomerInsurance();
             ci.setCustomerPolicyId(customerInsurancePurchase.getCustomerPolicyId());
             ci.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
-<<<<<<< HEAD
+
 
 
 
 //            ci.setPolicyType(customerInsurancePurchase.getPolicyType());
 
-=======
+
             // ci.setPolicyType(customerInsurancePurchase.getPolicyType());
->>>>>>> 3a82965d3a4cbfd139852a1c7e678dc380a4854b
+
             ci.setEmail(customerInsurancePurchase.getEmail());
             ci.setSumInsured(customerInsurancePurchase.getSumInsured());
             ci.getStartDate().add(customerInsurancePurchase.getStartDate());
@@ -76,15 +76,15 @@ public class PurchaseServiceImplementation implements PurchaseService {
             purchaseDTO.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
             purchaseDTO.setEmail(customerInsurancePurchase.getEmail());
             purchaseDTO.setName(customerInsurancePurchase.getName());
-<<<<<<< HEAD
+
 
 
 
 //            purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
 
-=======
+
             // purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
->>>>>>> 3a82965d3a4cbfd139852a1c7e678dc380a4854b
+
             purchaseDTO.setSumInsured(customerInsurancePurchase.getSumInsured());
             purchaseDTO.setPurchaseDate(customerInsurancePurchase.getPurchaseDate());
             purchaseDTO.setStartDate(customerInsurancePurchase.getStartDate());
@@ -205,15 +205,14 @@ public class PurchaseServiceImplementation implements PurchaseService {
 
         renewDTO.setCustomerPolicyId(customerInsurance.getCustomerPolicyId());
         renewDTO.setInsurancePolicyId(customerInsurance.getInsurancePolicyId());
-<<<<<<< HEAD
+
 
 
 
 //       renewDTO.setPolicyType(customerInsurance.getPolicyType());
 
-=======
         // renewDTO.setPolicyType(customerInsurance.getPolicyType());
->>>>>>> 3a82965d3a4cbfd139852a1c7e678dc380a4854b
+
         renewDTO.setEmail(customerInsurance.getEmail());
         renewDTO.setSumInsured(customerInsurance.getSumInsured());
         renewDTO.setStartDate(startDay);
