@@ -35,5 +35,5 @@ public CustomerInsurance returnUserPolicyInformation(String customerPolicyId) th
 public long returnUserCount(String insuranceID);
 
 public boolean updateClaimStatus(String customerId,String status);
-public Insurance returnInsuranceForRenewal(Insurance insurance,CustomerInsurance customerInsurance);
+public Insurance returnInsuranceForRenewal(Insurance insurance,String customerPolicyId);
 }

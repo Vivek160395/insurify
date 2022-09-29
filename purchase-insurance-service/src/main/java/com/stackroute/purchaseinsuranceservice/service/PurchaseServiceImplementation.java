@@ -2,6 +2,7 @@ package com.stackroute.purchaseinsuranceservice.service;
 
 import com.stackroute.purchaseinsuranceservice.config.Producer;
 import com.stackroute.purchaseinsuranceservice.domain.Insurance;
+import com.stackroute.purchaseinsuranceservice.domain.PolicyDetails;
 import com.stackroute.purchaseinsuranceservice.exception.NoInsuranceFoundException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyExpiredException;
 import com.stackroute.purchaseinsuranceservice.exception.PolicyIdAlreadyExistsException;
@@ -20,10 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.*;
 
 @Service
 public class PurchaseServiceImplementation implements PurchaseService{
@@ -375,7 +375,123 @@ public class PurchaseServiceImplementation implements PurchaseService{
     }
 
     @Override
-    public Insurance returnInsuranceForRenewal(Insurance insurance, CustomerInsurance customerInsurance){
+    public Insurance returnInsuranceForRenewal(Insurance insurance,String customerPolicyId){
+        System.out.println(insurance);
+        CustomerInsurance customerInsurance;
+        Insurance modifiedInsurance;
+         List<String> startDate=new ArrayList<>();
+         List<String> endDate=new ArrayList<>();
+
+
+        if(purchaseRepository.findById(customerPolicyId).isPresent())
+        {
+            customerInsurance = purchaseRepository.findById(customerPolicyId).get();
+            modifiedInsurance=insurance;
+            int lastIndex=customerInsurance.getEndDate().size()-1;
+            String policyEndDate=customerInsurance.getEndDate().get(lastIndex);
+            long sum=customerInsurance.getSumInsured();
+            List<PolicyDetails> policyDetails=new ArrayList<>();
+            for(int i=0;i<insurance.getPolicyDetails().length;i++)
+            {
+                if(insurance.getPolicyDetails()[i].getSumInsure()==sum)
+                policyDetails.add(insurance.getPolicyDetails()[i]);
+            }
+            if(policyDetails.size()==0)
+            {
+                //No Policy with Given SumInsured
+                return null;
+            }
+            if(!insurance.getInsuranceType().equalsIgnoreCase("HealthInsurance"))
+            {
+               PolicyDetails[] updatePolicyDetails=new PolicyDetails[policyDetails.size()];
+               for(int i=0;i<policyDetails.size();i++)
+               {
+                   updatePolicyDetails[i]=policyDetails.get(i);
+               }
+               modifiedInsurance.setPolicyDetails(updatePolicyDetails);
+               return modifiedInsurance;
+            }
+            //updating policy Details for Health Insurance
+            List<InsuredInfo> usersInfo=new ArrayList<>();
+            int user_no=customerInsurance.getHealthInsurance().getInsuredInfo().length;
+            LocalDate today_date = LocalDate.now();
+            LocalDate user_dob;
+            for(int i=0;i<user_no;i++)
+            {
+                usersInfo.add(customerInsurance.getHealthInsurance().getInsuredInfo()[i]);
+            }
+           InsuredInfo[] availableUsersInfo=customerInsurance.getHealthInsurance().getInsuredInfo();
+           int age[]=new int[user_no];
+            for (int i = 0; i <user_no ; i++) {
+                user_dob = LocalDate.parse(usersInfo.get(i).getInsuredDOB());
+                age[i]=Period.between(user_dob, today_date).getYears();
+                if(age[i]>60)
+                {
+                    return null;
+                }
+            }
+            int customPremium=0;
+            float bmi=0;
+            float bmiFactor=1;
+            float diseaseFactor=1;
+            int tempCost=0;
+            for(int j=0;j<policyDetails.size();j++)
+            {
+              customPremium=0;
+              bmiFactor=1;
+              diseaseFactor=1;
+              for(int k=0;k<user_no;k++)
+              {
+                  bmiFactor=1;
+                  diseaseFactor=1;
+                  bmi =10000*usersInfo.get(k).getWeight()/(usersInfo.get(k).getHeight()*usersInfo.get(k).getHeight());
+                  if(bmi<18.5f)
+                  {
+                    bmiFactor=1.1f;
+                  }
+                  else if(bmi<30f)
+                  {
+                      bmiFactor=1.2f;
+                  }
+                  else{
+                      bmiFactor=1.3f;
+                  }
+                  if(usersInfo.get(k).getIllnessList()!=null){
+                  if(usersInfo.get(k).getIllnessList().length<=2)
+                  {
+                      diseaseFactor=1.2f;
+                  } else if (usersInfo.get(k).getIllnessList().length>=3) {
+                      diseaseFactor=1.5f;
+                  }
+                  }
+                    if(age[k]<20){
+                       tempCost= (int) (diseaseFactor*bmiFactor*policyDetails.get(j).getKids());
+                      customPremium=customPremium+tempCost;
+                     }
+                   else if(age[k]<41){
+                       tempCost= (int) (diseaseFactor*bmiFactor*policyDetails.get(j).getAdults1());
+                        customPremium=customPremium+tempCost;
+                    }
+                   else if(age[k]<51) {
+                       tempCost= (int) (diseaseFactor*bmiFactor*policyDetails.get(j).getAdults2());
+                     customPremium=customPremium+tempCost;
+                     }
+              else if(age[k]<60) {
+                  tempCost= (int) (diseaseFactor*bmiFactor*policyDetails.get(j).getAdults3());
+               customPremium=customPremium+tempCost;
+              }
+
+              }
+                policyDetails.get(j).setPremiums(customPremium);
+            }
+            PolicyDetails[] updatePolicyDetails=new PolicyDetails[policyDetails.size()];
+            for(int i=0;i<policyDetails.size();i++)
+            {
+                updatePolicyDetails[i]=policyDetails.get(i);
+            }
+            modifiedInsurance.setPolicyDetails(updatePolicyDetails);
+            return modifiedInsurance;
+        }
         return null;
     }
     @Override
@@ -531,4 +647,7 @@ public int uploadDocument(MultipartFile documentFile,String policyId) throws IOE
         CustomerInsurance insurance = purchaseRepository.save(retrieveInsurance);
       return 1;
     }
+
+
+
 }
