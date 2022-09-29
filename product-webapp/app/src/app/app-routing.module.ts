@@ -56,8 +56,7 @@ const routes: Routes = [
       { path: "claim", component: ClaimComponent },
       { path: "buy", component: PurchaseInsuranceComponent },
       { path: "policyDetails", component: InsuranceDetailsComponent },
-      { path: "claim", component: ClaimComponent }, 
-      { path: "InsuranceDetails", component: InsuranceDetailsComponent },
+      { path: "claim", component: ClaimComponent }, { path: "InsuranceDetails", component: InsuranceDetailsComponent },
       { path: "edit-insurance", component: EditInsuranceComponent },
       { path: "login", component: LoginComponent }]
       
