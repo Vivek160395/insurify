@@ -22,10 +22,10 @@
 </div>
 
 <br><br>
-<div fxLayout="row" *ngIf="policyType === 'HealthInsurance'">
-    
+<div fxLayout="row" >
+    <!-- *ngIf="policyType === 'HealthInsurance'" -->
     <div fxLayoutAlign="center" class="col-md-6">
-        <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="50px" >
+        <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="5%" >
             <mat-radio-button [value]="i" appZoomonhover="true" *ngFor="let p of premium;let i=index ">
                 <b> Premium</b><br> Rs.{{p}} <br>({{duration[i]}} Years)
             </mat-radio-button>
@@ -54,7 +54,7 @@
 </div>
 
 
-<div fxLayoutAlign="center" *ngIf="policyType === 'LifeInsurance' || policyType === 'AutomobileInsurance'">
+<!-- <div fxLayoutAlign="center" *ngIf="policyType === 'LifeInsurance' || policyType === 'AutomobileInsurance'">
     <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="50px">
         <mat-radio-button [value]="0" appZoomonhover="true">
             <b>Total Premium</b> <br> Rs.4000 <br>(5 Years)
@@ -66,7 +66,7 @@
             <b>Total Premium</b> <br> Rs.1500 <br>(10 Years)
         </mat-radio-button>
     </mat-radio-group>
-</div>
+</div> -->
 
 <div style="height: 495px;" fxLayout="row" fxLayoutGap="15%" >
     <mat-card class="first_card" fxFlex="45%" appZoomonhover="true" >
@@ -161,7 +161,7 @@
 </div>
 
 <div class="terms">
-    <mat-checkbox>
+    <mat-checkbox >
         <b>I hereBy declare that I have agreed to terms and conditions of the policy</b>
     </mat-checkbox>
 </div>

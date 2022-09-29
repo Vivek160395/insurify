@@ -20,6 +20,7 @@ import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insura
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 
+
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
 const routes: Routes = [
