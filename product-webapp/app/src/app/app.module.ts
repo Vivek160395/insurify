@@ -79,7 +79,6 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
 import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
 import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

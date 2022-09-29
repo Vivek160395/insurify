@@ -22,23 +22,23 @@
 </div>
 
 <br><br>
-<div fxLayout="row" *ngIf="policyType === 'HealthInsurance'">
-    
+<div fxLayout="row" >
+    <!-- *ngIf="policyType === 'HealthInsurance'" -->
     <div fxLayoutAlign="center" class="col-md-6">
-        <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="50px">
-            <mat-radio-button [value]="0" appZoomonhover="true">
-                <b>Adult Premium</b><br> Rs.10000 <br>(5 Years)
+        <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="5%" >
+            <mat-radio-button [value]="i" appZoomonhover="true" *ngFor="let p of premium;let i=index ">
+                <b> Premium</b><br> Rs.{{p}} <br>({{duration[i]}} Years)
             </mat-radio-button>
-            <mat-radio-button [value]="1" appZoomonhover="true">
+            <!-- <mat-radio-button [value]="1" appZoomonhover="true">
                 <b>Adult Premium</b> <br> Rs.7500 <br>(1 Years)
             </mat-radio-button>
             <mat-radio-button [value]="2" appZoomonhover="true">
                 <b>Adult Premium</b> <br> Rs.5000 <br>(10 Years)
-            </mat-radio-button>
+            </mat-radio-button> -->
         </mat-radio-group>
     </div>
 
-    <div fxLayoutAlign="center" class="col-md-6">
+    <!-- <div fxLayoutAlign="center" class="col-md-6">
         <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="50px">
             <mat-radio-button [value]="0" appZoomonhover="true">
                 <b>Kids Premium</b> <br> Rs.9500 <br>(10 Years)
@@ -50,11 +50,11 @@
                 <b>Kids Premium</b> <br> Rs.4500 <br>(3 Years)
             </mat-radio-button>
         </mat-radio-group>
-    </div>
+    </div> -->
 </div>
 
 
-<div fxLayoutAlign="center" *ngIf="policyType === 'LifeInsurance' || policyType === 'AutomobileInsurance'">
+<!-- <div fxLayoutAlign="center" *ngIf="policyType === 'LifeInsurance' || policyType === 'AutomobileInsurance'">
     <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="50px">
         <mat-radio-button [value]="0" appZoomonhover="true">
             <b>Total Premium</b> <br> Rs.4000 <br>(5 Years)
@@ -66,9 +66,9 @@
             <b>Total Premium</b> <br> Rs.1500 <br>(10 Years)
         </mat-radio-button>
     </mat-radio-group>
-</div>
+</div> -->
 
-<div style="height: 495px;" fxLayout="row" fxLayoutGap="15%" *ngIf="policyType === 'LifeInsurance' || policyType === 'AutomobileInsurance'">
+<div style="height: 495px;" fxLayout="row" fxLayoutGap="15%" >
     <mat-card class="first_card" fxFlex="45%" appZoomonhover="true" >
         <mat-card-content fxLayout="column" fxLayoutAlign="center" >
 
@@ -78,7 +78,7 @@
             
             <div *ngFor="let data of addOnName; let i=index">
                 <p style="padding-left: 125px;">
-                    <mat-checkbox (change)="checkBox($event,i)" [checked]="selectedItems[i]">
+                    <mat-checkbox (change)="checkBox($event,i)" >
                         <b>{{data}}</b>({{addOnPrice[i]}})
                     </mat-checkbox>
                 </p>
@@ -91,16 +91,16 @@
         <mat-card class="second_card" appZoomonhover="true">
         
         <h1 class="summary"><b>Premium Summary</b></h1>
-
-            <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngIf="myModel == 0">
+        <div *ngFor="let d of duration;let i=index">
+            <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngIf="myModel == i">
                 <div>
                     <p class="d-flex justify-content-md-center">
-                        <b class="col-md-6">Premium </b>{{premium[0]}}
+                        <b class="col-md-6">Premium </b>{{premium[myModel]}}
                     </p>
                 </div>
                 <div>
                     <p class="d-flex justify-content-md-center">
-                        <b class="col-md-6">Duration </b>{{duration[0]}}
+                        <b class="col-md-6">Duration </b>{{duration[myModel]}}
                     </p>
                 </div>
                 <div *ngFor="let name of addOnName; let i=index">
@@ -109,11 +109,11 @@
                     </p>
                 </div>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Total Premium </b> {{totalPremium}}
+                    <b class="col-md-6">Total Premium </b> {{calculate_premium()}}
                 </p>
             </mat-card-content>
-
-            <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngIf="myModel == 1">
+        </div>
+            <!-- <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngIf="myModel == 1">
                 <div>
                     <p class="d-flex justify-content-md-center">
                         <b class="col-md-6">Premium </b>{{premium[1]}}
@@ -131,7 +131,7 @@
                     </p>
                 </div>
                 <p class="d-flex justify-content-md-center">
-                    <b class="col-md-6">Total Premium </b> {{totalPremium}}
+                    <b class="col-md-6">Total Premium </b> {{calculate_premium()}}
                 </p>
             </mat-card-content>
 
@@ -139,12 +139,12 @@
 
                 <div>
                     <p class="d-flex justify-content-md-center">
-                        <b class="col-md-6">Premium </b>{{premium[2]}}
+                        <b class="col-md-6">Premium</b>{{premium[2]}}
                     </p>
                 </div>
                 <div>
                     <p class="d-flex justify-content-md-center">
-                        <b class="col-md-6">Duration </b>{{duration[2]}}
+                        <b class="col-md-6">Duration</b>{{duration[2]}}
                     </p>
                 </div>
                 <div *ngFor="let name of addOnName; let i=index">
@@ -155,13 +155,13 @@
                 <p class="d-flex justify-content-md-center">
                     <b class="col-md-6">Total Premium </b> {{totalPremium}}
                 </p>
-            </mat-card-content>
+            </mat-card-content> -->
           </mat-card>
     </div>
 </div>
 
 <div class="terms">
-    <mat-checkbox>
+    <mat-checkbox >
         <b>I hereBy declare that I have agreed to terms and conditions of the policy</b>
     </mat-checkbox>
 </div>

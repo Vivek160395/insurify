@@ -22,25 +22,26 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
 import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
 import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
 
+
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
 const routes: Routes = [
-  {path:"",component:RecommendationComponent},
-  {path:"register",component:RegisterComponent},
-  {path:"add-policy",component:AddInsurancePolicyComponent},
-  {path:"policies", component:PoliciesComponent},
-  
-  {path: "renewal", component: RenewalPolicyComponent},
-  {path: "renewal-home", component: RenewalPolicyHomeComponent},
-  {path:"details",component:DetailsComponent},
-  {path: "renewal", component: RenewalPolicyComponent},
-  {path:"update", component:UpdateComponent},
-  {path: "login", component: LoginComponent},
-  {path: "nav-bar", component: NavBarComponent},
-  {path:"claim",component:ClaimComponent},
-  
-  {path:"policyDetails",component:InsuranceDetailsComponent},
-  {path:"chat",component:ChatComponent},
+  // {path:"",component:RecommendationComponent},
+  // {path:"register",component:RegisterComponent},
+  // {path:"add-policy",component:AddInsurancePolicyComponent},
+  // {path:"policies", component:PoliciesComponent},
+
+  // {path: "renewal", component: RenewalPolicyComponent},
+  // {path: "renewal-home", component: RenewalPolicyHomeComponent},
+  // {path:"details",component:DetailsComponent},
+  // {path: "renewal", component: RenewalPolicyComponent},
+  // {path:"update", component:UpdateComponent},
+  // {path: "login", component: LoginComponent},
+  // {path: "nav-bar", component: NavBarComponent},
+  // {path:"claim",component:ClaimComponent},
+
+  // {path:"policyDetails",component:InsuranceDetailsComponent},
+  // {path:"chat",component:ChatComponent},
   {
     path: "", component: NavBarComponent, children: [
       { path: "", component: RecommendationComponent },
@@ -58,13 +59,14 @@ const routes: Routes = [
       { path: "claim", component: ClaimComponent },
       { path: "buy", component: PurchaseInsuranceComponent },
       { path: "policyDetails", component: InsuranceDetailsComponent },
-      { path: "claim", component: ClaimComponent }, { path: "InsuranceDetails", component: InsuranceDetailsComponent }]
+      { path: "claim", component: ClaimComponent },
+      { path: "InsuranceDetails", component: InsuranceDetailsComponent },
+      { path: "edit-insurance", component: EditInsuranceComponent },]
   },
   { path: "edit-insurance", component: EditInsuranceComponent },
   { path: "login", component: LoginComponent },
   {path:'registeredPolicies', component: RegisteredPoliciesComponent},
-  {path:'policyBuyers', component: RegisteredPolicyBuyersComponent},
-  
+  {path:'policyBuyers', component: RegisteredPolicyBuyersComponent}
 
 ];
 

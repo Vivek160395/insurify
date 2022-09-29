@@ -114,8 +114,11 @@ public class InsuranceController {
     @DeleteMapping("/policy/delete/{policyId}")
     public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable String policyId)
             throws PolicyNotFoundException {
-        insuranceService.deletePolicyByPolicyId(policyId);
-        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
+        if (insuranceService.deletePolicyByPolicyId(policyId)) {
+            return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Not Deleted", HttpStatus.OK);
+        }
     }
 
     @GetMapping("/policy-name/{policyName}")
@@ -166,7 +169,6 @@ public class InsuranceController {
         }
         return outputStream.toByteArray();
     }
-
 
     @PutMapping("/update")
     public ResponseEntity<?> updateInsurance(@RequestBody Insurance insurance) {

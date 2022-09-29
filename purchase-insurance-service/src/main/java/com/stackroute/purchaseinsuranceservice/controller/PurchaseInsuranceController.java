@@ -154,12 +154,14 @@ public class PurchaseInsuranceController {
 
      return new ResponseEntity<>(purchaseService.returnUserCount(insuranceId),HttpStatus.OK);
  }
-@GetMapping("/get/renew/{customerPolicyId}")
-public ResponseEntity<?> returnInsurancePolicyOptionsForRenew(@PathVariable String customerPolicyId){
-    return new ResponseEntity<>(purchaseService.returnUserCount(customerPolicyId),HttpStatus.OK);
+@PutMapping("/testing/{customerPolicyId}")
+public ResponseEntity<?> returnInsurancePolicyOptionsForRenew(@RequestBody Insurance insurance,@PathVariable String customerPolicyId){
+    return new ResponseEntity<>(purchaseService.returnInsuranceForRenewal(insurance,customerPolicyId),HttpStatus.OK);
 }
+
+
     @GetMapping("/returnobj")
-    public ResponseEntity<?> returnobjasd(){
+    public ResponseEntity<?> returnobj(){
         Insurance result=new Insurance();
         PolicyDetails policyDetails1 =new PolicyDetails(3000,1,1000000,8000,12400,13000,14000,300000,1000000);
         PolicyDetails policyDetails2 =new PolicyDetails(2400,2,1000000,7300,11400,12000,13000,200000,1000000);
