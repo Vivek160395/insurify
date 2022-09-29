@@ -23,9 +23,9 @@ public class EmailServiceImpl implements EmailService{
         SimpleMailMessage msg = new SimpleMailMessage();
         try
         {
-            if(email.getToEmailId().contains(","))
+            if(email.getEmail().contains(","))
             {
-                String[] emails = email.getToEmailId().split(",");
+                String[] emails = email.getEmail().split(",");
                 int recipientSize = emails.length;
                 for(int i = 0; i< recipientSize; i++)
                 {
@@ -37,7 +37,7 @@ public class EmailServiceImpl implements EmailService{
             }
             else
             {
-                msg.setTo(email.getToEmailId());
+                msg.setTo(email.getEmail());
                 msg.setSubject(email.getSubject());
                 msg.setText(email.getBody());
                 mailSender.send(msg);
