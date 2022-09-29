@@ -12,10 +12,13 @@ button {
     outline: none;
 }
 
-#divChart {
-    width: 400px;
-    height: 400px;
-    display: block;
+#table1 {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-radius: 20px;
+    overflow: hidden !important;
 }
 
 #insurance1 {
@@ -43,9 +46,10 @@ button {
 }
 
 #chart {
-    height: 200px;
-    width: 400px;
-    margin: 35px;
+    height: 300px;
+    width: 300px;
+    /* margin: 35px; */
+    margin: auto;
 }
 
 .text {
@@ -60,4 +64,19 @@ button {
     color: gray;
     text-align: center;
     margin: 20px 20px 30px 20px;
+}
+
+.mat-column-policyName {
+    padding: 0 20px;
+    text-align: center;
+}
+
+th {
+    font-weight: bold;
+    font-size: 20px;
+    background-color: aliceblue;
+    color: black;
+    border-top: none;
+    text-align: center;
+    width: 100px;
 }
