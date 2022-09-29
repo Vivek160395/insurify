@@ -30,12 +30,9 @@
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>DOB</mat-label>
-                            <input matInput placeholder="Enter your Dob" formControlName="dateOfBirth" [ngModel]="info.dateOfBirth" [matDatepicker]="picker">
+                            <input matInput placeholder="Enter your Dob" type="date" formControlName="dateOfBirth" [ngModel]="info.dateOfBirth" >
                             <mat-hint>DD/MM/YYYY</mat-hint>
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
-                          
                     </div>
                 </div>
                 <hr>

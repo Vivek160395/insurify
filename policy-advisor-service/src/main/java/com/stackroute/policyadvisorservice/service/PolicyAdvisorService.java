@@ -13,14 +13,22 @@ import java.util.Optional;
 public interface PolicyAdvisorService {
 
 
-    public PolicyAdvisor registerPolicyAdvisor(PolicyAdvisor policyAdvisor) throws PolicyAdvisorAlreadyExists;
-    public Optional<PolicyAdvisor> getPolicyAdvisorByName(String name);
+    public PolicyAdvisor registerPolicyAdvisor(PolicyAdvisor policyAdvisor)
+            throws PolicyAdvisorAlreadyExists;
+    public Optional<PolicyAdvisor> getPolicyAdvisorByEmail(String emailId);
 
     public List<PolicyAdvisor> findAllPolicyAdvisors();
 
-   public PolicyAdvisor changePassword(PolicyAdvisor policyAdvisor, String emailId) throws PolicyAdvisorNotRegisteredException;
-    public PolicyAdvisor updatePolicyAdvisor(PolicyAdvisor policyAdvisor, String emailId) throws PolicyAdvisorNotRegisteredException;
-    public boolean deletePolicyAdvisor(String emailId) throws PolicyAdvisorNotRegisteredException;
+   public PolicyAdvisor changePassword(PolicyAdvisor policyAdvisor, String emailId)
+           throws PolicyAdvisorNotRegisteredException;
 
-    public float calculateRating(Rating rating);
+    public PolicyAdvisor update(PolicyAdvisor policyAdvisor, String emailId, MultipartFile file)
+            throws PolicyAdvisorNotRegisteredException, IOException;
+    public PolicyAdvisor update(PolicyAdvisor policyAdvisor, String emailId)
+            throws PolicyAdvisorNotRegisteredException;
+    public boolean deletePolicyAdvisor(String emailId)
+            throws PolicyAdvisorNotRegisteredException;
+
+  public PolicyAdvisor calculateRating( Rating ratings, String emailId)
+          throws PolicyAdvisorNotRegisteredException;
 }

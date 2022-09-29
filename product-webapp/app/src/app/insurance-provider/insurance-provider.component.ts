@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Route, Router } from '@angular/router';
-import { Chart, BarElement, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip, LinearScale, LineController, LineElement, PointElement } from 'chart.js';
+import { RecommendationServiceService } from '../recommendation-service.service';
+import { Chart, registerables } from 'chart.js'
+
 
 @Component({
   selector: 'app-insurance-provider',
@@ -8,52 +10,65 @@ import { Chart, BarElement, BarController, CategoryScale, Decimation, Filler, Le
   styleUrls: ['./insurance-provider.component.css']
 })
 export class InsuranceProviderComponent implements OnInit {
-  constructor(private elementRef: ElementRef, private route: Router) {
-    Chart.register(BarElement, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
+  constructor(private elementRef: ElementRef, private route: Router, private service: RecommendationServiceService) {
+    Chart.register(...registerables)
   }
 
   myChart1: any = [];
-  goto() {
-    this.route.navigateByUrl("/policyDetails")
+  goto(id: any) {
+    this.service.policyNo = id;
+    this.route.navigateByUrl("/policyDetails");
   }
   ngOnInit(): void {
-    var ctx = this.elementRef.nativeElement.querySelector("#myChart").getContext('2d');
+    this.getAllPolicies();
+    var ctx = this.elementRef.nativeElement.querySelector("#myChart ").getContext('2d');
     this.myChart1 = new Chart(ctx, {
-      type: 'line',
+      type: 'pie',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: [
+          'Corona',
+          'Suv',
+          'Term Life'
+        ],
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          label: 'My First Dataset',
+          data: [300, 50, 100],
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
+            'cyan',
+            'rgb(224, 194, 194)',
+            '#F9E076'
           ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
+          hoverOffset: 4
         }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
       }
     });
   }
+  policies: any = [];
+  count = 0;
+  getAllPolicies() {
+    this.service.getAllPolicies().subscribe(data => {
+      for (var i = 0; i < data.content.length; i++) {
+        if (data.content[i].userEmail == this.service.userEmail) {
+          this.policies[this.count] = data.content[i];
+          this.count = this.count + 1;
+        }
+      }
+    })
+    console.log(this.policies);
+  }
+  policyName: any;
+  policyType: any;
+  pic: any;
+  imageType: any;
 
-
+  // getPolicy() {
+  //   this.service.getPolicyDetails("297025").subscribe(data => {
+  //     console.log(data);
+  //     this.policyName = data.policyName;
+  //     this.policyType = data.insuranceType;
+  //     this.pic = data.picByte;
+  //     this.imageType = data.picType;
+  //   })
+  // }
 }
 

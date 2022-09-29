@@ -119,11 +119,11 @@ public class PurchaseInsuranceController {
         return new ResponseEntity<>(purchaseService.startUp(email), HttpStatus.ACCEPTED);
     }
     @PutMapping("/upload/documents/{policyId}")
-    public ResponseEntity<?> updateImage(@RequestParam("documentFile") MultipartFile documentFile,
+    public ResponseEntity<?> updateImage(@RequestParam("imageFile") MultipartFile imageFile,
                                          @PathVariable String policyId)  {
      int result=0;
            try {
-               result=purchaseService.uploadDocument(documentFile, policyId);
+               result=purchaseService.uploadDocument(imageFile, policyId);
 
            }
            catch(IOException e)
@@ -132,8 +132,24 @@ public class PurchaseInsuranceController {
            }
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
+    @PutMapping("/update/claim/{customerId}/{status}")
+    public ResponseEntity<?> updateClaims(@PathVariable String customerId,@PathVariable String status)  {
+
+        return new ResponseEntity<>(purchaseService.updateClaimStatus(customerId,status),HttpStatus.OK);
+    }
+ @GetMapping("/get/count/{insuranceId}")
+ public ResponseEntity<?> returnUserCountForPolicy(@PathVariable String insuranceId)  {
+
+     return new ResponseEntity<>(purchaseService.returnUserCount(insuranceId),HttpStatus.OK);
+ }
+@PutMapping("/testing/{customerPolicyId}")
+public ResponseEntity<?> returnInsurancePolicyOptionsForRenew(@RequestBody Insurance insurance,@PathVariable String customerPolicyId){
+    return new ResponseEntity<>(purchaseService.returnInsuranceForRenewal(insurance,customerPolicyId),HttpStatus.OK);
+}
+
+
     @GetMapping("/returnobj")
-    public ResponseEntity<?> returnobjasd(){
+    public ResponseEntity<?> returnobj(){
         Insurance result=new Insurance();
         PolicyDetails policyDetails1 =new PolicyDetails(3000,1,1000000,8000,12400,13000,14000,300000,1000000);
         PolicyDetails policyDetails2 =new PolicyDetails(2400,2,1000000,7300,11400,12000,13000,200000,1000000);
@@ -170,9 +186,9 @@ public class PurchaseInsuranceController {
         modelsAllowed.add("XYZ-2");
         result.setPolicyId("123456");
         result.setPolicyName("ABCDEFGH");
-        result.setInsuranceType("HealthInsurance");
-//        result.setInsuranceType("AutoMobile Insurance");
-//        result.setInsuranceType("LifeInsurance");
+//        result.setInsuranceType("HealthInsurance");
+//        result.setInsuranceType("AutoMobileInsurance");
+        result.setInsuranceType("LifeInsurance");
         result.setPolicyDescription("This is a message describing the policy");
 //        result.setCategory("Bike");
         result.setPolicyDocuments("This is terms and conditions");
@@ -180,7 +196,9 @@ public class PurchaseInsuranceController {
         result.setPolicyDetails(pd);
         result.setPolicyBenefits(pb);
         result.setAddOnDetails(add);
-
+        System.out.println(result.getCategory());
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
+
 }
+

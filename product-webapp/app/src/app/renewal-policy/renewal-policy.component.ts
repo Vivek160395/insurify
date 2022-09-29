@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Insurance } from '../insurance';
 import { RenewalService } from '../renewal.service';
 
 @Component({
@@ -10,211 +11,175 @@ import { RenewalService } from '../renewal.service';
 })
 export class RenewalPolicyComponent implements OnInit {
 
-  setCheckBox1 = false;
-  setCheckBox2 = false;
-  setCheckBox3 = false;
-  setCheckBox4 = false;
+  addOnName: string[] = [];
+  addOnPrice : number[] = [];
+  policyDescription: string = "";
+  policyTitle: string = "";
+  policyType: string = "";
+  policySubType: string = "";
+
+  totalPremium: number = 0;
+  premium: number[] = [];
+  duration: number[] = [];
+
+  setCheckBox: boolean[] = [];
   myModel: any;
+  selectedItems: any[] = []
   
-  constructor(private renewalService: RenewalService, private router: ActivatedRoute) {
+  
+  constructor(private renewalService: RenewalService,private http : HttpClient) {
     this.myModel = 0;
    }
-
-  ngOnInit(): void {
-    console.log(this.router.snapshot.params['id']);
-    this.getTwoWheelerDetails()
-  }
-
-  checkBox1(event:any){this.setCheckBox1 = event.checked;}
-  checkBox2(event:any){this.setCheckBox2 = event.checked;}
-  checkBox3(event:any){this.setCheckBox3 = event.checked;}
-  checkBox4(event:any){this.setCheckBox4 = event.checked;}
-
-  submit(){
-  }
-
-  category:string = "two-wheeler";
-  insuranceType:string = "AutomobileInsurance";
 
    today = new Date();
    pipe = new DatePipe("en-US");
    date = this.pipe.transform(this.today,'yyyy-MM-dd')
 
-  twoWheelerSummary:any = {
-    customerPolicyId: this.renewalService.customerPolicyId,
-    date: this.date,
-    premium: "",
-    duration: "",
-    tax: 150,
-    roadSideAssistance: "",
-    personalProtectCover: "",
-    engineProtect: "",
-    consumablesCover: "",
-    totalPremium: ""
-   }
+  ngOnInit(): void {
+    // localStorage.getItem(customerPolicyId);
+    this.myModel=0
+    this.http.get('http://localhost:8010/api/vk1/policy-id/11223344').subscribe((x:any)=>{
+     
+      
+      
+    this.http.put<Insurance>("http://localhost:8084/api/testing/30153115",x).subscribe((data:any)=> 
+    {
+      console.log("Inside retrived insurance success");
+      console.log(data.policyDescription);
+      console.log(data.policyDetails.length);
+      console.log(data.addOnDetails.length);
+      this.policyDescription = data.policyDescription;
+      this.policyTitle = data.policyName;
+      this.policyType = data.insuranceType;
+      console.log(this.policyType)
 
-  fourWheelerSummary:any = {
-    customerPolicyId: this.renewalService.customerPolicyId,
-    date: this.date,
-    premium: "",
-    duration: "",
-    tax: 150,
-    roadSideAssistance: "",
-    personalProtectCover: "",
-    engineProtect: "",
-    consumablesCover: "",
-    totalPremium: ""
-  }
-
-  healthSummary:any = {
-    customerPolicyId: this.renewalService.customerPolicyId,
-    date: this.date,
-    premium: "",
-    duration: "",
-    tax: 150,
-    hospitalCashCover: "",
-    personalAccidentCover: "",
-    maternityCover: "",
-    AyushCover: "",
-    totalPremium: ""
-  }
-
-  lifeSummary:any = {
-    customerPolicyId: this.renewalService.customerPolicyId,
-    date: this.date,
-    premium: "",
-    duration: "",
-    tax: 150,
-    hospiCareBenefit: "",
-    coverAgainstCriticalIllness: "",
-    coverAgainstCriticalDisability: "",
-    accidentalDeathBenefit: "",
-    totalPremium: ""
-  }
-
-  getTwoWheelerDetails(){
-    this.renewalService.getTwoWheelerData(this.twoWheelerSummary).subscribe
-    (
-      data => {
-        console.log(data);
-        if(data.policyType === "Automobile Insurance" && data.automobileInsurance.category === "car"){
-          if(this.myModel == 0){
-            this.fourWheelerSummary.premium = data.premium[0];
-            console.log(data.premium[0]);
-            this.fourWheelerSummary.duration = data.duration[0];
-            console.log(data.duration[0]);
-          }
-          else if(this.myModel == 2){
-            this.twoWheelerSummary.premium = data.premium[1];
-            console.log(data.premium[1]);
-            this.fourWheelerSummary.duration = data.duration[1];
-            console.log(data.duration[1]);
-          }
-          else if(this.myModel == 3){
-            this.twoWheelerSummary.premium = data.premium[2];
-            console.log(data.premium[2]);
-            this.fourWheelerSummary.duration = data.duration[2];
-            console.log(data.duration[2]);
-          }
-          this.fourWheelerSummary.roadSideAssistance = data.addOnName[1][0];
-          console.log(data.addOnName[1][0]);
-          this.fourWheelerSummary.personalProtectCover = data.addOnName[1][1];
-          console.log(data.addOnName[1][1]);
-          this.fourWheelerSummary.engineProtect = data.addOnName[1][2];
-          console.log(data.addOnName[1][2]);
-          this.fourWheelerSummary.consumablesCover = data.addOnName[1][3];
-          console.log(data.addOnName[1][3]);
-        }
-        else if(data.policyType === "Automobile Insurance" && data.automobileInsurance.category === "bike"){
-          if(this.myModel == 0){
-            this.fourWheelerSummary.premium = data.premium[0];
-            console.log(data.premium[0]);
-            this.fourWheelerSummary.duration = data.duration[0];
-            console.log(data.duration[0]);
-          }
-          else if(this.myModel == 2){
-            this.twoWheelerSummary.premium = data.premium[1];
-            console.log(data.premium[1]);
-            this.fourWheelerSummary.duration = data.duration[1];
-            console.log(data.duration[1]);
-          }
-          else if(this.myModel == 3){
-            this.twoWheelerSummary.premium = data.premium[2];
-            console.log(data.premium[2]);
-            this.fourWheelerSummary.duration = data.duration[2];
-            console.log(data.duration[2]);
-          }
-          this.twoWheelerSummary.roadSideAssistance = data.addOnName[0][0];
-          console.log(data.addOnName[0][0]);
-          this.twoWheelerSummary.personalProtectCover = data.addOnName[0][1];
-          console.log(data.addOnName[0][1]);
-          this.twoWheelerSummary.engineProtect = data.addOnName[0][2];
-          console.log(data.addOnName[0][2]);
-          this.twoWheelerSummary.consumablesCover = data.addOnName[0][3]
-          console.log(data.addOnName[0][3]);
-        }
-        else if(data.policyType === "Health Insurance"){
-          if(this.myModel == 0){
-            this.fourWheelerSummary.premium = data.premium[3];
-            console.log(data.premium[0]);
-            this.fourWheelerSummary.duration = data.duration[3];
-            console.log(data.duration[3]);
-          }
-          else if(this.myModel == 2){
-            this.twoWheelerSummary.premium = data.premium[4];
-            console.log(data.premium[1]);
-            this.fourWheelerSummary.duration = data.duration[4];
-            console.log(data.duration[4]);
-          }
-          else if(this.myModel == 3){
-            this.twoWheelerSummary.premium = data.premium[5];
-            console.log(data.premium[2]);
-            this.fourWheelerSummary.duration = data.duration[5];
-            console.log(data.duration[5]);
-          }
-          this.twoWheelerSummary.premium = data.premium[2];
-          console.log(data.premium[2]);
-          this.twoWheelerSummary.hospitalCashCover = data.addOnName[2][0];
-          console.log(data.addOnName[2][0]);
-          this.twoWheelerSummary.personalAccidentCover = data.addOnName[2][1];
-          console.log(data.addOnName[2][1]);
-          this.twoWheelerSummary.engineProtect = data.addOnName[2][2];
-          console.log(data.addOnName[2][2]);
-          this.twoWheelerSummary.consumablesCover = data.addOnName[2][3];
-          console.log(data.addOnName[2][3]);
-        }
-        else if(data.policyType === "Life Insurance"){
-          if(this.myModel == 0){
-            this.fourWheelerSummary.premium = data.premium[3];
-            console.log(data.premium[0]);
-            this.fourWheelerSummary.duration = data.duration[3];
-            console.log(data.duration[3]);
-          }
-          else if(this.myModel == 2){
-            this.twoWheelerSummary.premium = data.premium[4];
-            console.log(data.premium[1]);
-            this.fourWheelerSummary.duration = data.duration[4];
-            console.log(data.duration[4]);
-          }
-          else if(this.myModel == 3){
-            this.twoWheelerSummary.premium = data.premium[5];
-            console.log(data.premium[2]);
-            this.fourWheelerSummary.duration = data.duration[5];
-            console.log(data.duration[5]);
-          }
-          this.twoWheelerSummary.premium = data.premium[3];
-          console.log(data.premium[3])
-          this.twoWheelerSummary.roadSideAssistance = data.addOnName[3][0];
-          console.log(data.addOnName[3][0]);
-          this.twoWheelerSummary.personalProtectCover = data.addOnName[3][1];
-          console.log(data.addOnName[3][1]);
-          this.twoWheelerSummary.engineProtect = data.addOnName[3][2];
-          console.log(data.addOnName[3][2]);
-          this.twoWheelerSummary.consumablesCover = data.addOnName[3][3]
-          console.log(data.addOnName[3][3]);
-        }
+      if(this.policyType == "AutoMobileInsurance"){
+        this.policySubType = data.category;
       }
-    )
+      if(this.policyType == "HealthInsurance"){
+        
+      }
+      for(let i=0;i<data.policyDetails.length;i++){
+        this.premium.push(data.policyDetails[i].premiums);
+        this.duration.push(data.policyDetails[i].durations);
+      }
+      for(let i=0;i<data.addOnDetails.length;i++){
+        this.addOnName.push(data.addOnDetails[i].addOnName);
+        this.addOnPrice.push(data.addOnDetails[i].addOnPremiums);
+        this.setCheckBox.push(false);
+      }
+    }
+    )})//closing first subscribe
   }
 
+  data: any = {
+    "customerPolicyId": null,
+    "duration": null,
+    "premium": null,
+    "addOnName": [],
+    "date": null
+  }
+
+  checkBox(event:any, i:any){
+    this.setCheckBox[i] = event.checked;
+    console.log(i);
+    if(event.checked){
+      console.log("checked");
+      this.selectedItems.push(i);
+    }
+    else{
+      console.log("unchecked");
+      this.selectedItems = this.selectedItems.filter(m => m!=i)
+      
+    }
+    console.log(this.selectedItems);
+    // console.log(this.setCheckBox)
+  }
+  calculate_premium()
+  {
+    console.log(this.myModel);
+    console.log(this.addOnPrice);
+    console.log(this.selectedItems);
+    this.totalPremium=0;
+   for(let i=0;i<this.selectedItems.length;i++)
+   {
+    console.log(this.addOnPrice[this.selectedItems[i]]);
+    
+      this.totalPremium=this.totalPremium + this.addOnPrice[this.selectedItems[i]];
+   } 
+   console.log('Premium : '+this.premium[+this.myModel]);
+   
+   this.totalPremium=this.totalPremium + this.premium[+this.myModel]
+    return this.totalPremium;
+  }
+  onSubmit(){
+    this.data.customerPolicyId = this.renewalService.customerPolicyId;
+
+    for(let i=0; i<this.duration.length; i++){
+      if(this.myModel == 0){
+        this.data.duration = this.duration[0];
+      }
+      else if(this.myModel == 1){
+        this.data.duration = this.duration[1];
+      }
+      else if(this.myModel == 2){
+        this.data.duration = this.duration[2];
+      }
+    }
+
+    // for(let i=0; i<this.setCheckBox.length; i++){
+    //   if(this.setCheckBox[i] == true && this.myModel == 0){
+    //     this.data.addOnName[0] = this.addOnName[0];
+    //     this.data.addOnName[1] = this.addOnName[1];
+    //     this.data.addOnName[2] = this.addOnName[2];
+    //     this.data.addOnName[3] = this.addOnName[3];
+    //       this.totalPremium = this.addOnPrice.reduce(function(a,b)
+    //       {
+    //         return a+b;
+    //       },4000)
+    //   }
+    //   else if(this.setCheckBox[i] == false && this.myModel == 0){
+    //     this.totalPremium = this.premium[0];
+    //   }
+    //   else if(this.setCheckBox[i] == true && this.myModel == 1){
+    //     this.data.addOnName[0] = this.addOnName[0];
+    //     this.data.addOnName[1] = this.addOnName[1];
+    //     this.data.addOnName[2] = this.addOnName[2];
+    //     this.data.addOnName[3] = this.addOnName[3];
+    //     this.totalPremium = this.addOnPrice.reduce(function(a,b)
+    //     {
+    //       return a+b;
+    //     },3000)
+    //   }
+    //   else if(this.setCheckBox[i] == false && this.myModel == 1){
+    //     this.totalPremium = this.premium[1];
+    //   }
+    //   else if(this.setCheckBox[i] == true && this.myModel == 2){
+    //     this.data.addOnName[0] = this.addOnName[0];
+    //     this.data.addOnName[1] = this.addOnName[1];
+    //     this.data.addOnName[2] = this.addOnName[2];
+    //     this.data.addOnName[3] = this.addOnName[3];
+    //     this.totalPremium = this.addOnPrice.reduce(function(a,b)
+    //     {
+    //       return a+b;
+    //     },1500)
+    //   }
+    //   else if(this.setCheckBox[i] == false && this.myModel == 2){
+    //     this.totalPremium = this.premium[2];
+    //   }
+    //   else if(this.setCheckBox[0] == true && this.myModel == 0){
+    //     this.data.addOnName[0] = this.addOnName[0];
+    //     console.log(this.addOnName[0])
+    //     this.totalPremium = this.addOnPrice[0] + this.premium[0];
+    //     console.log(this.addOnPrice[0]);
+    //   }
+    //     console.log(this.totalPremium);
+    // }
+    this.data.date = this.date;
+
+    this.renewalService.updateData(this.data).subscribe(res => 
+      {
+        console.log(res);
+      })
+   }
 }

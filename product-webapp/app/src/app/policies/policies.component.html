@@ -11,8 +11,8 @@
         <mat-tab label="All" >
         <div style="display: flex; flex-wrap: wrap; padding-top: 20px;" >
             <div *ngFor="let policy of purchasedPolicies | filter:searchedKeyword; let i=index;" >
-                <mat-card class="example-card" (click)="openDialog(policy)">
-                    <mat-card-title>{{policy.policyType}} {{policyTitle[i]}}</mat-card-title>
+                <mat-card class="example-card" (click)="openDialog(policy, i)">
+                    <mat-card-title>{{policy.policyType}} {{policyTitle[i]}} {{insuranceTitle[i]}}</mat-card-title>
                     <mat-divider></mat-divider>
                     <br>
                     <mat-card-subtitle>
@@ -27,7 +27,7 @@
                         <!-- {{longText}} -->
                     </mat-card-content>
                     <button mat-raised-button color="primary" routerLink="/claim">Claim</button>
-                    <button mat-raised-button color="primary" style="margin-left:180px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1] || policy.endDate[(policy.endDate.length)-1].month - currentDate.month>=0" routerLink="/renewal-home">Renew</button>
+                    <button mat-raised-button color="primary" style="margin-left:180px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1] || (policy.endDate[(policy.endDate.length-1)].year==currentDate.year && policy.endDate[(policy.endDate.length)-1].month - currentDate.month)>=1" routerLink="/renewal-home">Renew</button>
                 </mat-card>
         </div> 
     </div>
@@ -37,7 +37,7 @@
                 <div *ngFor="let policy of purchasedPolicies  | filter:searchedKeyword; let i=index;">
 
                     <div *ngIf="policy.status==true">
-                        <mat-card class="example-card" (click)="openDialog(policy)">
+                        <mat-card class="example-card" (click)="openDialog(policy,i)">
                             <mat-card-title>{{policy.policyType}} {{policyTitle[i]}}</mat-card-title>
                             <mat-divider></mat-divider>
                             <br>
@@ -69,8 +69,8 @@
 
             <div *ngFor="let policy of purchasedPolicies  | filter:searchedKeyword; let i=index " >
                 <div *ngIf="policy.status==false">
-                    <mat-card class="example-card" (click)="openDialog(policy)">
-                        <mat-card-title>{{policy.policyType}} {{policyTitle[i]}} </mat-card-title>
+                    <mat-card class="example-card" (click)="openDialog(policy,i)">
+                        <mat-card-title>{{policy.policyType}} {{policyTitle[i]}}  </mat-card-title>
                     <mat-divider></mat-divider>
                     <br>
                     <mat-card-subtitle>

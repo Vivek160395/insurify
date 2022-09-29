@@ -1,79 +1,18 @@
 <div style="margin:30px 0;background-color:white ;">
-    <div class="mat-elevation-z4 row" id="insurance">
-        <div style="margin:auto;padding-top: 20px;" class="col-lg-6 col-sm-12 col-md -12">
-            <div>
-                <h1 style="font-size: 30px;">Name - Ritvik</h1>
-            </div>
-            <div style="margin-top:30px ;">
-                <p class="description">asdsadsadadsadsadada</p>
-            </div>
-        </div>
-        <div class="col-lg-2" style="align-items:center">
-            <div style="margin:20px ;">
-                <img src="../../assets/img/loginavatar.png" width="100px" height="100px" class="images" style="display: flex;margin:auto;border-radius:20px ;">
-            </div>
-            <button mat-flat-button style="background-color:#795c34;color: white;display:flex;margin: auto auto 20px auto;" class="buy"> Edit
-        Profile</button>
-        </div>
+    <div>
+        <h1 style="text-align: center;font-size:70px;padding: 30px;">Insurances</h1>
     </div>
-
-    <div class="mat-elevation-z4 column" id="insurance1">
-        <div class="mat-elevation-z4 row" id="insurance2" (click)="goto()">
-            <div style="margin: 20px;" class="col-3.5">
-                <img src="../../assets/img/Coronavirus-Business-Insurance.png" width="350px" height="200px" class="images" style="border-radius:20px ;">
-            </div>
-            <div class="col-4">
-                <p class="text"> EkChartEkHiBarUseHotaHai</p>
-                <br>
-                <p class="text"> CORONA VIRUS</p>
-            </div>
-            <div class="col-4">
-                <div class="chart">
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
+    <div class="mat-elevation-z4 row" id="insurance1">
+        <div id="chart">
+            <canvas id="myChart"></canvas>
         </div>
-        <div class="mat-elevation-z4 row" id="insurance2">
-            <div style="margin: 20px;" class="col-3.5">
-                <img src="../../assets/img/Coronavirus-Business-Insurance.png" width="350px" height="200px" class="images" style="border-radius:20px ;">
+        <div class="mat-elevation-z4" id="insurance2" *ngFor="let policy of policies">
+            <div style="margin: 20px;" (click)="goto(policy.policyId)">
+                <img src="data:{{policy.picType}};base64,{{policy.picByte}}" width="350px" height="200px" class="images" style="border-radius:20px ;">
             </div>
-            <div class="col-4">
-                <p class="text"> CORONA VIRUS</p>
-                <br>
-                <p class="text"> CORONA VIRUS</p>
-            </div>
-            <div class="col-4">
-                <div class="chart">
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="mat-elevation-z4 row" id="insurance2">
-            <div style="margin: 20px;" class="col-3.5">
-                <img src="../../assets/img/Coronavirus-Business-Insurance.png" width="350px" height="200px" class="images" style="border-radius:20px ;">
-            </div>
-            <div class="col-4">
-                <p class="text"> EkChartEkHiBarUseHotaHai</p>
-                <br>
-                <p class="text"> CORONA VIRUS</p>
-            </div>
-            <div class="col-4">
-                <div class="chart">
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="mat-elevation-z4 row" id="insurance3">
-            <div style="display:flex;margin: 20px;">
-                <img src="../../assets/img/Coronavirus-Business-Insurance.png" width="350px" height="200px" class="images" style="border-radius:20px ;">
-            </div>
-            <div style="margin:auto;padding-top: 20px;" class="col-lg-6 col-sm-12 col-md -12">
-                <div>
-                    <h1 class="policyName">Corona Virus</h1>
-                </div>
-                <div style="margin-top:30px ;">
-                    <p class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique in voluptatibus error nemo sequi, earum beatae voluptates vel? Ut blanditiis tenetur nesciunt quos hic assumenda earum doloribus a, dolor tempore.</p>
-                </div>
+            <div>
+                <p class="text"> {{policy.policyName}}</p>
+                <p class="text1"> {{policy.insuranceType}}</p>
             </div>
         </div>
     </div>
