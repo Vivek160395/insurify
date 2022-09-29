@@ -98,15 +98,18 @@ export class RenewalPolicyComponent implements OnInit {
   calculate_premium()
   {
     console.log(this.myModel);
-   
+    console.log(this.addOnPrice);
+    console.log(this.selectedItems);
     this.totalPremium=0;
    for(let i=0;i<this.selectedItems.length;i++)
    {
-    console.log(this.addOnPrice[i]);
+    console.log(this.addOnPrice[this.selectedItems[i]]);
     
-      this.totalPremium=this.totalPremium + this.addOnPrice[i];
+      this.totalPremium=this.totalPremium + this.addOnPrice[this.selectedItems[i]];
    } 
-   this.totalPremium=this.totalPremium + this.premium[this.myModel]
+   console.log('Premium : '+this.premium[+this.myModel]);
+   
+   this.totalPremium=this.totalPremium + this.premium[+this.myModel]
     return this.totalPremium;
   }
   onSubmit(){

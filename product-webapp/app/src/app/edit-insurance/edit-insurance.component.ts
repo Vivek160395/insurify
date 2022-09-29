@@ -286,29 +286,88 @@ export class EditInsuranceComponent implements OnInit {
     }
   }
 modifyform(){
+  const obj=this.insuranceForms
   let control=<FormArray>this.insuranceForms.get('policyBenefits')
+  console.log("Inside method");
+  let arr=[]
+  
   for(let i=0;i<control.length;i++)
   {
     if(control.at(i).invalid)
     {
-      control.removeAt(i)
+      console.log("Removing method");
+      arr.push(i)
     }   
   }
-  control=<FormArray>this.insuranceForms.get('addOnDetails')
-  for(let i=0;i<control.length;i++)
+  let count1=0
+  for(let ij=0;ij<arr.length;ij++)
   {
-    if(control.at(i).invalid)
-    {
-      control.removeAt(i)
-    }   
+    let z=arr[ij]-count1
+    control.removeAt(z);
+    count1++
   }
-  control=<FormArray>this.insuranceForms.get('policyDetails')
-  for(let i=0;i<control.length;i++)
+
+   let  control1=<FormArray>this.insuranceForms.get('addOnDetails')
+   let arr1=[]
+  for(let i=0;i<control1.length;i++)
   {
-    if(control.at(i).invalid)
+    if(control1.at(i).invalid)
     {
-      control.removeAt(i)
-    }   
+      arr1.push(i)
+    }  
+ 
+  }
+  let count2=0
+  for(let ij=0;ij<arr.length;ij++)
+  {
+    let z=arr1[ij]-count2
+    control1.removeAt(z);
+    count2++
+  }
+  console.log("After removing add on details");
+  let x=<FormArray>this.insuranceForms.get('policyDetails')
+  let remove=[]
+  for(let i=0;i<x.length;i++)
+  {
+    console.log('Automobile INSURANCE:'+(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&(obj.get('insuranceType')!.value=='AutoMobileInsurance')));
+    console.log('Health INSURANCE:'+(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid));
+    console.log('Life INSURANCE:'+(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid));
+    if(!((x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&(obj.get('insuranceType')!.value=='AutoMobileInsurance'))
+    ||(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid)
+    ||(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid)))
+    {
+ 
+      console.log(x.at(i).value);
+      
+      remove.push(i)
+    }
+    else{
+      console.log('Entering else');
+
+      for(let j=0;j<i;j++)
+      {
+        console.log('Durations :'+x.at(i).get('durations')!.value+","+x.at(j).get('durations')!.value);
+        console.log('sumInsure :'+x.at(i).get('sumInsure')!.value+","+x.at(j).get('sumInsure')!.value); 
+        if((x.at(i).get('durations')!.value == x.at(j).get('durations')!.value)&&(x.at(i).get('sumInsure')!.value == x.at(j).get('sumInsure')!.value))
+        {
+          console.log("I: "+i+"J: "+j)
+          if(remove.indexOf(i)==-1)
+          remove.push(i)
+        }
+      } 
+    } 
+    
+    
+  }
+  
+  console.log("After removing add on details");
+  let count=0
+  console.log(remove);
+  for(let ij=0;ij<remove.length;ij++)
+  {
+    let z=remove[ij]-count
+    x.removeAt(z);
+    count++
   }
 }
 
