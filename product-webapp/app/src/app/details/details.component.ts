@@ -25,6 +25,7 @@ import  jsPDF from 'jspdf';
   styleUrls: ['./details.component.css'],
   providers: [DatePipe]
 })
+
 export class DetailsComponent implements OnInit {
   insuranceType: string | null;
   policyId:any;
@@ -38,14 +39,24 @@ export class DetailsComponent implements OnInit {
   
   sysDate = new Date();
   currentDate:any;
+  sampleDate= new Date();
+  sampleFinlDate: any;
  
   constructor(private http:HttpClient, private datePipe: DatePipe) {
      this.insuranceType= localStorage.getItem('insuranceType');
      this.policyId= localStorage.getItem('customerPolicyId');
 
      this.currentDate = this.datePipe.transform(this.sysDate, 'yyyy-MM-dd');
-     console.log(this.sysDate);
-     console.log(this.currentDate);
+     this.sampleFinlDate = this.datePipe.transform('Wed Aug 22 2022 23:11:06 GMT+0530 (India Standard Time)','yyyy-MM-dd');
+     console.log(this.sampleFinlDate);
+     
+     console.log(this.sysDate.getMonth);
+    //  console.log(this.currentDate.getMonth());
+     
+     console.log("----------------");
+    //  console.log(this.currentDate.compareTo(this.sampleFinlDate));
+    console.log(this.currentDate.month);
+    
      
      
   }
@@ -55,48 +66,17 @@ export class DetailsComponent implements OnInit {
     response.subscribe((data)=>{
       console.log(data);
       this.policies=data;
-      // for(var i=0;i<this.policies.length;i++){
-      //   if(this.policies[i].customerPolicyId==this.policyId){
-      //     this.policies[i].startDate.length = this.renewals;
-      //     this.policies[i].claimStatus.length = this.claims;
-      //     for(var j=0;j<i;j++){
-      //       this.claimDatesArray[j]=this.policies[i].claimDate[j];
-      //       console.log(this.claimDatesArray);
-            
-      //     }
-      //   }
-        
-         
-      // console.log(this.policies[0].policyType);
-      // For="let details of data"
-      // this.healthInsuredInfo=data.healthInsurance.insuredInfo;
-      // }
+
     });
   }
 
-  downloadMyFile(){
-    const link = document.createElement('a');
-    link.setAttribute('target', '_blank');
-    link.setAttribute('href', 'abc.net/files/test.ino');
-    link.setAttribute('download', `policyDetails.pdf`);
-    // document.body.appendChild(link);
-    link.click();
-    link.remove();
-}
+
 
 @ViewChild('pdfFile')
   pdfFile!: ElementRef;
-  
-  // public downloadAsPDF() {
-  //   const pdfFile = this.pdfFile.nativeElement;
-  //   var html = htmlToPdfmake(pdfFile.innerHTML);
-  //   const documentDefinition = { content: html };
-  //   pdfMake.createPdf(documentDefinition).download(); 
-     
-  // }
 
 
-  public downloadAsPDF() {
+  public downloadAsPDF(policyNo:any) {
     let div = this.pdfFile.nativeElement;
    
     var img:any;
@@ -136,7 +116,7 @@ export class DetailsComponent implements OnInit {
 
 
           doc.addImage(newImage, 'PNG',  10, 11, width, height);
-          filename = 'myPolicyDetails' + '.pdf';
+          filename = `${policyNo}-PolicyDetails.pdf`;
           doc.save(filename);
 
         };
@@ -152,5 +132,40 @@ export class DetailsComponent implements OnInit {
       });
  
   }
+
+
+  
+downloadPdf(base64String:any, policyNo:any){
+
+    const source = `data:application/pdf;base64,${base64String}`;
+    const link = document.createElement("a");
+    link.href = source;
+    // link.download = `${fil.pdf`
+    link.download=`${policyNo}-claimDocument.pdf`;
+    link.click();  
+
+}
+
+
+onClickDownloadFile(doc:any, policyNo:any)
+{
+  this.downloadPdf(doc, policyNo);
+}
+
+
+openFile(doc: any){
+  var byteCharacters = atob(doc);
+  var byteNumbers = new Array(byteCharacters.length);
+
+  for (var i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+
+  var byteArray = new Uint8Array(byteNumbers);
+  var file = new Blob([byteArray], { type: 'application/pdf;base64' });
+  var fileURL = URL.createObjectURL(file);
+  window.open(fileURL);
+}
+
 }
 

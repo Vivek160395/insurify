@@ -181,8 +181,7 @@ userForm = new FormGroup({
 });
 
 relationlist:string[]=['Self','Brother','Father','Mother','Son','Daughter','Sister','GrandFather','GrandMother','Wife','Husband','Uncle','Aunt']
-minDate: Date;
-maxDate: Date;
+
 adultValue=0
 kidValue=0
 checkflag=false
@@ -512,16 +511,18 @@ check_validity(){
       }))
     }
    console.log(control1);
-   
-      this.httpclient.get('http://localhost:8084/api/returnobj').subscribe((data:any)=>{
+         this.sortedsuminsured=[]   
+      this.httpclient.get('http://localhost:8010/api/vk1/policy-id/567890').subscribe((data:any)=>{
       console.log('Policy ID : '+data.policyId)
       console.log('Policy Name : '+data.policyName)
-      if(data.insuranceType=='AutoMobile Insurance') 
+      
+      if(data.insuranceType=='AutoMobileInsurance') 
         {
-          console.log('Inside Automobile Insurance');
+          console.log('Inside AutomobileInsurance');
           
           this.insuranceobj=[]
           this.isAuto=true
+         console.log(data.category);
          
          this.autocategory=data.category
           for(let index=0;index<data.policyDetails.length;index++)
@@ -586,10 +587,21 @@ check_validity(){
           {
             this.insuranceobj.push({'sumInsured':data.policyDetails[index].sumInsure,'duration':data.policyDetails[index].durations,'premium':data.policyDetails[index].premiums,'minsal':data.policyDetails[index].minSalary,'maxsal':data.policyDetails[index].maxSalary})
           }
-             
+
+        for (let index = 0; index < data.policyDetails.length; index++) {
+          this.flags = true;
+          for (let x = 0; x < this.sortedsuminsured.length; x++) {
+            if (this.sortedsuminsured[x] == data.policyDetails[index].sumInsure) {
+              this.flags = false;
+              break;
+            }
+          }
+          if(this.flags)
+          this.sortedsuminsured.push(data.policyDetails[index].sumInsure)
            }
-      if(data.insuranceType=='AutoMobile Insurance')
-        this.autocategory=data.category
+          }
+       
+        
       this.userForm.get('policyname')?.setValue(data.policyName)
       this.userForm.get('policyname')!.disable();
       this.DescriptionText=data.policyDescription;
@@ -625,8 +637,8 @@ check_validity(){
       const currentYear = new Date().getFullYear();
       const currentMonth=new Date().getMonth();
       const currentDay=new Date().getDate();
-      this.minDate = new Date(currentYear - 25, currentMonth, currentDay);
-      this.maxDate = new Date(currentYear + 55, currentMonth,currentDay);
+      // this.minDate = new Date(currentYear - 25, currentMonth, currentDay);
+      // this.maxDate = new Date(currentYear + 55, currentMonth,currentDay);
     }
     on_premium_select(data:any){
       this.premium=+data

@@ -4,7 +4,6 @@ import com.stackroute.recommendationservice.exception.InsuranceAlreadyExists;
 import com.stackroute.recommendationservice.exception.NoInsurancesFound;
 import com.stackroute.recommendationservice.exception.UserAlreadyPosted;
 import com.stackroute.recommendationservice.model.Insurance;
-import com.stackroute.recommendationservice.model.InsuranceProfile;
 import com.stackroute.recommendationservice.model.User;
 import java.util.List;
 

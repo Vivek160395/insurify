@@ -23,6 +23,8 @@ public class MessageConfiguration {
         return new Queue("queue_4");
     }
 
+    @Bean Queue purchaseRenewQueue(){return new Queue("purchaseRenewQueue"); }
+
     @Bean
     public Jackson2JsonMessageConverter jackson2JsonMessageConverter(){
         return new Jackson2JsonMessageConverter();
@@ -31,6 +33,10 @@ public class MessageConfiguration {
     @Bean
     public Binding customerBinding(Queue queue, DirectExchange directExchange){
         return BindingBuilder.bind(queue).to(directExchange).with("Nehitha");
+    }
+    @Bean
+    public Binding purchaseRenewQueueBinding(Queue purchaseRenewQueue, DirectExchange directExchange){
+        return BindingBuilder.bind(purchaseRenewQueue).to(directExchange).with("renewPurchaseQueueKey");
     }
 
     @Bean

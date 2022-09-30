@@ -58,3 +58,31 @@ mat-icon {
 .row {
     margin: 0;
 }
+
+.ren,
+.clai {
+    font-size: 20px;
+    color: white;
+}
+
+@media screen and (max-width:800px) {
+    #navcontent {
+        display: block;
+        font-size: 20px;
+    }
+    .renew,
+    .claim {
+        display: none;
+    }
+    .insurify {
+        font-size: 20px;
+    }
+    mat-icon {
+        transform: scale(1);
+    }
+}
+
+#navcontent {
+    display: none;
+    font-size: 20px;
+}

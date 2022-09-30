@@ -2,10 +2,9 @@
     <mat-toolbar class="example-toolbar">
         <div style="display: flex;justify-content: space-between;">
             <div style="display: flex;margin:auto">
-                <button class="menu" type="button" mat-button (click)="drawer.toggle()"
-                    style="display: flex;justify-content: center;color: white;">
-                    <mat-icon>menu</mat-icon>
-                </button>
+                <button class="menu" type="button" mat-button (click)="drawer.toggle()" style="display: flex;justify-content: center;color: white;">
+          <mat-icon>menu</mat-icon>
+        </button>
             </div>
             <div style="display: flex;">
                 <div class="insurify" routerLink="" style="color:white">
@@ -14,15 +13,11 @@
             </div>
         </div>
         <div style="display: flex;">
-            <div style="margin-right: 30px;">
-                <button mat-button>
-          <span style="font-size: 18px;color: white;">Renewals</span>
-        </button>
+            <div style="margin-right: 30px;" class="renew">
+                <button mat-button class="ren">Renewals</button>
             </div>
-            <div style="margin-right: 30px;">
-                <button mat-button>
-          <span style="font-size: 18px;color: white;">Claims</span>
-        </button>
+            <div style="margin-right: 30px;" class="claim">
+                <button mat-button class="clai">Claims</button>
             </div>
         </div>
         <div style="display: flex;">
@@ -49,9 +44,19 @@
             <mat-nav-list>
                 <a mat-list-item routerLink="" style="font-size: 20px;">
                     <span class="material-symbols-outlined" style="margin-right:10px">
-                        <mat-icon>home</mat-icon>
-                    </span> Home
+            <mat-icon>home</mat-icon>
+          </span> Home
                 </a>
+                <button mat-list-item routerLink="" id="navcontent">
+          <span class="material-symbols-outlined" style="margin-right:10px">
+            <mat-icon>home</mat-icon>
+          </span> Renew
+        </button>
+                <button mat-list-item routerLink="" id="navcontent">
+          <span class="material-symbols-outlined" style="margin-right:10px">
+            <mat-icon>home</mat-icon>
+          </span> Claims
+        </button>
             </mat-nav-list>
         </mat-drawer>
         <div style="background-color: rgb(221,221,221)">
