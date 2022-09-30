@@ -1,7 +1,5 @@
 <div fxLayout="column">
-    <div>Validity :{{check_validity()}}          Validity 1 :{{check_validity1()}}         Validity 2:{{check_validity2()}}        Validity 3:{{check_validity3()}}</div>
     <button mat-raised-button (click)="modifyform()">ClickMe</button>
-   
     <mat-stepper #stepper>
 
         <mat-step [stepControl]="insuranceForms">
@@ -335,7 +333,7 @@
                     <div fxLayout="row">
                         <button mat-button matStepperPrevious>Back</button>
                         <button mat-button (click)="stepper.reset()" style="margin-left: auto">Reset</button>
-                        <button mat-raised-button color="warn" [disabled]="check_validity()" (click)="onSubmit()">Update
+                        <button mat-raised-button color="primary" (click)="onSubmit()">Add
                             policy</button>
 
                     </div>

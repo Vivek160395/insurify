@@ -10,12 +10,9 @@ export class RegisteredPolicyBuyersComponent implements OnInit {
 
   policyBuyerDetails:any;
   customerPolicyId:any;
-  insuranceType:any;
-  policyName:any;
 
   backButton:boolean=true;
   allUserDetailsView:boolean=false;
-  detailedView:boolean=true;
   renewView:boolean=true;
   claimView:boolean=true;
 
@@ -28,8 +25,6 @@ export class RegisteredPolicyBuyersComponent implements OnInit {
       
       console.log(data);
       this.policyBuyerDetails=data;
-      this.insuranceType=localStorage.getItem('typeOfInsurance');
-      this.policyName=localStorage.getItem('typeOfPolicy');
       // console.log(this.registeredPolicies);
   })
   }
@@ -38,18 +33,6 @@ back(){
   this.renewView=true;
   this.allUserDetailsView=false;
   this.claimView=true;
-  this.detailedView=true;
-}
-
-getDetails(policy:any){
-  this.backButton=false;
-  this.detailedView=false;
-  this.allUserDetailsView=true;
-  this.claimView=true;
-  this.renewView=true;
-
-  this.customerPolicyId=policy.customerPolicyId;
-
 }
 
  renew(policy:any){
@@ -66,8 +49,6 @@ getDetails(policy:any){
   this.renewView=true;
   this.allUserDetailsView=true;
   this.claimView=false;
-
-  this.customerPolicyId=policy.customerPolicyId;
  }
 
 
@@ -101,34 +82,6 @@ var byteArray = new Uint8Array(byteNumbers);
 var file = new Blob([byteArray], { type: 'application/pdf;base64' });
 var fileURL = URL.createObjectURL(file);
 window.open(fileURL);
-}
-
-acceptClaim(policy:any, status:any, j:any, i:any){
-  // window.alert("Your claim is Approved.")
-   this.http.put("http://localhost:8084/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
-    console.log(data);
-    policy.claimStatus[i]='approved'
-    console.log(policy.claimStatus[i]);
-  //  this.policyBuyerDetails[j].claimStatus[i]="approved"
-  //   console.log(this.policyBuyerDetails[j].claimStatus[i]);
-    
-  },
-   (error:any)=>{
-    console.log(error);
-    
-   });
-}
-
-rejectClaim(policy:any, status:any, j:any, i:any){
-  this.http.put("http://localhost:8084/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
-    console.log(data);
-    policy.claimStatus[i]='rejected'
-    console.log(policy.claimStatus[i]);
-   },
-   (error:any)=>{
-    console.log(error);
-    
-   });
 }
 
 

@@ -1,9 +1,3 @@
-<p>{{strmsg}}</p>
-<!-- <button mat-raised-button (click)="age_display()">get</button> -->
-<!-- <p>asdasd</p> -->
-<button mat-raised-button (click)="fill_form()">Health</button>
-<button mat-raised-button (click)="fill_form()">Auto</button>
-<button mat-raised-button (click)="fill_form()">Health</button>
 <mat-stepper linear #stepper>
     <mat-step>
         <ng-template matStepLabel>Enter details</ng-template>
@@ -21,11 +15,9 @@
                                             <div class="AdultInput">
                                                 <mat-form-field appearance="outline" fxFlex="100%">
                                                     <mat-label>No of Adults</mat-label>
-                                                    <mat-select placeholder="No of Adults" formControlName="adultno"
-                                                        [(ngModel)]="adultValue" (selectionChange)="function_for_dob_list(adultValue)" >
-                                                        <mat-option value="{{i+1}}"
-                                                            *ngFor="let x of [].constructor(5);let i =index ">
-                                                            {{i+1}}
+                                                    <mat-select placeholder="No of Adults" formControlName="adultno" [(ngModel)]="adultValue" (selectionChange)="function_for_dob_list(adultValue)">
+                                                        <mat-option value="{{i}}" *ngFor="let x of [].constructor(5);let i =index ">
+                                                            {{i}}
                                                         </mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
@@ -290,9 +282,8 @@
 
                     <mat-form-field appearance="outline" fxFlex="33%">
                         <mat-label>Nominee DOB</mat-label>
-                        <input matInput  placeholder="Nominee Date Of Birth" type="date" formControlName="nomineeDOB"
-                            required>
-                            
+                        <input matInput min="minDate" max="maxDate" placeholder="Nominee Date Of Birth" type="date" formControlName="nomineeDOB" required>
+
                         <!-- <input type="date" formControlname="nomineeDOB"> -->
                         <small style="color: red;" *ngIf="userForm.controls.nomineeDOB.errors?.['required'] && userForm.controls.nomineeDOB.invalid && (userForm.controls.nomineeDOB.touched || userForm.controls.nomineeDOB.dirty)">*Required</small>
                     </mat-form-field>
@@ -513,7 +504,7 @@
             </div>
         </form>
     </mat-step>
-    <mat-step *ngIf="!(isAuto||isHealth||isLife)">
+    <mat-step *ngIf="!(isAuto||isHealth)">
         <ng-template matStepLabel>Done</ng-template>
         <p>You are now done.</p>
         <div>

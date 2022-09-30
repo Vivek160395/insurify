@@ -10,7 +10,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
 import { RecommendationServiceService } from '../recommendation-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { last } from 'rxjs';
 
 
 export interface bike {
@@ -55,9 +54,7 @@ export class premiumdetails {
   styleUrls: ['./add-insurance-policy.component.css']
 })
 export class AddInsurancePolicyComponent implements OnInit {
- bikeList=['KTM 390 Duke','KTM 125 Duke','Heroflareon','Honda SP 125','Honda Shine','Honda H`ness CB350','TVS Apache RTR 160','TVS Ronin','TVS Apache RTR 200 4V','Hero Splendor Plus','Hero HF Deluxe','','']
- carList=['Hyundai Creta','Hyundai Venue','Hyundai i20','Toyota Fortuner','Toyota Innova Crysta','Toyota Urban Cruiser', 'Tata Tiago','Tata Harrier','Tata Safari','Maruti Brezza','Maruti Swift'] 
- bikeGroups: bikeCompany[] = [
+  bikeGroups: bikeCompany[] = [
     {
       name: 'Honda',
       bikeList: [
@@ -124,7 +121,6 @@ export class AddInsurancePolicyComponent implements OnInit {
       ],
     },
   ];
-  
   num: number = 0;
   policyarray: policyDetails[] = []
   premiumarray: premiumdetails[] = []
@@ -433,7 +429,7 @@ export class AddInsurancePolicyComponent implements OnInit {
     for (let k = 0; k < control.length; k++) {
       if (this.insuranceForms.get('insuranceType')?.value == 'LifeInsurance') {
         console.log('1');
-        
+
         if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('premiums')?.invalid || control.at(k).get('durations')?.invalid || control.at(k).get('minSalary')?.invalid || control.at(k).get('maxSalary')?.invalid) {
           this.openSnackBar('Fill all the details of row  ' + (k + 1) + '  to add new Row')
           return
@@ -641,8 +637,8 @@ export class AddInsurancePolicyComponent implements OnInit {
   //Methods for chips component
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  sumInsuredValues: SumInsured[] = [{ insuredSum: 100000 },{ insuredSum: 5000000 }, { insuredSum: 1000000 }, { insuredSum: 5000000 }];
-  duration: Duration[] = [{ years: 1 },{ years: 2 }, { years: 5 }, { years: 10 }];
+  sumInsuredValues: SumInsured[] = [{ insuredSum: 100000 }, { insuredSum: 1000000 }, { insuredSum: 5000000 }];
+  duration: Duration[] = [{ years: 1 }, { years: 5 }, { years: 10 }];
   add(event: MatChipInputEvent): void {
     // const value = (event.value || '').trim();
     const value = +event.value;
@@ -681,102 +677,8 @@ export class AddInsurancePolicyComponent implements OnInit {
       this.duration.splice(index, 1);
     }
   }
-
   // api for getting policy
-getnumber()
-{
-  var text = 1;
-  var possible = "123456789";
-  let   randomlength=Math.floor(Math.random() * 2377887)%10
-   randomlength++
-  for (var i = 0; i < randomlength; i++)
-    text =text+(i+1)* Math.floor(Math.random() * 2377)%100
 
-  return text;
-}
-getword()
-{
-  var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let   randomlength=Math.floor(Math.random() * 43223)%30
-   randomlength++
-  for (var i = 0; i < randomlength; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-  return text;
-}
-getdob()
-{
-  var text = "";
-  let   randomlength=Math.floor(Math.random() * 15654833)
-   randomlength++
-
-   text=(randomlength%40 +1980).toString()+'-'
-   text=text+ (randomlength%3 + 10).toString()+'-'
-   text=text + (randomlength%20 + 10).toString()
-  // for (var i = 0; i < randomlength; i++)
-  //   text += possible.charAt(Math.floor(Math.random() * possible.length));
-  return text;
-}
-
- fill_form()
- {
-  this.insuranceForms.reset()
-  this.insuranceForms.get('policyId')?.patchValue(this.id.toString())
-  // this.insuranceForms.get()
- let sumInsuredValue=[100000,500000,1000000,5000000]
- let dur=[1,2,5,10]
- let it=this.getnumber()%25 +10
-  const pdc=<FormArray>this.insuranceForms.get('policyDetails')
-  
-  for(let n=0;n<it;n++)
-  {
-    let sal=(this.getnumber()%11)*100000+1
-    let yy=this.getnumber()%11
-    pdc.at(n).get('premiums')?.patchValue((this.getnumber()%11)*(1423)+1)
-    pdc.at(n).get('durations')?.patchValue((dur[(this.getnumber())%(dur.length)]).toString())
-    pdc.at(n).get('sumInsure')?.patchValue((sumInsuredValue[(this.getnumber())%(sumInsuredValue.length)]).toString())
-    pdc.at(n).get('adults1')?.patchValue(yy*(1230)+1)
-    pdc.at(n).get('adults2')?.patchValue((yy)*(1600)+1)
-    pdc.at(n).get('adults3')?.patchValue((yy)*(2500)+1)
-    pdc.at(n).get('kids')?.patchValue((yy)*(800)+1)
-    pdc.at(n).get('minSalary')?.patchValue(sal)
-    pdc.at(n).get('maxSalary')?.patchValue(sal + (this.getnumber()%11)*100000)
-    this.addDetails(n)
-  }
-  this.removeDetails(it)
-  const pc=<FormArray>this.insuranceForms.get('policyBenefits')
-  for(let n=0;n<this.getnumber()%14 + 1;n++)
-  {
-    pc.at(n).get('brief')?.patchValue(this.getword())
-    pc.at(n).get('description')?.patchValue(this.getword())
-    this.addDetails1(n)
-  }
-
-  const ac=<FormArray>this.insuranceForms.get('addOnDetails')
-  for(let n=0;n<this.getnumber()%14 +1;n++)
-  {
-    ac.at(n).get('addOnName')?.patchValue(this.getword())
-    ac.at(n).get('addOnDescription')?.patchValue(this.getword())
-    ac.at(n).get('addOnPremiums')?.patchValue(this.getnumber())
-    this.addDetails2(n)
-  }
-  
-  
-  let insurancearray=['LifeInsurance','HealthInsurance','AutoMobileInsurance']
-  let categoryarray=['Car','Bike']
-  let ind=this.getnumber()%2
-  let selcted_ins=this.getnumber()%3
-  this.insuranceForms.get('insuranceType')?.patchValue(insurancearray[selcted_ins])
-  this.insuranceForms.get('policyName')?.patchValue(this.getword())
-  this.insuranceForms.get('policyDescription')?.patchValue(this.getword())
-  this.insuranceForms.get('policyDocuments')?.patchValue(this.getword())
-  this.insuranceForms.get('userEmail')?.patchValue(this.getnumber().toString())
-  this.insuranceForms.get('category')?.patchValue(categoryarray[ind])
-  // if(ind==0){  this.insuranceForms.get('modelsAllowed')?.patchValue(this.carList)  }
-  // else {this.insuranceForms.get('modelsAllowed')?.patchValue(this.bikeList)}
-   
- }
 }
 
 

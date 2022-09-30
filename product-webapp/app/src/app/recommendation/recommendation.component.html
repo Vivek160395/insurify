@@ -1,5 +1,5 @@
 <div class="row" style=" display: flex;flex-wrap: wrap;background-color: white;">
-    <div class=col-1 style=" margin: 0 0 0 30px;display: block;color: black; width: 100%;">
+    <div class=col-1 style=" margin: auto auto 0 30px;display: block;color: black; width: 100%;">
         <div class="sideHead">
             <div class="sideHeading1">
                 LIFE</div>
@@ -52,13 +52,13 @@
            paginate: { itemsPerPage :6,
             currentPage :page,
             totalItems:totalLength
-           } " matRipple [class.mat-elevation-z8]="isActive" (click)="goTo(item.policyId)">
+           } " matRipple [class.mat-elevation-z8]="isActive">
                     <mat-card-header style=" background-color: white; ">
                         <mat-card-title style=" color: black;font-family: 'Times New Roman' , Times, serif; ">
-                            <b> {{item.policyName}}</b>
+                            <b> {{item.insuranceName}}</b>
                         </mat-card-title>
                     </mat-card-header>
-                    <img mat-card-image class="rounded-9" src="data:{{item.picType}};base64,{{item.picByte}}" alt=" Photo of a Shiba Inu " style=" width: 375.5px; height:300px; ">
+                    <img mat-card-image class="rounded-9" src="data:{{item.imageType}};base64,{{item.imageOfInsurance}}" alt=" Photo of a Shiba Inu " style=" width: 375.5px; height:300px; ">
                     <mat-card-content>
                         <p style=" color: black; ">
                             <app-more [text]="item.description " [limit]="150 "></app-more>
@@ -68,4 +68,3 @@
             </div>
         </div>
     </div>
-</div>

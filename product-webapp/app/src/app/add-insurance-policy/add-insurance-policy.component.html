@@ -1,8 +1,6 @@
-<div style="position:absolute;width: 100%;" fxLayout="column">
-    <div>Validity :{{check_validity()}} Validity 1 :{{check_validity1()}} Validity 2:{{check_validity2()}} Validity
-        3:{{check_validity3()}}</div>
-    <button mat-raised-button (click)="modifyform()">Editing</button>
-    <button mat-raised-button (click)="fill_form()">Produce Insurance</button>
+<div style="position:absolute;width: 100%;">
+    <!-- <div>Validity :{{check_validity()}}          Validity 1 :{{check_validity1()}}         Validity 2:{{check_validity2()}}        Validity 3:{{check_validity3()}}</div> -->
+    <button mat-raised-button (click)="modifyform()">ClickMe</button>
     <mat-stepper #stepper>
         <mat-step [stepControl]="insuranceForms">
             <mat-card style="width: 100%;">
@@ -12,8 +10,7 @@
                         <div fxLayout="row" fxLayoutGap="2%">
                             <mat-form-field appearance="outline" fxFlex="25%">
                                 <mat-label>Policy Id</mat-label>
-                                <input matInput placeholder="Policy Id" formControlName="policyId" required
-                                    style="text-align: center;">
+                                <input matInput placeholder="Policy Id" formControlName="policyId" required style="text-align: center;">
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex="25%">
                                 <mat-label>Insurance Type</mat-label>
@@ -25,8 +22,7 @@
                             </mat-form-field>
 
 
-                            <mat-form-field appearance="outline" fxFlex="25%"
-                                *ngIf="insurancex==='AutoMobileInsurance'">
+                            <mat-form-field appearance="outline" fxFlex="25%" *ngIf="insurancex==='AutoMobileInsurance'">
                                 <mat-label>Insurance subcategory</mat-label>
                                 <mat-select placeholder="Insurance subcategory" formControlName="category">
                                     <mat-option value="Bike">Bike Insurance</mat-option>
@@ -43,8 +39,7 @@
 
                             <mat-form-field appearance="outline" fxFlex="100%">
                                 <mat-label>Policy Description</mat-label>
-                                <textarea formControlName="policyDescription" matInput placeholder="Policy Description"
-                                    type="text"></textarea>
+                                <textarea formControlName="policyDescription" matInput placeholder="Policy Description" type="text"></textarea>
                             </mat-form-field>
 
                         </div>
@@ -53,8 +48,7 @@
                         </div>
                         <div formArrayName="policyBenefits">
 
-                            <div *ngFor="let child of policyBenefitsx;let i=index" formGroupName="{{i}}" fxLayout="row"
-                                fxLayoutGap="2%">
+                            <div *ngFor="let child of policyBenefitsx;let i=index" formGroupName="{{i}}" fxLayout="row" fxLayoutGap="2%">
 
                                 <mat-form-field appearance="outline" fxFlex="20%" *ngIf="flags[i]">
                                     <mat-label>Benefit</mat-label>
@@ -80,11 +74,9 @@
                                 <mat-expansion-panel hideToggle>
                                     <mat-expansion-panel-header>
                                         <mat-panel-title>
-                                            <p style="text-align: center;font-family: cursive;" fxFlex="70%">
-                                                {{benefits.briefs}}</p>
+                                            <p style="text-align: center;font-family: cursive;" fxFlex="70%">{{benefits.briefs}}</p>
                                         </mat-panel-title>
-                                        <button mat-raised-button (click)="removeDetails1(i)"
-                                            style="color: orangered;border: 2px orangered;">Remove</button>
+                                        <button mat-raised-button (click)="removeDetails1(i)" style="color: orangered;border: 2px orangered;">Remove</button>
                                     </mat-expansion-panel-header>
                                     <p>Policy Benefit : {{benefits.briefs}}</p>
                                     <p>Policy Benefit Description:{{benefits.descriptions}}</p>
@@ -107,43 +99,33 @@
                         <div fxLayout="row" fxLayoutGap="2%">
                             <mat-form-field class="example-chip-list" appearance="outline" fxFlex="50%">
                                 <mat-label>Allowed Sum Insured Values(Add new values below)</mat-label>
-                                <mat-chip-list #chipList aria-label="Fruit selection"
-                                    matTooltip="To add new Sum Insured values ,add the value and press Enter">
+                                <mat-chip-list #chipList aria-label="Fruit selection" matTooltip="To add new Sum Insured values ,add the value and press Enter">
                                     <mat-chip *ngFor="let fruit of sumInsuredValues" (removed)="remove(fruit)">
                                         {{fruit.insuredSum}}
                                         <button matChipRemove>
-                                            <mat-icon>cancel</mat-icon>
-                                        </button>
+                      <mat-icon>cancel</mat-icon>
+                    </button>
                                     </mat-chip>
-                                    <input placeholder="Add New Insured Sum..." [matChipInputFor]="chipList"
-                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                        [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                                    <input placeholder="Add New Insured Sum..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
                                 </mat-chip-list>
                             </mat-form-field>
                             <mat-form-field class="example-chip-list" appearance="outline" fxFlex="50%">
                                 <mat-label>Allowed Duration Values in Years(Add new values below)</mat-label>
-                                <mat-chip-list #chipList1
-                                    matTooltip="You can add values to be available for policy duration here">
+                                <mat-chip-list #chipList1 matTooltip="You can add values to be available for policy duration here">
                                     <mat-chip *ngFor="let x of duration" (removed)="removeduration(x)">
                                         {{x.years}}
                                         <button matChipRemove>
-                                            <mat-icon>cancel</mat-icon>
-                                        </button>
+                      <mat-icon>cancel</mat-icon>
+                    </button>
                                     </mat-chip>
-                                    <input placeholder="Add New Duration..." [matChipInputFor]="chipList1"
-                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                        [matChipInputAddOnBlur]="addOnBlur"
-                                        (matChipInputTokenEnd)="addduration($event)">
+                                    <input placeholder="Add New Duration..." [matChipInputFor]="chipList1" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addduration($event)">
                                 </mat-chip-list>
                             </mat-form-field>
                         </div>
-                        <h3 fxFlexLayout="row" *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Bike'"
-                            style="font-family: cursive"> Select Bike models allowed for policy</h3>
-                        <h3 fxFlexLayout="row" *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Car'"
-                            style="font-family: cursive"> Select Car models allowed for policy</h3>
+                        <h3 fxFlexLayout="row" *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Bike'" style="font-family: cursive"> Select Bike models allowed for policy</h3>
+                        <h3 fxFlexLayout="row" *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Car'" style="font-family: cursive"> Select Car models allowed for policy</h3>
                         <div fxFlexLayout="row">
-                            <mat-form-field appearance="outline" fxFlex="100%"
-                                *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Bike'">
+                            <mat-form-field appearance="outline" fxFlex="100%" *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Bike'">
                                 <mat-label>Bike Type</mat-label>
                                 <mat-select placeholder="Bike Type" formControlName="modelsAllowed" multiple>
                                     <mat-optgroup *ngFor="let group of bikeGroups" [label]="group.name">
@@ -154,8 +136,7 @@
                                 </mat-select>
                             </mat-form-field>
 
-                            <mat-form-field appearance="outline" fxFlex="100%"
-                                *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Car'">
+                            <mat-form-field appearance="outline" fxFlex="100%" *ngIf="insurancex==='AutoMobileInsurance'&&categoryx==='Car'">
                                 <mat-label>Car Model</mat-label>
                                 <mat-select placeholder="Car Model" formControlName="modelsAllowed" multiple>
                                     <mat-optgroup *ngFor="let group of carGroups" [label]="group.name">
@@ -169,8 +150,7 @@
                         <h3 fxFlexLayout="row" style="font-family: cursive">Add Financial details below</h3>
                         <div formArrayName="policyDetails">
                             <!-- <h2 style="font-family: cursive;">Enter the financial policyDetails of the policy </h2> -->
-                            <div *ngFor="let child of policyDetailsx;let i=index" formGroupName="{{i}}"
-                                fxFlexLayout="row" fxLayoutGap="2%">
+                            <div *ngFor="let child of policyDetailsx;let i=index" formGroupName="{{i}}" fxFlexLayout="row" fxLayoutGap="2%">
                                 <mat-form-field fxFlex="15%" appearance="outline">
                                     <mat-label>Sum Insured</mat-label>
                                     <mat-select placeholder="Sum Insured" formControlName="sumInsure" type="number">
@@ -190,32 +170,24 @@
                                 </mat-form-field>
                                 <mat-form-field fxFlex="10%" *ngIf="insurancex!='HealthInsurance'" appearance="outline">
                                     <mat-label>Policy Premium </mat-label>
-                                    <input formControlName="premiums" matInput placeholder="Policy Premium"
-                                        type="number">
+                                    <input formControlName="premiums" matInput placeholder="Policy Premium" type="number">
                                 </mat-form-field>
-
-                                <mat-form-field fxFlex="10%" appearance="outline" *ngIf="insurancex==='HealthInsurance'"
-                                    matTooltip="Age limit for kids is 20 years">
+                               
+                                <mat-form-field fxFlex="10%" appearance="outline" *ngIf="insurancex==='HealthInsurance'" matTooltip="Age limit for kids is 20 years">
                                     <mat-label>Kid Premium</mat-label>
                                     <input formControlName="kids" matInput placeholder="Kids Premium" type="number">
                                 </mat-form-field>
-                                <mat-form-field fxFlex="12%" appearance="outline" *ngIf="insurancex==='HealthInsurance'"
-                                    matTooltip="Age between  21  and 40 years">
+                                <mat-form-field fxFlex="12%" appearance="outline" *ngIf="insurancex==='HealthInsurance'" matTooltip="Age between  21  and 40 years">
                                     <mat-label>Adult Premium age(21-40)</mat-label>
-                                    <input formControlName="adults1" matInput placeholder="Age limt(21 to 40)"
-                                        type="number">
+                                    <input formControlName="adults1" matInput placeholder="Age limt(21 to 40)" type="number" >
                                 </mat-form-field>
-                                <mat-form-field fxFlex="9%" appearance="outline" *ngIf="insurancex==='HealthInsurance'"
-                                    matTooltip="Age between  41  and 50 years">
+                                <mat-form-field fxFlex="9%" appearance="outline" *ngIf="insurancex==='HealthInsurance'" matTooltip="Age between  41  and 50 years">
                                     <mat-label>Adult Premium age(41-50)</mat-label>
-                                    <input formControlName="adults2" matInput placeholder="Age limt(41 to 50)"
-                                        type="number">
+                                    <input formControlName="adults2" matInput placeholder="Age limt(41 to 50)" type="number">
                                 </mat-form-field>
-                                <mat-form-field fxFlex="9%" appearance="outline" *ngIf="insurancex==='HealthInsurance'"
-                                    matTooltip="Age between  51  and 60 years">
+                                <mat-form-field fxFlex="9%" appearance="outline" *ngIf="insurancex==='HealthInsurance'" matTooltip="Age between  51  and 60 years">
                                     <mat-label>Adult Premium age(51-60)</mat-label>
-                                    <input formControlName="adults3" matInput placeholder="Age limt(51 to 60)"
-                                        type="number">
+                                    <input formControlName="adults3" matInput placeholder="Age limt(51 to 60)" type="number">
                                 </mat-form-field>
                                 <mat-form-field fxFlex="15%" appearance="outline" *ngIf="insurancex==='LifeInsurance'">
                                     <mat-label>Minimum Salary</mat-label>
@@ -225,16 +197,14 @@
                                     <mat-label>Maximum Salary</mat-label>
                                     <input formControlName="maxSalary" matInput placeholder="Max Salary" type="number">
                                 </mat-form-field>
-                                <div
-                                    style="display: flex;justify-content: center;align-items: center;font-family: cursive;">
+                                <div style="display: flex;justify-content: center;align-items: center;font-family: cursive;">
                                     <a mat-raised-button (click)="removeDetails(i)">
                                         <mat-icon>remove_circle</mat-icon>
                                     </a>
                                     <a mat-raised-button (click)="addDetails(i)">
                                         <mat-icon>add</mat-icon>
                                     </a>
-                                    <a mat-raised-button (click)="addDetailsE(i)" style="color: orangered;">Empty
-                                        Row</a>
+                                    <a mat-raised-button (click)="addDetailsE(i)" style="color: orangered;">Empty Row</a>
                                 </div>
                             </div>
                             <div>
@@ -251,38 +221,30 @@
         </mat-step>
 
         <mat-step [stepControl]="insuranceForms">
-            <mat-card style="width: 100%;" class="mat-elevation-z3">
+            <mat-card style="width: 100%;">
                 <mat-card-content style="align-content: center;">
                     <form [formGroup]="insuranceForms">
                         <ng-template matStepLabel>Enter Additional Details</ng-template>
                         <div formArrayName="addOnDetails">
-                            <mat-card >
-                                <div fxLayout="row" fxLayoutGap="2%"
-                                    style="display: flex;justify-content: center;align-items: center;font-family: cursive;font-weight: 600;">
-                                    <p>Upload Photos</p>
-                                    <input type="file" (change)="onFileChanged($event)">
-                                </div>
-                            </mat-card>
-                            <div
-                                style="display: flex;justify-content: center;align-items: center;font-family: cursive;font-weight: 900;">
+                            <div fxLayout="row" fxLayoutGap="2%" style="display: flex;justify-content: center;align-items: center;font-family: cursive;font-weight: 600;">
+                                <p>Upload Photos</p>
+                                <input type="file" (change)="onFileChanged($event)">
+                            </div>
+                            <div style="display: flex;justify-content: center;align-items: center;font-family: cursive;font-weight: 900;">
                                 Enter AddOn Details below</div>
-                            <div *ngFor="let child of policyAddOnsx;let i=index" formGroupName="{{i}}" fxLayout="row"
-                                fxLayoutGap="2%">
+                            <div *ngFor="let child of policyAddOnsx;let i=index" formGroupName="{{i}}" fxLayout="row" fxLayoutGap="2%">
 
                                 <mat-form-field appearance="outline" fxFlex="15%" *ngIf="flag[i]">
                                     <mat-label>Add-On Name</mat-label>
-                                    <input matInput placeholder="AddOn name" type="text" formControlName="addOnName"
-                                        *ngIf="flag[i]">
+                                    <input matInput placeholder="AddOn name" type="text" formControlName="addOnName" *ngIf="flag[i]">
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFlex="60%" *ngIf="flag[i]">
                                     <mat-label>Add-On Description</mat-label>
-                                    <input matInput placeholder="Add-On Description" type="text"
-                                        formControlName="addOnDescription">
+                                    <input matInput placeholder="Add-On Description" type="text" formControlName="addOnDescription">
                                 </mat-form-field>
                                 <mat-form-field appearance="outline" fxFlex="20%" *ngIf="flag[i]">
                                     <mat-label>Add-On Premium</mat-label>
-                                    <input matInput placeholder="Add-On Premium" type="number"
-                                        formControlName="addOnPremiums">
+                                    <input matInput placeholder="Add-On Premium" type="number" formControlName="addOnPremiums">
                                 </mat-form-field>
 
                                 <a (click)="addDetails2(i)" fxFlexAlign="center" *ngIf="flag[i]">
@@ -296,11 +258,9 @@
                                     <mat-expansion-panel-header>
 
                                         <mat-panel-title>
-                                            <p style="text-align: center;font-family: cursive;" fxFlex="70%">
-                                                {{addondetails.addOnName}}</p>
+                                            <p style="text-align: center;font-family: cursive;" fxFlex="70%">{{addondetails.addOnName}}</p>
                                         </mat-panel-title>
-                                        <button mat-raised-button (click)="removeDetails2(i)"
-                                            style="color: orangered;">Remove</button>
+                                        <button mat-raised-button (click)="removeDetails2(i)" style="color: orangered;">Remove</button>
 
                                     </mat-expansion-panel-header>
                                     <p>Add-On Name : {{addondetails.addOnName}}</p>
@@ -327,11 +287,9 @@
                         <div style="width: 60%;">
                             <div fxLayout="row">
                                 <h3 style="font-family:cursive ;">Write Terms and Conditions below</h3>
-                                <button mat-raised-button (click)="openDialog()"
-                                    style="margin-left: auto">Preview</button>
+                                <button mat-raised-button (click)="openDialog()" style="margin-left: auto">Preview</button>
                             </div>
-                            <textarea type="text" style="width:100%;height:70vh;" formControlName="policyDocuments"
-                                [(ngModel)]="valueVariable"></textarea>
+                            <textarea type="text" style="width:100%;height:70vh;" formControlName="policyDocuments" [(ngModel)]="valueVariable"></textarea>
                         </div>
                         <div style="border: 2px solid;margin-left: 5%;">
                             <div style="padding-left: 5%;">
@@ -356,9 +314,8 @@
                                 <markdown ngPreserveWhitespaces>
                                     * Text to contain a bullet point
                                 </markdown>
-                                For more info <a href="https://www.markdownguide.org/cheat-sheet/"
-                                    target="_blank">MarkDown Syntax
-                                    Guide</a>
+                                For more info <a href="https://www.markdownguide.org/cheat-sheet/" target="_blank">MarkDown Syntax
+                  Guide</a>
                             </div>
                         </div>
                     </form>
@@ -368,9 +325,9 @@
                     <div fxLayout="row">
                         <button mat-button matStepperPrevious>Back</button>
                         <button mat-button (click)="stepper.reset()" style="margin-left: auto">Reset</button>
-
+                        
                         <button mat-raised-button color="primary" [disabled]="check_validity()" (click)="onSubmit()">Add
-                            policy</button>
+              policy</button>
 
                     </div>
                 </mat-card-actions>

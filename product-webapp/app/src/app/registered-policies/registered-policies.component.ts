@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class RegisteredPoliciesComponent implements OnInit {
 
   registeredPolicies:any;
-  searchedKeyword:any;
 
   constructor( private http: HttpClient, private router: Router) { }
 
@@ -29,9 +28,7 @@ export class RegisteredPoliciesComponent implements OnInit {
 openDialog(policy: any, i:any) {
   console.log(policy);
   this.router.navigateByUrl('/policyBuyers');
-  localStorage.setItem('insurancePolicyId',policy.policyId);
-  localStorage.setItem('typeOfInsurance', policy.insuranceType);
-  localStorage.setItem('typeOfPolicy',policy.policyName)
+  localStorage.setItem('insurancePolicyId',policy.policyId)
 
 }
 }
