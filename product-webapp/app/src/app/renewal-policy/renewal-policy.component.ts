@@ -38,20 +38,17 @@ export class RenewalPolicyComponent implements OnInit {
   ngOnInit(): void {
     // localStorage.getItem(customerPolicyId);
     this.myModel=0
-    this.http.get('http://localhost:8010/api/vk1/policy-id/11223344').subscribe((x:any)=>{
-     
-      
-      
-    this.http.put<Insurance>("http://localhost:8084/api/testing/30153115",x).subscribe((data:any)=> 
+    this.http.get('http://localhost:8010/api/vk1/policy-id/313259').subscribe((x:any)=>{
+    this.http.put<Insurance>("http://localhost:8084/api/testing/30153117",x).subscribe((data:any)=> 
     {
-      console.log("Inside retrived insurance success");
-      console.log(data.policyDescription);
-      console.log(data.policyDetails.length);
-      console.log(data.addOnDetails.length);
+      // console.log("Inside retrived insurance success");
+      // console.log(data.policyDescription);
+      // console.log(data.policyDetails.length);
+      // console.log(data.addOnDetails.length);
       this.policyDescription = data.policyDescription;
       this.policyTitle = data.policyName;
       this.policyType = data.insuranceType;
-      console.log(this.policyType);
+      // console.log(this.policyType);
 
       if(this.policyType == "AutoMobileInsurance"){
         this.policySubType = data.category;
@@ -82,103 +79,44 @@ export class RenewalPolicyComponent implements OnInit {
 
   checkBox(event:any, i:any){
     this.setCheckBox[i] = event.checked;
-    console.log(i);
+
     if(event.checked){
-      console.log("checked");
       this.selectedItems.push(i);
     }
     else{
-      console.log("unchecked");
       this.selectedItems = this.selectedItems.filter(m => m!=i)
       
     }
-    console.log(this.selectedItems);
-    // console.log(this.setCheckBox)
+    // console.log(this.selectedItems);
   }
   calculate_premium()
   {
-    console.log(this.myModel);
-    console.log(this.addOnPrice);
-    console.log(this.selectedItems);
+    // console.log(this.myModel);
+    // console.log(this.addOnPrice);
+    // console.log(this.selectedItems);
     this.totalPremium=0;
-   for(let i=0;i<this.selectedItems.length;i++)
-   {
-    console.log(this.addOnPrice[this.selectedItems[i]]);
-    
+    for(let i=0;i<this.selectedItems.length;i++)
+    {
+      // console.log(this.addOnPrice[this.selectedItems[i]]);
       this.totalPremium=this.totalPremium + this.addOnPrice[this.selectedItems[i]];
-   } 
-   console.log('Premium : '+this.premium[+this.myModel]);
+    } 
+    //  console.log('Premium : '+this.premium[+this.myModel]);
    
-   this.totalPremium=this.totalPremium + this.premium[+this.myModel]
-    return this.totalPremium;
+    this.totalPremium=this.totalPremium + this.premium[+this.myModel]
+      return this.totalPremium;
   }
   onSubmit(){
     this.data.customerPolicyId = this.renewalService.customerPolicyId;
-
-    for(let i=0; i<this.duration.length; i++){
-      if(this.myModel == 0){
-        this.data.duration = this.duration[0];
-      }
-      else if(this.myModel == 1){
-        this.data.duration = this.duration[1];
-      }
-      else if(this.myModel == 2){
-        this.data.duration = this.duration[2];
-      }
-    }
-
-    // for(let i=0; i<this.setCheckBox.length; i++){
-    //   if(this.setCheckBox[i] == true && this.myModel == 0){
-    //     this.data.addOnName[0] = this.addOnName[0];
-    //     this.data.addOnName[1] = this.addOnName[1];
-    //     this.data.addOnName[2] = this.addOnName[2];
-    //     this.data.addOnName[3] = this.addOnName[3];
-    //       this.totalPremium = this.addOnPrice.reduce(function(a,b)
-    //       {
-    //         return a+b;
-    //       },4000)
-    //   }
-    //   else if(this.setCheckBox[i] == false && this.myModel == 0){
-    //     this.totalPremium = this.premium[0];
-    //   }
-    //   else if(this.setCheckBox[i] == true && this.myModel == 1){
-    //     this.data.addOnName[0] = this.addOnName[0];
-    //     this.data.addOnName[1] = this.addOnName[1];
-    //     this.data.addOnName[2] = this.addOnName[2];
-    //     this.data.addOnName[3] = this.addOnName[3];
-    //     this.totalPremium = this.addOnPrice.reduce(function(a,b)
-    //     {
-    //       return a+b;
-    //     },3000)
-    //   }
-    //   else if(this.setCheckBox[i] == false && this.myModel == 1){
-    //     this.totalPremium = this.premium[1];
-    //   }
-    //   else if(this.setCheckBox[i] == true && this.myModel == 2){
-    //     this.data.addOnName[0] = this.addOnName[0];
-    //     this.data.addOnName[1] = this.addOnName[1];
-    //     this.data.addOnName[2] = this.addOnName[2];
-    //     this.data.addOnName[3] = this.addOnName[3];
-    //     this.totalPremium = this.addOnPrice.reduce(function(a,b)
-    //     {
-    //       return a+b;
-    //     },1500)
-    //   }
-    //   else if(this.setCheckBox[i] == false && this.myModel == 2){
-    //     this.totalPremium = this.premium[2];
-    //   }
-    //   else if(this.setCheckBox[0] == true && this.myModel == 0){
-    //     this.data.addOnName[0] = this.addOnName[0];
-    //     console.log(this.addOnName[0])
-    //     this.totalPremium = this.addOnPrice[0] + this.premium[0];
-    //     console.log(this.addOnPrice[0]);
-    //   }
-    //     console.log(this.totalPremium);
-    // }
     this.data.date = this.date;
-
+    this.data.premium = this.totalPremium;
+    console.log(this.data.premium);
+    this.data.duration = this.duration[this.myModel];
+    console.log(this.data.duration);
+    this.data.addOnName = this.addOnName;
+    console.log(this.data.addOnName);
     this.renewalService.updateData(this.data).subscribe(res => 
       {
+        res = this.data;
         console.log(res);
       })
    }
