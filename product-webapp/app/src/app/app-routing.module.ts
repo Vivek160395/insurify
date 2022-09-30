@@ -18,17 +18,27 @@ import { ChatComponent } from './chat/chat.component';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
+import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
+import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
+
 import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
+
+
+import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-advisor-update.component';
+
+
+
+
+
+// const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
 const routes: Routes = [
   {
     path: "", component: NavBarComponent, children: [
       { path: "", component: RecommendationComponent },
-      { path: "insurance-provider", component: InsuranceProviderComponent },
       { path: "register", component: RegisterComponent },
-      { path: "add-policy", component: AddInsurancePolicyComponent },
+      { path: "add", component: AddInsurancePolicyComponent },
       { path: "policies", component: PoliciesComponent },
-      { path: "renewal", component: RenewalPolicyComponent },
       { path: "renewal-update/:id", component: RenewalPolicyComponent },
       { path: "renewal-home", component: RenewalPolicyHomeComponent },
       { path: "details", component: DetailsComponent },
@@ -41,10 +51,13 @@ const routes: Routes = [
       { path: "claim", component: ClaimComponent },
       { path: "InsuranceDetails", component: InsuranceDetailsComponent },
       { path: "edit-insurance", component: EditInsuranceComponent },
+      { path: "policy-advisor-update", component: PolicyAdvisorUpdateComponent },
+      { path: "policy-advisor", component: PolicyAdvisorComponent },
       { path: "policy-advisor", component: PolicyAdvisorComponent },]
   },
   { path: "edit-insurance", component: EditInsuranceComponent },
   { path: "login", component: LoginComponent },
+  { path: 'registeredPolicies', component: RegisteredPoliciesComponent },
 
 
 ];

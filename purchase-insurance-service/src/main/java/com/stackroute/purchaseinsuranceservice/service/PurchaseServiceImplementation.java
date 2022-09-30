@@ -177,7 +177,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
         System.out.println("Cut Off date for renewing insurance :  " + cutOffDate);
         System.out.println("Cut Off status : " + (cutOffDate.compareTo(ourDate) > 0));
         if (cutOffDate.compareTo(ourDate) >= 0) {
-            System.out.println("Renew possible only before 30 days of policy expiry");
+            System.out.println("Renew possible only before 60 days of policy expiry");
             return false;
         }
 
@@ -332,6 +332,8 @@ public class PurchaseServiceImplementation implements PurchaseService {
         if (purchaseRepository.findById(customerPolicyId).isPresent()) {
             CustomerInsurance customerInsurance = purchaseRepository.findById(customerPolicyId).get();
             int index = customerInsurance.getClaimStatus().size() - 1;
+            System.out.println(index);
+            System.out.println(customerInsurance.getClaimSum().size());
             List<String> claimStatus = customerInsurance.getClaimStatus();
 
             List<String> decisionDate = customerInsurance.getDecisionDate();
@@ -382,14 +384,33 @@ public class PurchaseServiceImplementation implements PurchaseService {
             List<PolicyDetails> policyDetails=new ArrayList<>();
             for(int i=0;i<insurance.getPolicyDetails().length;i++)
             {
-                if(insurance.getPolicyDetails()[i].getSumInsure()==sum)
-                policyDetails.add(insurance.getPolicyDetails()[i]);
+                if(insurance.getPolicyDetails()[i].getSumInsure()==sum) {
+
+                    if(insurance.getInsuranceType().equalsIgnoreCase("LifeInsurance"))
+                    {
+                       float factor=1;
+                       int count=0;
+                       String[] dis_lst=  customerInsurance.getLifeInsurance().getHealthConditionList();
+                       boolean[] ans=customerInsurance.getLifeInsurance().getQuestionnaireAnswers();
+                       if(dis_lst.length>2) {  factor= factor*1.2f;   }
+                       for(int k=0;k<ans.length;k++)
+                       {
+                           if(ans[k])
+                           count++;
+                       }
+                       if(count>2) { factor=factor*1.2f;}
+                       int oldPremium=insurance.getPolicyDetails()[i].getPremiums();
+                       oldPremium= (int) (oldPremium*factor);
+                       insurance.getPolicyDetails()[i].setPremiums(oldPremium);
+                    }
+                    policyDetails.add(insurance.getPolicyDetails()[i]);
+                }
             }
             if(policyDetails.size()==0)
             {
-                //No Policy with Given SumInsured
                 return null;
             }
+
             if(!insurance.getInsuranceType().equalsIgnoreCase("HealthInsurance"))
             {
                PolicyDetails[] updatePolicyDetails=new PolicyDetails[policyDetails.size()];
@@ -400,6 +421,8 @@ public class PurchaseServiceImplementation implements PurchaseService {
                modifiedInsurance.setPolicyDetails(updatePolicyDetails);
                return modifiedInsurance;
             }
+
+
             //updating policy Details for Health Insurance
             List<InsuredInfo> usersInfo=new ArrayList<>();
             int user_no=customerInsurance.getHealthInsurance().getInsuredInfo().length;
@@ -438,7 +461,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
                   {
                     bmiFactor=1.1f;
                   }
-                  else if(bmi<30f)
+                  else if(bmi>24&&bmi<30f)
                   {
                       bmiFactor=1.2f;
                   }
@@ -548,6 +571,16 @@ public class PurchaseServiceImplementation implements PurchaseService {
                                 List<String> updateStatus = customerInsurance.getClaimStatus();
                                 updateStatus.remove(updateStatus.size() - 1);
                                 updateStatus.add("rejected");
+                                int index = customerInsurance.getClaimStatus().size() - 1;
+                                DecisionDTO decisionDTO = new DecisionDTO();
+                                decisionDTO.setCustomerPolicyId(customerInsurance.getCustomerPolicyId());
+                                decisionDTO.setInsurancePolicyId(customerInsurance.getInsurancePolicyId());
+                                decisionDTO.setEmail(customerInsurance.getEmail());
+                                decisionDTO.setName(customerInsurance.getName());
+                                decisionDTO.setClaimAmount(customerInsurance.getClaimSum().get(index));
+                                decisionDTO.setClaimDate(customerInsurance.getClaimSubmissionDate().get(index));
+                                decisionDTO.setStatus("rejected");
+                                producer.sendMessageForDecision(decisionDTO);
                                 customerInsurance.getDecisionDate().add(cutOffDate);
                                 customerInsurance.setClaimStatus(updateStatus);
                                 // customerInsurance.setClaimFlag(false);
@@ -616,7 +649,58 @@ public class PurchaseServiceImplementation implements PurchaseService {
         }
         return 1;
     }
+    public String checkRenewalStatus(String customerPolicyId,Insurance insurance) throws PolicyIdNotFoundException, ParseException {
+        if (!purchaseRepository.findById(customerPolicyId).isPresent()) {
+            return "Customer Policy Id not found";
+        }
 
+        CustomerInsurance customerInsurance = purchaseRepository.findById(customerPolicyId).get();
+        List<String> endDayList = customerInsurance.getEndDate();
+        Date date = new Date();
+        String currentDay = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        System.out.println(currentDay);
+        String startDay = endDayList.get(endDayList.size() - 1);
+        if (currentDay.compareTo(startDay) > 0) {
+            return "Policy has already expired";
+        }
+        String endDate = "";
+        System.out.println(startDay);
+        String sDay = customerInsurance.getStartDate().get(customerInsurance.getStartDate().size() - 1);
+        String eDay = startDay;
+        String ourDate = currentDay;
+        System.out.println("Status of : " + (sDay.compareTo(ourDate) < 0 && eDay.compareTo(ourDate) > 0));
+
+        if (!(sDay.compareTo(ourDate) < 0) || !(eDay.compareTo(ourDate) >= 0)) {
+            System.out.println("Cannot renew now because of policy  time interval is not valid");
+            return "No policy available to renew ";
+        }
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c1 = Calendar.getInstance();
+        c1.setTime(sdf1.parse(eDay));
+        c1.add(Calendar.DATE, -60); // number of days to add
+        String cutOffDate = sdf1.format(c1.getTime());
+        System.out.println("Cut Off date for renewing insurance :  " + cutOffDate);
+        System.out.println("Cut Off status : " + (cutOffDate.compareTo(ourDate) > 0));
+        if (cutOffDate.compareTo(ourDate) >= 0) {
+            System.out.println("Renew possible only before 60 days of policy expiry");
+            return "Renew possible only before 60 days of policy expiry";
+        }
+        PurchaseServiceImplementation purchaseServiceImplementation=new PurchaseServiceImplementation();
+        Insurance retrievedInsurance=returnInsuranceForRenewal(insurance,customerPolicyId);
+        if(retrievedInsurance==null)
+        {
+            for(int i=0;i<retrievedInsurance.getPolicyDetails().length;i++)
+            {
+                if(retrievedInsurance.getPolicyDetails()[i].getSumInsure()==customerInsurance.getSumInsured())
+                {
+                    return "Age of all users in the policy covered should be less than 60 years ";
+                }
+            }
+            return "Currently the policy cannot be renewed for "+customerInsurance.getSumInsured()+" amount";
+        }
+
+        return null;
+    }
     @Override
     public int uploadDocument(MultipartFile documentFile, String policyId) throws IOException {
 
