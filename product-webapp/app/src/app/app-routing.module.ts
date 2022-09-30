@@ -21,6 +21,7 @@ import { EditInsuranceComponent } from './edit-insurance/edit-insurance.componen
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
 import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
+import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
@@ -61,7 +62,8 @@ const routes: Routes = [
       { path: "policyDetails", component: InsuranceDetailsComponent },
       { path: "claim", component: ClaimComponent },
       { path: "InsuranceDetails", component: InsuranceDetailsComponent },
-      { path: "edit-insurance", component: EditInsuranceComponent },]
+      { path: "edit-insurance", component: EditInsuranceComponent },
+      { path: "policy-advisor", component: PolicyAdvisorComponent},]
   },
   { path: "edit-insurance", component: EditInsuranceComponent },
   { path: "login", component: LoginComponent },

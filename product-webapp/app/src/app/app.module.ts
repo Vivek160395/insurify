@@ -78,6 +78,7 @@ import { EditInsuranceComponent } from './edit-insurance/edit-insurance.componen
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
 import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
+import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/regi
     EditInsuranceComponent,
     InsuranceProviderComponent,
     RegisteredPoliciesComponent,
-    RegisteredPolicyBuyersComponent
+    RegisteredPolicyBuyersComponent,
+    PolicyAdvisorComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
