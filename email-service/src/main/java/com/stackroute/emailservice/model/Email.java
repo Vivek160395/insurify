@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Email {
 
 
-    private String toEmailId;
+    private String email;
     private String subject;
     private String body;
 }

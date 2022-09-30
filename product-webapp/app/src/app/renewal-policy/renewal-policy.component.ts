@@ -51,7 +51,7 @@ export class RenewalPolicyComponent implements OnInit {
       this.policyDescription = data.policyDescription;
       this.policyTitle = data.policyName;
       this.policyType = data.insuranceType;
-      console.log(this.policyType)
+      console.log(this.policyType);
 
       if(this.policyType == "AutoMobileInsurance"){
         this.policySubType = data.category;

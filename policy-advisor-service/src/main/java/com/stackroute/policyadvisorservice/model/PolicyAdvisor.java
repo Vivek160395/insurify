@@ -25,7 +25,7 @@ public class PolicyAdvisor {
 
     private String phoneNumber;
 
-    private char gender;
+    private String gender;
 
     private String dateOfBirth;
 
@@ -33,7 +33,7 @@ public class PolicyAdvisor {
 
     private String panNo;
 
-    private int YearsOfExperience;
+    private int yearsOfExperience;
 
     private List<String> category;
 

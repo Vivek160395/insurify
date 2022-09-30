@@ -11,5 +11,7 @@ import java.util.List;
 public interface PurchaseRepository extends MongoRepository<CustomerInsurance,String> {
 
     public List<CustomerInsurance> getCustomerInsuranceByEmail(String email);
+    public List<CustomerInsurance> getCustomerInsuranceByInsurancePolicyId(String insuranceId);
+
 
 }
