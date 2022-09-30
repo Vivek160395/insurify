@@ -114,9 +114,9 @@
                 <hr>
                 <h3><b>Profile Picture</b></h3>
                 <div class="input-group" fxLayoutGap = "2%">
-                    <div class="custom-file" fxFlex = "20%">
+                    <div class="custom-file" fxFlex = "15%">
                       <input type="file" class="custom-file-input" id="inputImage" aria-describedby="inputImage" formControlName = "profilePic">
-                      <label class="custom-file-label" for="inputImage">Choose file</label>
+                      <label class="custom-file-label" for="inputImage" (change)="onImgSelected($event)">Choose file</label>
                     </div>
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" type="button" id="inputImage">Add</button>

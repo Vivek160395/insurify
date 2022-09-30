@@ -2,6 +2,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Route, Router } from '@angular/router';
 import { RecommendationServiceService } from '../recommendation-service.service';
 import { Chart, registerables } from 'chart.js'
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -9,11 +11,10 @@ import { Chart, registerables } from 'chart.js'
   templateUrl: './insurance-provider.component.html',
   styleUrls: ['./insurance-provider.component.css']
 })
-export class InsuranceProviderComponent implements OnInit {
+export class InsuranceProviderComponent implements OnInit, AfterViewInit {
   constructor(private elementRef: ElementRef, private route: Router, private service: RecommendationServiceService) {
     Chart.register(...registerables)
   }
-
   myChart1: any = [];
   goto(id: any) {
     this.service.policyNo = id;
@@ -25,11 +26,6 @@ export class InsuranceProviderComponent implements OnInit {
     this.myChart1 = new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: [
-          'Corona',
-          'Suv',
-          'Term Life'
-        ],
         datasets: [{
           label: 'My First Dataset',
           data: [300, 50, 100],
@@ -53,24 +49,25 @@ export class InsuranceProviderComponent implements OnInit {
           this.count = this.count + 1;
         }
       }
+      this.dataSource = this.policies;
+      console.log(this.dataSource);
     })
-    console.log(this.policies);
   }
   policyName: any;
   policyType: any;
   pic: any;
   imageType: any;
+  count2 = 0;
+  displayedColumns: string[] = ['policyName', 'policyId'];
+  dataSource: any = [];
+  countOfInsurances: any = [];
 
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
 
-
-//   // getPolicy() {
-//   //   this.service.getPolicyDetails("297025").subscribe(data => {
-//   //     console.log(data);
-//   //     this.policyName = data.policyName;
-//   //     this.policyType = data.insuranceType;
-//   //     this.pic = data.picByte;
-//   //     this.imageType = data.picType;
-//   //   })
-//   // }
-// }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 }
+
+

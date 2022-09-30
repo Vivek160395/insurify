@@ -43,6 +43,12 @@ public class InsuranceServiceImpl implements InsuranceService {
         return insuranceRepo.findAll();
     }
 
+
+    @Override
+    public Iterable<Insurance> findAllPolicyByEmail(String userEmail) {
+        return insuranceRepo.findPolicyByUserEmail(userEmail);
+    }
+
     @Override
     public Optional<Insurance> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException {
         if (insuranceRepo.findById(policyId).isPresent()) {
@@ -66,6 +72,8 @@ public class InsuranceServiceImpl implements InsuranceService {
     public Optional<Insurance> findPolicyByPolicyName(String policyName) {
         return insuranceRepo.findPolicyByPolicyName(policyName);
     }
+
+
 
     @Override
     public Insurance editInsurance(@RequestBody Insurance insurance)

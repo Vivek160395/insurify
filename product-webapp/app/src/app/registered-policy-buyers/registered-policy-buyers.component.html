@@ -1,0 +1,91 @@
+<!-- <p>registered-policy-buyers works!</p> -->
+<div style="background-color: white;">
+    <h1 style="font-size: 60px; font-weight:450; padding-top: 35px; padding-left: 20px;"> Policy Buyers </h1>
+    <br>
+    <button [hidden]="backButton" mat-raised-button color="primary" style="margin-left:22px" (click)="back()"> Back</button>
+    <br>
+    <div style="background-color: rgb(249, 247, 247)">
+      <!-- style="background-color: rgb(227, 202, 245)" -->
+    
+        
+          <div [hidden]="allUserDetailsView" style="border: 2px solid rgb(76, 33, 168); padding: 15px; margin: 18px; font-size: 17px; font-weight: 400;">
+            <h2> Users Details </h2>            
+          <table >
+            <tr>
+                <th>Email Id</th>
+                <th>Name</th>
+                <th>Policy Id</th>
+                <th>Renew Details</th>
+                <th>Claim Details</th>
+                <!-- <th>Email Id</th> -->
+            </tr>
+            <tr *ngFor="let policy of policyBuyerDetails">  
+                <td>{{policy.email}}</td>
+                <td>{{policy.name}}</td>
+                <td>{{policy.customerPolicyId}}</td>
+                <td><button (click)="renew(policy)"> renewal </button></td>
+                <td><button (click)="claim(policy)">claim</button> </td>
+             </tr>
+          
+          </table>
+          </div>
+        
+
+          <div [hidden]="renewView" style="border: 2px solid rgb(76, 33, 168); padding: 10px; margin: 18px;"> 
+                <h2>Renewal Details</h2> 
+            <div *ngFor="let policy of policyBuyerDetails" >
+             <div *ngIf="policy.customerPolicyId==customerPolicyId && policy.renewalStatus"> 
+              <table >
+                <tr>
+                  <th>Policy No.</th>
+                  <th>Renew Date</th>
+                  <th>Start Date</th>
+                  <th>End Date </th>
+                </tr>
+                <tr *ngFor="let x of policy.startDate; let i=index;">
+                  <td>{{policy.customerPolicyId}}</td>
+                  <td>{{policy.purchaseDate[i]}}</td>
+                  <td>{{policy.startDate[i]}}</td>
+                  <td>{{policy.endDate[i]}}</td>
+                </tr>
+              </table>
+             </div>
+            </div>
+            </div>
+
+            <div [hidden]="claimView" style="border: 2px solid rgb(76, 33, 168); padding: 10px; margin: 18px;"> 
+                <h2>Claim Details</h2> 
+            <div *ngFor="let policy of policyBuyerDetails" >
+             <div *ngIf="policy.customerPolicyId==customerPolicyId && policy.claimStatus.length!=0"> 
+                <table>
+                    <tr>
+                      <th>Policy No.</th>
+                      <th>Claim Date</th>
+                      <th>Amount</th>
+                      <th>Document</th>
+                      <th>Action</th>
+                    </tr>
+                    <tr  *ngFor="let x of policy.claimDate; let i=index;">
+                      <td>{{policy.customerPolicyId}}</td>
+                      <td>{{policy.claimDate[i]}}</td>
+                      <td>₹{{policy.claimSum[i]}}</td>
+                      <td> 
+                        <button mat-button color="primary" (click)="onClickDownloadFile(policy.claimDocument[i], policy.customerPolicyId )"> Download </button> or
+                        <button mat-button color="primary" (click)="openFile(policy.claimDocument[i])"> Open </button>
+                      </td>
+                      <td>
+                        <button mat-button color="primary" > Accept </button> or
+                        <button mat-button color="primary" > Reject </button>
+                      </td>
+                    </tr>
+                    </table>
+             </div>
+            </div>
+            </div>
+   
+       
+    
+          
+       
+    </div>
+    </div>

@@ -15,5 +15,4 @@ public class InsuredInfo {
     public String name;
     private boolean preExistingIllness;
     private String[] illnessList;
-
 }

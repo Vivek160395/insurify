@@ -19,6 +19,7 @@ export class PolicyAdvisorUpdateComponent implements OnInit {
 
   update:any = {
   }
+  //file: File = null;
 
   policyAdvisor: PolicyAdvsior = new PolicyAdvsior();
   constructor(private policyadvisorService: PolicyAdvisorService) { }
@@ -131,8 +132,11 @@ UpdateSubmitted(data: any){
 // }
 
 
-
-
-
+onImgSelected(event: any){
 
 }
+}
+
+
+
+

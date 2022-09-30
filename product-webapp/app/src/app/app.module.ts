@@ -79,6 +79,8 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
 //import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-advisor-update.component';
 
+import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
+import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +111,9 @@ import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-adv
     PurchaseInsuranceComponent,
     EditInsuranceComponent,
     InsuranceProviderComponent,
-    PolicyAdvisorUpdateComponent
+    PolicyAdvisorUpdateComponent,
+    RegisteredPoliciesComponent,
+    RegisteredPolicyBuyersComponent
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [

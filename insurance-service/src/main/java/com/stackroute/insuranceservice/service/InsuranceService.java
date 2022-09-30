@@ -15,11 +15,14 @@ public interface InsuranceService {
 
     Iterable<Insurance> findAllInsurance();
 
+    Iterable<Insurance> findAllPolicyByEmail(String userEmail) throws PolicyNotFoundException;
+
     Optional<Insurance> getPolicyByPolicyId(String policyId) throws PolicyNotFoundException;
 
     boolean deletePolicyByPolicyId(String policyId) throws PolicyNotFoundException;
 
     Optional<Insurance> findPolicyByPolicyName(String policyName);
+
 
 
     Insurance editInsurance(@RequestBody Insurance insurance);

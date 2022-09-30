@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PolicyDetails {
 
-    long premiums;
-    long durations;
+    int premiums;
+    int durations;
     long sumInsure;
     int adults1;
     int adults2;
