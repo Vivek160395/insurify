@@ -11,7 +11,13 @@ describe('PolicyAdvisorComponent', () => {
       declarations: [ PolicyAdvisorComponent ]
     })
     .compileComponents();
+<<<<<<< HEAD
 
+=======
+  });
+
+  beforeEach(() => {
+>>>>>>> 0c9a20832b700c04158dea28c3deb71ad5a06f3c
     fixture = TestBed.createComponent(PolicyAdvisorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

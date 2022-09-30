@@ -21,7 +21,16 @@ import { EditInsuranceComponent } from './edit-insurance/edit-insurance.componen
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
 import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
+<<<<<<< HEAD
 import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
+=======
+<<<<<<< HEAD
+import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-advisor-update.component';
+=======
+import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
+>>>>>>> 3ee6eb3feae06b4e69168c439a0174e8bde8c730
+
+>>>>>>> 0c9a20832b700c04158dea28c3deb71ad5a06f3c
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
@@ -60,11 +69,20 @@ const routes: Routes = [
       { path: "claim", component: ClaimComponent },
       { path: "InsuranceDetails", component: InsuranceDetailsComponent },
       { path: "edit-insurance", component: EditInsuranceComponent },
+<<<<<<< HEAD
       { path: "policy-advisor", component: PolicyAdvisorComponent},]
+=======
+<<<<<<< HEAD
+    {path: "policy-advisor-update", component: PolicyAdvisorUpdateComponent}]
+=======
+      { path: "policy-advisor", component: PolicyAdvisorComponent},]
+>>>>>>> 3ee6eb3feae06b4e69168c439a0174e8bde8c730
+>>>>>>> 0c9a20832b700c04158dea28c3deb71ad5a06f3c
   },
   { path: "edit-insurance", component: EditInsuranceComponent },
   { path: "login", component: LoginComponent },
   {path:'registeredPolicies', component: RegisteredPoliciesComponent},
+
 
 ];
 
