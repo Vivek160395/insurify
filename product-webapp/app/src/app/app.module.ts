@@ -76,8 +76,16 @@ import { ZoomonhoverDirective } from './zoomonhover.directive';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
+<<<<<<< HEAD
+import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
+=======
+//import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
+import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-advisor-update.component';
+
+>>>>>>> 0c9a20832b700c04158dea28c3deb71ad5a06f3c
 import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
 import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
+import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +109,6 @@ import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/regi
     DetailsComponent,
     RenewalPolicyHomeComponent,
     InsuranceDetailsComponent,
-    // LoginComponent,
     MoreComponent,
     DetailsComponent,
     ChatComponent,
@@ -109,12 +116,17 @@ import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/regi
     PurchaseInsuranceComponent,
     EditInsuranceComponent,
     InsuranceProviderComponent,
+<<<<<<< HEAD
+    PolicyAdvisorComponent,
+=======
+    PolicyAdvisorUpdateComponent,
+>>>>>>> 0c9a20832b700c04158dea28c3deb71ad5a06f3c
     RegisteredPoliciesComponent,
-    RegisteredPolicyBuyersComponent
+    RegisteredPolicyBuyersComponent,
+    PolicyAdvisorComponent
   ],
   entryComponents: [PreviewMarkupComponent],
-  imports: [
-    IvyCarouselModule,
+    // IvyCarouselModule,
     BrowserModule,
     FlexLayoutModule,
     AppRoutingModule,
@@ -170,8 +182,7 @@ import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/regi
     MatCardModule,
     MatSidenavModule,
     MarkdownModule.forRoot(),
-    Ng2SearchPipeModule
-  ],
+    Ng2SearchPipeModule,
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]
