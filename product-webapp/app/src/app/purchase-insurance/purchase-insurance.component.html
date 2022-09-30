@@ -1,3 +1,9 @@
+<p>{{strmsg}}</p>
+<!-- <button mat-raised-button (click)="age_display()">get</button> -->
+<!-- <p>asdasd</p> -->
+<button mat-raised-button (click)="fill_form()">Health</button>
+<button mat-raised-button (click)="fill_form()">Auto</button>
+<button mat-raised-button (click)="fill_form()">Health</button>
 <mat-stepper linear #stepper>
     <mat-step>
         <ng-template matStepLabel>Enter details</ng-template>
@@ -17,9 +23,9 @@
                                                     <mat-label>No of Adults</mat-label>
                                                     <mat-select placeholder="No of Adults" formControlName="adultno"
                                                         [(ngModel)]="adultValue" (selectionChange)="function_for_dob_list(adultValue)" >
-                                                        <mat-option value="{{i}}"
+                                                        <mat-option value="{{i+1}}"
                                                             *ngFor="let x of [].constructor(5);let i =index ">
-                                                            {{i}}
+                                                            {{i+1}}
                                                         </mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
@@ -311,7 +317,7 @@
 
                     <mat-form-field appearance="outline" fxFlex="33%">
                         <mat-label>Nominee DOB</mat-label>
-                        <input matInput min="minDate" max="maxDate" placeholder="Nominee Date Of Birth" type="date" formControlName="nomineeDOB"
+                        <input matInput  placeholder="Nominee Date Of Birth" type="date" formControlName="nomineeDOB"
                             required>
                             
                         <!-- <input type="date" formControlname="nomineeDOB"> -->
@@ -550,7 +556,7 @@
             </div>
         </form>
     </mat-step>
-    <mat-step *ngIf="!(isAuto||isHealth)">
+    <mat-step *ngIf="!(isAuto||isHealth||isLife)">
         <ng-template matStepLabel>Done</ng-template>
         <p>You are now done.</p>
         <div>

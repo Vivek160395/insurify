@@ -146,8 +146,12 @@ public class PurchaseInsuranceController {
 public ResponseEntity<?> returnInsurancePolicyOptionsForRenew(@RequestBody Insurance insurance,@PathVariable String customerPolicyId){
     return new ResponseEntity<>(purchaseService.returnInsuranceForRenewal(insurance,customerPolicyId),HttpStatus.OK);
 }
+//    checkRenewalStatus
+@GetMapping("/getstatus/{customerPolicyId}")
+public ResponseEntity<?> returnRenewalStatus(@PathVariable String customerPolicyId,@RequestBody Insurance insurance) throws ParseException, PolicyIdNotFoundException {
 
-
+    return new ResponseEntity<>(purchaseService.checkRenewalStatus(customerPolicyId,insurance),HttpStatus.OK);
+}
     @GetMapping("/returnobj")
     public ResponseEntity<?> returnobj(){
         Insurance result=new Insurance();

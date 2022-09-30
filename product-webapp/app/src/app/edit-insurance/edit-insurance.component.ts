@@ -187,22 +187,7 @@ export class EditInsuranceComponent implements OnInit {
   insuranceobj: any
 
   ngOnInit(): void {
-    this.http.get('http://localhost:8010/api/vk1/policy-id/800233').subscribe((data:any)=>{
-      this.insuranceobj=data
-     
-     console.log(this.insuranceobj);
-    //  const formData=new FormData;
-     // formData.append("insurance","ins");
-      // formData.append("customerPolicyId","123123")
-      this.http.put<Insurance>('http://localhost:8084/api/testing/123123',data).subscribe((data:any)=>
-      {
-        console.log(data);
-        console.log("inside success");
-      },
-      (error:any)=>{console.log(error);
-      }
-      )
-    })
+    
     this.http.get('http://localhost:8010/api/vk1/policy-id/123456').subscribe((data: any) => {
       this.insuranceobj = data
 
@@ -266,6 +251,7 @@ export class EditInsuranceComponent implements OnInit {
     this.insuranceForms.get('policyId')!.disable()
     this.insuranceForms.get('policyName')!.disable()
     this.insuranceForms.get('insuranceType')!.disable()
+    this.insuranceForms.get('category')!.disable()
     console.log(this.insuranceForms.value);
     this.init_flag = true
   }
@@ -626,6 +612,78 @@ modifyform(){
     return (this.insuranceForms.get('addOnDetails') as FormArray).controls;
   }
   //=========================================================================================================
-  
+  check_validity()
+  {
+    const obj=this.insuranceForms
+    let validity1=obj.get('policyDescription')?.valid
+    let validity2=this.check_validity2()
+    let validity3=obj.get('policyDocuments')?.valid&&obj.get('userEmail')?.valid
+   
+    if(obj.get('insuranceType')?.value==='AutoMobileInsurance')
+    {
+     let validity4=obj.get('modelsAllowed')?.valid&&obj.get('category')?.valid
+     return !(validity1&&validity2&&validity3&&validity4)
+    }
+    return !(validity1&&validity2&&validity3)
+  }
+  check_validity1(){
+    const obj=this.insuranceForms
+    let validity1=obj.get('policyDescription')?.valid
+    return validity1
+  }
+  check_validity2(){
+    const obj=this.insuranceForms
+    let x=<FormArray>obj.get('policyDetails')
+    let flag1=false,flag2=false,flag3=false
+    console.log("length of policy Details"+x.length);
+    
+    for(let i=0;i<x.length;i++)
+    {
+      if(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&(obj.get('insuranceType')!.value=='AutoMobileInsurance'))
+      {  
+        flag1=true
+        break
+      }
+      if(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid)
+      {
+        
+        flag1=true
+        break
+      }
+      if(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid)
+      {
+     
+        flag1=true
+        break
+      }
+    }
+    x=<FormArray>obj.get('policyBenefits')
+    for(let j=0;j<x.length;j++)
+    {
+      if(x.at(j).valid)
+      {
+       flag2=true
+       break
+     }
+    }
+    x=<FormArray>obj.get('addOnDetails')
+    for(let k=0;k<x.length;k++)
+    {
+      if(x.at(k).valid)
+      {
+       flag3=true
+       break
+     }
+    }
+    return flag1&&flag2&&flag3
+    console.log(flag1 +''+flag2+''+flag3);
+    
+     
+  }
+  check_validity3(){
+    const obj=this.insuranceForms
+    let validity3=obj.get('policyDocuments')?.valid&&obj.get('userEmail')?.valid
+    return validity3
+  }
 
 }

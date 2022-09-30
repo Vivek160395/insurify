@@ -45,7 +45,7 @@ const routes: Routes = [
       { path: "", component: RecommendationComponent },
       { path: "insurance-provider", component: InsuranceProviderComponent },
       { path: "register", component: RegisterComponent },
-      { path: "add-policy", component: AddInsurancePolicyComponent },
+      { path: "add", component: AddInsurancePolicyComponent },
       { path: "policies", component: PoliciesComponent },
       { path: "renewal-update", component: RenewalPolicyComponent },
       { path: "renewal-home", component: RenewalPolicyHomeComponent },
