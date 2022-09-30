@@ -28,4 +28,5 @@ export class RecommendationServiceService {
   }
   policyNo: any;
   userEmail: any = "gritvik97@gmail.com";
+  userType = "Insurer"
 }

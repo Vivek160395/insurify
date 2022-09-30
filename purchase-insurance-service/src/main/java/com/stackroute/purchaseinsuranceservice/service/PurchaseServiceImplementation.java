@@ -43,11 +43,6 @@ public class PurchaseServiceImplementation implements PurchaseService {
             CustomerInsurance ci = new CustomerInsurance();
             ci.setCustomerPolicyId(customerInsurancePurchase.getCustomerPolicyId());
             ci.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
-
-
-
-//            ci.setPolicyType(customerInsurancePurchase.getPolicyType());
-
             ci.setEmail(customerInsurancePurchase.getEmail());
             ci.setSumInsured(customerInsurancePurchase.getSumInsured());
             ci.getStartDate().add(customerInsurancePurchase.getStartDate());
@@ -74,11 +69,6 @@ public class PurchaseServiceImplementation implements PurchaseService {
             purchaseDTO.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
             purchaseDTO.setEmail(customerInsurancePurchase.getEmail());
             purchaseDTO.setName(customerInsurancePurchase.getName());
-
-
-
-//            purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
-
             purchaseDTO.setSumInsured(customerInsurancePurchase.getSumInsured());
             purchaseDTO.setPurchaseDate(customerInsurancePurchase.getPurchaseDate());
             purchaseDTO.setStartDate(customerInsurancePurchase.getStartDate());
@@ -95,6 +85,19 @@ public class PurchaseServiceImplementation implements PurchaseService {
     public Iterable<CustomerInsurance> getCustomerInsurances() {
         System.out.println(purchaseRepository.findAll());
         return purchaseRepository.findAll();
+    }
+
+    @Override
+    public Iterable<CustomerInsurance> getCustomerInsurancesByInusranceId(String insuranceId) throws NoInsuranceFoundException {
+        Iterable<CustomerInsurance> customerInsurances;
+
+        customerInsurances = purchaseRepository.getCustomerInsuranceByInsurancePolicyId(insuranceId);
+
+        if (customerInsurances == null) {
+            throw new NoInsuranceFoundException();
+        }
+        System.out.println(customerInsurances);
+        return customerInsurances;
     }
 
     @Override
@@ -199,11 +202,6 @@ public class PurchaseServiceImplementation implements PurchaseService {
 
         renewDTO.setCustomerPolicyId(customerInsurance.getCustomerPolicyId());
         renewDTO.setInsurancePolicyId(customerInsurance.getInsurancePolicyId());
-
-
-
-//       renewDTO.setPolicyType(customerInsurance.getPolicyType());
-
         renewDTO.setEmail(customerInsurance.getEmail());
         renewDTO.setSumInsured(customerInsurance.getSumInsured());
         renewDTO.setStartDate(startDay);

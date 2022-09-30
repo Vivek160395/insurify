@@ -77,7 +77,8 @@ import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insura
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
-import { PolicyAdvisorDetailsComponent } from './policy-advisor-details/policy-advisor-details.component';
+import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
+import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
 
 @NgModule({
   declarations: [
@@ -110,11 +111,11 @@ import { PolicyAdvisorDetailsComponent } from './policy-advisor-details/policy-a
     EditInsuranceComponent,
     InsuranceProviderComponent,
     PolicyAdvisorComponent,
-    PolicyAdvisorDetailsComponent
+    RegisteredPoliciesComponent,
+    RegisteredPolicyBuyersComponent
   ],
   entryComponents: [PreviewMarkupComponent],
-  imports: [
-    IvyCarouselModule,
+    // IvyCarouselModule,
     BrowserModule,
     FlexLayoutModule,
     AppRoutingModule,
@@ -170,8 +171,7 @@ import { PolicyAdvisorDetailsComponent } from './policy-advisor-details/policy-a
     MatCardModule,
     MatSidenavModule,
     MarkdownModule.forRoot(),
-    Ng2SearchPipeModule
-  ],
+    Ng2SearchPipeModule,
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]

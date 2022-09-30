@@ -114,14 +114,22 @@ public class InsuranceController {
     @DeleteMapping("/policy/delete/{policyId}")
     public ResponseEntity<?> deletePolicyByPolicyId(@PathVariable String policyId)
             throws PolicyNotFoundException {
-        insuranceService.deletePolicyByPolicyId(policyId);
-        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
+        if (insuranceService.deletePolicyByPolicyId(policyId)) {
+            return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Not Deleted", HttpStatus.OK);
+        }
     }
 
     @GetMapping("/policy-name/{policyName}")
     public ResponseEntity<?> getPolicyByPolicyName(@PathVariable String policyName) {
         insuranceService.findPolicyByPolicyName(policyName);
         return new ResponseEntity<>(insuranceService.findPolicyByPolicyName(policyName), HttpStatus.OK);
+    }
+
+    @GetMapping("/policies/{email}")
+    public ResponseEntity<?> getPoliciesByEmail(@PathVariable String email) throws PolicyNotFoundException {
+        return new ResponseEntity<>(insuranceService.findAllPolicyByEmail(email), HttpStatus.OK);
     }
 
     // compress the image bytes before storing it in the database
@@ -161,7 +169,6 @@ public class InsuranceController {
         }
         return outputStream.toByteArray();
     }
-
 
     @PutMapping("/update")
     public ResponseEntity<?> updateInsurance(@RequestBody Insurance insurance) {
