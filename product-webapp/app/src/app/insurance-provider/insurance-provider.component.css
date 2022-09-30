@@ -12,11 +12,13 @@ button {
     outline: none;
 }
 
-table {
-    width: 100%;
-}
 
-#table1 {
+/* table {
+    width: 100%;
+} */
+
+
+/* #table1 {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
@@ -25,7 +27,7 @@ table {
     border-radius: 20px;
     overflow: hidden !important;
     margin: auto;
-}
+} */
 
 #insurance1 {
     margin: 30px 30px 0 30px;
@@ -38,6 +40,15 @@ hr {
     background-color: blue;
     border-radius: 3.2px;
     margin: 0 30px;
+}
+
+
+/* table {
+    width: 50%;
+} */
+
+table {
+    width: 100%;
 }
 
 #insurance2 {
@@ -97,19 +108,21 @@ hr {
     width: 100%;
 }
 
-th {
+
+/* th {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
     background-color: aliceblue;
     color: black;
     border-top: none;
     text-align: center;
+} */
+
+tr {
     width: 100%;
 }
 
-
-/* :host ::ng-deep.mat-paginator .mat-paginator-container {
-    justify-content: flex-start;
-    padding: 0;
-    font-stretch: 0;
-} */
+#tabledata {
+    border-radius: 20px;
+    overflow: hidden !important;
+}
