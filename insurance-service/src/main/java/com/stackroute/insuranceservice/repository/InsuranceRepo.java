@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface InsuranceRepo extends ElasticsearchRepository<Insurance,String> {
     Optional<Insurance> findPolicyByPolicyName(String policyName);
+    Iterable<Insurance> findPolicyByUserEmail(String email);
 }
