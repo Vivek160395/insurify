@@ -4,7 +4,7 @@
         <div>
             <h1 style="text-align: center;font-size:70px;padding: 30px;color: blue;">Insurances</h1>
         </div>
-        <hr>
+        <!-- <hr> -->
         <div style="margin:20px 0">
             <div class="row">
                 <div class="col-5">
@@ -15,13 +15,13 @@
                 </div>
                 <div class="mat-elevation-z8 col-5" id="table1">
                     <table mat-table [dataSource]="dataSource">
-                        <ng-container matColumnDef="policyName">
+                        <ng-container matColumnDef="PolicyName">
                             <th mat-header-cell *matHeaderCellDef> Policy Name </th>
-                            <td mat-cell *matCellDef="let element"> {{element.policyName}} </td>
+                            <td mat-cell *matCellDef="let element"> {{element.PolicyName}} </td>
                         </ng-container>
-                        <ng-container matColumnDef="policyId">
+                        <ng-container matColumnDef="Bought">
                             <th mat-header-cell *matHeaderCellDef> No Of Users Bought </th>
-                            <td mat-cell *matCellDef="let element"> {{element.policyId}} </td>
+                            <td mat-cell *matCellDef="let element"> {{element.Bought}} </td>
                         </ng-container>
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
