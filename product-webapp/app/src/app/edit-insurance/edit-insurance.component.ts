@@ -79,7 +79,7 @@ export class EditInsuranceComponent implements OnInit {
       ],
     },
     {
-      name: 'KTM',
+      name: 'KTM' ,
       bikeList: [
         { value: 'KTM 390 Duke', viewValue: 'KTM 390 Duke' },
         { value: 'KTM 125 Duke', viewValue: 'KTM 125 Duke' },
