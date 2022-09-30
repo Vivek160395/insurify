@@ -28,6 +28,19 @@ public class AppConfig {
                 .route(p -> p
                         .path("/Recommendation/**")
                         .uri("http://localhost:9999/"))
+                .route(p -> p
+                        .path("/pg/**")
+                        .uri("http://localhost:8025/"))
+                .route(p -> p
+                        .path("/v1/notification/**")
+                        .uri("http://localhost:8040/"))
+                .route(p -> p
+                        .path("/api/**")
+                        .uri("http://localhost:9090/"))
+                .route(p -> p
+                        .path("/api/v1/**")
+                        .uri("http://localhost:8087/"))
+
                 .build();
     }
     @Bean

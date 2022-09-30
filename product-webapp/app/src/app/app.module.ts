@@ -77,6 +77,7 @@ import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insura
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -166,7 +167,8 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
     MatCardModule,
     MatSidenavModule,
     MarkdownModule.forRoot(),
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent],

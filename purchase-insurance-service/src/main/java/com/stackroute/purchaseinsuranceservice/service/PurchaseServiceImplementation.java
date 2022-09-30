@@ -43,21 +43,17 @@ public class PurchaseServiceImplementation implements PurchaseService {
             CustomerInsurance ci = new CustomerInsurance();
             ci.setCustomerPolicyId(customerInsurancePurchase.getCustomerPolicyId());
             ci.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
-<<<<<<< HEAD
 
-=======
->>>>>>> 233295c2918cbd6791b664f0e658131992c4a056
 
 
 
 //            ci.setPolicyType(customerInsurancePurchase.getPolicyType());
 
-<<<<<<< HEAD
+
 
             // ci.setPolicyType(customerInsurancePurchase.getPolicyType());
 
-=======
->>>>>>> 233295c2918cbd6791b664f0e658131992c4a056
+
             ci.setEmail(customerInsurancePurchase.getEmail());
             ci.setSumInsured(customerInsurancePurchase.getSumInsured());
             ci.getStartDate().add(customerInsurancePurchase.getStartDate());
@@ -84,21 +80,16 @@ public class PurchaseServiceImplementation implements PurchaseService {
             purchaseDTO.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
             purchaseDTO.setEmail(customerInsurancePurchase.getEmail());
             purchaseDTO.setName(customerInsurancePurchase.getName());
-<<<<<<< HEAD
 
-=======
->>>>>>> 233295c2918cbd6791b664f0e658131992c4a056
 
 
 
 //            purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
 
-<<<<<<< HEAD
+
 
             // purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
 
-=======
->>>>>>> 233295c2918cbd6791b664f0e658131992c4a056
             purchaseDTO.setSumInsured(customerInsurancePurchase.getSumInsured());
             purchaseDTO.setPurchaseDate(customerInsurancePurchase.getPurchaseDate());
             purchaseDTO.setStartDate(customerInsurancePurchase.getStartDate());
@@ -219,20 +210,13 @@ public class PurchaseServiceImplementation implements PurchaseService {
 
         renewDTO.setCustomerPolicyId(customerInsurance.getCustomerPolicyId());
         renewDTO.setInsurancePolicyId(customerInsurance.getInsurancePolicyId());
-<<<<<<< HEAD
 
-=======
->>>>>>> 233295c2918cbd6791b664f0e658131992c4a056
 
 
 
 //       renewDTO.setPolicyType(customerInsurance.getPolicyType());
 
-<<<<<<< HEAD
-        // renewDTO.setPolicyType(customerInsurance.getPolicyType());
 
-=======
->>>>>>> 233295c2918cbd6791b664f0e658131992c4a056
         renewDTO.setEmail(customerInsurance.getEmail());
         renewDTO.setSumInsured(customerInsurance.getSumInsured());
         renewDTO.setStartDate(startDay);
