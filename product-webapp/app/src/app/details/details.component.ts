@@ -29,6 +29,7 @@ import  jsPDF from 'jspdf';
 export class DetailsComponent implements OnInit {
   insuranceType: string | null;
   policyId:any;
+  policyName:any;
   policies:any;
   healthInsuredInfo:any;
   claims:any;
@@ -45,7 +46,7 @@ export class DetailsComponent implements OnInit {
   constructor(private http:HttpClient, private datePipe: DatePipe) {
      this.insuranceType= localStorage.getItem('insuranceType');
      this.policyId= localStorage.getItem('customerPolicyId');
-
+     this.policyName= localStorage.getItem('policyName');
      this.currentDate = this.datePipe.transform(this.sysDate, 'yyyy-MM-dd');
      this.sampleFinlDate = this.datePipe.transform('Wed Aug 22 2022 23:11:06 GMT+0530 (India Standard Time)','yyyy-MM-dd');
      console.log(this.sampleFinlDate);

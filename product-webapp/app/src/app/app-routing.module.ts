@@ -19,6 +19,13 @@ import { ChatComponent } from './chat/chat.component';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
+import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
+import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
+<<<<<<< HEAD
+import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-advisor-update.component';
+=======
+import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
+>>>>>>> 3ee6eb3feae06b4e69168c439a0174e8bde8c730
 
 const routes: Routes = [
   {
@@ -28,7 +35,8 @@ const routes: Routes = [
       { path: "register", component: RegisterComponent },
       { path: "add-policy", component: AddInsurancePolicyComponent },
       { path: "policies", component: PoliciesComponent },
-      { path: "renewal-update", component: RenewalPolicyComponent },
+      { path: "renewal", component: RenewalPolicyComponent },
+      { path: "renewal-update/:id", component: RenewalPolicyComponent },
       { path: "renewal-home", component: RenewalPolicyHomeComponent },
       { path: "details", component: DetailsComponent },
       { path: "update", component: UpdateComponent },
@@ -39,9 +47,18 @@ const routes: Routes = [
       { path: "policyDetails", component: InsuranceDetailsComponent },
       { path: "claim", component: ClaimComponent },
       { path: "InsuranceDetails", component: InsuranceDetailsComponent },
-      { path: "edit-insurance", component: EditInsuranceComponent },]
+      { path: "edit-insurance", component: EditInsuranceComponent },
+<<<<<<< HEAD
+    {path: "policy-advisor-update", component: PolicyAdvisorUpdateComponent}]
+=======
+      { path: "policy-advisor", component: PolicyAdvisorComponent},]
+>>>>>>> 3ee6eb3feae06b4e69168c439a0174e8bde8c730
   },
-  { path: "login", component: LoginComponent }
+  { path: "edit-insurance", component: EditInsuranceComponent },
+  { path: "login", component: LoginComponent },
+  {path:'registeredPolicies', component: RegisteredPoliciesComponent},
+  {path:'policyBuyers', component: RegisteredPolicyBuyersComponent}
+
 
 ];
 

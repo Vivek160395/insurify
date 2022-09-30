@@ -111,15 +111,15 @@ public class PolicyAdvisorController {
     }
 
 
-    //    @PutMapping("changePassword/{emailId}")
-//    public ResponseEntity<?> changePassword(@RequestBody PolicyAdvisor policyAdvisor, @PathVariable String emailId) throws PolicyAdvisorNotRegisteredException{
-//        try {
-//            return new ResponseEntity<>(policyAdvisorService.changePassword(policyAdvisor, emailId), HttpStatus.OK);
-//        } catch (PolicyAdvisorNotRegisteredException e) {
-//            e.getMessage();
-//            throw e;
-//        }
-//    }
+        @PutMapping("changePassword/{emailId}")
+    public ResponseEntity<?> changePassword(@RequestBody PolicyAdvisor policyAdvisor, @PathVariable String emailId) throws PolicyAdvisorNotRegisteredException{
+        try {
+            return new ResponseEntity<>(policyAdvisorService.changePassword(policyAdvisor, emailId), HttpStatus.OK);
+        } catch (PolicyAdvisorNotRegisteredException e) {
+            e.getMessage();
+            throw e;
+        }
+    }
 
 
 }

@@ -4,6 +4,7 @@ import com.stackroute.policyadvisorservice.exception.PolicyAdvisorAlreadyExists;
 import com.stackroute.policyadvisorservice.exception.PolicyAdvisorNotRegisteredException;
 import com.stackroute.policyadvisorservice.model.PolicyAdvisor;
 import com.stackroute.policyadvisorservice.model.Rating;
+import com.stackroute.policyadvisorservice.rabbitMq.domain.DTO;
 import com.stackroute.policyadvisorservice.repository.PolicyAdvisorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,12 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService{
     @Override
     public PolicyAdvisor registerPolicyAdvisor(PolicyAdvisor policyAdvisor) throws PolicyAdvisorAlreadyExists {
 
+        DTO dto = new DTO();
+
+        dto.setEmailId(dto.getEmailId());
+        dto.setPassword(dto.getPassword());
+        dto.setUserType(dto.getUserType());
+
         if (policyAdvisorRepository.findById(policyAdvisor.getEmailId()).isPresent()) {
             throw new PolicyAdvisorAlreadyExists();
         } else {
@@ -44,7 +51,16 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService{
 
     @Override
     public PolicyAdvisor changePassword(PolicyAdvisor policyAdvisor, String emailId) throws PolicyAdvisorNotRegisteredException {
-        return null;
+        DTO dto = new DTO();
+        dto.setPassword(dto.getPassword());
+
+        if (policyAdvisorRepository.findById(emailId).isPresent()) {
+            PolicyAdvisor policyAdvisor1 = policyAdvisorRepository.findById(emailId).get();
+            policyAdvisor1.setPassword(policyAdvisor1.getPassword());
+            return policyAdvisor1;
+        } else {
+            throw new PolicyAdvisorNotRegisteredException();
+        }
     }
 
 

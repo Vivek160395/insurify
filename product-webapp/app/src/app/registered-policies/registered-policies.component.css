@@ -1,0 +1,30 @@
+.example-card {
+    width: 360px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    background-color: rgb(245, 245, 245);
+    cursor: pointer;
+}
+
+.example-card:hover {
+    /* transform: ; */
+    border: 2px solid rgb(56, 52, 181);
+    transform: scale(1.1);
+    /* margin: 5px; */
+}
+
+div {
+    padding: 7px;
+}
+
+mat-card-subtitle {
+    color: rgb(77, 77, 78);
+    padding-left: 15px;
+    font-size: 19px;
+    font-weight: 410;
+}
+
+mat-icon {
+    padding-top: 3px;
+    margin-right: 7px;
+}

@@ -1,6 +1,6 @@
 <div class="background">
     <div fxLayout="row" class="cards">
-        <div fxFlex="35%" style="background-color: lightblue;" class="shadow">
+        <div fxFlex="35%" style="background-color: lightblue;" class="shadow js-hover">
             <p style="font-size: 30px;margin-top:30px" class="text-center">Welcome to insurify</p>
             <div style="margin-top:30px ;">
                 <p>Register and find some great insurance deals.</p>
@@ -16,21 +16,6 @@
         </div>
         <div fxFlex="35%" class="col bg-light shadow">
             <h3 class="text-center"> Sign Up</h3>
-            <form [formGroup]="registerForm" (ngSubmit)="registerSubmitted(registerForm)">
-
-                <div fxLayout="row" class="cards">
-                    <div fxFlex="35%" style="background-color: lightblue;" class="shadow">
-                        <h3 class="text-center">Welcome to insurify</h3>
-                        <p>Register and find some great insurance deals.</p>
-                        Our friendly customer support team is your extended family. Speak your heart out. They listen
-                        with undivided attention to resolve your concerns.
-                        Give us a call, request a callback or drop us an email, we are here to help.
-                        <img src="assets/img/sign_up.png" width="120" height="100" alt="Register">
-                    </div>
-
-                    <div fxFlex="35%" class="col bg-light shadow">
-                        <h3 class="text-center"> Sign Up</h3>
-
                         <form [formGroup]="registerForm" (ngSubmit)="registerSubmitted(registerForm)">
 
                             <div class="mb-3">
@@ -112,8 +97,6 @@
 
                         </form>
                     </div>
-                </div>
-
-            </form>
+               
         </div>
     </div>

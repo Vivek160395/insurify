@@ -53,6 +53,7 @@ export class PoliciesComponent {
         this.http.get("http://localhost:8010/api/vk1/policy-id/"+this.purchasedPolicies[i].insurancePolicyId).subscribe((x:any)=>{
             this.description.push(x.policyDescription);
             this.policyTitle.push(x.policyName)
+            // this.policyTitle.push(x.insuranceType);
         })
       }
       
@@ -131,8 +132,9 @@ export class PoliciesComponent {
   openDialog(policy: any, i:any) {
     console.log(policy);
     this.router.navigateByUrl('/details');
-    // localStorage.setItem('insuranceType',this.policyTitle[i]);
-    localStorage.setItem('insuranceType','Automobile Insurance');
+    localStorage.setItem('policyName',this.policyTitle[i]);
+    localStorage.setItem('insuranceType',this.insuranceTitle[i]);
+    // localStorage.setItem('insuranceType','Automobile Insurance');
     localStorage.setItem('customerPolicyId', policy.customerPolicyId)
     console.log(localStorage.getItem('insuranceType'));
     console.log(localStorage.getItem('customerPolicyId'));
