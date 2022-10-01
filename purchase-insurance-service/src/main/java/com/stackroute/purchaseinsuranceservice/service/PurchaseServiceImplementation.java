@@ -373,7 +373,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
          List<String> startDate=new ArrayList<>();
          List<String> endDate=new ArrayList<>();
 
-
+        System.out.println();
         if(purchaseRepository.findById(customerPolicyId).isPresent())
         {
             customerInsurance = purchaseRepository.findById(customerPolicyId).get();

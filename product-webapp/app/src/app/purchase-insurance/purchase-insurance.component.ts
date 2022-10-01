@@ -512,7 +512,7 @@ check_validity(){
     }
    console.log(control1);
          this.sortedsuminsured=[]   
-      this.httpclient.get('http://localhost:8010/api/vk1/policy-id/11223344').subscribe((data:any)=>{
+      this.httpclient.get('http://localhost:8010/api/vk1/policy-id/50505').subscribe((data:any)=>{
       console.log('Policy ID : '+data.policyId)
       console.log('Policy Name : '+data.policyName)
       

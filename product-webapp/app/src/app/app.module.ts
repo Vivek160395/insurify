@@ -118,7 +118,8 @@ import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.componen
     PolicyAdvisorComponent
   ],
   entryComponents: [PreviewMarkupComponent],
-    // IvyCarouselModule,
+  imports:[
+    IvyCarouselModule,
     BrowserModule,
     FlexLayoutModule,
     AppRoutingModule,
@@ -175,6 +176,7 @@ import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.componen
     MatSidenavModule,
     MarkdownModule.forRoot(),
     Ng2SearchPipeModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA]

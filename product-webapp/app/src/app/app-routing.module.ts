@@ -56,7 +56,7 @@ const routes: Routes = [
       { path: "register", component: RegisterComponent },
       { path: "add", component: AddInsurancePolicyComponent },
       { path: "policies", component: PoliciesComponent },
-      { path: "renewal-update/:id", component: RenewalPolicyComponent },
+      { path: "renewal-update", component: RenewalPolicyComponent },
       { path: "renewal-home", component: RenewalPolicyHomeComponent },
       { path: "details", component: DetailsComponent },
       { path: "update", component: UpdateComponent },
