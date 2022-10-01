@@ -332,6 +332,8 @@ public class PurchaseServiceImplementation implements PurchaseService {
         if (purchaseRepository.findById(customerPolicyId).isPresent()) {
             CustomerInsurance customerInsurance = purchaseRepository.findById(customerPolicyId).get();
             int index = customerInsurance.getClaimStatus().size() - 1;
+            System.out.println(index);
+            System.out.println(customerInsurance.getClaimSum().size());
             List<String> claimStatus = customerInsurance.getClaimStatus();
 
             List<String> decisionDate = customerInsurance.getDecisionDate();
