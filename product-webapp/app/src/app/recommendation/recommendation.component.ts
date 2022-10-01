@@ -3,7 +3,7 @@ import { C, E } from '@angular/cdk/keycodes';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RecommendationServiceService } from '../recommendation-service.service';
+import { RecommendationServiceService } from '../Services/recommendation-service.service';
 export interface Insurances {
   name: string;
 }

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Route, Router } from '@angular/router';
-import { RecommendationServiceService } from '../recommendation-service.service';
+import { RecommendationServiceService } from '../Services/recommendation-service.service';
 import { Chart, registerables } from 'chart.js'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';

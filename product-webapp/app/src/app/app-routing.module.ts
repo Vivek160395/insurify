@@ -19,6 +19,7 @@ import { ChatComponent } from './chat/chat.component';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
+// import { PersonGuard } from './guard/person.guard';
 
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
@@ -42,6 +43,7 @@ const routes: Routes = [
   // {path:"chat",component:ChatComponent},
   {
     path: "", component: NavBarComponent, children: [
+      // { path: "", component: RecommendationComponent, canActivate: [PersonGuard] },
       { path: "", component: RecommendationComponent },
       { path: "insurance-provider", component: InsuranceProviderComponent },
       { path: "register", component: RegisterComponent },
@@ -60,7 +62,7 @@ const routes: Routes = [
       { path: "InsuranceDetails", component: InsuranceDetailsComponent },
       { path: "edit-insurance", component: EditInsuranceComponent },]
   },
-  { path: "login", component: LoginComponent }
+  // { path: "login", component: LoginComponent }
 
 ];
 

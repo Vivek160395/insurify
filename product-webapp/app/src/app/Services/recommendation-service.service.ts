@@ -35,5 +35,6 @@ export class RecommendationServiceService {
   getCountOfUsersBoughtInsurance(id: any): Observable<any> {
     return this.http.get(`http://localhost:8084/api/get/count/${id}`);
   }
+  redirectUrl: any = '';
 }
 

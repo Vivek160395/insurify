@@ -4,7 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CalculatorComponent } from '../calculator/calculator.component';
-import { RecommendationServiceService } from '../recommendation-service.service';
+import { RecommendationServiceService } from '../Services/recommendation-service.service';
 export interface PeriodicElement1 {
   addOnName: string;
   addOnPremiums: number;
