@@ -483,7 +483,7 @@ check_validity(){
  
    openSnackBar(message: string) {
     
-    this.snackBar.open(message, 'Undo',{duration: 3000});
+    this.snackBar.open(message, 'Ok',{duration: 3000});
   }
   function_check_dob(){
     const control=this.userForm.get('adultno')
@@ -717,9 +717,12 @@ check_validity(){
         //Health Insurance Premium Calculation
       if(this.isHealth&&this.userForm.get('sumInsured')?.valid&&this.userForm.get('duration')?.valid&&kid_control?.valid&&adult_control?.valid)
       {
-         if(this.userForm.get('adultno')?.invalid||this.userForm.get('kidno')?.invalid||this.userForm.get('sumInsured')||this.userForm.get('duration')?.invalid)
+        console.log(1);
+         if(this.userForm.get('adultno')?.valid&&this.userForm.get('kidno')?.valid && this.userForm.get('sumInsured')&& this.userForm.get('duration')?.valid)
          {
-          const control=<FormArray>this.userForm.controls['date_list']
+          console.log(123);
+          
+          const control=<FormArray>this.userForm.get('date_list')
           for(let i=0;i < +this.userForm.get('adultno')?.value!;i++)
           {
            if(control.at(i).get('dob')?.invalid)
@@ -739,13 +742,16 @@ check_validity(){
             break
            }
           }
+          if(ins_obj_index==-1)
+          return false
+
           for(let i=0;i < +this.userForm.get('adultno')?.value!;i++)
           {
            if(control.at(i).get('dob')?.value<41)
            {
              if(ins_obj_index>-1)
              {
-                this.premium=this.premium+this.insuranceobj[i].adults1!    
+                this.premium=this.premium+this.insuranceobj[ins_obj_index].adults1!;    
              }
             continue
            } 
@@ -753,7 +759,7 @@ check_validity(){
            {
             if(ins_obj_index>-1)
             {
-              this.premium=this.premium+this.insuranceobj[i].adults2!     
+              this.premium=this.premium+this.insuranceobj[ins_obj_index].adults2!     
             }
              continue
            } 
@@ -761,12 +767,13 @@ check_validity(){
            {
             if(ins_obj_index>-1)
             {
-              this.premium=this.premium+this.insuranceobj[i].adults3!       
+              this.premium=this.premium+this.insuranceobj[ins_obj_index].adults3!       
             }
              continue
            } 
           }
           this.premium=this.premium+this.insuranceobj[ins_obj_index].kids!*this.kidValue+this.addonpremium
+          
           this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
           return true 
         }
@@ -775,8 +782,66 @@ check_validity(){
       //Life Insurance Premium Calculation
       if(this.isLife&&this.userForm.get('sumInsured')?.valid&&this.userForm.get('duration')?.valid&&this.userForm.get('annualIncome')?.valid)
       {
-        this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
-        return true
+        let arr:number[]=[]
+          let currentpremium=this.premium
+          const sum=+this.userForm.get('sumInsured')!.value!
+          const dur=+this.userForm.get('duration')!.value!
+          const sel_sal=+this.userForm.get('annualIncome')!.value!
+          const maxsal=+this.userForm.get('duration')!.value!
+         let ins_obj_index=-1
+        for(let index=0;index<this.insuranceobj.length;index++)
+        {
+         if(sum==this.insuranceobj[index].sumInsured && dur==this.insuranceobj[index].duration&&sel_sal>=this.insuranceobj[index].minsal!&&sel_sal<=this.insuranceobj[index].maxsal!)
+         {
+          ins_obj_index=index
+          arr.push(this.insuranceobj[index].premium!)
+         }
+        }
+        if(arr.length==0)
+        {
+          return false
+        }
+        if(arr.length==1)
+        {
+          this.premium=arr[0]
+          this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
+          return true
+        }
+        let k=-1
+       for( k=0;k<arr.length;k++)
+       {
+        if(arr[k]==currentpremium)
+        {
+          break;
+        }
+       }
+        if(k<arr.length)
+        {
+         this.premium=currentpremium
+         if(this.userForm.get('lifeillnessStatus')?.valid)
+         {
+           if((this.userForm.get('lifeillnessStatus')?.value)?.toString()=='Yes'){
+            this.premium=Math.floor(1.2*this.premium)}
+         }
+         const anscontrol=<FormArray>this.userForm.get('questionnaireAnswers')
+         if(anscontrol.valid)
+         {
+          let numcount=0
+          for(let kk=0;kk<anscontrol.length;kk++)
+          {
+            if(anscontrol.at(kk).value==true)
+            {
+             numcount++
+            }
+          }
+          if(numcount>2)
+          {
+            this.premium=Math.floor(1.2*this.premium)}
+          }
+         this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
+         return true
+        }
+       return false
       }
       //Auto Insurance Premium Calculation
       if(this.isAuto&&model_control?.valid&&policy_duration_control?.valid&&policy_sum_insured_control?.valid)
@@ -895,8 +960,7 @@ check_validity(){
               this.premiumarray=[]
            for(let i=0;i<this.insuranceobj.length;i++)
            {
-            console.log('Value of result'+ (this.insuranceobj[i].duration==selected_duration&&this.insuranceobj[i].sumInsured==sum_insured&&user_salary>this.insuranceobj[i].minsal!&&user_salary<this.insuranceobj[i].maxsal!));
-            
+            console.log('Value of result'+ (this.insuranceobj[i].duration==selected_duration&&this.insuranceobj[i].sumInsured==sum_insured&&user_salary>this.insuranceobj[i].minsal!&&user_salary<this.insuranceobj[i].maxsal!));          
             if(this.insuranceobj[i].duration==selected_duration&&this.insuranceobj[i].sumInsured==sum_insured&&user_salary>this.insuranceobj[i].minsal!&&user_salary<this.insuranceobj[i].maxsal!)
             {
               count++;
@@ -1305,4 +1369,128 @@ check_age_limit(i:any)
   control.at(+i).get('dob')?.reset()
   }
 }
+ strmsg=''
+
+age_display(){
+  let count=this.adultValue + this.kidValue
+   this.strmsg=''
+  //  let birthdate=this.userForm.get('nomineeDOB')!.value
+  //  this.strmsg=this.strmsg+birthdate
+  //  let timeDiff = Math.abs(Date.now() -  new Date(birthdate!.toString()).getTime());
+  //  let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
+  //  this.strmsg=this.strmsg+age+'-'
+  const control=<FormArray>this.userForm.get('insuredInfo')
+  for(let i=0;i<count;i++)
+  {
+    // if(control.valid){
+    // if(control.at(i).valid){
+    let birthdate=control.at(i).get('insuredDOB')!.value.toString()
+    //  birthdate=control.at(i).get('insuredDOB')!
+    let timeDiff = Math.abs(Date.now() -  new Date(birthdate).getTime());
+    let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
+    this.strmsg=this.strmsg+age+'-'
+  //   }
+  // }
+}
+this.strmsg=this.strmsg+'-'+count
+}
+getnumber()
+{
+  var text = 1;
+  var possible = "123456789";
+  let   randomlength=Math.floor(Math.random() * 2377 * possible.length)%10
+   randomlength++
+  for (var i = 0; i < randomlength; i++)
+    text =text+(i+1)* Math.floor(Math.random() * possible.length)%10
+
+  return text;
+}
+getword()
+{
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let   randomlength=Math.floor(Math.random() * possible.length)%10
+   randomlength++
+  for (var i = 0; i < randomlength; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
+getdob()
+{
+  var text = "";
+  let   randomlength=Math.floor(Math.random() * 15654833)
+   randomlength++
+
+   text=(randomlength%40 +1980).toString()+'-'
+   text=text+ (randomlength%3 + 10).toString()+'-'
+   text=text + (randomlength%20 + 10).toString()
+  // for (var i = 0; i < randomlength; i++)
+  //   text += possible.charAt(Math.floor(Math.random() * possible.length));
+  return text;
+}
+getdisease(){
+  var text = [];
+  let   randomlength=Math.floor(Math.random() * 15654833)%this.diseaselist.length
+   randomlength++
+
+  for (var i = 0; i < randomlength; i++)
+    text.push(this.diseaselist[i])
+  return text;
+}
+ fill_form()
+ {
+  const date=new Date()
+  this.userForm.get('name')?.patchValue(this.getword())
+  this.userForm.get('address')?.patchValue(this.getword())
+  this.userForm.get('city')?.patchValue(this.getword())
+  this.userForm.get('state')?.patchValue(this.getword())
+  this.userForm.get('pincode')?.patchValue(this.getnumber().toString())
+  this.userForm.get('mobile')?.patchValue(this.getnumber().toString())
+  this.userForm.get('nameOfNominee')?.patchValue(this.getword())
+  this.userForm.get('nomineeDOB')?.patchValue("1983-05-05")
+  this.userForm.get('relation')?.patchValue(this.relationlist[this.getnumber()%this.relationlist.length])
+  this.userForm.get('adultno')?.patchValue((this.getnumber()%5 +1).toString())
+  this.userForm.get('kidno')?.patchValue((this.getnumber()%5).toString())
+  this.function_for_dob_list(this.adultValue)
+  const control=<FormArray>this.userForm.get('date_list')
+  let num=0
+  for(let i=0;i<this.adultValue;i++)
+  {
+    console.log(this.getnumber());
+    
+    while(num>60 || num < 20)
+    {
+    num=this.getnumber()%40
+     
+    num=num + 52
+    console.log(num)
+    }
+
+   control.at(i).get('dob')?.patchValue(((num*this.getnumber())%40+21).toString())
+  }
+  this.userForm.get('sumInsured')?.patchValue(this.sortedsuminsured[this.getnumber()%this.sortedsuminsured.length].toString())
+  this.on_suminsured_select(this.selectedValue)
+  setTimeout(() => {  this.userForm.get('duration')?.patchValue(this.sortedduration[this.getnumber()%this.sortedduration.length].toString())
+  this.on_duration_select(this.selectedDuration); },2000);
+ 
+  setTimeout(() => {
+    const controlx=<FormArray>this.userForm.get('insuredInfo')
+   for(let x=0;x<(this.adultValue+this.kidValue);x++)
+   {
+    let opt=["Yes","No"]
+    let selection=this.getnumber()%2
+    controlx.at(x).get('nameof')?.patchValue(this.getword())
+    controlx.at(x).get('insuredDOB')?.patchValue(this.getdob())
+    controlx.at(x).get('relation')?.patchValue(this.relationlist[this.getnumber()%this.relationlist.length])
+    controlx.at(x).get('preExistingIllness')?.patchValue(opt[selection])
+    if(selection==0){
+    controlx.at(x).get('illnessList')?.patchValue(this.getdisease())
+    }
+    controlx.at(x).get('height')?.patchValue(((num*this.getnumber())%40+150).toString())
+    controlx.at(x).get('weight')?.patchValue(((num*this.getnumber())%40+50).toString())
+   }
+   },5000);
+   
+ }
 }

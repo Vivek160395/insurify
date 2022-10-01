@@ -31,36 +31,29 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
     this.myChart1 = new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: [
-          'Red',
-          'Blue',
-          'Yellow'
-        ],
+        labels: this.policynamesofInsurance,
         datasets: [{
           label: 'My First Dataset',
-          data: [300, 50, 100],
-          backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
-          ],
-          hoverOffset: 4
+          data: [10, 20, 30, 40, 50, 60],
+          backgroundColor: this.colors,
         }]
       }
     });
   }
   countData: any;
   policies: any = [];
-  countofusersBountInsurance: any = [];
-  policynamesofInsurance: any = [];
+  countofusersBountInsurance: any[] = [];
+  policynamesofInsurance: any[] = [];
   count = 0;
+  colors: any[] = [];
   page: number = 1;
   totalLength: any;
   getAllPolicies() {
+    // console.log(this.colors);
     this.service.getuserPolicies(this.service.userEmail).subscribe(data => {
       this.policies = data
+      // console.log(this.policies);
       for (var i = 0; i < data.length; i++) {
-
         this.policynamesofInsurance[this.count] = data[i].policyName;
         this.count += 1;
         this.service.getCountOfUsersBoughtInsurance(data[i].policyId).subscribe(da => {
@@ -72,11 +65,18 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
           // this.dataSource = this.ELEMENT_DATA;
           this.countofusersBountInsurance[this.count2] = da;
           this.count2 += 1;
-          console.log(this.countofusersBountInsurance);
+          // console.log(this.countofusersBountInsurance);
         })
       }
-      console.log(this.policynamesofInsurance);
+      // console.log(this.policynamesofInsurance);
       this.totalLength = this.policynamesofInsurance.length;
+      for (var i = 0; i < this.policynamesofInsurance.length; i++) {
+        var num = Math.floor(Math.random() * 256);
+        var num1 = Math.floor(Math.random() * 256);
+        var num2 = Math.floor(Math.random() * 256);
+        this.colors.push(`rgb(${num},${num2},${num1})`)
+        console.log(this.colors);
+      }
     })
 
   }

@@ -3,17 +3,22 @@
     <br>
     <h1 style="font-size: 60px; font-weight:450; padding-top: 10px; padding-left: 15px;">Policies added by Insurer </h1>
     <br>
+    <mat-form-field class="search" appearance="fill" style="width: 380px; margin-left: 650px; margin-bottom: 10px;">
+        <mat-label>Search</mat-label>
+        <input matInput type="text" placeholder="Enter Keyword you want to search" [(ngModel)]="searchedKeyword">
+    </mat-form-field>
+    <br>
 
     <div style="display: flex; flex-wrap: wrap; padding: 10px; margin: 10px; border: solid 2px rgb(48, 48, 132);"  >
-            <div *ngFor="let policy of registeredPolicies; let i=index;" >
+            <div *ngFor="let policy of registeredPolicies | filter:searchedKeyword; let i=index;" >
                 <mat-card class="example-card" (click)="openDialog(policy, i)">
-                    <mat-card-title> {{policy.insuranceType}}</mat-card-title>
+                    <mat-card-title> {{policy.policyName}} </mat-card-title>
                     <mat-divider></mat-divider>
                     <br>
                     <mat-card-subtitle>
                         <mat-icon matTooltip="Policy Number" matTooltipPosition="above"> insert_drive_file </mat-icon>   {{policy.policyId}} <br>
                         
-                        <mat-icon matTooltip="Policy Name" matTooltipPosition="above">subject</mat-icon> {{policy.policyName}} <br>
+                        <mat-icon matTooltip="Insurance Type" matTooltipPosition="above">subject</mat-icon> {{policy.insuranceType}} <br>
                         <!-- <mat-icon matTooltip="Start Date" matTooltipPosition="above">event_available</mat-icon> {{policy.purchaseDate[0]}} <br>  -->
                        
                         <!-- <mat-icon matTooltip="End Date" matTooltipPosition="above">event_busy</mat-icon> {{policy.endDate[0]}} <br> -->
