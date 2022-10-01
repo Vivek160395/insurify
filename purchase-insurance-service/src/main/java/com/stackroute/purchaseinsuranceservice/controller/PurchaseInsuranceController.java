@@ -50,7 +50,7 @@ public class PurchaseInsuranceController {
     public ResponseEntity<?> getPolicyByInsurancePolicyId(@PathVariable String insuranceId)
     {
         try{
-            return new ResponseEntity<>(purchaseService.getCustomerInsurancesByInusranceId(insuranceId),HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(purchaseService.getCustomerInsurancesByInsuranceId(insuranceId),HttpStatus.ACCEPTED);
         }
         catch ( NoInsuranceFoundException noInsuranceFoundException)
         {

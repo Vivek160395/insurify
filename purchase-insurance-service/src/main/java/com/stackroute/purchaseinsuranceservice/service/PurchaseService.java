@@ -22,7 +22,7 @@ public interface PurchaseService {
 
     public Iterable<CustomerInsurance> getCustomerInsurances();
 
-    public Iterable<CustomerInsurance> getCustomerInsurancesByInusranceId(String insuranceId) throws NoInsuranceFoundException;
+    public Iterable<CustomerInsurance> getCustomerInsurancesByInsuranceId(String insuranceId) throws NoInsuranceFoundException;
 
     public CustomerInsurance getPolicyDetailsByCustomerPolicyID(String customerPolicyId)
             throws PolicyIdNotFoundException;

@@ -88,7 +88,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
     }
 
     @Override
-    public Iterable<CustomerInsurance> getCustomerInsurancesByInusranceId(String insuranceId) throws NoInsuranceFoundException {
+    public Iterable<CustomerInsurance> getCustomerInsurancesByInsuranceId(String insuranceId) throws NoInsuranceFoundException {
         Iterable<CustomerInsurance> customerInsurances;
 
         customerInsurances = purchaseRepository.getCustomerInsuranceByInsurancePolicyId(insuranceId);
@@ -457,21 +457,21 @@ public class PurchaseServiceImplementation implements PurchaseService {
                   bmi =10000*usersInfo.get(k).getWeight()/(usersInfo.get(k).getHeight()*usersInfo.get(k).getHeight());
                   if(bmi<18.5f)
                   {
-                    bmiFactor=1.1f;
+                    bmiFactor=1.05f;
                   }
                   else if(bmi>24&&bmi<30f)
                   {
-                      bmiFactor=1.2f;
+                      bmiFactor=1.1f;
                   }
                   else{
-                      bmiFactor=1.3f;
+                      bmiFactor=1.2f;
                   }
                   if(usersInfo.get(k).getIllnessList()!=null){
                   if(usersInfo.get(k).getIllnessList().length<=2)
                   {
-                      diseaseFactor=1.2f;
+                      diseaseFactor=1.1f;
                   } else if (usersInfo.get(k).getIllnessList().length>=3) {
-                      diseaseFactor=1.5f;
+                      diseaseFactor=1.2f;
                   }
                   }
                     if(age[k]<20){

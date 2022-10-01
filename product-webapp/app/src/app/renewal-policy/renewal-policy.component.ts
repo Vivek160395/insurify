@@ -127,54 +127,7 @@ export class RenewalPolicyComponent implements OnInit {
       }
     }
 
-    // for(let i=0; i<this.setCheckBox.length; i++){
-    //   if(this.setCheckBox[i] == true && this.myModel == 0){
-    //     this.data.addOnName[0] = this.addOnName[0];
-    //     this.data.addOnName[1] = this.addOnName[1];
-    //     this.data.addOnName[2] = this.addOnName[2];
-    //     this.data.addOnName[3] = this.addOnName[3];
-    //       this.totalPremium = this.addOnPrice.reduce(function(a,b)
-    //       {
-    //         return a+b;
-    //       },4000)
-    //   }
-    //   else if(this.setCheckBox[i] == false && this.myModel == 0){
-    //     this.totalPremium = this.premium[0];
-    //   }
-    //   else if(this.setCheckBox[i] == true && this.myModel == 1){
-    //     this.data.addOnName[0] = this.addOnName[0];
-    //     this.data.addOnName[1] = this.addOnName[1];
-    //     this.data.addOnName[2] = this.addOnName[2];
-    //     this.data.addOnName[3] = this.addOnName[3];
-    //     this.totalPremium = this.addOnPrice.reduce(function(a,b)
-    //     {
-    //       return a+b;
-    //     },3000)
-    //   }
-    //   else if(this.setCheckBox[i] == false && this.myModel == 1){
-    //     this.totalPremium = this.premium[1];
-    //   }
-    //   else if(this.setCheckBox[i] == true && this.myModel == 2){
-    //     this.data.addOnName[0] = this.addOnName[0];
-    //     this.data.addOnName[1] = this.addOnName[1];
-    //     this.data.addOnName[2] = this.addOnName[2];
-    //     this.data.addOnName[3] = this.addOnName[3];
-    //     this.totalPremium = this.addOnPrice.reduce(function(a,b)
-    //     {
-    //       return a+b;
-    //     },1500)
-    //   }
-    //   else if(this.setCheckBox[i] == false && this.myModel == 2){
-    //     this.totalPremium = this.premium[2];
-    //   }
-    //   else if(this.setCheckBox[0] == true && this.myModel == 0){
-    //     this.data.addOnName[0] = this.addOnName[0];
-    //     console.log(this.addOnName[0])
-    //     this.totalPremium = this.addOnPrice[0] + this.premium[0];
-    //     console.log(this.addOnPrice[0]);
-    //   }
-    //     console.log(this.totalPremium);
-    // }
+    
     this.data.date = this.date;
 
     this.renewalService.updateData(this.data).subscribe(res => 

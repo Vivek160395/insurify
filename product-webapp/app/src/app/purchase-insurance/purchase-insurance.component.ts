@@ -742,38 +742,87 @@ check_validity(){
             break
            }
           }
-          if(ins_obj_index==-1)
-          return false
-
-          for(let i=0;i < +this.userForm.get('adultno')?.value!;i++)
+          if(ins_obj_index==-1){
+          return false}
+          
+          for(let i=0;i < (this.adultValue + this.kidValue);i++)
           {
+            let factor=1
+            const controly=<FormArray>this.userForm.get('insuredInfo')
+              if(controly.at(i).get('weight')?.valid &&controly.at(i).get('height')?.valid){
+                {
+                  const weight=controly.at(i).get('weight')?.value
+                  const height=controly.at(i).get('height')?.value
+                  let bmi=(weight)/(height*height)
+                  bmi=10000*bmi
+                 console.log('Bmi of user with name :'+ controly.at(i).get('nameof')?.value+'is'+bmi)
+                 if(bmi>24 ||bmi<18)
+                 {
+                  factor=factor*1.25
+                 } 
+                }               
+              }
+              if(controly.at(i).get('preExistingIllness')?.valid){
+               if(controly.at(i).value=='Yes')
+               {
+                factor=factor*1.25
+               }
+              }
            if(control.at(i).get('dob')?.value<41)
-           {
+           {             
              if(ins_obj_index>-1)
-             {
-                this.premium=this.premium+this.insuranceobj[ins_obj_index].adults1!;    
+             {            
+                this.premium=this.premium+ (factor * this.insuranceobj[ins_obj_index].adults1!);                   
              }
             continue
            } 
            if(control.at(i).get('dob')?.value<51)
            {
+            const controly=<FormArray>this.userForm.get('insuredInfo')
             if(ins_obj_index>-1)
             {
-              this.premium=this.premium+this.insuranceobj[ins_obj_index].adults2!     
+                this.premium=this.premium+ (factor * this.insuranceobj[ins_obj_index].adults2!);    
             }
              continue
            } 
            if(control.at(i).get('dob')?.value<61)
            {
+            const controly=<FormArray>this.userForm.get('insuredInfo')
             if(ins_obj_index>-1)
             {
-              this.premium=this.premium+this.insuranceobj[ins_obj_index].adults3!       
+              this.premium=this.premium+ (factor * this.insuranceobj[ins_obj_index].adults3!);        
             }
              continue
            } 
           }
-          this.premium=this.premium+this.insuranceobj[ins_obj_index].kids!*this.kidValue+this.addonpremium
-          
+          let kidfactor=1
+          for(let z=0;z<this.kidValue;z++)
+          {
+            const controly=<FormArray>this.userForm.get('insuredInfo')
+            if(controly.at(z).get('weight')?.valid &&controly.at(z).get('height')?.valid){
+              {
+                const weight=controly.at(z).get('weight')?.value
+                const height=controly.at(z).get('height')?.value
+                let bmi=(weight)/(height*height)
+                bmi=10000*bmi
+               console.log('Bmi of user with name :'+ controly.at(z).get('nameof')?.value+'is'+bmi)
+               if(bmi>24 ||bmi<18)
+               {
+                kidfactor=kidfactor+0.1
+               } 
+              }               
+            }
+            if(controly.at(z).get('preExistingIllness')?.valid){
+             if(controly.at(z).value=='Yes')
+             {
+              kidfactor=kidfactor+0.1
+             }
+            }
+          }
+          this.premium=this.premium+this.insuranceobj[ins_obj_index].kids!*this.kidValue * kidfactor+this.addonpremium
+          console.log('kidFactor : '+kidfactor );
+         console.log(this.insuranceobj[ins_obj_index]);
+          this.insuranceobj[ins_obj_index]
           this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
           return true 
         }
