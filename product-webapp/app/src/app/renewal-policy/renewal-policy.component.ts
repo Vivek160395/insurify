@@ -54,9 +54,6 @@ export class RenewalPolicyComponent implements OnInit {
       if(this.policyType == "AutoMobileInsurance"){
         this.policySubType = data.category;
       }
-      if(this.policyType == "HealthInsurance"){
-        
-      }
       for(let i=0;i<data.policyDetails.length;i++){
         this.premium.push(data.policyDetails[i].premiums);
         this.duration.push(data.policyDetails[i].durations);
