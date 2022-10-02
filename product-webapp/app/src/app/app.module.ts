@@ -76,6 +76,12 @@ import { ZoomonhoverDirective } from './zoomonhover.directive';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
+//import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
+import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-advisor-update.component';
+
+import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
+import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
+import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 
 
 @NgModule({
@@ -100,18 +106,21 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
     DetailsComponent,
     RenewalPolicyHomeComponent,
     InsuranceDetailsComponent,
-    // LoginComponent,
     MoreComponent,
     DetailsComponent,
     ChatComponent,
     ZoomonhoverDirective,
     PurchaseInsuranceComponent,
     EditInsuranceComponent,
-    InsuranceProviderComponent
+    InsuranceProviderComponent,
+    PolicyAdvisorUpdateComponent,
+    RegisteredPoliciesComponent,
+    RegisteredPolicyBuyersComponent,
+    PolicyAdvisorComponent
   ],
   entryComponents: [PreviewMarkupComponent],
-  imports: [
-    IvyCarouselModule,
+  imports:[
+   IvyCarouselModule,
     BrowserModule,
     FlexLayoutModule,
     AppRoutingModule,
@@ -168,7 +177,6 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
     MatSidenavModule,
     MarkdownModule.forRoot(),
     Ng2SearchPipeModule,
-  
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -19,6 +19,11 @@ public class UserServiceApplication {
 	public static void main(String[] args) {SpringApplication.run(UserServiceApplication.class, args);
 	}
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> c2ed7039a1a5c2884c8b05f9b8385e787799d334
 
   // @Bean
   // FilterRegistrationBean jwtFilter(){

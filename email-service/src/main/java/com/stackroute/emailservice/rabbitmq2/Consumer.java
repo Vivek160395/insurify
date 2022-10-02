@@ -1,9 +1,6 @@
 package com.stackroute.emailservice.rabbitmq2;
 
-import com.stackroute.emailservice.model.Claim;
-import com.stackroute.emailservice.model.Email;
-import com.stackroute.emailservice.model.Purchase;
-import com.stackroute.emailservice.model.Renew;
+import com.stackroute.emailservice.model.*;
 import com.stackroute.emailservice.service.EmailService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,9 +81,9 @@ public class Consumer {
         claim.setStatus(claimDTO.getStatus());
 
         email.setEmail(claimDTO.getEmail());
-        email.setSubject("Claimimg Insurance is Successfull");
+        email.setSubject("Claiming Insurance");
         email.setBody("Hi,"+" "+claim.getName()+"\n"+
-                "Thank you for Claiming Insurance from INSURIFY.\n"+
+                "Thank you for Claiming Insurance from INSURIFY. We will notify you when it is approved.\n"+
                 "Please check the details below : \n"+
                 "CustomerPolicyId  :\t"+claim.getCustomerPolicyId()+".\n"+
                 "InsurancePolicyId :\t"+claim.getInsurancePolicyId()+".\n"+
@@ -138,6 +135,34 @@ public class Consumer {
                 "Have a nice day");
 
         emailService.sendEmail(email);
+    }
+
+    @RabbitListener(queues = "decision_queue")
+    public void getDataAndSendDecisionEmail(DecisionDTO decisionDTO){
+        Decision decision = new Decision();
+        Email email = new Email();
+        decision.setCustomerPolicyId(decisionDTO.getCustomerPolicyId());
+        decision.setInsurancePolicyId(decisionDTO.getInsurancePolicyId());
+        decision.setEmail(decisionDTO.getEmail());
+        decision.setName(decisionDTO.getName());
+        decision.setClaimAmount(decisionDTO.getClaimAmount());
+        decision.setClaimDate(decisionDTO.getClaimDate());
+        decision.setStatus(decisionDTO.getStatus());
+
+        email.setEmail(decisionDTO.getEmail());
+        email.setSubject("Claiming Insurance is Successfull");
+        email.setBody("Hi,"+" "+decision.getName()+"\n"+
+                "Thank you for Claiming Insurance from INSURIFY.\n"+
+                "Please check the details below : \n"+
+                "CustomerPolicyId  :\t"+decision.getCustomerPolicyId()+".\n"+
+                "InsurancePolicyId :\t"+decision.getInsurancePolicyId()+".\n"+
+                "Claim Amount      :\t"+decision.getClaimAmount()+".\n"+
+                "Claim Date        :\t"+decision.getClaimDate()+".\n"+
+                "Status            :\t"+decision.getStatus()+".\n"+
+                "Have a nice day");
+
+        emailService.sendEmail(email);
+
     }
 
 
