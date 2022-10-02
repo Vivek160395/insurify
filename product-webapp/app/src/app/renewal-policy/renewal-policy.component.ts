@@ -38,8 +38,8 @@ export class RenewalPolicyComponent implements OnInit {
   ngOnInit(): void {
     // localStorage.getItem(customerPolicyId);
     this.myModel = 0
-    this.http.get('http://localhost:8010/api/vk1/policy-id/313259').subscribe((x: any) => {
-      this.http.put<Insurance>("http://localhost:8084/api/testing/30153117", x).subscribe((data: any) => {
+    this.http.get('http://localhost:8010/api/vk1/policy-id/50506').subscribe((x: any) => {
+      this.http.put<Insurance>('http://localhost:8084/api/testing/30153116', x).subscribe((data: any) => {
         // console.log("Inside retrived insurance success");
         // console.log(data.policyDescription);
         // console.log(data.policyDetails.length);
