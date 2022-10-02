@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RenewalService } from '../renewal.service';
+import { RenewalService } from '../Services/renewal.service';
 
 @Component({
   selector: 'app-renewal-policy-home',
@@ -14,7 +14,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
   insuranceType:string = "";
 
   ngOnInit():void {
-    this.getPolicyDetails()    
+    this.getPolicyDetails()
   }
 
   vehicle :any = {
@@ -38,7 +38,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
 
   getPolicyDetails(){
     this.renewalService.getPolicyDetails().subscribe(
-      res => 
+      res =>
       {
         this.insuranceType = res.insuranceType;
         this.category = res.category;

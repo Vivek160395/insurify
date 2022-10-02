@@ -115,7 +115,7 @@ export class PurchaseInsuranceComponent implements OnInit {
   "Have you ever consumed narcotics?",
   "Are you employed in the armed, para military or police forces?",
   "Is your occupation associated with any specific hazard or do you take part in activities or have hobbies that could be dangerous in any way?",
-  "Have you undergone any surgery or have been hospitalized for  treatment in the past?",
+  "Have you undergone any tests/investigations/surgery or have been hospitalized for observation or treatment in the past?",
 ];
 life_answers:boolean[]=[]
 dob!:string
@@ -155,7 +155,7 @@ userForm = new FormGroup({
   healthCondition           : new FormControl([], [Validators.required]), 
   customerPolicyId                : new FormControl("", [Validators.required]),
   insurancePolicyId               : new FormControl("", [Validators.required]),
-  email                           : new FormControl("", [Validators.required,Validators.email]),
+  email                           : new FormControl("", [Validators.required]),
   sumInsured                      : new FormControl("", [Validators.required]),
   startDate                       : new FormControl("",[Validators.required]),
   purchaseDate                    : new FormControl("",[Validators.required]),

@@ -3,8 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { RecommendationServiceService } from '../recommendation-service.service';
-import { Userservice1Service } from '../userservice1.service';
+import { RecommendationServiceService } from '../Services/recommendation-service.service';
+import { Userservice1Service } from '../Services/userservice1.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -12,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit  {
+export class NavBarComponent implements OnInit {
 
 
   // avatarUrl:any;
@@ -21,36 +21,36 @@ export class NavBarComponent implements OnInit  {
   motors: string[] = [
     'Bike Insurance',
     'Car Insurance',
-    ];
+  ];
   healths: string[] = [
-      'Health Insurance',
-      'Health Booster',
-      'Personal Protect',
-      ];
+    'Health Insurance',
+    'Health Booster',
+    'Personal Protect',
+  ];
 
-      renewals: string[] = [
-        'Car Policy',
-        'Bike Policy',
-        'Health Policy',
-        ];
+  renewals: string[] = [
+    'Car Policy',
+    'Bike Policy',
+    'Health Policy',
+  ];
 
-        claims: string[] = [
-          'Health Claims',
-          'Motor Claims'
-          ];
-          centered = false;
-          disabled = false;
-          unbounded = false;
+  claims: string[] = [
+    'Health Claims',
+    'Motor Claims'
+  ];
+  centered = false;
+  disabled = false;
+  unbounded = false;
 
-          radius!: number;
-          color!: string;
+  radius!: number;
+  color!: string;
   // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.XLarge)
   // .pipe(
   //   map(result => result.matches),
   //   shareReplay()
   // );
 
-  constructor(private breakpointObserver: BreakpointObserver,private router: Router,private service:Userservice1Service) { }
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private service: Userservice1Service) { }
   ngOnInit(): void {
     //  this.getAllUsers();
   }
