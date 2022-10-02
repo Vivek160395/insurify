@@ -6,7 +6,7 @@ import { Insurance } from '../insurance';
 import { MatDialog } from '@angular/material/dialog';
 
 import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
-import { RecommendationServiceService } from '../recommendation-service.service';
+import { RecommendationServiceService } from '../Services/recommendation-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
@@ -79,7 +79,7 @@ export class EditInsuranceComponent implements OnInit {
       ],
     },
     {
-      name: 'KTM' ,
+      name: 'KTM',
       bikeList: [
         { value: 'KTM 390 Duke', viewValue: 'KTM 390 Duke' },
         { value: 'KTM 125 Duke', viewValue: 'KTM 125 Duke' },
@@ -161,7 +161,7 @@ export class EditInsuranceComponent implements OnInit {
       kids: new FormControl("", [Validators.min(1), Validators.required]),
       minSalary: new FormControl("", [Validators.required, Validators.min(1)]),
       maxSalary: new FormControl("", [Validators.required, Validators.min(1)]),
-      
+
     })]),
     policyBenefits: new FormArray([
       new FormGroup({
@@ -187,7 +187,7 @@ export class EditInsuranceComponent implements OnInit {
   insuranceobj: any
 
   ngOnInit(): void {
-    
+
     this.http.get('http://localhost:8010/api/vk1/policy-id/123456').subscribe((data: any) => {
       this.insuranceobj = data
 
@@ -200,7 +200,7 @@ export class EditInsuranceComponent implements OnInit {
         category: this.insuranceobj.category,
         modelsAllowed: this.insuranceobj.modelsAllowed,
         policyDocuments: this.insuranceobj.policyDocuments,
-        userEmail:localStorage.getItem('email')
+        userEmail: localStorage.getItem('email')
       })
       const control1 = <FormArray>this.insuranceForms.get('policyBenefits')
 
@@ -240,8 +240,8 @@ export class EditInsuranceComponent implements OnInit {
           maxSalary: this.insuranceobj.policyDetails[i].maxSalary,
         })
         // console.log('No Error for ' + i);
-        if(i<(this.insuranceobj.policyDetails.length-1))
-        this.addDetailsE(i)
+        if (i < (this.insuranceobj.policyDetails.length - 1))
+          this.addDetailsE(i)
       }
 
       console.log(this.insuranceForms.value)
@@ -271,91 +271,80 @@ export class EditInsuranceComponent implements OnInit {
       });
     }
   }
-modifyform(){
-  const obj=this.insuranceForms
-  let control=<FormArray>this.insuranceForms.get('policyBenefits')
-  console.log("Inside method");
-  let arr=[]
-  
-  for(let i=0;i<control.length;i++)
-  {
-    if(control.at(i).invalid)
-    {
-      console.log("Removing method");
-      arr.push(i)
-    }   
-  }
-  let count1=0
-  for(let ij=0;ij<arr.length;ij++)
-  {
-    let z=arr[ij]-count1
-    control.removeAt(z);
-    count1++
-  }
+  modifyform() {
+    const obj = this.insuranceForms
+    let control = <FormArray>this.insuranceForms.get('policyBenefits')
+    console.log("Inside method");
+    let arr = []
 
-   let  control1=<FormArray>this.insuranceForms.get('addOnDetails')
-   let arr1=[]
-  for(let i=0;i<control1.length;i++)
-  {
-    if(control1.at(i).invalid)
-    {
-      arr1.push(i)
-    }  
- 
-  }
-  let count2=0
-  for(let ij=0;ij<arr.length;ij++)
-  {
-    let z=arr1[ij]-count2
-    control1.removeAt(z);
-    count2++
-  }
-  console.log("After removing add on details");
-  let x=<FormArray>this.insuranceForms.get('policyDetails')
-  let remove=[]
-  for(let i=0;i<x.length;i++)
-  {
-    console.log('Automobile INSURANCE:'+(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&(obj.get('insuranceType')!.value=='AutoMobileInsurance')));
-    console.log('Health INSURANCE:'+(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid));
-    console.log('Life INSURANCE:'+(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid));
-    if(!((x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&(obj.get('insuranceType')!.value=='AutoMobileInsurance'))
-    ||(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid)
-    ||(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid)))
-    {
- 
-      console.log(x.at(i).value);
-      
-      remove.push(i)
+    for (let i = 0; i < control.length; i++) {
+      if (control.at(i).invalid) {
+        console.log("Removing method");
+        arr.push(i)
+      }
     }
-    else{
-      console.log('Entering else');
+    let count1 = 0
+    for (let ij = 0; ij < arr.length; ij++) {
+      let z = arr[ij] - count1
+      control.removeAt(z);
+      count1++
+    }
 
-      for(let j=0;j<i;j++)
-      {
-        console.log('Durations :'+x.at(i).get('durations')!.value+","+x.at(j).get('durations')!.value);
-        console.log('sumInsure :'+x.at(i).get('sumInsure')!.value+","+x.at(j).get('sumInsure')!.value); 
-        if((x.at(i).get('durations')!.value == x.at(j).get('durations')!.value)&&(x.at(i).get('sumInsure')!.value == x.at(j).get('sumInsure')!.value))
-        {
-          console.log("I: "+i+"J: "+j)
-          if(remove.indexOf(i)==-1)
-          remove.push(i)
+    let control1 = <FormArray>this.insuranceForms.get('addOnDetails')
+    let arr1 = []
+    for (let i = 0; i < control1.length; i++) {
+      if (control1.at(i).invalid) {
+        arr1.push(i)
+      }
+
+    }
+    let count2 = 0
+    for (let ij = 0; ij < arr.length; ij++) {
+      let z = arr1[ij] - count2
+      control1.removeAt(z);
+      count2++
+    }
+    console.log("After removing add on details");
+    let x = <FormArray>this.insuranceForms.get('policyDetails')
+    let remove = []
+    for (let i = 0; i < x.length; i++) {
+      console.log('Automobile INSURANCE:' + (x.at(i).get('premiums')?.valid && x.at(i).get('durations')?.valid && x.at(i).get('sumInsure')?.valid && (obj.get('insuranceType')!.value == 'AutoMobileInsurance')));
+      console.log('Health INSURANCE:' + (x.at(i).get('adults1')?.valid && x.at(i).get('adults2')?.valid && x.at(i).get('adults3')?.valid && x.at(i).get('kids')?.valid && x.at(i).get('durations')?.valid && x.at(i).get('sumInsure')?.valid));
+      console.log('Life INSURANCE:' + (x.at(i).get('premiums')?.valid && x.at(i).get('durations')?.valid && x.at(i).get('sumInsure')?.valid && x.at(i).get('minSalary')?.valid && x.at(i).get('maxSalary')?.valid));
+      if (!((x.at(i).get('premiums')?.valid && x.at(i).get('durations')?.valid && x.at(i).get('sumInsure')?.valid && (obj.get('insuranceType')!.value == 'AutoMobileInsurance'))
+        || (x.at(i).get('adults1')?.valid && x.at(i).get('adults2')?.valid && x.at(i).get('adults3')?.valid && x.at(i).get('kids')?.valid && x.at(i).get('durations')?.valid && x.at(i).get('sumInsure')?.valid)
+        || (x.at(i).get('premiums')?.valid && x.at(i).get('durations')?.valid && x.at(i).get('sumInsure')?.valid && x.at(i).get('minSalary')?.valid && x.at(i).get('maxSalary')?.valid))) {
+
+        console.log(x.at(i).value);
+
+        remove.push(i)
+      }
+      else {
+        console.log('Entering else');
+
+        for (let j = 0; j < i; j++) {
+          console.log('Durations :' + x.at(i).get('durations')!.value + "," + x.at(j).get('durations')!.value);
+          console.log('sumInsure :' + x.at(i).get('sumInsure')!.value + "," + x.at(j).get('sumInsure')!.value);
+          if ((x.at(i).get('durations')!.value == x.at(j).get('durations')!.value) && (x.at(i).get('sumInsure')!.value == x.at(j).get('sumInsure')!.value)) {
+            console.log("I: " + i + "J: " + j)
+            if (remove.indexOf(i) == -1)
+              remove.push(i)
+          }
         }
-      } 
-    } 
-    
-    
+      }
+
+
+    }
+
+    console.log("After removing add on details");
+    let count = 0
+    console.log(remove);
+    for (let ij = 0; ij < remove.length; ij++) {
+      let z = remove[ij] - count
+      x.removeAt(z);
+      count++
+    }
   }
-  
-  console.log("After removing add on details");
-  let count=0
-  console.log(remove);
-  for(let ij=0;ij<remove.length;ij++)
-  {
-    let z=remove[ij]-count
-    x.removeAt(z);
-    count++
-  }
-}
 
   onSubmit() {
     this.modifyform();
@@ -365,23 +354,23 @@ modifyform(){
 
     formData.append("imageFile", this.insuranceForms.controls['fileSource'].value!);
     formData.append("policyId", this.insuranceForms.controls['policyId'].value!)
-  //   const httpOptions = {
-  //     headers: new HttpHeaders(
-  //     { 
-  //        'Authorization': 'Your Token',
-  //        'Content-Type': 'application/json'
-  //     })
+    //   const httpOptions = {
+    //     headers: new HttpHeaders(
+    //     {
+    //        'Authorization': 'Your Token',
+    //        'Content-Type': 'application/json'
+    //     })
     this.insuranceForms.get('policyId')!.enable()
     this.insuranceForms.get('policyName')!.enable()
     this.insuranceForms.get('insuranceType')!.enable()
-  // }
-   console.log(this.insuranceForms.get('insuranceType')!.value)
+    // }
+    console.log(this.insuranceForms.get('insuranceType')!.value)
     this.http.put<Insurance>("http://localhost:8010/api/vk1/update", this.insuranceForms.value).subscribe(
       (data: any) => {
         console.log(data);
-        if(this.insuranceForms.controls['fileSource'].valid)
-        this.http.put("http://localhost:8010/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
-          .subscribe((data: any) => { console.log(data) });
+        if (this.insuranceForms.controls['fileSource'].valid)
+          this.http.put("http://localhost:8010/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
+            .subscribe((data: any) => { console.log(data) });
       });
     console.log(this.insuranceForms.value)
     this.insuranceForms.get('policyId')!.disable()
@@ -431,7 +420,7 @@ modifyform(){
       }
       //premiums,durations,sumInsure,adults1,adults2,adults3,kids,minSalary,maxSalary
       if (this.insuranceForms.get('insuranceType')?.value == 'HealthInsurance') {
-        // console.log('4');        
+        // console.log('4');
         if (control.at(k).get('sumInsure')?.invalid || control.at(k).get('durations')?.invalid || control.at(k).get('adults2')?.invalid || control.at(k).get('adults3')?.invalid || control.at(k).get('adults1')?.invalid || control.at(k).get('kids')?.invalid) {
           // console.log('5');
           this.openSnackBar('Fill all the details of row  ' + (k + 1) + '  to add new Row')
@@ -445,7 +434,7 @@ modifyform(){
       durations: new FormControl(control.at(i).get('durations')?.value, [Validators.required, Validators.min(0)]),
       sumInsure: new FormControl(control.at(i).get('sumInsure')?.value, [Validators.required, Validators.min(0)]),
       adults1: new FormControl(control.at(i).get('adults1')?.value, [Validators.min(1), Validators.required]),
-      adults2: new FormControl(control.at(i).get('adults2')?.value, [Validators.min(1),Validators.required]),
+      adults2: new FormControl(control.at(i).get('adults2')?.value, [Validators.min(1), Validators.required]),
       adults3: new FormControl(control.at(i).get('adults3')?.value, [Validators.min(1), Validators.required]),
       kids: new FormControl(control.at(i).get('kids')?.value, [Validators.min(1), Validators.required]),
       minSalary: new FormControl(control.at(i).get('minSalary')?.value, [Validators.required, Validators.min(0)]),
@@ -515,8 +504,8 @@ modifyform(){
       durations: new FormControl("", [Validators.required, Validators.min(0)]),
       sumInsure: new FormControl("", [Validators.required, Validators.min(0)]),
       adults1: new FormControl("", [Validators.min(1), Validators.required]),
-      adults2: new FormControl("", [Validators.min(1),Validators.required]),
-      adults3: new FormControl("", [Validators.min(1),Validators.required]),
+      adults2: new FormControl("", [Validators.min(1), Validators.required]),
+      adults3: new FormControl("", [Validators.min(1), Validators.required]),
       kids: new FormControl("", [Validators.min(1), Validators.required]),
       minSalary: new FormControl("", [Validators.required, Validators.min(0)]),
       maxSalary: new FormControl("", [Validators.required, Validators.min(0)])
@@ -612,77 +601,67 @@ modifyform(){
     return (this.insuranceForms.get('addOnDetails') as FormArray).controls;
   }
   //=========================================================================================================
-  check_validity()
-  {
-    const obj=this.insuranceForms
-    let validity1=obj.get('policyDescription')?.valid
-    let validity2=this.check_validity2()
-    let validity3=obj.get('policyDocuments')?.valid&&obj.get('userEmail')?.valid
-   
-    if(obj.get('insuranceType')?.value==='AutoMobileInsurance')
-    {
-     let validity4=obj.get('modelsAllowed')?.valid&&obj.get('category')?.valid
-     return !(validity1&&validity2&&validity3&&validity4)
+  check_validity() {
+    const obj = this.insuranceForms
+    let validity1 = obj.get('policyDescription')?.valid
+    let validity2 = this.check_validity2()
+    let validity3 = obj.get('policyDocuments')?.valid && obj.get('userEmail')?.valid
+
+    if (obj.get('insuranceType')?.value === 'AutoMobileInsurance') {
+      let validity4 = obj.get('modelsAllowed')?.valid && obj.get('category')?.valid
+      return !(validity1 && validity2 && validity3 && validity4)
     }
-    return !(validity1&&validity2&&validity3)
+    return !(validity1 && validity2 && validity3)
   }
-  check_validity1(){
-    const obj=this.insuranceForms
-    let validity1=obj.get('policyDescription')?.valid
+  check_validity1() {
+    const obj = this.insuranceForms
+    let validity1 = obj.get('policyDescription')?.valid
     return validity1
   }
-  check_validity2(){
-    const obj=this.insuranceForms
-    let x=<FormArray>obj.get('policyDetails')
-    let flag1=false,flag2=false,flag3=false
-    console.log("length of policy Details"+x.length);
-    
-    for(let i=0;i<x.length;i++)
-    {
-      if(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&(obj.get('insuranceType')!.value=='AutoMobileInsurance'))
-      {  
-        flag1=true
+  check_validity2() {
+    const obj = this.insuranceForms
+    let x = <FormArray>obj.get('policyDetails')
+    let flag1 = false, flag2 = false, flag3 = false
+    console.log("length of policy Details" + x.length);
+
+    for (let i = 0; i < x.length; i++) {
+      if (x.at(i).get('premiums')?.valid && x.at(i).get('durations')?.valid && x.at(i).get('sumInsure')?.valid && (obj.get('insuranceType')!.value == 'AutoMobileInsurance')) {
+        flag1 = true
         break
       }
-      if(x.at(i).get('adults1')?.valid&&x.at(i).get('adults2')?.valid&&x.at(i).get('adults3')?.valid&&x.at(i).get('kids')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid)
-      {
-        
-        flag1=true
+      if (x.at(i).get('adults1')?.valid && x.at(i).get('adults2')?.valid && x.at(i).get('adults3')?.valid && x.at(i).get('kids')?.valid && x.at(i).get('durations')?.valid && x.at(i).get('sumInsure')?.valid) {
+
+        flag1 = true
         break
       }
-      if(x.at(i).get('premiums')?.valid&&x.at(i).get('durations')?.valid&&x.at(i).get('sumInsure')?.valid&&x.at(i).get('minSalary')?.valid&&x.at(i).get('maxSalary')?.valid)
-      {
-     
-        flag1=true
+      if (x.at(i).get('premiums')?.valid && x.at(i).get('durations')?.valid && x.at(i).get('sumInsure')?.valid && x.at(i).get('minSalary')?.valid && x.at(i).get('maxSalary')?.valid) {
+
+        flag1 = true
         break
       }
     }
-    x=<FormArray>obj.get('policyBenefits')
-    for(let j=0;j<x.length;j++)
-    {
-      if(x.at(j).valid)
-      {
-       flag2=true
-       break
-     }
+    x = <FormArray>obj.get('policyBenefits')
+    for (let j = 0; j < x.length; j++) {
+      if (x.at(j).valid) {
+        flag2 = true
+        break
+      }
     }
-    x=<FormArray>obj.get('addOnDetails')
-    for(let k=0;k<x.length;k++)
-    {
-      if(x.at(k).valid)
-      {
-       flag3=true
-       break
-     }
+    x = <FormArray>obj.get('addOnDetails')
+    for (let k = 0; k < x.length; k++) {
+      if (x.at(k).valid) {
+        flag3 = true
+        break
+      }
     }
-    return flag1&&flag2&&flag3
-    console.log(flag1 +''+flag2+''+flag3);
-    
-     
+    return flag1 && flag2 && flag3
+    console.log(flag1 + '' + flag2 + '' + flag3);
+
+
   }
-  check_validity3(){
-    const obj=this.insuranceForms
-    let validity3=obj.get('policyDocuments')?.valid&&obj.get('userEmail')?.valid
+  check_validity3() {
+    const obj = this.insuranceForms
+    let validity3 = obj.get('policyDocuments')?.valid && obj.get('userEmail')?.valid
     return validity3
   }
 

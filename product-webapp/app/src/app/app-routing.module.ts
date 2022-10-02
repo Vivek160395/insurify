@@ -19,42 +19,35 @@ import { ChatComponent } from './chat/chat.component';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
-import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
-import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
-
-import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
-
-
-import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-advisor-update.component';
-
-
-
+// import { PersonGuard } from './guard/person.guard';
 
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
 const routes: Routes = [
+  // {path:"",component:RecommendationComponent},
+  // {path:"register",component:RegisterComponent},
+  // {path:"add-policy",component:AddInsurancePolicyComponent},
+  // {path:"policies", component:PoliciesComponent},
 
-  {path:"",component:RecommendationComponent},
-  {path:"register",component:RegisterComponent},
-  {path:"add-policy",component:AddInsurancePolicyComponent},
-  {path: "renewal", component: RenewalPolicyComponent},
-  {path: "renewal-home", component: RenewalPolicyHomeComponent},
-  {path:"details",component:DetailsComponent},
-  {path: "renewal", component: RenewalPolicyComponent},
-  {path:"update", component:UpdateComponent},
-  {path: "login", component: LoginComponent},
-  {path: "nav-bar", component: NavBarComponent},
-  {path:"claim",component:ClaimComponent},
+  // {path: "renewal", component: RenewalPolicyComponent},
+  // {path: "renewal-home", component: RenewalPolicyHomeComponent},
+  // {path:"details",component:DetailsComponent},
+  // {path: "renewal", component: RenewalPolicyComponent},
+  // {path:"update", component:UpdateComponent},
+  // {path: "login", component: LoginComponent},
+  // {path: "nav-bar", component: NavBarComponent},
+  // {path:"claim",component:ClaimComponent},
 
-  {path:"policyDetails",component:InsuranceDetailsComponent},
-  {path:"chat",component:ChatComponent},
-
+  // {path:"policyDetails",component:InsuranceDetailsComponent},
+  // {path:"chat",component:ChatComponent},
   {
     path: "", component: NavBarComponent, children: [
+      // { path: "", component: RecommendationComponent, canActivate: [PersonGuard] },
       { path: "", component: RecommendationComponent },
+      { path: "insurance-provider", component: InsuranceProviderComponent },
       { path: "register", component: RegisterComponent },
-      { path: "add", component: AddInsurancePolicyComponent },
+      { path: "add-policy", component: AddInsurancePolicyComponent },
       { path: "policies", component: PoliciesComponent },
       { path: "renewal-update", component: RenewalPolicyComponent },
       { path: "renewal-home", component: RenewalPolicyHomeComponent },
@@ -67,18 +60,9 @@ const routes: Routes = [
       { path: "policyDetails", component: InsuranceDetailsComponent },
       { path: "claim", component: ClaimComponent },
       { path: "InsuranceDetails", component: InsuranceDetailsComponent },
-      { path: "edit-insurance", component: EditInsuranceComponent },
-
-      {path: "policy-advisor-update", component: PolicyAdvisorUpdateComponent},
-      { path: "policy-advisor", component: PolicyAdvisorComponent},
-
-      { path: "policy-advisor", component: PolicyAdvisorComponent},]
-
+      { path: "edit-insurance", component: EditInsuranceComponent },]
   },
-  { path: "edit-insurance", component: EditInsuranceComponent },
-  { path: "login", component: LoginComponent },
-  {path:'registeredPolicies', component: RegisteredPoliciesComponent},
-
+  // { path: "login", component: LoginComponent }
 
 ];
 
