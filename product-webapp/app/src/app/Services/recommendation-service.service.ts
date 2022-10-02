@@ -31,7 +31,7 @@ export class RecommendationServiceService {
   }
   policyNo: any;
   userEmail: any = "gritvik97@gmail.com";
-  userType = "Insurer"
+  userType = "Insured"
   getCountOfUsersBoughtInsurance(id: any): Observable<any> {
     return this.http.get(`http://localhost:8084/api/get/count/${id}`);
   }
