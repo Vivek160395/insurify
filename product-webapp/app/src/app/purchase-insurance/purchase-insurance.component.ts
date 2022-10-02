@@ -115,7 +115,7 @@ export class PurchaseInsuranceComponent implements OnInit {
   "Have you ever consumed narcotics?",
   "Are you employed in the armed, para military or police forces?",
   "Is your occupation associated with any specific hazard or do you take part in activities or have hobbies that could be dangerous in any way?",
-  "Have you undergone any tests/investigations/surgery or have been hospitalized for observation or treatment in the past?",
+  "Have you undergone any surgery or have been hospitalized for  treatment in the past?",
 ];
 life_answers:boolean[]=[]
 dob!:string
@@ -132,7 +132,7 @@ userForm = new FormGroup({
     nameof                  : new FormControl("", [Validators.required]),
     insuredDOB              : new FormControl("", [Validators.required]),
     relation                : new FormControl("", [Validators.required]),
-    preExistingIllness      : new FormControl("", [Validators.required]),
+    preExistingIllness      : new FormControl("No", [Validators.required]),
     illnessList             : new FormControl([], [Validators.required]),
     weight                  : new FormControl([], [Validators.required]),
     height                  : new FormControl([], [Validators.required])})],[Validators.required]), 
@@ -155,7 +155,7 @@ userForm = new FormGroup({
   healthCondition           : new FormControl([], [Validators.required]), 
   customerPolicyId                : new FormControl("", [Validators.required]),
   insurancePolicyId               : new FormControl("", [Validators.required]),
-  email                           : new FormControl("", [Validators.required]),
+  email                           : new FormControl("", [Validators.required,Validators.email]),
   sumInsured                      : new FormControl("", [Validators.required]),
   startDate                       : new FormControl("",[Validators.required]),
   purchaseDate                    : new FormControl("",[Validators.required]),
@@ -417,7 +417,7 @@ proceedPayment(){
  customerInsurancePurchase.lifeInsurance.lifeIllnessStatus  =this.lifediseasestatus
  customerInsurancePurchase.lifeInsurance.healthConditionList  =this.userForm.get('lifeillnessList')!.value!
  }
- customerInsurancePurchase.email='testing@gmail.com'
+ customerInsurancePurchase.email=localStorage.getItem("email")!
  customerInsurancePurchase.insurancePolicyId='1232131'
  console.log(customerInsurancePurchase)
  console.log('This is before posting');
@@ -512,7 +512,7 @@ check_validity(){
     }
    console.log(control1);
          this.sortedsuminsured=[]   
-      this.httpclient.get('http://localhost:8010/api/vk1/policy-id/11223344').subscribe((data:any)=>{
+      this.httpclient.get('http://localhost:8010/api/vk1/policy-id/12211221').subscribe((data:any)=>{
       console.log('Policy ID : '+data.policyId)
       console.log('Policy Name : '+data.policyName)
       
@@ -572,7 +572,7 @@ check_validity(){
                 nameof            : new FormControl("", [Validators.required]),
                 insuredDOB        : new FormControl("", [Validators.required]),
                 relation          : new FormControl("", [Validators.required]),
-                preExistingIllness: new FormControl("1", [Validators.required]),
+                preExistingIllness: new FormControl("No", [Validators.required]),
                 illnessList       : new FormControl([], [Validators.required]),
                 weight            : new FormControl([], [Validators.required]),
                 height            : new FormControl([], [Validators.required])
@@ -744,18 +744,22 @@ check_validity(){
           }
           if(ins_obj_index==-1){
           return false}
+          const controly=<FormArray>this.userForm.get('insuredInfo')
+          const len=+this.adultValue + +this.kidValue;
+          console.log(len);
           
-          for(let i=0;i < (this.adultValue + this.kidValue);i++)
+          for(let i=0;i < len;i++)
           {
             let factor=1
-            const controly=<FormArray>this.userForm.get('insuredInfo')
+            console.log("Inside");
+            
               if(controly.at(i).get('weight')?.valid &&controly.at(i).get('height')?.valid){
                 {
                   const weight=controly.at(i).get('weight')?.value
                   const height=controly.at(i).get('height')?.value
                   let bmi=(weight)/(height*height)
                   bmi=10000*bmi
-                 console.log('Bmi of user with name :'+ controly.at(i).get('nameof')?.value+'is'+bmi)
+                 console.log('Bmi of user with name :'+ controly.at(i).get('nameof')?.value+'  is  '+bmi)
                  if(bmi>24 ||bmi<18)
                  {
                   factor=factor*1.25
@@ -763,7 +767,7 @@ check_validity(){
                 }               
               }
               if(controly.at(i).get('preExistingIllness')?.valid){
-               if(controly.at(i).value=='Yes')
+               if(controly.at(i).get('preExistingIllness')?.value=='Yes')
                {
                 factor=factor*1.25
                }
@@ -771,13 +775,16 @@ check_validity(){
            if(control.at(i).get('dob')?.value<41)
            {             
              if(ins_obj_index>-1)
-             {            
+             { 
+              console.log('Factor '+factor)
+                         
                 this.premium=this.premium+ (factor * this.insuranceobj[ins_obj_index].adults1!);                   
              }
             continue
            } 
            if(control.at(i).get('dob')?.value<51)
            {
+            console.log('Factor '+factor)
             const controly=<FormArray>this.userForm.get('insuredInfo')
             if(ins_obj_index>-1)
             {
@@ -787,6 +794,7 @@ check_validity(){
            } 
            if(control.at(i).get('dob')?.value<61)
            {
+            console.log('Factor '+factor)
             const controly=<FormArray>this.userForm.get('insuredInfo')
             if(ins_obj_index>-1)
             {
@@ -799,29 +807,30 @@ check_validity(){
           for(let z=0;z<this.kidValue;z++)
           {
             const controly=<FormArray>this.userForm.get('insuredInfo')
-            if(controly.at(z).get('weight')?.valid &&controly.at(z).get('height')?.valid){
+            if(controly.at( +z + +this.adultValue).get('weight')?.valid &&controly.at( +z + +this.adultValue).get('height')?.valid){
               {
                 const weight=controly.at(z).get('weight')?.value
                 const height=controly.at(z).get('height')?.value
                 let bmi=(weight)/(height*height)
                 bmi=10000*bmi
-               console.log('Bmi of user with name :'+ controly.at(z).get('nameof')?.value+'is'+bmi)
+               console.log('Bmi of user with name :'+ controly.at(z + +this.adultValue).get('nameof')?.value+'  is  '+bmi)
                if(bmi>24 ||bmi<18)
                {
                 kidfactor=kidfactor+0.1
                } 
               }               
             }
-            if(controly.at(z).get('preExistingIllness')?.valid){
-             if(controly.at(z).value=='Yes')
-             {
+            if(controly.at(+z + +this.adultValue).get('preExistingIllness')?.valid){
+              console.log(controly.at(+z + +this.adultValue).get('preExistingIllness')!.value);
+             if(controly.at(+z + +this.adultValue).get('preExistingIllness')!.value=='Yes')
+             {      
               kidfactor=kidfactor+0.1
              }
             }
           }
-          this.premium=this.premium+this.insuranceobj[ins_obj_index].kids!*this.kidValue * kidfactor+this.addonpremium
+          this.premium=Math.floor(this.premium+this.insuranceobj[ins_obj_index].kids!*this.kidValue * kidfactor+this.addonpremium *(+this.adultValue + +this.kidValue))
           console.log('kidFactor : '+kidfactor );
-         console.log(this.insuranceobj[ins_obj_index]);
+          console.log(this.insuranceobj[ins_obj_index]);
           this.insuranceobj[ins_obj_index]
           this.times=Math.floor(+this.userForm.get('sumInsured')!.value!/this.premium)
           return true 
@@ -916,6 +925,8 @@ check_validity(){
 
       on_duration_select(data:any)
       {
+        console.log(this.isHealth);
+        
         this.date=new Date()
         // this.formattedDate = formatDate(this.date, 'yyyy-MM-dd', 'en-US');
         this.userForm.get('startDate')?.setValue(formatDate(this.date, 'yyyy-MM-dd', 'en-IN'))
@@ -1034,17 +1045,21 @@ check_validity(){
         }
         if(this.isHealth)
         {
+          console.log('Inside the isHealth');
+          
           const control1= this.userForm.get('adultno')
           const control2=this.userForm.get('kidno')
           const control3=this.userForm.get('sumInsured')
           const control4=this.userForm.get('duration')
-          if(control1?.invalid)
+          console.log(control1?.valid);
+          
+          if(this.adultValue<1)
             {
               this.openSnackBar("Select no of adults and give their age")
                 control4?.reset()
                 return
             }
-            if(control2?.invalid)
+            if(this.kidValue<0)
             {
               this.openSnackBar("Select no of kids first")
                 control4?.reset()
@@ -1056,7 +1071,7 @@ check_validity(){
               control4?.reset()
               return
             }
-            this.calculate_premium()
+            // this.calculate_premium()
         }
         
       }

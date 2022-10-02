@@ -148,6 +148,8 @@ public class PurchaseServiceImplementation implements PurchaseService {
     public boolean renewCustomerPolicy(CustomerRenewal customerRenewal)
             throws PolicyIdNotFoundException, ParseException, PolicyExpiredException {
         RenewDTO renewDTO = new RenewDTO();
+        System.out.println("ID:"+customerRenewal.getCustomerPolicyId());
+
         if (!purchaseRepository.findById(customerRenewal.getCustomerPolicyId()).isPresent()) {
             throw new PolicyIdNotFoundException();
         }
@@ -164,7 +166,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
         String eDay = startDay;
         String ourDate = customerRenewal.getDate();
         System.out.println("Status of : " + (sDay.compareTo(ourDate) < 0 && eDay.compareTo(ourDate) > 0));
-
+        System.out.println("Start Date:"+sDay+ "End Date :"+eDay+"Our date :"+ourDate);
         if (!(sDay.compareTo(ourDate) < 0) || !(eDay.compareTo(ourDate) >= 0)) {
             System.out.println("Cannot renew now because of policy  time interval is not valid");
             return false;

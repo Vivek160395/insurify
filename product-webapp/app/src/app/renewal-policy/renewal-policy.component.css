@@ -66,8 +66,10 @@
 .summary{
     text-align: center; 
     text-shadow: 2px 2px rgb(158, 141, 141);
+    color: rgb(56, 197, 207);
 }
 .additional{
     text-align: center; 
     text-shadow: 2px 2px rgb(158, 141, 141);
+    color: rgb(197, 65, 65);
 }
