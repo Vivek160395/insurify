@@ -17,7 +17,7 @@
 </div>
 <div fxLayout="column">
     <div class="choose_plan">
-        <h1><b>Choose your Plan</b></h1>
+        <h1><b class="summary" style="font-family: cursive;font-size: xx-large;">Choose Your Plan</b></h1>
     </div>
 </div>
 
@@ -25,13 +25,13 @@
 
 <div>
     <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="5%" fxLayout="row" fxLayoutAlign="center">
-        <mat-radio-button [value]="i" appZoomonhover="true" *ngFor="let p of premium;let i=index ">
-            <b> Premium</b><br> Rs.{{p}} <br>({{duration[i]}} Years)
+        <mat-radio-button [value]="i" appZoomonhover="true" *ngFor="let p of premium;let i=index " style="border-radius: 10px;border:1px solid  black">
+            <b style="font-family: cursive;margin: auto;"> Premium   </b><br> Rs.{{p}} <br>({{duration[i]}} Years)
         </mat-radio-button>
     </mat-radio-group>
 </div>
 
-<div style="height: 495px;" fxLayout="row" fxLayoutGap="15%" >
+<div  fxLayout="row" fxLayoutGap="15%" >
     <mat-card class="first_card" fxFlex="45%" appZoomonhover="true" >
         <mat-card-content fxLayout="column" fxLayoutAlign="center" >
 
@@ -40,9 +40,9 @@
             </h1>
             
             <div *ngFor="let data of addOnName; let i=index">
-                <p style="padding-left: 125px;">
+                <p style="padding-left: 20%;font-family: cursive;">
                     <mat-checkbox (change)="checkBox($event,i)" >
-                        <b>{{data}}</b>({{addOnPrice[i]}})
+                        <b style="font-family: cursive;">{{data}}</b> (RS {{addOnPrice[i]}}/-)
                     </mat-checkbox>
                 </p>
             </div>
@@ -57,20 +57,21 @@
                 <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngIf="myModel == i">
                     <div>
                         <p class="d-flex justify-content-md-center">
-                            <b class="col-md-6">Premium </b>{{premium[myModel]}}
+                            <b class="col-md-6" style="font-size: large;font-family: 'Times New Roman', Times, serif;"> Premium </b>{{premium[myModel]}}
                         </p>
                     </div>
                     <div>
                         <p class="d-flex justify-content-md-center">
-                            <b class="col-md-6">Duration </b>{{duration[myModel]}}
+                            <b class="col-md-6" style="font-size: large;font-family: 'Times New Roman', Times, serif;"> Duration  </b>{{duration[myModel]}}
                         </p>
                     </div>
-                    <div *ngFor="let name of addOnName; let i=index">
+                    
+                    <div *ngFor="let name of addOnName; let i=index">    
                         <p *ngIf="setCheckBox[i] === true" class="d-flex justify-content-md-center">
-                            <b class="col-md-6">{{name}} (AddOns)</b> {{addOnPrice[i]}}
+                            <b class="col-md-6" style="color: rgb(100, 100, 165);">{{name}} (Add On)</b> {{addOnPrice[i]}}
                         </p>
                     </div>
-                    <p class="d-flex justify-content-md-center">
+                    <p class="d-flex justify-content-md-center" style="color: rgb(205, 23, 230);font-weight:large;">
                         <b class="col-md-6">Total Premium </b> {{calculate_premium()}}
                     </p>
                 </mat-card-content>
@@ -78,13 +79,14 @@
         </mat-card>
     </div>
 </div>
-
-<div class="terms">
+<div fxLayout="column"  fxLayoutGap="10%">
+<!-- <div class="terms" >
     <mat-checkbox >
-        <b>I hereBy declare that I have agreed to terms and conditions of the policy</b>
+        <b>I here by declare that I have agreed to terms and conditions of the policy</b>
     </mat-checkbox>
-</div>
+</div> -->
 
-<div fxLayoutAlign="center">
-    <button class="submit" mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+<div fxLayoutAlign="center" fxLayout="row" style="margin-top: 10%;">
+    <button class="submit" fxFlex="30%" mat-raised-button color="primary" (click)="onSubmit()">Renew <mat-icon>autorenew</mat-icon></button>
+</div>
 </div>
