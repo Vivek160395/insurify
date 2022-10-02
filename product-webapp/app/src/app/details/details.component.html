@@ -32,6 +32,7 @@
       <h2 style="background-color: rgb(181, 181, 245); text-align: center;">Policy Information</h2>
       <table>
         <tr> <td>Insurance Type</td> <td> {{insuranceType}}</td> </tr>
+        <tr> <td>Policy Name</td> <td> {{policyName}}</td> </tr>
         <tr> 
           <td>Other Details</td>
           <table *ngIf="insuranceType=='Automobile Insurance'">
@@ -88,7 +89,7 @@
         <p>List claimStatus=neyList(); </p>
         <p>boolean status=true; </p>  -->
         <br>
-        <button mat-raised-button color="primary" (click)="downloadAsPDF();">Download as PDF <mat-icon>download</mat-icon> </button>
+        <button mat-raised-button color="primary" (click)="downloadAsPDF(policy.customerPolicyId);">Download as PDF <mat-icon>download</mat-icon> </button>
       </div>
       </div>
     </div>
@@ -105,16 +106,16 @@
         <th>Start Date</th>
         <th>End Date </th>
       </tr>
-    <!-- <div *ngFor="let x of policy.startDate.length">
-      <tr *ngIf="policy.claimDate.length>=x">
+    <!-- <div > -->
+      <tr *ngFor="let x of policy.startDate; let i=index;">
         <td>{{policy.customerPolicyId}}</td>
-        <td>{{policy.purchaseDate[0]}}</td>
-        <td>{{policy.startDate[0]}}</td>
-        <td>{{policy.endDate[0]}}</td>
+        <td>{{policy.purchaseDate[i]}}</td>
+        <td>{{policy.startDate[i]}}</td>
+        <td>{{policy.endDate[i]}}</td>
       </tr>
-    </div> -->
-
-      <tr *ngIf="policy.claimDate.length>=1">
+    <!-- </div> -->
+    <!-- *ngIf="policy.claimDate.length>=x" -->
+      <!-- <tr *ngIf="policy.claimDate.length>=1">
         <td>{{policy.customerPolicyId}}</td>
         <td>{{policy.purchaseDate[0]}}</td>
         <td>{{policy.startDate[0]}}</td>
@@ -137,7 +138,7 @@
         <td>{{policy.purchaseDate[3]}}</td>
         <td>{{policy.startDate[3]}}</td>
         <td>{{policy.endDate[3]}}</td>
-      </tr>
+      </tr> -->
      
       
     </table>
@@ -157,36 +158,59 @@
               <th>Policy No.</th>
               <th>Claim Date</th>
               <th>Amount</th>
+              <th>Document</th>
               <th>Status</th>
             </tr>
             <!-- *ngFor="let i of claims" -->
-            <tr *ngIf="policy.claimDate.length>=1">
+            
+
+            <tr  *ngFor="let x of policy.claimDate; let i=index;">
+              <td>{{policy.customerPolicyId}}</td>
+              <td>{{policy.claimDate[i]}}</td>
+              <td>₹{{policy.claimSum[i]}}</td>
+              <td> 
+                <button mat-button color="primary" (click)="onClickDownloadFile(policy.claimDocument[i], policy.customerPolicyId )"> Download </button> or
+                <button mat-button color="primary" (click)="openFile(policy.claimDocument[i])"> Open </button>
+              </td>
+              <td>{{policy.claimStatus[i]}}</td>
+            </tr>
+
+            
+            <!-- <tr  *ngIf="policy.claimDate.length>=1">
               <td>{{policy.customerPolicyId}}</td>
               <td>{{policy.claimDate[0]}}</td>
               <td>₹{{policy.claimSum[0]}}</td>
+              <td> 
+                <button mat-button color="primary" (click)="onClickDownloadFile(policy.claimDocument[0])"> Download </button> or
+                <button mat-button color="primary" (click)="openFile(policy.claimDocument[0])"> Open </button>
+              </td>
               <td>{{policy.claimStatus[0]}}</td>
             </tr>
             <tr *ngIf="policy.claimDate.length>=2">
               <td>{{policy.customerPolicyId}}</td>
               <td>{{policy.claimDate[1]}}</td>
               <td>₹{{policy.claimSum[1]}}</td>
+              <td> <button mat-button color="primary" (click)="onClickDownloadFile(policy.claimDocument[0])"> Download </button> or
+                <button mat-button color="primary" (click)="openFile(policy.claimDocument[0])"> Open </button></td>
               <td>{{policy.claimStatus[1]}}</td>
             </tr>
             <tr *ngIf="policy.claimDate.length>=3">
               <td>{{policy.customerPolicyId}}</td>
               <td>{{policy.claimDate[2]}}</td>
               <td>₹{{policy.claimSum[2]}}</td>
+              <td> {{policy.claimDocument[2]}}</td>
               <td>{{policy.claimStatus[2]}}</td>
             </tr>
             <tr *ngIf="policy.claimDate.length>=4">
               <td>{{policy.customerPolicyId}}</td>
               <td>{{policy.claimDate[3]}}</td>
               <td>₹{{policy.claimSum[3]}}</td>
+              <td> {{policy.claimDocument[3]}}</td>
               <td>{{policy.claimStatus[3]}}</td>
-            </tr>
+            </tr> -->
           </table>
           <br>
-          <!-- <button mat-raised-button color="primary" (click)="downloadMyFile()">Download as PDF <mat-icon>download</mat-icon> </button> -->
+          <!-- <button mat-raised-button color="primary" (click)="downloadAsPDF(policy.customerPolicyId)">Download as PDF <mat-icon>download</mat-icon> </button> -->
         </div>
        </div>
       </div>

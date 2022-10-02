@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { HttpClient } from '@angular/common/http';
-import { UserService } from '../user.service';
+import { UserService } from '../Services/user.service';
 
 
 @Component({
@@ -26,15 +26,15 @@ export class ChatComponent implements OnInit {
 
   msg:any[]=[
     {
-    "id":null,
-    "msg":null,
-    "show":false   
-  }
-]
+      "id": null,
+      "msg": null,
+      "show": false
+    }
+  ]
 
-  chatMsg:any={
-    "id":this.loginId,
-    "msg":null
+  chatMsg: any = {
+    "id": this.loginId,
+    "msg": null
   }
 
   registerMsg:any={
@@ -47,7 +47,7 @@ constructor(private http:HttpClient,private service:UserService) { }
 
 ngOnInit(): void {
     this.getnames();
-   }
+  }
 
    connect(id:any){
     if(this.role=="user"){

@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DetailsComponent } from '../details/details.component';
 import { DatePipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-policies',
@@ -14,7 +15,7 @@ import { DatePipe } from '@angular/common';
 })
 export class PoliciesComponent {
 
-  constructor(public dialog: MatDialog, private router: Router, private http: HttpClient, private datePipe: DatePipe) {
+  constructor(public dialog: MatDialog, private router: Router, private http: HttpClient, private datePipe: DatePipe, private snackbar: MatSnackBar) {
     this.currentDate = this.datePipe.transform(this.sysDate, 'yyyy-MM-dd');
      console.log(this.sysDate);
      console.log(this.currentDate);
@@ -26,6 +27,7 @@ export class PoliciesComponent {
   currentDate:any;
   description: string[]=[];
   policyTitle: string[]=[];
+  insuranceTitle: string[]=[];
 
 
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
@@ -39,9 +41,20 @@ export class PoliciesComponent {
       console.log(data);
       this.purchasedPolicies=data;
       for(let i=0; i<this.purchasedPolicies.length;i++){
+        if(this.purchasedPolicies[i].healthInsurance==null && this.purchasedPolicies[i].lifeInsurance==null){
+          this.insuranceTitle.push('Automobile Insurance');}
+        else if(this.purchasedPolicies[i].healthInsurance==null && this.purchasedPolicies[i].automobileInsurance==null){
+          this.insuranceTitle.push('Life Insurance');}
+        else if(this.purchasedPolicies[i].automobileInsurance==null && this.purchasedPolicies[i].lifeInsurance==null){
+          this.insuranceTitle.push('Health Insurance');}
+        else {
+          this.insuranceTitle.push('NA');
+        }
+
         this.http.get("http://localhost:8010/api/vk1/policy-id/"+this.purchasedPolicies[i].insurancePolicyId).subscribe((x:any)=>{
             this.description.push(x.policyDescription);
             this.policyTitle.push(x.policyName)
+            // this.policyTitle.push(x.insuranceType);
         })
       }
       
@@ -57,6 +70,7 @@ export class PoliciesComponent {
 
   title = 'policies-details';
   searchedKeyword!: string;
+  str:string="";
 
   policies = [
     {
@@ -120,7 +134,9 @@ export class PoliciesComponent {
   openDialog(policy: any, i:any) {
     console.log(policy);
     this.router.navigateByUrl('/details');
-    localStorage.setItem('insuranceType',this.policyTitle[i]);
+    localStorage.setItem('policyName',this.policyTitle[i]);
+    localStorage.setItem('insuranceType',this.insuranceTitle[i]);
+    // localStorage.setItem('insuranceType','Automobile Insurance');
     localStorage.setItem('customerPolicyId', policy.customerPolicyId)
     console.log(localStorage.getItem('insuranceType'));
     console.log(localStorage.getItem('customerPolicyId'));
@@ -140,5 +156,29 @@ export class PoliciesComponent {
     //   console.log(`Dialog result: ${result}`);
     // });
   }
+
+  renewPolicy(policy:any){
+
+    this.http.get("http://localhost:8010/api/vk1/policy-id/"+policy.insurancePolicyId).subscribe((data:any)=>{
+      // this.description.push(x.policyDescription);
+      // this.policyTitle.push(x.policyName))
+      this.http.get("http://localhost:8084/api/getstatus/"+policy.customerPolicyId).subscribe((x:any)=>{
+        this.str=x;
+        if(this.str==null){
+          this.router.navigateByUrl("/renewal-home");
+        }
+        else{
+          this.openSnackBar(x);
+        }
+      })
+
+
+  })
+}
+
+openSnackBar(message: string) {
+    
+  this.snackbar.open(message, 'Ok',{duration: 6000});
+}
 
 }

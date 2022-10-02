@@ -2,8 +2,9 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Component, OnInit, VERSION } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { CalculatorComponent } from '../calculator/calculator.component';
-import { RecommendationServiceService } from '../recommendation-service.service';
+import { RecommendationServiceService } from '../Services/recommendation-service.service';
 export interface PeriodicElement1 {
   addOnName: string;
   addOnPremiums: number;
@@ -43,12 +44,20 @@ export class InsuranceDetailsComponent implements OnInit {
   demo1: any = [];
   // dialog: any;
   buyPolicy() {
+
     localStorage.setItem('insurance_id', this.service.policyNo);
     console.log(localStorage.getItem('insurance_id'));
   }
-  constructor(private service: RecommendationServiceService, public dialog: MatDialog) { }
+  constructor(private service: RecommendationServiceService, public dialog: MatDialog, private route: Router) { }
   ngOnInit(): void {
     this.getPolicy();
+    if (this.service.userType == "Insurer") {
+      this.edit = false;
+      this.buy = true;
+    } else if (this.service.userType == "Insured") {
+      this.edit = true;
+      this.buy = false;
+    }
   }
 
   view: boolean = true;
@@ -58,21 +67,24 @@ export class InsuranceDetailsComponent implements OnInit {
   count1: number = 0;
   firstDiv: String = "";
   cars: string[] = [];
+  editPolicy() {
+    this.route.navigateByUrl("/edit-insurance")
+  }
   openDialog() {
     this.dialog.open(CalculatorComponent);
   }
+  buy = false;
+  edit = false;
   differentImg: string = "";
   befnefitsImg: string = "";
   getPolicy() {
     this.service.getPolicyDetails(this.service.policyNo).subscribe(data => {
       console.log(data);
-
       this.addOns = data.addOnDetails;
       this.addOnDescription = data.policyDescription;
       this.policyName = data.policyName;
       this.policyType = data.insuranceType;
       console.log(this.policyType);
-
       if (this.policyType === "AutoMobileInsurance") {
         this.displayedColumns = ['sumInsure', 'durations', 'premiums'];
         this.dataSource = data.policyDetails;
