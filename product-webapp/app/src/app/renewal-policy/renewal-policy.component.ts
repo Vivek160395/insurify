@@ -39,8 +39,8 @@ export class RenewalPolicyComponent implements OnInit {
 
   ngOnInit(): void {
     this.myModel = 0
-    this.http.get('http://localhost:8010/api/vk1/policy-id/50508').subscribe((x: any) => {
-      this.http.put<Insurance>('http://localhost:8084/api/testing/30153119', x).subscribe((data: any) => {
+    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/50508').subscribe((x: any) => {
+      this.http.put<Insurance>('http://localhost:8080/purchase/api/testing/30153119', x).subscribe((data: any) => {
         // console.log("Inside retrived insurance success");
         // console.log(data.policyDescription);
         // console.log(data.policyDetails.length);
