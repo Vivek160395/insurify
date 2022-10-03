@@ -4,6 +4,7 @@ import { RecommendationServiceService } from '../Services/recommendation-service
 import { Chart, registerables } from 'chart.js'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { LoginService } from '../Services/login.service';
 
 interface BoughtDetails {
   PolicyName: string;
@@ -16,7 +17,7 @@ var data12: any[] = [];
   styleUrls: ['./insurance-provider.component.css']
 })
 export class InsuranceProviderComponent implements OnInit, AfterViewInit {
-  constructor(private elementRef: ElementRef, private route: Router, private service: RecommendationServiceService) {
+  constructor(private elementRef: ElementRef, private route: Router, private service: RecommendationServiceService, private loginService: LoginService) {
     Chart.register(...registerables)
   }
   myChart1: any = [];
@@ -24,8 +25,22 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
     this.service.policyNo = id;
     this.route.navigateByUrl("/policyDetails");
   }
+  insurer: any = '';
+  others: any = '';
   ELEMENT_DATA: BoughtDetails[] = [];
   ngOnInit(): void {
+    console.log(this.service.userType);
+    // console.log(this.service.userType);
+    if (this.service.userType == "Insurer") {
+      this.insurer = false;
+      this.others = true;
+    } else {
+      this.insurer = true;
+      this.others = false;
+    }
+    console.log(this.insurer);
+    console.log(this.others);
+
     this.getAllPolicies();
     var ctx = this.elementRef.nativeElement.querySelector("#myChart ").getContext('2d');
     this.myChart1 = new Chart(ctx, {
@@ -60,8 +75,10 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
       this.policies = data;
       for (var i = 0; i < this.policies.length; i++) {
         var num = Math.floor(Math.random() * 256);
-        this.colors.push(`rgb(${num},${num},${num})`)
-        console.log(this.colors);
+        var num1 = Math.floor(Math.random() * 256);
+        var num2 = Math.floor(Math.random() * 256);
+        this.colors.push(`rgb(${num},${num1},${num2})`)
+        // console.log(this.colors);
       }
       // console.log(this.policies);
       for (var i = 0; i < data.length; i++) {
@@ -79,7 +96,7 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
           // console.log(this.countofusersBountInsurance);
         })
       }
-      // console.log(this.policynamesofInsurance);
+      console.log(this.policynamesofInsurance);
       this.totalLength = this.policynamesofInsurance.length;
     })
 

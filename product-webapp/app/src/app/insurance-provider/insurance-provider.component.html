@@ -1,10 +1,13 @@
-<div style="margin:30px 0;background-color:white ;">
+<div [hidden]="others" style="padding:50px 50px;background-color:white ;">
+    <p style="font-size: 40px;margin: 30px 0;">403 Access Forbidden</p>
+    <p style="font-size: 25px;margin:20px 0"> You are not allowded to access this page</p>
+</div>
 
+<div style="margin:30px 0;background-color:white ;" [hidden]="insurer">
     <div class="mat-elevation-z4 column" id="insurance1">
         <div>
             <h1 style="text-align: center;font-size:70px;padding: 30px;color: blue;">Insurances</h1>
         </div>
-        <!-- <hr> -->
         <div style="margin:20px 0">
             <div class="row">
                 <div class="col-6">
@@ -25,20 +28,20 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6" style="text-align: center;">
+                            <div class="col-6">
                                 <div *ngFor=" let item of policynamesofInsurance | paginate: { itemsPerPage :4,
                                 currentPage :page,
                                 totalItems:totalLength
                                } ">
-                                    <p style="margin: 25px 0;">{{item}}</p>
+                                    <p style="margin: 25px;">{{item}}</p>
                                 </div>
                             </div>
-                            <div class="col-6" style="text-align: center;">
+                            <div class="col-6">
                                 <div *ngFor=" let item of countofusersBountInsurance | paginate: { itemsPerPage :4,
                                 currentPage :page,
                                 totalItems:totalLength
                                }">
-                                    <p style="margin: 25px 0;">{{item}}</p>
+                                    <p style="margin: 25px;text-align: end;">{{item}}</p>
                                 </div>
                             </div>
                         </div>
