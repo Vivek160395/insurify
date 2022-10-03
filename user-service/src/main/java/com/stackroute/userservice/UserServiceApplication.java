@@ -16,9 +16,21 @@ import org.springframework.web.filter.CorsFilter;
 @SpringBootApplication
 public class UserServiceApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(UserServiceApplication.class, args);
-  }
+// <<<<<<< HEAD
+
+	public static void main(String[] args) {SpringApplication.run(UserServiceApplication.class, args);
+	}
+
+// <<<<<<< HEAD
+// =======
+
+
+// >>>>>>> c2ed7039a1a5c2884c8b05f9b8385e787799d334
+// =======
+//   public static void main(String[] args) {
+//     SpringApplication.run(UserServiceApplication.class, args);
+//   }
+// >>>>>>> 3877bd951680972b7e83b17589226bb970254a65
 
   // @Bean
   // FilterRegistrationBean jwtFilter(){
