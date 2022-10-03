@@ -8,8 +8,8 @@ export class RenewalService {
 
   constructor(private http:HttpClient) { }
 
-  customerPolicyId = "30153115";
-  email = "vijayy@gmail.com"
+  customerPolicyId = "50640911";
+  email = "sreekanth@gmail.com"
 
   userPolicyDetails():Observable<any>{
     return this.http.get("http://localhost:8084/api/get/"+this.customerPolicyId);

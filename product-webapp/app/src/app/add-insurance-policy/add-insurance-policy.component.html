@@ -1,8 +1,8 @@
 <div style="position:absolute;width: 100%;" fxLayout="column">
-    <div>Validity :{{check_validity()}} Validity 1 :{{check_validity1()}} Validity 2:{{check_validity2()}} Validity
+    <!-- <div>Validity :{{check_validity()}} Validity 1 :{{check_validity1()}} Validity 2:{{check_validity2()}} Validity
         3:{{check_validity3()}}</div>
     <button mat-raised-button (click)="modifyform()">Editing</button>
-    <button mat-raised-button (click)="fill_form()">Produce Insurance</button>
+    <button mat-raised-button (click)="fill_form()">Produce Insurance</button> -->
     <mat-stepper #stepper>
         <mat-step [stepControl]="insuranceForms">
             <mat-card style="width: 100%;">
@@ -68,7 +68,6 @@
                                 </mat-form-field>
 
                                 <div fxFlexAlign="center" fxFlex="2%" *ngIf="flags[i]">
-                                    <!-- <mat-icon><a (click)="removeDetails1(i)">remove_circle_outline</a></mat-icon> -->
                                     <mat-icon><a (click)="addDetails1(i)">add</a></mat-icon>
                                 </div>
 
