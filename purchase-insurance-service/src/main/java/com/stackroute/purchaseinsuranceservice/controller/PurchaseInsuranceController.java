@@ -49,7 +49,7 @@ public class PurchaseInsuranceController {
     @GetMapping("/policies/{insuranceId}")
     public ResponseEntity<?> getPolicyByInsurancePolicyId(@PathVariable String insuranceId) {
         try {
-            return new ResponseEntity<>(purchaseService.getCustomerInsurancesByInusranceId(insuranceId),
+            return new ResponseEntity<>(purchaseService.getCustomerInsurancesByInsuranceId(insuranceId),
                     HttpStatus.ACCEPTED);
         } catch (NoInsuranceFoundException noInsuranceFoundException) {
             return new ResponseEntity<>("No Insurance Found", HttpStatus.NOT_FOUND);

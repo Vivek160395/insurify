@@ -64,7 +64,7 @@ export class RenewalPolicyComponent implements OnInit {
         }
       }
       )
-    })//closing first subscribe
+    })
   }
 
   data: any = {
@@ -85,7 +85,6 @@ export class RenewalPolicyComponent implements OnInit {
       this.selectedItems = this.selectedItems.filter(m => m != i)
 
     }
-    // console.log(this.selectedItems);
   }
   calculate_premium() {
     // console.log(this.myModel);
@@ -105,13 +104,12 @@ export class RenewalPolicyComponent implements OnInit {
     this.data.customerPolicyId = this.renewalService.customerPolicyId;
     this.data.date = this.date;
     this.data.premium = this.totalPremium;
-    // console.log(this.data.premium);
     this.data.duration = this.duration[this.myModel];
-    // console.log(this.data.duration);
+
     for(let i=0;i<this.selectedItems.length;i++){
       this.data.addOnName[i] = this.addOnName[this.selectedItems[i]];
-      console.log(this.data.addOnName);
     }
+
     this.renewalService.updateData(this.data).subscribe(res => {
       res = this.data;
       console.log(res);
