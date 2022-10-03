@@ -13,7 +13,9 @@
                 <mat-card-actions>
                     <div fxLayout="row" class="Details">
                         <mat-card fxFlex="35%" style="background-color: azure;">
-                            <mat-card-subtitle>Give beneficiaries details</mat-card-subtitle>
+                            <mat-card-subtitle *ngIf="isHealth">Give Beneficiaries details</mat-card-subtitle>
+                            <mat-card-subtitle *ngIf="isAuto">Select Vehicle Model below</mat-card-subtitle>
+                            <mat-card-subtitle *ngIf="isLife">Give Annual Income below</mat-card-subtitle>
                             <mat-card-actions>
                                 <div fxLayout="row" class="inputDetails">
                                     <div fxLayout="column">
@@ -147,19 +149,19 @@
             <div fxLayout="column" class="Container">
                 <div fxLayout="row" class="SumInsured-And-Duration" style="display: flex;justify-content: center;align-items: center;">
                     <mat-card fxFlex="100%" style="background-color:beige">
-                        <mat-card-title style="font-family: cursive;">Select Sum Insured and Duration</mat-card-title>
+                        <mat-card-title style="font-family: cursive;">Select Sum Insured and Duration for the policy</mat-card-title>
                         <mat-card-actions>
                             <div fxLayout="column">
                                 <div fxLayout="row" fxLayoutGap="2%">
-                                    <mat-form-field appearance="outline">
+                                    <mat-form-field appearance="outline" fxFlex="25%">
                                         <mat-label>Sum Insured</mat-label>
-                                        <mat-select placeholder="Sum Insured" [(ngModel)]="selectedValue" (selectionChange)="on_suminsured_select($event.value)" formControlName="sumInsured">
+                                        <mat-select placeholder="Sum Insured"  [(ngModel)]="selectedValue" (selectionChange)="on_suminsured_select($event.value)" formControlName="sumInsured">
                                             <mat-option value="{{x}}" *ngFor="let x of sortedsuminsured">{{x}}
                                             </mat-option>
                                         </mat-select>
                                         <small style="color: red;" *ngIf="userForm.controls.sumInsured.errors?.['required'] && userForm.controls.sumInsured.invalid && (userForm.controls.sumInsured.touched || userForm.controls.sumInsured.dirty)">*Required</small>
                                     </mat-form-field>
-                                    <mat-form-field appearance="outline">
+                                    <mat-form-field appearance="outline" fxFlex="25%">
                                         <mat-label>Policy Duration</mat-label>
                                         <mat-select placeholder="policy Duration" [(ngModel)]="selectedDuration" formControlName="duration" (selectionChange)="on_duration_select($event.value);">
                                             <mat-option value="{{x}}" *ngFor="let x of sortedduration">{{x}}
@@ -437,12 +439,13 @@
     </mat-step>
 
     <mat-step *ngIf="isHealth && (+adultValue + +kidValue)>0">
+
         <form [formGroup]="userForm">
             <div formArrayName="insuredInfo">
                 <div *ngFor="let x of [].constructor(+adultValue + +kidValue);let i = index;" formGroupName="{{i}}">
                     <ng-template matStepLabel>Health details</ng-template>
                     <mat-card>
-                        <!-- <div>{{i+xy}}</div> -->
+                       
                         <div fxLayout="row" *ngIf="i<adultValue">
                             <h3 style="font-family: cursive;">Adult {{i+1}} details</h3>
                         </div>
@@ -455,35 +458,27 @@
                                 <mat-select placeholder="Relationship with Applicant" formControlName="relation">
                                     <mat-option value="{{x}}" *ngFor="let x of relationlist">{{x}}</mat-option>
                                 </mat-select>
-                                <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
+                               
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-label>Name</mat-label>
                                 <input matInput placeholder="Name" required formControlName="nameof">
-                                <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
-
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-label>Date of Birth</mat-label>
-                                <input placeholder="Nominee Date Of Birth" type="date"
+                                <input placeholder="Insured Date Of Birth" type="date" matInput
                                     formControlName="insuredDOB" required>
-                                    
-                                <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
-
-                            </mat-form-field>
+                            </mat-form-field> 
                         </div>
                         <div fxLayout="row" fxLayoutGap="2%">
                             <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-label>Weight</mat-label>
-                                <input matInput placeholder="weight" required formControlName="weight">
-                                <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
+                                <input matInput placeholder="weight" required formControlName="weight">                       
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-label>Height(cms)</mat-label>
-                                <input matInput placeholder="Height(in cms)" required formControlName="height">
-                                <!-- <small  style="color: red;" *ngIf="userForm.controls.address.errors?.['required'] && userForm.controls.address.invalid && (userForm.controls.address.touched || userForm.controls.address.dirty)">*Required</small> -->
+                                <input matInput placeholder="Height(in cms)" required formControlName="height">                       
                             </mat-form-field>
-
                             <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-select placeholder="Pre Existing Illness?" formControlName="preExistingIllness">
                                     <mat-option value="Yes">YES</mat-option>
@@ -496,15 +491,14 @@
                                 <mat-label>Pre existing disease</mat-label>
                                 <mat-select placeholder="Choose pre existing disease" multiple formControlName="illnessList">
                                     <mat-option value="{{x}}" *ngFor="let x of diseaselist">{{x}}</mat-option>
-                                </mat-select>
-                                <!-- <small  style="color: red;" *ngIf="userForm.controls.illnessList.errors?.['required'] && userForm.controls.illnessList.invalid && (userForm.controls.illnessList.touched || userForm.controls.illnessList.dirty)">*Required</small> -->
+                                </mat-select>                             
                             </mat-form-field>
                         </div>
 
                     </mat-card>
                 </div>
             </div>
-
+            
             <div fxLayout="row">
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button (click)="stepper.reset()">Reset</button>
@@ -512,8 +506,9 @@
                 <button mat-raised-button [disabled]="check_validity()" color="primary" (click)="proceedPayment()" fxFlex="30%" style="margin-left: auto;">Buy</button>
             </div>
         </form>
+        
     </mat-step>
-    <mat-step *ngIf="!(isAuto||isHealth||isLife)">
+    <!-- <mat-step *ngIf="!(isAuto||isHealth||isLife)">
         <ng-template matStepLabel>Done</ng-template>
         <p>You are now done.</p>
         <div>
@@ -522,5 +517,5 @@
             <button mat-button (click)="stepper.reset()">Reset</button>
             <button mat-button (click)="print()">Print object</button>
         </div>
-    </mat-step>
+    </mat-step> -->
 </mat-stepper>

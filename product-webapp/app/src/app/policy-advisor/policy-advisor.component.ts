@@ -9,19 +9,19 @@ import { Router } from '@angular/router';
 })
 export class PolicyAdvisorComponent implements OnInit {
 
-  constructor(private http: HttpClient,private router:Router) { }
-  policyAdvisors:any;
-  isActive=true
+  constructor(private http: HttpClient, private router: Router) { }
+  policyAdvisors: any;
+  isActive = true
 
   ngOnInit(): void {
     let response = this.http.get("http://localhost:8087/api/v1/policyAdvisors");
-    response.subscribe((data)=>{
+    response.subscribe((data) => {
 
       console.log(data);
-      this.policyAdvisors=data;
+      this.policyAdvisors = data;
       console.log(this.policyAdvisors.yearsOfExperience);
-      
-      
+
+
     })
   }
 

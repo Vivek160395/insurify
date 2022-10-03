@@ -20,67 +20,73 @@ spring:
             allowedMethods: "*"
             allowedHeaders: "*"
             exposedHeaders: "*"
-      routes:
-        - id: authentication-service
-          uri: lb://authentication-service
-          predicates:
-            - Path=/authentication-service/**
-          filters:
-            - RewritePath=/authentication-service(?<segment>/?.*), $\{segment}
 
+      routes:
+        - id: purchase-insurance-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/purchase/**
+          filters:
+            - RewritePath=/purchase(?<segment>/?.*), $\{segment}
 
         - id: user-service
-          uri: lb://user-service
+          uri: http://localhost:8085
           predicates:
-            - Path=/user-service/**
+            - Path=/user/**
           filters:
-            - RewritePath=/user-service(?<segment>/?.*), $\{segment}
+            - RewritePath=/user(?<segment>/?.*), $\{segment}
 
+        - id: authentication-service
+          uri: http://localhost:8086
+          predicates:
+            - Path=/authentication/**
+          filters:
+            - RewritePath=/authentication(?<segment>/?.*), $\{segment}
 
         - id: chat-service
-          uri: lb://chat-service
+          uri: http://localhost:9090
           predicates:
-            - Path=/chat-service/**
+            - Path=/chat/**
           filters:
-            - RewritePath=/chat-service(?<segment>/?.*), $\{segment}
-
-
-        - id: product-service
-          uri: lb://product-service
-          predicates:
-            - Path=/product-service/**
-          filters:
-            - RewritePath=/product-service(?<segment>/?.*), $\{segment}
-
+            - RewritePath=/chat(?<segment>/?.*), $\{segment}
 
         - id: email-service
-          uri: lb://email-service
+          uri: http://localhost:8040
           predicates:
-            - Path=/email-service/**
+            - Path=/email/**
           filters:
-            - RewritePath=/email-service(?<segment>/?.*), $\{segment}
+            - RewritePath=/email(?<segment>/?.*), $\{segment}
 
-        - id: product-trading-service
-          uri: lb://product-trading-service
+        - id: insurance-service
+          uri: http://localhost:8010
           predicates:
-            - Path=/product-trading-service/**
+            - Path=/insurance/**
           filters:
-            - RewritePath=/product-trading-service(?<segment>/?.*), $\{segment}
+            - RewritePath=/insurance(?<segment>/?.*), $\{segment}
 
-        - id: product-recommendation-service
-          uri: lb://product-recommendation-service
+        - id: payment-service
+          uri: http://localhost:8025
           predicates:
-            - Path=/product-recommendation-service/**
+            - Path=/payment/**
           filters:
-            - RewritePath=/product-recommendation-service(?<segment>/?.*), $\{segment}
+            - RewritePath=/payment(?<segment>/?.*), $\{segment}
 
-
-        - id: product-webapp
-          uri: lb://product-webapp
+        - id: policy-advisor-service
+          uri: http://localhost:8087
           predicates:
-            - Path=/**
+            - Path=/advisor/**
           filters:
-            - RewritePath=(?<segment>/?.*), $\{segment}
+            - RewritePath=/advisor(?<segment>/?.*),$\{segment}
+
+        - id: recommendation-service
+          uri: http://localhost:9999
+          predicates:
+            - Path=/recommendation/**
+          filters:
+            - RewritePath=/recommendation(?<segment>/?.*), $\{segment}
+
+
+
 
 
 

@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DetailsComponent } from '../details/details.component';
 import { DatePipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-policies',
@@ -14,7 +15,7 @@ import { DatePipe } from '@angular/common';
 })
 export class PoliciesComponent {
 
-  constructor(public dialog: MatDialog, private router: Router, private http: HttpClient, private datePipe: DatePipe) {
+  constructor(public dialog: MatDialog, private router: Router, private http: HttpClient, private datePipe: DatePipe, private snackbar: MatSnackBar) {
     this.currentDate = this.datePipe.transform(this.sysDate, 'yyyy-MM-dd');
      console.log(this.sysDate);
      console.log(this.currentDate);
@@ -69,6 +70,7 @@ export class PoliciesComponent {
 
   title = 'policies-details';
   searchedKeyword!: string;
+  str:string="";
 
   policies = [
     {
@@ -154,5 +156,29 @@ export class PoliciesComponent {
     //   console.log(`Dialog result: ${result}`);
     // });
   }
+
+  renewPolicy(policy:any){
+
+    this.http.get("http://localhost:8010/api/vk1/policy-id/"+policy.insurancePolicyId).subscribe((data:any)=>{
+      // this.description.push(x.policyDescription);
+      // this.policyTitle.push(x.policyName))
+      this.http.get("http://localhost:8084/api/getstatus/"+policy.customerPolicyId).subscribe((x:any)=>{
+        this.str=x;
+        if(this.str==null){
+          this.router.navigateByUrl("/renewal-home");
+        }
+        else{
+          this.openSnackBar(x);
+        }
+      })
+
+
+  })
+}
+
+openSnackBar(message: string) {
+    
+  this.snackbar.open(message, 'Ok',{duration: 6000});
+}
 
 }

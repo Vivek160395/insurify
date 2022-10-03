@@ -113,7 +113,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
     }
 
     @Override
-    public Iterable<CustomerInsurance> getCustomerInsurancesByInusranceId(String insuranceId) throws NoInsuranceFoundException {
+    public Iterable<CustomerInsurance> getCustomerInsurancesByInsuranceId(String insuranceId) throws NoInsuranceFoundException {
         Iterable<CustomerInsurance> customerInsurances;
 
         customerInsurances = purchaseRepository.getCustomerInsuranceByInsurancePolicyId(insuranceId);
@@ -173,6 +173,8 @@ public class PurchaseServiceImplementation implements PurchaseService {
     public boolean renewCustomerPolicy(CustomerRenewal customerRenewal)
             throws PolicyIdNotFoundException, ParseException, PolicyExpiredException {
         RenewDTO renewDTO = new RenewDTO();
+        System.out.println("ID:"+customerRenewal.getCustomerPolicyId());
+
         if (!purchaseRepository.findById(customerRenewal.getCustomerPolicyId()).isPresent()) {
             throw new PolicyIdNotFoundException();
         }
@@ -189,7 +191,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
         String eDay = startDay;
         String ourDate = customerRenewal.getDate();
         System.out.println("Status of : " + (sDay.compareTo(ourDate) < 0 && eDay.compareTo(ourDate) > 0));
-
+        System.out.println("Start Date:"+sDay+ "End Date :"+eDay+"Our date :"+ourDate);
         if (!(sDay.compareTo(ourDate) < 0) || !(eDay.compareTo(ourDate) >= 0)) {
             System.out.println("Cannot renew now because of policy  time interval is not valid");
             return false;
@@ -365,6 +367,8 @@ public class PurchaseServiceImplementation implements PurchaseService {
         if (purchaseRepository.findById(customerPolicyId).isPresent()) {
             CustomerInsurance customerInsurance = purchaseRepository.findById(customerPolicyId).get();
             int index = customerInsurance.getClaimStatus().size() - 1;
+            System.out.println(index);
+            System.out.println(customerInsurance.getClaimSum().size());
             List<String> claimStatus = customerInsurance.getClaimStatus();
 
             List<String> decisionDate = customerInsurance.getDecisionDate();
@@ -490,21 +494,21 @@ public class PurchaseServiceImplementation implements PurchaseService {
                   bmi =10000*usersInfo.get(k).getWeight()/(usersInfo.get(k).getHeight()*usersInfo.get(k).getHeight());
                   if(bmi<18.5f)
                   {
-                    bmiFactor=1.1f;
+                    bmiFactor=1.05f;
                   }
                   else if(bmi>24&&bmi<30f)
                   {
-                      bmiFactor=1.2f;
+                      bmiFactor=1.1f;
                   }
                   else{
-                      bmiFactor=1.3f;
+                      bmiFactor=1.2f;
                   }
                   if(usersInfo.get(k).getIllnessList()!=null){
                   if(usersInfo.get(k).getIllnessList().length<=2)
                   {
-                      diseaseFactor=1.2f;
+                      diseaseFactor=1.1f;
                   } else if (usersInfo.get(k).getIllnessList().length>=3) {
-                      diseaseFactor=1.5f;
+                      diseaseFactor=1.2f;
                   }
                   }
                     if(age[k]<20){
