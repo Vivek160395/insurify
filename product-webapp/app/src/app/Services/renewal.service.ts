@@ -6,23 +6,23 @@ import { Observable } from 'rxjs';
 })
 export class RenewalService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   customerPolicyId = "30153115";
   email = "vijayy@gmail.com"
 
-  userPolicyDetails():Observable<any>{
-    return this.http.get("http://localhost:8084/api/get/"+this.customerPolicyId);
+  userPolicyDetails(): Observable<any> {
+    return this.http.get("http://localhost:8084/api/get/" + this.customerPolicyId);
   }
 
-  getPolicyDetails():Observable<any>{
+  getPolicyDetails(): Observable<any> {
     return this.http.get("http://localhost:8010/api/vk1/policy-id/189989");
   }
 
-  updateData(data: any): Observable<any>{
-    return this.http.put("http://localhost:8084/api/renew",data);
+  updateData(data: any): Observable<any> {
+    return this.http.put("http://localhost:8084/api/renew", data);
   }
 
-  
+
 
 }
