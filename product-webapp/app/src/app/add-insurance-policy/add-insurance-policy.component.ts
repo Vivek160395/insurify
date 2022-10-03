@@ -13,42 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { last } from 'rxjs';
 
 
-export interface bike {
-  value: string;
-  viewValue: string;
-}
 
-export interface bikeCompany {
-  name: string;
-  bikeList: bike[];
-}
-
-export interface car {
-  value: string;
-  viewValue: string;
-}
-
-export interface carCompany {
-  name: string;
-  carList: bike[];
-}
-export interface SumInsured {
-  insuredSum: number;
-}
-export interface Duration {
-  years: number;
-}
-export class policyDetails {
-  constructor(
-    public briefs: string,
-    public descriptions: string) { }
-}
-export class premiumdetails {
-  constructor(
-    public addOnName: string,
-    public addOnDescription: string,
-    public addOnPremiums: number) { }
-}
 @Component({
   selector: 'app-add-insurance-policy',
   templateUrl: './add-insurance-policy.component.html',
@@ -750,69 +715,39 @@ export class AddInsurancePolicyComponent implements OnInit {
 
   }
 }
+export interface bike {
+  value: string;
+  viewValue: string;
+}
 
+export interface bikeCompany {
+  name: string;
+  bikeList: bike[];
+}
 
+export interface car {
+  value: string;
+  viewValue: string;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
- // formData.append("insuranceType",this.obj.insuranceType);
-    // formData.append("policyId",this.obj.policyId);
-    // formData.append("policyName",this.obj.policyName);
-    // formData.append("policyDescription",this.obj.policyDescription);
-    // for(let x of this.obj.policyDetails)
-    // {
-    //   formData.append("policyDetails",x as Blob);
-    // }
-    // for(let x of this.obj.policyBenefits)
-    // {
-    //   formData.append("policyBenefits",x as Blob);
-    // }
-    // for(let x of this.obj.addOnDetails)
-    // {
-    //   formData.append("addOnDetails",x as Blob);
-    // }
-      //  if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-  //   ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
-  //   ||(!control.at(i).value.adults1||!control.at(i).value.adults2||!control.at(i).value.adults3)
-  //   ||(!control.at(i).value.kids||control.at(i).value.adults2||control.at(i).value.adults3||control.at(i).value.adults1)))
-  //   {
-  //     return
-  //   }
-
-      // if((!control.at(i).value.sumInsure||!control.at(i).value.durations)&&
-    // ((!control.at(i).value.premiums)||(!control.at(i).value.premiums||!control.at(i).value.minSalary||!control.at(i).value.maxSalary)
-    // ||(!control.at(i).value.adults1||!control.at(i).value.adults2||!control.at(i).value.adults3)
-    // ||(!control.at(i).value.kids||control.at(i).value.adults2||control.at(i).value.adults3||control.at(i).value.adults1)))
-    // {
-    //   return
-    // }
-        // this.obj.insuranceType=this.insuranceForms.controls['insuranceType'].value!;
-    // this.obj.policyId=this.insuranceForms.controls['policyId'].value!;
-    // this.obj.policyName=this.insuranceForms.controls['policyName'].value!;
-    // this.obj.policyDescription=this.insuranceForms.controls['policyDescription'].value!;
-    // this.obj.policyDetails=this.insuranceForms.controls['policyDetails'].value;
-    // this.obj.policyBenefits=this.insuranceForms.controls['policyBenefits'].value;
-    // this.obj.addOnDetails=this.insuranceForms.controls['addOnDetails'].value;
-    // this.obj.fileSource=this.insuranceForms.controls['fileSource'].value;
-      // obj:Insurance={
-  //   insuranceType:'',
-  //   policyId         :'',
-  //   policyName       :'',
-  //   category         :'',
-  //   policyDescription:'',
-  //   policyDetails    :[],
-  //   policyBenefits   :[],
-  //   addOnDetails     :[],
-  //   policyDocuments  :'',
-  //   fileSource       :'',
-  // } ;
+export interface carCompany {
+  name: string;
+  carList: bike[];
+}
+export interface SumInsured {
+  insuredSum: number;
+}
+export interface Duration {
+  years: number;
+}
+export class policyDetails {
+  constructor(
+    public briefs: string,
+    public descriptions: string) { }
+}
+export class premiumdetails {
+  constructor(
+    public addOnName: string,
+    public addOnDescription: string,
+    public addOnPremiums: number) { }
+}

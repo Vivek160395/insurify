@@ -8,7 +8,7 @@ export class RenewalService {
 
   constructor(private http:HttpClient) { }
 
-  customerPolicyId = "30153115";
+  customerPolicyId = "30153119";
   email = "vijayy@gmail.com"
 
   userPolicyDetails():Observable<any>{
@@ -16,7 +16,7 @@ export class RenewalService {
   }
 
   getPolicyDetails():Observable<any>{
-    return this.http.get("http://localhost:8010/api/vk1/policy-id/189989");
+    return this.http.get("http://localhost:8010/api/vk1/policy-id/50506");
   }
 
   updateData(data: any): Observable<any>{

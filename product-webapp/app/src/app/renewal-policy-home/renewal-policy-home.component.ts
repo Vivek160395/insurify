@@ -12,6 +12,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
 
   category:string = "";
   insuranceType:string = "";
+  policyId: string ="";
 
   ngOnInit():void {
     this.getPolicyDetails()
@@ -42,6 +43,8 @@ export class RenewalPolicyHomeComponent implements OnInit {
       {
         this.insuranceType = res.insuranceType;
         this.category = res.category;
+        this.policyId = res.policyId;
+        console.log(this.policyId);
         console.log(this.category);
         console.log(this.insuranceType);
       }
@@ -51,7 +54,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
       data1 => { console.log(data1)
         if(this.insuranceType === "AutomobileInsurance" && this.category === "car"){
           this.data.customerPolicyId = data1.customerPolicyId;
-          this.data.policyId = data1.insurancePolicyId;
+          this.policyId = data1.insurancePolicyId;
           this.data.insuredName = data1.nameOfNominee;
           this.data.pinCode = data1.pincode;
           this.data.insurancePeriod = data1.duration;
@@ -65,7 +68,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
           }
           else if(this.insuranceType === "AutomobileInsurance" && this.category === "bike"){
             this.data.customerPolicyId = data1.customerPolicyId;
-            this.data.policyId = data1.insurancePolicyId;
+            this.policyId = data1.insurancePolicyId;
             this.data.insuredName = data1.nameOfNominee;
             this.data.pinCode = data1.pincode;
             this.data.insurancePeriod = data1.duration;
@@ -80,7 +83,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
           else if(this.insuranceType === "HealthInsurance"){
             console.log(data1);
             this.data.customerPolicyId = data1.customerPolicyId;
-            this.data.policyId = data1.insurancePolicyId;
+            this.policyId = data1.insurancePolicyId;
             this.data.insuredName = data1.nameOfNominee;
             this.data.pinCode = data1.pincode;
             this.data.insurancePeriod = data1.duration;
@@ -90,7 +93,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
           }
           else if(this.insuranceType === "LifeInsurance"){
             this.data.customerPolicyId = data1.customerPolicyId;
-            this.data.policyId = data1.insurancePolicyId;
+            this.policyId = data1.insurancePolicyId;
             this.data.insuredName = data1.nameOfNominee;
             this.data.pinCode = data1.pincode;
             this.data.insurancePeriod = data1.duration;
