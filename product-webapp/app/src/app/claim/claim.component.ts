@@ -1,24 +1,23 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { StepperOrientation } from '@angular/cdk/stepper';
-import { DecimalPipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { getMatFormFieldMissingControlError } from '@angular/material/form-field';
-import { MatTableDataSource } from '@angular/material/table';
+
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { Claim } from '../claim';
-import { ClaimService } from '../Services/claim.service';
-import { DetailsComponent } from '../details/details.component';
+import { ClaimService } from '../claim.service';
+
 
 
 
 @Component({
   selector: 'app-claim',
   templateUrl: './claim.component.html',
-  styleUrls: ['./claim.component.css']
+  styleUrls: ['./claim.component.css'],
+  providers: [DatePipe],
 })
 
 export class ClaimComponent implements OnInit {
@@ -28,11 +27,13 @@ export class ClaimComponent implements OnInit {
   claimError = '';
   today1 = new Date();
   claimLife: string = "";
+  currentDate = this.datePipe.transform(this.today1, 'yyyy-MM-dd');
+  claimAmount = '';
 
 
   stepperOrientation: Observable<StepperOrientation>;
 
-  constructor(private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, public dialog: MatDialog, private router: Router, private service: ClaimService, public http: HttpClient) {
+  constructor(private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, public dialog: MatDialog, private router: Router, private service: ClaimService, public http: HttpClient, private datePipe: DatePipe) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
@@ -41,6 +42,8 @@ export class ClaimComponent implements OnInit {
   ngOnInit(): void {
     this.getDetails()
     this.getpolicy()
+
+
 
   }
 
@@ -81,16 +84,17 @@ export class ClaimComponent implements OnInit {
 
 
 
+
   claimForm = new FormGroup({
     document: new FormControl("", [Validators.required]),
     description: new FormControl("", [Validators.required]),
-    claimType: new FormControl("", [Validators.required]),
-    claimAmount: new FormControl("", [Validators.required]),
-    claimDate: new FormControl("", [Validators.required]),
-    claimSubmissionDate: new FormControl("", [Validators.required]),
-    customerPolicyId: new FormControl(localStorage.getItem('customerPolicyId'), [Validators.required]),
-    insurancePolicyId: new FormControl(localStorage.getItem('policyId'), [Validators.required]),
-    email: new FormControl(localStorage.getItem('email'), [Validators.required]),
+    claimType: new FormControl("",),
+    claimAmount: new FormControl("",),
+    claimDate: new FormControl("",),
+    claimSubmissionDate: new FormControl("",),
+    customerPolicyId: new FormControl(localStorage.getItem('customerpolicyid'),),
+    insurancePolicyId: new FormControl(localStorage.getItem('policyid'),),
+    email: new FormControl(localStorage.getItem('emailid'),),
 
   })
 
@@ -120,6 +124,7 @@ export class ClaimComponent implements OnInit {
       info => {
         console.log(info);
 
+
         this.data.insurancePolicyId = info.insurancePolicyId;
         this.data.customerPolicyId = info.customerPolicyId;
         this.data.insuredName = info.name;
@@ -132,9 +137,12 @@ export class ClaimComponent implements OnInit {
         this.data.premium = info.premium;
         this.data.nomineeName = info.nameOfNominee;
         this.data.nomineeDOB = info.nomineeDOB;
-        localStorage.setItem('policyId', info.insurancePolicyId);
-        localStorage.setItem('customerPolicyId', info.customerPolicyId);
-        localStorage.setItem('email', info.email);
+        localStorage.setItem('policyid', info.insurancePolicyId);
+        localStorage.setItem('customerpolicyid', info.customerPolicyId);
+        localStorage.setItem('emailid', info.email);
+
+
+
 
         if (this.data.insuranceType === 'AutoMobileInsurance') {
           this.data.category = info.automobileInsurance.category;
@@ -150,12 +158,18 @@ export class ClaimComponent implements OnInit {
           this.data.name = info.healthInsurance.insuredInfo[0].name;
           this.data.relation = info.healthInsurance.insuredInfo[0].relation;
         }
-        this.data.maritalStatus = info.lifeInsurance.maritalStatus;
-        this.data.occupation = info.lifeInsurance.occupation;
-        this.data.organisationType = info.lifeInsurance.organisationType;
-        this.data.annualIncome = info.lifeInsurance.annualIncome;
+        else if (this.data.insuranceType === 'LifeInsurance') {
+          this.claimAmount = info.sumInsured.toString();
+          this.claimForm.patchValue({
+            claimAmount: this.claimAmount
 
+          });
+          this.data.maritalStatus = info.lifeInsurance.maritalStatus;
+          this.data.occupation = info.lifeInsurance.occupation;
+          this.data.organisationType = info.lifeInsurance.organisationType;
+          this.data.annualIncome = info.lifeInsurance.annualIncome;
 
+        }
 
 
 
@@ -217,11 +231,12 @@ export class ClaimComponent implements OnInit {
     },
       (err) => {
         this.claimError = err.error.text;
-        this.http.put("http://localhost:8084/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
+        this.http.put("http://localhost:8080/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
           .subscribe((data: any) => { console.log(data) });
         console.log(err.error.text)
         console.log(this.claimForm.value);
       });
+
   }
   get insurancex() {
     return this.data.insuranceType;
