@@ -60,7 +60,8 @@ const routes: Routes = [
       { path: "policyDetails", component: InsuranceDetailsComponent },
       { path: "claim", component: ClaimComponent },
       { path: "InsuranceDetails", component: InsuranceDetailsComponent },
-      { path: "edit-insurance", component: EditInsuranceComponent },]
+      { path: "edit-insurance", component: EditInsuranceComponent },
+    { path: "chat", component: ChatComponent}]
   },
   // { path: "login", component: LoginComponent }
 

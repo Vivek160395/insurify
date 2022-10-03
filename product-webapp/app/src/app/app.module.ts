@@ -83,6 +83,7 @@ import { RegisteredPoliciesComponent } from './registered-policies/registered-po
 import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
 import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -115,7 +116,8 @@ import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.componen
     PolicyAdvisorUpdateComponent,
     RegisteredPoliciesComponent,
     RegisteredPolicyBuyersComponent,
-    PolicyAdvisorComponent
+    PolicyAdvisorComponent,
+  
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
