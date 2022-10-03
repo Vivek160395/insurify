@@ -1,29 +1,45 @@
 
-<div style="background-color:white;">
-<div class="row" style=" display: flex;flex-wrap: wrap;background-color: white;height: 500px;margin: 0px ;">
-
-    <div class=col-3 style=" margin: 40px 0 0 80px;display: block;color: black; background-color: white;border: 2px solid blue;" >
-        
-        <div style="margin: 20px 10px;font-size:large;
+<div>
+<div class="row" style=" display: flex;flex-wrap: wrap;background-color: white;">
+   <div class=col-3 style=" margin: 40px 0 0 80px;display: block;color: black; border: 2px solid skyblue;background-color: cadetblue;
+   height: 600px;overflow-y: auto;" >
+       <div style="margin: 20px 10px;font-size:large;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"
         *ngFor="let x of names" (click)="getMsgsByName(x) ">
-          <div >{{x}}</div>
-           <hr>
-        </div>
+          <div style="padding:5px;background-color: aliceblue;cursor: pointer;">{{x}}</div>
+      </div>
    </div>
-    <div class=col-7 style=" margin: 40px 0 0 5px;display: block;color: black; background-color:white;border: 2px solid blue;">
-    <div [hidden]=" showMsgs">
+    <div class=col-8 style=" margin: 40px 0 0 0px;color: black; ">
+      <div [hidden]="!showMsgs">
+        <div style="border:2px solid skyblue ;height:600px; border-bottom:50px solid cadetblue ;
+        background-color: azure;font-size: xx-large;font-family: 'Times New Roman', Times, serif;
+        display: flex;align-items: center;justify-content: center;padding: 10px;white-space: pre-line;">
+           <div>Chat Web</div>
+           <div>Enjoy uninterrupted online communication service</div>
+      </div>
+      </div>
+     <div [hidden]=" showMsgs" class="chat-area" >
+         <div class="header" >{{otherId}}</div>
+         <div class="messages">
           <div *ngFor="let x of msg">
-          <div style="margin:10px 0px ; width: fit-content;padding: 5px 10px ;
-          font-family: 'Times New Roman', Times, serif;font-size: large;background-color:skyblue;"
-          *ngIf="!x.show">{{x.msg}}
+          <div class="message other-message" *ngIf="!x.show">
+            <div>
+                {{x.msg}}
+            </div>
           </div>
+          <div class="message my-message" *ngIf="x.show">
+            <div >{{x.msg}}</div>
+            </div>
           </div>
-          <div>
-            <mat-form-field appearance="outline" style="width:80%;" >
-            <input matInput placeholder="Type Your Message..." autocomplete="off" name="newmessage" [(ngModel)]="chatMsg.msg" >
-            </mat-form-field>
-         <button class="btn btn-primary" (click)="sendMessage()" >Send</button>
+          <div  #endOfChat></div>
+         </div>
+          <div class="input-area">
+            <mat-form-field appearance="outline" style="width:100%;" >
+            <input matInput placeholder="Type Your Message..." autocomplete="off" name="newmessage" [(ngModel)]="chatMsg.msg"
+          (keydown.enter)="sendMessage()" >
+            <button mat-icon-button matSuffix (click)="sendMessage()" >
+            <mat-icon>send</mat-icon></button>
+        </mat-form-field>
         </div>
     </div>
 </div>
@@ -31,25 +47,3 @@
 </div>
 
 
-<!-- <form #loginForm=ngForm>
-    <div>
-        <mat-form-field appearance="outline" style="width:80%;" >
-        <input matInput placeholder="Type Your Message..." autocomplete="off" name="newmessage" [(ngModel)]="newmessage" >
-        </mat-form-field>
-     <button class="btn btn-primary" (click)="sendMessage()" [disabled]="!loginForm.valid">Send</button>
-    </div>
-   </form> -->
-
-<!-- <div *ngFor="let string of greetings">
-    <div class="container">
-     <p>{{string}}</p>
-    </div>
-   </div>
-   <form #loginForm=ngForm>
-    <div>
-     <br>
-     <textarea autocomplete="off" placeholder="Type Your Message..." name="newmessage" [(ngModel)]="newmessage" required></textarea>
-     <button class="btn btn-primary" (click)="sendMessage()" [disabled]="!loginForm.valid">Send</button>
-    </div>
-   </form>
-</div> -->
