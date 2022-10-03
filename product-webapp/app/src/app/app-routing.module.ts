@@ -19,6 +19,8 @@ import { ChatComponent } from './chat/chat.component';
 import { PurchaseInsuranceComponent } from './purchase-insurance/purchase-insurance.component';
 import { EditInsuranceComponent } from './edit-insurance/edit-insurance.component';
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
+import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
+import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
 // import { PersonGuard } from './guard/person.guard';
 
 
@@ -60,7 +62,9 @@ const routes: Routes = [
       { path: "policyDetails", component: InsuranceDetailsComponent },
       { path: "claim", component: ClaimComponent },
       { path: "InsuranceDetails", component: InsuranceDetailsComponent },
-      { path: "edit-insurance", component: EditInsuranceComponent },]
+      { path: "edit-insurance", component: EditInsuranceComponent },
+      { path: "registeredPolicies", component:RegisteredPoliciesComponent},
+      { path: "policyBuyers", component:RegisteredPolicyBuyersComponent}]
   },
   // { path: "login", component: LoginComponent }
 
