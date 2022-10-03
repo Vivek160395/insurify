@@ -17,7 +17,7 @@ import java.time.LocalTime;
 
 @RestController
 @RequestMapping("/pg")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class PaymentController {
 
     @Autowired

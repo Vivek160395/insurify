@@ -21,8 +21,8 @@ import java.util.Map;
 
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/api/v1")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/api/v2")
 public class UserCredentialsController {
 
     private UserCredentialsService userCredentialsService;

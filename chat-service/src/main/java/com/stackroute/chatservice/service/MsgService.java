@@ -42,7 +42,8 @@ public MsgRepos msgRepos;
 
     public Message registerChatRoom(Message message) throws ChatRoomalreadyExistsException{
         if(msgRepos.findById(message.getChatRoomName()).isPresent()){
-            throw new ChatRoomalreadyExistsException();
+           Message message1=msgRepos.findById(message.getChatRoomName()).get();
+           return message1;
         }
         else {
             msgRepos.save(message);
