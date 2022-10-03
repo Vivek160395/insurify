@@ -24,9 +24,9 @@
                 <td>{{policy.customerPolicyId}}</td>
                 <td>{{policy.email}}</td>
                 <td>{{policy.name}}</td>
-                <td><button mat-raised-button color="basic" (click)="getDetails(policy)"> Details </button> </td>
-                <td><button (click)="renew(policy)"> renewal </button></td>
-                <td><button (click)="claim(policy)">claim</button> </td>
+                <td><button mat-stroked-button color="primary" (click)="getDetails(policy)"> Details </button> </td>
+                <td><button mat-stroked-button color="primary" (click)="renew(policy)"> Renewal </button></td>
+                <td><button mat-stroked-button color="primary" (click)="claim(policy)">Claim</button> </td>
              </tr>
           
           </table>
