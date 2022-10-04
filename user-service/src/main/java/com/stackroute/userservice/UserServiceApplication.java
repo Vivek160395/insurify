@@ -15,14 +15,11 @@ import org.springframework.web.filter.CorsFilter;
 @SpringBootApplication
 public class UserServiceApplication {
 
-<<<<<<< HEAD
-	public static void main(String[] args) {SpringApplication.run(UserServiceApplication.class, args);
-	}
-=======
-  public static void main(String[] args) {
-    SpringApplication.run(UserServiceApplication.class, args);
-  }
->>>>>>> 0bc986d0b26c05d70f0c0478cbea6093e54819d8
+    public static void main(String[] args) {
+        SpringApplication.run(UserServiceApplication.class, args);
+    }
+}
+
 
   // @Bean
   // FilterRegistrationBean jwtFilter(){
@@ -44,7 +41,7 @@ public class UserServiceApplication {
   // // config.addAllowedHeader("*");
   // // config.addAllowedMethod("*");
 
-<<<<<<< HEAD
+
 //	@Bean
 //	public FilterRegistrationBean filterRegistrationBean(){
 //		final CorsConfiguration config= new CorsConfiguration();
@@ -59,7 +56,7 @@ public class UserServiceApplication {
 //		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 //		return bean;
 //	}
-=======
+
   // final UrlBasedCorsConfigurationSource source = new
   // UrlBasedCorsConfigurationSource();
   // source.registerCorsConfiguration("/**", config);
@@ -69,5 +66,5 @@ public class UserServiceApplication {
   // return bean;
   // }
 
->>>>>>> 0bc986d0b26c05d70f0c0478cbea6093e54819d8
-}
+
+//}

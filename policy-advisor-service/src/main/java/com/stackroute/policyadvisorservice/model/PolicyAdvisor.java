@@ -29,7 +29,7 @@ public class PolicyAdvisor {
 
     private String dateOfBirth;
 
-    private long aadharNo;
+    private String aadharNo;
 
     private String panNo;
 

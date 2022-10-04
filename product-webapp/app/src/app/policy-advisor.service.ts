@@ -11,12 +11,34 @@ export class PolicyAdvisorService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = "http://localhost:8087/api/v1/policyAdvisorRating/{emailId}"
+  baseUrl1 = "http://localhost:8087/api/v1/updateDetails/"
+
+  baseUrl2 = "http://localhost:8087/api/v1/"
+
+  getUserDetails():Observable<any>{
+    return this.http.get(this.baseUrl2+"policyAdvisors");
+  }
   
-  updateAdvisorDetails(policyAdvisor: PolicyAdvsior, profilePic:File): Observable<Object>{
+  updateAdvisorDetails(policyAdvisor: PolicyAdvsior, emailId: string, profilePic:File): Observable<Object>{
+    const formData=new FormData();
     console.log(policyAdvisor);
-    return this.http.put(`${this.baseUrl}`,policyAdvisor);
+    
+    formData.append("updateInfo", JSON.stringify(policyAdvisor));
+    formData.append("imageFile", profilePic);
+    //return this.http.put(`${this.baseUrl}`,policyAdvisor);
+    return this.http.put(this.baseUrl1 + emailId, formData);
   }
 
+  //  updateDetails(info:any):Observable<any>{
+  //   return this.http.put(this.baseurl+"updateUserDetails/"+this.email1,info);
+  //    }
+
+  url = "http://localhost:8087/api/v1/update/"
+
+  updateAdvisorWithoutImage(policyAdvisor:PolicyAdvsior, emailId: string): Observable<Object>{
+    console.log(policyAdvisor);
     
+   
+    return this.http.put(this.url + emailId,policyAdvisor);
+  }
 }

@@ -1,6 +1,8 @@
 import { LoginComponent } from "./login/login.component";
 
 export class PolicyAdvsior {
+
+    emailId!: string;
     name!:string;
     gender!: string;
     dateOfBirth!: string;
@@ -9,7 +11,7 @@ export class PolicyAdvsior {
 
     panNo!: string;
 
-    YearsOfExperience!: Number;
+    yearsOfExperience!: Number;
 
     // List<String> category;
 
