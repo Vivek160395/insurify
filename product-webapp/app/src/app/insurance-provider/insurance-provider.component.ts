@@ -28,9 +28,26 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
   insurer: any = '';
   others: any = '';
   ELEMENT_DATA: BoughtDetails[] = [];
+  countData: any;
+  policies: any = [];
+  countofusersBountInsurance: any[] = [];
+  policynamesofInsurance: any[] = [];
+  count = 0;
+  colors: any[] = [];
+  page: number = 1;
+  totalLength: any;
+  chartCount: any = [];
+  chartPolicyName: any = [];
+  policyName: any;
+  policyType: any;
+  pic: any;
+  imageType: any;
+  count2 = 0;
+  displayedColumns: string[] = ['PolicyName', 'Bought'];
+  dataSource: any = [];
+  countOfInsurances: any = [];
   ngOnInit(): void {
     console.log(this.service.userType);
-    // console.log(this.service.userType);
     if (this.service.userType == "Insurer") {
       this.insurer = false;
       this.others = true;
@@ -43,34 +60,28 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
 
     this.getAllPolicies();
     var ctx = this.elementRef.nativeElement.querySelector("#myChart ").getContext('2d');
-    this.myChart1 = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: this.policynamesofInsurance,
-        datasets: [{
-          label: 'My First Dataset',
-          data: [10, 20, 30, 40, 50, 60],
-          // backgroundColor: ["rgb(189,126,91)",
-          //   "rgb(30,105,122)",
-          //   "rgb(114,151,164)",
-          //   "rgb(206,181,111)",
-          //   "rgb(30,75,91)",
-          //   "rgb(94,119,125)"]
-          backgroundColor: this.colors
-        }]
-      }
-    });
+    var dat = this.policynamesofInsurance;
+    var chartData = this.countofusersBountInsurance;
+    var colors = this.colors;
+    setTimeout(() => {
+      this.myChart1 = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: dat,
+          datasets: [{
+            label: "Count Of users",
+            data: chartData,
+            fill: false,
+            borderColor: '#de7219',
+            backgroundColor: '#de7219',
+            tension: 0.1
+          }]
+        }
+      });
+    }, 2000)
   }
-  countData: any;
-  policies: any = [];
-  countofusersBountInsurance: any[] = [];
-  policynamesofInsurance: any[] = [];
-  count = 0;
-  colors: any[] = [];
-  page: number = 1;
-  totalLength: any;
+
   getAllPolicies() {
-    // console.log(this.colors);
     this.service.getuserPolicies(this.service.userEmail).subscribe(data => {
       this.policies = data;
       for (var i = 0; i < this.policies.length; i++) {
@@ -78,22 +89,13 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
         var num1 = Math.floor(Math.random() * 256);
         var num2 = Math.floor(Math.random() * 256);
         this.colors.push(`rgb(${num},${num1},${num2})`)
-        // console.log(this.colors);
       }
-      // console.log(this.policies);
       for (var i = 0; i < data.length; i++) {
         this.policynamesofInsurance[this.count] = data[i].policyName;
         this.count += 1;
         this.service.getCountOfUsersBoughtInsurance(data[i].policyId).subscribe(da => {
-          // this.countData = {
-          //   "PolicyName": `${data[this.count2].policyName}`,
-          //   "Bought": da
-          // }
-          // this.ELEMENT_DATA.push(this.countData);
-          // this.dataSource = this.ELEMENT_DATA;
           this.countofusersBountInsurance[this.count2] = da;
           this.count2 += 1;
-          // console.log(this.countofusersBountInsurance);
         })
       }
       console.log(this.policynamesofInsurance);
@@ -101,16 +103,7 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
     })
 
   }
-  chartCount: any = [];
-  chartPolicyName: any = [];
-  policyName: any;
-  policyType: any;
-  pic: any;
-  imageType: any;
-  count2 = 0;
-  displayedColumns: string[] = ['PolicyName', 'Bought'];
-  dataSource: any = [];
-  countOfInsurances: any = [];
+
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

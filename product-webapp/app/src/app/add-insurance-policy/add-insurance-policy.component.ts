@@ -347,11 +347,11 @@ export class AddInsurancePolicyComponent implements OnInit {
     formData.append("imageFile", this.insuranceForms.controls['fileSource'].value!);
     formData.append("policyId", this.id.toString())
     console.log(formData)
-    this.http.post<Insurance>("http://localhost:8010/api/vk1/life-policy", this.insuranceForms.value).subscribe(
+    this.http.post<Insurance>("http://localhost:8080/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
       (data: any) => {
         console.log(data);
         if (this.filestatus)
-          this.http.put("http://localhost:8010/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
+          this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
             .subscribe((data: any) => { console.log(data) });
       });
     console.log(this.insuranceForms.value)

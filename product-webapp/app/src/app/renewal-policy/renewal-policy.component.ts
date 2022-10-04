@@ -1,7 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Insurance } from '../insurance';
+import { RenewCompletionComponent } from '../renew-completion/renew-completion.component';
 import { RenewalService } from '../Services/renewal.service';
 
 @Component({
@@ -27,7 +29,7 @@ export class RenewalPolicyComponent implements OnInit {
   selectedItems: any[] = []
 
 
-  constructor(private renewalService: RenewalService, private http: HttpClient) {
+  constructor(private renewalService: RenewalService, private http: HttpClient, private dialog: MatDialog) {
     this.myModel = 0;
   }
 
@@ -36,24 +38,17 @@ export class RenewalPolicyComponent implements OnInit {
   date = this.pipe.transform(this.today, 'yyyy-MM-dd')
 
   ngOnInit(): void {
-    // localStorage.getItem(customerPolicyId);
     this.myModel = 0
-    this.http.get('http://localhost:8010/api/vk1/policy-id/11223344').subscribe((x: any) => {
-      this.http.put<Insurance>("http://localhost:8080/api/testing/30153115", x).subscribe((data: any) => {
-        // console.log("Inside retrived insurance success");
-        // console.log(data.policyDescription);
-        // console.log(data.policyDetails.length);
-        // console.log(data.addOnDetails.length);
+    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/11223344').subscribe((x: any) => {
+      this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/30153115", x).subscribe((data: any) => {
+     
         this.policyDescription = data.policyDescription;
         this.policyTitle = data.policyName;
         this.policyType = data.insuranceType;
-        // console.log(this.policyType);
+
 
         if (this.policyType == "AutoMobileInsurance") {
           this.policySubType = data.category;
-        }
-        if (this.policyType == "HealthInsurance") {
-
         }
         for (let i = 0; i < data.policyDetails.length; i++) {
           this.premium.push(data.policyDetails[i].premiums);
@@ -66,7 +61,7 @@ export class RenewalPolicyComponent implements OnInit {
         }
       }
       )
-    })//closing first subscribe
+    })
   }
 
   data: any = {
@@ -87,19 +82,13 @@ export class RenewalPolicyComponent implements OnInit {
       this.selectedItems = this.selectedItems.filter(m => m != i)
 
     }
-    // console.log(this.selectedItems);
   }
   calculate_premium() {
-    // console.log(this.myModel);
-    // console.log(this.addOnPrice);
-    // console.log(this.selectedItems);
     this.totalPremium = 0;
+
     for (let i = 0; i < this.selectedItems.length; i++) {
-      // console.log(this.addOnPrice[this.selectedItems[i]]);
       this.totalPremium = this.totalPremium + this.addOnPrice[this.selectedItems[i]];
     }
-    //  console.log('Premium : '+this.premium[+this.myModel]);
-
     this.totalPremium = this.totalPremium + this.premium[+this.myModel]
     return this.totalPremium;
   }
@@ -107,14 +96,16 @@ export class RenewalPolicyComponent implements OnInit {
     this.data.customerPolicyId = this.renewalService.customerPolicyId;
     this.data.date = this.date;
     this.data.premium = this.totalPremium;
-    console.log(this.data.premium);
     this.data.duration = this.duration[this.myModel];
-    console.log(this.data.duration);
-    this.data.addOnName = this.addOnName;
-    console.log(this.data.addOnName);
+
+    for(let i=0;i<this.selectedItems.length;i++){
+      this.data.addOnName[i] = this.addOnName[this.selectedItems[i]];
+    }
+
     this.renewalService.updateData(this.data).subscribe(res => {
       res = this.data;
       console.log(res);
+      this.dialog.open(RenewCompletionComponent);
     })
   }
 }
