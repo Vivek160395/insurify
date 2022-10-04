@@ -65,14 +65,16 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
     var colors = this.colors;
     setTimeout(() => {
       this.myChart1 = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
           labels: dat,
           datasets: [{
-            data: [1, 2, 3, 4, 5, 6],
-            backgroundColor: colors,
-            borderColor: colors,
-            borderWidth: 1
+            label: "Count Of users",
+            data: chartData,
+            fill: false,
+            borderColor: '#de7219',
+            backgroundColor: '#de7219',
+            tension: 0.1
           }]
         }
       });

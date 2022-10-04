@@ -6,14 +6,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor(){}
+  constructor() { }
 
 
   ngOnInit() {
-    // this.httpClient.get('http://localhost:8010/api/vk1/get/371265')
+    // this.httpClient.get('http://localhost:8080/insurance/api/vk1/get/371265')
     //   .subscribe(
     //     res => {
     //       this.retrieveResponse = res;

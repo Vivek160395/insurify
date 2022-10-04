@@ -11,12 +11,12 @@ export class PolicyAdvisorService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = "http://localhost:8087/api/v1/policyAdvisorRating/{emailId}"
-  
-  updateAdvisorDetails(policyAdvisor: PolicyAdvsior, profilePic:File): Observable<Object>{
+  baseUrl = "http://localhost:8080/advisor/api/v1/policyAdvisorRating/{emailId}"
+
+  updateAdvisorDetails(policyAdvisor: PolicyAdvsior, profilePic: File): Observable<Object> {
     console.log(policyAdvisor);
-    return this.http.put(`${this.baseUrl}`,policyAdvisor);
+    return this.http.put(`${this.baseUrl}`, policyAdvisor);
   }
 
-    
+
 }
