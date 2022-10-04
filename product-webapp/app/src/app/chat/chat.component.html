@@ -4,10 +4,11 @@
    <div class=col-3 style=" margin: 40px 0 0 80px;display: inline;color: black; border: 2px solid skyblue;background-color:white;
    height: 600px;overflow-y: auto;" >
        <div style="margin: 20px 10px;font-size:large;
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;display: flex;
+        justify-content: space-between;"
         *ngFor="let x of names" (click)="getMsgsByName(x)">
           <div class="circle">{{x.charAt(0).toUpperCase()}}</div>
-          <div>{{x}}</div>
+          <div style="margin:auto auto auto 10px;">{{x}}</div>
        </div>
    </div>
     <div class=col-8 style=" margin: 40px 0 0 0px;color: black; ">
@@ -25,12 +26,12 @@
          <div class="messages">
           <div *ngFor="let x of msg">
           <div class="message other-message" *ngIf="!x.show">
-            <div>
+            <div style="border-radius:8.5px ;background-color: rgb(159, 185, 233);">
                 {{x.msg}}
             </div>
           </div>
           <div class="message my-message" *ngIf="x.show">
-            <div >{{x.msg}}</div>
+            <div style="border-radius:8.5px ;background-color:rgb(233, 173, 151);">{{x.msg}}</div>
             </div>
           </div>
           <div  #endOfChat></div>

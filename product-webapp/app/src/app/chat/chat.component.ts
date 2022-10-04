@@ -40,9 +40,9 @@ export class ChatComponent implements OnInit {
   }
 
   registerMsg: any = {
-    "chatRoomName": "null",
-    "userName": null,
-    "advisorName": null
+    "chatRoomName": '',
+    "userName": '',
+    "advisorName": ''
   }
 
   constructor(private http: HttpClient, private service: UserService) {
@@ -53,11 +53,13 @@ export class ChatComponent implements OnInit {
     this.getnames();
   }
 
-  connect(id: any) {
-    if (this.role == "user") {
-      this.registerMsg.userName = this.loginId;
-      this.registerMsg.advisorName = id;
-      this.registerMsg.chatRoomName = this.loginId + "&" + id;
+ connect(id:any){
+    if(this.role=="user"){
+      this.registerMsg.userName=this.loginId;
+      this.registerMsg.advisorName=id;
+      this.registerMsg.chatRoomName=this.loginId+"&"+id;
+      console.log("done");
+      console.log(this.registerMsg);
       this.service.registerChatRoom(this.registerMsg).subscribe(
         data => {
           this.getnames();
@@ -97,13 +99,16 @@ export class ChatComponent implements OnInit {
     this.showMsgs = false;
     this.otherId = id;
     if (this.role == 'user') {
+
       this.service.getMsgs(this.loginId + "&" + this.otherId).subscribe(data => {
+        if(data!=null){
         this.msg = data;
         for (let i: number = 0; i < data.length; i++) {
           if (data[i].id == this.loginId) {
             this.msg[i].show = true;
           }
         }
+      }
       })
     }
     else {
