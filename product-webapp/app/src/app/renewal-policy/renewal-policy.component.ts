@@ -38,12 +38,9 @@ export class RenewalPolicyComponent implements OnInit {
   ngOnInit(): void {
     // localStorage.getItem(customerPolicyId);
     this.myModel = 0
-    this.http.get('http://localhost:8010/api/vk1/policy-id/11223344').subscribe((x: any) => {
-      this.http.put<Insurance>("http://localhost:8080/api/testing/30153115", x).subscribe((data: any) => {
-        // console.log("Inside retrived insurance success");
-        // console.log(data.policyDescription);
-        // console.log(data.policyDetails.length);
-        // console.log(data.addOnDetails.length);
+    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/11223344').subscribe((x: any) => {
+      this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/30153115", x).subscribe((data: any) => {
+     
         this.policyDescription = data.policyDescription;
         this.policyTitle = data.policyName;
         this.policyType = data.insuranceType;
@@ -87,18 +84,16 @@ export class RenewalPolicyComponent implements OnInit {
       this.selectedItems = this.selectedItems.filter(m => m != i)
 
     }
-    // console.log(this.selectedItems);
+    
   }
   calculate_premium() {
-    // console.log(this.myModel);
-    // console.log(this.addOnPrice);
-    // console.log(this.selectedItems);
+
     this.totalPremium = 0;
     for (let i = 0; i < this.selectedItems.length; i++) {
-      // console.log(this.addOnPrice[this.selectedItems[i]]);
+      
       this.totalPremium = this.totalPremium + this.addOnPrice[this.selectedItems[i]];
     }
-    //  console.log('Premium : '+this.premium[+this.myModel]);
+    
 
     this.totalPremium = this.totalPremium + this.premium[+this.myModel]
     return this.totalPremium;
@@ -110,7 +105,13 @@ export class RenewalPolicyComponent implements OnInit {
     console.log(this.data.premium);
     this.data.duration = this.duration[this.myModel];
     console.log(this.data.duration);
-    this.data.addOnName = this.addOnName;
+    let x=[]
+    for(let i=0;i<this.selectedItems.length;i++){
+      this.data.addOnName[i] = this.addOnName[this.selectedItems[i]];
+      console.log(this.data.addOnName);
+    }
+
+
     console.log(this.data.addOnName);
     this.renewalService.updateData(this.data).subscribe(res => {
       res = this.data;

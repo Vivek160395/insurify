@@ -53,7 +53,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
             ci.getStartDate().add(customerInsurancePurchase.getStartDate());
             ci.getEndDate().add(customerInsurancePurchase.getEndDate());
             ci.getPremium().add(customerInsurancePurchase.getPremium());
-            ci.getPurchaseDate().add(customerInsurancePurchase.getPurchaseDate());
+
             ci.getDuration().add(customerInsurancePurchase.getDuration());
             ci.getAddOnName().add(customerInsurancePurchase.getAddOnName());
             ci.setName(customerInsurancePurchase.getName());
@@ -80,7 +80,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
             // purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
 
             purchaseDTO.setSumInsured(customerInsurancePurchase.getSumInsured());
-            purchaseDTO.setPurchaseDate(customerInsurancePurchase.getPurchaseDate());
+
             purchaseDTO.setStartDate(customerInsurancePurchase.getStartDate());
             purchaseDTO.setEndDate(customerInsurancePurchase.getEndDate());
             purchaseDTO.setDuration(customerInsurancePurchase.getDuration());
@@ -208,7 +208,6 @@ public class PurchaseServiceImplementation implements PurchaseService {
         customerInsurance.getEndDate().add(endDate);
         customerInsurance.getPremium().add(customerRenewal.getPremium());
         customerInsurance.getAddOnName().add(customerRenewal.getAddOnName());
-        customerInsurance.getPurchaseDate().add(customerRenewal.getDate());
         customerInsurance.getDuration().add(customerRenewal.getDuration());
         customerInsurance.setRenewalStatus(true);
         purchaseRepository.save(customerInsurance);
