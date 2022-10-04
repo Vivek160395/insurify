@@ -28,8 +28,8 @@ export class ClaimComponent implements OnInit {
   today1 = new Date();
   claimLife: string = "";
   currentDate = this.datePipe.transform(this.today1, 'yyyy-MM-dd');
-  claimAmount='';
-  
+  claimAmount = '';
+
 
   stepperOrientation: Observable<StepperOrientation>;
 
@@ -43,11 +43,11 @@ export class ClaimComponent implements OnInit {
     this.getDetails()
     this.getpolicy()
 
-    
+
 
   }
 
-  
+
 
 
   data: any = {
@@ -88,16 +88,16 @@ export class ClaimComponent implements OnInit {
   claimForm = new FormGroup({
     document: new FormControl("", [Validators.required]),
     description: new FormControl("", [Validators.required]),
-    claimType: new FormControl("", ),
-    claimAmount: new FormControl("", ),
-    claimDate: new FormControl("", ),
-    claimSubmissionDate: new FormControl("", ),
-    customerPolicyId: new FormControl(localStorage.getItem('customerpolicyid'), ),
-    insurancePolicyId: new FormControl(localStorage.getItem('policyid'), ),
-    email: new FormControl(localStorage.getItem('emailid'), ),
+    claimType: new FormControl("",),
+    claimAmount: new FormControl("",),
+    claimDate: new FormControl("",),
+    claimSubmissionDate: new FormControl("",),
+    customerPolicyId: new FormControl(localStorage.getItem('customerpolicyid'),),
+    insurancePolicyId: new FormControl(localStorage.getItem('policyid'),),
+    email: new FormControl(localStorage.getItem('emailid'),),
 
   })
-  
+
 
   public onFileChanged(event: any) {
     console.log(event)
@@ -123,7 +123,7 @@ export class ClaimComponent implements OnInit {
     this.service.getUserDetails().subscribe(
       info => {
         console.log(info);
-        
+
 
         this.data.insurancePolicyId = info.insurancePolicyId;
         this.data.customerPolicyId = info.customerPolicyId;
@@ -159,11 +159,11 @@ export class ClaimComponent implements OnInit {
           this.data.relation = info.healthInsurance.insuredInfo[0].relation;
         }
         else if (this.data.insuranceType === 'LifeInsurance') {
-          this.claimAmount= info.sumInsured.toString();
-        this.claimForm.patchValue({
-          claimAmount: this.claimAmount
-  
-        });
+          this.claimAmount = info.sumInsured.toString();
+          this.claimForm.patchValue({
+            claimAmount: this.claimAmount
+
+          });
           this.data.maritalStatus = info.lifeInsurance.maritalStatus;
           this.data.occupation = info.lifeInsurance.occupation;
           this.data.organisationType = info.lifeInsurance.organisationType;
@@ -202,14 +202,14 @@ export class ClaimComponent implements OnInit {
 
         console.log(info);
         this.data.insuranceType = info.insuranceType;
-         
+
 
       });
 
 
   }
 
- 
+
 
 
   onSubmit() {
@@ -231,12 +231,12 @@ export class ClaimComponent implements OnInit {
     },
       (err) => {
         this.claimError = err.error.text;
-        this.http.put("http://localhost:8084/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
+        this.http.put("http://localhost:8080/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
           .subscribe((data: any) => { console.log(data) });
         console.log(err.error.text)
         console.log(this.claimForm.value);
       });
-      
+
   }
   get insurancex() {
     return this.data.insuranceType;

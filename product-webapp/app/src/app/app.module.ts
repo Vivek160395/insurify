@@ -116,7 +116,8 @@ import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.componen
     PolicyAdvisorUpdateComponent,
     RegisteredPoliciesComponent,
     RegisteredPolicyBuyersComponent,
-    PolicyAdvisorComponent
+    PolicyAdvisorComponent,
+  
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [

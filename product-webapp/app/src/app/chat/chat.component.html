@@ -1,25 +1,27 @@
 
 <div>
 <div class="row" style=" display: flex;flex-wrap: wrap;background-color: white;">
-   <div class=col-3 style=" margin: 40px 0 0 80px;display: block;color: black; border: 2px solid skyblue;background-color: cadetblue;
+   <div class=col-3 style=" margin: 40px 0 0 80px;display: inline;color: black; border: 2px solid skyblue;background-color:white;
    height: 600px;overflow-y: auto;" >
        <div style="margin: 20px 10px;font-size:large;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"
-        *ngFor="let x of names" (click)="getMsgsByName(x) ">
-          <div style="padding:5px;background-color: aliceblue;cursor: pointer;">{{x}}</div>
-      </div>
+        *ngFor="let x of names" (click)="getMsgsByName(x)">
+          <div class="circle">{{x.charAt(0).toUpperCase()}}</div>
+          <div>{{x}}</div>
+       </div>
    </div>
     <div class=col-8 style=" margin: 40px 0 0 0px;color: black; ">
       <div [hidden]="!showMsgs">
         <div style="border:2px solid skyblue ;height:600px; border-bottom:50px solid cadetblue ;
         background-color: azure;font-size: xx-large;font-family: 'Times New Roman', Times, serif;
         display: flex;align-items: center;justify-content: center;padding: 10px;white-space: pre-line;">
-           <div>Chat Web</div>
-           <div>Enjoy uninterrupted online communication service</div>
+           Online Web Chat Services
       </div>
       </div>
      <div [hidden]=" showMsgs" class="chat-area" >
-         <div class="header" >{{otherId}}</div>
+         <div class="header" >
+        <div>{{otherId}}</div>
+        </div>
          <div class="messages">
           <div *ngFor="let x of msg">
           <div class="message other-message" *ngIf="!x.show">

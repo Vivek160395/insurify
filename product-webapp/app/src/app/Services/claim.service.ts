@@ -21,7 +21,7 @@ export class ClaimService {
 
 
   customerPolicyId: string = "11120"
-  baseurl: any = "http://localhost:8084/api/";
+  baseurl: any = "http://localhost:8080/api/";
   getUserDetails(): Observable<any> {
     return this.http.get(this.baseurl + "get/" + this.customerPolicyId);
   }
