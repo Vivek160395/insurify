@@ -35,7 +35,7 @@ export class PoliciesComponent {
   originally bred for hunting.`;
 
   ngOnInit(): void {
-    let response= this.http.get("http://localhost:8084/api/retrieveall/customerinsurances");
+    let response= this.http.get("http://localhost:8080/purchase/api/retrieveall/customerinsurances");
     response.subscribe((data)=>{
       
       console.log(data);
@@ -51,7 +51,7 @@ export class PoliciesComponent {
           this.insuranceTitle.push('NA');
         }
 
-        this.http.get("http://localhost:8010/api/vk1/policy-id/"+this.purchasedPolicies[i].insurancePolicyId).subscribe((x:any)=>{
+        this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+this.purchasedPolicies[i].insurancePolicyId).subscribe((x:any)=>{
             this.description.push(x.policyDescription);
             this.policyTitle.push(x.policyName)
             // this.policyTitle.push(x.insuranceType);
@@ -159,11 +159,15 @@ export class PoliciesComponent {
 
   renewPolicy(policy:any){
 
-    this.http.get("http://localhost:8010/api/vk1/policy-id/"+policy.insurancePolicyId).subscribe((data:any)=>{
-      // this.description.push(x.policyDescription);
+    this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+policy.insurancePolicyId).subscribe((data:any)=>{
+    console.log("hello from renew button");
+      
+    // this.description.push(x.policyDescription);
       // this.policyTitle.push(x.policyName))
-      this.http.get("http://localhost:8084/api/getstatus/"+policy.customerPolicyId).subscribe((x:any)=>{
+      this.http.get("http://localhost:8080/purchase/api/getstatus/"+policy.customerPolicyId, data).subscribe((x:any)=>{
         this.str=x;
+        console.log(x);
+        
         if(this.str==null){
           this.router.navigateByUrl("/renewal-home");
         }

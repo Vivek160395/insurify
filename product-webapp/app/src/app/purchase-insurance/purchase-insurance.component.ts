@@ -234,6 +234,9 @@ getErrorMessage() {
 
   return  '';
 }
+
+
+
 purchase_insurance()
 {
 
@@ -422,7 +425,7 @@ proceedPayment(){
  console.log(customerInsurancePurchase)
  console.log('This is before posting');
  
- this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8084/api/add/customer-insurance',customerInsurancePurchase).subscribe(
+ this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8080/purchase/api/add/customer-insurance',customerInsurancePurchase).subscribe(
   (data:any)=>{
     console.log(data);
   }
@@ -511,8 +514,8 @@ check_validity(){
       }))
     }
    console.log(control1);
-         this.sortedsuminsured=[]   
-      this.httpclient.get('http://localhost:8010/api/vk1/policy-id/12211221').subscribe((data:any)=>{
+      this.sortedsuminsured=[]   
+      this.httpclient.get('http://localhost:8080/insurance/api/vk1/policy-id/413386').subscribe((data:any)=>{
       console.log('Policy ID : '+data.policyId)
       console.log('Policy Name : '+data.policyName)
       

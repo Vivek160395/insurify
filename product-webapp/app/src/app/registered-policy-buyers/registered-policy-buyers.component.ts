@@ -23,7 +23,7 @@ export class RegisteredPolicyBuyersComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    let response= this.http.get("http://localhost:8084/api/policies/"+localStorage.getItem('insurancePolicyId'));
+    let response= this.http.get("http://localhost:8080/purchase/api/policies/"+localStorage.getItem('insurancePolicyId'));
     response.subscribe((data)=>{
       
       console.log(data);
@@ -105,7 +105,7 @@ window.open(fileURL);
 
 acceptClaim(policy:any, status:any, j:any, i:any){
   // window.alert("Your claim is Approved.")
-   this.http.put("http://localhost:8084/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
+   this.http.put("http://localhost:8080/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
     console.log(data);
     policy.claimStatus[i]='approved'
     console.log(policy.claimStatus[i]);
@@ -120,7 +120,7 @@ acceptClaim(policy:any, status:any, j:any, i:any){
 }
 
 rejectClaim(policy:any, status:any, j:any, i:any){
-  this.http.put("http://localhost:8084/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
+  this.http.put("http://localhost:8080/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
     console.log(data);
     policy.claimStatus[i]='rejected'
     console.log(policy.claimStatus[i]);
