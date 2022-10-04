@@ -236,6 +236,8 @@ export class PurchaseInsuranceComponent implements OnInit {
 
     return '';
   }
+
+  
   purchase_insurance() {
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
