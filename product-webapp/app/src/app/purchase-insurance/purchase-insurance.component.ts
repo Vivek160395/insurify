@@ -416,11 +416,11 @@ export class PurchaseInsuranceComponent implements OnInit {
       customerInsurancePurchase.lifeInsurance.healthConditionList = this.userForm.get('lifeillnessList')!.value!
     }
     customerInsurancePurchase.email = localStorage.getItem("email")!
-    customerInsurancePurchase.insurancePolicyId = '1232131'
+    customerInsurancePurchase.insurancePolicyId = `${this.service.policyNo}`
     console.log(customerInsurancePurchase)
     console.log('This is before posting');
 
-    this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8084/api/add/customer-insurance', customerInsurancePurchase).subscribe(
+    this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8080/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
       (data: any) => {
         console.log(data);
       }
@@ -503,7 +503,7 @@ export class PurchaseInsuranceComponent implements OnInit {
     }
     console.log(control1);
     this.sortedsuminsured = []
-    this.httpclient.get(`http://localhost:8010/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
+    this.httpclient.get(`http://localhost:8080/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
       console.log('Policy ID : ' + data.policyId)
       console.log('Policy Name : ' + data.policyName)
 
