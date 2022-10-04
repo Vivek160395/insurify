@@ -21,6 +21,8 @@ import { EditInsuranceComponent } from './edit-insurance/edit-insurance.componen
 import { InsuranceProviderComponent } from './insurance-provider/insurance-provider.component';
 import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
 import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
+import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-advisor-update.component';
+//import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 // import { PersonGuard } from './guard/person.guard';
 
@@ -49,10 +51,15 @@ const routes: Routes =
       { path: "claim", component: ClaimComponent },
       { path: "InsuranceDetails", component: InsuranceDetailsComponent },
       { path: "edit-insurance", component: EditInsuranceComponent },
-      { path: "registeredPolicies", component: RegisteredPoliciesComponent},
-      { path: "policyBuyers", component:RegisteredPolicyBuyersComponent},
-      { path: "policy-advisor", component: PolicyAdvisorComponent}] 
-  }
+    {path: "policy-advisor-update", component: PolicyAdvisorUpdateComponent},
+    { path: "chat", component: ChatComponent},
+    { path: "registeredPolicies", component: RegisteredPoliciesComponent},
+    { path: "policyBuyers", component:RegisteredPolicyBuyersComponent},
+    { path: "policy-advisor", component: PolicyAdvisorComponent}]
+  },
+  // { path: "login", component: LoginComponent }
+
+      
 ];
 
 @NgModule({

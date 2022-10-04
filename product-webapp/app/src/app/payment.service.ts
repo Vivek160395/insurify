@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { Payment } from './payment';
 
 
-const httpOptions ={
-  headers: new HttpHeaders({'Content-Type':'application/json'})
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({

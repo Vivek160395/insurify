@@ -188,7 +188,7 @@ export class EditInsuranceComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.http.get('http://localhost:8010/api/vk1/policy-id/123456').subscribe((data: any) => {
+    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/313911').subscribe((data: any) => {
       this.insuranceobj = data
 
       console.log(this.insuranceobj)
@@ -365,11 +365,11 @@ export class EditInsuranceComponent implements OnInit {
     this.insuranceForms.get('insuranceType')!.enable()
     // }
     console.log(this.insuranceForms.get('insuranceType')!.value)
-    this.http.put<Insurance>("http://localhost:8010/api/vk1/update", this.insuranceForms.value).subscribe(
+    this.http.put<Insurance>("http://localhost:8080/insurance/api/vk1/update", this.insuranceForms.value).subscribe(
       (data: any) => {
         console.log(data);
         if (this.insuranceForms.controls['fileSource'].valid)
-          this.http.put("http://localhost:8010/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
+          this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
             .subscribe((data: any) => { console.log(data) });
       });
     console.log(this.insuranceForms.value)

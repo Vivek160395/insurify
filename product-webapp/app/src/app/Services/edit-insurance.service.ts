@@ -7,9 +7,9 @@ import { Insurance } from '../insurance';
 })
 export class EditInsuranceService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  editInsurance(){
-    return  this.http.get('http://localhost:8010/api/vk1/policy-id/123456')
+  editInsurance() {
+    return this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/123456')
   }
 }

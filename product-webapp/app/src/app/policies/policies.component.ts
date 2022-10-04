@@ -11,23 +11,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-policies',
   templateUrl: './policies.component.html',
   styleUrls: ['./policies.component.css'],
-  providers:[DatePipe]
+  providers: [DatePipe]
 })
 export class PoliciesComponent {
 
   constructor(public dialog: MatDialog, private router: Router, private http: HttpClient, private datePipe: DatePipe, private snackbar: MatSnackBar) {
     this.currentDate = this.datePipe.transform(this.sysDate, 'yyyy-MM-dd');
-     console.log(this.sysDate);
-     console.log(this.currentDate);
+    console.log(this.sysDate);
+    console.log(this.currentDate);
   }
 
-  purchasedPolicies:any;
+  purchasedPolicies: any;
 
   sysDate = new Date();
-  currentDate:any;
-  description: string[]=[];
-  policyTitle: string[]=[];
-  insuranceTitle: string[]=[];
+  currentDate: any;
+  description: string[] = [];
+  policyTitle: string[] = [];
+  insuranceTitle: string[] = [];
 
 
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
@@ -39,14 +39,17 @@ export class PoliciesComponent {
     response.subscribe((data)=>{
       
       console.log(data);
-      this.purchasedPolicies=data;
-      for(let i=0; i<this.purchasedPolicies.length;i++){
-        if(this.purchasedPolicies[i].healthInsurance==null && this.purchasedPolicies[i].lifeInsurance==null){
-          this.insuranceTitle.push('Automobile Insurance');}
-        else if(this.purchasedPolicies[i].healthInsurance==null && this.purchasedPolicies[i].automobileInsurance==null){
-          this.insuranceTitle.push('Life Insurance');}
-        else if(this.purchasedPolicies[i].automobileInsurance==null && this.purchasedPolicies[i].lifeInsurance==null){
-          this.insuranceTitle.push('Health Insurance');}
+      this.purchasedPolicies = data;
+      for (let i = 0; i < this.purchasedPolicies.length; i++) {
+        if (this.purchasedPolicies[i].healthInsurance == null && this.purchasedPolicies[i].lifeInsurance == null) {
+          this.insuranceTitle.push('Automobile Insurance');
+        }
+        else if (this.purchasedPolicies[i].healthInsurance == null && this.purchasedPolicies[i].automobileInsurance == null) {
+          this.insuranceTitle.push('Life Insurance');
+        }
+        else if (this.purchasedPolicies[i].automobileInsurance == null && this.purchasedPolicies[i].lifeInsurance == null) {
+          this.insuranceTitle.push('Health Insurance');
+        }
         else {
           this.insuranceTitle.push('NA');
         }
@@ -57,99 +60,99 @@ export class PoliciesComponent {
             // this.policyTitle.push(x.insuranceType);
         })
       }
-      
+
       console.log(this.purchasedPolicies[0].endDate);
-      
+
       // console.log(this.purchasedPolicies[0].policyType);
-      var dateDiff = this.currentDate-(this.purchasedPolicies[0].endDate[0]+30);
+      var dateDiff = this.currentDate - (this.purchasedPolicies[0].endDate[0] + 30);
       console.log(dateDiff);
-      
-      
+
+
     });
   }
 
   title = 'policies-details';
   searchedKeyword!: string;
-  str:string="";
+  str: string = "";
 
   policies = [
     {
-      name:'Automobile Insurance',
+      name: 'Automobile Insurance',
       policyNo: '013298',
       purchaseDate: '28-01-2022',
       endDate: '27-01-2023',
-      sumInsured:'$3000',
-      status:'claimed'
+      sumInsured: '$3000',
+      status: 'claimed'
     },
     {
-      name:'Health Insurance',
+      name: 'Health Insurance',
       policyNo: '0169182',
       purchaseDate: '28-01-2022',
       endDate: '27-01-2027',
-      sumInsured:'$5000',
-      status:"active"
+      sumInsured: '$5000',
+      status: "active"
     },
     {
-      name:'Life Insurance',
+      name: 'Life Insurance',
       policyNo: '2132951',
       purchaseDate: '21-11-2022',
       endDate: '20-11-2042',
-      sumInsured:'$10000',
-      status:"active"
+      sumInsured: '$10000',
+      status: "active"
     },
     {
-      name:'Crop Insurance',
+      name: 'Crop Insurance',
       policyNo: '5132911',
       purchaseDate: '28-01-2022',
       endDate: '27-01-2023',
-      sumInsured:'$2000',
-      status:"active"
+      sumInsured: '$2000',
+      status: "active"
     },
     {
-      name:'ABC Insurance',
+      name: 'ABC Insurance',
       policyNo: '011291',
       purchaseDate: '28-01-2022',
       endDate: '27-01-2023',
-      sumInsured:'$3000',
-      status:"active"
+      sumInsured: '$3000',
+      status: "active"
     },
     {
-      name:'XYZ Insurance',
+      name: 'XYZ Insurance',
       policyNo: '7132981',
       purchaseDate: '28-01-2022',
       endDate: '27-01-2023',
-      sumInsured:'$3000',
-      status:"active"
+      sumInsured: '$3000',
+      status: "active"
     },
     {
-      name:'Motor Insurance',
+      name: 'Motor Insurance',
       policyNo: '013298',
       purchaseDate: '28-01-2022',
       endDate: '27-01-2023',
-      sumInsured:'$3000',
-      status:"active"
+      sumInsured: '$3000',
+      status: "active"
     }
   ]
 
-  openDialog(policy: any, i:any) {
+  openDialog(policy: any, i: any) {
     console.log(policy);
     this.router.navigateByUrl('/details');
-    localStorage.setItem('policyName',this.policyTitle[i]);
-    localStorage.setItem('insuranceType',this.insuranceTitle[i]);
+    localStorage.setItem('policyName', this.policyTitle[i]);
+    localStorage.setItem('insuranceType', this.insuranceTitle[i]);
     // localStorage.setItem('insuranceType','Automobile Insurance');
     localStorage.setItem('customerPolicyId', policy.customerPolicyId)
     console.log(localStorage.getItem('insuranceType'));
     console.log(localStorage.getItem('customerPolicyId'));
     console.log(policy.endDate[0]);
-    let endDateInDateFormat= this.datePipe.transform(new Date(policy.endDate[0]), 'yyyy-MM-dd');
+    let endDateInDateFormat = this.datePipe.transform(new Date(policy.endDate[0]), 'yyyy-MM-dd');
     // this.datePipe.transform(this.sysDate, 'yyyy-MM-dd')
     console.log(endDateInDateFormat);
-    
-    let diff=this.currentDate-policy.endDate[0];
+
+    let diff = this.currentDate - policy.endDate[0];
     console.log(diff);
-    
+
     // console.log(this.currentDate-endDateInDateFormat);
-    
+
     // const dialogRef = this.dialog.open(DetailsComponent);
 
     // dialogRef.afterClosed().subscribe(result => {
@@ -157,7 +160,7 @@ export class PoliciesComponent {
     // });
   }
 
-  renewPolicy(policy:any){
+  renewPolicy(policy: any) {
 
     this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+policy.insurancePolicyId).subscribe((data:any)=>{
     console.log("hello from renew button");
@@ -171,18 +174,18 @@ export class PoliciesComponent {
         if(this.str==null){
           this.router.navigateByUrl("/renewal-home");
         }
-        else{
+        else {
           this.openSnackBar(x);
         }
       })
 
 
-  })
-}
+    })
+  }
 
-openSnackBar(message: string) {
-    
-  this.snackbar.open(message, 'Ok',{duration: 6000});
-}
+  openSnackBar(message: string) {
+
+    this.snackbar.open(message, 'Ok', { duration: 6000 });
+  }
 
 }
