@@ -14,7 +14,7 @@ export class PolicyAdvisorComponent implements OnInit {
   isActive = true
 
   ngOnInit(): void {
-    let response = this.http.get("http://localhost:8087/api/v1/policyAdvisors");
+    let response = this.http.get("http://localhost:8080/advisor/policyAdvisors");
     response.subscribe((data) => {
 
       console.log(data);
