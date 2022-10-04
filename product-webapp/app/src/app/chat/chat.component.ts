@@ -58,6 +58,8 @@ ngOnInit(): void {
       this.registerMsg.userName=this.loginId;
       this.registerMsg.advisorName=id;
       this.registerMsg.chatRoomName=this.loginId+"&"+id;
+      console.log("done");
+      console.log(this.registerMsg);
       this.service.registerChatRoom(this.registerMsg).subscribe(
         data=>{
           this.getnames();
@@ -97,10 +99,11 @@ getMsgsByName(id:string){
     if(this.role=='user'){
       this.service.getMsgs(this.loginId+"&"+this.otherId).subscribe(data=>{
           this.msg=data;
+          if(data!=null){
           for(let i:number=0;i<data.length;i++){
             if(data[i].id==this.loginId){
               this.msg[i].show=true;
-            }} }) 
+            }} }}) 
         }
     else{
       this.service.getMsgs(this.otherId+"&"+this.loginId).subscribe( data=>{
