@@ -39,16 +39,12 @@ export class RenewalPolicyComponent implements OnInit {
 
   ngOnInit(): void {
     this.myModel = 0
-    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/50508').subscribe((x: any) => {
+    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/50507').subscribe((x: any) => {
       this.http.put<Insurance>('http://localhost:8080/purchase/api/testing/30153119', x).subscribe((data: any) => {
-        // console.log("Inside retrived insurance success");
-        // console.log(data.policyDescription);
-        // console.log(data.policyDetails.length);
-        // console.log(data.addOnDetails.length);
+
         this.policyDescription = data.policyDescription;
         this.policyTitle = data.policyName;
         this.policyType = data.insuranceType;
-        // console.log(this.policyType);
 
         if (this.policyType == "AutoMobileInsurance") {
           this.policySubType = data.category;
@@ -87,16 +83,11 @@ export class RenewalPolicyComponent implements OnInit {
     }
   }
   calculate_premium() {
-    // console.log(this.myModel);
-    // console.log(this.addOnPrice);
-    // console.log(this.selectedItems);
     this.totalPremium = 0;
+
     for (let i = 0; i < this.selectedItems.length; i++) {
-      // console.log(this.addOnPrice[this.selectedItems[i]]);
       this.totalPremium = this.totalPremium + this.addOnPrice[this.selectedItems[i]];
     }
-    //  console.log('Premium : '+this.premium[+this.myModel]);
-
     this.totalPremium = this.totalPremium + this.premium[+this.myModel]
     return this.totalPremium;
   }
