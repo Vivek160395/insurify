@@ -45,8 +45,9 @@ export class InsuranceDetailsComponent implements OnInit {
   // dialog: any;
   buyPolicy() {
 
-    localStorage.setItem('insurance_id', this.service.policyNo);
-    console.log(localStorage.getItem('insurance_id'));
+    // localStorage.setItem('insurance_id', this.service.policyNo);
+    // console.log(localStorage.getItem('insurance_id'));
+    this.route.navigateByUrl("/buy")
   }
   constructor(private service: RecommendationServiceService, public dialog: MatDialog, private route: Router) { }
   ngOnInit(): void {
