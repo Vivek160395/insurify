@@ -22,7 +22,7 @@ public interface PurchaseService {
 
     public Iterable<CustomerInsurance> getCustomerInsurances();
 
-    public Iterable<CustomerInsurance> getCustomerInsurancesByInusranceId(String insuranceId) throws NoInsuranceFoundException;
+    public Iterable<CustomerInsurance> getCustomerInsurancesByInsuranceId(String insuranceId) throws NoInsuranceFoundException;
 
     public CustomerInsurance getPolicyDetailsByCustomerPolicyID(String customerPolicyId)
             throws PolicyIdNotFoundException;
@@ -47,4 +47,5 @@ public interface PurchaseService {
     public boolean updateClaimStatus(String customerId, String status);
 
     public Insurance returnInsuranceForRenewal(Insurance insurance, String customerPolicyId);
+    public String checkRenewalStatus(String customerPolicyId,Insurance insurance) throws PolicyIdNotFoundException, ParseException;
 }

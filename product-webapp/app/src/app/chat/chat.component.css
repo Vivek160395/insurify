@@ -1,0 +1,91 @@
+/* 
+.chat-bubble-container1{
+    display: flex;
+    justify-content: flex-end;
+    width:100%
+}
+
+.chat-bubble1{
+    background-color: skyblue;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 10px;
+    margin-top: 16px;
+    border-radius: 8px;
+    width: fit-content;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+    display: flex;
+    justify-content: flex-end;
+    width:100%;
+    
+}
+
+.chat-bubble2{
+    background-color: skyblue;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 10px;
+    padding-left: 8px;
+    margin-top: 16px;
+    border-radius: 8px;
+    width: fit-content;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+} */
+
+
+
+.messages{
+    overflow: auto;
+    height:485px;
+    background-color: aliceblue;
+}
+
+.chat-area .messages .message{
+    display: flex;
+    padding: 10px;
+  
+}
+
+.chat-area .messages .message > div{
+    background:cornflowerblue;
+    padding: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: large;
+
+}
+
+.chat-area .messages .message.my-message{
+    justify-content: flex-end;
+}
+
+.chat-area .messages .message.other-message{
+    justify-content: flex-start;
+}
+
+.chat-area .input-area{
+    display:flex;
+}
+
+.header{
+    background-color: cadetblue;
+    color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 25px;
+    padding: 20px;
+}
+
+.circle{
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: cornflowerblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    
+
+}

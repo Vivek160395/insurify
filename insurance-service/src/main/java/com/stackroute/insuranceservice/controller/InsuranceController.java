@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +29,7 @@ import java.util.zip.Inflater;
 
 @RestController
 @RequestMapping("/api/vk1")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class InsuranceController {
 
     @Autowired
@@ -55,6 +54,7 @@ public class InsuranceController {
         lifePolicyObj.setAddOnDetails(insurance.getAddOnDetails());
         lifePolicyObj.setPolicyDocuments(insurance.getPolicyDocuments());
         lifePolicyObj.setUserEmail(insurance.getUserEmail());
+
         if (insurance.getInsuranceType().equalsIgnoreCase("AutomobileInsurance")) {
             lifePolicyObj.setCategory(insurance.getCategory());
             lifePolicyObj.setModelsAllowed(insurance.getModelsAllowed());
@@ -66,13 +66,8 @@ public class InsuranceController {
     }
 
     @PutMapping("/photos/update/{policyId}")
-    public ResponseEntity<?> updateImage(@RequestParam("imageFile") MultipartFile imageFile,
-            @PathVariable String policyId) throws IOException {
-        // System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~" +
-        // System.out.println(insuranceRepo.findById(policyId));
+    public ResponseEntity<?> updateImage(@RequestParam("imageFile") MultipartFile imageFile,@PathVariable String policyId) throws IOException {
         Insurance retrieveInsurance = insuranceRepo.findById(policyId).get();
-        // System.out.println("Original Image Byte Size - " +
-        // imageFile.getBytes().length);
         retrieveInsurance.setPicByte(imageFile.getBytes());
         retrieveInsurance.setPicType(imageFile.getContentType());
         DTO dto = new DTO();
@@ -82,7 +77,6 @@ public class InsuranceController {
         dto.setDescription(retrieveInsurance.getPolicyDescription());
         dto.setPicByte(imageFile.getBytes());
         dto.setPicType(imageFile.getContentType());
-        // System.out.println("PolicyId" + policyId);
         producer.sendingMessageToRabbitMQServer(dto);
         Insurance insurance1 = insuranceRepo.save(retrieveInsurance);
         if (insurance1.getPolicyId().equalsIgnoreCase(policyId)) {

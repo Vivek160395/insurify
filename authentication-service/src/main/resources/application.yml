@@ -1,17 +1,10 @@
 server:
-  port: 8080
+  port: 8086
 spring:
   datasource:
     username: root
-
-
     password: password@123
-
-
-
-
-    url: jdbc:mysql://localhost:3306/insurifyDb
-
+    url: jdbc:mysql://localhost:3306/insurifyd
     driver: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -23,13 +16,23 @@ spring:
   application:
     name: authentication-service
 
-#  security:
+
+  cloud:
+    compatibility-verifier:
+      enabled: false
 #    oauth2:
 #      client:
 #        registration:
 #          google:
 #            clientId: 692492348685-qpv81o821qgrrobknsffo375288t4hea.apps.googleusercontent.com
 #            clientSecret: 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
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serverUrl:
+      defaultZone: http://localhost:8761/eureka
 
 
 

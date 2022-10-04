@@ -20,8 +20,8 @@ export class ClaimService {
 
  
 
-  customerPolicyId:string="11120"
-  baseurl:any="http://localhost:8084/api/";
+  customerPolicyId:string="11116"
+  baseurl:any="http://localhost:8080/purchase/api/";
   getUserDetails():Observable<any>{
     return this.http.get(this.baseurl+"get/"+this.customerPolicyId);
   }
@@ -30,7 +30,7 @@ export class ClaimService {
     return this.http.put<any>(this.baseurl+"claim", user);
 }
 getPolicyDetails(): Observable<any> {
-  return this.http.get("http://localhost:8010/api/vk1/policy-id/322950")
+  return this.http.get("http://localhost:8080/api/vk1/policy-id/276534")
 
 }
   

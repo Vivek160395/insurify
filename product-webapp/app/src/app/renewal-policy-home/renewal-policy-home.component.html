@@ -2,7 +2,7 @@
     <h1 style="text-align-last: center; padding-top: 2%; font-size: xx-large; color: white;"><b>Policy Details</b></h1>
 </header>
 
-<div fxLayout="row" *ngIf="insuranceType === 'AutomobileInsurance' && category === 'bike'">
+<!-- <div fxLayout="row" *ngIf="insuranceType === 'AutomobileInsurance' && category === 'bike'">
     <div style="width: 50%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;" 
     appZoomonhover="true">
 
@@ -14,7 +14,7 @@
         <h3><b>Insurance Policy ID:</b> {{this.data.policyId}}</h3> 
         <h3><b>Customer Name:</b> {{this.data.insuredName}}</h3>
         <h3><b>PinCode:</b> {{this.data.pinCode}}</h3>
-        <h3><b>Insurance Period:</b> {{this.data.insurancePeriod}}</h3>
+        <h3><b>Insurance End Date:</b> {{this.data.insuranceEndDate}}</h3>
         <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
         <h3><b>Mobile Number:</b> {{this.data.ownerNumber}}</h3>
         <h3><b>Email-ID:</b> {{this.data.ownerEmail}}</h3>
@@ -32,9 +32,9 @@
         <h3><b>Engine Number:</b>{{this.vehicle.engineNumber}}</h3>
         <h3><b>Chasis Number:</b>{{this.vehicle.chasisNumber}}</h3>
     </div>
-</div>
+</div> -->
 
-<div fxLayout="row" *ngIf="insuranceType === 'AutomobileInsurance' && category === 'car'">
+<div fxLayout="row" *ngIf="insuranceType === 'AutomobileInsurance'">
     <div style="width: 50%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;"
     appZoomonhover="true">
 
@@ -46,7 +46,7 @@
         <h3><b>Insurance Policy ID:</b> {{this.data.policyId}}</h3> 
         <h3><b>Customer Name:</b> {{this.data.insuredName}}</h3>
         <h3><b>PinCode:</b> {{this.data.pinCode}}</h3>
-        <h3><b>Insurance Period:</b> {{this.data.insurancePeriod}}</h3>
+        <h3><b>Insurance End Date:</b> {{this.data.insuranceEndDate}}</h3>
         <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
         <h3><b>Mobile Number:</b> {{this.data.ownerNumber}}</h3>
         <h3><b>Email-ID:</b> {{this.data.ownerEmail}}</h3>
@@ -64,7 +64,7 @@
     </div>
 </div>
 
-<div fxLayout="row" *ngIf="insuranceType === 'LifeInsurance'">
+<div fxLayout="row" *ngIf="insuranceType === 'LifeInsurance' || insuranceType === 'HealthInsurance'">
     <div style="width: 99%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;"
     appZoomonhover="true">
 
@@ -76,14 +76,14 @@
             <h3><b>Insurance Policy ID:</b> {{this.data.policyId}}</h3> 
             <h3><b>Customer Name:</b> {{this.data.insuredName}}</h3>
             <h3><b>PinCode:</b> {{this.data.pinCode}}</h3>
-            <h3><b>Insurance Period:</b> {{this.data.insurancePeriod}}</h3>
+            <h3><b>Insurance End Date:</b> {{this.data.insuranceEndDate}}</h3>
             <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
             <h3><b>Mobile Number:</b> {{this.data.ownerNumber}}</h3>
             <h3><b>Email-ID:</b> {{this.data.ownerEmail}}</h3>
     </div>
 </div>
 
-<div fxLayout="row" *ngIf="insuranceType === 'HealthInsurance'">
+<!-- <div fxLayout="row" *ngIf="insuranceType === 'HealthInsurance'">
     <div style="width: 99%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;"
     appZoomonhover="true">
 
@@ -95,15 +95,15 @@
         <h3><b>Insurance Policy ID:</b> {{this.data.policyId}}</h3> 
         <h3><b>Customer Name:</b> {{this.data.insuredName}}</h3>
         <h3><b>PinCode:</b> {{this.data.pinCode}}</h3>
-        <h3><b>Insurance Period:</b> {{this.data.insurancePeriod}}</h3>
+        <h3><b>Insurance End Date:</b> {{this.data.insuranceEndDate}}</h3>
         <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
         <h3><b>Mobile Number:</b> {{this.data.ownerNumber}}</h3>
         <h3><b>Email-ID:</b> {{this.data.ownerEmail}}</h3>
     </div>
-</div>
+</div> -->
 
 <div fxLayoutAlign="center">
     <button mat-raised-button color="primary" fxLayout="column">
-        <a style="text-decoration: none; color: white;" routerLink="/renewal">Renew Now</a>
+        <a style="text-decoration: none; color: white;" routerLink="/renewal-update">Renew Now</a>
     </button>
 </div>

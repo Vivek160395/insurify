@@ -11,9 +11,11 @@ export class PolicyAdvisorService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl1 = "http://localhost:8087/api/v1/updateDetails/"
+  baseUrl = "http://localhost:8080/advisor/"
 
-  baseUrl2 = "http://localhost:8087/api/v1/"
+  baseUrl1 = this.baseUrl+ "api/v1/updateDetails/"
+
+  baseUrl2 = this.baseUrl + "api/v1/"
 
   getUserDetails():Observable<any>{
     return this.http.get(this.baseUrl2+"policyAdvisors");
@@ -33,7 +35,7 @@ export class PolicyAdvisorService {
   //   return this.http.put(this.baseurl+"updateUserDetails/"+this.email1,info);
   //    }
 
-  url = "http://localhost:8087/api/v1/update/"
+  url = this.baseUrl + "api/v1/update/"
 
   updateAdvisorWithoutImage(policyAdvisor:PolicyAdvsior, emailId: string): Observable<Object>{
     console.log(policyAdvisor);
