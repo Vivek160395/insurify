@@ -12,15 +12,15 @@ export class RenewalService {
   email = "sreekanth@gmail.com"
 
   userPolicyDetails(): Observable<any> {
-    return this.http.get("http://localhost:8084/api/get/" + this.customerPolicyId);
+    return this.http.get("http://localhost:8080/purchase/api/get/" + this.customerPolicyId);
   }
 
   getPolicyDetails(): Observable<any> {
-    return this.http.get("http://localhost:8010/api/vk1/policy-id/189989");
+    return this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/189989");
   }
 
   updateData(data: any): Observable<any> {
-    return this.http.put("http://localhost:8084/api/renew", data);
+    return this.http.put("http://localhost:8080/purchase/api/renew", data);
   }
 
 
