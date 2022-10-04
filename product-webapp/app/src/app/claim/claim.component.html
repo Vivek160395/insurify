@@ -156,6 +156,10 @@
               <mat-label>Estimated Claim Ammount</mat-label>
               <input matInput placeholder="claimLoss" formControlName="claimAmount" style="text-align: left;">
             </mat-form-field>
+            <!-- <mat-form-field appearance="outline" fxFlex="23%" *ngIf="insurancex==='LifeInsurance'">
+              <mat-label>Estimated Claim Ammount</mat-label>
+              <input matInput [ngModel]="claimAmount" formControlName="claimAmount" style="text-align: left;">
+            </mat-form-field> -->
             
             
             <mat-form-field appearance="outline" fxFlex="23%">
@@ -166,7 +170,7 @@
             <mat-form-field appearance="outline" fxFlex="23%" *ngIf="insurancex==='AutoMobileInsurance'">
 
               <mat-label>Date of Event Occur</mat-label>
-              <input matInput style="text-align: left;" [matDatepicker]="picker" [max]="today1"
+              <input matInput style="text-align: left;" [matDatepicker]="picker" [max]="currentDate"
                 placeholder="Event Date Occur" formControlName="claimSubmissionDate">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -176,7 +180,7 @@
             <mat-form-field appearance="outline" fxFlex="23%" *ngIf="insurancex==='LifeInsurance'">
 
               <mat-label>Date of Event Occur</mat-label>
-              <input matInput style="text-align: left;" [matDatepicker]="picker" [max]="today1"
+              <input matInput style="text-align: left;" [matDatepicker]="picker" [max]=""
                 placeholder="Event Date Occur" formControlName="claimSubmissionDate">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -190,7 +194,7 @@
       <mat-card-actions fxLayout="row">
         <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
         <button mat-flat-button matStepperNext style="margin-left: auto;background-color:rgb(105, 143, 224);" 
- (click)="onSubmit()">submit</button>
+ (click)="onSubmit()" [disabled]="!claimForm.valid">submit</button>
       </mat-card-actions>
 
 
@@ -201,10 +205,9 @@
     <ng-template matStepLabel>Done</ng-template>
     <h2 style="text-align: center;color:rgb(132, 132, 163) ;font-family: Arial, Helvetica, sans-serif;">{{this.claimError}}</h2>
     
-    <mat-card-actions fxLayout="row">
+    <mat-card-actions >
 
-      <button mat-button style="margin-left:auto;background-color:rgb(170, 190, 233);"
-        (click)="stepper.reset()">Reset</button>
+      
     </mat-card-actions>
   </mat-step>
 

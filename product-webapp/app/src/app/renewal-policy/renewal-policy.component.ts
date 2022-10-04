@@ -37,18 +37,17 @@ export class RenewalPolicyComponent implements OnInit {
 
   ngOnInit(): void {
     // localStorage.getItem(customerPolicyId);
-    this.myModel=0
-    this.http.get('http://localhost:8010/api/vk1/policy-id/11223344').subscribe((x:any)=>{
-    this.http.put<Insurance>("http://localhost:8084/api/testing/30153115",x).subscribe((data:any)=> 
-    {
-      // console.log("Inside retrived insurance success");
-      // console.log(data.policyDescription);
-      // console.log(data.policyDetails.length);
-      // console.log(data.addOnDetails.length);
-      this.policyDescription = data.policyDescription;
-      this.policyTitle = data.policyName;
-      this.policyType = data.insuranceType;
-      // console.log(this.policyType);
+    this.myModel = 0
+    this.http.get('http://localhost:8010/api/vk1/policy-id/11223344').subscribe((x: any) => {
+      this.http.put<Insurance>("http://localhost:8080/api/testing/30153115", x).subscribe((data: any) => {
+        // console.log("Inside retrived insurance success");
+        // console.log(data.policyDescription);
+        // console.log(data.policyDetails.length);
+        // console.log(data.addOnDetails.length);
+        this.policyDescription = data.policyDescription;
+        this.policyTitle = data.policyName;
+        this.policyType = data.insuranceType;
+        // console.log(this.policyType);
 
         if (this.policyType == "AutoMobileInsurance") {
           this.policySubType = data.category;

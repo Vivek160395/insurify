@@ -30,7 +30,7 @@ import java.util.zip.Inflater;
 
 @RestController
 @RequestMapping("/api/vk1")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class InsuranceController {
 
     @Autowired

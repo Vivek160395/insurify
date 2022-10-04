@@ -13,7 +13,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class MsgController {
 
@@ -66,13 +66,6 @@ public class MsgController {
 
     @PostMapping("api/register/chatroom")
     public ResponseEntity<?> registerChatRoom(@RequestBody Message message) throws ChatRoomalreadyExistsException {
-//        try{
-//            return msgService.registerChatRoom(message);
-//        }
-//        catch (ChatRoomalreadyExistsException e){
-//            e.getMessage();
-//            throw e;
-//        }
    return new ResponseEntity<>(msgService.registerChatRoom(message),HttpStatus.OK);
     }
 

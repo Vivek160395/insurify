@@ -1,8 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-// import * as Stomp from 'stompjs';
-// import * as SockJS from 'sockjs-client';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../Services/user.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -16,13 +17,14 @@ export class ChatComponent implements OnInit {
   @ViewChild('endOfChat')
   endOfChat!: ElementRef;
 
+  names:any=[];
   role:string="user";
   loginId:any='john@gmail.com';
   otherId:any=null;
-  
-  names:any[]=[];
+ 
   showMsgs:boolean=true;
   disable:boolean=true;
+
 
   msg:any[]=[
     {
@@ -43,13 +45,15 @@ export class ChatComponent implements OnInit {
       "advisorName":null
   }
 
-constructor(private http:HttpClient,private service:UserService) { }
+constructor(private http:HttpClient,private service:UserService) { 
+
+}
 
 ngOnInit(): void {
     this.getnames();
   }
 
-   connect(id:any){
+ connect(id:any){
     if(this.role=="user"){
       this.registerMsg.userName=this.loginId;
       this.registerMsg.advisorName=id;
@@ -71,19 +75,21 @@ ngOnInit(): void {
           this.getMsgsByName(id);
         }
       );
- }
-     
-   }
+ } }
 
 getnames(){
   this.service.getNames(this.loginId).subscribe((data)=>{
-  for(let i:number=0;i<data.length;i++){
+   for(let i:number=0;i<data.length;i++){
     if(this.role=="user"){
-      this.names[i]=data[i].advisorName;
+      this.names.push(data[i].advisorName);
     }
     else{
-      this.names[i]=data[i].userName
-    }}});}
+      this.names.push(data[i].userName);
+    }
+  }
+}); }
+
+ 
 
 getMsgsByName(id:string){
   this.showMsgs=false;
@@ -107,7 +113,6 @@ getMsgsByName(id:string){
   }
 
 sendMessage(){
-
 if(this.chatMsg.msg!=null){
 if(this.role=="user"){ this.service.updateMsgList(this.chatMsg,this.loginId+"&"+this.otherId).subscribe(data=>{
         this.getMsgsByName(this.otherId);} );
