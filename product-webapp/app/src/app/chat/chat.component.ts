@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+// import * as Stomp from 'stompjs';
+// import * as SockJS from 'sockjs-client';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../Services/user.service';
 import { Subscription } from 'rxjs';
