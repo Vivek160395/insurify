@@ -49,10 +49,18 @@ export class NavBarComponent implements OnInit {
   //   map(result => result.matches),
   //   shareReplay()
   // );
-
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private service: Userservice1Service) { }
+  others: boolean = true;
+  insurer: boolean = true;
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private service: Userservice1Service, private service1: RecommendationServiceService) { }
   ngOnInit(): void {
     //  this.getAllUsers();
+    if (this.service1.userType == "Insurer") {
+      this.others = true;
+      this.insurer = false
+    } else {
+      this.others = false;
+      this.insurer = true;
+    }
   }
   showFiller = false;
   // getAllUsers():void{

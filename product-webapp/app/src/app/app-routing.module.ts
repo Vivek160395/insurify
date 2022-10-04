@@ -49,10 +49,14 @@ const routes: Routes =
       { path: "claim", component: ClaimComponent },
       { path: "InsuranceDetails", component: InsuranceDetailsComponent },
       { path: "edit-insurance", component: EditInsuranceComponent },
-      { path: "registeredPolicies", component: RegisteredPoliciesComponent},
-      { path: "policyBuyers", component:RegisteredPolicyBuyersComponent},
-      { path: "policy-advisor", component: PolicyAdvisorComponent}] 
-  }
+    { path: "chat", component: ChatComponent},
+    { path: "registeredPolicies", component: RegisteredPoliciesComponent},
+    { path: "policyBuyers", component:RegisteredPolicyBuyersComponent},
+    { path: "policy-advisor", component: PolicyAdvisorComponent}]
+  },
+  // { path: "login", component: LoginComponent }
+
+      
 ];
 
 @NgModule({

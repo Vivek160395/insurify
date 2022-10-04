@@ -3,16 +3,15 @@
 }
 .heading{
     margin: 0px;
-    text-align: center; 
-    padding-top: 10px; 
-    background-color: #3f8cb586; 
+    text-align: center;
+    padding-top: 10px;
+    background-color: #3f8cb586;
     color: white;
 }
 .description{
     text-shadow: 2px 2px rgb(158, 141, 141);
     color: black;
 }
-
 .one{
     text-shadow: 2px 2px rgb(158, 141, 141);
     padding-top: 30px;
@@ -20,7 +19,7 @@
     font-size: 40px;
 }
 .two{
-    text-shadow: 2px 2px rgb(158, 141, 141); 
+    text-shadow: 2px 2px rgb(158, 141, 141);
     padding-top: 25px;
     color: black;
     font-size: 40px;
@@ -32,7 +31,7 @@
     font-size: 30px;
 }
 .choose_plan{
-    text-align: center; 
+    text-align: center;
     padding-top: 5px;
     margin-top: 12px;
     font-size: 20px;
@@ -59,18 +58,18 @@
     /* box-shadow: 4px 4px 5px 5px rgb(158, 141, 141); */
 }
 .submit{
-    width: 50%; 
-    position: absolute; 
-    top: 95%; 
+    width: 50%;
+    position: absolute;
+    top: 95%;
     box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);
 }
 .summary{
-    text-align: center; 
+    text-align: center;
     text-shadow: 2px 2px rgb(158, 141, 141);
     color: rgb(56, 197, 207);
 }
 .additional{
-    text-align: center; 
+    text-align: center;
     text-shadow: 2px 2px rgb(158, 141, 141);
     color: rgb(197, 65, 65);
 }

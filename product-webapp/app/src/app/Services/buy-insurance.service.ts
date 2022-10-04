@@ -7,8 +7,8 @@ import { CustomerInsurancePurchase } from '../CustomerInsurancePurchase';
 })
 export class BuyInsuranceService {
 
-  constructor(private http:HttpClient) { }
-  buyInsurance(customerins :CustomerInsurancePurchase){
-    this.http.post<CustomerInsurancePurchase>('http://localhost:8084/api/add/customer-insurance',customerins)
+  constructor(private http: HttpClient) { }
+  buyInsurance(customerins: CustomerInsurancePurchase) {
+    this.http.post<CustomerInsurancePurchase>('http://localhost:8080/api/add/customer-insurance', customerins)
   }
 }
