@@ -90,11 +90,11 @@ export class ClaimComponent implements OnInit {
     description: new FormControl("", [Validators.required]),
     claimType: new FormControl("", ),
     claimAmount: new FormControl("", ),
-    claimDate: new FormControl("", ),
-    claimSubmissionDate: new FormControl("", ),
-    customerPolicyId: new FormControl(localStorage.getItem('customerpolicyid'), ),
-    insurancePolicyId: new FormControl(localStorage.getItem('policyid'), ),
-    email: new FormControl(localStorage.getItem('emailid'), ),
+    claimDate: new FormControl("", [Validators.required]),
+    claimSubmissionDate: new FormControl("",[Validators.required] ),
+    customerPolicyId: new FormControl(localStorage.getItem('customerpolicyid1'), ),
+    insurancePolicyId: new FormControl(localStorage.getItem('policyid1'), ),
+    email: new FormControl(localStorage.getItem('emailid1'), ),
 
   })
   
@@ -137,9 +137,9 @@ export class ClaimComponent implements OnInit {
         this.data.premium = info.premium;
         this.data.nomineeName = info.nameOfNominee;
         this.data.nomineeDOB = info.nomineeDOB;
-        localStorage.setItem('policyid', info.insurancePolicyId);
-        localStorage.setItem('customerpolicyid', info.customerPolicyId);
-        localStorage.setItem('emailid', info.email);
+        localStorage.setItem('policyid1', info.insurancePolicyId);
+        localStorage.setItem('customerpolicyid1', info.customerPolicyId);
+        localStorage.setItem('emailid1', info.email);
 
 
 
@@ -231,7 +231,7 @@ export class ClaimComponent implements OnInit {
     },
       (err) => {
         this.claimError = err.error.text;
-        this.http.put("http://localhost:8084/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
+        this.http.put("http://localhost:8080/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
           .subscribe((data: any) => { console.log(data) });
         console.log(err.error.text)
         console.log(this.claimForm.value);

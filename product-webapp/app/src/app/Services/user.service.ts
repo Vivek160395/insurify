@@ -30,14 +30,14 @@ export class UserService {
   }
 
 
-  baseUrl = "http://localhost:8085/api/v1/user";
+  // baseUrl = "http://localhost:8080/user/api/v1/user";
   baseUrl1 = "http://localhost:8085/api/v1";
 
 
 
   registerUser(user: User): Observable<Object> {
     console.log(user);
-    return this.http.post(`${this.baseUrl}`, user);
+    return this.http.post("http://localhost:8080/user/api/v1/user", user);
   }
 
   postUserId(s1: string): Observable<any> {

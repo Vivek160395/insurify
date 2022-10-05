@@ -170,7 +170,7 @@
             <mat-form-field appearance="outline" fxFlex="23%" *ngIf="insurancex==='AutoMobileInsurance'">
 
               <mat-label>Date of Event Occur</mat-label>
-              <input matInput style="text-align: left;" [matDatepicker]="picker" [max]="currentDate"
+              <input matInput style="text-align: left;" [matDatepicker]="picker" [max]="currentDate "
                 placeholder="Event Date Occur" formControlName="claimSubmissionDate">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -180,7 +180,16 @@
             <mat-form-field appearance="outline" fxFlex="23%" *ngIf="insurancex==='LifeInsurance'">
 
               <mat-label>Date of Event Occur</mat-label>
-              <input matInput style="text-align: left;" [matDatepicker]="picker" [max]=""
+              <input matInput style="text-align: left;" [matDatepicker]="picker" [max]="currentDate "
+                placeholder="Event Date Occur" formControlName="claimSubmissionDate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+
+            </mat-form-field>
+            <mat-form-field appearance="outline" fxFlex="23%" *ngIf="insurancex==='HealthInsurance'">
+
+              <mat-label>Date of Issue Occur</mat-label>
+              <input matInput style="text-align: left;" [matDatepicker]="picker" [max]="currentDate "
                 placeholder="Event Date Occur" formControlName="claimSubmissionDate">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>

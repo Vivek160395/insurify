@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { User } from '../user';
 import { UserService } from '../Services/user.service';
+
+
 
 @Component({
   selector: 'app-register',
@@ -9,11 +11,12 @@ import { UserService } from '../Services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+error:string='';
  user: User = new User();
 constructor(private userService: UserService) {}
 
 ngOnInit():void{}
+
 
 registerForm = new FormGroup({
   userType: new FormControl('', [Validators.required]),
@@ -32,11 +35,15 @@ registerSubmitted(data:any){
   this.user.emailId = data.value.emailId;
   this.user.password = data.value.password;
   this.user.userType = data.value.userType;
-
+  if (this.password.value==this.confirmPassword.value) {
   console.log(this.user);
   this.userService.registerUser(this.user).subscribe((response)=>{
     console.log("Registered data", response);
   });
+}
+else{
+  this.error="password and confirm password is not matches"
+}
 
 
 
@@ -64,5 +71,7 @@ OnRegister() {
     alert("Your password confirm password should match");
   }
 }
+
+
 
 }

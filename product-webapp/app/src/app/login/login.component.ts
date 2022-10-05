@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
     this.loginservice.loginUser(this.logInForm.value.emailId).subscribe((response) => {
       this.loginservice.stauts = true;
       console.log(response);
+      localStorage.setItem('emailid1', response.emailId);
       if (response.userType == "As Insured") {
         console.log(response.userType);
         this.router.navigate(["/policyDetails"]);
