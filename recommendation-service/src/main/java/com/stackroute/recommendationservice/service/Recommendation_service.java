@@ -4,11 +4,12 @@ import com.stackroute.recommendationservice.exception.InsuranceAlreadyExists;
 import com.stackroute.recommendationservice.exception.NoInsurancesFound;
 import com.stackroute.recommendationservice.exception.UserAlreadyPosted;
 import com.stackroute.recommendationservice.model.Insurance;
+import com.stackroute.recommendationservice.model.InsuranceProfile;
 import com.stackroute.recommendationservice.model.User;
 import java.util.List;
 
 public interface Recommendation_service {
-    Insurance addInsurance(Insurance insurance) throws InsuranceAlreadyExists;
+    Insurance addInsurance(InsuranceProfile insurance) throws InsuranceAlreadyExists;
 
     // void addAge(int age);
     void addInsuranceType(String insuranceType);
