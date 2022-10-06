@@ -17,15 +17,11 @@ export class ClaimService {
 
     }), responseType: 'text' as 'json'
   };
-
-
-
-  customerPolicyId: string = "11120"
-  baseurl: any = "http://localhost:8080/api/";
+  customerPolicyId1:string ="11120"
+  baseurl: any = "http://localhost:8080/purchase/api/";
   getUserDetails(): Observable<any> {
-    return this.http.get(this.baseurl + "get/" + this.customerPolicyId);
+    return this.http.get(this.baseurl + "get/"+this.customerPolicyId1);
   }
-
   putUser = (user: any): Observable<any> => {
     return this.http.put<any>(this.baseurl + "claim", user);
   }

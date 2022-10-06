@@ -11,7 +11,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  email1: string = 'm@gmail.com';
+  email1 = localStorage.getItem('logInEmailId')?.toString();
 
   baseurl: any = "http://localhost:8080/user/api/v1/";
   getUserDetails(): Observable<any> {
@@ -37,7 +37,7 @@ export class UserService {
 
   registerUser(user: User): Observable<Object> {
     console.log(user);
-    return this.http.post(`${this.baseUrl}`, user);
+    return this.http.post("http://localhost:8080/user/api/v1/user", user);
   }
 
   postUserId(s1: string): Observable<any> {

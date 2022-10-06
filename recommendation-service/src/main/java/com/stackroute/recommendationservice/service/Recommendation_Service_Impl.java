@@ -7,6 +7,9 @@ import com.stackroute.recommendationservice.model.*;
 import com.stackroute.recommendationservice.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,12 +31,26 @@ public class Recommendation_Service_Impl implements Recommendation_service {
     }
 
     @Override
-    public Insurance addInsurance(Insurance insurance) throws InsuranceAlreadyExists {
-        Optional<Insurance> insurance1 = insurance_repository.findById(insurance.getPolicyId());
-        if (insurance1.isPresent()) {
-            throw new InsuranceAlreadyExists();
+    public Insurance addInsurance(InsuranceProfile insurance) throws InsuranceAlreadyExists {
+        Optional<Insurance> insurance2 = insurance_repository.findById(insurance.getPolicyId());
+        Insurance insurance1 = new Insurance();
+        InsuranceType insuranceType = new InsuranceType();
+        insurance1.setPolicyId(insurance.getPolicyId());
+        insurance1.setPolicyName(insurance.getPolicyName());
+        insuranceType.setInsuranceType(insurance.getInsuranceType());
+        insurance1.setPicType(insurance.getPicType());
+        insurance1.setPicByte(insurance.getPicByte());
+        insurance1.setDescription(insurance.getPolicyDescription());
+        insurance1.setNoOfUsersBought(0);
+        if (insurance2.isEmpty()) {
+            insurance_type_repository.save(insuranceType);
+            insurance_repository.save(insurance1);
+            System.out.println(insurance1.getPolicyId());
+            System.out.println(insuranceType.getInsuranceType());
+            createInsuranceTypeRelation(insurance1.getPolicyId(), insuranceType.getInsuranceType());
+            return insurance1;
         } else {
-            return insurance_repository.save(insurance);
+            throw new InsuranceAlreadyExists();
         }
     }
 
@@ -100,5 +117,19 @@ public class Recommendation_Service_Impl implements Recommendation_service {
             throw new NoInsurancesFound();
         } else
             return insurances;
+    }
+
+    @Override
+    public boolean addInsuranceImage(String policyId, MultipartFile file) throws NoInsurancesFound, IOException {
+        Insurance insurance = insurance_repository.findById(policyId).get();
+        System.out.println(insurance.getPolicyId());
+        insurance.setPicByte(file.getBytes());
+        insurance.setPicType(file.getContentType());
+        Insurance insurance2 = insurance_repository.save(insurance);
+        if (insurance2.getPolicyId().equals(insurance.getPolicyId())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

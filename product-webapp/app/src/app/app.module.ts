@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MatIconModule } from '@angular/material/icon';
-
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { RegisterComponent } from './register/register.component';
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -82,7 +82,9 @@ import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-adv
 import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
 import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
 import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
-import { RenewCompletionComponent } from './renew-completion/renew-completion.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { LoginNavbarComponent } from './login-navbar/login-navbar.component';
+// import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 
 
 @NgModule({
@@ -118,7 +120,9 @@ import { RenewCompletionComponent } from './renew-completion/renew-completion.co
     RegisteredPoliciesComponent,
     RegisteredPolicyBuyersComponent,
     PolicyAdvisorComponent,
-    RenewCompletionComponent
+    HomepageComponent,
+    LoginNavbarComponent,
+  
   ],
   entryComponents: [PreviewMarkupComponent],
   imports: [
@@ -179,8 +183,9 @@ import { RenewCompletionComponent } from './renew-completion/renew-completion.co
     MatSidenavModule,
     MarkdownModule.forRoot(),
     Ng2SearchPipeModule,
-    BrowserAnimationsModule
-
+    BrowserAnimationsModule,
+    CarouselModule,
+    // JwSocialButtonsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

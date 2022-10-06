@@ -24,43 +24,52 @@ import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/regi
 import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-advisor-update.component';
 //import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { LoginNavbarComponent } from './login-navbar/login-navbar.component';
 // import { PersonGuard } from './guard/person.guard';
 
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
 
-const routes: Routes = 
-[
-  {
-    path: "", component: NavBarComponent, children: [
-      // { path: "", component: RecommendationComponent, canActivate: [PersonGuard] },
-      { path: "", component: RecommendationComponent },
-      { path: "insurance-provider", component: InsuranceProviderComponent },
-      { path: "register", component: RegisterComponent },
-      { path: "add-policy", component: AddInsurancePolicyComponent },
-      { path: "policies", component: PoliciesComponent },
-      { path: "renewal-update", component: RenewalPolicyComponent },
-      { path: "renewal-home", component: RenewalPolicyHomeComponent },
-      { path: "details", component: DetailsComponent },
-      { path: "update", component: UpdateComponent },
-      { path: "login", component: LoginComponent },
-      { path: "nav-bar", component: NavBarComponent },
-      { path: "claim", component: ClaimComponent },
-      { path: "buy", component: PurchaseInsuranceComponent },
-      { path: "policyDetails", component: InsuranceDetailsComponent },
-      { path: "claim", component: ClaimComponent },
-      { path: "InsuranceDetails", component: InsuranceDetailsComponent },
-      { path: "edit-insurance", component: EditInsuranceComponent },
-    {path: "policy-advisor-update", component: PolicyAdvisorUpdateComponent},
-    { path: "chat", component: ChatComponent},
-    { path: "registeredPolicies", component: RegisteredPoliciesComponent},
-    { path: "policyBuyers", component:RegisteredPolicyBuyersComponent},
-    { path: "policy-advisor", component: PolicyAdvisorComponent}]
-  },
-  // { path: "login", component: LoginComponent }
+const routes: Routes =
+  [
+    { path: "", component: HomepageComponent },
+    {
+      path: "home", component: NavBarComponent, children: [
+        // { path: "", component: RecommendationComponent, canActivate: [PersonGuard] },
+        { path: "home-page", component: RecommendationComponent },
+        { path: "insurance-provider", component: InsuranceProviderComponent },
+        { path: "add-policy", component: AddInsurancePolicyComponent },
+        { path: "policies", component: PoliciesComponent },
+        { path: "renewal-update", component: RenewalPolicyComponent },
+        { path: "renewal-home", component: RenewalPolicyHomeComponent },
+        { path: "details", component: DetailsComponent },
+        { path: "update", component: UpdateComponent },
+        { path: "nav-bar", component: NavBarComponent },
+        { path: "claim", component: ClaimComponent },
+        { path: "buy", component: PurchaseInsuranceComponent },
+        { path: "policyDetails", component: InsuranceDetailsComponent },
+        { path: "claim", component: ClaimComponent },
+        { path: "InsuranceDetails", component: InsuranceDetailsComponent },
+        { path: "edit-insurance", component: EditInsuranceComponent },
+        { path: "policy-advisor-update", component: PolicyAdvisorUpdateComponent },
+        { path: "chat", component: ChatComponent },
+        { path: "registeredPolicies", component: RegisteredPoliciesComponent },
+        { path: "policyBuyers", component: RegisteredPolicyBuyersComponent },
+        { path: "policy-advisor", component: PolicyAdvisorComponent }],
 
-      
-];
+    },
+    { path: "", component: HomepageComponent },
+    {
+      path: "nav", component: LoginNavbarComponent, children: [
+        { path: "login", component: LoginComponent },
+        { path: "register", component: RegisterComponent },
+      ]
+    }
+    // { path: "login", component: LoginComponent }
+
+
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

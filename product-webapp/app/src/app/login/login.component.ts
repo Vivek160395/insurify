@@ -1,3 +1,4 @@
+import { I } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -29,12 +30,14 @@ export class LoginComponent implements OnInit {
   });
   value = this.logInForm.value;
   logIn(): void {
+    console.log("Entering method");
+
     this.loginservice.emailId = this.logInForm.value.emailId;
     this.loginservice.password = this.logInForm.value.password;
     if (this.logInForm.valid) {
       this.loginservice.getUserCredentials(this.logInForm.value).subscribe((response) => {
         console.log("Log in successfull", response);
-
+        localStorage.setItem("logInEmailId", this.loginservice.emailId);
 
       }, error => {
         console.log("Log in failed", error);
@@ -42,18 +45,28 @@ export class LoginComponent implements OnInit {
         this.logInForm.reset();
       }
       )
+
+
     }
 
+    console.log("Just before checking for usertype");
 
     this.loginservice.loginUser(this.logInForm.value.emailId).subscribe((response) => {
       this.loginservice.stauts = true;
       console.log(response);
+      localStorage.setItem('emailid1', response.emailId);
       if (response.userType == "As Insured") {
         console.log(response.userType);
-        this.router.navigate(["/policyDetails"]);
+        localStorage.setItem("UserType", "customer")
+        this.router.navigate(["/home/home-page"]);
+      }
+      else if (response.userType == "As Policy Advisor") {
+        localStorage.setItem("UserType", "policyadvisor")
+        this.router.navigate(["/home/home-page"]);
       }
       else {
-        this.router.navigate(["/add-policy"]);
+        localStorage.setItem("UserType", "insuranceprovider")
+        this.router.navigate(["/home/insurance-provider"]);
       }
     }
     );

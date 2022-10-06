@@ -188,7 +188,7 @@ export class EditInsuranceComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/313911').subscribe((data: any) => {
+    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/'+localStorage.getItem('editpolicyid')?.toString()).subscribe((data: any) => {
       this.insuranceobj = data
 
       console.log(this.insuranceobj)
@@ -200,7 +200,7 @@ export class EditInsuranceComponent implements OnInit {
         category: this.insuranceobj.category,
         modelsAllowed: this.insuranceobj.modelsAllowed,
         policyDocuments: this.insuranceobj.policyDocuments,
-        userEmail: localStorage.getItem('email')
+        userEmail: localStorage.getItem('logInEmailId')
       })
       const control1 = <FormArray>this.insuranceForms.get('policyBenefits')
 
@@ -603,6 +603,7 @@ export class EditInsuranceComponent implements OnInit {
   //=========================================================================================================
   check_validity() {
     const obj = this.insuranceForms
+    console.log(obj)
     let validity1 = obj.get('policyDescription')?.valid
     let validity2 = this.check_validity2()
     let validity3 = obj.get('policyDocuments')?.valid && obj.get('userEmail')?.valid
@@ -611,7 +612,12 @@ export class EditInsuranceComponent implements OnInit {
       let validity4 = obj.get('modelsAllowed')?.valid && obj.get('category')?.valid
       return !(validity1 && validity2 && validity3 && validity4)
     }
-    return !(validity1 && validity2 && validity3)
+    console.log('Validity 1:'+validity1)
+    console.log('Validity 2:'+validity2)
+    console.log('Validity 3:'+validity3)
+    console.log(validity1 && validity2 && validity3);
+    
+    return !(this.check_validity1() && this.check_validity2() && this.check_validity3())
   }
   check_validity1() {
     const obj = this.insuranceForms

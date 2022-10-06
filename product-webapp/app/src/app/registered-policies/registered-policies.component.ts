@@ -15,7 +15,7 @@ export class RegisteredPoliciesComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    let response= this.http.get("http://localhost:8080/insurance/api/vk1/policies/ajay123@gmail.com");
+    let response= this.http.get("http://localhost:8080/insurance/api/vk1/policies/"+localStorage.getItem('logInEmailId')?.toString());
     response.subscribe((data)=>{
       
       console.log(data);
@@ -28,7 +28,7 @@ export class RegisteredPoliciesComponent implements OnInit {
 
   openDialog(policy: any, i: any) {
     console.log(policy);
-    this.router.navigateByUrl('/policyBuyers');
+    this.router.navigateByUrl('/home/policyBuyers');
     localStorage.setItem('insurancePolicyId', policy.policyId);
     localStorage.setItem('typeOfInsurance', policy.insuranceType);
     localStorage.setItem('typeOfPolicy', policy.policyName)

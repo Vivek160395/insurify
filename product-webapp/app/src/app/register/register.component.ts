@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { User } from '../user';
 import { UserService } from '../Services/user.service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-register',
@@ -12,9 +15,10 @@ export class RegisterComponent implements OnInit {
 
   error: string = '';
  user: User = new User();
-constructor(private userService: UserService) {}
+constructor(private userService: UserService,private route:Router) {}
 
 ngOnInit():void{}
+
 
 registerForm = new FormGroup({
   userType: new FormControl('', [Validators.required]),
@@ -38,12 +42,13 @@ registerSubmitted(data:any){
     console.log(this.user);
     this.userService.registerUser(this.user).subscribe((response)=>{
       console.log("Registered data", response);
+      this.route.navigateByUrl("/nav/login")
     });
   }
   else{
     this.error = "Password and Confirm Password Should Match";
   }
- 
+
   //console.table(this.registerForm.value);
  // alert("Your password confirm password should match");
 }
@@ -66,11 +71,13 @@ get confirmPassword(): FormControl{
 }
 
 
-// OnRegister() {
-//   console.table(this.registerForm.value);
-//   if (this.password.value != this.confirmPassword.value) {
-//     alert("Your password confirm password should match");
-//   }
-// }
+OnRegister() {
+  console.table(this.registerForm.value);
+  if (this.password.value != this.confirmPassword.value) {
+    alert("Your password confirm password should match");
+  }
+}
+
+
 
 }

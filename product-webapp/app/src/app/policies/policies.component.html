@@ -92,9 +92,42 @@
                     </mat-card>
                 </div>
             </div>
+        </mat-tab>
+
+        <mat-tab label="Completed">
+            <div style="display: flex; flex-wrap: wrap; padding-top: 20px; ">
+
+                <div *ngFor="let policy of purchasedPolicies  | filter:searchedKeyword; let i=index ">
+                    <div *ngIf="policy.status==false">
+                        <mat-card class="example-card" (click)="openDialog(policy,i)">
+                            <mat-card-title> {{insuranceTitle[i]}} </mat-card-title>
+                            <mat-divider></mat-divider>
+                            <br>
+                            <mat-card-subtitle>
+                                <mat-icon matTooltip="Policy Name" matTooltipPosition="above">subject</mat-icon> {{policyTitle[i]}} <br>
+                                <mat-icon matTooltip="Policy Number" matTooltipPosition="above"> insert_drive_file </mat-icon>
+                                {{policy.customerPolicyId}} <br>
+                                <mat-icon matTooltip="Start Date" matTooltipPosition="above">event_available</mat-icon>
+                                {{policy.startDate[0]}} <br>
+                                <!-- <mat-icon>today</mat-icon>  -->
+                                <mat-icon matTooltip="End Date" matTooltipPosition="above">event_busy</mat-icon> {{policy.endDate[0]}}
+                                <br>
+                                <!-- <mat-icon> money</mat-icon> -->
+                                <mat-icon matTooltip="Sum Insured" matTooltipPosition="above">account_balance_wallet</mat-icon>
+                                ₹{{policy.sumInsured}}
+                            </mat-card-subtitle>
+                            <mat-card-content>
+                                <!-- {{longText}} -->
+                                {{description[i]}}
+                            </mat-card-content>
+                            <!-- <button mat-raised-button color="primary" disabled>Claim</button>
+                        <button mat-raised-button color="primary" style="margin-left:180px" routerLink="/renewal">Renew</button> -->
+                        </mat-card>
+                    </div>
+                </div>
             </div>
         </mat-tab>
-        </mat-tab-group>
+    </mat-tab-group>
     <br>
 
 

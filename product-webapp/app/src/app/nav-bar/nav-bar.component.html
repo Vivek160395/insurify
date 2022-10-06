@@ -7,7 +7,7 @@
         </button>
             </div>
             <div style="display: flex;">
-                <div class="insurify" routerLink="" style="color:white">
+                <div class="insurify" routerLink="/home/home-page" style="color:white">
                     INSURIFY
                 </div>
             </div>
@@ -19,10 +19,19 @@
             <div style="margin-right: 30px;" class="claim">
                 <button mat-button class="clai">Claims</button>
             </div>
+            <!-- <div style="margin-right: 30px;" class="claim">
+                <button mat-button class="clai" routerLink="/home/add-policy">Add Insurance</button>
+            </div> -->
         </div>
         <div style="display: flex;">
-            <div style="margin-right: 20px;">
-                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/login"> Login
+            <div style="margin-right: 20px;" [hidden]="loginButton">
+                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/nav/login">
+          Login
+        </button>
+            </div>
+            <div style="margin-right: 20px;" [hidden]="logoutButton">
+                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/nav/login">
+          Login
         </button>
             </div>
             <div style="margin-right: 20px;">
@@ -42,34 +51,34 @@
     <mat-drawer-container class="example-sid-container">
         <mat-drawer #drawer class="example-sid-sidenav" mode="side">
             <mat-nav-list style="padding: 10px;">
-                <a mat-list-item routerLink="" style="font-size: 20px;">
+                <a mat-list-item routerLink="/home/home-page" style="font-size: 20px;">
                     <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>home</mat-icon>
           </span> Home
                 </a>
-                <a mat-list-item routerLink="" style="font-size: 20px;">
+                <a mat-list-item routerLink="/home/policies" style=" font-size: 20px;">
                     <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>history</mat-icon>
-          </span> History
+          </span> Purchases
                 </a>
                 <div [hidden]="others">
-                    <a mat-list-item routerLink="" style="font-size: 20px;">
+                    <a mat-list-item routerLink="/home/chat" style="font-size: 20px;">
                         <span class="material-symbols-outlined" style="margin-right:13px">
               <mat-icon>support_agent</mat-icon>
             </span> Chat
                     </a>
-                    <a mat-list-item routerLink="" style="font-size: 20px;">
+                    <a mat-list-item routerLink="/home/policy-advisor" style="font-size: 20px;">
                         <span class="material-symbols-outlined" style="margin:0 10px 0 5px">
               <mat-icon>groups</mat-icon>
             </span> Advisors
                     </a>
                 </div>
-                <a mat-list-item routerLink="" style="font-size: 20px;">
+                <a mat-list-item routerLink="/home/update" style="font-size: 20px;">
                     <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>edit</mat-icon>
           </span> Edit Profile
                 </a>
-                <a mat-list-item routerLink="" style="font-size: 20px;" [hidden]="insurer">
+                <a mat-list-item routerLink="/home/add-policy" style="font-size: 20px;" [hidden]="insurer">
                     <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>add</mat-icon>
           </span> Add Insurance
