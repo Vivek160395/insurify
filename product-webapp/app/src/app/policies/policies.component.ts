@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DetailsComponent } from '../details/details.component';
 import { DatePipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Insurance } from '../insurance';
 
 @Component({
   selector: 'app-policies',
@@ -136,7 +137,7 @@ export class PoliciesComponent {
 
   openDialog(policy: any, i: any) {
     console.log(policy);
-    this.router.navigateByUrl('/details');
+    this.router.navigateByUrl('/home/details');
     localStorage.setItem('policyName', this.policyTitle[i]);
     localStorage.setItem('insuranceType', this.insuranceTitle[i]);
     // localStorage.setItem('insuranceType','Automobile Insurance');
@@ -172,7 +173,7 @@ export class PoliciesComponent {
         console.log(x);
         
         if(this.str==null){
-          this.router.navigateByUrl("/renewal-home");
+          this.router.navigateByUrl("/home/renewal-home");
         }
         else {
           this.openSnackBar(x);
