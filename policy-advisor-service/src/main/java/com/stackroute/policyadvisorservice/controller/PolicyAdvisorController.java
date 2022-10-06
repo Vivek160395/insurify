@@ -54,7 +54,7 @@ public class PolicyAdvisorController {
         return new ResponseEntity<>(policyAdvisorService.getPolicyAdvisorByEmail(emailId), HttpStatus.OK);
     }
 
-    @PutMapping("/updateDetails/{emailId}")
+    @PutMapping("/update/{emailId}")
     public ResponseEntity<?> updateInfo(@RequestBody PolicyAdvisor policyAdvisor, @PathVariable String emailId)
             throws PolicyAdvisorNotRegisteredException {
         try {
@@ -67,7 +67,7 @@ public class PolicyAdvisorController {
 
 
 
-    @PutMapping("/updatePicture/{emailId}")
+    @PutMapping("/updateDetails/{emailId}")
     public ResponseEntity<?> updatePicture(@RequestParam("updateInfo") String policyAdvisor,
                                            @PathVariable String emailId, @RequestParam("imageFile") MultipartFile file)
             throws PolicyAdvisorNotRegisteredException, IOException {

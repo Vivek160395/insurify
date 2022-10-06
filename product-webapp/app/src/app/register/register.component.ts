@@ -10,6 +10,7 @@ import { UserService } from '../Services/user.service';
 })
 export class RegisterComponent implements OnInit {
 
+  error: string = '';
  user: User = new User();
 constructor(private userService: UserService) {}
 
@@ -33,14 +34,21 @@ registerSubmitted(data:any){
   this.user.password = data.value.password;
   this.user.userType = data.value.userType;
 
-  console.log(this.user);
-  this.userService.registerUser(this.user).subscribe((response)=>{
-    console.log("Registered data", response);
-  });
-
-
-
+  if (this.password.value == this.confirmPassword.value) {
+    console.log(this.user);
+    this.userService.registerUser(this.user).subscribe((response)=>{
+      console.log("Registered data", response);
+    });
+  }
+  else{
+    this.error = "Password and Confirm Password Should Match";
+  }
+ 
+  //console.table(this.registerForm.value);
+ // alert("Your password confirm password should match");
 }
+
+
 get userType(): FormControl{
   return this.registerForm.get('userType') as FormControl;
 }
@@ -58,11 +66,11 @@ get confirmPassword(): FormControl{
 }
 
 
-OnRegister() {
-  console.table(this.registerForm.value);
-  if (this.password.value != this.confirmPassword.value) {
-    alert("Your password confirm password should match");
-  }
-}
+// OnRegister() {
+//   console.table(this.registerForm.value);
+//   if (this.password.value != this.confirmPassword.value) {
+//     alert("Your password confirm password should match");
+//   }
+// }
 
 }

@@ -1,3 +1,4 @@
+import { I } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
     if (this.logInForm.valid) {
       this.loginservice.getUserCredentials(this.logInForm.value).subscribe((response) => {
         console.log("Log in successfull", response);
-
+        localStorage.setItem("logInEmailId", this.loginservice.emailId );
 
       }, error => {
         console.log("Log in failed", error);
@@ -42,6 +43,8 @@ export class LoginComponent implements OnInit {
         this.logInForm.reset();
       }
       )
+
+      
     }
 
 
@@ -52,8 +55,11 @@ export class LoginComponent implements OnInit {
         console.log(response.userType);
         this.router.navigate(["/policyDetails"]);
       }
+      else if(response.userType == "As Policy Advisor"){
+        this.router.navigate(["/policyDetails"]);
+      }
       else {
-        this.router.navigate(["/add-policy"]);
+        this.router.navigate(["/insurance-provider"]);
       }
     }
     );

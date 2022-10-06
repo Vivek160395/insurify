@@ -29,7 +29,8 @@
                         {{description[i]}}
                     </mat-card-content>
                     <button mat-raised-button color="primary" routerLink="/claim">Claim</button>
-                    <button mat-raised-button color="primary" style="margin-left:180px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1] || (policy.endDate[(policy.endDate.length-1)].year==currentDate.year && policy.endDate[(policy.endDate.length)-1].month - currentDate.month)>=1" (click)="renewPolicy(policy)" >Renew</button>
+                    <!-- [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1] || (policy.endDate[(policy.endDate.length-1)].year==currentDate.year && policy.endDate[(policy.endDate.length)-1].month - currentDate.month)>=1" -->
+                    <button mat-raised-button color="primary" style="margin-left:180px"  (click)="renewPolicy(policy)" >Renew</button>
                 </mat-card>
         </div> 
     </div>

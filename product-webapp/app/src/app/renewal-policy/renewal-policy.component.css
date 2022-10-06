@@ -1,3 +1,6 @@
+.bgm{
+    background-color: white;
+}
 .heading{
     margin: 0px;
     text-align: center;
@@ -30,25 +33,29 @@
 .choose_plan{
     text-align: center;
     padding-top: 5px;
+    margin-top: 12px;
     font-size: 20px;
+    color: rgb(80, 14, 186);
+    text-shadow: 2px 2px rgb(158, 141, 141);
 }
 .first_card{
-    position: absolute;
-    left: 15%;
-    top: 42%;
-    width: 30%;
-    height: 50%;
-    color: black;
-    box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);
+    position: absolute; 
+    left: 15%; 
+    top: 42%; 
+    width: 30%; 
+    height: 50%; 
+    color: black; 
+    box-shadow: 4px 4px 5px 5px rgb(149, 66, 66);
 }
 .second_card{
-    position: absolute;
-    top: 42%;
-    left:50%;
-    width: 35%;
-    height: 50%;
-    color: black;
-    box-shadow: 4px 4px 5px 5px rgb(158, 141, 141);
+    position: absolute; 
+    top: 42%; 
+    left:50%; 
+    width: 35%; 
+    height: 50%; 
+    color: black; 
+    box-shadow: 4px 4px 5px 5px rgb(56, 197, 207);
+    /* box-shadow: 4px 4px 5px 5px rgb(158, 141, 141); */
 }
 .submit{
     width: 50%;
