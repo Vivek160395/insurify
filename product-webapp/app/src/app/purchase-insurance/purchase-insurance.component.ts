@@ -237,7 +237,7 @@ export class PurchaseInsuranceComponent implements OnInit {
     return '';
   }
 
-  
+
   purchase_insurance() {
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -416,14 +416,17 @@ export class PurchaseInsuranceComponent implements OnInit {
       customerInsurancePurchase.lifeInsurance.lifeIllnessStatus = this.lifediseasestatus
       customerInsurancePurchase.lifeInsurance.healthConditionList = this.userForm.get('lifeillnessList')!.value!
     }
-    customerInsurancePurchase.email = localStorage.getItem("email")!
+    customerInsurancePurchase.email = localStorage.getItem("logInEmailId")!;
     customerInsurancePurchase.insurancePolicyId = `${this.service.policyNo}`
     console.log(customerInsurancePurchase)
     console.log('This is before posting');
-
+    const emailid = localStorage.getItem("logInEmailId");
     this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8080/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
       (data: any) => {
         console.log(data);
+        this.httpclient.post(`http://localhost:8080/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
+          console.log(data);
+        })
       }
     );
     console.log('This is after posting');
