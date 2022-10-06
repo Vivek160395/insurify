@@ -167,7 +167,7 @@ export class PoliciesComponent {
       
     // this.description.push(x.policyDescription);
       // this.policyTitle.push(x.policyName))
-      this.http.get("http://localhost:8080/purchase/api/getstatus/"+policy.customerPolicyId, data).subscribe((x:any)=>{
+      this.http.put("http://localhost:8080/purchase/api/getstatus/"+policy.customerPolicyId, data).subscribe((x:any)=>{
         this.str=x;
         console.log(x);
         

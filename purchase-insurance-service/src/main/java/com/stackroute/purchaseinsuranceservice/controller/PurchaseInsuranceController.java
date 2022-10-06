@@ -147,7 +147,7 @@ public class PurchaseInsuranceController {
     }
 
     // checkRenewalStatus
-    @GetMapping("/getstatus/{customerPolicyId}")
+    @PutMapping("/getstatus/{customerPolicyId}")
     public ResponseEntity<?> returnRenewalStatus(@PathVariable String customerPolicyId,
             @RequestBody Insurance insurance) throws ParseException, PolicyIdNotFoundException {
 
