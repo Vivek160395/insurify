@@ -48,7 +48,7 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
   countOfInsurances: any = [];
   ngOnInit(): void {
     console.log(this.service.userType);
-    if (this.service.userType == "As Insurer") {
+    if (this.service.userType == "insuranceprovider") {
       this.insurer = false;
       this.others = true;
     } else {

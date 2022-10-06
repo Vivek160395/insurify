@@ -39,7 +39,6 @@ const routes: Routes =
         // { path: "", component: RecommendationComponent, canActivate: [PersonGuard] },
         { path: "home-page", component: RecommendationComponent },
         { path: "insurance-provider", component: InsuranceProviderComponent },
-        { path: "register", component: RegisterComponent },
         { path: "add-policy", component: AddInsurancePolicyComponent },
         { path: "policies", component: PoliciesComponent },
         { path: "renewal-update", component: RenewalPolicyComponent },
@@ -61,7 +60,12 @@ const routes: Routes =
 
     },
     { path: "", component: HomepageComponent },
-    { path: "loginnav", component: LoginNavbarComponent, children: [{ path: "login", component: LoginComponent }] }
+    {
+      path: "nav", component: LoginNavbarComponent, children: [
+        { path: "login", component: LoginComponent },
+        { path: "register", component: RegisterComponent },
+      ]
+    }
     // { path: "login", component: LoginComponent }
 
 

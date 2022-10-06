@@ -24,11 +24,11 @@ export class UpdateComponent implements OnInit {
     "emailId": null,
     "password": null,
     "userType": null,
-    "name": "sri",
+    "name": null,
     "gender": null,
-    "age": 0,
+    "age": null,
     "dateOfBirth": null,
-    "mobileNo": 0,
+    "mobileNo": null,
     "address": {
       "houseNo": null,
       "street": null,
@@ -37,7 +37,7 @@ export class UpdateComponent implements OnInit {
       "state": null,
       "pinCode": null
     },
-    "aadharNo": 0,
+    "aadharNo": null,
     "panNo": null,
     "profilePic": null
   }

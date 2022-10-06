@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RecommendationServiceService {
+  userType = localStorage.getItem('UserType');
 
   constructor(private http: HttpClient) { }
   basicUrl = "http://localhost:8080/recommendation/Recommendation";
@@ -30,8 +31,7 @@ export class RecommendationServiceService {
     return this.http.get(this.policyUrl + `/policy-id/${policyId}`);
   }
   policyNo: any;
-  userEmail: any = "gritvik99@gmail.com";
-  userType = "As Insurer"
+  userEmail = localStorage.getItem('logInEmailId');
   getCountOfUsersBoughtInsurance(id: any): Observable<any> {
     return this.http.get(`http://localhost:8080/purchase/api/get/count/${id}`);
   }
