@@ -24,7 +24,7 @@ export class PolicyAdvisorComponent implements OnInit {
 
       console.log(data);
       this.policyAdvisors = data;
-      console.log(this.policyAdvisors.yearsOfExperience);
+      // console.log(this.policyAdvisors.yearsOfExperience);
       })
   }
 
