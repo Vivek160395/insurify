@@ -15,9 +15,9 @@ export class RegisteredPoliciesComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    let response = this.http.get("http://localhost:8080/insurance/api/vk1/policies/ajay123@gmail.com");
-    response.subscribe((data) => {
-
+    let response= this.http.get("http://localhost:8080/insurance/api/vk1/policies/ajay123@gmail.com");
+    response.subscribe((data)=>{
+      
       console.log(data);
       this.registeredPolicies = data;
       console.log(this.registeredPolicies);
