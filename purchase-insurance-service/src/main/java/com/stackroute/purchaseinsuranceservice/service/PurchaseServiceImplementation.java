@@ -686,11 +686,14 @@ public class PurchaseServiceImplementation implements PurchaseService {
             System.out.println("Renew possible only before 60 days of policy expiry");
             return "Renew possible only before 60 days of policy expiry";
         }
-        PurchaseServiceImplementation purchaseServiceImplementation = new PurchaseServiceImplementation();
-        Insurance retrievedInsurance = returnInsuranceForRenewal(insurance, customerPolicyId);
-        if (retrievedInsurance == null) {
-            for (int i = 0; i < retrievedInsurance.getPolicyDetails().length; i++) {
-                if (retrievedInsurance.getPolicyDetails()[i].getSumInsure() == customerInsurance.getSumInsured()) {
+        PurchaseServiceImplementation purchaseServiceImplementation=new PurchaseServiceImplementation();
+        Insurance retrievedInsurance=returnInsuranceForRenewal(insurance,customerPolicyId);
+        if(retrievedInsurance==null)
+        {
+            for(int i=0;i<insurance.getPolicyDetails().length;i++)
+            {
+                if(insurance.getPolicyDetails()[i].getSumInsure()==customerInsurance.getSumInsured())
+                {
                     return "Age of all users in the policy covered should be less than 60 years ";
                 }
             }

@@ -101,14 +101,15 @@ export class ChatComponent implements OnInit {
     if (this.role == 'user') {
 
       this.service.getMsgs(this.loginId + "&" + this.otherId).subscribe(data => {
+       this.msg = data;
         if(data!=null){
-        this.msg = data;
         for (let i: number = 0; i < data.length; i++) {
           if (data[i].id == this.loginId) {
             this.msg[i].show = true;
           }
         }
       }
+      
       })
     }
     else {

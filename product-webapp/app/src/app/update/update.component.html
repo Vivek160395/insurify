@@ -30,7 +30,7 @@
                         </mat-form-field>
                         <mat-form-field appearance="outline" fxFlex="50%">
                             <mat-label>DOB</mat-label>
-                            <input matInput placeholder="Enter your Dob" type="date" formControlName="dateOfBirth" [ngModel]="info.dateOfBirth" >
+                            <input matInput placeholder="Enter your Dob" type="date" formControlName="dateOfBirth" [ngModel]="info.dateOfBirth">
                             <mat-hint>DD/MM/YYYY</mat-hint>
                         </mat-form-field>
                     </div>
@@ -96,7 +96,8 @@
                     <div fxFlex="50%"><b><button mat-raised-button color="primary" type="submit" [disabled]="profile.invalid"
                 style="margin: 40px 0px;" (click)="onSubmit()">Update</button></b></div>
                     <div fxFlex="50%"> <b><button mat-raised-button color="primary" (click)="onCancel()"
-                        style="margin: 40px 0px;background-color: white;border: 2px solid blue;color: blue;">Cancel</button></b></div>
+                style="margin: 40px 0px;background-color: white;border: 2px solid blue;color: blue;">Cancel</button></b>
+                    </div>
                 </div>
             </form>
         </mat-card-content>
@@ -109,41 +110,41 @@
             <h1>Basic Personal Details</h1>
             <div>
                 <div fxLayout="row" fxLayoutGap="2%">
-                    <div  fxFlex="50%" class="c1">User Name : {{info.name}}</div>
-                    <div  fxFlex="50%" class="c1">Mobile : {{info.mobileNo}}</div>
+                    <div fxFlex="50%" class="c1">User Name : {{info.name}}</div>
+                    <div fxFlex="50%" class="c1">Mobile : {{info.mobileNo}}</div>
                 </div>
                 <div fxLayout="row" fxLayoutGap="2%">
-                    <div  fxFlex="50%" class="c1">Gender : {{info.gender}}</div>
-                    <div  fxFlex="50%" class="c1"> DOB : {{info.dateOfBirth}}</div>
+                    <div fxFlex="50%" class="c1">Gender : {{info.gender}}</div>
+                    <div fxFlex="50%" class="c1"> DOB : {{info.dateOfBirth}}</div>
                 </div>
             </div>
             <hr>
             <h1>Address Details</h1>
             <div>
                 <div fxLayout="row" fxLayoutGap="2%">
-                    <div  fxFlex="50%" class="c1"> House No : {{info.address.houseNo}}</div>
-                    <div  fxFlex="50%" class="c1">Street : {{info.address.street}}</div>
+                    <div fxFlex="50%" class="c1"> House No : {{info.address.houseNo}}</div>
+                    <div fxFlex="50%" class="c1">Street : {{info.address.street}}</div>
                 </div>
                 <div fxLayout="row" fxLayoutGap="2%">
-                    <div  fxFlex="50%" class="c1">Land Mark : {{info.address.landmark}}</div>
-                     <div  fxFlex="50%" class="c1"> City : {{info.address.city}}</div>
+                    <div fxFlex="50%" class="c1">Land Mark : {{info.address.landmark}}</div>
+                    <div fxFlex="50%" class="c1"> City : {{info.address.city}}</div>
                 </div>
                 <div fxLayout="row" fxLayoutGap="2%">
-                    <div  fxFlex="50%" class="c1">State : {{info.address.state}}</div>
-                     <div  fxFlex="50%" class="c1">Pincode : {{info.address.pinCode}} </div>
+                    <div fxFlex="50%" class="c1">State : {{info.address.state}}</div>
+                    <div fxFlex="50%" class="c1">Pincode : {{info.address.pinCode}} </div>
                 </div>
             </div>
             <hr>
             <h1>Additional Details</h1>
             <div fxLayout="row" fxLayoutGap="2%">
-                <div  fxFlex="50%" class="c1"> Aadhar number : {{info.aadharNo}}</div>
-                <div  fxFlex="50%" class="c1"> Pan Number: {{info.panNo}}</div>
+                <div fxFlex="50%" class="c1"> Aadhar number : {{info.aadharNo}}</div>
+                <div fxFlex="50%" class="c1"> Pan Number: {{info.panNo}}</div>
             </div>
             <hr>
             <div [hidden]="imgView"> <img src="data:*;base64,{{info.profilePic}}" height="200"> </div>
             <div [hidden]="imgView2"><img [src]="Imgurl" height="200"></div>
-            <b><button mat-raised-button color="primary" (click)="onEdit()"  style="margin: 40px 0px;">Edit</button></b>
+            <b><button mat-raised-button color="primary" (click)="onEdit()" style="margin: 40px 0px;">Edit</button></b>
 
-            </mat-card-content>
+        </mat-card-content>
     </mat-card>
 </div>

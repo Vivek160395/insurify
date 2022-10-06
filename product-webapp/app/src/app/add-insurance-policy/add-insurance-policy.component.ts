@@ -350,14 +350,24 @@ export class AddInsurancePolicyComponent implements OnInit {
     this.http.post<Insurance>("http://localhost:8080/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
       (data: any) => {
         console.log(data);
-        if (this.filestatus)
+        if (this.filestatus) {
           this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
             .subscribe((data: any) => { console.log(data) });
+          this.addInsuranceTo();
+        }
       });
     console.log(this.insuranceForms.value)
     this.insuranceForms.get('policyId')!.disable()
   }
-
+  addInsuranceTo() {
+    this.insuranceForms.get('policyId')?.enable();
+    this.http.post("http://localhost:8080/recommendation/Recommendation/Insurance", this.insuranceForms.value).subscribe(
+      (data) => {
+        console.log(data);
+      }
+    )
+    this.insuranceForms.get('policyId')?.disable();
+  }
 
   addDetails(i: any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
@@ -714,6 +724,7 @@ export class AddInsurancePolicyComponent implements OnInit {
     // else {this.insuranceForms.get('modelsAllowed')?.patchValue(this.bikeList)}
 
   }
+
 }
 export interface bike {
   value: string;
@@ -751,3 +762,6 @@ export class premiumdetails {
     public addOnDescription: string,
     public addOnPremiums: number) { }
 }
+
+
+
