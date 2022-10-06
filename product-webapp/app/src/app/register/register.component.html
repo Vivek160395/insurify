@@ -14,8 +14,8 @@
                 </div>
             </div>
         </div>
-        <div fxFlex="35%" class="col bg-light shadow">
-            <h3 class="text-center"> Sign Up</h3>
+        <div fxFlex="35%" class="col bg-light shadow js-hover">
+            <h1 class="text-center"> Sign Up</h1>
                         <form [formGroup]="registerForm" (ngSubmit)="registerSubmitted(registerForm)">
 
                             <div class="mb-3">
@@ -38,9 +38,9 @@
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" id="inlineRadio3"
                                             value="As Policy Advisor" formControlName="userType">
-                                        <label class="form-check-label" for="inlineRadio2"> <b>As Policy Advisor </b>
+                                        <label class="form-check-label" for="inlineRadio3"> <b>As Policy Advisor </b>
                                         </label>
-                                        <!-- <img src="assets/img/As_insurer.png" width="28" height="28" style="padding-left: 1px;"> -->
+                                        <img src="assets/img/As_policy_advisor.png" width="26" height="26" style="padding-left: 1px;"> 
                                     </div>
                                 </div>
                                 <div class="form-text text-danger" *ngIf="userType.errors?.['required']"> Role is
@@ -87,11 +87,14 @@
                                 <div class = " form-text text-danger"> {{this.error}}</div>
 
 
-
-                                <button type="submit" [disabled]="registerForm.invalid"
+                                <div>
+                                    <button type="submit" [disabled]="registerForm.invalid"
                                     class=" btn btn-primary mr-1">Register</button>
+                                </div>
 
+                                 <div>
                                 <p class="mb-3">Already a member? </p>
+                                </div>  
                                 <a href="http://localhost:4200/login" class="text-center">Log In</a>
 
                            </div>

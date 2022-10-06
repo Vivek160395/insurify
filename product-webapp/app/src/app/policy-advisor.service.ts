@@ -20,6 +20,10 @@ export class PolicyAdvisorService {
   getUserDetails():Observable<any>{
     return this.http.get(this.baseUrl2+"policyAdvisors");
   }
+
+  // getDetailsById(emailId: any): Observable<any>{
+  //   return this.http.get(this.baseUrl2 + "/policAdvisor/" + emailId);
+  // }
   
   updateAdvisorDetails(policyAdvisor: PolicyAdvsior, emailId: string, profilePic:File): Observable<Object>{
     const formData=new FormData();

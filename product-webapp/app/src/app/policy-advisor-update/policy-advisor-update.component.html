@@ -14,23 +14,23 @@
                         <div fxlayout = "row" fxLayoutGap = "63px">
                             <mat-form-field appearance="outline" fxFlex = "30%">
                                 <mat-label>Email</mat-label>
-                                <input matInput placeholder = "emailId" id = "emailId" formControlName="emailId" > 
+                                <input matInput placeholder = "emailId" formControlName="emailId" > 
                     
                             </mat-form-field>
 
                              <mat-form-field appearance="outline" fxFlex = "30%">
                                 <mat-label>Name</mat-label>
-                                <input matInput placeholder="Ex. Jane Doe" formControlName="name" type="text"
-                                >
+                                <input matInput placeholder="Ex. Jane Doe" formControlName="name" type="text">
                                 <mat-hint>Enter your full name</mat-hint>
+                                <!-- <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error> -->
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex = "30%">
                                 <mat-label>Phone Number</mat-label>
-                                <input matInput placeholder="Ex. +1 11111-00000" formControlName="phoneNumber" type="text"
-                                >
+                                <input matInput placeholder="Ex. +1 11111-00000" formControlName="phoneNumber" type="text">
                                 <mat-icon matSuffix>phone</mat-icon>
                                 <mat-hint>Enter your phone number with country  code</mat-hint>
+                                <!-- <mat-error *ngIf="phoneNumber.invalid">{{getErrorMessage()}}</mat-error> -->
                             </mat-form-field>
                         </div> 
 
@@ -48,14 +48,14 @@
 
                             <mat-form-field appearance = "outline" fxFlex = "30%">
                                 <mat-label>Date of  Birth</mat-label>
-                                <input matInput [matDatepicker]="picker"  formControlName = "dateOfBirth"  >                              <mat-hint>MM/DD/YYYY</mat-hint>
+                                <input matInput [matDatepicker]="picker"  formControlName = "dateOfBirth" type = "date" >                              <mat-hint>MM/DD/YYYY</mat-hint>
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex = "30%">
                                 <mat-label>Experience</mat-label>
-                                <input matInput maxlength="2"  placeholder="Ex. 3" fromControlName = "yearsOfExperience" >
+                                <input matInput placeholder="Ex. 3" fromControlName = "yearsOfExperience" >
                                 <mat-hint>Enter your experience in years</mat-hint>
                             </mat-form-field>
                         </div>
@@ -68,13 +68,13 @@
                         <div fxlayout = "row" fxLayoutGap = "5%">
                             <mat-form-field appearance="outline" fxFlex = "30%">
                                 <mat-label>Pan Number</mat-label>
-                                <input matInput maxlength="10"  formControlName = "panNo" >
+                                <input matInput formControlName = "panNo" >
                                 <mat-hint>Enter your Pan number</mat-hint>
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex = "30%">
                                 <mat-label>Aadhar Number</mat-label>
-                                <input matInput maxlength="12"  formControlName = "aadharNo" >
+                                <input matInput formControlName = "aadharNo" >
                                 <mat-hint>Enter your Aadhar Number</mat-hint>
                             </mat-form-field>
                         </div>
@@ -98,7 +98,7 @@
                                     </mat-chip>
                                     <input placeholder="Others" [matChipInputFor]="chipList"
                                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" 
-                                     (matChipInputTokenEnd)="add($event)">
+                                     (matChipInputTokenEnd)="add($event)" formControlName = "category">
                                 </mat-chip-list>
 
                 
