@@ -155,17 +155,20 @@ export class AddInsurancePolicyComponent implements OnInit {
   }
 
 
-
+  filePath: any = '';
   ngOnInit(): void {
     this.insuranceForms.get('policyId')?.setValue(this.id.toString())
     this.insuranceForms.get('userEmail')?.setValue(this.service.userEmail);
     this.insuranceForms.get('policyId')!.disable()
   }
   id = Math.floor(Math.random() * 1000000 + 100000);
+  formData1 = new FormData;
   public onFileChanged(event: any) {
     //Select File
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
+      this.formData1.append("imageFile", event.target.files[0]);
+
       this.insuranceForms.patchValue({
         fileSource: file
       });
@@ -353,20 +356,30 @@ export class AddInsurancePolicyComponent implements OnInit {
         if (this.filestatus) {
           this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
             .subscribe((data: any) => { console.log(data) });
-          this.addInsuranceTo();
+          this.addInsuranceTo(formData);
+          this.addImage(formData);
         }
       });
     console.log(this.insuranceForms.value)
     this.insuranceForms.get('policyId')!.disable()
   }
-  addInsuranceTo() {
+  addInsuranceTo(formData: FormData) {
     this.insuranceForms.get('policyId')?.enable();
     this.http.post("http://localhost:8080/recommendation/Recommendation/Insurance", this.insuranceForms.value).subscribe(
       (data) => {
         console.log(data);
+        this.addImage(formData);
       }
     )
     this.insuranceForms.get('policyId')?.disable();
+  }
+  addImage(formData: FormData) {
+    // this.insuranceForms.get('policyId')?.enable();
+    this.http.post(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
+      console.log(data);
+    })
+    // this.insuranceForms.get('policyId')?.disable();
+
   }
 
   addDetails(i: any) {
