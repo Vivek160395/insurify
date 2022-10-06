@@ -8,7 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { ClaimService } from '../claim.service';
+import { ClaimService } from '../Services/claim.service';
+
 
 
 
@@ -27,7 +28,7 @@ export class ClaimComponent implements OnInit {
   claimError = '';
   today1= new Date();
   claimLife: string = "";
-  claimAmount = '';
+ claimAmount="";
   
   stepperOrientation: Observable<StepperOrientation>;
 
@@ -87,6 +88,27 @@ export class ClaimComponent implements OnInit {
       });
     }
   }
+  getpolicy() {
+    this.service.getPolicyDetails().subscribe(
+      info => {
+        console.log(info);
+        this.data.insuranceType = info.insuranceType;
+
+
+      });
+    }
+  claimForm = new FormGroup({
+    document: new FormControl("", [Validators.required]),
+    description: new FormControl("", [Validators.required]),
+    claimType: new FormControl("", ),
+    claimAmount: new FormControl("", ),
+    claimDate: new FormControl("", [Validators.required]),
+    claimSubmissionDate: new FormControl(new Date(), [Validators.required]),
+    customerPolicyId: new FormControl(localStorage.getItem('customerpolicyid1'), ),
+    insurancePolicyId: new FormControl(localStorage.getItem('policyid1'), ),
+    email: new FormControl(localStorage.getItem('emailid1'), ),
+
+  })
 
   getDetails() {
     this.service.getUserDetails().subscribe(
@@ -122,18 +144,20 @@ export class ClaimComponent implements OnInit {
           this.data.name = info.healthInsurance.insuredInfo[0].name;
           this.data.relation = info.healthInsurance.insuredInfo[0].relation;
         }
-        else if (this.data.insuranceType === 'LifeInsurance') {
+        
+          
+          this.data.maritalStatus = info.lifeInsurance.maritalStatus;
+          this.data.occupation = info.lifeInsurance.occupation;
+          this.data.organisationType = info.lifeInsurance.organisationType;
+          this.data.annualIncome = info.lifeInsurance.annualIncome;
+          console.log(this.data.maritalStatus);
           this.claimAmount = info.sumInsured.toString();
           this.claimForm.patchValue({
             claimAmount: this.claimAmount
 
           });
-          this.data.maritalStatus = info.lifeInsurance.maritalStatus;
-          this.data.occupation = info.lifeInsurance.occupation;
-          this.data.organisationType = info.lifeInsurance.organisationType;
-          this.data.annualIncome = info.lifeInsurance.annualIncome;
 
-        }
+        
       });
 
 
@@ -141,30 +165,12 @@ export class ClaimComponent implements OnInit {
 
 
   }
-  claimForm = new FormGroup({
-    document: new FormControl("", [Validators.required]),
-    description: new FormControl("", [Validators.required]),
-    claimType: new FormControl("", ),
-    claimAmount: new FormControl("", ),
-    claimDate: new FormControl("", [Validators.required]),
-    claimSubmissionDate: new FormControl(new Date(), [Validators.required]),
-    customerPolicyId: new FormControl(localStorage.getItem('customerpolicyid1'), ),
-    insurancePolicyId: new FormControl(localStorage.getItem('policyid1'), ),
-    email: new FormControl(localStorage.getItem('emailid1'), ),
-
-  })
   
-  getpolicy() {
-    this.service.getPolicyDetails().subscribe(
-      info => {
-        console.log(info);
-        this.data.insuranceType = info.insuranceType;
+  
+  
 
 
-      });
-
-
-  }
+  
 
 
 
