@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { User } from '../user';
 import { UserService } from '../Services/user.service';
+
+
 
 @Component({
   selector: 'app-register',
@@ -15,6 +17,7 @@ export class RegisterComponent implements OnInit {
 constructor(private userService: UserService) {}
 
 ngOnInit():void{}
+
 
 registerForm = new FormGroup({
   userType: new FormControl('', [Validators.required]),
@@ -66,11 +69,13 @@ get confirmPassword(): FormControl{
 }
 
 
-// OnRegister() {
-//   console.table(this.registerForm.value);
-//   if (this.password.value != this.confirmPassword.value) {
-//     alert("Your password confirm password should match");
-//   }
-// }
+OnRegister() {
+  console.table(this.registerForm.value);
+  if (this.password.value != this.confirmPassword.value) {
+    alert("Your password confirm password should match");
+  }
+}
+
+
 
 }

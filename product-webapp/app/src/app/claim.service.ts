@@ -30,7 +30,7 @@ export class ClaimService {
     return this.http.put<any>(this.baseurl+"claim", user);
 }
 getPolicyDetails(): Observable<any> {
-  return this.http.get("http://localhost:8080/api/vk1/policy-id/276534")
+  return this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/276534")
 
 }
   
