@@ -13,22 +13,18 @@ export class PolicyAdvisorService {
 
   baseUrl = "http://localhost:8080/advisor/"
 
-  baseUrl1 = this.baseUrl+ "api/v1/updateDetails/"
+  baseUrl1 = this.baseUrl + "api/v1/updateDetails/"
 
   baseUrl2 = this.baseUrl + "api/v1/"
 
-  getUserDetails():Observable<any>{
-    return this.http.get(this.baseUrl2+"policyAdvisors");
+  getUserDetails(): Observable<any> {
+    return this.http.get(this.baseUrl2 + "policyAdvisors");
   }
 
-  // getDetailsById(emailId: any): Observable<any>{
-  //   return this.http.get(this.baseUrl2 + "/policAdvisor/" + emailId);
-  // }
-  
-  updateAdvisorDetails(policyAdvisor: PolicyAdvsior, emailId: string, profilePic:File): Observable<Object>{
-    const formData=new FormData();
+  updateAdvisorDetails(policyAdvisor: PolicyAdvsior, emailId: string, profilePic: File): Observable<Object> {
+    const formData = new FormData();
     console.log(policyAdvisor);
-    
+
     formData.append("updateInfo", JSON.stringify(policyAdvisor));
     formData.append("imageFile", profilePic);
     //return this.http.put(`${this.baseUrl}`,policyAdvisor);
@@ -41,10 +37,10 @@ export class PolicyAdvisorService {
 
   url = this.baseUrl + "api/v1/update/"
 
-  updateAdvisorWithoutImage(policyAdvisor:PolicyAdvsior, emailId: string): Observable<Object>{
+  updateAdvisorWithoutImage(policyAdvisor: PolicyAdvsior, emailId: string): Observable<Object> {
     console.log(policyAdvisor);
-    
-   
-    return this.http.put(this.url + emailId,policyAdvisor);
+
+
+    return this.http.put(this.url + emailId, policyAdvisor);
   }
 }

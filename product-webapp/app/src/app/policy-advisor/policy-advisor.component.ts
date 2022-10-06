@@ -11,10 +11,9 @@ import { UserService } from '../Services/user.service';
 })
 export class PolicyAdvisorComponent implements OnInit {
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,private service:UserService) { }
   policyAdvisors: any;
   isActive = true
-  service!: UserService;
 
   
 
@@ -24,12 +23,14 @@ export class PolicyAdvisorComponent implements OnInit {
 
       console.log(data);
       this.policyAdvisors = data;
-      console.log(this.policyAdvisors.yearsOfExperience);
+      console.log(this.policyAdvisors[0].emailId);
       })
   }
 
+  
+
  clickMe(id:any){
-  let mychat=new ChatComponent(this.http,this.service);
+   let mychat=new ChatComponent(this.http,this.service);
    mychat.connect(id);
  }
 

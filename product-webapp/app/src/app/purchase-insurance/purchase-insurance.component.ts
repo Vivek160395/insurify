@@ -236,6 +236,8 @@ export class PurchaseInsuranceComponent implements OnInit {
 
     return '';
   }
+
+  
   purchase_insurance() {
 
     // ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -415,7 +417,7 @@ export class PurchaseInsuranceComponent implements OnInit {
       customerInsurancePurchase.lifeInsurance.healthConditionList = this.userForm.get('lifeillnessList')!.value!
     }
     customerInsurancePurchase.email = localStorage.getItem("email")!
-    customerInsurancePurchase.insurancePolicyId = '1232131'
+    customerInsurancePurchase.insurancePolicyId = `${this.service.policyNo}`
     console.log(customerInsurancePurchase)
     console.log('This is before posting');
 
