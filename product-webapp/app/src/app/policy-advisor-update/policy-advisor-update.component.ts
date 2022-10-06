@@ -52,6 +52,8 @@ policyAdvisor: PolicyAdvsior = new PolicyAdvsior();
 
   ngOnInit(): void {
       this.getDetails();
+
+      //this.getDetailsById();
   }
 
   //Methods for chips component
@@ -96,6 +98,7 @@ policyAdvisor: PolicyAdvsior = new PolicyAdvsior();
       console.log(this.file);
       for(var i=0;i<data.length;i++){
         if(data[i].emailId === this.policyAdvisor.emailId){
+          this.info.emailId = localStorage.getItem("logInEmailId");
           this.info.name=data[i].name;
           this.info.phoneNumber=data[i].phoneNumber;
           this.info.dateOfBirth=data[i].dateOfBirth;
@@ -104,21 +107,21 @@ policyAdvisor: PolicyAdvsior = new PolicyAdvsior();
           this.info.panNo=data[i].panNo;
           this.info.yearsOfExperience = data[i].yearsOfExperience;
 
-          //this.info.category = data[i].category;
+          this.info.category = data[i].category;
           this.info.profilePic=data[i].profilePic;
         } 
       }
     })
-
   }
+
 
   //form-group
   PolicyAdvisorUpdate = new FormGroup({
       emailId: new FormControl(''),
       name: new FormControl('',[Validators.maxLength(20)]),
-      phoneNumber: new FormControl(''),
-      aadharNo: new FormControl(''),
-      panNo: new FormControl(''),
+      phoneNumber: new FormControl('', ),
+      aadharNo: new FormControl('', [Validators.maxLength(12)]),
+      panNo: new FormControl('',[Validators.maxLength(10)]),
       yearsOfExperience: new FormControl('', [Validators.pattern('^(0-9)*')]),
       gender: new FormControl(''),
       dateOfBirth: new FormControl(''),
@@ -127,67 +130,20 @@ policyAdvisor: PolicyAdvsior = new PolicyAdvsior();
 
     });
 
-  //UpdateSubmitted(data: any){
-  //   this.policyAdvisor.name = data.value.name;
-  //   this.policyAdvisor.phoneNumber = data.value.phoneNumber;
-  //   this.policyAdvisor.YearsOfExperience = data.value.YearsOfExpereince;
-  //   this.policyAdvisor.aadharNo = data. value.aadharNo;
-  //   this.policyAdvisor.panNo = data.value.panNo;
+    // getDetailsById(){
+    //   this.policyadvisorService.getDetailsById(this.PolicyAdvisorUpdate.value.emailId).subscribe(data=>{
+    //     console.log(this.file);
+    //     this.PolicyAdvisorUpdate.patchValue({
 
-  //   this.policyAdvisor.gender = data.value.gender;
-  //   this.policyAdvisor.dateOfBirth =data.value.dateOfBirth;
-
-
-  //   console.log(this.policyAdvisor);
-  // this.policyadvisorService.updateAdvisorDetails(this.policyAdvisor).subscribe((response)=>{
-  //   console.log("Policy advisor details updated", response);
-  // });
-  //}
-
-  // get name(): FormControl{
-  //   return this.PolicyAdvisorUpdate.get('name') as FormControl;
-  // }
-
-  // get gender(): FormControl{
-//   return this.PolicyAdvisorUpdate.get('gender') as FormControl;
-// }
-
-// get dateOfBirth(): FormControl{
-//   return this.PolicyAdvisorUpdate.get('dateOfBirth') as FormControl;
-// }
-
-// get phoneNumber(): FormControl{
-//   return this.PolicyAdvisorUpdate.get('phoneNumber') as FormControl;
-// }
-
-// get aadharNo(): FormControl{
-//   return this.PolicyAdvisorUpdate.get('aadharNo') as FormControl;
-// }
-
-// get panNo(): FormControl{
-//   return this.PolicyAdvisorUpdate.get('panNo') as FormControl;
-// }
-
-// get YearsOfExpereince(): FormControl{
-//   return this.PolicyAdvisorUpdate.get('YearsOfExperience') as FormControl;
-// }
-
-// get profilePic(): FormControl{
-//   return this.PolicyAdvisorUpdate.get('profilePic') as FormControl;
-
-//}
-// get category(): FormControl{
-//   return this.PolicyAdvisorUpdate.get('category') as FormControl;
-// }
-
-
+    //     })
+    // }
 
   onSubmit(){
     console.log(this.PolicyAdvisorUpdate.value.dateOfBirth);
   // this.edit=true;
   // this.view=false;
 
-  this.info.emailId= this.PolicyAdvisorUpdate.get('emailId')?.value;
+  this.info.emailId= localStorage.getItem("logInEmailId");
     this.info.name=this.PolicyAdvisorUpdate.get('name')?.value;
     this.info.dateOfBirth=this.PolicyAdvisorUpdate.get('dateOfBirth')?.value;
     this.info.gender=this.PolicyAdvisorUpdate.get('gender')?.value;
@@ -195,6 +151,8 @@ policyAdvisor: PolicyAdvsior = new PolicyAdvsior();
     this.info.aadharNo=this.PolicyAdvisorUpdate.get('aadharNo')?.value;
     this.info.panNo=this.PolicyAdvisorUpdate.get('panNo')?.value;
     this.info.yearsOfExperience=this.PolicyAdvisorUpdate.get('yearsOfExperience')?.value;
+
+    this.info.category=this.PolicyAdvisorUpdate.get('category')?.value;
 
     this.info.profilePic = this.PolicyAdvisorUpdate.get('profilePic')?.value;
     if(this.info.profilePic! = null){
@@ -209,6 +167,8 @@ policyAdvisor: PolicyAdvsior = new PolicyAdvsior();
           (error) => console.log(error)
         );
       }
+
+      //localStorage.setItem('data', JSON.stringify(this.info));
     }
 
   
