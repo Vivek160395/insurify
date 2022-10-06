@@ -13,7 +13,7 @@ export class UserService {
 
   email1: string = 'm@gmail.com';
 
-  baseurl: any = "http://localhost:8085/api/v1/";
+  baseurl: any = "http://localhost:8080/user/api/v1/";
   getUserDetails(): Observable<any> {
     return this.http.get(this.baseurl + "users");
   }
@@ -30,8 +30,8 @@ export class UserService {
   }
 
 
-  baseUrl = "http://localhost:8085/api/v1/user";
-  baseUrl1 = "http://localhost:8085/api/v1";
+  baseUrl = "http://localhost:8080/user/api/v1/user";
+  baseUrl1 = "http://localhost:8080/user/api/v1";
 
 
 
@@ -41,28 +41,28 @@ export class UserService {
   }
 
   postUserId(s1: string): Observable<any> {
-    return this.http.post("http://localhost:9090/api/userId", s1);
+    return this.http.post("http://localhost:8080/chat/api/userId", s1);
 
   }
 
   postAdvisorId(s1: string): Observable<any> {
-    return this.http.post("http://localhost:9090/api/advisorId", s1);
+    return this.http.post("http://localhost:8080/chat/api/advisorId", s1);
   }
 
   getMsgs(chatRoom: string): Observable<any> {
-    return this.http.get("http://localhost:9090/api/msg/" + chatRoom);
+    return this.http.get("http://localhost:8080/chat/api/msg/" + chatRoom);
   }
 
   registerChatRoom(msg: any): Observable<any> {
-    return this.http.post("http://localhost:9090/api/register/chatroom", msg)
+    return this.http.post("http://localhost:8080/chat/api/register/chatroom", msg)
   }
 
   updateMsgList(chatMsg: any, chatRoom: string): Observable<any> {
-    return this.http.put("http://localhost:9090/api/update/msg/" + chatRoom, chatMsg)
+    return this.http.put("http://localhost:8080/chat/api/update/msg/" + chatRoom, chatMsg)
   }
 
   getNames(id: any): Observable<any> {
-    return this.http.get("http://localhost:9090/api/names/" + id)
+    return this.http.get("http://localhost:8080/chat/api/names/" + id)
   }
 
 }

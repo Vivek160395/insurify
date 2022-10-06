@@ -1,6 +1,5 @@
 <p>{{strmsg}}</p>
 <!-- <button mat-raised-button (click)="age_display()">get</button> -->
-<!-- <p>asdasd</p> -->
 <button mat-raised-button (click)="fill_form()">Health</button>
 <button mat-raised-button (click)="fill_form()">Auto</button>
 <button mat-raised-button (click)="fill_form()">Health</button>
@@ -501,7 +500,7 @@
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button (click)="stepper.reset()">Reset</button>
                 <button mat-button (click)="print()">Print object</button>
-                <button mat-raised-button [disabled]="check_validity()" color="primary" (click)="proceedPayment()" fxFlex="30%" style="margin-left: auto;">Buy</button>
+                <button mat-raised-button [disabled]="check_validity()" color="primary" (click)="purchase_insurance()" fxFlex="30%" style="margin-left: auto;">Buy</button>
             </div>
         </form>
 

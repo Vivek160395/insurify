@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { Payment } from './payment';
 
 
-const httpOptions ={
-  headers: new HttpHeaders({'Content-Type':'application/json'})
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({
@@ -17,7 +17,7 @@ export class PaymentService {
 
 
   createOrder(order: Payment): Observable<any>{
-    return this.http.post("http://localhost:8025/pg/createOrder",order, httpOptions);
+    return this.http.post("http://localhost:8080/payment/pg/createOrder",order, httpOptions);
       // name: order.name,
       // emailId: order.email,
       // mobileNo: order.phone,

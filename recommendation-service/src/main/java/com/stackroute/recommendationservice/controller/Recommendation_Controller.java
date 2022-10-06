@@ -1,7 +1,9 @@
 package com.stackroute.recommendationservice.controller;
 
+import com.stackroute.recommendationservice.exception.InsuranceAlreadyExists;
 import com.stackroute.recommendationservice.exception.NoInsurancesFound;
 import com.stackroute.recommendationservice.model.Insurance;
+import com.stackroute.recommendationservice.model.InsuranceProfile;
 import com.stackroute.recommendationservice.service.Recommendation_service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,24 +45,25 @@ public class Recommendation_Controller {
     // }
     //
     //
-    // @PostMapping("/Insurance")
-    // public ResponseEntity<?> registerInsurance(@RequestBody InsuranceProfile
-    // insuranceProfile) {
-    // try {
-    //// recommendation_service.addAge(insuranceProfile.getAge());
-    // recommendation_service.addInsuranceType(insuranceProfile.getInsuranceType());
-    //// recommendation_service.addOccupation(insuranceProfile.getOccupation());
-    // Insurance insurance = recommendation_service.addInsurance(insuranceProfile);
-    // if(insurance != null){
-    // return new ResponseEntity<>("Insurance Added",HttpStatus.CREATED);
-    // }else{
-    // return new ResponseEntity<>("Insurance Not added",HttpStatus.OK);
-    // }
-    // }catch (InsuranceAlreadyExists e){
-    // log.error(e.getMessage());
-    // return new ResponseEntity<>("Insurance Already Exists", HttpStatus.CONFLICT);
-    // }
-    // }
+     @PostMapping("/Insurance")
+     public ResponseEntity<?> registerInsurance(@RequestBody InsuranceProfile
+     insuranceProfile) {
+     try {
+         System.out.println(insuranceProfile.getPolicyId());
+         System.out.println(insuranceProfile.getPolicyDescription());
+         System.out.println(insuranceProfile.getPolicyName());
+         System.out.println(insuranceProfile.getInsuranceType());
+     Insurance insurance = recommendation_service.addInsurance(insuranceProfile);
+     if(insurance != null){
+     return new ResponseEntity<>("Insurance Added",HttpStatus.OK);
+     }else{
+     return new ResponseEntity<>("Insurance Not added",HttpStatus.OK);
+     }
+     }catch (InsuranceAlreadyExists e){
+     log.error(e.getMessage());
+     return new ResponseEntity<>("Insurance Already Exists", HttpStatus.CONFLICT);
+     }
+     }
 
     // @GetMapping("/InsuranceByAge/{age}")
     // public ResponseEntity<?> getInsuranceByAge(@PathVariable int age) throws

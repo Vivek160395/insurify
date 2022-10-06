@@ -41,39 +41,39 @@
     </mat-toolbar>
     <mat-drawer-container class="example-sid-container">
         <mat-drawer #drawer class="example-sid-sidenav" mode="side">
-            <mat-nav-list>
-                <a mat-list-item routerLink="" style="font-size: 20px;padding:10px 10px 10px 0px;">
+            <mat-nav-list style="padding: 10px;">
+                <a mat-list-item routerLink="" style="font-size: 20px;">
                     <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>home</mat-icon>
           </span> Home
                 </a>
-                <button mat-list-item routerLink="" style="padding:10px 10px 10px 0px;font-size: 20px;">
-          <span class="material-symbols-outlined" style="margin-right:10px">
+                <a mat-list-item routerLink="" style="font-size: 20px;">
+                    <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>history</mat-icon>
           </span> History
-        </button>
+                </a>
                 <div [hidden]="others">
-                    <button mat-list-item routerLink="" style="padding:10px 10px 10px 0px;font-size: 20px;">
-            <span class="material-symbols-outlined" style="margin-right:13px">
+                    <a mat-list-item routerLink="" style="font-size: 20px;">
+                        <span class="material-symbols-outlined" style="margin-right:13px">
               <mat-icon>support_agent</mat-icon>
             </span> Chat
-          </button>
-                    <button mat-list-item routerLink="" style="padding:10px 10px 10px 0px;font-size: 20px;">
-            <span class="material-symbols-outlined" style="margin:0 10px 0 5px">
+                    </a>
+                    <a mat-list-item routerLink="" style="font-size: 20px;">
+                        <span class="material-symbols-outlined" style="margin:0 10px 0 5px">
               <mat-icon>groups</mat-icon>
             </span> Advisors
-          </button>
+                    </a>
                 </div>
-                <button mat-list-item routerLink="" style="padding:10px 10px 10px 0px;font-size: 20px;">
-          <span class="material-symbols-outlined" style="margin-right:10px">
+                <a mat-list-item routerLink="" style="font-size: 20px;">
+                    <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>edit</mat-icon>
           </span> Edit Profile
-        </button>
-                <button mat-list-item routerLink="" style="padding:10px 10px 10px 0px;font-size: 20px;" [hidden]="insurer">
-          <span class="material-symbols-outlined" style="margin-right:10px">
+                </a>
+                <a mat-list-item routerLink="" style="font-size: 20px;" [hidden]="insurer">
+                    <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>add</mat-icon>
           </span> Add Insurance
-        </button>
+                </a>
             </mat-nav-list>
         </mat-drawer>
         <div style="background-color: rgb(221,221,221)">

@@ -26,5 +26,4 @@ public class Insurance {
     private String policyDocuments;
     private List<String> modelsAllowed;
     private String userEmail;
-
 }

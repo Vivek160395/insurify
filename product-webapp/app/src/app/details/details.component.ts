@@ -63,8 +63,8 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let response = this.http.get("http://localhost:8080/api/retrieveall/customerinsurances");
-    response.subscribe((data) => {
+    let response= this.http.get("http://localhost:8080/purchase/api/retrieveall/customerinsurances");
+    response.subscribe((data)=>{
       console.log(data);
       this.policies = data;
 

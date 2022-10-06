@@ -10,6 +10,6 @@ export class EditInsuranceService {
   constructor(private http: HttpClient) { }
 
   editInsurance() {
-    return this.http.get('http://localhost:8010/api/vk1/policy-id/123456')
+    return this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/123456')
   }
 }

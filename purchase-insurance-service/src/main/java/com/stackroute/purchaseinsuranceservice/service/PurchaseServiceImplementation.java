@@ -44,24 +44,16 @@ public class PurchaseServiceImplementation implements PurchaseService {
             ci.setCustomerPolicyId(customerInsurancePurchase.getCustomerPolicyId());
             ci.setInsurancePolicyId(customerInsurancePurchase.getInsurancePolicyId());
 
-
-
-
-
-//            ci.setPolicyType(customerInsurancePurchase.getPolicyType());
-
-
-
             // ci.setPolicyType(customerInsurancePurchase.getPolicyType());
 
-
+            // ci.setPolicyType(customerInsurancePurchase.getPolicyType());
 
             ci.setEmail(customerInsurancePurchase.getEmail());
             ci.setSumInsured(customerInsurancePurchase.getSumInsured());
             ci.getStartDate().add(customerInsurancePurchase.getStartDate());
             ci.getEndDate().add(customerInsurancePurchase.getEndDate());
             ci.getPremium().add(customerInsurancePurchase.getPremium());
-            ci.getPurchaseDate().add(customerInsurancePurchase.getPurchaseDate());
+
             ci.getDuration().add(customerInsurancePurchase.getDuration());
             ci.getAddOnName().add(customerInsurancePurchase.getAddOnName());
             ci.setName(customerInsurancePurchase.getName());
@@ -83,19 +75,12 @@ public class PurchaseServiceImplementation implements PurchaseService {
             purchaseDTO.setEmail(customerInsurancePurchase.getEmail());
             purchaseDTO.setName(customerInsurancePurchase.getName());
 
-
-
-
-
-//            purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
-
-
+            // purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
 
             // purchaseDTO.setPolicyType(customerInsurancePurchase.getPolicyType());
 
-
             purchaseDTO.setSumInsured(customerInsurancePurchase.getSumInsured());
-            purchaseDTO.setPurchaseDate(customerInsurancePurchase.getPurchaseDate());
+
             purchaseDTO.setStartDate(customerInsurancePurchase.getStartDate());
             purchaseDTO.setEndDate(customerInsurancePurchase.getEndDate());
             purchaseDTO.setDuration(customerInsurancePurchase.getDuration());
@@ -113,7 +98,8 @@ public class PurchaseServiceImplementation implements PurchaseService {
     }
 
     @Override
-    public Iterable<CustomerInsurance> getCustomerInsurancesByInsuranceId(String insuranceId) throws NoInsuranceFoundException {
+    public Iterable<CustomerInsurance> getCustomerInsurancesByInsuranceId(String insuranceId)
+            throws NoInsuranceFoundException {
         Iterable<CustomerInsurance> customerInsurances;
 
         customerInsurances = purchaseRepository.getCustomerInsuranceByInsurancePolicyId(insuranceId);
@@ -173,7 +159,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
     public boolean renewCustomerPolicy(CustomerRenewal customerRenewal)
             throws PolicyIdNotFoundException, ParseException, PolicyExpiredException {
         RenewDTO renewDTO = new RenewDTO();
-        System.out.println("ID:"+customerRenewal.getCustomerPolicyId());
+        System.out.println("ID:" + customerRenewal.getCustomerPolicyId());
 
         if (!purchaseRepository.findById(customerRenewal.getCustomerPolicyId()).isPresent()) {
             throw new PolicyIdNotFoundException();
@@ -191,7 +177,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
         String eDay = startDay;
         String ourDate = customerRenewal.getDate();
         System.out.println("Status of : " + (sDay.compareTo(ourDate) < 0 && eDay.compareTo(ourDate) > 0));
-        System.out.println("Start Date:"+sDay+ "End Date :"+eDay+"Our date :"+ourDate);
+        System.out.println("Start Date:" + sDay + "End Date :" + eDay + "Our date :" + ourDate);
         if (!(sDay.compareTo(ourDate) < 0) || !(eDay.compareTo(ourDate) >= 0)) {
             System.out.println("Cannot renew now because of policy  time interval is not valid");
             return false;
@@ -222,7 +208,6 @@ public class PurchaseServiceImplementation implements PurchaseService {
         customerInsurance.getEndDate().add(endDate);
         customerInsurance.getPremium().add(customerRenewal.getPremium());
         customerInsurance.getAddOnName().add(customerRenewal.getAddOnName());
-        customerInsurance.getPurchaseDate().add(customerRenewal.getDate());
         customerInsurance.getDuration().add(customerRenewal.getDuration());
         customerInsurance.setRenewalStatus(true);
         purchaseRepository.save(customerInsurance);
@@ -230,12 +215,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
         renewDTO.setCustomerPolicyId(customerInsurance.getCustomerPolicyId());
         renewDTO.setInsurancePolicyId(customerInsurance.getInsurancePolicyId());
 
-
-
-
-//       renewDTO.setPolicyType(customerInsurance.getPolicyType());
-
-
+        // renewDTO.setPolicyType(customerInsurance.getPolicyType());
 
         renewDTO.setEmail(customerInsurance.getEmail());
         renewDTO.setSumInsured(customerInsurance.getSumInsured());
@@ -353,6 +333,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
         if (customer_insurance_list == null)
             return 0;
         // customer_insurance_list.stream().filter((a)->a.getInsurancePolicyId().equalsIgnoreCase(insuranceID));
+        System.out.println(insuranceID);
         for (int i = 0; i < customer_insurance_list.size(); i++) {
             if (customer_insurance_list.get(i).getInsurancePolicyId().equalsIgnoreCase(insuranceID)) {
                 count++;
@@ -401,140 +382,123 @@ public class PurchaseServiceImplementation implements PurchaseService {
     }
 
     @Override
-    public Insurance returnInsuranceForRenewal(Insurance insurance,String customerPolicyId){
+    public Insurance returnInsuranceForRenewal(Insurance insurance, String customerPolicyId) {
         System.out.println(insurance);
         CustomerInsurance customerInsurance;
         Insurance modifiedInsurance;
-         List<String> startDate=new ArrayList<>();
-         List<String> endDate=new ArrayList<>();
+        List<String> startDate = new ArrayList<>();
+        List<String> endDate = new ArrayList<>();
 
-
-        if(purchaseRepository.findById(customerPolicyId).isPresent())
-        {
+        if (purchaseRepository.findById(customerPolicyId).isPresent()) {
             customerInsurance = purchaseRepository.findById(customerPolicyId).get();
-            modifiedInsurance=insurance;
-            int lastIndex=customerInsurance.getEndDate().size()-1;
-            String policyEndDate=customerInsurance.getEndDate().get(lastIndex);
-            long sum=customerInsurance.getSumInsured();
-            List<PolicyDetails> policyDetails=new ArrayList<>();
-            for(int i=0;i<insurance.getPolicyDetails().length;i++)
-            {
-                if(insurance.getPolicyDetails()[i].getSumInsure()==sum) {
+            modifiedInsurance = insurance;
+            int lastIndex = customerInsurance.getEndDate().size() - 1;
+            String policyEndDate = customerInsurance.getEndDate().get(lastIndex);
+            long sum = customerInsurance.getSumInsured();
+            List<PolicyDetails> policyDetails = new ArrayList<>();
+            for (int i = 0; i < insurance.getPolicyDetails().length; i++) {
+                if (insurance.getPolicyDetails()[i].getSumInsure() == sum) {
 
-                    if(insurance.getInsuranceType().equalsIgnoreCase("LifeInsurance"))
-                    {
-                       float factor=1;
-                       int count=0;
-                       String[] dis_lst=  customerInsurance.getLifeInsurance().getHealthConditionList();
-                       boolean[] ans=customerInsurance.getLifeInsurance().getQuestionnaireAnswers();
-                       if(dis_lst.length>2) {  factor= factor*1.2f;   }
-                       for(int k=0;k<ans.length;k++)
-                       {
-                           if(ans[k])
-                           count++;
-                       }
-                       if(count>2) { factor=factor*1.2f;}
-                       int oldPremium=insurance.getPolicyDetails()[i].getPremiums();
-                       oldPremium= (int) (oldPremium*factor);
-                       insurance.getPolicyDetails()[i].setPremiums(oldPremium);
+                    if (insurance.getInsuranceType().equalsIgnoreCase("LifeInsurance")) {
+                        float factor = 1;
+                        int count = 0;
+                        String[] dis_lst = customerInsurance.getLifeInsurance().getHealthConditionList();
+                        boolean[] ans = customerInsurance.getLifeInsurance().getQuestionnaireAnswers();
+                        if (dis_lst.length > 2) {
+                            factor = factor * 1.2f;
+                        }
+                        for (int k = 0; k < ans.length; k++) {
+                            if (ans[k])
+                                count++;
+                        }
+                        if (count > 2) {
+                            factor = factor * 1.2f;
+                        }
+                        int oldPremium = insurance.getPolicyDetails()[i].getPremiums();
+                        oldPremium = (int) (oldPremium * factor);
+                        insurance.getPolicyDetails()[i].setPremiums(oldPremium);
                     }
                     policyDetails.add(insurance.getPolicyDetails()[i]);
                 }
             }
-            if(policyDetails.size()==0)
-            {
+            if (policyDetails.size() == 0) {
                 return null;
             }
 
-            if(!insurance.getInsuranceType().equalsIgnoreCase("HealthInsurance"))
-            {
-               PolicyDetails[] updatePolicyDetails=new PolicyDetails[policyDetails.size()];
-               for(int i=0;i<policyDetails.size();i++)
-               {
-                   updatePolicyDetails[i]=policyDetails.get(i);
-               }
-               modifiedInsurance.setPolicyDetails(updatePolicyDetails);
-               return modifiedInsurance;
+            if (!insurance.getInsuranceType().equalsIgnoreCase("HealthInsurance")) {
+                PolicyDetails[] updatePolicyDetails = new PolicyDetails[policyDetails.size()];
+                for (int i = 0; i < policyDetails.size(); i++) {
+                    updatePolicyDetails[i] = policyDetails.get(i);
+                }
+                modifiedInsurance.setPolicyDetails(updatePolicyDetails);
+                return modifiedInsurance;
             }
 
-
-            //updating policy Details for Health Insurance
-            List<InsuredInfo> usersInfo=new ArrayList<>();
-            int user_no=customerInsurance.getHealthInsurance().getInsuredInfo().length;
+            // updating policy Details for Health Insurance
+            List<InsuredInfo> usersInfo = new ArrayList<>();
+            int user_no = customerInsurance.getHealthInsurance().getInsuredInfo().length;
             LocalDate today_date = LocalDate.now();
             LocalDate user_dob;
-            for(int i=0;i<user_no;i++)
-            {
+            for (int i = 0; i < user_no; i++) {
                 usersInfo.add(customerInsurance.getHealthInsurance().getInsuredInfo()[i]);
             }
-           InsuredInfo[] availableUsersInfo=customerInsurance.getHealthInsurance().getInsuredInfo();
-           int age[]=new int[user_no];
-            for (int i = 0; i <user_no ; i++) {
+            InsuredInfo[] availableUsersInfo = customerInsurance.getHealthInsurance().getInsuredInfo();
+            int age[] = new int[user_no];
+            for (int i = 0; i < user_no; i++) {
                 user_dob = LocalDate.parse(usersInfo.get(i).getInsuredDOB());
-                age[i]=Period.between(user_dob, today_date).getYears();
-                if(age[i]>60)
-                {
+                age[i] = Period.between(user_dob, today_date).getYears();
+                if (age[i] > 60) {
                     return null;
                 }
             }
-            int customPremium=0;
-            float bmi=0;
-            float bmiFactor=1;
-            float diseaseFactor=1;
-            int tempCost=0;
-            for(int j=0;j<policyDetails.size();j++)
-            {
-              customPremium=0;
-              bmiFactor=1;
-              diseaseFactor=1;
-              for(int k=0;k<user_no;k++)
-              {
-                  bmiFactor=1;
-                  diseaseFactor=1;
-                  bmi =10000*usersInfo.get(k).getWeight()/(usersInfo.get(k).getHeight()*usersInfo.get(k).getHeight());
-                  if(bmi<18.5f)
-                  {
-                    bmiFactor=1.05f;
-                  }
-                  else if(bmi>24&&bmi<30f)
-                  {
-                      bmiFactor=1.1f;
-                  }
-                  else{
-                      bmiFactor=1.2f;
-                  }
-                  if(usersInfo.get(k).getIllnessList()!=null){
-                  if(usersInfo.get(k).getIllnessList().length<=2)
-                  {
-                      diseaseFactor=1.1f;
-                  } else if (usersInfo.get(k).getIllnessList().length>=3) {
-                      diseaseFactor=1.2f;
-                  }
-                  }
-                    if(age[k]<20){
-                       tempCost= (int) (diseaseFactor*bmiFactor*policyDetails.get(j).getKids());
-                      customPremium=customPremium+tempCost;
-                     }
-                   else if(age[k]<41){
-                       tempCost= (int) (diseaseFactor*bmiFactor*policyDetails.get(j).getAdults1());
-                        customPremium=customPremium+tempCost;
+            int customPremium = 0;
+            float bmi = 0;
+            float bmiFactor = 1;
+            float diseaseFactor = 1;
+            int tempCost = 0;
+            for (int j = 0; j < policyDetails.size(); j++) {
+                customPremium = 0;
+                bmiFactor = 1;
+                diseaseFactor = 1;
+                for (int k = 0; k < user_no; k++) {
+                    bmiFactor = 1;
+                    diseaseFactor = 1;
+                    bmi = 10000 * usersInfo.get(k).getWeight()
+                            / (usersInfo.get(k).getHeight() * usersInfo.get(k).getHeight());
+                    if (bmi < 18.5f) {
+                        bmiFactor = 1.05f;
+                    } else if (bmi > 24 && bmi < 30f) {
+                        bmiFactor = 1.1f;
+                    } else {
+                        bmiFactor = 1.2f;
                     }
-                   else if(age[k]<51) {
-                       tempCost= (int) (diseaseFactor*bmiFactor*policyDetails.get(j).getAdults2());
-                     customPremium=customPremium+tempCost;
-                     }
-              else if(age[k]<60) {
-                  tempCost= (int) (diseaseFactor*bmiFactor*policyDetails.get(j).getAdults3());
-               customPremium=customPremium+tempCost;
-              }
+                    if (usersInfo.get(k).getIllnessList() != null) {
+                        if (usersInfo.get(k).getIllnessList().length <= 2) {
+                            diseaseFactor = 1.1f;
+                        } else if (usersInfo.get(k).getIllnessList().length >= 3) {
+                            diseaseFactor = 1.2f;
+                        }
+                    }
+                    if (age[k] < 20) {
+                        tempCost = (int) (diseaseFactor * bmiFactor * policyDetails.get(j).getKids());
+                        customPremium = customPremium + tempCost;
+                    } else if (age[k] < 41) {
+                        tempCost = (int) (diseaseFactor * bmiFactor * policyDetails.get(j).getAdults1());
+                        customPremium = customPremium + tempCost;
+                    } else if (age[k] < 51) {
+                        tempCost = (int) (diseaseFactor * bmiFactor * policyDetails.get(j).getAdults2());
+                        customPremium = customPremium + tempCost;
+                    } else if (age[k] < 60) {
+                        tempCost = (int) (diseaseFactor * bmiFactor * policyDetails.get(j).getAdults3());
+                        customPremium = customPremium + tempCost;
+                    }
 
-              }
+                }
                 policyDetails.get(j).setPremiums(customPremium);
             }
-            PolicyDetails[] updatePolicyDetails=new PolicyDetails[policyDetails.size()];
-            for(int i=0;i<policyDetails.size();i++)
-            {
-                updatePolicyDetails[i]=policyDetails.get(i);
+            PolicyDetails[] updatePolicyDetails = new PolicyDetails[policyDetails.size()];
+            for (int i = 0; i < policyDetails.size(); i++) {
+                updatePolicyDetails[i] = policyDetails.get(i);
             }
             modifiedInsurance.setPolicyDetails(updatePolicyDetails);
             return modifiedInsurance;
@@ -684,7 +648,9 @@ public class PurchaseServiceImplementation implements PurchaseService {
         }
         return 1;
     }
-    public String checkRenewalStatus(String customerPolicyId,Insurance insurance) throws PolicyIdNotFoundException, ParseException {
+
+    public String checkRenewalStatus(String customerPolicyId, Insurance insurance)
+            throws PolicyIdNotFoundException, ParseException {
         if (!purchaseRepository.findById(customerPolicyId).isPresent()) {
             return "Customer Policy Id not found";
         }
@@ -724,18 +690,19 @@ public class PurchaseServiceImplementation implements PurchaseService {
         Insurance retrievedInsurance=returnInsuranceForRenewal(insurance,customerPolicyId);
         if(retrievedInsurance==null)
         {
-            for(int i=0;i<retrievedInsurance.getPolicyDetails().length;i++)
+            for(int i=0;i<insurance.getPolicyDetails().length;i++)
             {
-                if(retrievedInsurance.getPolicyDetails()[i].getSumInsure()==customerInsurance.getSumInsured())
+                if(insurance.getPolicyDetails()[i].getSumInsure()==customerInsurance.getSumInsured())
                 {
                     return "Age of all users in the policy covered should be less than 60 years ";
                 }
             }
-            return "Currently the policy cannot be renewed for "+customerInsurance.getSumInsured()+" amount";
+            return "Currently the policy cannot be renewed for " + customerInsurance.getSumInsured() + " amount";
         }
 
         return null;
     }
+
     @Override
     public int uploadDocument(MultipartFile documentFile, String policyId) throws IOException {
 
@@ -746,7 +713,5 @@ public class PurchaseServiceImplementation implements PurchaseService {
         CustomerInsurance insurance = purchaseRepository.save(retrieveInsurance);
         return 1;
     }
-
-
 
 }
