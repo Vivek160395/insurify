@@ -13,7 +13,7 @@ export class LoginService {
   password: any;
   constructor(private httpClient: HttpClient) { }
 
-  baseUrl = "http://localhost:8080/api/v1";
+  baseUrl = "http://localhost:8080/authentication/api/v2";
   getUserCredentials(data: any): Observable<any> {
     console.log(data);
     return this.httpClient.post(this.baseUrl + "/loginUser", data);

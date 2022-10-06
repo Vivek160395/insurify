@@ -9,7 +9,7 @@
         <div fxFlex="35%" class="col bg-light shadow">
             <h3 class="text-center"> Log in</h3>
 
-            <form [formGroup]="logInForm" (ngSubmit)="logIn">
+            <form [formGroup]="logInForm" (ngSubmit)="logIn()">
                 <small class="text-danger">{{msg}}</small>
 
                 <div class="mb-3">
@@ -28,13 +28,13 @@
                 <div class="mb-3">
                     <input type="password" class="form-control" placeholder="Enter your password* " id="password" name="password" formControlName="password">
                 </div>
-                <div class="form-text text-danger" *ngIf="password.errors?.['required']"> Password is required </div>
+                <div class="form-text text-danger" *ngIf="password.errors?.['required']&&(password.dirty || password.touched)"> Password is required </div>
 
 
                 <button type="submit" [disabled]="logInForm.invalid" class=" btn btn-primary mr-1">Log in</button>
 
                 <p class="mb-3">New member? </p>
-                <a class="nav-link" routerLink="/register">Register here</a>
+                <a class="nav-link" routerLink="/home/register">Register here</a>
 
             </form>
         </div>

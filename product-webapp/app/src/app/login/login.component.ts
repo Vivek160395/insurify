@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit {
   });
   value = this.logInForm.value;
   logIn(): void {
+    console.log("Entering method");
+    
     this.loginservice.emailId = this.logInForm.value.emailId;
     this.loginservice.password = this.logInForm.value.password;
     if (this.logInForm.valid) {
@@ -47,19 +49,24 @@ export class LoginComponent implements OnInit {
       
     }
 
-
+   console.log("Just before checking for usertype");
+   
     this.loginservice.loginUser(this.logInForm.value.emailId).subscribe((response) => {
       this.loginservice.stauts = true;
       console.log(response);
+      localStorage.setItem('emailid1', response.emailId);
       if (response.userType == "As Insured") {
         console.log(response.userType);
-        this.router.navigate(["/policyDetails"]);
+        localStorage.setItem("UserType","customer")
+        this.router.navigate(["/home/home-page"]);
       }
       else if(response.userType == "As Policy Advisor"){
-        this.router.navigate(["/policyDetails"]);
+        localStorage.setItem("UserType","policyadvisor")
+        this.router.navigate(["/home/home-page"]);
       }
       else {
-        this.router.navigate(["/insurance-provider"]);
+        localStorage.setItem("UserType","insuranceprovider")
+        this.router.navigate(["/home/insurance-provider"]);
       }
     }
     );
