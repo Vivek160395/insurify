@@ -158,7 +158,7 @@ export class AddInsurancePolicyComponent implements OnInit {
 
   ngOnInit(): void {
     this.insuranceForms.get('policyId')?.setValue(this.id.toString())
-    this.insuranceForms.get('userEmail')?.setValue(this.service.userEmail);
+    this.insuranceForms.get('userEmail')?.setValue(localStorage.getItem(''));
     this.insuranceForms.get('policyId')!.disable()
   }
   id = Math.floor(Math.random() * 1000000 + 100000);
