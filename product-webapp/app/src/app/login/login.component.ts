@@ -61,10 +61,12 @@ export class LoginComponent implements OnInit {
         this.router.navigate(["/home/home-page"]);
       }
       else if (response.userType == "As Policy Advisor") {
+        console.log(response.userType);
         localStorage.setItem("UserType", "policyadvisor")
         this.router.navigate(["/home/home-page"]);
       }
       else {
+        console.log(response.userType);
         localStorage.setItem("UserType", "insuranceprovider")
         this.router.navigate(["/home/insurance-provider"]);
       }
