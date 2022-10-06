@@ -335,7 +335,7 @@
                     <div fxLayout="row">
                         <button mat-button matStepperPrevious>Back</button>
                         <button mat-button (click)="stepper.reset()" style="margin-left: auto">Reset</button>
-                        <button mat-raised-button color="warn" [disabled]="check_validity()" (click)="onSubmit()">Update
+                        <button mat-raised-button color="warn" [disabled]="!(check_validity1() && check_validity2() && check_validity3())" (click)="onSubmit()">Update
                             policy</button>
 
                     </div>
