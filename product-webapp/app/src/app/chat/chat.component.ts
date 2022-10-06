@@ -54,7 +54,7 @@ export class ChatComponent implements OnInit {
   }
 
  connect(id:any){
-    if(this.role=="user"){
+    if(this.role=="customer"){
       this.registerMsg.userName=this.loginId;
       this.registerMsg.advisorName=id;
       this.registerMsg.chatRoomName=this.loginId+"&"+id;
@@ -93,13 +93,10 @@ export class ChatComponent implements OnInit {
     });
   }
 
-
-
   getMsgsByName(id: string) {
     this.showMsgs = false;
     this.otherId = id;
     if (this.role == 'customer') {
-
       this.service.getMsgs(this.loginId + "&" + this.otherId).subscribe(data => {
        this.msg = data;
         if(data!=null){

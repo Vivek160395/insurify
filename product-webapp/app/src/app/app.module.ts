@@ -83,6 +83,7 @@ import { RegisteredPoliciesComponent } from './registered-policies/registered-po
 import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
 import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { LoginNavbarComponent } from './login-navbar/login-navbar.component';
 // import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 
 
@@ -120,6 +121,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     RegisteredPolicyBuyersComponent,
     PolicyAdvisorComponent,
     HomepageComponent,
+    LoginNavbarComponent,
   
   ],
   entryComponents: [PreviewMarkupComponent],

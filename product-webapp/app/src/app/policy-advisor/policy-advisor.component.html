@@ -1,40 +1,40 @@
 <div style="background-color: white;">
-  
 
-  <h1 style="font-size: 60px; font-weight:450; padding-top: 20px; padding-left: 15px;">Policy Advisors</h1>
-  <br>
-  
-  <div style="display: flex; flex-wrap:wrap; padding-top: 20px">
-     <div *ngFor="let advisors of policyAdvisors">
-         <mat-card class="example-card" [class.mat-elevation-z2]="isActive" >
-            
-             <mat-card-title style="padding-left:90px;">{{advisors.name}}</mat-card-title>
-             <mat-divider></mat-divider>
-             <img mat-card-image class="rounded-9" src="data:{{advisors.imageType}};base64,{{advisors.profilePic}}" alt=" Photo of a Policy Advisor " style=" width: 250px; height:200px; ">
-             <mat-divider></mat-divider>
-             <br>
-             <!-- <mat-card-subtitle>
-              
+
+    <h1 style="font-size: 60px; font-weight:450; padding-top: 20px; padding-left: 15px;">Policy Advisors</h1>
+    <br>
+
+    <div style="display: flex; flex-wrap:wrap; padding-top: 20px">
+        <div *ngFor="let advisors of policyAdvisors">
+            <mat-card class="example-card" [class.mat-elevation-z2]="isActive">
+
+                <mat-card-title style="padding-left:90px;">{{advisors.name}}</mat-card-title>
+                <mat-divider></mat-divider>
+                <img mat-card-image class="rounded-9" src="data:{{advisors.imageType}};base64,{{advisors.profilePic}}" alt=" Photo of a Policy Advisor " style=" width: 250px; height:200px; ">
+                <mat-divider></mat-divider>
+                <br>
+                <!-- <mat-card-subtitle>
+
              </mat-card-subtitle> -->
-             <mat-card-content>
-                <span style="font-weight:600 ;" >EmailId:</span>{{advisors.emailId}} 
-                   <br>
-                <span style="font-weight:600 ;" >Category:</span>{{advisors.category}} 
-                 <br>
-                 <span style="font-weight:600 ;" >YearsOfExperience:</span>{{advisors.yearsOfExperience}}
-                 <br>
-                 <span style="font-weight:600 ;" >Gender:</span>{{advisors.gender}}
-                 <br>
-                 <span style="font-weight:600 ;" >Phone Number:</span>{{advisors.phoneNumber}}
-             </mat-card-content>
-             
-            
-            <button mat-raised-button color="primary" style="margin-left:180px" (click)="clickMe(advisors.emailId)" routerLink="/home/chat">Chat</button>
+                <mat-card-content>
+                    <span style="font-weight:600 ;">EmailId:</span>{{advisors.emailId}}
+                    <br>
+                    <span style="font-weight:600 ;">Category:</span>{{advisors.category}}
+                    <br>
+                    <span style="font-weight:600 ;">YearsOfExperience:</span>{{advisors.yearsOfExperience}}
+                    <br>
+                    <span style="font-weight:600 ;">Gender:</span>{{advisors.gender}}
+                    <br>
+                    <span style="font-weight:600 ;">Phone Number:</span>{{advisors.phoneNumber}}
+                </mat-card-content>
 
-         </mat-card>
-     </div>
-  </div>
+
+                <button mat-raised-button color="primary" style="margin-left:180px" (click)="clickMe(advisors.emailId)" routerLink="/home/chat">Chat</button>
+
+
+                <button mat-raised-button color="primary" style="margin-left:180px" (click)="clickMe(advisors.emailId)" routerLink="/home/chat">Chat</button>
+
+            </mat-card>
+        </div>
+    </div>
 </div>
-
-   
-

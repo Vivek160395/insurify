@@ -4,13 +4,16 @@ import com.stackroute.recommendationservice.exception.InsuranceAlreadyExists;
 import com.stackroute.recommendationservice.exception.NoInsurancesFound;
 import com.stackroute.recommendationservice.model.Insurance;
 import com.stackroute.recommendationservice.model.InsuranceProfile;
+import com.stackroute.recommendationservice.repository.Insurance_Repository;
 import com.stackroute.recommendationservice.service.Recommendation_service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 // you need to add the method for suggesting on the basis of the no of insurances bought
@@ -21,11 +24,14 @@ import java.util.List;
 // @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class Recommendation_Controller {
     private final Recommendation_service recommendation_service;
+    private final Insurance_Repository insurance_Repository;
 
     @Autowired
-    public Recommendation_Controller(Recommendation_service recommendation_service) {
+    public Recommendation_Controller(Recommendation_service recommendation_service,
+            Insurance_Repository insurance_Repository) {
         log.debug("Recommendation_service");
         this.recommendation_service = recommendation_service;
+        this.insurance_Repository = insurance_Repository;
     }
 
     // @PostMapping("/user")
@@ -45,26 +51,42 @@ public class Recommendation_Controller {
     // }
     //
     //
-     @PostMapping("/Insurance")
-     public ResponseEntity<?> registerInsurance(@RequestBody InsuranceProfile
-     insuranceProfile) {
-     try {
-         System.out.println(insuranceProfile.getPolicyId());
-         System.out.println(insuranceProfile.getPolicyDescription());
-         System.out.println(insuranceProfile.getPolicyName());
-         System.out.println(insuranceProfile.getInsuranceType());
-     Insurance insurance = recommendation_service.addInsurance(insuranceProfile);
-     if(insurance != null){
-     return new ResponseEntity<>("Insurance Added",HttpStatus.OK);
-     }else{
-     return new ResponseEntity<>("Insurance Not added",HttpStatus.OK);
-     }
-     }catch (InsuranceAlreadyExists e){
-     log.error(e.getMessage());
-     return new ResponseEntity<>("Insurance Already Exists", HttpStatus.CONFLICT);
-     }
-     }
+    @PostMapping("/Insurance")
+    public ResponseEntity<?> registerInsurance(@RequestBody InsuranceProfile insuranceProfile) {
+        try {
+            // System.out.println(insuranceProfile.getPolicyId());
+            // System.out.println(insuranceProfile.getPolicyDescription());
+            // System.out.println(insuranceProfile.getPolicyName());
+            // System.out.println(insuranceProfile.getInsuranceType());
+            Insurance insurance = recommendation_service.addInsurance(insuranceProfile);
+            if (insurance != null) {
+                return new ResponseEntity<>(insurance, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Insurance Not added", HttpStatus.OK);
+            }
+        } catch (InsuranceAlreadyExists e) {
+            log.error(e.getMessage());
+            return new ResponseEntity<>("Insurance Already Exists", HttpStatus.CONFLICT);
+        }
+    }
 
+    @PutMapping("/insurance/{policyId}")
+    public ResponseEntity<?> addImage(@PathVariable String policyId, @RequestParam("imageFile") MultipartFile file)
+            throws NoInsurancesFound, IOException {
+        Insurance insurance = insurance_Repository.findById(policyId).get();
+        System.out.println("************************************");
+        System.out.println("Line no 78" + insurance.getPolicyId());
+        System.out.println("************************************");
+        insurance.setPicByte(file.getBytes());
+        insurance.setPicType(file.getContentType());
+        insurance_Repository.save(insurance);
+        if (insurance.getPolicyId().equals(policyId)) {
+            return new ResponseEntity<>(insurance_Repository.save(insurance), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Image Not Updated", HttpStatus.BAD_GATEWAY);
+        }
+
+    }
     // @GetMapping("/InsuranceByAge/{age}")
     // public ResponseEntity<?> getInsuranceByAge(@PathVariable int age) throws
     // NoInsurancesFound {

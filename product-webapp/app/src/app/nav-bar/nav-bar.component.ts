@@ -51,15 +51,25 @@ export class NavBarComponent implements OnInit {
   // );
   others: boolean = true;
   insurer: boolean = true;
+  loginButton: boolean = true;
+  logoutButton: boolean = false;
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private service: Userservice1Service, private service1: RecommendationServiceService) { }
   ngOnInit(): void {
     //  this.getAllUsers();
-    if (this.service1.userType == "Insurer") {
+    if (this.service1.userType == "insuranceprovider") {
       this.others = true;
       this.insurer = false
     } else {
       this.others = false;
       this.insurer = true;
+    }
+    const loginId = localStorage.getItem('logInEmailId');
+    if (loginId != null) {
+      this.logoutButton = false;
+      this.loginButton = true;
+    } else {
+      this.logoutButton = false;
+      this.loginButton = true;
     }
   }
   showFiller = false;

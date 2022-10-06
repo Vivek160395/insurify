@@ -42,13 +42,13 @@ registerSubmitted(data:any){
     console.log(this.user);
     this.userService.registerUser(this.user).subscribe((response)=>{
       console.log("Registered data", response);
-      this.route.navigateByUrl("/home/login")
+      this.route.navigateByUrl("/nav/login")
     });
   }
   else{
     this.error = "Password and Confirm Password Should Match";
   }
- 
+
   //console.table(this.registerForm.value);
  // alert("Your password confirm password should match");
 }
