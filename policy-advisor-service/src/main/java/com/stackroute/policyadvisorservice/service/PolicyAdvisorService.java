@@ -24,6 +24,7 @@ public interface PolicyAdvisorService {
 
     public PolicyAdvisor update(PolicyAdvisor policyAdvisor, String emailId, MultipartFile file)
             throws PolicyAdvisorNotRegisteredException, IOException;
+
     public PolicyAdvisor update(PolicyAdvisor policyAdvisor, String emailId)
             throws PolicyAdvisorNotRegisteredException;
     public boolean deletePolicyAdvisor(String emailId)

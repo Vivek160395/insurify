@@ -74,6 +74,17 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService{
             PolicyAdvisor policyAdvisor1 = policyAdvisorRepository.findById(emailId).get();
 
             policyAdvisor1.setProfilePic(file.getBytes());
+
+            policyAdvisor1.setName(policyAdvisor.getName());
+            policyAdvisor1.setPhoneNumber(policyAdvisor.getPhoneNumber());
+            policyAdvisor1.setGender(policyAdvisor.getGender());
+            policyAdvisor1.setPhoneNumber(policyAdvisor.getPhoneNumber());
+            policyAdvisor1.setAadharNo(policyAdvisor.getAadharNo());
+            policyAdvisor1.setPanNo(policyAdvisor.getPanNo());
+            policyAdvisor1.setYearsOfExperience(policyAdvisor.getYearsOfExperience());
+            policyAdvisor1.setCategory(policyAdvisor.getCategory());
+            policyAdvisor1.setRatings(policyAdvisor.getRatings());
+
             policyAdvisorRepository.save(policyAdvisor1);
             return policyAdvisor1;
         } else {

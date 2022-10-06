@@ -7,8 +7,6 @@ import com.stackroute.insuranceservice.model.Insurance;
 import com.stackroute.insuranceservice.repository.InsuranceRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -43,7 +41,6 @@ public class InsuranceServiceImpl implements InsuranceService {
         return insuranceRepo.findAll();
     }
 
-
     @Override
     public Iterable<Insurance> findAllPolicyByEmail(String userEmail) {
         return insuranceRepo.findPolicyByUserEmail(userEmail);
@@ -72,8 +69,6 @@ public class InsuranceServiceImpl implements InsuranceService {
     public Optional<Insurance> findPolicyByPolicyName(String policyName) {
         return insuranceRepo.findPolicyByPolicyName(policyName);
     }
-
-
 
     @Override
     public Insurance editInsurance(@RequestBody Insurance insurance)

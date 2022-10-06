@@ -17,7 +17,7 @@ public class CustomerInsurancePurchase {
 
     private long sumInsured;
     private String startDate;
-    private String purchaseDate;
+
     private String endDate;
     private int duration;
     private String[] addOnName;

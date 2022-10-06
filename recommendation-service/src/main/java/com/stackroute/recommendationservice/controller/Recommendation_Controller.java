@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("/Recommendation")
-//@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class Recommendation_Controller {
     private final Recommendation_service recommendation_service;
 
