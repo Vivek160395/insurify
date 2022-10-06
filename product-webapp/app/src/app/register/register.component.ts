@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { User } from '../user';
 import { UserService } from '../Services/user.service';
+import { Router } from '@angular/router';
 
 
 
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
   error: string = '';
  user: User = new User();
-constructor(private userService: UserService) {}
+constructor(private userService: UserService,private route:Router) {}
 
 ngOnInit():void{}
 
@@ -41,6 +42,7 @@ registerSubmitted(data:any){
     console.log(this.user);
     this.userService.registerUser(this.user).subscribe((response)=>{
       console.log("Registered data", response);
+      this.route.navigateByUrl("/home/login")
     });
   }
   else{

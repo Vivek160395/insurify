@@ -32,10 +32,11 @@ import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = 
 [
+  { path:"",component:HomepageComponent},
   {
-    path: "", component: NavBarComponent, children: [
+    path: "home", component: NavBarComponent, children: [
       // { path: "", component: RecommendationComponent, canActivate: [PersonGuard] },
-      { path: "", component: RecommendationComponent },
+      { path: "home-page", component: RecommendationComponent },
       { path: "insurance-provider", component: InsuranceProviderComponent },
       { path: "register", component: RegisterComponent },
       { path: "add-policy", component: AddInsurancePolicyComponent },
@@ -59,7 +60,7 @@ const routes: Routes =
     { path: "policy-advisor", component: PolicyAdvisorComponent}],
     
   },
-  { path:"home",component:HomepageComponent}
+  { path:"",component:HomepageComponent}
   // { path: "login", component: LoginComponent }
 
       
