@@ -54,13 +54,13 @@ public class Recommendation_Controller {
     @PostMapping("/Insurance")
     public ResponseEntity<?> registerInsurance(@RequestBody InsuranceProfile insuranceProfile) {
         try {
-            System.out.println(insuranceProfile.getPolicyId());
-            System.out.println(insuranceProfile.getPolicyDescription());
-            System.out.println(insuranceProfile.getPolicyName());
-            System.out.println(insuranceProfile.getInsuranceType());
+            // System.out.println(insuranceProfile.getPolicyId());
+            // System.out.println(insuranceProfile.getPolicyDescription());
+            // System.out.println(insuranceProfile.getPolicyName());
+            // System.out.println(insuranceProfile.getInsuranceType());
             Insurance insurance = recommendation_service.addInsurance(insuranceProfile);
             if (insurance != null) {
-                return new ResponseEntity<>("Insurance Added", HttpStatus.OK);
+                return new ResponseEntity<>(insurance, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Insurance Not added", HttpStatus.OK);
             }
@@ -70,18 +70,20 @@ public class Recommendation_Controller {
         }
     }
 
-    @PostMapping("/insurance/{policyId}")
+    @PutMapping("/insurance/{policyId}")
     public ResponseEntity<?> addImage(@PathVariable String policyId, @RequestParam("imageFile") MultipartFile file)
-            throws NoInsurancesFound {
-        try {
-            if (recommendation_service.addInsuranceImage(policyId, file)) {
-                return new ResponseEntity<>("Image Updated", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Image Not Updated", HttpStatus.BAD_REQUEST);
-            }
-        } catch (IOException e) {
-            log.error(e.getMessage());
-            return new ResponseEntity<>("Insurance Not Found", HttpStatus.NOT_FOUND);
+            throws NoInsurancesFound, IOException {
+        Insurance insurance = insurance_Repository.findById(policyId).get();
+        System.out.println("************************************");
+        System.out.println("Line no 78" + insurance.getPolicyId());
+        System.out.println("************************************");
+        insurance.setPicByte(file.getBytes());
+        insurance.setPicType(file.getContentType());
+        insurance_Repository.save(insurance);
+        if (insurance.getPolicyId().equals(policyId)) {
+            return new ResponseEntity<>(insurance_Repository.save(insurance), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Image Not Updated", HttpStatus.BAD_GATEWAY);
         }
 
     }

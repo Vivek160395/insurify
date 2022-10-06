@@ -22,7 +22,8 @@
         </div>
         <div style="display: flex;">
             <div style="margin-right: 20px;">
-                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/home/login"> Login
+                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/home/login">
+          Login
         </button>
             </div>
             <div style="margin-right: 20px;">
@@ -53,7 +54,7 @@
           </span> History
                 </a>
                 <div [hidden]="others">
-                    <a mat-list-item routerLink="" style="font-size: 20px;">
+                    <a mat-list-item routerLink="/home/chat" style="font-size: 20px;">
                         <span class="material-symbols-outlined" style="margin-right:13px">
               <mat-icon>support_agent</mat-icon>
             </span> Chat
@@ -65,11 +66,11 @@
                     </a>
                 </div>
                 <a mat-list-item routerLink="/home/update" style="font-size: 20px;">
-                    <span class="material-symbols-outlined"  style="margin-right:10px">
+                    <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>edit</mat-icon>
           </span> Edit Profile
                 </a>
-                <a mat-list-item routerLink="" style="font-size: 20px;" [hidden]="insurer">
+                <a mat-list-item routerLink="/home/add-policy" style="font-size: 20px;" [hidden]="insurer">
                     <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>add</mat-icon>
           </span> Add Insurance

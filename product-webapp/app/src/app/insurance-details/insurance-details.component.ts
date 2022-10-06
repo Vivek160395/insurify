@@ -52,10 +52,10 @@ export class InsuranceDetailsComponent implements OnInit {
   constructor(private service: RecommendationServiceService, public dialog: MatDialog, private route: Router) { }
   ngOnInit(): void {
     this.getPolicy();
-    if (this.service.userType == "Insurer") {
+    if (this.service.userType == "As Insurer") {
       this.edit = false;
       this.buy = true;
-    } else if (this.service.userType == "Insured") {
+    } else if (this.service.userType == "As Insured") {
       this.edit = true;
       this.buy = false;
     }

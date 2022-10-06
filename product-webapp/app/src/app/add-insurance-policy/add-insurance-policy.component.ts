@@ -154,9 +154,14 @@ export class AddInsurancePolicyComponent implements OnInit {
     return <FormArray>this.insuranceForms.controls['policyBenefits'];
   }
 
-
+  type: boolean = false;
+  others: boolean = true;
   filePath: any = '';
   ngOnInit(): void {
+    if (this.service.userType != "As Insurer") {
+      this.type = true;
+      this.others = false;
+    }
     this.insuranceForms.get('policyId')?.setValue(this.id.toString())
     this.insuranceForms.get('userEmail')?.setValue(this.service.userEmail);
     this.insuranceForms.get('policyId')!.disable()
@@ -357,7 +362,6 @@ export class AddInsurancePolicyComponent implements OnInit {
           this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
             .subscribe((data: any) => { console.log(data) });
           this.addInsuranceTo(formData);
-          this.addImage(formData);
         }
       });
     console.log(this.insuranceForms.value)
@@ -368,20 +372,13 @@ export class AddInsurancePolicyComponent implements OnInit {
     this.http.post("http://localhost:8080/recommendation/Recommendation/Insurance", this.insuranceForms.value).subscribe(
       (data) => {
         console.log(data);
-        this.addImage(formData);
+        this.http.put(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
+          console.log(data);
+        })
       }
     )
     this.insuranceForms.get('policyId')?.disable();
   }
-  addImage(formData: FormData) {
-    // this.insuranceForms.get('policyId')?.enable();
-    this.http.post(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
-      console.log(data);
-    })
-    // this.insuranceForms.get('policyId')?.disable();
-
-  }
-
   addDetails(i: any) {
     const control = <FormArray>this.insuranceForms.controls['policyDetails'];
     console.log('Length of policy Details Array' + control.length);
