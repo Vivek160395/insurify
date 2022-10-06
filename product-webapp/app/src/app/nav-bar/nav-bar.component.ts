@@ -55,7 +55,8 @@ export class NavBarComponent implements OnInit {
   logoutButton: boolean = false;
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private service: Userservice1Service, private service1: RecommendationServiceService) { }
   ngOnInit(): void {
-    //  this.getAllUsers();
+    console.log(this.service1.userType);
+    
     if (this.service1.userType == "insuranceprovider") {
       this.others = true;
       this.insurer = false

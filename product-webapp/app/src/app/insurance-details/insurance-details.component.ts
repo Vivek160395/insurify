@@ -69,7 +69,8 @@ export class InsuranceDetailsComponent implements OnInit {
   firstDiv: String = "";
   cars: string[] = [];
   editPolicy() {
-    this.route.navigateByUrl("/edit-insurance")
+    localStorage.setItem('editpolicyid',this.service.policyNo)
+    this.route.navigateByUrl("/home/edit-insurance")
   }
   openDialog() {
     this.dialog.open(CalculatorComponent);
