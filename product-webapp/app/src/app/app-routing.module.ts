@@ -22,6 +22,7 @@ import { InsuranceProviderComponent } from './insurance-provider/insurance-provi
 import { RegisteredPoliciesComponent } from './registered-policies/registered-policies.component';
 import { RegisteredPolicyBuyersComponent } from './registered-policy-buyers/registered-policy-buyers.component';
 import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
+import { HomepageComponent } from './homepage/homepage.component';
 // import { PersonGuard } from './guard/person.guard';
 
 
@@ -52,8 +53,10 @@ const routes: Routes =
     { path: "chat", component: ChatComponent},
     { path: "registeredPolicies", component: RegisteredPoliciesComponent},
     { path: "policyBuyers", component:RegisteredPolicyBuyersComponent},
-    { path: "policy-advisor", component: PolicyAdvisorComponent}]
+    { path: "policy-advisor", component: PolicyAdvisorComponent}],
+    
   },
+  { path:"home",component:HomepageComponent}
   // { path: "login", component: LoginComponent }
 
       

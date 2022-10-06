@@ -723,9 +723,9 @@ public class PurchaseServiceImplementation implements PurchaseService {
         Insurance retrievedInsurance=returnInsuranceForRenewal(insurance,customerPolicyId);
         if(retrievedInsurance==null)
         {
-            for(int i=0;i<retrievedInsurance.getPolicyDetails().length;i++)
+            for(int i=0;i<insurance.getPolicyDetails().length;i++)
             {
-                if(retrievedInsurance.getPolicyDetails()[i].getSumInsure()==customerInsurance.getSumInsured())
+                if(insurance.getPolicyDetails()[i].getSumInsure()==customerInsurance.getSumInsured())
                 {
                     return "Age of all users in the policy covered should be less than 60 years ";
                 }
