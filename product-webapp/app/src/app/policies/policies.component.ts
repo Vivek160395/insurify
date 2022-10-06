@@ -168,7 +168,7 @@ export class PoliciesComponent {
       
     // this.description.push(x.policyDescription);
       // this.policyTitle.push(x.policyName))
-      this.http.put("http://localhost:8080/purchase/api/getstatus/"+policy.customerPolicyId, data).subscribe((x:any)=>{
+      this.http.put<Insurance>("http://localhost:8080/purchase/api/getstatus/"+policy.customerPolicyId, data).subscribe((x:any)=>{
         this.str=x;
         console.log(x);
         
@@ -176,6 +176,8 @@ export class PoliciesComponent {
           this.router.navigateByUrl("/home/renewal-home");
         }
         else {
+          console.log(this.str);
+          
           this.openSnackBar(x);
         }
       })
