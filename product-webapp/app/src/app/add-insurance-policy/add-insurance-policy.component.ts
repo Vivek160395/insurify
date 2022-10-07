@@ -153,17 +153,17 @@ export class AddInsurancePolicyComponent implements OnInit {
   get insuranceFormControl() {
     return <FormArray>this.insuranceForms.controls['policyBenefits'];
   }
-
+  userType = localStorage.getItem('UserType')
   type: boolean = false;
   others: boolean = true;
   filePath: any = '';
   ngOnInit(): void {
-    if (this.service.userType != "policyadvisor") {
+    if (this.userType != "insuranceprovider") {
       this.type = true;
       this.others = false;
     }
     this.insuranceForms.get('policyId')?.setValue(this.id.toString())
-    this.insuranceForms.get('userEmail')?.setValue(localStorage.getItem(''));
+    this.insuranceForms.get('userEmail')?.setValue(localStorage.getItem('logInEmailId'));
     this.insuranceForms.get('policyId')!.disable()
   }
   id = Math.floor(Math.random() * 1000000 + 100000);
