@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Insurance } from '../insurance';
 import { RenewCompletionComponent } from '../renew-completion/renew-completion.component';
 import { RenewalService } from '../Services/renewal.service';
@@ -29,7 +30,7 @@ export class RenewalPolicyComponent implements OnInit {
   selectedItems: any[] = []
 
 
-  constructor(private renewalService: RenewalService, private http: HttpClient, private dialog: MatDialog) {
+  constructor(private renewalService: RenewalService, private http: HttpClient, private dialog: MatDialog,private router:Router) {
     this.myModel = 0;
   }
 
@@ -109,6 +110,7 @@ export class RenewalPolicyComponent implements OnInit {
       res = this.data;
       console.log(res);
       this.dialog.open(RenewCompletionComponent);
+      this.router.navigateByUrl('/home/policies')
     })
   }
 }

@@ -12,8 +12,8 @@
 
                     <div *ngFor="let policy of policies">
                         <div *ngIf="policy.customerPolicyId==this.policyId">
-                            <button mat-raised-button color="primary" style="margin-left:190px" routerLink="/home/claim">Claim</button>
-                            <button mat-raised-button color="primary" style="margin-left:650px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1]" routerLink="/home/renewal-home">Renew</button>
+                            <!-- <button mat-raised-button color="primary" style="margin-left:190px" routerLink="/home/claim">Claim</button>
+                            <button mat-raised-button color="primary" style="margin-left:650px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1]" routerLink="/home/renewal-home">Renew</button> -->
                             <div id="pdfFile" #pdfFile style="padding-right: 5px;">
                                 <h2 style="background-color: rgb(181, 181, 245); text-align: center; margin-top: 15px;">Customer Information
                                 </h2>
@@ -164,7 +164,7 @@
                                     </tr>
                                     <tr>
                                         <td>Start Date</td>
-                                        <td>{{policy.startDate[(policy.startDate.length)-1]}}</td>
+                                        <td>{{policy.startDate[0]}}</td>
                                     </tr>
                                     <tr>
                                         <td>End Date</td>
@@ -172,9 +172,9 @@
                                     </tr>
                                     <tr>
                                         <td>Purchase Date</td>
-                                        <td>{{policy.purchaseDate[(policy.purchaseDate.length)-1]}}</td>
+                                        <td>{{policy.startDate[0]}}</td>
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <td>Duration(in years)</td>
                                         <td>{{policy.duration}}</td>
                                     </tr>
@@ -185,7 +185,7 @@
                                     <tr>
                                         <td>Premium</td>
                                         <td>{{policy.premium}}</td>
-                                    </tr>
+                                    </tr> -->
                                     <tr *ngIf="policy.status">
                                         <td>Status</td>
                                         <td>Active</td>
@@ -221,14 +221,14 @@
                             <table>
                                 <tr>
                                     <th>Policy No.</th>
-                                    <th>Renew Date</th>
+                                    <th>Duration</th>
                                     <th>Start Date</th>
                                     <th>End Date </th>
                                 </tr>
                                 <!-- <div > -->
                                 <tr *ngFor="let x of policy.startDate; let i=index;">
                                     <td>{{policy.customerPolicyId}}</td>
-                                    <td>{{policy.purchaseDate[i]}}</td>
+                                    <td>{{policy.duration[i]}} Years</td>
                                     <td>{{policy.startDate[i]}}</td>
                                     <td>{{policy.endDate[i]}}</td>
                                 </tr>
