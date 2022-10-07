@@ -12,6 +12,6 @@ export class EditInsuranceService {
    
 baseurl='https://insurify.stackroute.io/insurance/api/vk1/policy-id/'
   editInsurance() {
-    return this.http.get(this.baseurl+localStorage.getItem('editPolicyId'))
+    return this.http.get(this.baseurl+localStorage.getItem('editpolicyid'))
   }
 }

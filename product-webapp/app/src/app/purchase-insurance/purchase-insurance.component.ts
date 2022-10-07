@@ -12,6 +12,7 @@ import { PolicyDetails } from '../policy-details';
 import { formatDate } from '@angular/common';
 import { PaymentService } from '../payment.service';
 import { RecommendationServiceService } from '../Services/recommendation-service.service';
+import { Router } from '@angular/router';
 export interface LifeTable {
   minSal: number;
   maxSal: number;
@@ -428,6 +429,7 @@ export class PurchaseInsuranceComponent implements OnInit {
         this.httpclient.post(`https://insurify.stackroute.io/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
         // this.httpclient.post(`http://localhost:8080/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
           console.log(data);
+          this.route.navigateByUrl('/home/policies')
         })
       }
     );
@@ -621,7 +623,7 @@ export class PurchaseInsuranceComponent implements OnInit {
     }
 
   }
-  constructor(public httpclient: HttpClient, public snackBar: MatSnackBar, public order: PaymentService, public service: RecommendationServiceService) {
+  constructor(public httpclient: HttpClient, public snackBar: MatSnackBar, public order: PaymentService, public service: RecommendationServiceService,public route:Router) {
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
     const currentDay = new Date().getDate();
