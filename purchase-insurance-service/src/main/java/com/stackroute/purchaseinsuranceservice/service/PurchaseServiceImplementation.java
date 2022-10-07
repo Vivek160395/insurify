@@ -671,19 +671,11 @@ public class PurchaseServiceImplementation implements PurchaseService {
         String ourDate = currentDay;
         System.out.println("Status of : " + (sDay.compareTo(ourDate) < 0 && eDay.compareTo(ourDate) > 0));
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar c = Calendar.getInstance();
-        c.setTime(sdf.parse(ourDate));
-        c.add(Calendar.DATE, -1); // number of days to add
-        // startDay = sdf.format(c.getTime());
-        // System.out.println("Policy renewal starts from" + startDay);
-        // c.add(Calendar.YEAR, customerRenewal.getDuration());
-        c.add(Calendar.DATE, -1);
-        ourDate = sdf.format(c.getTime());
 
-        if (!(sDay.compareTo(ourDate) < 0) || !(eDay.compareTo(ourDate) >= 0)) {
+
+        if (!(sDay.compareTo(ourDate) <= 0) || !(eDay.compareTo(ourDate) >= 0)) {
             System.out.println("Cannot renew now because of policy  time interval is not valid");
-            return "No policy available to renew ";
+            return "Policy can be renewed only during its running period";
         }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c1 = Calendar.getInstance();

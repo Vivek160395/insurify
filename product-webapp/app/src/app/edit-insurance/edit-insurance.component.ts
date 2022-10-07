@@ -188,8 +188,8 @@ export class EditInsuranceComponent implements OnInit {
   insuranceobj: any
 
   ngOnInit(): void {
-
-    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/' + localStorage.getItem('editpolicyid')?.toString()).subscribe((data: any) => {
+    this.http.get('https://insurify.stackroute.io/insurance/api/vk1/policy-id/' + localStorage.getItem('editpolicyid')?.toString()).subscribe((data: any) => {
+    // this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/' + localStorage.getItem('editpolicyid')?.toString()).subscribe((data: any) => {
       this.insuranceobj = data
 
       console.log(this.insuranceobj)
