@@ -52,7 +52,7 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.getnames();
    setInterval(()=>{this.getMsgsByName(this.setid);console.log('123');
-   },2000)
+   },1000)
   }
 
  connect(id:any){

@@ -605,7 +605,7 @@ export class AddInsurancePolicyComponent implements OnInit {
   //Methods for chips component
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  sumInsuredValues: SumInsured[] = [{ insuredSum: 100000 }, { insuredSum: 5000000 }, { insuredSum: 1000000 }, { insuredSum: 5000000 }];
+  sumInsuredValues: SumInsured[] = [{ insuredSum: 100000 }, { insuredSum: 500000 }, { insuredSum: 1000000 }, { insuredSum: 5000000 }];
   duration: Duration[] = [{ years: 1 }, { years: 2 }, { years: 5 }, { years: 10 }];
   add(event: MatChipInputEvent): void {
     // const value = (event.value || '').trim();
