@@ -1,9 +1,7 @@
 <div fxLayout="column">
-    <div>Validity :{{check_validity()}}          Validity 1 :{{check_validity1()}}         Validity 2:{{check_validity2()}}        Validity 3:{{check_validity3()}}</div>
-    <button mat-raised-button (click)="modifyform()">ClickMe</button>
-   
+    <!-- <div>Validity :{{check_validity()}}          Validity 1 :{{check_validity1()}}         Validity 2:{{check_validity2()}}        Validity 3:{{check_validity3()}}</div>
+    <button mat-raised-button (click)="modifyform()">ClickMe</button> -->
     <mat-stepper #stepper>
-
         <mat-step [stepControl]="insuranceForms">
             <mat-card style="width: 100%;">
                 <mat-card-content>

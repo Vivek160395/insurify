@@ -253,7 +253,7 @@ export class PurchaseInsuranceComponent implements OnInit {
       amount: this.premium.toString(),
       customerPolicyId: this.id.toString(),
       //  emailId:localStorage.getItem('email'),
-      emailId: this.userForm.get('email')!.value!,
+      emailId: localStorage.getItem('logInEmailId'),
       name: this.userForm.get('name')!.value!,
       //  paymentDate:this.userForm.get('startDate')!.value!,
       mobileNo: ("+91" + (this.userForm.get('mobile')!.value!).toString()),
