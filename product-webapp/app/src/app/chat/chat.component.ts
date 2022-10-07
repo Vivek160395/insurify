@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
- setid:string=''
+  setid: string = ''
 
   @ViewChild('endOfChat')
   endOfChat!: ElementRef;
@@ -55,11 +55,11 @@ export class ChatComponent implements OnInit {
    },1000)
   }
 
- connect(id:any){
-    if(this.role=="customer"){
-      this.registerMsg.userName=this.loginId;
-      this.registerMsg.advisorName=id;
-      this.registerMsg.chatRoomName=this.loginId+"&"+id;
+  connect(id: any) {
+    if (this.role == "customer") {
+      this.registerMsg.userName = this.loginId;
+      this.registerMsg.advisorName = id;
+      this.registerMsg.chatRoomName = this.loginId + "&" + id;
       console.log("done");
       console.log(this.registerMsg);
       this.service.registerChatRoom(this.registerMsg).subscribe(
@@ -69,7 +69,7 @@ export class ChatComponent implements OnInit {
         }
       );
     }
-    else if(this.role=='policyadvisor')  {
+    else if (this.role == 'policyadvisor') {
       this.registerMsg.userName = id;
       this.registerMsg.advisorName = this.loginId;
       this.registerMsg.chatRoomName = id + "&" + this.loginId;
@@ -84,47 +84,48 @@ export class ChatComponent implements OnInit {
 
   getnames() {
     this.service.getNames(this.loginId).subscribe((data) => {
-      for (let i: number = 0; i < data.length; i++) { 
+      for (let i: number = 0; i < data.length; i++) {
         if (this.role == "customer") {
           this.names.push(data[i].advisorName);
           console.log(data[i].advisorName);
-          
+
         }
-        else if(this.role=='policyadvisor') {
+        else if (this.role == 'policyadvisor') {
           this.names.push(data[i].userName);
           console.log(data[i].userName);
-          
+
         }
       }
     });
   }
 
   getMsgsByName(id: string) {
-    this.setid=id
+    this.setid = id
     this.showMsgs = false;
     this.otherId = id;
     if (this.role == 'customer') {
       this.service.getMsgs(this.loginId + "&" + this.otherId).subscribe(data => {
-       this.msg = data;
-        if(data!=null){
-        for (let i: number = 0; i < data.length; i++) {
-          if (data[i].id == this.loginId) {
-            this.msg[i].show = true;
+        this.msg = data;
+        if (data != null) {
+          for (let i: number = 0; i < data.length; i++) {
+            if (data[i].id == this.loginId) {
+              this.msg[i].show = true;
+            }
           }
         }
-      }
-      
+
       })
     }
-    else if(this.role=='policyadvisor') {
+    else if (this.role == 'policyadvisor') {
       this.service.getMsgs(this.otherId + "&" + this.loginId).subscribe(data => {
         this.msg = data;
-        if(data!=null){
-        for (let i: number = 0; i < data.length; i++) {
-          if (data[i].id == this.loginId) {
-            this.msg[i].show = true;
+        if (data != null) {
+          for (let i: number = 0; i < data.length; i++) {
+            if (data[i].id == this.loginId) {
+              this.msg[i].show = true;
+            }
           }
-        }}
+        }
       });
     }
     this.scrollToBottom();
@@ -137,7 +138,7 @@ export class ChatComponent implements OnInit {
           this.getMsgsByName(this.otherId);
         });
       }
-      else if(this.role=='policyadvisor') {
+      else if (this.role == 'policyadvisor') {
         this.service.updateMsgList(this.chatMsg, this.otherId + "&" + this.loginId).subscribe(data => {
           this.getMsgsByName(this.otherId)
         });

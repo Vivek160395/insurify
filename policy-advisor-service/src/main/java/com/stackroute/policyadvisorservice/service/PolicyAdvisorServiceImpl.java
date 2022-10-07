@@ -1,5 +1,6 @@
 package com.stackroute.policyadvisorservice.service;
 
+// import com.stackroute.policyadvisorservice.config.Producer;
 import com.stackroute.policyadvisorservice.exception.PolicyAdvisorAlreadyExists;
 import com.stackroute.policyadvisorservice.exception.PolicyAdvisorNotRegisteredException;
 import com.stackroute.policyadvisorservice.model.PolicyAdvisor;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import java.io.IOException;
@@ -17,8 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PolicyAdvisorServiceImpl implements PolicyAdvisorService{
+public class PolicyAdvisorServiceImpl implements PolicyAdvisorService {
 
+    // @Autowired
+    // Producer producer;
 
     private PolicyAdvisorRepository policyAdvisorRepository;
 
@@ -39,18 +43,20 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService{
             throw new PolicyAdvisorAlreadyExists();
         } else {
             policyAdvisorRepository.save(policyAdvisor);
+            // producer.sendingMessageToRabbitMQServer(dto);
             return policyAdvisor;
         }
     }
 
     @Override
-    public List<PolicyAdvisor> findAllPolicyAdvisors(){
+    public List<PolicyAdvisor> findAllPolicyAdvisors() {
 
         return policyAdvisorRepository.findAll();
     }
 
     @Override
-    public PolicyAdvisor changePassword(PolicyAdvisor policyAdvisor, String emailId) throws PolicyAdvisorNotRegisteredException {
+    public PolicyAdvisor changePassword(PolicyAdvisor policyAdvisor, String emailId)
+            throws PolicyAdvisorNotRegisteredException {
         DTO dto = new DTO();
         dto.setPassword(dto.getPassword());
 
@@ -63,8 +69,7 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService{
         }
     }
 
-
-//
+    //
 
     @Override
     public PolicyAdvisor update(PolicyAdvisor policyAdvisor, String emailId, MultipartFile file)
@@ -95,7 +100,7 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService{
     @Override
     public PolicyAdvisor update(PolicyAdvisor policyAdvisor, String emailId)
             throws PolicyAdvisorNotRegisteredException {
-
+        System.out.println(policyAdvisor);
         if (policyAdvisorRepository.findById(emailId).isPresent()) {
             PolicyAdvisor policyAdvisor1 = policyAdvisorRepository.findById(emailId).get();
 
@@ -118,31 +123,30 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService{
 
     @Override
     public boolean deletePolicyAdvisor(String emailId) throws PolicyAdvisorNotRegisteredException {
-           if( policyAdvisorRepository.findById(emailId).isPresent()) {
-               policyAdvisorRepository.deleteById(emailId);
-               return true;
-           }
-           else
-               throw new PolicyAdvisorNotRegisteredException();
+        if (policyAdvisorRepository.findById(emailId).isPresent()) {
+            policyAdvisorRepository.deleteById(emailId);
+            return true;
+        } else
+            throw new PolicyAdvisorNotRegisteredException();
     }
 
     @Override
-    public PolicyAdvisor calculateRating(Rating ratings,String emailId ) throws PolicyAdvisorNotRegisteredException {
-        float sum= 0F;
+    public PolicyAdvisor calculateRating(Rating ratings, String emailId) throws PolicyAdvisorNotRegisteredException {
+        float sum = 0F;
         float average = 0.0F;
 
-        if( policyAdvisorRepository.findById(emailId).isPresent()) {
+        if (policyAdvisorRepository.findById(emailId).isPresent()) {
 
             PolicyAdvisor policyAdvisor1 = policyAdvisorRepository.findById(emailId).get();
-            List<Rating> ratingList = policyAdvisor1.getRatings();
-           // Rating rating = new Rating();
-            if (ratingList!= null){
+            List<Rating> ratingList = Arrays.asList(policyAdvisor1.getRatings());
+            // Rating rating = new Rating();
+            if (ratingList != null) {
                 ratingList.add(ratings);
-                for (Rating r: ratingList){
+                for (Rating r : ratingList) {
                     sum = sum + r.getRating();
                 }
 
-                average = sum/ ratingList.size();
+                average = sum / ratingList.size();
                 policyAdvisor1.setAverageRating(average);
                 policyAdvisorRepository.save(policyAdvisor1);
 
@@ -151,14 +155,12 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService{
             List<Rating> ratingList1 = new ArrayList<>();
             ratingList1.add(ratings);
             policyAdvisor1.setAverageRating(ratings.getRating());
-            policyAdvisor1.setRatings(ratingList1);
+            // policyAdvisor1.setRatings(ratingList1);
             policyAdvisorRepository.save(policyAdvisor1);
             return policyAdvisor1;
-        }
-        else
+        } else
             throw new PolicyAdvisorNotRegisteredException();
     }
-
 
     @Override
     public Optional<PolicyAdvisor> getPolicyAdvisorByEmail(String emailId) {

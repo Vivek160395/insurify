@@ -11,6 +11,7 @@ import { PreviewMarkupComponent } from '../preview-markup/preview-markup.compone
 import { RecommendationServiceService } from '../Services/recommendation-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { last } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 
@@ -109,7 +110,7 @@ export class AddInsurancePolicyComponent implements OnInit {
   }
 
 
-  constructor(public snackBar: MatSnackBar, public http: HttpClient, public dialog: MatDialog, private service: RecommendationServiceService) { }
+  constructor(public snackBar: MatSnackBar, public http: HttpClient, public dialog: MatDialog, private service: RecommendationServiceService, private route: Router) { }
 
   openDialog() {
     this.dialog.open(PreviewMarkupComponent, { data: this.valueVariable })
@@ -374,6 +375,7 @@ export class AddInsurancePolicyComponent implements OnInit {
         console.log(data);
         this.http.put(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
           console.log(data);
+          this.route.navigateByUrl("/home/home-page");
         })
       }
     )

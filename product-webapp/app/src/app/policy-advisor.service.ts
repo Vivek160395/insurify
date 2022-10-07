@@ -39,8 +39,10 @@ export class PolicyAdvisorService {
 
   updateAdvisorWithoutImage(policyAdvisor: PolicyAdvsior, emailId: string): Observable<Object> {
     console.log(policyAdvisor);
-
-
+    console.log(emailId);
     return this.http.put(this.url + emailId, policyAdvisor);
+  }
+  registerNewPolicyAdvisor(data: any): Observable<any> {
+    return this.http.post(this.baseUrl + "api/v1/policyAdvisor", data);
   }
 }
