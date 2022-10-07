@@ -10,9 +10,9 @@ import { InsuredInfo } from '../InsuredInfo';
 import { LifeInsurance } from '../LifeInsurance';
 import { PolicyDetails } from '../policy-details';
 import { formatDate } from '@angular/common';
-import { PaymentService } from '../payment.service';
 import { RecommendationServiceService } from '../Services/recommendation-service.service';
 import { Router } from '@angular/router';
+import { PaymentService } from '../Services/payment.service';
 export interface LifeTable {
   minSal: number;
   maxSal: number;

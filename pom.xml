@@ -22,7 +22,6 @@
     </properties>
 
     <modules>
-        <module>config-server</module>
         <module>eureka-server</module>
         <module>api-gateway</module>
         <module>product-webapp</module>
@@ -33,9 +32,6 @@
         <module>payment-service</module>
         <module>recommendation-service</module>
         <module>policy-advisor-service</module>
-        <module>claim-service</module>
-        <module>renewal-service</module>
-        <module>subscription-service</module>
         <module>chat-service</module>
         <module>purchase-insurance-service</module>
     </modules>
@@ -50,11 +46,11 @@
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.5</version>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.projectlombok</groupId>-->
+<!--            <artifactId>lombok</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>

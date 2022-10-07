@@ -2,7 +2,7 @@ import { ObserversModule } from '@angular/cdk/observers';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PolicyAdvsior } from './policy-advsior';
+import { PolicyAdvsior } from '../policy-advsior';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,8 @@ export class PolicyAdvisorService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = "http://localhost:8080/advisor/"
+  // baseUrl = "http://localhost:8080/advisor/"
+  baseUrl = "http://insurify.stackroute.io/advisor/"
 
   baseUrl1 = this.baseUrl + "api/v1/updateDetails/"
 

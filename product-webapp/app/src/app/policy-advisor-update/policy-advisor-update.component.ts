@@ -4,7 +4,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { HttpClient } from '@angular/common/http';
 import { PolicyAdvsior } from '../policy-advsior';
-import { PolicyAdvisorService } from '../policy-advisor.service';
+import { PolicyAdvisorService } from '../Services/policy-advisor.service';
 
 export interface Fruit {
   name: string;

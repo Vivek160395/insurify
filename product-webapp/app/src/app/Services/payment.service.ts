@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Payment } from './payment';
+import { Payment } from '../payment';
 
 
 const httpOptions = {
@@ -17,8 +17,9 @@ export class PaymentService {
 
 
   createOrder(order: Payment): Observable<any>{
-    return this.http.post("http://localhost:8080/payment/pg/createOrder",order, httpOptions);
-      // name: order.name,
+    // return this.http.post("http://localhost:8080/payment/pg/createOrder",order, httpOptions);
+    return this.http.post("http://insurify.stackroute.io/payment/pg/createOrder",order, httpOptions);
+    // name: order.name,
       // emailId: order.email,
       // mobileNo: order.phone,
       // currency:order.currency,
