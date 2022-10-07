@@ -2,10 +2,9 @@
     <mat-toolbar class="example-toolbar">
         <div style="display: flex;justify-content: space-between;">
             <div style="display: flex;margin:auto">
-                <button class="menu" type="button" mat-button (click)="drawer.toggle()"
-                    style="display: flex;justify-content: center;color: white;">
-                    <mat-icon>menu</mat-icon>
-                </button>
+                <button class="menu" type="button" mat-button (click)="drawer.toggle()" style="display: flex;justify-content: center;color: white;">
+          <mat-icon>menu</mat-icon>
+        </button>
             </div>
             <div style="display: flex;">
                 <div class="insurify" routerLink="/home/home-page" style="color:white">
@@ -15,11 +14,11 @@
         </div>
         <div style="display: flex;">
             <div style="margin-right: 30px;" class="renew" *ngIf="!isInsurer">
-               <a routerLink="/home/policies"><button mat-button class="ren">View Purchased Policies</button></a>
+                <a routerLink="/home/policies"><button mat-button class="ren">View Purchased Policies</button></a>
             </div>
             <div style="margin-right: 30px;" class="renew" *ngIf="isInsurer">
                 <a routerLink="/home/registeredPolicies"><button mat-button class="ren">View Registered policies</button></a>
-             </div>
+            </div>
             <!-- <div style="margin-right: 30px;" class="claim">
                 <button mat-button class="clai">LOGOUT</button>
             </div> -->
@@ -29,31 +28,28 @@
         </div>
         <div style="display: flex;">
             <div style="margin-right: 20px;" [hidden]="loginButton">
-                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;"
-                    routerLink="/nav/login">
-                    Login
-                </button>
+                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/nav/login">
+          Login
+        </button>
             </div>
             <div style="margin-right: 20px;" [hidden]="logoutButton">
-                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;"
-                    routerLink="/nav/login">
-                    LogOut
-                </button>
+                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/nav/login">
+          LogOut
+        </button>
             </div>
             <div style="margin-right: 20px;">
-                <button mat-button [matMenuTriggerFor]="menu4" aria-label="Example icon-button with a menu"
-                    matTooltip="Profile" color="white">
-                    <mat-icon class="icon-display">account_circle</mat-icon>
-                </button>
+                <button mat-button [matMenuTriggerFor]="menu4" aria-label="Example icon-button with a menu" matTooltip="Profile" color="white">
+          <mat-icon class="icon-display">account_circle</mat-icon>
+        </button>
                 <mat-menu #menu4="matMenu">
                     <button mat-menu-item *ngIf="!isPolicyAdvisor" router="home/update">
-                        <mat-icon>edit</mat-icon>
-                        <span>Edit Profile</span>
-                    </button>
+            <mat-icon>edit</mat-icon>
+            <span>Edit Profile</span>
+          </button>
                     <button mat-menu-item *ngIf="isPolicyAdvisor" router="/home/policy-advisor-update">
-                        <mat-icon>edit</mat-icon>
-                        <span>Edit Profile</span>
-                      </button>
+            <mat-icon>edit</mat-icon>
+            <span>Edit Profile</span>
+          </button>
                 </mat-menu>
             </div>
         </div>
@@ -64,41 +60,49 @@
             <mat-nav-list style="padding: 10px;">
                 <a mat-list-item routerLink="/home/home-page" style="font-size: 20px;">
                     <span class="material-symbols-outlined" style="margin-right:10px">
-                        <mat-icon>home</mat-icon>
-                    </span> Home
+            <mat-icon>home</mat-icon>
+          </span> Home
                 </a>
-                <a mat-list-item routerLink="/home/registeredPolicies" style=" font-size: 20px;">
-                    <span class="material-symbols-outlined" style="margin-right:10px">
-                        <mat-icon>history</mat-icon>
-                    </span> Purchases
-                </a>
+                <div>
+                    <a mat-list-item routerLink="/home/policies" style=" font-size: 20px;" *ngIf="!isPolicyAdvisor">
+                        <span class="material-symbols-outlined" style="margin-right:10px">
+              <mat-icon>history</mat-icon>
+            </span> Purchases
+                    </a>
+                </div>
+                <div>
+                    <a mat-list-item routerLink="/home/registeredPolicies" style=" font-size: 20px;" *ngIf="isPolicyAdvisor">
+                        <span class="material-symbols-outlined" style="margin-right:10px">
+              <mat-icon>history</mat-icon>
+            </span> Purchases
+                    </a>
+                </div>
                 <div [hidden]="others">
                     <a mat-list-item routerLink="/home/chat" style="font-size: 20px;">
                         <span class="material-symbols-outlined" style="margin-right:13px">
-                            <mat-icon>support_agent</mat-icon>
-                        </span> Chat
+              <mat-icon>support_agent</mat-icon>
+            </span> Chat
                     </a>
                     <a mat-list-item routerLink="/home/policy-advisor" style="font-size: 20px;">
                         <span class="material-symbols-outlined" style="margin:0 10px 0 5px">
-                            <mat-icon>groups</mat-icon>
-                        </span> Advisors
+              <mat-icon>groups</mat-icon>
+            </span> Advisors
                     </a>
                 </div>
                 <a mat-list-item routerLink="/home/update" style="font-size: 20px;" *ngIf="!isPolicyAdvisor">
                     <span class="material-symbols-outlined" style="margin-right:10px">
-                        <mat-icon>edit</mat-icon>
-                    </span> Edit Profile
+            <mat-icon>edit</mat-icon>
+          </span> Edit Profile
                 </a>
-                <a mat-list-item routerLink="/home/policy-advisor-update" style="font-size: 20px;"
-                    *ngIf="isPolicyAdvisor">
+                <a mat-list-item routerLink="/home/policy-advisor-update" style="font-size: 20px;" *ngIf="isPolicyAdvisor">
                     <span class="material-symbols-outlined" style="margin-right:10px">
-                        <mat-icon>edit</mat-icon>
-                    </span> Edit Profile
+            <mat-icon>edit</mat-icon>
+          </span> Edit Profile
                 </a>
                 <a mat-list-item routerLink="/home/add-policy" style="font-size: 20px;" [hidden]="insurer">
                     <span class="material-symbols-outlined" style="margin-right:10px">
-                        <mat-icon>add</mat-icon>
-                    </span> Add Insurance
+            <mat-icon>add</mat-icon>
+          </span> Add Insurance
                 </a>
             </mat-nav-list>
         </mat-drawer>

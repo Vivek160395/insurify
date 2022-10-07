@@ -21,5 +21,8 @@ export class LoginService {
   loginUser(emailId: any): Observable<any> {
     return this.httpClient.get(this.baseUrl + "/" + emailId);
   }
+  addNewUser(data: any): Observable<any> {
+    return this.httpClient.post(this.baseUrl + "/user", data);
+  }
   stauts: any = '';
 }

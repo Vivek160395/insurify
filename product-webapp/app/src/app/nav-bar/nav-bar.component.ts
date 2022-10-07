@@ -61,8 +61,8 @@ export class NavBarComponent implements OnInit {
     console.log(this.service1.userType);
     if (localStorage.getItem('UserType') == "policyadvisor") {
       console.log("inside advisor");
-
       this.displayRenewal = true
+      this.isPolicyAdvisor = true;
     }
     if (localStorage.getItem('UserType') == "policyadvisor" || localStorage.getItem('UserType') === "customer") { this.displayRenewal = true }
     else {

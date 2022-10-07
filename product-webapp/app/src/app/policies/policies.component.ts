@@ -36,29 +36,29 @@ export class PoliciesComponent {
   originally bred for hunting.`;
 
   ngOnInit(): void {
-    let response= this.http.get("http://localhost:8080/purchase/api/get/insurances/"+localStorage.getItem('logInEmailId'));
-    response.subscribe((data)=>{
-      
+    let response = this.http.get("http://localhost:8080/purchase/api/get/insurances/" + localStorage.getItem('logInEmailId'));
+    response.subscribe((data) => {
+
       console.log(data);
       this.purchasedPolicies = data;
       for (let i = 0; i < this.purchasedPolicies.length; i++) {
         if (this.purchasedPolicies[i].automobileInsurance.engineNumber != 0) {
           this.insuranceTitle.push('Automobile Insurance');
         }
-        else if (this.purchasedPolicies[i].healthInsurance.adults > 0 ) {
+        else if (this.purchasedPolicies[i].healthInsurance.adults > 0) {
           this.insuranceTitle.push('Health Insurance');
         }
         else if (this.purchasedPolicies[i].lifeInsurance.height > 0) {
-          this.insuranceTitle.push('Health Insurance');
+          this.insuranceTitle.push('Life Insurance');
         }
         else {
           this.insuranceTitle.push('NA');
         }
 
-        this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+this.purchasedPolicies[i].insurancePolicyId).subscribe((x:any)=>{
-            this.description.push(x.policyDescription);
-            this.policyTitle.push(x.policyName)
-            // this.policyTitle.push(x.insuranceType);
+        this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((x: any) => {
+          this.description.push(x.policyDescription);
+          this.policyTitle.push(x.policyName)
+          // this.policyTitle.push(x.insuranceType);
         })
       }
 
@@ -138,11 +138,11 @@ export class PoliciesComponent {
   openDialog(policy: any, i: any) {
     console.log(policy);
     this.router.navigateByUrl('/home/details');
-    localStorage.setItem('policyName', this.policyTitle[i]);
-    localStorage.setItem('insuranceType', this.insuranceTitle[i]);
+    localStorage.setItem('policyName1', this.policyTitle[i]);
+    localStorage.setItem('insuranceType1', this.insuranceTitle[i]);
     // localStorage.setItem('insuranceType','Automobile Insurance');
     localStorage.setItem('customerPolicyId', policy.customerPolicyId)
-    console.log(localStorage.getItem('insuranceType'));
+    console.log(localStorage.getItem('insuranceType1'));
     console.log(localStorage.getItem('customerPolicyId'));
     console.log(policy.endDate[0]);
     let endDateInDateFormat = this.datePipe.transform(new Date(policy.endDate[0]), 'yyyy-MM-dd');
@@ -162,40 +162,40 @@ export class PoliciesComponent {
   }
 
   renewPolicy(i: any) {
-    
-    this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+this.purchasedPolicies[i].insurancePolicyId).subscribe((data:any)=>{
-    console.log("hello from renew button");
+
+    this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
+      console.log("hello from renew button");
       console.log(data)
-    // this.description.push(x.policyDescription);
+      // this.description.push(x.policyDescription);
       // this.policyTitle.push(x.policyName))
-      this.http.put<Insurance>("http://localhost:8080/purchase/api/getstatus/"+this.purchasedPolicies[i].customerPolicyId, data).subscribe((x:any)=>{
-        this.str=x;
+      this.http.put<Insurance>("http://localhost:8080/purchase/api/getstatus/" + this.purchasedPolicies[i].customerPolicyId, data).subscribe((x: any) => {
+        this.str = x;
         console.log(x);
-        
-        if(this.str==null){
-          localStorage.setItem("customerPolicyId",this.purchasedPolicies[i].customerPolicyId);
-          localStorage.setItem("insurancePolicyId",this.purchasedPolicies[i].insurancePolicyId);
+
+        if (this.str == null) {
+          localStorage.setItem("customerPolicyId", this.purchasedPolicies[i].customerPolicyId);
+          localStorage.setItem("insurancePolicyId", this.purchasedPolicies[i].insurancePolicyId);
           this.router.navigateByUrl("/home/renewal-home");
         }
         else {
           console.log(this.str);
-          
+
           this.openSnackBar(x.toString());
         }
       },
-      (error:any)=>{
-        console.log(error.error.text)
-        this.openSnackBar((error.error.text).toString());
-      })
+        (error: any) => {
+          console.log(error.error.text)
+          this.openSnackBar((error.error.text).toString());
+        })
 
 
     })
   }
-  claimPolicy(i:any){
+  claimPolicy(i: any) {
     console.log(i)
-          localStorage.setItem("customerPolicyId",this.purchasedPolicies[i].customerPolicyId);
-          localStorage.setItem("insurancePolicyId",this.purchasedPolicies[i].insurancePolicyId);
-          this.router.navigateByUrl("/home/claim");
+    localStorage.setItem("customerPolicyId", this.purchasedPolicies[i].customerPolicyId);
+    localStorage.setItem("insurancePolicyId", this.purchasedPolicies[i].insurancePolicyId);
+    this.router.navigateByUrl("/home/claim");
   }
 
   openSnackBar(message: string) {

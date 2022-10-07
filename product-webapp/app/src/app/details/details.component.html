@@ -65,7 +65,7 @@
                                     </tr>
                                     <tr>
                                         <td>Other Details</td>
-                                        <table *ngIf="insuranceType=='Automobile Insurance'">
+                                        <table *ngIf="insuranceType=='AutoMobileInsurance'">
                                             <tr>
                                                 <td>Vehicle Registration Number</td>
                                                 <td> {{policy.automobileInsurance.vehicleRegistrationNumber}}</td>
@@ -83,7 +83,7 @@
                                                 <td>{{policy.automobileInsurance.chassisNumber}}</td>
                                             </tr>
                                         </table>
-                                        <table *ngIf="insuranceType=='Life Insurance'">
+                                        <table *ngIf="insuranceType=='LifeInsurance'">
                                             <tr>
                                                 <td>Identity Proof</td>
                                                 <td>{{policy.lifeInsurance.identityProof}}</td>
@@ -118,7 +118,7 @@
                                             </tr>
 
                                         </table>
-                                        <table *ngIf="insuranceType=='Health Insurance'">
+                                        <table *ngIf="insuranceType=='HealthInsurance'">
                                             <tr>
                                                 <td>kids</td>
                                                 <td>{{policy.healthInsurance.kids}}</td>
@@ -338,3 +338,4 @@
         </mat-tab-group>
     </div>
 </div>
+
