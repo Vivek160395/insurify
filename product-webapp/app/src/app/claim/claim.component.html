@@ -9,10 +9,10 @@
             <h2>Insurer Details:</h2>
             <div>
               <div fxLayout="row" fxLayoutGap="2%">
-                <div fxFlex="25%" class="a1"><b>Customer PolicyId :</b> {{this.data.customerPolicyId}}</div>
-                <div fxFlex="25%" class="a1"><b>Insurance PolicyId : </b>{{this.data.insurancePolicyId}}</div>
-                <div fxFlex="25%" class="a1"><b>Name :</b>{{this.data.insuredName}} </div>
-                <div fxFlex="25%" class="a1"><b>EmailId :</b> {{this.data.insuredEmail}}</div>
+                <div fxFlex="33%" class="a1"><b>Customer PolicyId :</b> {{this.data.customerPolicyId}}</div>
+                <div fxFlex="33%" class="a1"><b>Insurance PolicyId : </b>{{this.data.insurancePolicyId}}</div>
+                <div fxFlex="33%" class="a1"><b>Name :</b>{{this.data.insuredName}} </div>
+                <!-- <div fxFlex="25%" class="a1"><b>EmailId :</b> {{this.data.insuredEmail}}</div> -->
 
               </div>
 
@@ -20,11 +20,11 @@
             <br>
             <div>
               <div fxLayout="row" fxLayoutGap="2%">
-                <div fxFlex="25%" class="a1"><b>StartDate :</b> {{this.data.startDate}}</div>
-                <div fxFlex="25%" class="a1"><b>PurchaseDate : </b>{{this.data. purchaseDate}}</div>
-                <div fxFlex="25%" class="a1"><b>EndDate :</b>{{this.data.endDate}} </div>
-                <div fxFlex="25%" class="a1"><b>Duration :</b> {{this.data.duration}}</div>
-
+                <div fxFlex="33%" class="a1"><b>StartDate :</b> {{this.data.startDate[0]}}</div>
+                <div fxFlex="33%" class="a1"><b>PurchaseDate : </b>{{this.data.startDate[0]}}</div>
+                <div fxFlex="33%" class="a1"><b>EndDate :</b>{{this.data.endDate[this.data.endDate.length-1]}} </div>
+                <!-- <div fxFlex="25%" class="a1"></div> -->
+                <!-- <b>Duration :</b> {{this.data.duration}} -->
 
               </div>
 
@@ -33,37 +33,43 @@
             <div>
 
               <div fxLayout="row" fxLayoutGap="2%">
-                <div fxFlex="25%" class="a1"><b>SumInsured:</b> {{this.data.sumInsured}}</div>
-                <div fxFlex="25%" class="a1"><b>Premium: </b>{{this.data. premium}}</div>
-                <div fxFlex="25%" class="a1"><b>Nominee Name: </b>{{this.data.nomineeName}}</div>
-                <div fxFlex="25%" class="a1"><b>Nominee DOB: </b>{{this.data.nomineeDOB}}</div>
+                <div fxFlex="33%" class="a1"><b>SumInsured:</b> {{this.data.sumInsured}}</div>
+                <!-- <div fxFlex="25%" class="a1"><b>Premium: </b>{{this.data.premium}}</div> -->
+                <div fxFlex="33%" class="a1"><b>Nominee Name: </b>{{this.data.nomineeName}}</div>
+                <div fxFlex="33%" class="a1"><b>Nominee DOB: </b>{{this.data.nomineeDOB}}</div>
               </div>
               <br>
               <div *ngIf="insurancex==='AutoMobileInsurance'">
                 <h2>Vehicle Details:</h2>
                 <div fxLayout="row" fxLayoutGap="2%">
-                  <div fxFlex="25%" class="a1"><b>Vehicle Reg No:</b> {{this.data.vehicleRegistrationNumber}}</div>
-                  <div fxFlex="25%" class="a1"><b>Category:</b>{{this.data.category}}</div>
-                  <div fxFlex="25%" class="a1"><b>Engine Number:</b>{{ this.data.engineNumber}}</div>
-                  <div fxFlex="25%" class="a1"><b>Chassis Number:</b>{{this.data.chassisNumber}}</div>
+                  <div fxFlex="50%" class="a1"><b>Vehicle Reg No:</b>       {{this.data.vehicleRegistrationNumber}}</div>
+                  <div fxFlex="50%" class="a1"><b>Category      :</b>       {{this.data.category}}</div>
+                  
+                </div>
+                <div fxLayout="row" fxLayoutGap="2%" style="margin-top: 2%;">
+                 
+                  <div fxFlex="50%" class="a1"><b>Engine Number  :</b>    {{ this.data.engineNumber}}</div>
+                  <div fxFlex="50%" class="a1"><b>Chassis Number :</b>   {{this.data.chassisNumber}}</div>
                 </div>
               </div>
               <div *ngIf="insurancex==='HealthInsurance'">
                 <h2>Health Insurance Details:</h2>
                 <div fxLayout="row" fxLayoutGap="2%">
                   <div fxFlex="25%" class="a1"><b>Kids:</b> {{this.data.kids}}</div>
-                  <div fxFlex="25%" class="a1"><b>Adults:</b>{{this.data.adults }}</div>
-                  <div fxFlex="25%" class="a1"><b>Relation:</b>{{  this.data.relation}}</div>
-                  <div fxFlex="25%" class="a1"><b>Name:</b>{{this.data.name}}</div>
+                  <div fxFlex="25%" class="a1"><b>Adults:</b> {{this.data.adults}}</div>
+                  <div fxFlex="25%" class="a1"></div>
+                  <div fxFlex="25%" class="a1"></div>
                 </div>
               </div>
               <div *ngIf="insurancex==='LifeInsurance'">
                 <h2>Life Insurance Details:</h2>
                 <div fxLayout="row" fxLayoutGap="2%">
-                  <div fxFlex="25%" class="a1"><b>Marital Status:</b> {{this.data.maritalStatus}}</div>
-                  <div fxFlex="25%" class="a1"><b>occupation:</b>{{this.data.occupation}}</div>
-                  <div fxFlex="25%" class="a1"><b>organisationType:</b>{{ this.data.organisationType}}</div>
-                  <div fxFlex="25%" class="a1"><b>annualIncome:</b>{{this.data.annualIncome}}</div>
+                  <div fxFlex="50%" class="a1"><b>Marital Status:</b> {{this.data.maritalStatus}}</div>
+                  <div fxFlex="50%" class="a1"><b>occupation:</b>{{this.data.occupation}}</div>
+                </div>
+                <div fxLayout="row" fxLayoutGap="2%" style="margin-top: 2%;">                
+                  <div fxFlex="50%" class="a1"><b>organisationType:</b>{{ this.data.organisationType}}</div>
+                  <div fxFlex="50%" class="a1"><b>annualIncome:</b>{{this.data.annualIncome}}</div>
                 </div>
               </div>
 
@@ -88,7 +94,7 @@
       <mat-card-actions fxLayout="row">
 
         <button mat-raised-button matStepperNext
-          style="margin-left: auto;background-color:rgb(105, 143, 224);">Claim</button>
+          style="margin-left: auto;background-color:rgb(105, 143, 224);" >Claim</button>
       </mat-card-actions>
 
     </mat-card>
@@ -190,7 +196,7 @@
       <mat-card-actions fxLayout="row">
         <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
         <button mat-flat-button matStepperNext style="margin-left: auto;background-color:rgb(105, 143, 224);" 
- (click)="onSubmit()" [disabled]="!claimForm.valid">submit</button>
+ (click)="onSubmit()" [disabled]="!claimForm.valid &&!flag">submit</button>
       </mat-card-actions>
 
 

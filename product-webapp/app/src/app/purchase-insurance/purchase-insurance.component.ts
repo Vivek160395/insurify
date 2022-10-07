@@ -334,7 +334,7 @@ export class PurchaseInsuranceComponent implements OnInit {
     const customerInsurancePurchase = new CustomerInsurancePurchase(
       this.userForm.get('customerPolicyId')!.value!.toString(),
       this.userForm.get('insurancePolicyId')!.value!.toString(),
-      this.email,
+      localStorage.getItem('logInEmailId')!,
       +this.userForm.get('sumInsured')!.value!,
       this.userForm.get('startDate')!.value!,
       this.userForm.get('endDate')!.value!,

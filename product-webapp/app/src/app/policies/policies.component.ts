@@ -36,19 +36,19 @@ export class PoliciesComponent {
   originally bred for hunting.`;
 
   ngOnInit(): void {
-    let response= this.http.get("http://localhost:8080/purchase/api/retrieveall/customerinsurances");
+    let response= this.http.get("http://localhost:8080/purchase/api/get/insurances/"+localStorage.getItem('logInEmailId'));
     response.subscribe((data)=>{
       
       console.log(data);
       this.purchasedPolicies = data;
       for (let i = 0; i < this.purchasedPolicies.length; i++) {
-        if (this.purchasedPolicies[i].healthInsurance == null && this.purchasedPolicies[i].lifeInsurance == null) {
+        if (this.purchasedPolicies[i].automobileInsurance.engineNumber != 0) {
           this.insuranceTitle.push('Automobile Insurance');
         }
-        else if (this.purchasedPolicies[i].healthInsurance == null && this.purchasedPolicies[i].automobileInsurance == null) {
-          this.insuranceTitle.push('Life Insurance');
+        else if (this.purchasedPolicies[i].healthInsurance.adults > 0 ) {
+          this.insuranceTitle.push('Health Insurance');
         }
-        else if (this.purchasedPolicies[i].automobileInsurance == null && this.purchasedPolicies[i].lifeInsurance == null) {
+        else if (this.purchasedPolicies[i].lifeInsurance.height > 0) {
           this.insuranceTitle.push('Health Insurance');
         }
         else {
@@ -77,62 +77,62 @@ export class PoliciesComponent {
   str: string = "";
 
   policies = [
-    {
-      name: 'Automobile Insurance',
-      policyNo: '013298',
-      purchaseDate: '28-01-2022',
-      endDate: '27-01-2023',
-      sumInsured: '$3000',
-      status: 'claimed'
-    },
-    {
-      name: 'Health Insurance',
-      policyNo: '0169182',
-      purchaseDate: '28-01-2022',
-      endDate: '27-01-2027',
-      sumInsured: '$5000',
-      status: "active"
-    },
-    {
-      name: 'Life Insurance',
-      policyNo: '2132951',
-      purchaseDate: '21-11-2022',
-      endDate: '20-11-2042',
-      sumInsured: '$10000',
-      status: "active"
-    },
-    {
-      name: 'Crop Insurance',
-      policyNo: '5132911',
-      purchaseDate: '28-01-2022',
-      endDate: '27-01-2023',
-      sumInsured: '$2000',
-      status: "active"
-    },
-    {
-      name: 'ABC Insurance',
-      policyNo: '011291',
-      purchaseDate: '28-01-2022',
-      endDate: '27-01-2023',
-      sumInsured: '$3000',
-      status: "active"
-    },
-    {
-      name: 'XYZ Insurance',
-      policyNo: '7132981',
-      purchaseDate: '28-01-2022',
-      endDate: '27-01-2023',
-      sumInsured: '$3000',
-      status: "active"
-    },
-    {
-      name: 'Motor Insurance',
-      policyNo: '013298',
-      purchaseDate: '28-01-2022',
-      endDate: '27-01-2023',
-      sumInsured: '$3000',
-      status: "active"
-    }
+    // {
+    //   name: 'Automobile Insurance',
+    //   policyNo: '013298',
+    //   purchaseDate: '28-01-2022',
+    //   endDate: '27-01-2023',
+    //   sumInsured: '$3000',
+    //   status: 'claimed'
+    // },
+    // {
+    //   name: 'Health Insurance',
+    //   policyNo: '0169182',
+    //   purchaseDate: '28-01-2022',
+    //   endDate: '27-01-2027',
+    //   sumInsured: '$5000',
+    //   status: "active"
+    // },
+    // {
+    //   name: 'Life Insurance',
+    //   policyNo: '2132951',
+    //   purchaseDate: '21-11-2022',
+    //   endDate: '20-11-2042',
+    //   sumInsured: '$10000',
+    //   status: "active"
+    // },
+    // {
+    //   name: 'Crop Insurance',
+    //   policyNo: '5132911',
+    //   purchaseDate: '28-01-2022',
+    //   endDate: '27-01-2023',
+    //   sumInsured: '$2000',
+    //   status: "active"
+    // },
+    // {
+    //   name: 'ABC Insurance',
+    //   policyNo: '011291',
+    //   purchaseDate: '28-01-2022',
+    //   endDate: '27-01-2023',
+    //   sumInsured: '$3000',
+    //   status: "active"
+    // },
+    // {
+    //   name: 'XYZ Insurance',
+    //   policyNo: '7132981',
+    //   purchaseDate: '28-01-2022',
+    //   endDate: '27-01-2023',
+    //   sumInsured: '$3000',
+    //   status: "active"
+    // },
+    // {
+    //   name: 'Motor Insurance',
+    //   policyNo: '013298',
+    //   purchaseDate: '28-01-2022',
+    //   endDate: '27-01-2023',
+    //   sumInsured: '$3000',
+    //   status: "active"
+    // }
   ]
 
   openDialog(policy: any, i: any) {
@@ -161,29 +161,41 @@ export class PoliciesComponent {
     // });
   }
 
-  renewPolicy(policy: any) {
-
-    this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+policy.insurancePolicyId).subscribe((data:any)=>{
+  renewPolicy(i: any) {
+    
+    this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+this.purchasedPolicies[i].insurancePolicyId).subscribe((data:any)=>{
     console.log("hello from renew button");
-      
+      console.log(data)
     // this.description.push(x.policyDescription);
       // this.policyTitle.push(x.policyName))
-      this.http.put<Insurance>("http://localhost:8080/purchase/api/getstatus/"+policy.customerPolicyId, data).subscribe((x:any)=>{
+      this.http.put<Insurance>("http://localhost:8080/purchase/api/getstatus/"+this.purchasedPolicies[i].customerPolicyId, data).subscribe((x:any)=>{
         this.str=x;
         console.log(x);
         
         if(this.str==null){
+          localStorage.setItem("customerPolicyId",this.purchasedPolicies[i].customerPolicyId);
+          localStorage.setItem("insurancePolicyId",this.purchasedPolicies[i].insurancePolicyId);
           this.router.navigateByUrl("/home/renewal-home");
         }
         else {
           console.log(this.str);
           
-          this.openSnackBar(x);
+          this.openSnackBar(x.toString());
         }
+      },
+      (error:any)=>{
+        console.log(error.error.text)
+        this.openSnackBar((error.error.text).toString());
       })
 
 
     })
+  }
+  claimPolicy(i:any){
+    console.log(i)
+          localStorage.setItem("customerPolicyId",this.purchasedPolicies[i].customerPolicyId);
+          localStorage.setItem("insurancePolicyId",this.purchasedPolicies[i].insurancePolicyId);
+          this.router.navigateByUrl("/home/claim");
   }
 
   openSnackBar(message: string) {

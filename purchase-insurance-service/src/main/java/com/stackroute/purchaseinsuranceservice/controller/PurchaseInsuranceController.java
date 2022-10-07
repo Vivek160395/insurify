@@ -74,7 +74,7 @@ public class PurchaseInsuranceController {
         } catch (NoInsuranceFoundException n) {
             n.printStackTrace();
         }
-        return new ResponseEntity<>(cus, HttpStatus.FOUND);
+        return new ResponseEntity<>(cus, HttpStatus.OK);
     }
 
     @GetMapping("/get/check/{email}/{insurancePolicyId}")

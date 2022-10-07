@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document("user")
+@Document
 public class PolicyAdvisor {
 
         @Id

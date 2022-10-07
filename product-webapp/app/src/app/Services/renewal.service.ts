@@ -8,15 +8,14 @@ export class RenewalService {
 
   constructor(private http: HttpClient) { }
 
-  customerPolicyId = "50640911";
-  email = "sreekanth@gmail.com"
+  
 
   userPolicyDetails(): Observable<any> {
-    return this.http.get("http://localhost:8080/purchase/api/get/" + this.customerPolicyId);
+    return this.http.get("http://localhost:8080/purchase/api/get/" + localStorage.getItem('customerPolicyId'));
   }
 
   getPolicyDetails(): Observable<any> {
-    return this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/189989");
+    return this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+localStorage.getItem('insurancePolicyId'));
   }
 
   updateData(data: any): Observable<any> {

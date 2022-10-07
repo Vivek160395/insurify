@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-
+ setid:string=''
 
   @ViewChild('endOfChat')
   endOfChat!: ElementRef;
@@ -51,6 +51,8 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.getnames();
+   setInterval(()=>{this.getMsgsByName(this.setid);console.log('123');
+   },2000)
   }
 
  connect(id:any){
@@ -82,18 +84,23 @@ export class ChatComponent implements OnInit {
 
   getnames() {
     this.service.getNames(this.loginId).subscribe((data) => {
-      for (let i: number = 0; i < data.length; i++) {
+      for (let i: number = 0; i < data.length; i++) { 
         if (this.role == "customer") {
           this.names.push(data[i].advisorName);
+          console.log(data[i].advisorName);
+          
         }
         else if(this.role=='policyadvisor') {
           this.names.push(data[i].userName);
+          console.log(data[i].userName);
+          
         }
       }
     });
   }
 
   getMsgsByName(id: string) {
+    this.setid=id
     this.showMsgs = false;
     this.otherId = id;
     if (this.role == 'customer') {

@@ -28,12 +28,14 @@
                         <!-- {{longText}} -->
                         {{description[i]}}
                     </mat-card-content>
-                    <button mat-raised-button color="primary" routerLink="/home/claim">Claim</button>
-                    <!-- [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1] || (policy.endDate[(policy.endDate.length-1)].year==currentDate.year && policy.endDate[(policy.endDate.length)-1].month - currentDate.month)>=1" -->
-                    <button mat-raised-button color="primary" style="margin-left:180px"  (click)="renewPolicy(policy)" >Renew</button>
+                    
                 </mat-card>
+                <button mat-raised-button color="primary" routerLink="/home/claim" (click)="claimPolicy(i)">Claim</button>
+            <!-- [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1] || (policy.endDate[(policy.endDate.length-1)].year==currentDate.year && policy.endDate[(policy.endDate.length)-1].month - currentDate.month)>=1" -->
+            <button mat-raised-button color="primary" style="margin-left:180px"  (click)="renewPolicy(i)" >Renew</button>
+            </div>
         </div> 
-    </div>
+   
 </mat-tab>
         <mat-tab label="Active">
             <div style="display: flex; flex-wrap: wrap; padding: 2px; padding-top: 20px;">
@@ -57,8 +59,8 @@
                         <!-- {{longText}} -->
                         {{description[i]}}
                     </mat-card-content>
-                            <button mat-raised-button color="primary" routerLink="/home/claim">Claim</button>
-                            <button mat-raised-button color="primary" style="margin-left:180px" (click)="renewPolicy(policy)">Renew</button>
+                            <button mat-raised-button color="primary" routerLink="/home/claim" (click)="claimPolicy(i)">Claim</button>
+                            <button mat-raised-button color="primary" style="margin-left:auto" (click)="renewPolicy(i)">Renew</button>
                         </mat-card>  
                     </div>                  
             </div> 

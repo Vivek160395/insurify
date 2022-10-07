@@ -93,7 +93,7 @@ export class ClaimComponent implements OnInit {
       info => {
         console.log(info);
         this.data.insuranceType = info.insuranceType;
-
+        console.log(this.data.insuranceType)
 
       });
     }
@@ -104,22 +104,22 @@ export class ClaimComponent implements OnInit {
     claimAmount: new FormControl("", ),
     claimDate: new FormControl("", [Validators.required]),
     claimSubmissionDate: new FormControl(new Date(), [Validators.required]),
-    customerPolicyId: new FormControl(localStorage.getItem('customerpolicyid1'), ),
-    insurancePolicyId: new FormControl(localStorage.getItem('policyid1'), ),
-    email: new FormControl(localStorage.getItem('emailid1'), ),
+    customerPolicyId: new FormControl(localStorage.getItem('customerPolicyId'), ),
+    insurancePolicyId: new FormControl(localStorage.getItem('insurancePolicyId'), ),
+    email: new FormControl(localStorage.getItem('logInEmailId'), ),
 
   })
 
   getDetails() {
     this.service.getUserDetails().subscribe(
-      info => {
+      (info:any) => {
         console.log(info);
         this.data.insurancePolicyId = info.insurancePolicyId;
         this.data.customerPolicyId = info.customerPolicyId;
         this.data.insuredName = info.name;
-        this.data.insuredEmail = info.email;
+        this.data.insuredEmail = localStorage.getItem('logInEmailId');
         this.data.startDate = info.startDate;
-        this.data.purchaseDate = info.purchaseDate;
+        this.data.purchaseDate = info.startDate[0];
         this.data.endDate = info.endDate;
         this.data.duration = info.duration;
         this.data.sumInsured = info.sumInsured;
@@ -131,6 +131,8 @@ export class ClaimComponent implements OnInit {
         localStorage.setItem('emailid1', info.email);
 
         if (this.data.insuranceType === 'AutoMobileInsurance') {
+          console.log("Entering Auto mobile function");
+          console.log( info.automobileInsurance.engineNumber);
           this.data.category = info.automobileInsurance.category;
           this.data.vehicleRegistrationNumber = info.automobileInsurance.
             vehicleRegistrationNumber;
@@ -138,25 +140,26 @@ export class ClaimComponent implements OnInit {
           this.data.chassisNumber = info.automobileInsurance.chassisNumber;
         }
         else if (this.data.insuranceType === 'HealthInsurance') {
-
+          console.log("Entering Health function");
           this.data.kids = info.healthInsurance.kids;
           this.data.adults = info.healthInsurance.adults;
           this.data.name = info.healthInsurance.insuredInfo[0].name;
           this.data.relation = info.healthInsurance.insuredInfo[0].relation;
         }
-        
-          
+        else if(this.data.insuranceType === 'LifeInsurance'){
+          console.log("Entering Life function");
           this.data.maritalStatus = info.lifeInsurance.maritalStatus;
           this.data.occupation = info.lifeInsurance.occupation;
           this.data.organisationType = info.lifeInsurance.organisationType;
           this.data.annualIncome = info.lifeInsurance.annualIncome;
           console.log(this.data.maritalStatus);
+          
           this.claimAmount = info.sumInsured.toString();
           this.claimForm.patchValue({
             claimAmount: this.claimAmount
 
           });
-
+        }
         
       });
 
@@ -173,9 +176,10 @@ export class ClaimComponent implements OnInit {
   
 
 
-
+flag=true
 
   onSubmit() {
+    this.flag=false
     const formData: FormData = new FormData();
 
     formData.append("imageFile", this.claimForm.controls['document'].value!);
@@ -186,25 +190,51 @@ export class ClaimComponent implements OnInit {
 
     this.service.putUser(this.claimForm.value).subscribe((
       info) => {
-
-
       this.claimForm.reset();
-
-
     },
       (err) => {
         this.claimError = err.error.text;
+        if(err.error.text!="Previous Claims are still pending.Please wait for the older claims to settle in order to raise new claim " && err.error.text!="No active Policy to claim" && err.error.text!="Insured amount has been Exhausted.Purchase a new Policy to avail Benefits")
+        {
         this.http.put("http://localhost:8080/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
           .subscribe((data: any) => { console.log(data) });
+      }
         console.log(err.error.text)
         console.log(this.claimForm.value);
       });
+    // this.http.put<CustomerClaim>('http://localhost:8080/purchase/claim',this.claimForm.value).subscribe((
+    //   info) => {
+    //      this.http.put("http://localhost:8080/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
+    //       .subscribe((data: any) => { console.log(data) });
+   
+    //   this.claimForm.reset();
+
+
+    // },
+    //   (err) => {
+    //     this.claimError = err.error.text;
+    //     // this.http.put("http://localhost:8080/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
+    //     //   .subscribe((data: any) => { console.log(data) });
+    //     console.log(err.error.text)
+    //     console.log(this.claimForm.value);
+    //   });
 
   }
   get insurancex() {
     return this.data.insuranceType;
   }
 
+}
+export class CustomerClaim{
+ constructor(public customerPolicyId :string,
+    public insurancePolicyId:string,
+    public email:any,
+    public   claimAmount:any,
+    public claimDate :any,
+    public claimSubmissionDate:any,
+    public description:any,
+    public claimType:any,
+    public file :any){}
 }
 
 
