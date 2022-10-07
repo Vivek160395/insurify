@@ -21,9 +21,9 @@
             <div>
               <div fxLayout="row" fxLayoutGap="2%">
                 <div fxFlex="25%" class="a1"><b>StartDate :</b> {{this.data.startDate}}</div>
-                <div fxFlex="25%" class="a1"><b>PurchaseDate : </b>{{this.data. purchaseDate}}</div>
                 <div fxFlex="25%" class="a1"><b>EndDate :</b>{{this.data.endDate}} </div>
                 <div fxFlex="25%" class="a1"><b>Duration :</b> {{this.data.duration}}</div>
+                <div fxFlex="25%" class="a1"><b>SumInsured:</b> {{this.data.sumInsured}}</div>
 
 
               </div>
@@ -33,10 +33,11 @@
             <div>
 
               <div fxLayout="row" fxLayoutGap="2%">
-                <div fxFlex="25%" class="a1"><b>SumInsured:</b> {{this.data.sumInsured}}</div>
+                
                 <div fxFlex="25%" class="a1"><b>Premium: </b>{{this.data. premium}}</div>
                 <div fxFlex="25%" class="a1"><b>Nominee Name: </b>{{this.data.nomineeName}}</div>
                 <div fxFlex="25%" class="a1"><b>Nominee DOB: </b>{{this.data.nomineeDOB}}</div>
+                <div fxFlex="25%" class="a1"><b></b></div>
               </div>
               <br>
               <div *ngIf="insurancex==='AutoMobileInsurance'">
