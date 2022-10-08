@@ -17,16 +17,14 @@ export class RecommendationComponent implements OnInit {
   isActive = true;
   images: any = [];
   trendNames: any = [];
-  healthNames: any = [];
   motorNames: any = [];
   lifeNames: any = [];
-  otherNames: any = [];
+  healthNames: any = [];
   isHealth = true;
   isDisplay = false;
   isMotor = true;
   isLife = true;
   isTrend = true;
-  isother = true;
   healthCount: number = 0;
   lifeCount: number = 0;
   otherCount: number = 0;
@@ -38,7 +36,7 @@ export class RecommendationComponent implements OnInit {
   page: number = 1;
   showMore: boolean = false;
   life() {
-    this.isother = true;
+    this.isHealth = true;
     this.isMotor = true;
     this.isTrend = true;
     this.isLife = !this.isLife;
@@ -56,7 +54,7 @@ export class RecommendationComponent implements OnInit {
     this.route.navigateByUrl("/home/policyDetails");
   }
   trend() {
-    this.isother = true;
+    this.isHealth = true;
     this.isMotor = true;
     this.isLife = true;
     this.isTrend = !this.isTrend;
@@ -69,22 +67,22 @@ export class RecommendationComponent implements OnInit {
       this.totalLength = this.allNames.length;
     }
   }
-  other() {
+  health() {
     this.isMotor = true;
     this.isTrend = true;
     this.isLife = true;
-    this.isother = !this.isother;
-    if (this.isother == true) {
+    this.isHealth = !this.isHealth;
+    if (this.isHealth == true) {
       this.isDisplay = false;
       this.allNames = this.images;
       this.totalLength = this.allNames.length;
     } else {
-      this.allNames = this.otherNames;
+      this.allNames = this.healthNames;
       this.totalLength = this.allNames.length;
     }
   }
   motor() {
-    this.isother = true;
+    this.isHealth = true;
     this.isTrend = true;
     this.isLife = true;
     this.isMotor = !this.isMotor;
@@ -116,7 +114,7 @@ export class RecommendationComponent implements OnInit {
   }
   getimageOfHealth(type: string) {
     this.service.getInsuranceOnBasisOfType(type).subscribe((data) => {
-      this.otherNames = data;
+      this.healthNames = data;
     })
   }
   getImagesOfLife(type: string) {
