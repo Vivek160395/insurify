@@ -63,19 +63,24 @@ export class NavBarComponent implements OnInit {
       console.log("inside advisor");
       this.displayRenewal = true
       this.isPolicyAdvisor = true;
+      this.others = false;
     }
-    if (localStorage.getItem('UserType') == "policyadvisor" || localStorage.getItem('UserType') === "customer") { this.displayRenewal = true }
+    if (localStorage.getItem('UserType') === "customer") {
+      this.displayRenewal = true;
+      this.others = false;
+    }
     else {
       this.isInsurer = true;
+      this.others = true;
     }
 
-    if (this.service1.userType == "insuranceprovider") {
-      this.others = true;
-      this.insurer = false
-    } else {
-      this.others = false;
-      this.insurer = true;
-    }
+    // if (this.service1.userType == "insuranceprovider") {
+    //   this.others = true;
+    //   this.insurer = false
+    // } else {
+    //   this.others = false;
+    //   this.insurer = true;
+    // }
     const loginId = localStorage.getItem('logInEmailId');
     if (loginId != null) {
       this.logoutButton = false;
@@ -84,6 +89,10 @@ export class NavBarComponent implements OnInit {
       this.logoutButton = false;
       this.loginButton = true;
     }
+  }
+  logout() {
+    this.router.navigateByUrl('/nav/login')
+    localStorage.clear;
   }
   showFiller = false;
   // getAllUsers():void{
