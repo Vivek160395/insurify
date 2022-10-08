@@ -24,8 +24,7 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: 'password'
-      MYSQL_USERNAME: authuser
-      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: insurifyd
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 
   mongodbservice:
