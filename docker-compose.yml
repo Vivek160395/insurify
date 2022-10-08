@@ -66,7 +66,7 @@ services:
     hostname: localhost
     network_mode: host
     ports:
-      - 8090:8090
+      - 8085:8085
     depends_on:
       - mongodbservice
     restart: always
@@ -176,6 +176,16 @@ services:
     hostname: localhost
     ports:
       - 8080:8080
+  product-webapp:
+    build:   product-webapp/
+    container_name:   product-webapp
+    depends_on:
+      - eureka-server
+    restart: always
+    network_mode: "host"
+    hostname: localhost
+    ports:
+      - 4200:4200
 
 
 
