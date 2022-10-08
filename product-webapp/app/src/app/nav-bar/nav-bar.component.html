@@ -19,6 +19,12 @@
             <div style="margin-right: 30px;" class="renew" *ngIf="isInsurer">
                 <a routerLink="/home/registeredPolicies"><button mat-button class="ren">View Registered policies</button></a>
             </div>
+            <!-- <div style="margin-right: 30px;" class="claim">
+              <button mat-button class="clai">LOGOUT</button>
+          </div> -->
+            <!-- <div style="margin-right: 30px;" class="claim">
+              <button mat-button class="clai" routerLink="/home/add-policy">Add Insurance</button>
+          </div> -->
         </div>
         <div style="display: flex;">
             <div style="margin-right: 20px;" [hidden]="loginButton">
@@ -27,7 +33,7 @@
         </button>
             </div>
             <div style="margin-right: 20px;" [hidden]="logoutButton">
-                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" (click)="logout()">
+                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/nav/login">
           LogOut
         </button>
             </div>
@@ -72,12 +78,12 @@
                     </a>
                 </div>
                 <div [hidden]="others">
-                    <a mat-list-item routerLink="/home/chat" style="font-size: 20px;">
+                    <a mat-list-item routerLink="/home/chat" style="font-size: 20px;" *ngIf="!isInsurer">
                         <span class="material-symbols-outlined" style="margin-right:13px">
               <mat-icon>support_agent</mat-icon>
             </span> Chat
                     </a>
-                    <a mat-list-item routerLink="/home/policy-advisor" style="font-size: 20px;">
+                    <a mat-list-item routerLink="/home/policy-advisor" style="font-size: 20px;" *ngIf="isCustomer">
                         <span class="material-symbols-outlined" style="margin:0 10px 0 5px">
               <mat-icon>groups</mat-icon>
             </span> Advisors

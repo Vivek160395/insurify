@@ -6,15 +6,12 @@ import { Router } from '@angular/router';
 import { RecommendationServiceService } from '../Services/recommendation-service.service';
 import { Userservice1Service } from '../Services/userservice1.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-
-
   // avatarUrl:any;
   // imgurl = "";
   // imgurlType = "";
@@ -27,13 +24,11 @@ export class NavBarComponent implements OnInit {
     'Health Booster',
     'Personal Protect',
   ];
-
   renewals: string[] = [
     'Car Policy',
     'Bike Policy',
     'Health Policy',
   ];
-
   claims: string[] = [
     'Health Claims',
     'Motor Claims'
@@ -41,14 +36,8 @@ export class NavBarComponent implements OnInit {
   centered = false;
   disabled = false;
   unbounded = false;
-
   radius!: number;
   color!: string;
-  // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.XLarge)
-  // .pipe(
-  //   map(result => result.matches),
-  //   shareReplay()
-  // );
   others: boolean = true;
   insurer: boolean = true;
   loginButton: boolean = true;
@@ -56,6 +45,7 @@ export class NavBarComponent implements OnInit {
   isPolicyAdvisor: boolean = false;
   displayRenewal: boolean = false;
   isInsurer: boolean = false
+  isCustomer: boolean = false
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private service: Userservice1Service, private service1: RecommendationServiceService) { }
   ngOnInit(): void {
     console.log(this.service1.userType);
@@ -63,24 +53,19 @@ export class NavBarComponent implements OnInit {
       console.log("inside advisor");
       this.displayRenewal = true
       this.isPolicyAdvisor = true;
-      this.others = false;
     }
-    if (localStorage.getItem('UserType') === "customer") {
-      this.displayRenewal = true;
-      this.others = false;
-    }
+    if (localStorage.getItem('UserType') == "policyadvisor" || localStorage.getItem('UserType') === "customer") { this.displayRenewal = true }
     else {
       this.isInsurer = true;
-      this.others = true;
     }
-
-    // if (this.service1.userType == "insuranceprovider") {
-    //   this.others = true;
-    //   this.insurer = false
-    // } else {
-    //   this.others = false;
-    //   this.insurer = true;
-    // }
+    if (localStorage.getItem('UserType') == "customer") { this.isCustomer = true }
+    if (this.service1.userType == "insuranceprovider") {
+      this.others = true;
+      this.insurer = false
+    } else {
+      this.others = false;
+      this.insurer = true;
+    }
     const loginId = localStorage.getItem('logInEmailId');
     if (loginId != null) {
       this.logoutButton = false;
@@ -90,14 +75,9 @@ export class NavBarComponent implements OnInit {
       this.loginButton = true;
     }
   }
-  logout() {
-    this.router.navigateByUrl('/nav/login')
-    localStorage.clear;
-  }
   showFiller = false;
   // getAllUsers():void{
   //   this.service.getUser().subscribe((data)=>{
-
   //       if(this.service.userEmail===null || this.service.userEmail==="")
   //       {
   //         console.log("hello");
@@ -115,7 +95,6 @@ export class NavBarComponent implements OnInit {
   //           this.value=true
   //         }
   //    }}
-
   //     for(var i=0; i<data.length;i++){
   //       if(this.service.userEmail=== data[i].emailId)
   //       {
@@ -124,7 +103,6 @@ export class NavBarComponent implements OnInit {
   //       }
   //     }
   //   })
-
   // }
   // image:any
   // image2:any
@@ -132,7 +110,4 @@ export class NavBarComponent implements OnInit {
   // value:boolean=true
   // value2:boolean=false
   // name1:any
-
-
-
 }
