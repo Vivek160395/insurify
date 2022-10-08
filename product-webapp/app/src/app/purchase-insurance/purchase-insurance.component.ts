@@ -10,8 +10,9 @@ import { InsuredInfo } from '../InsuredInfo';
 import { LifeInsurance } from '../LifeInsurance';
 import { PolicyDetails } from '../policy-details';
 import { formatDate } from '@angular/common';
-import { PaymentService } from '../payment.service';
 import { RecommendationServiceService } from '../Services/recommendation-service.service';
+import { Router } from '@angular/router';
+import { PaymentService } from '../Services/payment.service';
 export interface LifeTable {
   minSal: number;
   maxSal: number;
@@ -253,7 +254,7 @@ export class PurchaseInsuranceComponent implements OnInit {
       amount: this.premium.toString(),
       customerPolicyId: this.id.toString(),
       //  emailId:localStorage.getItem('email'),
-      emailId: this.userForm.get('email')!.value!,
+      emailId: localStorage.getItem('logInEmailId'),
       name: this.userForm.get('name')!.value!,
       //  paymentDate:this.userForm.get('startDate')!.value!,
       mobileNo: ("+91" + (this.userForm.get('mobile')!.value!).toString()),
@@ -334,7 +335,7 @@ export class PurchaseInsuranceComponent implements OnInit {
     const customerInsurancePurchase = new CustomerInsurancePurchase(
       this.userForm.get('customerPolicyId')!.value!.toString(),
       this.userForm.get('insurancePolicyId')!.value!.toString(),
-      this.email,
+      localStorage.getItem('logInEmailId')!,
       +this.userForm.get('sumInsured')!.value!,
       this.userForm.get('startDate')!.value!,
       this.userForm.get('endDate')!.value!,
@@ -421,11 +422,14 @@ export class PurchaseInsuranceComponent implements OnInit {
     console.log(customerInsurancePurchase)
     console.log('This is before posting');
     const emailid = localStorage.getItem("logInEmailId");
-    this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8080/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
+    this.httpclient.post<CustomerInsurancePurchase>('https://insurify.stackroute.io/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
+    // this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8080/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
       (data: any) => {
         console.log(data);
-        this.httpclient.post(`http://localhost:8080/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
+        this.httpclient.post(`https://insurify.stackroute.io/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
+        // this.httpclient.post(`http://localhost:8080/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
           console.log(data);
+          this.route.navigateByUrl('/home/policies')
         })
       }
     );
@@ -507,7 +511,8 @@ export class PurchaseInsuranceComponent implements OnInit {
     }
     console.log(control1);
     this.sortedsuminsured = []
-    this.httpclient.get(`http://localhost:8080/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
+    this.httpclient.get(`https://insurify.stackroute.io/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
+    // this.httpclient.get(`http://localhost:8080/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
       console.log('Policy ID : ' + data.policyId)
       console.log('Policy Name : ' + data.policyName)
 
@@ -618,7 +623,7 @@ export class PurchaseInsuranceComponent implements OnInit {
     }
 
   }
-  constructor(public httpclient: HttpClient, public snackBar: MatSnackBar, public order: PaymentService, public service: RecommendationServiceService) {
+  constructor(public httpclient: HttpClient, public snackBar: MatSnackBar, public order: PaymentService, public service: RecommendationServiceService,public route:Router) {
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
     const currentDay = new Date().getDate();

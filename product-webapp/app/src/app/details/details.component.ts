@@ -44,9 +44,9 @@ export class DetailsComponent implements OnInit {
   sampleFinlDate: any;
 
   constructor(private http: HttpClient, private datePipe: DatePipe) {
-    this.insuranceType = localStorage.getItem('insuranceType');
+    this.insuranceType = localStorage.getItem('insuranceType1');
     this.policyId = localStorage.getItem('customerPolicyId');
-    this.policyName = localStorage.getItem('policyName');
+    this.policyName = localStorage.getItem('policyName1');
     this.currentDate = this.datePipe.transform(this.sysDate, 'yyyy-MM-dd');
     this.sampleFinlDate = this.datePipe.transform('Wed Aug 22 2022 23:11:06 GMT+0530 (India Standard Time)', 'yyyy-MM-dd');
     console.log(this.sampleFinlDate);
@@ -63,8 +63,9 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let response= this.http.get("http://localhost:8080/purchase/api/retrieveall/customerinsurances");
-    response.subscribe((data)=>{
+    let response = this.http.get("https://insurify.stackroute.io/purchase/api/retrieveall/customerinsurances");
+    // let response = this.http.get("http://localhost:8080/purchase/api/retrieveall/customerinsurances");
+    response.subscribe((data) => {
       console.log(data);
       this.policies = data;
 

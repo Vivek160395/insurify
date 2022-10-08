@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Insurance } from '../insurance';
 import { RenewCompletionComponent } from '../renew-completion/renew-completion.component';
 import { RenewalService } from '../Services/renewal.service';
@@ -29,7 +30,7 @@ export class RenewalPolicyComponent implements OnInit {
   selectedItems: any[] = []
 
 
-  constructor(private renewalService: RenewalService, private http: HttpClient, private dialog: MatDialog) {
+  constructor(private renewalService: RenewalService, private http: HttpClient, private dialog: MatDialog,private router:Router) {
     this.myModel = 0;
   }
 
@@ -39,8 +40,13 @@ export class RenewalPolicyComponent implements OnInit {
 
   ngOnInit(): void {
     this.myModel = 0
-    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/11223344').subscribe((x: any) => {
-      this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/30153115", x).subscribe((data: any) => {
+    console.log(localStorage.getItem('insurancePolicyId'));
+    console.log(localStorage.getItem('customerPolicyId'))
+    this.http.get('https://insurify.stackroute.io/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
+    // this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
+      console.log(x)
+      this.http.put<Insurance>("https://insurify.stackroute.io/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
+      // this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
      
         this.policyDescription = data.policyDescription;
         this.policyTitle = data.policyName;
@@ -93,7 +99,7 @@ export class RenewalPolicyComponent implements OnInit {
     return this.totalPremium;
   }
   onSubmit() {
-    this.data.customerPolicyId = this.renewalService.customerPolicyId;
+    this.data.customerPolicyId = localStorage.getItem('customerPolicyId');
     this.data.date = this.date;
     this.data.premium = this.totalPremium;
     this.data.duration = this.duration[this.myModel];
@@ -106,6 +112,7 @@ export class RenewalPolicyComponent implements OnInit {
       res = this.data;
       console.log(res);
       this.dialog.open(RenewCompletionComponent);
+      this.router.navigateByUrl('/home/policies')
     })
   }
 }

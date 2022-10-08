@@ -13,12 +13,13 @@ public class Consumer {
     @Autowired
     private UserCredentialsServiceImpl userCredentialsService;
 
-    @RabbitListener(queues="queue1")
+    @RabbitListener(queues = "queue1")
     public void getUserDtoFromRabbitMq(UserDTO userDTO) throws UserAlreadyExistException {
-        UserCredentials userCredentials=new UserCredentials();
+        UserCredentials userCredentials = new UserCredentials();
         userCredentials.setEmailId(userDTO.getEmailId());
         userCredentials.setPassword(userDTO.getPassword());
         userCredentials.setUserType(userDTO.getUserType());
         userCredentialsService.saveUser(userCredentials);
+        System.out.println(userDTO);
     }
 }

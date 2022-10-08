@@ -208,6 +208,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
         customerInsurance.getEndDate().add(endDate);
         customerInsurance.getPremium().add(customerRenewal.getPremium());
         customerInsurance.getAddOnName().add(customerRenewal.getAddOnName());
+        // customerInsurance.getPurchaseDate().add(customerRenewal.getDate());
         customerInsurance.getDuration().add(customerRenewal.getDuration());
         customerInsurance.setRenewalStatus(true);
         purchaseRepository.save(customerInsurance);
@@ -333,7 +334,6 @@ public class PurchaseServiceImplementation implements PurchaseService {
         if (customer_insurance_list == null)
             return 0;
         // customer_insurance_list.stream().filter((a)->a.getInsurancePolicyId().equalsIgnoreCase(insuranceID));
-        System.out.println(insuranceID);
         for (int i = 0; i < customer_insurance_list.size(); i++) {
             if (customer_insurance_list.get(i).getInsurancePolicyId().equalsIgnoreCase(insuranceID)) {
                 count++;
@@ -671,9 +671,11 @@ public class PurchaseServiceImplementation implements PurchaseService {
         String ourDate = currentDay;
         System.out.println("Status of : " + (sDay.compareTo(ourDate) < 0 && eDay.compareTo(ourDate) > 0));
 
-        if (!(sDay.compareTo(ourDate) < 0) || !(eDay.compareTo(ourDate) >= 0)) {
+
+
+        if (!(sDay.compareTo(ourDate) <= 0) || !(eDay.compareTo(ourDate) >= 0)) {
             System.out.println("Cannot renew now because of policy  time interval is not valid");
-            return "No policy available to renew ";
+            return "Policy can be renewed only during its running period";
         }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c1 = Calendar.getInstance();
@@ -686,14 +688,11 @@ public class PurchaseServiceImplementation implements PurchaseService {
             System.out.println("Renew possible only before 60 days of policy expiry");
             return "Renew possible only before 60 days of policy expiry";
         }
-        PurchaseServiceImplementation purchaseServiceImplementation=new PurchaseServiceImplementation();
-        Insurance retrievedInsurance=returnInsuranceForRenewal(insurance,customerPolicyId);
-        if(retrievedInsurance==null)
-        {
-            for(int i=0;i<insurance.getPolicyDetails().length;i++)
-            {
-                if(insurance.getPolicyDetails()[i].getSumInsure()==customerInsurance.getSumInsured())
-                {
+        PurchaseServiceImplementation purchaseServiceImplementation = new PurchaseServiceImplementation();
+        Insurance retrievedInsurance = returnInsuranceForRenewal(insurance, customerPolicyId);
+        if (retrievedInsurance == null) {
+            for (int i = 0; i < insurance.getPolicyDetails().length; i++) {
+                if (insurance.getPolicyDetails()[i].getSumInsure() == customerInsurance.getSumInsured()) {
                     return "Age of all users in the policy covered should be less than 60 years ";
                 }
             }

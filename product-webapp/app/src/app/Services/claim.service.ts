@@ -17,16 +17,21 @@ export class ClaimService {
 
     }), responseType: 'text' as 'json'
   };
-  customerPolicyId1:string ="11120"
-  baseurl: any = "http://localhost:8080/purchase/api/";
+  customerPolicyId1:string =localStorage.getItem('customerPolicyId')!
+  // baseurl: any = "http://localhost:8080/purchase/api/";
+   
+    baseurl='https://insurify.stackroute.io/purchase/api/'
   getUserDetails(): Observable<any> {
-    return this.http.get(this.baseurl + "get/"+this.customerPolicyId1);
+    console.log(this.customerPolicyId1)
+    console.log(localStorage.getItem('customerPolicyId')!)
+    return this.http.get(this.baseurl + "get/"+localStorage.getItem('customerPolicyId'));
   }
   putUser = (user: any): Observable<any> => {
-    return this.http.put<any>(this.baseurl + "claim", user);
+    console.log(user)
+    return this.http.put(this.baseurl + "claim", user);
   }
   getPolicyDetails(): Observable<any> {
-    return this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/322950")
+    return this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+localStorage.getItem('insurancePolicyId'))
 
   }
 

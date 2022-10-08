@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PreviewMarkupComponent } from '../preview-markup/preview-markup.component';
 import { RecommendationServiceService } from '../Services/recommendation-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 export interface bike {
@@ -138,7 +139,7 @@ export class EditInsuranceComponent implements OnInit {
   }
 
 
-  constructor(public snackBar: MatSnackBar, public http: HttpClient, public dialog: MatDialog, private service: RecommendationServiceService) { }
+  constructor(public snackBar: MatSnackBar, public http: HttpClient, public dialog: MatDialog, private service: RecommendationServiceService, private route: Router) { }
 
   openDialog() {
     this.dialog.open(PreviewMarkupComponent, { data: this.valueVariable })
@@ -187,8 +188,8 @@ export class EditInsuranceComponent implements OnInit {
   insuranceobj: any
 
   ngOnInit(): void {
-
-    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/'+localStorage.getItem('editpolicyid')?.toString()).subscribe((data: any) => {
+    this.http.get('https://insurify.stackroute.io/insurance/api/vk1/policy-id/' + localStorage.getItem('editpolicyid')?.toString()).subscribe((data: any) => {
+    // this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/' + localStorage.getItem('editpolicyid')?.toString()).subscribe((data: any) => {
       this.insuranceobj = data
 
       console.log(this.insuranceobj)
@@ -365,12 +366,18 @@ export class EditInsuranceComponent implements OnInit {
     this.insuranceForms.get('insuranceType')!.enable()
     // }
     console.log(this.insuranceForms.get('insuranceType')!.value)
-    this.http.put<Insurance>("http://localhost:8080/insurance/api/vk1/update", this.insuranceForms.value).subscribe(
+    this.http.put<Insurance>("https://insurify.stackroute.io/insurance/api/vk1/update", this.insuranceForms.value).subscribe(
+    // this.http.put<Insurance>("http://localhost:8080/insurance/api/vk1/update", this.insuranceForms.value).subscribe(
       (data: any) => {
         console.log(data);
         if (this.insuranceForms.controls['fileSource'].valid)
-          this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
-            .subscribe((data: any) => { console.log(data) });
+        this.http.put("https://insurify.stackroute.io/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })  
+        // this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
+            .subscribe((data: any) => {
+              this.route.navigateByUrl("/home/home-page")
+              console.log(data)
+            }
+            );
       });
     console.log(this.insuranceForms.value)
     this.insuranceForms.get('policyId')!.disable()
@@ -612,11 +619,11 @@ export class EditInsuranceComponent implements OnInit {
       let validity4 = obj.get('modelsAllowed')?.valid && obj.get('category')?.valid
       return !(validity1 && validity2 && validity3 && validity4)
     }
-    console.log('Validity 1:'+validity1)
-    console.log('Validity 2:'+validity2)
-    console.log('Validity 3:'+validity3)
+    console.log('Validity 1:' + validity1)
+    console.log('Validity 2:' + validity2)
+    console.log('Validity 3:' + validity3)
     console.log(validity1 && validity2 && validity3);
-    
+
     return !(this.check_validity1() && this.check_validity2() && this.check_validity3())
   }
   check_validity1() {

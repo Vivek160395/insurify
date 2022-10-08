@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class CustomerInsurancePurchase {
     private String customerPolicyId;
     private String insurancePolicyId;
-//    private String policyType;
+    //    private String policyType;
     private String email;
 
     private long sumInsured;

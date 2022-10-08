@@ -74,7 +74,7 @@ public class PurchaseInsuranceController {
         } catch (NoInsuranceFoundException n) {
             n.printStackTrace();
         }
-        return new ResponseEntity<>(cus, HttpStatus.FOUND);
+        return new ResponseEntity<>(cus, HttpStatus.OK);
     }
 
     @GetMapping("/get/check/{email}/{insurancePolicyId}")
@@ -109,7 +109,7 @@ public class PurchaseInsuranceController {
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/refresh/{email}")
+    @GetMapping("/refresh/{email}")
     public ResponseEntity<?> updateInsuranceAttributesByDate(@PathVariable String email) throws ParseException {
         return new ResponseEntity<>(purchaseService.startUp(email), HttpStatus.ACCEPTED);
     }

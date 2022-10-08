@@ -1,4 +1,5 @@
 package com.stackroute.policyadvisorservice.model;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,14 +8,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
 public class PolicyAdvisor {
 
-        @Id
+    @Id
     private String emailId;
 
     private String password;
@@ -35,11 +35,11 @@ public class PolicyAdvisor {
 
     private int yearsOfExperience;
 
-    private List<String> category;
+    private String[] category;
 
     private byte[] profilePic;
 
-    private List<Rating> ratings;
+    private Rating[] ratings;
     private float averageRating;
 
 }

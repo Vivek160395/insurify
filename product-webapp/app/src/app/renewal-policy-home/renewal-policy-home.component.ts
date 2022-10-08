@@ -38,18 +38,18 @@ export class RenewalPolicyHomeComponent implements OnInit {
 
   getPolicyDetails() {
     this.renewalService.getPolicyDetails().subscribe(
-      res => {
+      (res:any) => {
         this.insuranceType = res.insuranceType;
         this.category = res.category;
         this.data.policyId = res.policyId;
         console.log(this.data.policyId);
-        console.log(this.category);
-        console.log(this.insuranceType);
+        // console.log(this.category);
+        // console.log(this.insuranceType);
       }
     )
     this.renewalService.userPolicyDetails().subscribe
       (
-        data1 => {
+        (data1:any) => {
           console.log(data1)
           if (this.insuranceType === "AutomobileInsurance" && this.category === "car") {
             this.data.customerPolicyId = data1.customerPolicyId;
@@ -68,7 +68,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
           else if (this.insuranceType === "AutomobileInsurance" && this.category === "bike") {
             this.data.customerPolicyId = data1.customerPolicyId;
             this.data.policyId = data1.insurancePolicyId;
-            this.data.insuredName = data1.nameOfNominee;
+            this.data.insuredName = data1.name;
             this.data.pinCode = data1.pincode;
             this.data.insuranceEndDate = data1.endDate;
             this.data.policyIssuenceDate = data1.startDate;
@@ -83,7 +83,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
             console.log(data1);
             this.data.customerPolicyId = data1.customerPolicyId;
             this.data.policyId = data1.insurancePolicyId;
-            this.data.insuredName = data1.nameOfNominee;
+            this.data.insuredName = data1.name;
             this.data.pinCode = data1.pincode;
             this.data.insuranceEndDate = data1.endDate;
             this.data.policyIssuenceDate = data1.startDate[0];
@@ -93,7 +93,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
           else if (this.insuranceType === "LifeInsurance") {
             this.data.customerPolicyId = data1.customerPolicyId;
             this.data.policyId = data1.insurancePolicyId;
-            this.data.insuredName = data1.nameOfNominee;
+            this.data.insuredName = data1.name;
             this.data.pinCode = data1.pincode;
             this.data.insuranceEndDate = data1.endDate;
             this.data.policyIssuenceDate = data1.startDate[0];
