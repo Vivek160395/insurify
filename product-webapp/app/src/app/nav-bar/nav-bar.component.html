@@ -64,17 +64,17 @@
           </span> Home
                 </a>
                 <div>
-                    <a mat-list-item routerLink="/home/policies" style=" font-size: 20px;" *ngIf="!isPolicyAdvisor">
+                    <a mat-list-item routerLink="/home/policies" style=" font-size: 20px;" *ngIf="!isInsurer">
                         <span class="material-symbols-outlined" style="margin-right:10px">
               <mat-icon>history</mat-icon>
             </span> Purchases
                     </a>
                 </div>
                 <div>
-                    <a mat-list-item routerLink="/home/registeredPolicies" style=" font-size: 20px;" *ngIf="isPolicyAdvisor">
+                    <a mat-list-item routerLink="/home/registeredPolicies" style=" font-size: 20px;" *ngIf="isInsurer">
                         <span class="material-symbols-outlined" style="margin-right:10px">
               <mat-icon>history</mat-icon>
-            </span> Purchases
+            </span> Registered Policies
                     </a>
                 </div>
                 <div [hidden]="others">

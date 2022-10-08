@@ -31,7 +31,8 @@ export class ClaimService {
     return this.http.put(this.baseurl + "claim", user);
   }
   getPolicyDetails(): Observable<any> {
-    return this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+localStorage.getItem('insurancePolicyId'))
+    return this.http.get("https://insurify.stackroute.io/insurance/api/vk1/policy-id/"+localStorage.getItem('insurancePolicyId'))
+    // return this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+localStorage.getItem('insurancePolicyId'))
 
   }
 
