@@ -356,11 +356,14 @@ export class AddInsurancePolicyComponent implements OnInit {
     formData.append("imageFile", this.insuranceForms.controls['fileSource'].value!);
     formData.append("policyId", this.id.toString())
     console.log(formData)
-    this.http.post<Insurance>("http://localhost:8080/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
+    
+    this.http.post<Insurance>("https://insurify.stackroute.io/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
+    // this.http.post<Insurance>("http://localhost:8080/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
       (data: any) => {
         console.log(data);
         if (this.filestatus) {
-          this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
+          this.http.put("https://insurify.stackroute.io/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
+          // this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
             .subscribe((data: any) => { console.log(data) });
           this.addInsuranceTo(formData);
         }
@@ -370,10 +373,12 @@ export class AddInsurancePolicyComponent implements OnInit {
   }
   addInsuranceTo(formData: FormData) {
     this.insuranceForms.get('policyId')?.enable();
-    this.http.post("http://localhost:8080/recommendation/Recommendation/Insurance", this.insuranceForms.value).subscribe(
+    this.http.post("https://insurify.stackroute.io/recommendation/Recommendation/Insurance", this.insuranceForms.value).subscribe(
+    // this.http.post("http://localhost:8080/recommendation/Recommendation/Insurance", this.insuranceForms.value).subscribe(
       (data) => {
         console.log(data);
-        this.http.put(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
+        this.http.put(`https://insurify.stackroute.io/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
+        // this.http.put(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
           console.log(data);
           this.route.navigateByUrl("/home/home-page");
         })
@@ -607,7 +612,7 @@ export class AddInsurancePolicyComponent implements OnInit {
   //Methods for chips component
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  sumInsuredValues: SumInsured[] = [{ insuredSum: 100000 }, { insuredSum: 5000000 }, { insuredSum: 1000000 }, { insuredSum: 5000000 }];
+  sumInsuredValues: SumInsured[] = [{ insuredSum: 100000 }, { insuredSum: 500000 }, { insuredSum: 1000000 }, { insuredSum: 5000000 }];
   duration: Duration[] = [{ years: 1 }, { years: 2 }, { years: 5 }, { years: 10 }];
   add(event: MatChipInputEvent): void {
     // const value = (event.value || '').trim();

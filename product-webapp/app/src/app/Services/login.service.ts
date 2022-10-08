@@ -13,16 +13,17 @@ export class LoginService {
   password: any;
   constructor(private httpClient: HttpClient) { }
 
-  baseUrl = "http://localhost:8080/authentication/api/v2";
+  // baseurl = "http://localhost:8080/authentication/api/v2";
+  baseurl='https://insurify.stackroute.io/authentication/api/v2'
   getUserCredentials(data: any): Observable<any> {
     console.log(data);
-    return this.httpClient.post(this.baseUrl + "/loginUser", data);
+    return this.httpClient.post(this.baseurl + "/loginUser", data);
   }
   loginUser(emailId: any): Observable<any> {
-    return this.httpClient.get(this.baseUrl + "/" + emailId);
+    return this.httpClient.get(this.baseurl + "/" + emailId);
   }
   addNewUser(data: any): Observable<any> {
-    return this.httpClient.post(this.baseUrl + "/user", data);
+    return this.httpClient.post(this.baseurl + "/user", data);
   }
   stauts: any = '';
 }
