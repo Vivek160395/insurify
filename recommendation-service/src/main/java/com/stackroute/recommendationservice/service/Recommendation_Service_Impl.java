@@ -7,6 +7,9 @@ import com.stackroute.recommendationservice.model.*;
 import com.stackroute.recommendationservice.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +47,7 @@ public class Recommendation_Service_Impl implements Recommendation_service {
             insurance_repository.save(insurance1);
             System.out.println(insurance1.getPolicyId());
             System.out.println(insuranceType.getInsuranceType());
-            createInsuranceTypeRelation(insurance1.getPolicyId(),insuranceType.getInsuranceType());
+            createInsuranceTypeRelation(insurance1.getPolicyId(), insuranceType.getInsuranceType());
             return insurance1;
         } else {
             throw new InsuranceAlreadyExists();
@@ -114,5 +117,19 @@ public class Recommendation_Service_Impl implements Recommendation_service {
             throw new NoInsurancesFound();
         } else
             return insurances;
+    }
+
+    @Override
+    public boolean addInsuranceImage(String policyId, MultipartFile file) throws NoInsurancesFound, IOException {
+        Insurance insurance = insurance_repository.findById(policyId).get();
+        System.out.println(insurance.getPolicyId());
+        insurance.setPicByte(file.getBytes());
+        insurance.setPicType(file.getContentType());
+        Insurance insurance2 = insurance_repository.save(insurance);
+        if (insurance2.getPolicyId().equals(insurance.getPolicyId())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

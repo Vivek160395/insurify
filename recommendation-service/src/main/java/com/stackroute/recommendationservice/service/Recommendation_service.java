@@ -6,7 +6,11 @@ import com.stackroute.recommendationservice.exception.UserAlreadyPosted;
 import com.stackroute.recommendationservice.model.Insurance;
 import com.stackroute.recommendationservice.model.InsuranceProfile;
 import com.stackroute.recommendationservice.model.User;
+
+import java.io.IOException;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public interface Recommendation_service {
     Insurance addInsurance(InsuranceProfile insurance) throws InsuranceAlreadyExists;
@@ -35,4 +39,6 @@ public interface Recommendation_service {
     List<Insurance> getAllInsurance() throws NoInsurancesFound;
 
     List<Insurance> getAllInsurancesWhichAreTrending() throws NoInsurancesFound;
+
+    boolean addInsuranceImage(String policyId, MultipartFile file) throws NoInsurancesFound, IOException;
 }

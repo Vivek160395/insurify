@@ -18,8 +18,8 @@ export class ChatComponent implements OnInit {
   endOfChat!: ElementRef;
 
   names: any = [];
-  role: string = "user";
-  loginId: any = 'john@gmail.com';
+  role: string = localStorage.getItem('UserType')!.toString();
+  loginId: any = localStorage.getItem('logInEmailId');
   otherId: any = null;
 
   showMsgs: boolean = true;
@@ -54,7 +54,7 @@ export class ChatComponent implements OnInit {
   }
 
  connect(id:any){
-    if(this.role=="user"){
+    if(this.role=="customer"){
       this.registerMsg.userName=this.loginId;
       this.registerMsg.advisorName=id;
       this.registerMsg.chatRoomName=this.loginId+"&"+id;
@@ -67,7 +67,7 @@ export class ChatComponent implements OnInit {
         }
       );
     }
-    else {
+    else if(this.role=='policyadvisor')  {
       this.registerMsg.userName = id;
       this.registerMsg.advisorName = this.loginId;
       this.registerMsg.chatRoomName = id + "&" + this.loginId;
@@ -83,23 +83,20 @@ export class ChatComponent implements OnInit {
   getnames() {
     this.service.getNames(this.loginId).subscribe((data) => {
       for (let i: number = 0; i < data.length; i++) {
-        if (this.role == "user") {
+        if (this.role == "customer") {
           this.names.push(data[i].advisorName);
         }
-        else {
+        else if(this.role=='policyadvisor') {
           this.names.push(data[i].userName);
         }
       }
     });
   }
 
-
-
   getMsgsByName(id: string) {
     this.showMsgs = false;
     this.otherId = id;
-    if (this.role == 'user') {
-
+    if (this.role == 'customer') {
       this.service.getMsgs(this.loginId + "&" + this.otherId).subscribe(data => {
        this.msg = data;
         if(data!=null){
@@ -112,14 +109,15 @@ export class ChatComponent implements OnInit {
       
       })
     }
-    else {
+    else if(this.role=='policyadvisor') {
       this.service.getMsgs(this.otherId + "&" + this.loginId).subscribe(data => {
         this.msg = data;
+        if(data!=null){
         for (let i: number = 0; i < data.length; i++) {
           if (data[i].id == this.loginId) {
             this.msg[i].show = true;
           }
-        }
+        }}
       });
     }
     this.scrollToBottom();
@@ -127,12 +125,12 @@ export class ChatComponent implements OnInit {
 
   sendMessage() {
     if (this.chatMsg.msg != null) {
-      if (this.role == "user") {
+      if (this.role == "customer") {
         this.service.updateMsgList(this.chatMsg, this.loginId + "&" + this.otherId).subscribe(data => {
           this.getMsgsByName(this.otherId);
         });
       }
-      else {
+      else if(this.role=='policyadvisor') {
         this.service.updateMsgList(this.chatMsg, this.otherId + "&" + this.loginId).subscribe(data => {
           this.getMsgsByName(this.otherId)
         });

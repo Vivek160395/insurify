@@ -23,7 +23,7 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
   myChart1: any = [];
   goto(id: any) {
     this.service.policyNo = id;
-    this.route.navigateByUrl("/policyDetails");
+    this.route.navigateByUrl("/home/policyDetails");
   }
   insurer: any = '';
   others: any = '';
@@ -43,12 +43,13 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
   pic: any;
   imageType: any;
   count2 = 0;
+  userType = localStorage.getItem('UserType');
   displayedColumns: string[] = ['PolicyName', 'Bought'];
   dataSource: any = [];
   countOfInsurances: any = [];
   ngOnInit(): void {
-    console.log(this.service.userType);
-    if (this.service.userType == "Insurer") {
+    console.log(this.userType);
+    if (this.userType == "insuranceprovider") {
       this.insurer = false;
       this.others = true;
     } else {

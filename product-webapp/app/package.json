@@ -26,6 +26,7 @@
     "angular-responsive-carousel": "^2.1.2",
     "chart.js": "^3.9.1",
     "dom-to-image": "^2.6.0",
+    "force": "^0.0.3",
     "html-to-pdfmake": "^2.4.6",
     "jspdf": "^2.5.1",
     "jw-angular-social-buttons": "^1.0.0",

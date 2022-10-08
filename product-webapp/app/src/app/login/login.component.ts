@@ -31,13 +31,13 @@ export class LoginComponent implements OnInit {
   value = this.logInForm.value;
   logIn(): void {
     console.log("Entering method");
-    
+
     this.loginservice.emailId = this.logInForm.value.emailId;
     this.loginservice.password = this.logInForm.value.password;
     if (this.logInForm.valid) {
       this.loginservice.getUserCredentials(this.logInForm.value).subscribe((response) => {
         console.log("Log in successfull", response);
-        localStorage.setItem("logInEmailId", this.loginservice.emailId );
+        localStorage.setItem("logInEmailId", this.loginservice.emailId);
 
       }, error => {
         console.log("Log in failed", error);
@@ -46,26 +46,28 @@ export class LoginComponent implements OnInit {
       }
       )
 
-      
+
     }
 
-   console.log("Just before checking for usertype");
-   
+    console.log("Just before checking for usertype");
+
     this.loginservice.loginUser(this.logInForm.value.emailId).subscribe((response) => {
       this.loginservice.stauts = true;
       console.log(response);
       localStorage.setItem('emailid1', response.emailId);
       if (response.userType == "As Insured") {
         console.log(response.userType);
-        localStorage.setItem("UserType","customer")
+        localStorage.setItem("UserType", "customer")
         this.router.navigate(["/home/home-page"]);
       }
-      else if(response.userType == "As Policy Advisor"){
-        localStorage.setItem("UserType","policyadvisor")
+      else if (response.userType == "As Policy Advisor") {
+        console.log(response.userType);
+        localStorage.setItem("UserType", "policyadvisor")
         this.router.navigate(["/home/home-page"]);
       }
       else {
-        localStorage.setItem("UserType","insuranceprovider")
+        console.log(response.userType);
+        localStorage.setItem("UserType", "insuranceprovider")
         this.router.navigate(["/home/insurance-provider"]);
       }
     }

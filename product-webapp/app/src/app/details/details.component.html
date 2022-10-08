@@ -1,121 +1,240 @@
-
 <div style="background-color: white;">
-<h1 style="font-size: 60px; font-weight:450; padding-top: 35px; padding-left: 20px;"> Policy Details </h1>
-<br>
-<br>
-<div style="background-color: rgb(249, 247, 247)">
-  <!-- style="background-color: rgb(227, 202, 245)" -->
-  <mat-tab-group >
-    <mat-tab label="Detailed Information">
-      
-      <div style="border: 2px solid rgb(76, 33, 168); padding: 15px; margin: 18px; font-size: 17px; font-weight: 400;">
-        
-      
-       <div *ngFor="let policy of policies">
-       <div *ngIf="policy.customerPolicyId==this.policyId">
-        <button mat-raised-button color="primary" style="margin-left:190px" routerLink="/claim">Claim</button>
-      <button mat-raised-button color="primary" style="margin-left:650px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1]" routerLink="/renewal-home">Renew</button>
-      <div id="pdfFile" #pdfFile style="padding-right: 5px;"> 
-      <h2 style="background-color: rgb(181, 181, 245); text-align: center; margin-top: 15px;">Customer Information</h2>
-  
-        <table>
-          <tr> <td>Email Id</td> <td>{{policy.email}}</td> </tr>
-          <tr> <td>Name</td> <td>{{policy.name}}</td> </tr>
-          <tr> <td>Mobile No.</td> <td>{{policy.mobile}}</td> </tr>
-          <tr> <td>Address</td> <td>{{policy.address}}</td> </tr>
-          <tr> <td>PinCode</td> <td>{{policy.pincode}}</td> </tr>
-          <tr> <td>City</td> <td>{{policy.city}}</td> </tr>
-          <tr> <td>State</td> <td>{{policy.state}}</td> </tr>
-          <tr> <td>Customer Policy Id</td> <td>{{policy.customerPolicyId}}</td> </tr>
-      </table>
-      <br>
-      <h2 style="background-color: rgb(181, 181, 245); text-align: center;">Policy Information</h2>
-      <table>
-        <tr> <td>Insurance Type</td> <td> {{insuranceType}}</td> </tr>
-        <tr> <td>Policy Name</td> <td> {{policyName}}</td> </tr>
-        <tr> 
-          <td>Other Details</td>
-          <table *ngIf="insuranceType=='Automobile Insurance'">
-            <tr><td>Vehicle Registration Number</td> <td> {{policy.automobileInsurance.vehicleRegistrationNumber}}</td></tr>
-            <tr><td>Category</td> <td>{{policy.automobileInsurance.category}}</td></tr>
-            <tr><td>Engine Number</td> <td>{{policy.automobileInsurance.engineNumber}}</td></tr>
-            <tr><td>Chassis Number</td> <td>{{policy.automobileInsurance.chassisNumber}}</td></tr>
-          </table>
-          <table *ngIf="insuranceType=='Life Insurance'">
-            <tr><td>Identity Proof</td> <td>{{policy.lifeInsurance.identityProof}}</td> </tr>
-            <tr><td>Marital Status</td> <td>{{policy.lifeInsurance.maritalStatus}}</td></tr>
-            <tr><td>Occupation</td> <td>{{policy.lifeInsurance.occupation}}</td></tr>
-            <tr><td>Organisation Type</td> <td>{{policy.lifeInsurance.organisationType}}</td></tr>
-            <tr><td>Pan No. </td> <td>{{policy.lifeInsurance.pan}}</td></tr>
-            <tr><td>Address Proof</td> <td>{{policy.lifeInsurance.addressProof}}</td></tr>
-            <tr><td>Weight(in kgs)</td> <td>{{policy.lifeInsurance.weight}}</td></tr>
-            <tr><td>Height(in cms)</td> <td>{{policy.lifeInsurance.height}}</td></tr>
+    <h1 style="font-size: 60px; font-weight:450; padding-top: 35px; padding-left: 20px;"> Policy Details </h1>
+    <br>
+    <br>
+    <div style="background-color: rgb(249, 247, 247)">
+        <!-- style="background-color: rgb(227, 202, 245)" -->
+        <mat-tab-group>
+            <mat-tab label="Detailed Information">
 
-          </table>
-          <table *ngIf="insuranceType=='Health Insurance'">              
-              <tr><td>kids</td> <td>{{policy.healthInsurance.kids}}</td></tr>
-              <tr><td>adults</td> <td>{{policy.healthInsurance.adults}}</td></tr>
-              <tr><td>InsuredInfo[]</td> 
-                <table *ngFor="let info of policy.healthInsurance.insuredInfo">
-                  <tr><td>Insured DOB</td> <td>{{info.insuredDOB}}</td></tr> 
-                  <tr><td>Relation</td> <td>{{info.relation}}</td> </tr>
-                  <tr><td>PreExisting Illness</td> <td>{{info.preExistingIllness}}</td></tr> 
-                </table> 
-              </tr>
-          </table>
-       </tr>
-        <tr> <td>Name Of Nominee</td> <td>{{policy.nameOfNominee}}</td> </tr>
-        <tr> <td>Nominee DOB</td> <td>{{policy.nomineeDOB}}</td> </tr>
-        <tr> <td>Relation</td> <td>{{policy.relation}}</td> </tr>
-        <tr> <td>Sum Insured</td> <td>₹{{policy.sumInsured}}</td> </tr>
-        <tr> <td>Start Date</td> <td>{{policy.startDate[(policy.startDate.length)-1]}}</td> </tr>
-        <tr> <td>End Date</td> <td>{{policy.endDate[(policy.endDate.length)-1]}}</td> </tr>
-        <tr> <td>Purchase Date</td> <td>{{policy.purchaseDate[(policy.purchaseDate.length)-1]}}</td> </tr>
-        <tr> <td>Duration(in years)</td> <td>{{policy.duration}}</td> </tr>
-        <tr> <td>AddOn Name</td> <td>{{policy.addOnName}}</td> </tr>
-        <tr> <td>Premium</td> <td>{{policy.premium}}</td> </tr>
-        <tr *ngIf="policy.status"> <td>Status</td> <td>Active</td> </tr>
-        <tr *ngIf="!policy.status"> <td>Status</td> <td>Expired</td> </tr>
-        
-      </table>
-      <br> <br>
-    </div>
-        <!-- <p>HealthInsurance </p>
+                <div style="border: 2px solid rgb(76, 33, 168); padding: 15px; margin: 18px; font-size: 17px; font-weight: 400;">
+
+
+                    <div *ngFor="let policy of policies">
+                        <div *ngIf="policy.customerPolicyId==this.policyId">
+                            <button mat-raised-button color="primary" style="margin-left:190px" routerLink="/home/claim">Claim</button>
+                            <button mat-raised-button color="primary" style="margin-left:650px" [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1]" routerLink="/home/renewal-home">Renew</button>
+                            <div id="pdfFile" #pdfFile style="padding-right: 5px;">
+                                <h2 style="background-color: rgb(181, 181, 245); text-align: center; margin-top: 15px;">Customer Information
+                                </h2>
+
+                                <table>
+                                    <tr>
+                                        <td>Email Id</td>
+                                        <td>{{policy.email}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>{{policy.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mobile No.</td>
+                                        <td>{{policy.mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td>{{policy.address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PinCode</td>
+                                        <td>{{policy.pincode}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>City</td>
+                                        <td>{{policy.city}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>State</td>
+                                        <td>{{policy.state}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Customer Policy Id</td>
+                                        <td>{{policy.customerPolicyId}}</td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <h2 style="background-color: rgb(181, 181, 245); text-align: center;">Policy Information</h2>
+                                <table>
+                                    <tr>
+                                        <td>Insurance Type</td>
+                                        <td> {{insuranceType}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Policy Name</td>
+                                        <td> {{policyName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Other Details</td>
+                                        <table *ngIf="insuranceType=='Automobile Insurance'">
+                                            <tr>
+                                                <td>Vehicle Registration Number</td>
+                                                <td> {{policy.automobileInsurance.vehicleRegistrationNumber}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Category</td>
+                                                <td>{{policy.automobileInsurance.category}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Engine Number</td>
+                                                <td>{{policy.automobileInsurance.engineNumber}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Chassis Number</td>
+                                                <td>{{policy.automobileInsurance.chassisNumber}}</td>
+                                            </tr>
+                                        </table>
+                                        <table *ngIf="insuranceType=='Life Insurance'">
+                                            <tr>
+                                                <td>Identity Proof</td>
+                                                <td>{{policy.lifeInsurance.identityProof}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Marital Status</td>
+                                                <td>{{policy.lifeInsurance.maritalStatus}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Occupation</td>
+                                                <td>{{policy.lifeInsurance.occupation}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Organisation Type</td>
+                                                <td>{{policy.lifeInsurance.organisationType}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pan No. </td>
+                                                <td>{{policy.lifeInsurance.pan}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Address Proof</td>
+                                                <td>{{policy.lifeInsurance.addressProof}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Weight(in kgs)</td>
+                                                <td>{{policy.lifeInsurance.weight}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Height(in cms)</td>
+                                                <td>{{policy.lifeInsurance.height}}</td>
+                                            </tr>
+
+                                        </table>
+                                        <table *ngIf="insuranceType=='Health Insurance'">
+                                            <tr>
+                                                <td>kids</td>
+                                                <td>{{policy.healthInsurance.kids}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>adults</td>
+                                                <td>{{policy.healthInsurance.adults}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>InsuredInfo[]</td>
+                                                <table *ngFor="let info of policy.healthInsurance.insuredInfo">
+                                                    <tr>
+                                                        <td>Insured DOB</td>
+                                                        <td>{{info.insuredDOB}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Relation</td>
+                                                        <td>{{info.relation}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>PreExisting Illness</td>
+                                                        <td>{{info.preExistingIllness}}</td>
+                                                    </tr>
+                                                </table>
+                                            </tr>
+                                        </table>
+                                    </tr>
+                                    <tr>
+                                        <td>Name Of Nominee</td>
+                                        <td>{{policy.nameOfNominee}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nominee DOB</td>
+                                        <td>{{policy.nomineeDOB}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Relation</td>
+                                        <td>{{policy.relation}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sum Insured</td>
+                                        <td>₹{{policy.sumInsured}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Start Date</td>
+                                        <td>{{policy.startDate[(policy.startDate.length)-1]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>End Date</td>
+                                        <td>{{policy.endDate[(policy.endDate.length)-1]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Purchase Date</td>
+                                        <td>{{policy.purchaseDate[(policy.purchaseDate.length)-1]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Duration(in years)</td>
+                                        <td>{{policy.duration}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>AddOn Name</td>
+                                        <td>{{policy.addOnName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Premium</td>
+                                        <td>{{policy.premium}}</td>
+                                    </tr>
+                                    <tr *ngIf="policy.status">
+                                        <td>Status</td>
+                                        <td>Active</td>
+                                    </tr>
+                                    <tr *ngIf="!policy.status">
+                                        <td>Status</td>
+                                        <td>Expired</td>
+                                    </tr>
+
+                                </table>
+                                <br> <br>
+                            </div>
+                            <!-- <p>HealthInsurance </p>
         <p>LifeInsurance </p>
         <p>AutomobileInsurance</p> -->
-        <!-- <p>boolean renewalStatus=false; </p>
+                            <!-- <p>boolean renewalStatus=false; </p>
         <p>List claimSum=new Arr </p>
         <p>List claimDate=new ist </p>
         <p>List claimStatus=neyList(); </p>
         <p>boolean status=true; </p>  -->
-        <br>
-        <button mat-raised-button color="primary" (click)="downloadAsPDF(policy.customerPolicyId);">Download as PDF <mat-icon>download</mat-icon> </button>
-      </div>
-      </div>
-    </div>
-    </mat-tab>
-    <mat-tab label="Renewal History">
-      <div style="border: 2px solid rgb(76, 33, 168); padding: 10px; margin: 18px;"> 
-      <h2>Renewal Details</h2> 
-  <div *ngFor="let policy of policies">
-    <div *ngIf="policyId==policy.customerPolicyId && policy.renewalStatus"> 
-    <table >
-      <tr>
-        <th>Policy No.</th>
-        <th>Renew Date</th>
-        <th>Start Date</th>
-        <th>End Date </th>
-      </tr>
-    <!-- <div > -->
-      <tr *ngFor="let x of policy.startDate; let i=index;">
-        <td>{{policy.customerPolicyId}}</td>
-        <td>{{policy.purchaseDate[i]}}</td>
-        <td>{{policy.startDate[i]}}</td>
-        <td>{{policy.endDate[i]}}</td>
-      </tr>
-    <!-- </div> -->
-    <!-- *ngIf="policy.claimDate.length>=x" -->
-      <!-- <tr *ngIf="policy.claimDate.length>=1">
+                            <br>
+                            <button mat-raised-button color="primary" (click)="downloadAsPDF(policy.customerPolicyId);">Download as
+                PDF <mat-icon>download</mat-icon> </button>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Renewal History">
+                <div style="border: 2px solid rgb(76, 33, 168); padding: 10px; margin: 18px;">
+                    <h2>Renewal Details</h2>
+                    <div *ngFor="let policy of policies">
+                        <div *ngIf="policyId==policy.customerPolicyId && policy.renewalStatus">
+                            <table>
+                                <tr>
+                                    <th>Policy No.</th>
+                                    <th>Renew Date</th>
+                                    <th>Start Date</th>
+                                    <th>End Date </th>
+                                </tr>
+                                <!-- <div > -->
+                                <tr *ngFor="let x of policy.startDate; let i=index;">
+                                    <td>{{policy.customerPolicyId}}</td>
+                                    <td>{{policy.purchaseDate[i]}}</td>
+                                    <td>{{policy.startDate[i]}}</td>
+                                    <td>{{policy.endDate[i]}}</td>
+                                </tr>
+                                <!-- </div> -->
+                                <!-- *ngIf="policy.claimDate.length>=x" -->
+                                <!-- <tr *ngIf="policy.claimDate.length>=1">
         <td>{{policy.customerPolicyId}}</td>
         <td>{{policy.purchaseDate[0]}}</td>
         <td>{{policy.startDate[0]}}</td>
@@ -139,48 +258,49 @@
         <td>{{policy.startDate[3]}}</td>
         <td>{{policy.endDate[3]}}</td>
       </tr> -->
-     
-      
-    </table>
-    <br>
-  <!-- <button mat-raised-button color="primary" (click)="downloadMyFile()">Download as PDF <mat-icon>download</mat-icon> </button> -->
-</div> 
-</div>   
-</div>
-</mat-tab>
-    <mat-tab label="Claim History"> 
-      <div style="border: 2px solid rgb(76, 33, 168); padding: 10px; margin: 18px;"> 
-        <h2 mat-dialog-title>Clam Details</h2> 
-        <div *ngFor="let policy of policies">
-          <div *ngIf="policyId==policy.customerPolicyId && policy.claimStatus.length!=0"> 
-           <table>
-            <tr>
-              <th>Policy No.</th>
-              <th>Claim Date</th>
-              <th>Amount</th>
-              <th>Document</th>
-              <th>Status</th>
-            </tr>
-            <!-- *ngFor="let i of claims" -->
-            
 
-            <tr  *ngFor="let x of policy.claimDate; let i=index;">
-              <td>{{policy.customerPolicyId}}</td>
-              <td>{{policy.claimDate[i]}}</td>
-              <td>₹{{policy.claimSum[i]}}</td>
-              <td> 
-                <button mat-button color="primary" (click)="onClickDownloadFile(policy.claimDocument[i], policy.customerPolicyId )"> Download </button> or
-                <button mat-button color="primary" (click)="openFile(policy.claimDocument[i])"> Open </button>
-              </td>
-              <td>{{policy.claimStatus[i]}}</td>
-            </tr>
 
-            
-            <!-- <tr  *ngIf="policy.claimDate.length>=1">
+                            </table>
+                            <br>
+                            <!-- <button mat-raised-button color="primary" (click)="downloadMyFile()">Download as PDF <mat-icon>download</mat-icon> </button> -->
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Claim History">
+                <div style="border: 2px solid rgb(76, 33, 168); padding: 10px; margin: 18px;">
+                    <h2 mat-dialog-title>Clam Details</h2>
+                    <div *ngFor="let policy of policies">
+                        <div *ngIf="policyId==policy.customerPolicyId && policy.claimStatus.length!=0">
+                            <table>
+                                <tr>
+                                    <th>Policy No.</th>
+                                    <th>Claim Date</th>
+                                    <th>Amount</th>
+                                    <th>Document</th>
+                                    <th>Status</th>
+                                </tr>
+                                <!-- *ngFor="let i of claims" -->
+
+
+                                <tr *ngFor="let x of policy.claimDate; let i=index;">
+                                    <td>{{policy.customerPolicyId}}</td>
+                                    <td>{{policy.claimDate[i]}}</td>
+                                    <td>₹{{policy.claimSum[i]}}</td>
+                                    <td>
+                                        <button mat-button color="primary" (click)="onClickDownloadFile(policy.claimDocument[i], policy.customerPolicyId )"> Download
+                    </button> or
+                                        <button mat-button color="primary" (click)="openFile(policy.claimDocument[i])"> Open </button>
+                                    </td>
+                                    <td>{{policy.claimStatus[i]}}</td>
+                                </tr>
+
+
+                                <!-- <tr  *ngIf="policy.claimDate.length>=1">
               <td>{{policy.customerPolicyId}}</td>
               <td>{{policy.claimDate[0]}}</td>
               <td>₹{{policy.claimSum[0]}}</td>
-              <td> 
+              <td>
                 <button mat-button color="primary" (click)="onClickDownloadFile(policy.claimDocument[0])"> Download </button> or
                 <button mat-button color="primary" (click)="openFile(policy.claimDocument[0])"> Open </button>
               </td>
@@ -208,13 +328,13 @@
               <td> {{policy.claimDocument[3]}}</td>
               <td>{{policy.claimStatus[3]}}</td>
             </tr> -->
-          </table>
-          <br>
-          <!-- <button mat-raised-button color="primary" (click)="downloadAsPDF(policy.customerPolicyId)">Download as PDF <mat-icon>download</mat-icon> </button> -->
-        </div>
-       </div>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+                            </table>
+                            <br>
+                            <!-- <button mat-raised-button color="primary" (click)="downloadAsPDF(policy.customerPolicyId)">Download as PDF <mat-icon>download</mat-icon> </button> -->
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
 </div>

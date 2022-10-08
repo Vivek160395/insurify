@@ -47,20 +47,20 @@ export class InsuranceDetailsComponent implements OnInit {
 
     // localStorage.setItem('insurance_id', this.service.policyNo);
     // console.log(localStorage.getItem('insurance_id'));
-    this.route.navigateByUrl("/buy")
+    this.route.navigateByUrl("/home/buy")
   }
   constructor(private service: RecommendationServiceService, public dialog: MatDialog, private route: Router) { }
   ngOnInit(): void {
     this.getPolicy();
-    if (this.service.userType == "Insurer") {
+    if (this.userType == "insuranceprovider") {
       this.edit = false;
       this.buy = true;
-    } else if (this.service.userType == "Insured") {
+    } else if (this.userType == "customer") {
       this.edit = true;
       this.buy = false;
     }
   }
-
+  userType = localStorage.getItem('UserType');
   view: boolean = true;
   wide: number = 0;
   carModel: number = 0;
@@ -69,7 +69,8 @@ export class InsuranceDetailsComponent implements OnInit {
   firstDiv: String = "";
   cars: string[] = [];
   editPolicy() {
-    this.route.navigateByUrl("/edit-insurance")
+    localStorage.setItem('editpolicyid', this.service.policyNo)
+    this.route.navigateByUrl("/home/edit-insurance")
   }
   openDialog() {
     this.dialog.open(CalculatorComponent);

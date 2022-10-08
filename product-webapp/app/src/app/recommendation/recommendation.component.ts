@@ -53,7 +53,7 @@ export class RecommendationComponent implements OnInit {
   }
   goTo(id: any) {
     this.service.policyNo = id;
-    this.route.navigateByUrl("/policyDetails");
+    this.route.navigateByUrl("/home/policyDetails");
   }
   trend() {
     this.isother = true;
