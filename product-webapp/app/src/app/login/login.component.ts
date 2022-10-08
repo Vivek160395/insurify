@@ -39,6 +39,33 @@ export class LoginComponent implements OnInit {
       this.loginservice.getUserCredentials(this.logInForm.value).subscribe((response) => {
         console.log("Log in successfull", response);
         localStorage.setItem("logInEmailId", this.loginservice.emailId);
+        this.loginservice.loginUser(this.logInForm.value.emailId).subscribe((response) => {
+          this.loginservice.stauts = true;
+          console.log(response);
+          localStorage.setItem('logInEmailId', response.emailId);
+          if (response.userType == "As Insured") {
+            console.log(response.userType);
+            localStorage.setItem("UserType", "customer")
+            this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
+            // this.http.get('http://localhost:8080/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
+            })
+            this.router.navigate(["/home/home-page"]);
+          }
+          else if (response.userType == "As Policy Advisor") {
+            console.log(response.userType);
+            localStorage.setItem("UserType", "policyadvisor")
+            this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
+            // this.http.get('http://localhost:8080/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
+            })
+            this.router.navigate(["/home/home-page"]);
+          }
+          else {
+            console.log(response.userType);
+            localStorage.setItem("UserType", "insuranceprovider")
+            this.router.navigate(["/home/insurance-provider"]);
+          }
+        }
+        );
       }, error => {
         console.log("Log in failed", error);
         this.msg = "Please enter valid credentials";
@@ -50,33 +77,7 @@ export class LoginComponent implements OnInit {
 
     console.log("Just before checking for usertype");
 
-    this.loginservice.loginUser(this.logInForm.value.emailId).subscribe((response) => {
-      this.loginservice.stauts = true;
-      console.log(response);
-      localStorage.setItem('logInEmailId', response.emailId);
-      if (response.userType == "As Insured") {
-        console.log(response.userType);
-        localStorage.setItem("UserType", "customer")
-        this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
-        // this.http.get('http://localhost:8080/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
-        })
-        this.router.navigate(["/home/home-page"]);
-      }
-      else if (response.userType == "As Policy Advisor") {
-        console.log(response.userType);
-        localStorage.setItem("UserType", "policyadvisor")
-        this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
-        // this.http.get('http://localhost:8080/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
-        })
-        this.router.navigate(["/home/home-page"]);
-      }
-      else {
-        console.log(response.userType);
-        localStorage.setItem("UserType", "insuranceprovider")
-        this.router.navigate(["/home/insurance-provider"]);
-      }
-    }
-    );
+    
   }
 
 
