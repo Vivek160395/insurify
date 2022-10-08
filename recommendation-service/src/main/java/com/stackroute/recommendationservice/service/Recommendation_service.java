@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 public interface Recommendation_service {
     Insurance addInsurance(InsuranceProfile insurance) throws InsuranceAlreadyExists;
 
+    Insurance editInsurance(InsuranceProfile insuranceProfile);
+
     // void addAge(int age);
     void addInsuranceType(String insuranceType);
 

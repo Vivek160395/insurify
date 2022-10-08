@@ -21,7 +21,6 @@
     <div class=" col-10">
         <div style="margin: 40px 0px 0 0px;">
             <div style="display: flex;justify-content: space-between; ">
-                <!-- <div style="margin-left: 100px;"> -->
                 <mat-chip-list class="example-chip">
                     <div style="margin-right:15px ;">
                         <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" life() "> Life Insurances</mat-chip>
@@ -30,16 +29,14 @@
                         <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" motor() "> Motor Insurances</mat-chip>
                     </div>
                     <div style="margin-right:15px ;">
-                        <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" other() "> Other Insurances</mat-chip>
+                        <mat-chip class="example-box" style="margin-right:20px;background-color: skyblue;color:black;" (click)=" other() "> Health Insurances</mat-chip>
                     </div>
                     <div style="margin-right:15px ;">
                         <mat-chip class="example-box" (click)=" trend() ">Trending
                             <mat-icon>trending_up</mat-icon>
                         </mat-chip>
                     </div>
-
                 </mat-chip-list>
-                <!-- </div> -->
                 <div style="font-size:large;">
                     <b style="font-family:'Times New Roman', Times, serif ;">
             <pagination-controls (pageChange)="page=$event"></pagination-controls>
@@ -58,7 +55,7 @@
                             <b> {{item.policyName}}</b>
                         </mat-card-title>
                     </mat-card-header>
-                    <img mat-card-image class="rounded-9" src="data:{{item.picType}};base64,{{item.picByte}}" alt=" Photo of a Shiba Inu " style=" width: 375.5px; height:200px; ">
+                    <img mat-card-image class="rounded-9" src="data:{{item.picType}};base64,{{item.picByte}}" alt=" Photo of a Shiba Inu " style=" width: 370px; height:200px; ">
                     <mat-card-content>
                         <p style=" color: black; ">
                             <app-more [text]="item.description " [limit]="150 "></app-more>

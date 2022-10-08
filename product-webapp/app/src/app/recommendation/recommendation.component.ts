@@ -100,9 +100,9 @@ export class RecommendationComponent implements OnInit {
   constructor(private http: HttpClient, private service: RecommendationServiceService, private route: Router) { }
   ngOnInit(): void {
     this.getNames();
-    // this.getimageOfFarmer("Farmer Insurance");
-    // this.getImagesOfLife("Life Insurance");
-    // this.getimagesOfMotor("Motor Insurance");
+    this.getimageOfHealth("HealthInsurance");
+    this.getImagesOfLife("LifeInsurance");
+    this.getimagesOfMotor("AutoMobileInsurance");
     this.getrendingInsurances();
   }
 
@@ -114,7 +114,7 @@ export class RecommendationComponent implements OnInit {
       console.log(this.images[0].imageType);
     })
   }
-  getimageOfFarmer(type: string) {
+  getimageOfHealth(type: string) {
     this.service.getInsuranceOnBasisOfType(type).subscribe((data) => {
       this.otherNames = data;
     })
