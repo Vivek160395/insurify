@@ -163,35 +163,38 @@ export class PoliciesComponent {
   }
 
   renewPolicy(i: any) {
-  this.http.get("https://insurify.stackroute.io/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
-    // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
-      console.log("hello from renew button");
-      console.log(data)
-      // this.description.push(x.policyDescription);
-      // this.policyTitle.push(x.policyName))
-      this.http.put<Insurance>("https://insurify.stackroute.io/purchase/api/getstatus/" + this.purchasedPolicies[i].customerPolicyId, data).subscribe((x: any) => {
-      // this.http.put<Insurance>("http://localhost:8080/purchase/api/getstatus/" + this.purchasedPolicies[i].customerPolicyId, data).subscribe((x: any) => {
-        this.str = x;
-        console.log(x);
-
-        if (this.str == null) {
-          localStorage.setItem("customerPolicyId", this.purchasedPolicies[i].customerPolicyId);
+    localStorage.setItem("customerPolicyId", this.purchasedPolicies[i].customerPolicyId);
           localStorage.setItem("insurancePolicyId", this.purchasedPolicies[i].insurancePolicyId);
           this.router.navigateByUrl("/home/renewal-home");
-        }
-        else {
-          console.log(this.str);
+  // this.http.get("https://insurify.stackroute.io/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
+  //   // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
+  //     console.log("hello from renew button");
+  //     console.log(data)
+  //     // this.description.push(x.policyDescription);
+  //     // this.policyTitle.push(x.policyName))
+  //     this.http.put<Insurance>("https://insurify.stackroute.io/purchase/api/getstatus/" + this.purchasedPolicies[i].customerPolicyId, data).subscribe((x: any) => {
+  //     // this.http.put<Insurance>("http://localhost:8080/purchase/api/getstatus/" + this.purchasedPolicies[i].customerPolicyId, data).subscribe((x: any) => {
+  //       this.str = x;
+  //       console.log(x);
 
-          this.openSnackBar(x.toString());
-        }
-      },
-        (error: any) => {
-          console.log(error.error.text)
-          this.openSnackBar((error.error.text).toString());
-        })
+  //       if (this.str == null) {
+  //         localStorage.setItem("customerPolicyId", this.purchasedPolicies[i].customerPolicyId);
+  //         localStorage.setItem("insurancePolicyId", this.purchasedPolicies[i].insurancePolicyId);
+  //         this.router.navigateByUrl("/home/renewal-home");
+  //       }
+  //       else {
+  //         console.log(this.str);
+
+  //         this.openSnackBar(x.toString());
+  //       }
+    //   },
+    //     (error: any) => {
+    //       console.log(error.error.text)
+    //       this.openSnackBar((error.error.text).toString());
+    //     })
 
 
-    })
+    // })
   }
   claimPolicy(i: any) {
     console.log(i)

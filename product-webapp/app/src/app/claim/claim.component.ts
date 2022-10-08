@@ -156,8 +156,8 @@ export class ClaimComponent implements OnInit {
           
           this.claimAmount = info.sumInsured.toString();
           this.claimForm.patchValue({
-            claimAmount: this.claimAmount
-
+            claimAmount: this.claimAmount,
+            claimType:"Death Claim"
           });
         }
         

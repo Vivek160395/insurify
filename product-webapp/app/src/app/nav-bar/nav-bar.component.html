@@ -20,11 +20,11 @@
                 <a routerLink="/home/registeredPolicies"><button mat-button class="ren">View Registered policies</button></a>
             </div>
             <!-- <div style="margin-right: 30px;" class="claim">
-                <button mat-button class="clai">LOGOUT</button>
-            </div> -->
+              <button mat-button class="clai">LOGOUT</button>
+          </div> -->
             <!-- <div style="margin-right: 30px;" class="claim">
-                <button mat-button class="clai" routerLink="/home/add-policy">Add Insurance</button>
-            </div> -->
+              <button mat-button class="clai" routerLink="/home/add-policy">Add Insurance</button>
+          </div> -->
         </div>
         <div style="display: flex;">
             <div style="margin-right: 20px;" [hidden]="loginButton">
@@ -42,11 +42,11 @@
           <mat-icon class="icon-display">account_circle</mat-icon>
         </button>
                 <mat-menu #menu4="matMenu">
-                    <button mat-menu-item *ngIf="!isPolicyAdvisor" router="home/update">
+                    <button mat-menu-item *ngIf="!isPolicyAdvisor" routerLink="home/update">
             <mat-icon>edit</mat-icon>
             <span>Edit Profile</span>
           </button>
-                    <button mat-menu-item *ngIf="isPolicyAdvisor" router="/home/policy-advisor-update">
+                    <button mat-menu-item *ngIf="isPolicyAdvisor" routerLink="/home/policy-advisor-update">
             <mat-icon>edit</mat-icon>
             <span>Edit Profile</span>
           </button>
@@ -78,12 +78,12 @@
                     </a>
                 </div>
                 <div [hidden]="others">
-                    <a mat-list-item routerLink="/home/chat" style="font-size: 20px;">
+                    <a mat-list-item routerLink="/home/chat" style="font-size: 20px;" *ngIf="!isInsurer">
                         <span class="material-symbols-outlined" style="margin-right:13px">
               <mat-icon>support_agent</mat-icon>
             </span> Chat
                     </a>
-                    <a mat-list-item routerLink="/home/policy-advisor" style="font-size: 20px;">
+                    <a mat-list-item routerLink="/home/policy-advisor" style="font-size: 20px;" *ngIf="isCustomer">
                         <span class="material-symbols-outlined" style="margin:0 10px 0 5px">
               <mat-icon>groups</mat-icon>
             </span> Advisors

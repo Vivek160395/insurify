@@ -18,7 +18,7 @@ export class UpdateComponent implements OnInit {
   view: boolean = false;
   imgView: boolean = false;
   imgView2: boolean = false;
-  loginId = localStorage.getItem('emailid1');
+  loginId = localStorage.getItem('logInEmailId');
   type = localStorage.getItem('UserType');
   UserType: any = ""
 

@@ -370,14 +370,15 @@ export class EditInsuranceComponent implements OnInit {
     // this.http.put<Insurance>("http://localhost:8080/insurance/api/vk1/update", this.insuranceForms.value).subscribe(
       (data: any) => {
         console.log(data);
-        if (this.insuranceForms.controls['fileSource'].value!=null)
-        this.http.put("https://insurify.stackroute.io/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })  
+        this.route.navigateByUrl("/home/home-page")
+        // if (this.insuranceForms.controls['fileSource'].value!=null)
+        // this.http.put("https://insurify.stackroute.io/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })  
         // this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
-            .subscribe((data: any) => {
-              this.route.navigateByUrl("/home/home-page")
-              console.log(data)
-            }
-            );
+            // .subscribe((data: any) => {
+            //   this.route.navigateByUrl("/home/home-page")
+            //   console.log(data)
+            // }
+            // );
       });
     console.log(this.insuranceForms.value)
     this.insuranceForms.get('policyId')!.disable()
