@@ -39,15 +39,8 @@ export class LoginComponent implements OnInit {
       this.loginservice.getUserCredentials(this.logInForm.value).subscribe((response) => {
         console.log("Log in successfull", response);
         localStorage.setItem("logInEmailId", this.loginservice.emailId);
-      }, error => {
-        console.log("Log in failed", error);
-        this.msg = "Please enter valid credentials";
-        this.logInForm.reset();
-        return;
-      }
-      )
-    }
 
+        
     console.log("Just before checking for usertype");
 
     this.loginservice.loginUser(this.logInForm.value.emailId).subscribe((response) => {
@@ -77,8 +70,17 @@ export class LoginComponent implements OnInit {
       }
     }
     );
-  }
 
+      }, error => {
+        console.log("Log in failed", error);
+        this.msg = "Please enter valid credentials";
+        this.logInForm.reset();
+        return;
+      }
+      )
+    }
+
+  }
 
 
 

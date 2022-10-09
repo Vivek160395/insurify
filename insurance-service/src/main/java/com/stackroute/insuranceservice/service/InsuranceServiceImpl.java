@@ -91,7 +91,7 @@ public class InsuranceServiceImpl implements InsuranceService {
             insurancePolicyObj.setCategory(null);
             insurancePolicyObj.setModelsAllowed(null);
         }
-        insuranceRepo.save(insurance);
-        return insuranceRepo.save(insurance);
+        // insuranceRepo.save(insurance);
+        return insuranceRepo.save(insurancePolicyObj);
     }
 }

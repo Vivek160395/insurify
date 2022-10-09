@@ -41,7 +41,7 @@ export class ClaimComponent implements OnInit {
   ngOnInit(): void {
     this.getDetails()
     this.getpolicy()
-
+    setTimeout(()=>{this.getDetails();this.getpolicy()},1000)
   }
   
 
