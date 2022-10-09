@@ -11,9 +11,9 @@ export class RecommendationServiceService {
   constructor(private http: HttpClient) { }
   // basicUrl = "http://localhost:8080/recommendation/Recommendation";
   // policyUrl = "http://localhost:8080/insurance/api/vk1/";
-  basicUrl='http://localhost:8080/recommendation/Recommendation'
-  policyUrl='http://localhost:8080/insurance/api/vk1/'
-  basicurl='http://localhost:8080/'
+  basicUrl = 'http://localhost:8080/recommendation/Recommendation'
+  policyUrl = 'http://localhost:8080/insurance/api/vk1/'
+  basicurl = 'http://localhost:8080/'
   getAllInsurances(): Observable<any> {
     return this.http.get<any>(`${this.basicUrl}/Insurances`);
   }
@@ -21,13 +21,13 @@ export class RecommendationServiceService {
     return this.http.get(`${this.basicUrl}/${type}/InsuranceByType`);
   }
   getrendingInsurances(): Observable<any> {
-    return this.http.get(this.basicUrl+'/TrendingInsurances');
+    return this.http.get(this.basicUrl + '/TrendingInsurances');
   }
   getAllPolicies(): Observable<any> {
-    return this.http.get(this.basicurl+"insurance/api/vk1/policies/");
+    return this.http.get(this.policyUrl + "/policies/");
   }
   getuserPolicies(userEmail: any): Observable<any> {
-    return this.http.get(this.basicurl+'insurance/api/vk1/policies/${userEmail}');
+    return this.http.get(this.policyUrl + `/policies/${userEmail}`);
   }
   // insurance-details ui code below
   getPolicyDetails(policyId: string): Observable<any> {
@@ -36,7 +36,7 @@ export class RecommendationServiceService {
   policyNo: any;
   userEmail = localStorage.getItem('logInEmailId');
   getCountOfUsersBoughtInsurance(id: any): Observable<any> {
-    return this.http.get(this.basicurl+`purchase/api/get/count/${id}`);
+    return this.http.get(this.basicurl + `purchase/api/get/count/${id}`);
   }
   redirectUrl: any = '';
 }

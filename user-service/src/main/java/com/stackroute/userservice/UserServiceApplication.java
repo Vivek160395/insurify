@@ -16,9 +16,8 @@ import org.springframework.web.filter.CorsFilter;
 @SpringBootApplication
 public class UserServiceApplication {
 
-
     public static void main(String[] args) {
         SpringApplication.run(UserServiceApplication.class, args);
     }
-}
 
+}

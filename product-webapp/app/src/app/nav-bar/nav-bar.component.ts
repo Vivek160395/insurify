@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { RecommendationServiceService } from '../Services/recommendation-service.service';
 import { Userservice1Service } from '../Services/userservice1.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../Services/login.service';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -46,7 +47,7 @@ export class NavBarComponent implements OnInit {
   displayRenewal: boolean = false;
   isInsurer: boolean = false
   isCustomer: boolean = false
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private service: Userservice1Service, private service1: RecommendationServiceService) { }
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private service: Userservice1Service, private service1: RecommendationServiceService, private loginService: LoginService) { }
   ngOnInit(): void {
     console.log(this.service1.userType);
     if (localStorage.getItem('UserType') == "policyadvisor") {
