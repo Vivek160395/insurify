@@ -54,6 +54,9 @@ export class PolicyAdvisorUpdateComponent implements OnInit {
     this.getDetails();
 
     //this.getDetailsById();
+
+    this.PolicyAdvisorUpdate.get('emailId')?.disable()
+
   }
 
   //Methods for chips component
@@ -97,7 +100,7 @@ export class PolicyAdvisorUpdateComponent implements OnInit {
     this.policyadvisorService.getUserDetails().subscribe(data => {
       console.log(this.file);
       for (var i = 0; i < data.length; i++) {
-        if (data[i].emailId === this.policyAdvisor.emailId) {
+        if (data[i].emailId === localStorage.getItem('logInEmailId')) {
           this.info.emailId = localStorage.getItem("logInEmailId");
           this.info.name = data[i].name;
           this.info.phoneNumber = data[i].phoneNumber;

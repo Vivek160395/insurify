@@ -14,7 +14,7 @@ export class UserService {
   email1 = localStorage.getItem('logInEmailId')?.toString();
 
   // baseurl: any = "http://localhost:8080/user/api/v1/";
-  baseurl='https://insurify.stackroute.io/user/api/v1/'
+  baseurl='http://localhost:8080/user/api/v1/'
   getUserDetails(): Observable<any> {
     return this.http.get(this.baseurl + "users");
   }
@@ -33,8 +33,8 @@ export class UserService {
 
   // baseUrl = "http://localhost:8080/user/api/v1/user";
   // baseUrl1 = "http://localhost:8080/user/api/v1";
-  baseUrl='https://insurify.stackroute.io/'
-  // baseUrl1='https://insurify.stackroute.io/user/api/v1'
+  baseUrl='http://localhost:8080/'
+  // baseUrl1='http://localhost:8080/user/api/v1'
 
   registerUser(user: User): Observable<Object> {
     console.log(user);

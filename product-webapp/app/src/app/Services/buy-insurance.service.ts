@@ -7,7 +7,7 @@ import { CustomerInsurancePurchase } from '../CustomerInsurancePurchase';
 })
 export class BuyInsuranceService {
   // baseurl='http://localhost:8080/'
-  baseurl='https://insurify.stackroute.io/'
+  baseurl='http://localhost:8080/'
   constructor(private http: HttpClient) { }
   buyInsurance(customerins: CustomerInsurancePurchase) {
     this.http.post<CustomerInsurancePurchase>(this.baseurl+'purchase/api/add/customer-insurance', customerins)

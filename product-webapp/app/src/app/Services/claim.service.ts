@@ -20,7 +20,7 @@ export class ClaimService {
   customerPolicyId1:string =localStorage.getItem('customerPolicyId')!
   // baseurl: any = "http://localhost:8080/purchase/api/";
    
-    baseurl='https://insurify.stackroute.io/purchase/api/'
+    baseurl='http://localhost:8080/purchase/api/'
   getUserDetails(): Observable<any> {
     console.log(this.customerPolicyId1)
     console.log(localStorage.getItem('customerPolicyId')!)

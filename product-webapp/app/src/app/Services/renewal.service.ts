@@ -8,7 +8,7 @@ export class RenewalService {
 
   constructor(private http: HttpClient) { }
   // baseurl='http://localhost:8080/'
-  baseurl='https://insurify.stackroute.io/'
+  baseurl='http://localhost:8080/'
 
   userPolicyDetails(): Observable<any> {
     return this.http.get(this.baseurl+"purchase/api/get/" + localStorage.getItem('customerPolicyId'));
