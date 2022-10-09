@@ -11,8 +11,8 @@ export class PolicyAdvisorService {
 
   constructor(private http: HttpClient) { }
 
-  // baseUrl = "http://localhost:8080/advisor/"
-  baseUrl = "https://insurify.stackroute.io/advisor/"
+  baseUrl = "http://localhost:8080/advisor/"
+  // baseUrl = "https://insurify.stackroute.io/advisor/"
 
   baseUrl1 = this.baseUrl + "api/v1/updateDetails/"
 

@@ -13,8 +13,8 @@ export class UserService {
 
   email1 = localStorage.getItem('logInEmailId')?.toString();
 
-  // baseurl: any = "http://localhost:8080/user/api/v1/";
-  baseurl='https://insurify.stackroute.io/user/api/v1/'
+  baseurl: any = "http://localhost:8080/user/api/v1/";
+  // baseurl='https://insurify.stackroute.io/user/api/v1/'
   getUserDetails(): Observable<any> {
     return this.http.get(this.baseurl + "users");
   }
@@ -31,40 +31,40 @@ export class UserService {
   }
 
 
-  // baseUrl = "http://localhost:8080/user/api/v1/user";
-  // baseUrl1 = "http://localhost:8080/user/api/v1";
-  baseUrl='https://insurify.stackroute.io/'
+  baseUrl = "http://localhost:8080/user/api/v1/user";
+  baseUrl1 = "http://localhost:8080/user/api/v1";
+  // baseUrl = 'https://insurify.stackroute.io/'
   // baseUrl1='https://insurify.stackroute.io/user/api/v1'
 
   registerUser(user: User): Observable<Object> {
     console.log(user);
-    // return this.http.post("http://localhost:8080/user/api/v1/user", user);
-    return this.http.post(this.baseUrl+"user/api/v1/user", user);
+    return this.http.post("http://localhost:8080/user/api/v1/user", user);
+    // return this.http.post(this.baseUrl + "user/api/v1/user", user);
   }
 
   postUserId(s1: string): Observable<any> {
-    return this.http.post(this.baseUrl+"chat/api/userId", s1);
+    return this.http.post(this.baseUrl + "chat/api/userId", s1);
 
   }
 
   postAdvisorId(s1: string): Observable<any> {
-    return this.http.post(this.baseUrl+"chat/api/advisorId", s1);
+    return this.http.post(this.baseUrl + "chat/api/advisorId", s1);
   }
 
   getMsgs(chatRoom: string): Observable<any> {
-    return this.http.get(this.baseUrl+"chat/api/msg/" + chatRoom);
+    return this.http.get(this.baseUrl + "chat/api/msg/" + chatRoom);
   }
 
   registerChatRoom(msg: any): Observable<any> {
-    return this.http.post(this.baseUrl+"chat/api/register/chatroom", msg)
+    return this.http.post(this.baseUrl + "chat/api/register/chatroom", msg)
   }
 
   updateMsgList(chatMsg: any, chatRoom: string): Observable<any> {
-    return this.http.put(this.baseUrl+"chat/api/update/msg/" + chatRoom, chatMsg)
+    return this.http.put(this.baseUrl + "chat/api/update/msg/" + chatRoom, chatMsg)
   }
 
   getNames(id: any): Observable<any> {
-    return this.http.get(this.baseUrl+"chat/api/names/" + id)
+    return this.http.get(this.baseUrl + "chat/api/names/" + id)
   }
 
 }

@@ -422,12 +422,12 @@ export class PurchaseInsuranceComponent implements OnInit {
     console.log(customerInsurancePurchase)
     console.log('This is before posting');
     const emailid = localStorage.getItem("logInEmailId");
-    this.httpclient.post<CustomerInsurancePurchase>('https://insurify.stackroute.io/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
-    // this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8080/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
+    // this.httpclient.post<CustomerInsurancePurchase>('https://insurify.stackroute.io/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
+    this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8080/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
       (data: any) => {
         console.log(data);
-        this.httpclient.post(`https://insurify.stackroute.io/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
-        // this.httpclient.post(`http://localhost:8080/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
+        // this.httpclient.post(`https://insurify.stackroute.io/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
+        this.httpclient.post(`http://localhost:8080/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
           console.log(data);
           this.route.navigateByUrl('/home/policies')
         })
@@ -511,8 +511,8 @@ export class PurchaseInsuranceComponent implements OnInit {
     }
     console.log(control1);
     this.sortedsuminsured = []
-    this.httpclient.get(`https://insurify.stackroute.io/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
-    // this.httpclient.get(`http://localhost:8080/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
+    // this.httpclient.get(`https://insurify.stackroute.io/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
+    this.httpclient.get(`http://localhost:8080/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
       console.log('Policy ID : ' + data.policyId)
       console.log('Policy Name : ' + data.policyName)
 
@@ -623,7 +623,7 @@ export class PurchaseInsuranceComponent implements OnInit {
     }
 
   }
-  constructor(public httpclient: HttpClient, public snackBar: MatSnackBar, public order: PaymentService, public service: RecommendationServiceService,public route:Router) {
+  constructor(public httpclient: HttpClient, public snackBar: MatSnackBar, public order: PaymentService, public service: RecommendationServiceService, public route: Router) {
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
     const currentDay = new Date().getDate();

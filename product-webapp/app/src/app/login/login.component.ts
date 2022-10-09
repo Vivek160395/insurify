@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
 
   registerForm: any;
-  constructor(private loginservice: LoginService, public router: Router,public http:HttpClient) { }
+  constructor(private loginservice: LoginService, public router: Router, public http: HttpClient) { }
 
   ngOnInit(): void {
 
@@ -46,16 +46,18 @@ export class LoginComponent implements OnInit {
           if (response.userType == "As Insured") {
             console.log(response.userType);
             localStorage.setItem("UserType", "customer")
-            this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
-            // this.http.get('http://localhost:8080/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
+            // this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
+            this.http.get('http://localhost:8080/purchase/api/refresh/' + localStorage.getItem('logInEmailId')).subscribe((data: any) => {
+              console.log(data);
             })
             this.router.navigate(["/home/home-page"]);
           }
           else if (response.userType == "As Policy Advisor") {
             console.log(response.userType);
             localStorage.setItem("UserType", "policyadvisor")
-            this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
-            // this.http.get('http://localhost:8080/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
+            // this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
+            this.http.get('http://localhost:8080/purchase/api/refresh/' + localStorage.getItem('logInEmailId')).subscribe((data: any) => {
+              console.log(data);
             })
             this.router.navigate(["/home/home-page"]);
           }
@@ -77,7 +79,7 @@ export class LoginComponent implements OnInit {
 
     console.log("Just before checking for usertype");
 
-    
+
   }
 
 
