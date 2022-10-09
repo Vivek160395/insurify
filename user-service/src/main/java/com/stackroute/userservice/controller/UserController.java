@@ -69,6 +69,7 @@ public class UserController {
         }
     }
 
+
     @PutMapping("/updateUser/{emailId}")
     public ResponseEntity<?> updateUserInfo(@RequestParam("userDetails") String user, @PathVariable String emailId,
             @RequestParam("imageFile") MultipartFile file) throws UserNotRegisteredException, IOException {

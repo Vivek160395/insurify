@@ -17,8 +17,8 @@ export class PaymentService {
 
 
   createOrder(order: Payment): Observable<any>{
-    // return this.http.post("https://insurify.stackroute.io/payment/pg/createOrder",order, httpOptions);
-    return this.http.post("https://insurify.stackroute.io/payment/pg/createOrder",order, httpOptions);
+    // return this.http.post("http://localhost:8080/payment/pg/createOrder",order, httpOptions);
+    return this.http.post("http://localhost:8080/payment/pg/createOrder",order, httpOptions);
     // name: order.name,
       // emailId: order.email,
       // mobileNo: order.phone,

@@ -33,10 +33,10 @@
     </div>
     
     <div fxLayout="row" fxLayoutGap="15%" style="background-color: white;">
-        <mat-card class="first_card" fxFlex="45%" appZoomonhover="true" >
+        <mat-card class="first_card" fxFlex="45%"  >
             <mat-card-content fxLayout="column" fxLayoutAlign="center" >
     
-                <h1 class="additional">
+                <h1 style="color: rgb(197, 65, 65);text-align: center;">
                     <b>Additional Covers</b>
                 </h1>
                 
@@ -52,27 +52,27 @@
           </mat-card>
         
         <div fxFlex="45%" fxLayout="column" fxLayoutAlign="center">
-            <mat-card class="second_card" appZoomonhover="true">
-                <h1 class="summary"><b>Premium Summary</b></h1>
+            <mat-card class="second_card" >
+                <h1 style="color: skyblue;text-align: center;"><b>Premium Summary</b></h1>
                 <div *ngFor="let d of duration;let i=index">
                     <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngIf="myModel == i">
                         <div>
                             <p class="d-flex justify-content-md-center">
-                                <b class="col-md-6">Premium </b>{{premium[myModel]}}
+                                <b class="col-md-6" style="font-family: cursive;font-weight: bold;">Premium </b>{{premium[myModel]}}
                             </p>
                         </div>
                         <div>
                             <p class="d-flex justify-content-md-center">
-                                <b class="col-md-6">Duration </b>{{duration[myModel]}}
+                                <b class="col-md-6" style="font-family: cursive;font-weight: bold;">Duration </b>{{duration[myModel]}}
                             </p>
                         </div>
                         <div *ngFor="let name of addOnName; let i=index">
                             <p *ngIf="setCheckBox[i] === true" class="d-flex justify-content-md-center">
-                                <b class="col-md-6">{{name}} (AddOns)</b> {{addOnPrice[i]}}
+                                <b class="col-md-6" style="font-family: cursive;font-weight: bold;">{{name}} (AddOns)</b> {{addOnPrice[i]}}
                             </p>
                         </div>
                         <p class="d-flex justify-content-md-center">
-                            <b class="col-md-6">Total Premium </b> {{calculate_premium()}}
+                            <b class="col-md-6" style="font-family: 'Times New Roman', Times, serif;font-size: larger;font-weight: bolder;color: red;">Total Premium </b> {{calculate_premium()}}
                         </p>
                     </mat-card-content>
                 </div>

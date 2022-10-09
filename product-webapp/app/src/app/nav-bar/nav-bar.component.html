@@ -58,7 +58,12 @@
     <mat-drawer-container class="example-sid-container">
         <mat-drawer #drawer class="example-sid-sidenav" mode="side">
             <mat-nav-list style="padding: 10px;">
-                <a mat-list-item routerLink="/home/home-page" style="font-size: 20px;">
+                <a mat-list-item routerLink="/home/home-page" style="font-size: 20px;" *ngIf="!isInsurer">
+                    <span class="material-symbols-outlined" style="margin-right:10px">
+            <mat-icon>home</mat-icon>
+          </span> Home
+                </a>
+                <a mat-list-item routerLink="/home/insurance-provider" style="font-size: 20px;" *ngIf="isInsurer">
                     <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>home</mat-icon>
           </span> Home

@@ -128,7 +128,7 @@
                                                 <td>{{policy.healthInsurance.adults}}</td>
                                             </tr>
                                             <tr>
-                                                <td>InsuredInfo[]</td>
+                                                <td>Insured Information</td>
                                                 <table *ngFor="let info of policy.healthInsurance.insuredInfo">
                                                     <tr>
                                                         <td>Insured DOB</td>
@@ -269,7 +269,7 @@
             </mat-tab>
             <mat-tab label="Claim History">
                 <div style="border: 2px solid rgb(76, 33, 168); padding: 10px; margin: 18px;">
-                    <h2 mat-dialog-title>Clam Details</h2>
+                    <h2 mat-dialog-title>Claim Details</h2>
                     <div *ngFor="let policy of policies">
                         <div *ngIf="policyId==policy.customerPolicyId && policy.claimStatus.length!=0">
                             <table>

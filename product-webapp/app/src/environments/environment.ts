@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   local: 'local',
-  apiBaseUrl: 'https://insurify.stackroute.io/',
-  localUrl: 'https://insurify.stackroute.io'
+  apiBaseUrl: 'http://localhost:8080/',
+  localUrl: 'http://localhost:8080'
 };
 
 /*

@@ -36,13 +36,13 @@
                         </mat-card-content>
 
                     </mat-card>
-                    <mat-card>
-                        <button mat-raised-button color="primary" routerLink="/home/claim"
+                    
+                        <button mat-raised-button color="primary" routerLink="/home/claim" style="margin-left:20px"
                             (click)="claimPolicy(i)">Claim</button>
                         <!-- [disabled]="currentDate<policy.endDate[(policy.endDate.length)-1] || (policy.endDate[(policy.endDate.length-1)].year==currentDate.year && policy.endDate[(policy.endDate.length)-1].month - currentDate.month)>=1" -->
-                        <button mat-raised-button color="primary" style="margin-left:180px"
+                        <button mat-raised-button color="primary" style="margin-left:130px"
                             (click)="renewPolicy(i)">Renew</button>
-                    </mat-card>
+                    
                 </div>
             </div>
 
@@ -74,10 +74,12 @@
                                 <!-- {{longText}} -->
                                 {{description[i]}}
                             </mat-card-content>
+                            <div fxLayout="row">
                             <button mat-raised-button color="primary" routerLink="/home/claim"
                                 (click)="claimPolicy(i)">Claim</button>
                             <button mat-raised-button color="primary" style="margin-left:auto"
                                 (click)="renewPolicy(i)">Renew</button>
+                            </div>
                         </mat-card>
                     </div>
                 </div>

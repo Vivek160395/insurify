@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 export class RenewalService {
 
   constructor(private http: HttpClient) { }
-  // baseurl='https://insurify.stackroute.io/'
-  baseurl='https://insurify.stackroute.io/'
+  // baseurl='http://localhost:8080/'
+  baseurl='http://localhost:8080/'
 
   userPolicyDetails(): Observable<any> {
     return this.http.get(this.baseurl+"purchase/api/get/" + localStorage.getItem('customerPolicyId'));

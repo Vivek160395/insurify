@@ -22,7 +22,7 @@
                                 <mat-label>Name</mat-label>
                                 <input matInput placeholder="Ex. Jane Doe" formControlName="name" type="text">
                                 <mat-hint>Enter your full name</mat-hint>
-                                <!-- <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error> -->
+                                
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex = "30%">
@@ -30,7 +30,7 @@
                                 <input matInput placeholder="Ex. +1 11111-00000" formControlName="phoneNumber" type="text">
                                 <mat-icon matSuffix>phone</mat-icon>
                                 <mat-hint>Enter your phone number with country  code</mat-hint>
-                                <!-- <mat-error *ngIf="phoneNumber.invalid">{{getErrorMessage()}}</mat-error> -->
+                                
                             </mat-form-field>
                         </div> 
 
@@ -49,8 +49,7 @@
                             <mat-form-field appearance = "outline" fxFlex = "30%">
                                 <mat-label>Date of  Birth</mat-label>
                                 <input matInput   formControlName = "dateOfBirth" type = "date" >                              <mat-hint>MM/DD/YYYY</mat-hint>
-                                <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker> -->
+                                
                             </mat-form-field>
 
                             <mat-form-field appearance="outline" fxFlex = "30%">
@@ -83,7 +82,7 @@
                     <hr>
                     <h3><b>Experience Details</b></h3>
 
-                    <div>
+                    <!-- <div>
                         <div fxlayout = "row">
                             <mat-form-field class="insurance-chip-list" appearance="outline" fxFlex = "100%">
                                 <mat-label>Category</mat-label>
@@ -99,31 +98,14 @@
                                     <input placeholder="Others" [matChipInputFor]="chipList"
                                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" 
                                      (matChipInputTokenEnd)="add($event)" formControlName = "category">
-                                </mat-chip-list>
-
-                
-                            <!-- <mat-chip-list aria-label="Category selection">
-                                     <mat-chip>Health insurance</mat-chip>
-                                    <mat-chip>Life insurance </mat-chip>
-                                     <mat-chip >Two-wheeler insurance</mat-chip>
-                                    <mat-chip >Four-wheeler insurance</mat-chip>
-                                    <input [matChipInputFor]="chipList"> 
-                                </mat-chip-list> -->
+                                </mat-chip-list>                      
                             </mat-form-field>
                         </div>
-                    </div>
+                    </div> -->
 
                     <hr>
                     <h3><b>Profile Picture</b></h3>
-                    <!-- <div class="input-group" fxLayoutGap = "2%">
-                    <div class="custom-file" fxFlex = "15%">
-                      <input type="file" class="custom-file-input" id="inputImage" aria-describedby="inputImage" formControlName = "profilePic">
-                      <label class="custom-file-label" for="inputImage" (change)="onImgSelected($event)">Choose file</label>
-                    </div>
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" id="inputImage">Add</button>
-                    </div>
-                    </div> -->
+                    
                     <div>
                         <img [hidden]="imgView2" [src]="Imgurl" height="200">
                         <br>

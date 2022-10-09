@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Insurance } from '../insurance';
 import { RenewCompletionComponent } from '../renew-completion/renew-completion.component';
@@ -30,7 +31,7 @@ export class RenewalPolicyComponent implements OnInit {
   selectedItems: any[] = []
 
 
-  constructor(private renewalService: RenewalService, private http: HttpClient, private dialog: MatDialog,private router:Router) {
+  constructor(public snackBar: MatSnackBar,private renewalService: RenewalService, private http: HttpClient, private dialog: MatDialog,private router:Router) {
     this.myModel = 0;
   }
 
@@ -42,11 +43,11 @@ export class RenewalPolicyComponent implements OnInit {
     this.myModel = 0
     console.log(localStorage.getItem('insurancePolicyId'));
     console.log(localStorage.getItem('customerPolicyId'))
-    this.http.get('https://insurify.stackroute.io/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
-    // this.http.get('https://insurify.stackroute.io/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
+    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
+    // this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
       console.log(x)
-      this.http.put<Insurance>("https://insurify.stackroute.io/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
-      // this.http.put<Insurance>("https://insurify.stackroute.io/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
+      this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
+      // this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
      
         this.policyDescription = data.policyDescription;
         this.policyTitle = data.policyName;
@@ -111,8 +112,12 @@ export class RenewalPolicyComponent implements OnInit {
     this.renewalService.updateData(this.data).subscribe(res => {
       res = this.data;
       console.log(res);
-      this.dialog.open(RenewCompletionComponent);
+      this.openSnackBar('Your policy has been renewed')
       this.router.navigateByUrl('/home/policies')
     })
+  }
+  openSnackBar(message: string) {
+
+    this.snackBar.open(message, 'Ok', { duration: 3000 });
   }
 }
