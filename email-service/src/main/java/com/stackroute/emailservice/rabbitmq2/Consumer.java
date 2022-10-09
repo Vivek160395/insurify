@@ -48,16 +48,7 @@ public class Consumer {
         email.setBody("Hi,"+" "+purchase.getName()+"\n"+
                        "Thank you for Purchasing Insurance from INSURIFY.\n"+
                        "Please check the details below : \n"+
-                       "CustomerPolicyId  :\t"+purchase.getCustomerPolicyId()+".\n"+
-                       "InsurancePolicyId :\t"+purchase.getInsurancePolicyId()+".\n"+
-                       "Sum Insured       :\t"+purchase.getSumInsured()+".\n"+
-                       "Start Date        :\t"+purchase.getStartDate()+".\n"+
-                       "Purchase Date     :\t"+purchase.getPurchaseDate()+".\n"+
-                       "End Date          :\t"+purchase.getEndDate()+".\n"+
-                       "Duration          :\t"+purchase.getDuration()+".\n"+
-                       "AddOnName         :\t"+addon+".\n"+
-                       "Premium           :\t"+purchase.getPremium()+".\n"+
-                     "Have a nice day");
+                       "CustomerPolicyId  :\t"+purchase.getCustomerPolicyId()+".\n"+"InsurancePolicyId :\t"+purchase.getInsurancePolicyId()+".\n"+"Sum Insured       :\t"+purchase.getSumInsured()+".\n"+"Start Date        :\t"+purchase.getStartDate()+".\n"+"Purchase Date     :\t"+purchase.getPurchaseDate()+".\n"+"End Date          :\t"+purchase.getEndDate()+".\n"+"Duration          :\t"+purchase.getDuration()+".\n"+"AddOnName         :\t"+addon+".\n"+"Premium           :\t"+purchase.getPremium()+".\n"+"Have a nice day");
 
         emailService.sendEmail(email);
     }
@@ -85,18 +76,7 @@ public class Consumer {
         email.setBody("Hi,"+" "+claim.getName()+"\n"+
                 "Thank you for Claiming Insurance from INSURIFY. We will notify you when it is approved.\n"+
                 "Please check the details below : \n"+
-                "CustomerPolicyId  :\t"+claim.getCustomerPolicyId()+".\n"+
-                "InsurancePolicyId :\t"+claim.getInsurancePolicyId()+".\n"+
-                "Claim Amount      :\t"+claim.getClaimAmount()+".\n"+
-                "Claim Date        :\t"+claim.getClaimDate()+".\n"+
-                "Claim Type        :\t"+claim.getClaimType()+".\n"+
-                "Start Date        :\t"+claim.getStartDate()+".\n"+
-                "End Date          :\t"+claim.getEndDate()+".\n"+
-                "Duration          :\t"+claim.getDuration()+".\n"+
-                "Balance           :\t"+claim.getBalance()+".\n"+
-                "Status            :\t"+claim.getStatus()+".\n"+
-                "Have a nice day");
-
+                "CustomerPolicyId  :\t"+claim.getCustomerPolicyId()+".\n"+"InsurancePolicyId  :\t"+claim.getInsurancePolicyId()+".\n"+"Claim Amount        :\t"+claim.getClaimAmount()+".\n"+"Claim Date           :\t"+claim.getClaimDate()+".\n"+"Claim Type            :\t"+claim.getClaimType()+".\n"+"Start Date             :\t"+claim.getStartDate()+".\n"+"End Date                :\t"+claim.getEndDate()+".\n"+"Duration               :\t"+claim.getDuration()+".\n"+"Balance                 :\t"+claim.getBalance()+".\n"+"Status                  :\t"+claim.getStatus()+".\n"+"Have a nice day");
         emailService.sendEmail(email);
 
     }
@@ -117,22 +97,23 @@ public class Consumer {
         renew.setAddOnName(renewDTO.getAddOnName());
         renew.setPremium(renewDTO.getPremium());
         renew.setName(renewDTO.getName());
+        String addon = "";
+        String[] addonlist=renewDTO.getAddOnName();
+        for(int i=0;i<renewDTO.getAddOnName().length;i++)
+        {
+            addon=addon+addonlist[i]+",";
+        }
+        if(addon.length()==0)
+        {
+            addon="No addon's purchased";
+        }
+
 
         email.setEmail(renewDTO.getEmail());
         email.setSubject("Renewing Insurance");
         email.setBody("Hi,"+" "+renew.getName()+"\n"+
                 "Thank you for Renewing Insurance from INSURIFY.\n"+
-                "Please check the details below : \n"+
-                "CustomerPolicyId  :\t"+renew.getCustomerPolicyId()+".\n"+
-                "InsurancePolicyId :\t"+renew.getInsurancePolicyId()+".\n"+
-                "Sum Insured       :\t"+renew.getSumInsured()+".\n"+
-                "Start Date        :\t"+renew.getStartDate()+".\n"+
-                "Purchase Date     :\t"+renew.getPurchaseDate()+".\n"+
-                "End Date          :\t"+renew.getEndDate()+".\n"+
-                "Duration          :\t"+renew.getDuration()+".\n"+
-                "AddOnName         :\t"+renew.getAddOnName()+".\n"+
-                "Premium           :\t"+renew.getPremium()+".\n"+
-                "Have a nice day");
+                "Please check the details below : \n"+"CustomerPolicyId  :\t"+renew.getCustomerPolicyId()+".\n"+"InsurancePolicyId :\t"+renew.getInsurancePolicyId()+".\n"+"Sum Insured       :\t"+renew.getSumInsured()+".\n"+"Start Date        :\t"+renew.getStartDate()+".\n"+"Purchase Date     :\t"+renew.getPurchaseDate()+".\n"+"End Date          :\t"+renew.getEndDate()+".\n"+"Duration          :\t"+renew.getDuration()+".\n"+"AddOnName         :\t"+addon+".\n"+"Premium           :\t"+renew.getPremium()+".\n"+"Have a nice day");
 
         emailService.sendEmail(email);
     }
@@ -154,12 +135,7 @@ public class Consumer {
         email.setBody("Hi,"+" "+decision.getName()+"\n"+
                 "Thank you for Claiming Insurance from INSURIFY.\n"+
                 "Please check the details below : \n"+
-                "CustomerPolicyId  :\t"+decision.getCustomerPolicyId()+".\n"+
-                "InsurancePolicyId :\t"+decision.getInsurancePolicyId()+".\n"+
-                "Claim Amount      :\t"+decision.getClaimAmount()+".\n"+
-                "Claim Date        :\t"+decision.getClaimDate()+".\n"+
-                "Status            :\t"+decision.getStatus()+".\n"+
-                "Have a nice day");
+                "CustomerPolicyId  :\t"+decision.getCustomerPolicyId()+".\n"+"InsurancePolicyId :\t"+decision.getInsurancePolicyId()+".\n"+"Claim Amount      :\t"+decision.getClaimAmount()+".\n"+"Claim Date        :\t"+decision.getClaimDate()+".\n"+"Status            :\t"+decision.getStatus()+".\n"+"Have a nice day");
 
         emailService.sendEmail(email);
 

@@ -404,9 +404,12 @@ public class PurchaseServiceImplementation implements PurchaseService {
                         int count = 0;
                         String[] dis_lst = customerInsurance.getLifeInsurance().getHealthConditionList();
                         boolean[] ans = customerInsurance.getLifeInsurance().getQuestionnaireAnswers();
-                        if (dis_lst.length > 2) {
-                            factor = factor * 1.2f;
+                        if(dis_lst!=null){
+                            if (dis_lst.length > 2) {
+                                factor = factor * 1.2f;
+                            }
                         }
+
                         for (int k = 0; k < ans.length; k++) {
                             if (ans[k])
                                 count++;
