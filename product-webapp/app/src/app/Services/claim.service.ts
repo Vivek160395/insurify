@@ -18,9 +18,9 @@ export class ClaimService {
     }), responseType: 'text' as 'json'
   };
   customerPolicyId1: string = localStorage.getItem('customerPolicyId')!
-  // baseurl: any = "http://localhost:8080/purchase/api/";
+  // baseurl: any = "https://insurify.stackroute.io/purchase/api/";
 
-  baseurl = 'http://localhost:8080/purchase/api/'
+  baseurl = 'https://insurify.stackroute.io/purchase/api/'
   getUserDetails(): Observable<any> {
     console.log(this.customerPolicyId1)
     console.log(localStorage.getItem('customerPolicyId')!)
@@ -31,8 +31,8 @@ export class ClaimService {
     return this.http.put(this.baseurl + "claim", user);
   }
   getPolicyDetails(): Observable<any> {
-    return this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + localStorage.getItem('insurancePolicyId'))
-    // return this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/"+localStorage.getItem('insurancePolicyId'))
+    return this.http.get("https://insurify.stackroute.io/insurance/api/vk1/policy-id/" + localStorage.getItem('insurancePolicyId'))
+    // return this.http.get("https://insurify.stackroute.io/insurance/api/vk1/policy-id/"+localStorage.getItem('insurancePolicyId'))
 
   }
 

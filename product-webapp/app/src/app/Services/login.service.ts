@@ -13,8 +13,8 @@ export class LoginService {
   password: any;
   constructor(private httpClient: HttpClient) { }
 
-  // baseurl = "http://localhost:8080/authentication/api/v2";
-  baseurl = 'http://localhost:8080/authentication/api/v2'
+  // baseurl = "https://insurify.stackroute.io/authentication/api/v2";
+  baseurl = 'https://insurify.stackroute.io/authentication/api/v2'
   getUserCredentials(data: any): Observable<any> {
     console.log(data);
     return this.httpClient.post(this.baseurl + "/loginUser", data);

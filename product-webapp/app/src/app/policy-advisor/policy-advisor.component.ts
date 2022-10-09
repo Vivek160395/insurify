@@ -18,8 +18,8 @@ export class PolicyAdvisorComponent implements OnInit {
 
 
   ngOnInit(): void {
-  // let response = this.http.get("http://localhost:8080/advisor/api/v1/policyAdvisors");
-    let response = this.http.get("http://localhost:8080/advisor/api/v1/policyAdvisors");
+  // let response = this.http.get("https://insurify.stackroute.io/advisor/api/v1/policyAdvisors");
+    let response = this.http.get("https://insurify.stackroute.io/advisor/api/v1/policyAdvisors");
     response.subscribe((data) => {
 
       console.log(data);
