@@ -29,12 +29,12 @@
         </div>
         <div style="display: flex;">
             <div style="margin-right: 20px;" [hidden]="loginButton">
-                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/home/login">
+                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/nav/login">
           Login
         </button>
             </div>
             <div style="margin-right: 20px;" [hidden]="logoutButton">
-                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/home/login">
+                <button mat-button style="color:white;font-size: 20px;background-color: #4A2511;;" routerLink="/nav/login">
           LogOut
         </button>
             </div>
@@ -83,7 +83,8 @@
             </span> Registered Policies
                     </a>
                 </div>
-                <div [hidden]="others">
+                <!-- [hidden]="others" -->
+                <div >
                     <a mat-list-item routerLink="/home/chat" style="font-size: 20px;" *ngIf="!isInsurer">
                         <span class="material-symbols-outlined" style="margin-right:13px">
               <mat-icon>support_agent</mat-icon>

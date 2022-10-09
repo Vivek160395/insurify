@@ -356,34 +356,14 @@ export class AddInsurancePolicyComponent implements OnInit {
     formData.append("imageFile", this.insuranceForms.controls['fileSource'].value!);
     formData.append("policyId", this.id.toString())
     console.log(formData)
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
-    this.http.post<Insurance>("http://localhost:8080/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
+
     // this.http.post<Insurance>("http://localhost:8080/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
-=======
-
-    this.http.post<Insurance>("http://localhost:8080/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
-      // this.http.post<Insurance>("http://localhost:8080/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
-=======
-
-    this.http.post<Insurance>("http://localhost:8080/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
-      // this.http.post<Insurance>("http://localhost:8080/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
+      this.http.post<Insurance>("http://localhost:8080/insurance/api/vk1/life-policy", this.insuranceForms.value).subscribe(
       (data: any) => {
         console.log(data);
         if (this.filestatus) {
-          this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
-<<<<<<< HEAD
-<<<<<<< HEAD
           // this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
-=======
-            // this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
-=======
-            // this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
+          this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })
             .subscribe((data: any) => { console.log(data) });
           this.addInsuranceTo(formData);
         }
@@ -393,28 +373,12 @@ export class AddInsurancePolicyComponent implements OnInit {
   }
   addInsuranceTo(formData: FormData) {
     this.insuranceForms.get('policyId')?.enable();
-    this.http.post("http://localhost:8080/recommendation/Recommendation/Insurance", this.insuranceForms.value).subscribe(
-<<<<<<< HEAD
-<<<<<<< HEAD
     // this.http.post("http://localhost:8080/recommendation/Recommendation/Insurance", this.insuranceForms.value).subscribe(
+    this.http.post("http://localhost:8080/recommendation/Recommendation/Insurance", this.insuranceForms.value).subscribe(
       (data) => {
         console.log(data);
-        this.http.put(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
         // this.http.put(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
-=======
-      // this.http.post("http://localhost:8080/recommendation/Recommendation/Insurance", this.insuranceForms.value).subscribe(
-      (data) => {
-        console.log(data);
         this.http.put(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
-          // this.http.put(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
-=======
-      // this.http.post("http://localhost:8080/recommendation/Recommendation/Insurance", this.insuranceForms.value).subscribe(
-      (data) => {
-        console.log(data);
-        this.http.put(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
-          // this.http.put(`http://localhost:8080/recommendation/Recommendation/insurance/${this.id.toString()}`, formData).subscribe((data) => {
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
           console.log(data);
           this.route.navigateByUrl("/home/home-page");
         })

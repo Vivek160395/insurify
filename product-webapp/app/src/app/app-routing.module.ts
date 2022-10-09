@@ -32,14 +32,15 @@ import { InsurerGuard } from './guard/insurer.guard';
 
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
-
+// canActivate: [AuthGuard],
 const routes: Routes =
   [
     { path: "", component: HomepageComponent },
     {
-      path: "home", component: NavBarComponent, canActivate: [AuthGuard], children: [
+      path: "home", component: NavBarComponent,  children: [
         // { path: "", component: RecommendationComponent, canActivate: [PersonGuard] },
-        { path: "home-page", component: RecommendationComponent, canActivate: [InsurerGuard] },
+        // canActivate: [InsurerGuard]
+        { path: "home-page", component: RecommendationComponent,  },
         { path: "insurance-provider", component: InsuranceProviderComponent },
         { path: "add-policy", component: AddInsurancePolicyComponent },
         { path: "policies", component: PoliciesComponent },
@@ -74,7 +75,8 @@ const routes: Routes =
   ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  // , { useHash: true }
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

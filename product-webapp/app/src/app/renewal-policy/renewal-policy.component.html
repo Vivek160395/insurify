@@ -24,7 +24,7 @@
     
     <br><br>
     
-    <div>
+    <div style="margin-top:-30px; margin-bottom:30px;">
         <mat-radio-group [(ngModel)]="myModel" fxLayoutGap="5%" fxLayout="row" fxLayoutAlign="center">
             <mat-radio-button [value]="i" appZoomonhover="true" *ngFor="let p of premium;let i=index ">
                 <b> Premium</b><br> Rs.{{p}} <br>({{duration[i]}} Years)
@@ -33,7 +33,7 @@
     </div>
     
     <div fxLayout="row" fxLayoutGap="15%" style="background-color: white;">
-        <mat-card class="first_card" fxFlex="45%"  >
+        <mat-card class="first_card" fxFlex="30%"  >
             <mat-card-content fxLayout="column" fxLayoutAlign="center" >
     
                 <h1 style="color: rgb(197, 65, 65);text-align: center;">
@@ -80,7 +80,7 @@
         </div>
     </div>
     
-    <div fxLayoutAlign="center" fxLayout="row" style="margin-top: 10%;">
+    <div fxLayoutAlign="center" fxLayout="row" style="margin-top: 10px; padding-bottom: 30px;">
         <button class="submit" fxFlex="30%" mat-raised-button color="primary" (click)="onSubmit()">Renew <mat-icon>autorenew</mat-icon></button>
     </div>
 </div>

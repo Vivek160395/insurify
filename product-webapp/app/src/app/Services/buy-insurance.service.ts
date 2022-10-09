@@ -7,17 +7,9 @@ import { CustomerInsurancePurchase } from '../CustomerInsurancePurchase';
 })
 export class BuyInsuranceService {
   // baseurl='http://localhost:8080/'
-<<<<<<< HEAD
-<<<<<<< HEAD
-  baseurl='http://localhost:8080/'
-=======
   baseurl = 'http://localhost:8080/'
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
-=======
-  baseurl = 'http://localhost:8080/'
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
   constructor(private http: HttpClient) { }
   buyInsurance(customerins: CustomerInsurancePurchase) {
-    this.http.post<CustomerInsurancePurchase>(this.baseurl + 'purchase/api/add/customer-insurance', customerins)
+    this.http.post<CustomerInsurancePurchase>(this.baseurl+'purchase/api/add/customer-insurance', customerins)
   }
 }

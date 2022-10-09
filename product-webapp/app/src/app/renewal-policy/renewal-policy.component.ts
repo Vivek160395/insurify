@@ -43,30 +43,12 @@ export class RenewalPolicyComponent implements OnInit {
     this.myModel = 0
     console.log(localStorage.getItem('insurancePolicyId'));
     console.log(localStorage.getItem('customerPolicyId'))
-<<<<<<< HEAD
-<<<<<<< HEAD
-    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
-    // this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
-      console.log(x)
-      this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
-      // this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
-     
-=======
     this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/' + localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
       // this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
       console.log(x)
       this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/" + localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
         // this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
 
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
-=======
-    this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/' + localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
-      // this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
-      console.log(x)
-      this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/" + localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
-        // this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
-
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
         this.policyDescription = data.policyDescription;
         this.policyTitle = data.policyName;
         this.policyType = data.insuranceType;

@@ -15,15 +15,7 @@ export class RegisteredPoliciesComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  let response= this.http.get("http://localhost:8080/insurance/api/vk1/policies/"+localStorage.getItem('logInEmailId')?.toString());
-=======
     let response = this.http.get("http://localhost:8080/insurance/api/vk1/policies/" + localStorage.getItem('logInEmailId')?.toString());
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
-=======
-    let response = this.http.get("http://localhost:8080/insurance/api/vk1/policies/" + localStorage.getItem('logInEmailId')?.toString());
->>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
     // let response= this.http.get("http://localhost:8080/insurance/api/vk1/policies/"+localStorage.getItem('logInEmailId')?.toString());
     response.subscribe((data) => {
 
