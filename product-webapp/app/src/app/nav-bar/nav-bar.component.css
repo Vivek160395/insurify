@@ -33,6 +33,7 @@
 }
 
 button {
+    width: 100%;
     outline: none;
 }
 
@@ -52,7 +53,7 @@ mat-icon {
 }
 
 .example-sid-sidenav {
-    width: 180px;
+    width: 190px;
 }
 
 .row {

@@ -23,10 +23,17 @@ export class RegisteredPolicyBuyersComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+<<<<<<< HEAD
   let response= this.http.get("http://localhost:8080/purchase/api/policies/"+localStorage.getItem('insurancePolicyId'));  
   // let response= this.http.get("http://localhost:8080/purchase/api/policies/"+localStorage.getItem('insurancePolicyId'));
     response.subscribe((data)=>{
       
+=======
+    let response = this.http.get("http://localhost:8080/purchase/api/policies/" + localStorage.getItem('insurancePolicyId'));
+    // let response= this.http.get("http://localhost:8080/purchase/api/policies/"+localStorage.getItem('insurancePolicyId'));
+    response.subscribe((data) => {
+
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
       console.log(data);
       this.policyBuyerDetails = data;
       this.insuranceType = localStorage.getItem('typeOfInsurance');
@@ -103,6 +110,7 @@ export class RegisteredPolicyBuyersComponent implements OnInit {
     window.open(fileURL);
   }
 
+<<<<<<< HEAD
 acceptClaim(policy:any, status:any, j:any, i:any){
   // window.alert("Your claim is Approved.")
   this.http.put("http://localhost:8080/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
@@ -132,6 +140,37 @@ rejectClaim(policy:any, status:any, j:any, i:any){
     
    });
 }
+=======
+  acceptClaim(policy: any, status: any, j: any, i: any) {
+    // window.alert("Your claim is Approved.")
+    this.http.put("http://localhost:8080/purchase/api/update/claim/" + policy.customerPolicyId + "/" + status, status).subscribe((data: any) => {
+      //  this.http.put("http://localhost:8080/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
+      console.log(data);
+      policy.claimStatus[i] = 'approved'
+      console.log(policy.claimStatus[i]);
+      //  this.policyBuyerDetails[j].claimStatus[i]="approved"
+      //   console.log(this.policyBuyerDetails[j].claimStatus[i]);
+
+    },
+      (error: any) => {
+        console.log(error);
+
+      });
+  }
+
+  rejectClaim(policy: any, status: any, j: any, i: any) {
+    this.http.put("http://localhost:8080/purchase/api/update/claim/" + policy.customerPolicyId + "/" + status, status).subscribe((data: any) => {
+      // this.http.put("http://localhost:8080/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
+      console.log(data);
+      policy.claimStatus[i] = 'rejected'
+      console.log(policy.claimStatus[i]);
+    },
+      (error: any) => {
+        console.log(error);
+
+      });
+  }
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 
 
 }

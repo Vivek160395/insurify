@@ -8,10 +8,16 @@ import { Insurance } from '../insurance';
 export class EditInsuranceService {
 
   constructor(private http: HttpClient) { }
+<<<<<<< HEAD
 // baseurl: any = "http://localhost:8080/insurance/api/vk1/policy-id/";
    
 baseurl='http://localhost:8080/insurance/api/vk1/policy-id/'
+=======
+  // baseurl: any = "http://localhost:8080/insurance/api/vk1/policy-id/";
+
+  baseurl = 'http://localhost:8080/insurance/api/vk1/policy-id/'
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
   editInsurance() {
-    return this.http.get(this.baseurl+localStorage.getItem('editpolicyid'))
+    return this.http.get(this.baseurl + localStorage.getItem('editpolicyid'))
   }
 }

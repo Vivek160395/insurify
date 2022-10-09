@@ -16,21 +16,25 @@ export class PaymentService {
   constructor(private http: HttpClient) { }
 
 
-  createOrder(order: Payment): Observable<any>{
+  createOrder(order: Payment): Observable<any> {
     // return this.http.post("http://localhost:8080/payment/pg/createOrder",order, httpOptions);
+<<<<<<< HEAD
     return this.http.post("http://localhost:8080/payment/pg/createOrder",order, httpOptions);
+=======
+    return this.http.post("http://localhost:8080/payment/pg/createOrder", order, httpOptions);
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
     // name: order.name,
-      // emailId: order.email,
-      // mobileNo: order.phone,
-      // currency:order.currency,
-      // amount: order.amount,
-      // customerPolicyId: order.policyId,
-      // policyType: order.policyType,
-      // paymentMode: order.paymentMode,
-      // tax: order.tax,
-      // discount: order.discount,
-      // paymentDate: order.date,
-      // paymentTime: order.time
+    // emailId: order.email,
+    // mobileNo: order.phone,
+    // currency:order.currency,
+    // amount: order.amount,
+    // customerPolicyId: order.policyId,
+    // policyType: order.policyType,
+    // paymentMode: order.paymentMode,
+    // tax: order.tax,
+    // discount: order.discount,
+    // paymentDate: order.date,
+    // paymentTime: order.time
     // }, httpOptions);
   }
 

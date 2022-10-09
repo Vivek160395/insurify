@@ -132,4 +132,13 @@ public class Recommendation_Service_Impl implements Recommendation_service {
             return false;
         }
     }
+
+    @Override
+    public Insurance editInsurance(InsuranceProfile insuranceProfile) {
+        Insurance insurance1 = insurance_repository.findById(insuranceProfile.getPolicyId()).get();
+        if (insurance1 != null) {
+            insurance_repository.save(insurance1);
+        }
+        return null;
+    }
 }

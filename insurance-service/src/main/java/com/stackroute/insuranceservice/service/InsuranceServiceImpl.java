@@ -84,14 +84,18 @@ public class InsuranceServiceImpl implements InsuranceService {
         insurancePolicyObj.setAddOnDetails(insurance.getAddOnDetails());
         insurancePolicyObj.setPolicyDocuments(insurance.getPolicyDocuments());
         insurancePolicyObj.setUserEmail(insurance.getUserEmail());
-        if (insurance.getInsuranceType().equalsIgnoreCase("AutomobileInsurance")) {
+        if (insurance.getInsuranceType().equalsIgnoreCase("AutoMobileInsurance")) {
             insurancePolicyObj.setCategory(insurance.getCategory());
             insurancePolicyObj.setModelsAllowed(insurance.getModelsAllowed());
         } else {
             insurancePolicyObj.setCategory(null);
             insurancePolicyObj.setModelsAllowed(null);
         }
+<<<<<<< HEAD
         // insuranceRepo.save(insurance);
+=======
+//        insuranceRepo.save(insurance);
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
         return insuranceRepo.save(insurancePolicyObj);
     }
 }

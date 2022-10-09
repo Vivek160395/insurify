@@ -423,16 +423,25 @@ export class PurchaseInsuranceComponent implements OnInit {
     console.log('This is before posting');
     const emailid = localStorage.getItem("logInEmailId");
     this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8080/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
+<<<<<<< HEAD
     // this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8080/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
       (data: any) => {
         console.log(data);
         this.httpclient.post(`http://localhost:8080/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
         // this.httpclient.post(`http://localhost:8080/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
+=======
+      // this.httpclient.post<CustomerInsurancePurchase>('http://localhost:8080/purchase/api/add/customer-insurance', customerInsurancePurchase).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.httpclient.post(`http://localhost:8080/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
+          // this.httpclient.post(`http://localhost:8080/recommendation/Recommendation/${emailid}/${this.service.policyNo}/buyInsurance`, data).subscribe((data) => {
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
           console.log(data);
-          this.route.navigateByUrl('/home/policies')
+
         })
       }
     );
+    this.route.navigateByUrl('/home/policies')
     console.log('This is after posting');
   }
 
@@ -512,7 +521,11 @@ export class PurchaseInsuranceComponent implements OnInit {
     console.log(control1);
     this.sortedsuminsured = []
     this.httpclient.get(`http://localhost:8080/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
+<<<<<<< HEAD
     // this.httpclient.get(`http://localhost:8080/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
+=======
+      // this.httpclient.get(`http://localhost:8080/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
       console.log('Policy ID : ' + data.policyId)
       console.log('Policy Name : ' + data.policyName)
 
@@ -623,7 +636,7 @@ export class PurchaseInsuranceComponent implements OnInit {
     }
 
   }
-  constructor(public httpclient: HttpClient, public snackBar: MatSnackBar, public order: PaymentService, public service: RecommendationServiceService,public route:Router) {
+  constructor(public httpclient: HttpClient, public snackBar: MatSnackBar, public order: PaymentService, public service: RecommendationServiceService, public route: Router) {
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
     const currentDay = new Date().getDate();

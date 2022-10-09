@@ -6,7 +6,11 @@ export const environment = {
   production: false,
   local: 'local',
   apiBaseUrl: 'http://localhost:8080/',
+<<<<<<< HEAD
   localUrl: 'http://localhost:8080'
+=======
+  localUrl: 'http://localhost:8080/'
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 };
 
 /*

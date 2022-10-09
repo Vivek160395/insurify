@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RenewalService } from '../Services/renewal.service';
 
 @Component({
@@ -8,13 +9,14 @@ import { RenewalService } from '../Services/renewal.service';
 })
 export class RenewalPolicyHomeComponent implements OnInit {
 
-  constructor(private renewalService: RenewalService) { }
+  constructor(private renewalService: RenewalService,public router:Router) { }
 
   category: string = "";
   insuranceType: string = "";
 
   ngOnInit(): void {
-    this.getPolicyDetails()
+   setInterval( ()=>{this.getPolicyDetails()},1000)
+    // this.router.navigateByUrl('/home/renewal-update')
   }
 
   vehicle: any = {
@@ -42,15 +44,15 @@ export class RenewalPolicyHomeComponent implements OnInit {
         this.insuranceType = res.insuranceType;
         this.category = res.category;
         this.data.policyId = res.policyId;
-        console.log(this.data.policyId);
-        // console.log(this.category);
-        // console.log(this.insuranceType);
+        // console.log(this.data.policyId);
+        // // console.log(this.category);
+        // // console.log(this.insuranceType);
       }
     )
     this.renewalService.userPolicyDetails().subscribe
       (
         (data1:any) => {
-          console.log(data1)
+          // console.log(data1)
           if (this.insuranceType === "AutomobileInsurance" && this.category === "car") {
             this.data.customerPolicyId = data1.customerPolicyId;
             this.data.policyId = data1.insurancePolicyId;
@@ -80,7 +82,7 @@ export class RenewalPolicyHomeComponent implements OnInit {
             this.vehicle.chasisNumber = data1.automobileInsurance.chassisNumber;
           }
           else if (this.insuranceType === "HealthInsurance") {
-            console.log(data1);
+            // console.log(data1);
             this.data.customerPolicyId = data1.customerPolicyId;
             this.data.policyId = data1.insurancePolicyId;
             this.data.insuredName = data1.name;

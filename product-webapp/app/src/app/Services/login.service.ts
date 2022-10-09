@@ -14,7 +14,11 @@ export class LoginService {
   constructor(private httpClient: HttpClient) { }
 
   // baseurl = "http://localhost:8080/authentication/api/v2";
+<<<<<<< HEAD
   baseurl='http://localhost:8080/authentication/api/v2'
+=======
+  baseurl = 'http://localhost:8080/authentication/api/v2'
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
   getUserCredentials(data: any): Observable<any> {
     console.log(data);
     return this.httpClient.post(this.baseurl + "/loginUser", data);

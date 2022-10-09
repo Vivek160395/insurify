@@ -36,7 +36,11 @@ export class PoliciesComponent {
   originally bred for hunting.`;
 
   ngOnInit(): void {
+<<<<<<< HEAD
   let response = this.http.get("http://localhost:8080/purchase/api/get/insurances/" + localStorage.getItem('logInEmailId'));
+=======
+    let response = this.http.get("http://localhost:8080/purchase/api/get/insurances/" + localStorage.getItem('logInEmailId'));
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
     // let response = this.http.get("http://localhost:8080/purchase/api/get/insurances/" + localStorage.getItem('logInEmailId'));
     response.subscribe((data) => {
 
@@ -56,7 +60,11 @@ export class PoliciesComponent {
           this.insuranceTitle.push('NA');
         }
         this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((x: any) => {
+<<<<<<< HEAD
         // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((x: any) => {
+=======
+          // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((x: any) => {
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
           this.description.push(x.policyDescription);
           this.policyTitle.push(x.policyName)
           // this.policyTitle.push(x.insuranceType);
@@ -163,6 +171,7 @@ export class PoliciesComponent {
   }
 
   renewPolicy(i: any) {
+<<<<<<< HEAD
   this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
     // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
       console.log("hello from renew button");
@@ -173,25 +182,40 @@ export class PoliciesComponent {
       // this.http.put<Insurance>("http://localhost:8080/purchase/api/getstatus/" + this.purchasedPolicies[i].customerPolicyId, data).subscribe((x: any) => {
         this.str = x;
         console.log(x);
+=======
+    localStorage.setItem("customerPolicyId", this.purchasedPolicies[i].customerPolicyId);
+    localStorage.setItem("insurancePolicyId", this.purchasedPolicies[i].insurancePolicyId);
+    setTimeout(() => { this.router.navigateByUrl("/home/renewal-home"); }, 2000)
+    // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
+    //   // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
+    //     console.log("hello from renew button");
+    //     console.log(data)
+    //     // this.description.push(x.policyDescription);
+    //     // this.policyTitle.push(x.policyName))
+    //     this.http.put<Insurance>("http://localhost:8080/purchase/api/getstatus/" + this.purchasedPolicies[i].customerPolicyId, data).subscribe((x: any) => {
+    //     // this.http.put<Insurance>("http://localhost:8080/purchase/api/getstatus/" + this.purchasedPolicies[i].customerPolicyId, data).subscribe((x: any) => {
+    //       this.str = x;
+    //       console.log(x);
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 
-        if (this.str == null) {
-          localStorage.setItem("customerPolicyId", this.purchasedPolicies[i].customerPolicyId);
-          localStorage.setItem("insurancePolicyId", this.purchasedPolicies[i].insurancePolicyId);
-          this.router.navigateByUrl("/home/renewal-home");
-        }
-        else {
-          console.log(this.str);
+    //       if (this.str == null) {
+    //         localStorage.setItem("customerPolicyId", this.purchasedPolicies[i].customerPolicyId);
+    //         localStorage.setItem("insurancePolicyId", this.purchasedPolicies[i].insurancePolicyId);
+    //         this.router.navigateByUrl("/home/renewal-home");
+    //       }
+    //       else {
+    //         console.log(this.str);
 
-          this.openSnackBar(x.toString());
-        }
-      },
-        (error: any) => {
-          console.log(error.error.text)
-          this.openSnackBar((error.error.text).toString());
-        })
+    //         this.openSnackBar(x.toString());
+    //       }
+    //   },
+    //     (error: any) => {
+    //       console.log(error.error.text)
+    //       this.openSnackBar((error.error.text).toString());
+    //     })
 
 
-    })
+    // })
   }
   claimPolicy(i: any) {
     console.log(i)

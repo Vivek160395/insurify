@@ -2,37 +2,6 @@
     <h1 style="text-align-last: center; padding-top: 2%; font-size: xx-large; color: white;"><b>Policy Details</b></h1>
 </header>
 
-<!-- <div fxLayout="row" *ngIf="insuranceType === 'AutomobileInsurance' && category === 'bike'">
-    <div style="width: 50%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;"
-    appZoomonhover="true">
-
-        <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
-            <h2><b>Policy Holder Details</b></h2>
-        </header>
-
-        <h3><b>Customer Policy ID:</b> {{this.data.customerPolicyId}}</h3>
-        <h3><b>Insurance Policy ID:</b> {{this.data.policyId}}</h3>
-        <h3><b>Customer Name:</b> {{this.data.insuredName}}</h3>
-        <h3><b>PinCode:</b> {{this.data.pinCode}}</h3>
-        <h3><b>Insurance End Date:</b> {{this.data.insuranceEndDate}}</h3>
-        <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
-        <h3><b>Mobile Number:</b> {{this.data.ownerNumber}}</h3>
-        <h3><b>Email-ID:</b> {{this.data.ownerEmail}}</h3>
-    </div>
-
-    <div style="border: 2px solid rgb(204, 172, 172); text-align: center; width: 50%; border-radius: 20px; margin: 5px;"
-    appZoomonhover="true">
-
-        <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
-            <h2><b>Vehicle Details</b></h2>
-        </header>
-
-        <h3><b>Registration Number:</b> {{this.vehicle.registrddNo}}</h3>
-        <h3><b>Model:</b> {{this.vehicle.category}}</h3>
-        <h3><b>Engine Number:</b>{{this.vehicle.engineNumber}}</h3>
-        <h3><b>Chasis Number:</b>{{this.vehicle.chasisNumber}}</h3>
-    </div>
-</div> -->
 
 <div fxLayout="row" *ngIf="insuranceType === 'AutomobileInsurance'">
     <div style="width: 50%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;" appZoomonhover="true">
@@ -41,24 +10,25 @@
             <h2><b>Policy Holder Details</b></h2>
         </header>
 
-        <h3><b>Customer Policy ID:</b> {{this.data.customerPolicyId}}</h3>
-        <h3><b>Insurance Policy ID:</b> {{this.data.policyId}}</h3>
-        <h3><b>Customer Name:</b> {{this.data.insuredName}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Customer Policy ID:</b> {{this.data.customerPolicyId}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Insurance Policy ID:</b> {{this.data.policyId}}</h3>
+
         <!-- <h3><b>PinCode:</b> {{this.data.pinCode}}</h3> -->
-        <h3><b>Insurance End Date:</b> {{this.data.insuranceEndDate}}</h3>
-        <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
-        <h3><b>Mobile Number:</b> {{this.data.ownerNumber}}</h3>
-        <h3><b>Email-ID:</b> {{this.data.ownerEmail}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Policy StartDate:</b> {{this.data.policyIssuenceDate}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;"> Insurance End Date:</b> {{this.data.insuranceEndDate[this.data.insuranceEndDate.length-1]}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Customer Name:</b> {{this.data.insuredName}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Mobile Number:</b> {{this.data.ownerNumber}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Email-ID:</b> {{this.data.ownerEmail}}</h3>
     </div>
 
     <div style="border: 2px solid rgb(204, 172, 172); text-align: center; width: 50%; border-radius: 20px; margin: 5px;" appZoomonhover="true">
         <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
-            <h2><b>Vehicle Details</b></h2>
+            <h2><b style="color: red;font-weight: bold;font-family: cursive;">Vehicle Details</b></h2>
         </header>
-        <h3><b>Registration Number:</b> {{this.vehicle.registrddNo}}</h3>
-        <h3><b>Model:</b> {{this.vehicle.category}}</h3>
-        <h3><b>Engine Number:</b>{{this.vehicle.engineNumber}}</h3>
-        <h3><b>Chasis Number:</b>{{this.vehicle.chasisNumber}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Registration Number:</b> {{this.vehicle.registrddNo}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Model:</b> {{this.vehicle.category}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Engine Number:</b>{{this.vehicle.engineNumber}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Chasis Number:</b>{{this.vehicle.chasisNumber}}</h3>
     </div>
 </div>
 
@@ -69,35 +39,15 @@
             <h2><b>Policy Holder Details</b></h2>
         </header>
 
-        <h3><b>Customer Policy ID:</b> {{this.data.customerPolicyId}}</h3>
-        <h3><b>Insurance Policy ID:</b> {{this.data.policyId}}</h3>
-        <h3><b>Customer Name:</b> {{this.data.insuredName}}</h3>
-        <h3><b>PinCode:</b> {{this.data.pinCode}}</h3>
-        <h3><b>Insurance End Date:</b> {{this.data.insuranceEndDate}}</h3>
-        <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
-        <h3><b>Mobile Number:</b> {{this.data.ownerNumber}}</h3>
-        <h3><b>Email-ID:</b> {{this.data.ownerEmail}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Customer Policy ID:</b> {{this.data.customerPolicyId}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Insurance Policy ID:</b> {{this.data.policyId}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Policy Start Date:</b> {{this.data.policyIssuenceDate}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Insurance End Date:</b> {{this.data.insuranceEndDate[this.data.insuranceEndDate.length-1]}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Customer Name:</b> {{this.data.insuredName}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Mobile Number:</b> {{this.data.ownerNumber}}</h3>
+        <h3><b style="color: red;font-weight: bold;font-family: cursive;">Email-ID:</b> {{this.data.ownerEmail}}</h3>
     </div>
 </div>
-
-<!-- <div fxLayout="row" *ngIf="insuranceType === 'HealthInsurance'">
-    <div style="width: 99%; border: 2px solid rgb(204, 172, 172); text-align: center; border-radius: 20px; margin: 5px;"
-    appZoomonhover="true">
-
-        <header style="background-color: rgb(196, 200, 203); border-radius: 20px;">
-            <h2><b>Policy Holder Details</b></h2>
-        </header>
-
-        <h3><b>Customer Policy ID:</b> {{this.data.customerPolicyId}}</h3>
-        <h3><b>Insurance Policy ID:</b> {{this.data.policyId}}</h3>
-        <h3><b>Customer Name:</b> {{this.data.insuredName}}</h3>
-        <h3><b>PinCode:</b> {{this.data.pinCode}}</h3>
-        <h3><b>Insurance End Date:</b> {{this.data.insuranceEndDate}}</h3>
-        <h3><b>Policy IssuenceDate:</b> {{this.data.policyIssuenceDate}}</h3>
-        <h3><b>Mobile Number:</b> {{this.data.ownerNumber}}</h3>
-        <h3><b>Email-ID:</b> {{this.data.ownerEmail}}</h3>
-    </div>
-</div> -->
 
 <div fxLayoutAlign="center">
     <button mat-raised-button color="primary" fxLayout="column">
