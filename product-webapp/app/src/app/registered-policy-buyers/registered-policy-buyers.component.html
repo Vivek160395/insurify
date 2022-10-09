@@ -76,7 +76,7 @@
           <table *ngIf="insuranceType=='HealthInsurance'">              
               <tr><td>kids</td> <td>{{policy.healthInsurance.kids}}</td></tr>
               <tr><td>adults</td> <td>{{policy.healthInsurance.adults}}</td></tr>
-              <tr><td>InsuredInfo[]</td> 
+              <tr><td>Insured Info</td> 
                 <table *ngFor="let info of policy.healthInsurance.insuredInfo">
                   <tr><td>Insured DOB</td> <td>{{info.insuredDOB}}</td></tr> 
                   <tr><td>Relation</td> <td>{{info.relation}}</td> </tr>

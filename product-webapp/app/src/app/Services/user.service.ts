@@ -13,8 +13,8 @@ export class UserService {
 
   email1 = localStorage.getItem('logInEmailId')?.toString();
 
-  baseurl: any = "http://localhost:8080/user/api/v1/";
-  // baseurl='https://insurify.stackroute.io/user/api/v1/'
+  // baseurl: any = "https://insurify.stackroute.io/user/api/v1/";
+  baseurl = 'https://insurify.stackroute.io/user/api/v1/'
   getUserDetails(): Observable<any> {
     return this.http.get(this.baseurl + "users");
   }
@@ -23,22 +23,22 @@ export class UserService {
     const formData = new FormData();
     formData.append("userDetails", info);
     formData.append("imageFile", file);
-    return this.http.put(this.baseurl + "updateUser/" + this.email1, formData);
+    return this.http.put(this.baseurl + "updateUser/" + localStorage.getItem('logInEmailId'), formData);
   }
 
   updateDetails(info: any): Observable<any> {
-    return this.http.put(this.baseurl + "updateUserDetails/" + this.email1, info);
+    return this.http.put<User>(this.baseurl + "updateUserDetails/" + localStorage.getItem('logInEmailId'), info);
   }
 
 
-  baseUrl = "http://localhost:8080/user/api/v1/user";
-  baseUrl1 = "http://localhost:8080/user/api/v1";
-  // baseUrl = 'https://insurify.stackroute.io/'
+  // baseUrl = "https://insurify.stackroute.io/user/api/v1/user";
+  // baseUrl1 = "https://insurify.stackroute.io/user/api/v1";
+  baseUrl = 'https://insurify.stackroute.io/'
   // baseUrl1='https://insurify.stackroute.io/user/api/v1'
 
   registerUser(user: User): Observable<Object> {
     console.log(user);
-    return this.http.post("http://localhost:8080/user/api/v1/user", user);
+    return this.http.post("https://insurify.stackroute.io/user/api/v1/user", user);
     // return this.http.post(this.baseUrl + "user/api/v1/user", user);
   }
 

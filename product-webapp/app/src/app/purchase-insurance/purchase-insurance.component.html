@@ -221,11 +221,18 @@
                 </mat-card>
             </div>
 
-            <div fxLayout="row">
-                <h2 style="margin-left:auto">
-                    Total premium Rs {{premium}}
-                </h2>
-                <button mat-button matStepperNext style="margin-left: auto;">Next</button>
+            <div fxLayout="row" style="display: flex;justify-content:space-between">
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                </div>
+                <div>
+                    <h2 style="margin-left:auto">
+                        Total premium Rs {{premium}}
+                    </h2>
+                </div>
+                <div>
+                    <button mat-button matStepperNext style="margin-left: auto;">Next</button>
+                </div>
             </div>
         </form>
     </mat-step>

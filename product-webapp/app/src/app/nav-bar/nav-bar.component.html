@@ -23,7 +23,7 @@
             <!-- <div style="margin-right: 30px;" class="claim">
               <button mat-button class="clai">LOGOUT</button>
           </div> -->
-            <!-- <div style="margin-right: 30px;" class="claim">
+            <!-- <div style="margin-right: 30px;" class="claim" *ngIf="isInsurer">
               <button mat-button class="clai" routerLink="/home/add-policy">Add Insurance</button>
           </div> -->
         </div>
@@ -105,7 +105,7 @@
             <mat-icon>edit</mat-icon>
           </span> Edit Profile
                 </a>
-                <a mat-list-item routerLink="/home/add-policy" style="font-size: 20px;" [hidden]="insurer">
+                <a mat-list-item routerLink="/home/add-policy" style="font-size: 20px;" *ngIf="isInsurer">
                     <span class="material-symbols-outlined" style="margin-right:10px">
             <mat-icon>add</mat-icon>
           </span> Add Insurance

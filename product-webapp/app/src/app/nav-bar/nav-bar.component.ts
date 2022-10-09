@@ -79,8 +79,7 @@ export class NavBarComponent implements OnInit {
   showFiller = false;
   logout() {
     localStorage.clear;
-    this.loginService.stauts = false;
-    this.router.navigateByUrl("/nav/login");
+    this.router.navigateByUrl("/nav/login")
   }
   // getAllUsers():void{
   //   this.service.getUser().subscribe((data)=>{

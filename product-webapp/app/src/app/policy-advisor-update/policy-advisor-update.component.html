@@ -47,10 +47,10 @@
 
                         <mat-form-field appearance="outline" fxFlex="30%">
                             <mat-label>Date of Birth</mat-label>
-                            <input matInput formControlName="dateOfBirth" type="date">
+                            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" type="date">
                             <mat-hint>MM/DD/YYYY</mat-hint>
-                            <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
-                            <!-- <mat-datepicker #picker></mat-datepicker> -->
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
 
                         <mat-form-field appearance="outline" fxFlex="30%">
