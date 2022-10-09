@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.httpClient.get('http://localhost:8080/insurance/api/vk1/get/371265')
+    // this.httpClient.get('https://insurify.stackroute.io/insurance/api/vk1/get/371265')
     //   .subscribe(
     //     res => {
     //       this.retrieveResponse = res;

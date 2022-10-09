@@ -24,7 +24,7 @@ export class RegisteredPolicyBuyersComponent implements OnInit {
 
   ngOnInit(): void {
   let response= this.http.get("https://insurify.stackroute.io/purchase/api/policies/"+localStorage.getItem('insurancePolicyId'));  
-  // let response= this.http.get("http://localhost:8080/purchase/api/policies/"+localStorage.getItem('insurancePolicyId'));
+  // let response= this.http.get("https://insurify.stackroute.io/purchase/api/policies/"+localStorage.getItem('insurancePolicyId'));
     response.subscribe((data)=>{
       
       console.log(data);
@@ -106,7 +106,7 @@ export class RegisteredPolicyBuyersComponent implements OnInit {
 acceptClaim(policy:any, status:any, j:any, i:any){
   // window.alert("Your claim is Approved.")
   this.http.put("https://insurify.stackroute.io/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
-  //  this.http.put("http://localhost:8080/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
+  //  this.http.put("https://insurify.stackroute.io/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
     console.log(data);
     policy.claimStatus[i]='approved'
     console.log(policy.claimStatus[i]);
@@ -122,7 +122,7 @@ acceptClaim(policy:any, status:any, j:any, i:any){
 
 rejectClaim(policy:any, status:any, j:any, i:any){
   this.http.put("https://insurify.stackroute.io/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
-  // this.http.put("http://localhost:8080/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
+  // this.http.put("https://insurify.stackroute.io/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
     console.log(data);
     policy.claimStatus[i]='rejected'
     console.log(policy.claimStatus[i]);

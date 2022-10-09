@@ -43,10 +43,10 @@ export class RenewalPolicyComponent implements OnInit {
     console.log(localStorage.getItem('insurancePolicyId'));
     console.log(localStorage.getItem('customerPolicyId'))
     this.http.get('https://insurify.stackroute.io/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
-    // this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
+    // this.http.get('https://insurify.stackroute.io/insurance/api/vk1/policy-id/'+localStorage.getItem('insurancePolicyId')).subscribe((x: any) => {
       console.log(x)
       this.http.put<Insurance>("https://insurify.stackroute.io/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
-      // this.http.put<Insurance>("http://localhost:8080/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
+      // this.http.put<Insurance>("https://insurify.stackroute.io/purchase/api/testing/"+localStorage.getItem('customerPolicyId'), x).subscribe((data: any) => {
      
         this.policyDescription = data.policyDescription;
         this.policyTitle = data.policyName;
