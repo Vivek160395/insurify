@@ -42,7 +42,11 @@ export class ClaimComponent implements OnInit {
     this.getDetails()
     this.getpolicy()
 <<<<<<< HEAD
+<<<<<<< HEAD
     setTimeout(()=>{this.getDetails();this.getpolicy()},1000)
+=======
+    setTimeout(() => { this.getDetails(); this.getpolicy() }, 1000)
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
     setTimeout(() => { this.getDetails(); this.getpolicy() }, 1000)
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
@@ -198,6 +202,7 @@ export class ClaimComponent implements OnInit {
       (err) => {
         this.claimError = err.error.text;
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(err.error.text!="Previous Claims are still pending.Please wait for the older claims to settle in order to raise new claim " && err.error.text!="No active Policy to claim" && err.error.text!="Insured amount has been Exhausted.Purchase a new Policy to avail Benefits")
         {
           this.http.put("http://localhost:8080/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
@@ -205,11 +210,16 @@ export class ClaimComponent implements OnInit {
           .subscribe((data: any) => { console.log(data) });
       }
 =======
+=======
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
         if (err.error.text != "Previous Claims are still pending.Please wait for the older claims to settle in order to raise new claim " && err.error.text != "No active Policy to claim" && err.error.text != "Insured amount has been Exhausted.Purchase a new Policy to avail Benefits") {
           this.http.put("http://localhost:8080/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
             // this.http.put("http://localhost:8080/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
             .subscribe((data: any) => { console.log(data) });
         }
+<<<<<<< HEAD
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
+=======
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
         console.log(err.error.text)
         console.log(this.claimForm.value);

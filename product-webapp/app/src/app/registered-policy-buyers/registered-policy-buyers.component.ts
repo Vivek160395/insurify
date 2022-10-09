@@ -24,15 +24,21 @@ export class RegisteredPolicyBuyersComponent implements OnInit {
 
   ngOnInit(): void {
 <<<<<<< HEAD
+<<<<<<< HEAD
   let response= this.http.get("http://localhost:8080/purchase/api/policies/"+localStorage.getItem('insurancePolicyId'));  
   // let response= this.http.get("http://localhost:8080/purchase/api/policies/"+localStorage.getItem('insurancePolicyId'));
     response.subscribe((data)=>{
       
 =======
+=======
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
     let response = this.http.get("http://localhost:8080/purchase/api/policies/" + localStorage.getItem('insurancePolicyId'));
     // let response= this.http.get("http://localhost:8080/purchase/api/policies/"+localStorage.getItem('insurancePolicyId'));
     response.subscribe((data) => {
 
+<<<<<<< HEAD
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
+=======
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
       console.log(data);
       this.policyBuyerDetails = data;
@@ -111,6 +117,7 @@ export class RegisteredPolicyBuyersComponent implements OnInit {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 acceptClaim(policy:any, status:any, j:any, i:any){
   // window.alert("Your claim is Approved.")
   this.http.put("http://localhost:8080/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
@@ -151,6 +158,18 @@ rejectClaim(policy:any, status:any, j:any, i:any){
       //  this.policyBuyerDetails[j].claimStatus[i]="approved"
       //   console.log(this.policyBuyerDetails[j].claimStatus[i]);
 
+=======
+  acceptClaim(policy: any, status: any, j: any, i: any) {
+    // window.alert("Your claim is Approved.")
+    this.http.put("http://localhost:8080/purchase/api/update/claim/" + policy.customerPolicyId + "/" + status, status).subscribe((data: any) => {
+      //  this.http.put("http://localhost:8080/purchase/api/update/claim/"+policy.customerPolicyId+"/"+status,status).subscribe((data:any)=>{
+      console.log(data);
+      policy.claimStatus[i] = 'approved'
+      console.log(policy.claimStatus[i]);
+      //  this.policyBuyerDetails[j].claimStatus[i]="approved"
+      //   console.log(this.policyBuyerDetails[j].claimStatus[i]);
+
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
     },
       (error: any) => {
         console.log(error);
@@ -170,6 +189,9 @@ rejectClaim(policy:any, status:any, j:any, i:any){
 
       });
   }
+<<<<<<< HEAD
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
+=======
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 
 

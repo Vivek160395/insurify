@@ -15,7 +15,11 @@ export class UserService {
 
   // baseurl: any = "http://localhost:8080/user/api/v1/";
 <<<<<<< HEAD
+<<<<<<< HEAD
   baseurl='http://localhost:8080/user/api/v1/'
+=======
+  baseurl = 'http://localhost:8080/user/api/v1/'
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
   baseurl = 'http://localhost:8080/user/api/v1/'
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
@@ -38,7 +42,11 @@ export class UserService {
   // baseUrl = "http://localhost:8080/user/api/v1/user";
   // baseUrl1 = "http://localhost:8080/user/api/v1";
 <<<<<<< HEAD
+<<<<<<< HEAD
   baseUrl='http://localhost:8080/'
+=======
+  baseUrl = 'http://localhost:8080/'
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
   baseUrl = 'http://localhost:8080/'
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b

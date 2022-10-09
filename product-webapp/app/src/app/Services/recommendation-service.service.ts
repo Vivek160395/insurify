@@ -12,9 +12,15 @@ export class RecommendationServiceService {
   // basicUrl = "http://localhost:8080/recommendation/Recommendation";
   // policyUrl = "http://localhost:8080/insurance/api/vk1/";
 <<<<<<< HEAD
+<<<<<<< HEAD
   basicUrl='http://localhost:8080/recommendation/Recommendation'
   policyUrl='http://localhost:8080/insurance/api/vk1/'
   basicurl='http://localhost:8080/'
+=======
+  basicUrl = 'http://localhost:8080/recommendation/Recommendation'
+  policyUrl = 'http://localhost:8080/insurance/api/vk1/'
+  basicurl = 'http://localhost:8080/'
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
   basicUrl = 'http://localhost:8080/recommendation/Recommendation'
   policyUrl = 'http://localhost:8080/insurance/api/vk1/'

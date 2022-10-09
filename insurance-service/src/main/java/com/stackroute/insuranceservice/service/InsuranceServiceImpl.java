@@ -92,7 +92,11 @@ public class InsuranceServiceImpl implements InsuranceService {
             insurancePolicyObj.setModelsAllowed(null);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         // insuranceRepo.save(insurance);
+=======
+//        insuranceRepo.save(insurance);
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
 //        insuranceRepo.save(insurance);
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b

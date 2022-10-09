@@ -19,7 +19,11 @@ export class PaymentService {
   createOrder(order: Payment): Observable<any> {
     // return this.http.post("http://localhost:8080/payment/pg/createOrder",order, httpOptions);
 <<<<<<< HEAD
+<<<<<<< HEAD
     return this.http.post("http://localhost:8080/payment/pg/createOrder",order, httpOptions);
+=======
+    return this.http.post("http://localhost:8080/payment/pg/createOrder", order, httpOptions);
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
     return this.http.post("http://localhost:8080/payment/pg/createOrder", order, httpOptions);
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b

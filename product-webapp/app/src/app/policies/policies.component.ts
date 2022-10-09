@@ -37,7 +37,11 @@ export class PoliciesComponent {
 
   ngOnInit(): void {
 <<<<<<< HEAD
+<<<<<<< HEAD
   let response = this.http.get("http://localhost:8080/purchase/api/get/insurances/" + localStorage.getItem('logInEmailId'));
+=======
+    let response = this.http.get("http://localhost:8080/purchase/api/get/insurances/" + localStorage.getItem('logInEmailId'));
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
     let response = this.http.get("http://localhost:8080/purchase/api/get/insurances/" + localStorage.getItem('logInEmailId'));
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
@@ -61,7 +65,11 @@ export class PoliciesComponent {
         }
         this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((x: any) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
         // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((x: any) => {
+=======
+          // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((x: any) => {
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
           // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((x: any) => {
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
@@ -172,6 +180,7 @@ export class PoliciesComponent {
 
   renewPolicy(i: any) {
 <<<<<<< HEAD
+<<<<<<< HEAD
   this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
     // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
       console.log("hello from renew button");
@@ -187,6 +196,12 @@ export class PoliciesComponent {
     localStorage.setItem("insurancePolicyId", this.purchasedPolicies[i].insurancePolicyId);
     setTimeout(() => { this.router.navigateByUrl("/home/renewal-home"); }, 2000)
     // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
+=======
+    localStorage.setItem("customerPolicyId", this.purchasedPolicies[i].customerPolicyId);
+    localStorage.setItem("insurancePolicyId", this.purchasedPolicies[i].insurancePolicyId);
+    setTimeout(() => { this.router.navigateByUrl("/home/renewal-home"); }, 2000)
+    // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
     //   // this.http.get("http://localhost:8080/insurance/api/vk1/policy-id/" + this.purchasedPolicies[i].insurancePolicyId).subscribe((data: any) => {
     //     console.log("hello from renew button");
     //     console.log(data)
@@ -196,6 +211,9 @@ export class PoliciesComponent {
     //     // this.http.put<Insurance>("http://localhost:8080/purchase/api/getstatus/" + this.purchasedPolicies[i].customerPolicyId, data).subscribe((x: any) => {
     //       this.str = x;
     //       console.log(x);
+<<<<<<< HEAD
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
+=======
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 
     //       if (this.str == null) {

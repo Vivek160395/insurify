@@ -9,7 +9,11 @@ export class RenewalService {
   constructor(private http: HttpClient) { }
   // baseurl='http://localhost:8080/'
 <<<<<<< HEAD
+<<<<<<< HEAD
   baseurl='http://localhost:8080/'
+=======
+  baseurl = 'http://localhost:8080/'
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
   baseurl = 'http://localhost:8080/'
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b

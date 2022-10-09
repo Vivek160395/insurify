@@ -20,8 +20,13 @@ export class ClaimService {
   customerPolicyId1: string = localStorage.getItem('customerPolicyId')!
   // baseurl: any = "http://localhost:8080/purchase/api/";
 <<<<<<< HEAD
+<<<<<<< HEAD
    
     baseurl='http://localhost:8080/purchase/api/'
+=======
+
+  baseurl = 'http://localhost:8080/purchase/api/'
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
 
   baseurl = 'http://localhost:8080/purchase/api/'

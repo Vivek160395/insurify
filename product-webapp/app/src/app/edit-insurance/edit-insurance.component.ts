@@ -190,7 +190,11 @@ export class EditInsuranceComponent implements OnInit {
   ngOnInit(): void {
     this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/' + localStorage.getItem('editpolicyid')?.toString()).subscribe((data: any) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
     // this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/' + localStorage.getItem('editpolicyid')?.toString()).subscribe((data: any) => {
+=======
+      // this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/' + localStorage.getItem('editpolicyid')?.toString()).subscribe((data: any) => {
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
       // this.http.get('http://localhost:8080/insurance/api/vk1/policy-id/' + localStorage.getItem('editpolicyid')?.toString()).subscribe((data: any) => {
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
@@ -372,11 +376,19 @@ export class EditInsuranceComponent implements OnInit {
     console.log(this.insuranceForms.get('insuranceType')!.value)
     this.http.put<Insurance>("http://localhost:8080/insurance/api/vk1/update", this.insuranceForms.value).subscribe(
 <<<<<<< HEAD
+<<<<<<< HEAD
     // this.http.put<Insurance>("http://localhost:8080/insurance/api/vk1/update", this.insuranceForms.value).subscribe(
       (data: any) => {
         console.log(data);
         if (this.insuranceForms.controls['fileSource'].valid)
         this.http.put("http://localhost:8080/insurance/api/vk1/photos/update/" + this.id.toString(), formData, { observe: 'response' })  
+=======
+      // this.http.put<Insurance>("http://localhost:8080/insurance/api/vk1/update", this.insuranceForms.value).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.route.navigateByUrl("/home/home-page")
+        // if (this.insuranceForms.controls['fileSource'].value!=null)
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
       // this.http.put<Insurance>("http://localhost:8080/insurance/api/vk1/update", this.insuranceForms.value).subscribe(
       (data: any) => {

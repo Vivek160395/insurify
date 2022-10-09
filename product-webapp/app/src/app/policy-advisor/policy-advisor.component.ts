@@ -19,7 +19,11 @@ export class PolicyAdvisorComponent implements OnInit {
 
   ngOnInit(): void {
 <<<<<<< HEAD
+<<<<<<< HEAD
   let response = this.http.get("http://localhost:8080/advisor/api/v1/policyAdvisors");
+=======
+    let response = this.http.get("http://localhost:8080/advisor/api/v1/policyAdvisors");
+>>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
 =======
     let response = this.http.get("http://localhost:8080/advisor/api/v1/policyAdvisors");
 >>>>>>> 0e564c3d9f7d0f2ebfc13cd801be91711926476b
