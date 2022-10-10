@@ -42,6 +42,10 @@ export class InsuranceDetailsComponent implements OnInit {
   dataSource2: any = [];
   demo: any = [];
   demo1: any = [];
+
+  isCar:boolean=false;
+  isBike:boolean=false;
+
   // dialog: any;
   buyPolicy() {
 

@@ -10,7 +10,7 @@ export class PolicyAdvsior {
     aadharNo!: Number;
 
     panNo!: string;
-
+    x=0;
     yearsOfExperience!: Number;
 
     // List<String> category;

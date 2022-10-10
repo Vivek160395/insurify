@@ -70,11 +70,18 @@ table {
 }
 
 #chart {
-    height: 300px;
-    width: 600px;
+    height: 250px;
+    width: 530px;
     margin: auto;
 }
 
+#insurance2:hover {
+    transform: scale(1.1);
+}
+
+#images:hover {
+    cursor: pointer;
+}
 .text {
     font-size: 30px;
     text-align: center;

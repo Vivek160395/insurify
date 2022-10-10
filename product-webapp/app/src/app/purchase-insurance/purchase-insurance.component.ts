@@ -512,11 +512,14 @@ export class PurchaseInsuranceComponent implements OnInit {
     }
     console.log(control1);
     this.sortedsuminsured = []
+    console.log(this.service.policyNo);
+    
     this.httpclient.get(`https://insurify.stackroute.io/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
       // this.httpclient.get(`https://insurify.stackroute.io/insurance/api/vk1/policy-id/${this.service.policyNo}`).subscribe((data: any) => {
       console.log('Policy ID : ' + data.policyId)
       console.log('Policy Name : ' + data.policyName)
 
+      
       if (data.insuranceType == 'AutoMobileInsurance') {
         console.log('Inside AutomobileInsurance');
 
@@ -824,7 +827,8 @@ export class PurchaseInsuranceComponent implements OnInit {
         return false
       }
       if (arr.length == 1) {
-        this.premium = arr[0]
+        this.premium = arr[0] + +this.addonpremium 
+
         this.times = Math.floor(+this.userForm.get('sumInsured')!.value! / this.premium)
         return true
       }
@@ -853,6 +857,7 @@ export class PurchaseInsuranceComponent implements OnInit {
             this.premium = Math.floor(1.2 * this.premium)
           }
         }
+        this.premium = this.premium + +this.addonpremium 
         this.times = Math.floor(+this.userForm.get('sumInsured')!.value! / this.premium)
         return true
       }
@@ -1042,8 +1047,8 @@ export class PurchaseInsuranceComponent implements OnInit {
         if (this.flags && this.insuranceobj[index].sumInsured == select_sumInsured)
           this.sortedduration.push(this.insuranceobj[index].duration)
       }
-
-      return
+        this.sortedduration.sort((a,b)=>a-b)
+      return 
     }
     if (this.isLife) {
       const control1 = this.userForm.get('sumInsured')

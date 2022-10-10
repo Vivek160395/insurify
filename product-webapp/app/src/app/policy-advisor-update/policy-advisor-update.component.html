@@ -24,7 +24,7 @@
                         <mat-form-field appearance="outline" fxFlex="30%">
                             <mat-label>Name</mat-label>
                             <input matInput placeholder="Ex. Jane Doe" formControlName="name" type="text"
-                                [ngModel]=info.name>
+                                [(ngModel)]=info.name>
                             <mat-hint>Enter your full name</mat-hint>
                             <!-- <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error> -->
                         </mat-form-field>
@@ -53,21 +53,23 @@
 
                         <mat-form-field appearance="outline" fxFlex="30%">
                             <mat-label>Date of Birth</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" type="date"
+                            <!-- [matDatepicker]="picker" -->
+                            <input matInput  formControlName="dateOfBirth" type="date"
                                 [(ngModel)]=info.dateOfBirth>
+
                             <mat-hint>MM/DD/YYYY</mat-hint>
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
+                            <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker> -->
                         </mat-form-field>
 
                         <mat-form-field appearance="outline" fxFlex="30%">
                             <mat-label>Experience</mat-label>
-                            <input matInput placeholder="Ex. 3" fromControlName="yearsOfExperience"
-                                [(ngModel)]=info.yearsOfExperience>
-                            <mat-hint>Enter your experience in years</mat-hint>
+                            <input matInput type='number' formControlName="yearsOfExperience" [(ngModel)]=info.yearsOfExperience>
+                            <mat-hint>Enter your Experience in years</mat-hint>
                         </mat-form-field>
-                    </div>
 
+                    </div>
+                    
                                     </div>
 
                                     <hr>
@@ -76,13 +78,13 @@
                                         <div fxlayout="row" fxLayoutGap="5%">
                                             <mat-form-field appearance="outline" fxFlex="30%">
                                                 <mat-label>Pan Number</mat-label>
-                                                <input matInput formControlName="panNo">
+                                                <input matInput formControlName="panNo" [(ngModel)]=info.panNo>
                                                 <mat-hint>Enter your Pan number</mat-hint>
                                             </mat-form-field>
 
                                             <mat-form-field appearance="outline" fxFlex="30%">
                                                 <mat-label>Aadhar Number</mat-label>
-                                                <input matInput formControlName="aadharNo">
+                                                <input matInput formControlName="aadharNo" [(ngModel)]=info.aadharNo>
                                                 <mat-hint>Enter your Aadhar Number</mat-hint>
                                             </mat-form-field>
                                         </div>
@@ -91,10 +93,15 @@
                                     <h3><b>Profile Picture</b></h3>
 
                                     <div>
-                                        <div [hidden]="imgView2"> <img src="data:*;base64,{{info.profilePic}}"
+                                        <div [hidden]="imageFlag"> 
+                                            <!-- <h2> old picture</h2> -->
+                                            <img src="data:*; base64,{{info.profilePic}}"
                                                 height="200"> </div>
                                         <!-- <div [hidden]="imgView2"><img [src]="Imgurl" height="200"></div> -->
-                                        <img [hidden]="imgView2" [src]="Imgurl" height="200">
+                                        <div [hidden]="imgView2">
+                                            <h2 *ngIf="imageFlag">new picture </h2>
+                                        <img [src]="Imgurl" height="200">
+                                        </div>
                                         <br>
                                         <input type="file" (change)="onImgSelected($event)">
                                     </div>

@@ -13,12 +13,13 @@
             <div style="display: flex; flex-wrap: wrap; padding-top: 20px;">
                 <div *ngFor="let policy of purchasedPolicies | filter:searchedKeyword; let i=index;">
                     <mat-card class="example-card" (click)="openDialog(policy, i)">
-                        <mat-card-title> {{insuranceTitle[i]}} </mat-card-title>
+                        <mat-card-title> {{policyTitle[i]}}  </mat-card-title>
                         <mat-divider></mat-divider>
                         <br>
                         <mat-card-subtitle>
-                            <mat-icon matTooltip="Policy Name" matTooltipPosition="above">subject</mat-icon>
-                            {{policyTitle[i]}} <br>
+                            <mat-icon matTooltip="Policy Name" matTooltipPosition="above">subject
+                            </mat-icon> {{insuranceTitle[i]}}
+                            <br>
                             <mat-icon matTooltip="Policy Number" matTooltipPosition="above"> insert_drive_file
                             </mat-icon> {{policy.customerPolicyId}} <br>
                             <mat-icon matTooltip="Start Date" matTooltipPosition="above">event_available</mat-icon>

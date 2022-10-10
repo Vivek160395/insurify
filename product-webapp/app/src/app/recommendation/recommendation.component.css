@@ -9,7 +9,12 @@
 
 .example-card {
     max-width: 500px;
+    cursor: pointer;
 }
+
+.example-card:hover {
+    transform: scale(1.1);
+  }
 
 .sideHeading {
     color: black;

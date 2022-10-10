@@ -365,7 +365,9 @@ export class EditInsuranceComponent implements OnInit {
     this.insuranceForms.get('policyName')!.enable()
     this.insuranceForms.get('insuranceType')!.enable()
     // }
+    this.insuranceForms.get('category')!.enable()
     console.log(this.insuranceForms.get('insuranceType')!.value)
+
     this.http.put<Insurance>("https://insurify.stackroute.io/insurance/api/vk1/update", this.insuranceForms.value).subscribe(
     // this.http.put<Insurance>("https://insurify.stackroute.io/insurance/api/vk1/update", this.insuranceForms.value).subscribe(
       (data: any) => {

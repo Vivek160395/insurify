@@ -47,7 +47,7 @@ export class PoliciesComponent {
         if (this.purchasedPolicies[i].automobileInsurance.engineNumber != 0) {
           this.insuranceTitle.push('AutoMobileInsurance');
         }
-        else if (this.purchasedPolicies[i].healthInsurance.adults > 0) {
+        else if (this.purchasedPolicies[i].healthInsurance.adults > 0 || this.purchasedPolicies[i].healthInsurance.kids > 0) {
           this.insuranceTitle.push('HealthInsurance');
         }
         else if (this.purchasedPolicies[i].lifeInsurance.height > 0) {
