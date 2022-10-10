@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class RenewalService {
 
   constructor(private http: HttpClient) { }
-  // baseurl='https://insurify.stackroute.io/'
+  // baseurl='http://localhost:8080/'
   baseurl = 'https://insurify.stackroute.io/'
 
   userPolicyDetails(): Observable<any> {

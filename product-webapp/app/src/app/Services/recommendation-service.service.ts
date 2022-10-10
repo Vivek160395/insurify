@@ -9,8 +9,8 @@ export class RecommendationServiceService {
   userType = localStorage.getItem('UserType');
 
   constructor(private http: HttpClient) { }
-  // basicUrl = "https://insurify.stackroute.io/recommendation/Recommendation";
-  // policyUrl = "https://insurify.stackroute.io/insurance/api/vk1/";
+  // basicUrl = "http://localhost:8080/recommendation/Recommendation";
+  // policyUrl = "http://localhost:8080/insurance/api/vk1/";
   basicUrl = 'https://insurify.stackroute.io/recommendation/Recommendation'
   policyUrl = 'https://insurify.stackroute.io/insurance/api/vk1/'
   basicurl = 'https://insurify.stackroute.io/'

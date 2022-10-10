@@ -6,7 +6,7 @@ import { CustomerInsurancePurchase } from '../CustomerInsurancePurchase';
   providedIn: 'root'
 })
 export class BuyInsuranceService {
-  // baseurl='https://insurify.stackroute.io/'
+  // baseurl='http://localhost:8080/'
   baseurl = 'https://insurify.stackroute.io/'
   constructor(private http: HttpClient) { }
   buyInsurance(customerins: CustomerInsurancePurchase) {

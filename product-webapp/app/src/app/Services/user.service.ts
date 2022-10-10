@@ -13,7 +13,7 @@ export class UserService {
 
   email1 = localStorage.getItem('logInEmailId')?.toString();
 
-  // baseurl: any = "https://insurify.stackroute.io/user/api/v1/";
+  // baseurl: any = "http://localhost:8080/user/api/v1/";
   baseurl = 'https://insurify.stackroute.io/user/api/v1/'
   getUserDetails(): Observable<any> {
     return this.http.get(this.baseurl + "users");
