@@ -26,7 +26,7 @@ public class Consumer {
         purchase.setEmail(purchaseDTO.getEmail());
         purchase.setSumInsured(purchaseDTO.getSumInsured());
         purchase.setStartDate(purchaseDTO.getStartDate());
-        purchase.setPurchaseDate(purchaseDTO.getPurchaseDate());
+//        purchase.setPurchaseDate(purchaseDTO.getPurchaseDate());
         purchase.setEndDate(purchaseDTO.getEndDate());
         purchase.setDuration(purchaseDTO.getDuration());
         purchase.setAddOnName(purchaseDTO.getAddOnName());
@@ -48,7 +48,7 @@ public class Consumer {
         email.setBody("Hi,"+" "+purchase.getName()+"\n"+
                        "Thank you for Purchasing Insurance from INSURIFY.\n"+
                        "Please check the details below : \n"+
-                       "CustomerPolicyId  :\t"+purchase.getCustomerPolicyId()+".\n"+"InsurancePolicyId :\t"+purchase.getInsurancePolicyId()+".\n"+"Sum Insured       :\t"+purchase.getSumInsured()+".\n"+"Start Date        :\t"+purchase.getStartDate()+".\n"+"Purchase Date     :\t"+purchase.getPurchaseDate()+".\n"+"End Date          :\t"+purchase.getEndDate()+".\n"+"Duration          :\t"+purchase.getDuration()+".\n"+"AddOnName         :\t"+addon+".\n"+"Premium           :\t"+purchase.getPremium()+".\n"+"Have a nice day");
+                       "CustomerPolicyId  :\t"+purchase.getCustomerPolicyId()+".\n"+"InsurancePolicyId :\t"+purchase.getInsurancePolicyId()+".\n"+"Sum Insured       :\t"+purchase.getSumInsured()+".\n"+"Start Date        :\t"+purchase.getStartDate()+".\n"+"End Date          :\t"+purchase.getEndDate()+".\n"+"Duration          :\t"+purchase.getDuration()+".\n"+"AddOnName         :\t"+addon+".\n"+"Premium           :\t"+purchase.getPremium()+".\n"+"Have a nice day");
 
         emailService.sendEmail(email);
     }
@@ -91,7 +91,7 @@ public class Consumer {
         renew.setEmail(renewDTO.getEmail());
         renew.setSumInsured(renewDTO.getSumInsured());
         renew.setStartDate(renewDTO.getStartDate());
-        renew.setPurchaseDate(renewDTO.getPurchaseDate());
+//        renew.setPurchaseDate(renewDTO.getPurchaseDate());
         renew.setEndDate(renewDTO.getEndDate());
         renew.setDuration(renewDTO.getDuration());
         renew.setAddOnName(renewDTO.getAddOnName());
