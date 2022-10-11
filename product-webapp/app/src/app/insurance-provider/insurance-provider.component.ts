@@ -59,7 +59,9 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
     console.log(this.insurer);
     console.log(this.others);
 
-    this.getAllPolicies();
+    setTimeout(() => {
+      this.getAllPolicies();
+    }, 1500);
     var ctx = this.elementRef.nativeElement.querySelector("#myChart ").getContext('2d');
     var dat = this.policynamesofInsurance;
     var chartData = this.countofusersBountInsurance;
@@ -79,9 +81,11 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
           }]
         }
       });
-    }, 2000)
+    }, 1500)
   }
 
+
+  
   getAllPolicies() {
     this.service.getuserPolicies(this.service.userEmail).subscribe(data => {
       this.policies = data;
@@ -91,6 +95,10 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
         var num2 = Math.floor(Math.random() * 256);
         this.colors.push(`rgb(${num},${num1},${num2})`)
       }
+      console.log(this.count);
+      console.log(this.count2);
+      
+      
       for (var i = 0; i < data.length; i++) {
         this.policynamesofInsurance[this.count] = data[i].policyName;
         this.count += 1;

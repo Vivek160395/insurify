@@ -15,8 +15,10 @@ export class RenewalPolicyHomeComponent implements OnInit {
   insuranceType: string = "";
 
   ngOnInit(): void {
+    this.getPolicyDetails()
    setInterval( ()=>{this.getPolicyDetails()},1000)
     // this.router.navigateByUrl('/home/renewal-update')
+    
   }
 
   vehicle: any = {
