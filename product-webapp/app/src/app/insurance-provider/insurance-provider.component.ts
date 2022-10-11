@@ -100,10 +100,9 @@ export class InsuranceProviderComponent implements OnInit, AfterViewInit {
       
       
       for (var i = 0; i < data.length; i++) {
-        
+        this.policynamesofInsurance[this.count] = data[i].policyName;
+        this.count += 1;
         this.service.getCountOfUsersBoughtInsurance(data[i].policyId).subscribe(da => {
-          this.policynamesofInsurance[this.count] = data[i].policyName;
-          this.count += 1;
           this.countofusersBountInsurance[this.count2] = da;
           this.count2 += 1;
         })

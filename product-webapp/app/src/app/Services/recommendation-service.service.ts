@@ -21,7 +21,7 @@ export class RecommendationServiceService {
     return this.http.get(`${this.basicUrl}/${type}/InsuranceByType`);
   }
   getrendingInsurances(): Observable<any> {
-    return this.http.get(this.basicUrl + '/TrendingInsurances');
+    return this.http.get('https://insurify.stackroute.io/recommendation/Recommendation/TrendingInsurances');
   }
   getAllPolicies(): Observable<any> {
     return this.http.get(this.policyUrl + "/policies/");
