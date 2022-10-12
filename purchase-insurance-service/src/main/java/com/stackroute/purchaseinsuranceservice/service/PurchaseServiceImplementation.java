@@ -159,7 +159,7 @@ public class PurchaseServiceImplementation implements PurchaseService {
     public boolean renewCustomerPolicy(CustomerRenewal customerRenewal)
             throws PolicyIdNotFoundException, ParseException, PolicyExpiredException {
         RenewDTO renewDTO = new RenewDTO();
-        System.out.println("ID:" + customerRenewal.getCustomerPolicyId());
+//        System.out.println("ID:" + customerRenewal.getCustomerPolicyId());
 
         if (!purchaseRepository.findById(customerRenewal.getCustomerPolicyId()).isPresent()) {
             throw new PolicyIdNotFoundException();
@@ -178,10 +178,10 @@ public class PurchaseServiceImplementation implements PurchaseService {
         String ourDate = customerRenewal.getDate();
         System.out.println("Status of : " + (sDay.compareTo(ourDate) < 0 && eDay.compareTo(ourDate) > 0));
         System.out.println("Start Date:" + sDay + "End Date :" + eDay + "Our date :" + ourDate);
-        if (!(sDay.compareTo(ourDate) < 0) || !(eDay.compareTo(ourDate) >= 0)) {
-            System.out.println("Cannot renew now because of policy  time interval is not valid");
-            return false;
-        }
+//        if (!(sDay.compareTo(ourDate) < 0) || !(eDay.compareTo(ourDate) >= 0)) {
+//            System.out.println("Cannot renew now because of policy  time interval is not valid");
+//            return false;
+//        }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c1 = Calendar.getInstance();
         c1.setTime(sdf1.parse(eDay));
@@ -189,10 +189,10 @@ public class PurchaseServiceImplementation implements PurchaseService {
         String cutOffDate = sdf1.format(c1.getTime());
         System.out.println("Cut Off date for renewing insurance :  " + cutOffDate);
         System.out.println("Cut Off status : " + (cutOffDate.compareTo(ourDate) > 0));
-        if (cutOffDate.compareTo(ourDate) >= 0) {
-            System.out.println("Renew possible only before 60 days of policy expiry");
-            return false;
-        }
+//        if (cutOffDate.compareTo(ourDate) >= 0) {
+//            System.out.println("Renew possible only before 60 days of policy expiry");
+//            return false;
+//        }
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
@@ -404,9 +404,12 @@ public class PurchaseServiceImplementation implements PurchaseService {
                         int count = 0;
                         String[] dis_lst = customerInsurance.getLifeInsurance().getHealthConditionList();
                         boolean[] ans = customerInsurance.getLifeInsurance().getQuestionnaireAnswers();
-                        if (dis_lst.length > 2) {
-                            factor = factor * 1.2f;
+                        if(dis_lst!=null){
+                            if (dis_lst.length > 2) {
+                                factor = factor * 1.2f;
+                            }
                         }
+
                         for (int k = 0; k < ans.length; k++) {
                             if (ans[k])
                                 count++;

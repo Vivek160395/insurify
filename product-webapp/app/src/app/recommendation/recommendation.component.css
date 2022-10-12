@@ -8,8 +8,13 @@
 }
 
 .example-card {
-    max-width: 400px;
+    max-width: 500px;
+    cursor: pointer;
 }
+
+.example-card:hover {
+    transform: scale(1.1);
+  }
 
 .sideHeading {
     color: black;
@@ -27,6 +32,7 @@
     width: 100%;
     text-align: left;
     margin-top: 100px;
+    font-size: 25px;
     overflow: hidden !important;
 }
 

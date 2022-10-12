@@ -18,7 +18,7 @@ export class UpdateComponent implements OnInit {
   view: boolean = false;
   imgView: boolean = false;
   imgView2: boolean = false;
-  loginId = localStorage.getItem('emailid1');
+  loginId = localStorage.getItem('logInEmailId');
   type = localStorage.getItem('UserType');
   UserType: any = ""
 
@@ -55,7 +55,7 @@ export class UpdateComponent implements OnInit {
     this.service.getUserDetails().subscribe(data => {
       console.log(this.file);
       for (var i = 0; i < data.length; i++) {
-        if (data[i].emailId === this.service.email1) {
+        if (data[i].emailId === this.loginId) {
           this.info.name = data[i].name;
           this.info.mobileNo = data[i].mobileNo;
           this.info.dateOfBirth = data[i].dateOfBirth;

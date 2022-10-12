@@ -41,7 +41,7 @@ export class ClaimComponent implements OnInit {
   ngOnInit(): void {
     this.getDetails()
     this.getpolicy()
-
+  setTimeout(()=>{this.getDetails();this.getpolicy()},1000)
   }
   
 
@@ -156,8 +156,8 @@ export class ClaimComponent implements OnInit {
           
           this.claimAmount = info.sumInsured.toString();
           this.claimForm.patchValue({
-            claimAmount: this.claimAmount
-
+            claimAmount: this.claimAmount,
+            claimType:"Death Claim"
           });
         }
         
@@ -170,11 +170,6 @@ export class ClaimComponent implements OnInit {
   }
   
   
-  
-
-
-  
-
 
 flag=true
 
@@ -197,28 +192,13 @@ flag=true
         if(err.error.text!="Previous Claims are still pending.Please wait for the older claims to settle in order to raise new claim " && err.error.text!="No active Policy to claim" && err.error.text!="Insured amount has been Exhausted.Purchase a new Policy to avail Benefits")
         {
           this.http.put("https://insurify.stackroute.io/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
-        // this.http.put("http://localhost:8080/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
+        // this.http.put("https://insurify.stackroute.io/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
           .subscribe((data: any) => { console.log(data) });
       }
         console.log(err.error.text)
         console.log(this.claimForm.value);
       });
-    // this.http.put<CustomerClaim>('http://localhost:8080/purchase/claim',this.claimForm.value).subscribe((
-    //   info) => {
-    //      this.http.put("http://localhost:8080/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
-    //       .subscribe((data: any) => { console.log(data) });
-   
-    //   this.claimForm.reset();
-
-
-    // },
-    //   (err) => {
-    //     this.claimError = err.error.text;
-    //     // this.http.put("http://localhost:8080/purchase/api/upload/documents/" + this.data.customerPolicyId, formData, { observe: 'response' })
-    //     //   .subscribe((data: any) => { console.log(data) });
-    //     console.log(err.error.text)
-    //     console.log(this.claimForm.value);
-    //   });
+      setTimeout(()=>{this.router.navigateByUrl('/home/policies')},3000)
 
   }
   get insurancex() {

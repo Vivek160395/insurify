@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
 
   registerForm: any;
-  constructor(private loginservice: LoginService, public router: Router,public http:HttpClient) { }
+  constructor(private loginservice: LoginService, public router: Router, public http: HttpClient) { }
 
   ngOnInit(): void {
 
@@ -39,15 +39,8 @@ export class LoginComponent implements OnInit {
       this.loginservice.getUserCredentials(this.logInForm.value).subscribe((response) => {
         console.log("Log in successfull", response);
         localStorage.setItem("logInEmailId", this.loginservice.emailId);
-      }, error => {
-        console.log("Log in failed", error);
-        this.msg = "Please enter valid credentials";
-        this.logInForm.reset();
-        return;
-      }
-      )
-    }
 
+        
     console.log("Just before checking for usertype");
 
     this.loginservice.loginUser(this.logInForm.value.emailId).subscribe((response) => {
@@ -58,7 +51,7 @@ export class LoginComponent implements OnInit {
         console.log(response.userType);
         localStorage.setItem("UserType", "customer")
         this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
-        // this.http.get('http://localhost:8080/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
+        // this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
         })
         this.router.navigate(["/home/home-page"]);
       }
@@ -66,7 +59,7 @@ export class LoginComponent implements OnInit {
         console.log(response.userType);
         localStorage.setItem("UserType", "policyadvisor")
         this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
-        // this.http.get('http://localhost:8080/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
+        // this.http.get('https://insurify.stackroute.io/purchase/api/refresh/'+localStorage.getItem('logInEmailId')).subscribe((data:any)=>{console.log(data);
         })
         this.router.navigate(["/home/home-page"]);
       }
@@ -77,8 +70,17 @@ export class LoginComponent implements OnInit {
       }
     }
     );
-  }
 
+      }, error => {
+        console.log("Log in failed", error);
+        this.msg = "Please enter valid credentials";
+        this.logInForm.reset();
+        return;
+      }
+      )
+    }
+
+  }
 
 
 

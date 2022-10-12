@@ -26,18 +26,21 @@ import { PolicyAdvisorUpdateComponent } from './policy-advisor-update/policy-adv
 import { PolicyAdvisorComponent } from './policy-advisor/policy-advisor.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginNavbarComponent } from './login-navbar/login-navbar.component';
+import { AuthGuard } from './guard/auth.guard';
+import { InsurerGuard } from './guard/insurer.guard';
 // import { PersonGuard } from './guard/person.guard';
 
 
 // const routes: Routes = [{path:"",component:RecommendationComponent},{path:"register",component:RegisterComponent},{path:"",component:PolicyDetailsComponent}];
-
+// canActivate: [AuthGuard],
 const routes: Routes =
   [
     { path: "", component: HomepageComponent },
     {
-      path: "home", component: NavBarComponent, children: [
+      path: "home", component: NavBarComponent,  children: [
         // { path: "", component: RecommendationComponent, canActivate: [PersonGuard] },
-        { path: "home-page", component: RecommendationComponent },
+        // canActivate: [InsurerGuard]
+        { path: "home-page", component: RecommendationComponent,  },
         { path: "insurance-provider", component: InsuranceProviderComponent },
         { path: "add-policy", component: AddInsurancePolicyComponent },
         { path: "policies", component: PoliciesComponent },
@@ -72,7 +75,8 @@ const routes: Routes =
   ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  // , { useHash: true }
+  imports: [RouterModule.forRoot(routes,{useHash:true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

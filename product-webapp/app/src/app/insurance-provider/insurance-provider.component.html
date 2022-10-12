@@ -59,10 +59,10 @@
 
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-top: 60px;">
             <div class="mat-elevation-z4" id="insurance2" *ngFor="let policy of policies">
                 <div style="margin: 20px;" (click)="goto(policy.policyId)">
-                    <img src="data:{{policy.picType}};base64,{{policy.picByte}}" width="350px" height="200px" class="images" style="border-radius:20px ;">
+                    <img src="data:{{policy.picType}};base64,{{policy.picByte}}" width="350px" height="200px" class="images" style="border-radius:20px ;" id="images">
                 </div>
                 <div>
                     <p class="text"> {{policy.policyName}}</p>
@@ -70,6 +70,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
+</div>
 </div>

@@ -22,9 +22,10 @@ export class PolicyAdvisorUpdateComponent implements OnInit {
   Imgurl: string = '';
   image: any;
 
-
+  imgView: boolean = false;
   imgView2: boolean = false;
-
+  x=0;
+  imageFlag: boolean=false;
   //info: PolicyAdvsior = new PolicyAdvsior();
 
   info: any = {
@@ -38,7 +39,7 @@ export class PolicyAdvisorUpdateComponent implements OnInit {
 
     "panNo": null,
 
-    "yearsOfExperience": 0,
+    "yearsOfExperience": null,
 
     // List<String> category;
 
@@ -54,6 +55,9 @@ export class PolicyAdvisorUpdateComponent implements OnInit {
     this.getDetails();
 
     //this.getDetailsById();
+
+    this.PolicyAdvisorUpdate.get('emailId')?.disable()
+
   }
 
   //Methods for chips component
@@ -97,7 +101,7 @@ export class PolicyAdvisorUpdateComponent implements OnInit {
     this.policyadvisorService.getUserDetails().subscribe(data => {
       console.log(this.file);
       for (var i = 0; i < data.length; i++) {
-        if (data[i].emailId === this.policyAdvisor.emailId) {
+        if (data[i].emailId === localStorage.getItem('logInEmailId')) {
           this.info.emailId = localStorage.getItem("logInEmailId");
           this.info.name = data[i].name;
           this.info.phoneNumber = data[i].phoneNumber;
@@ -108,6 +112,10 @@ export class PolicyAdvisorUpdateComponent implements OnInit {
           this.info.yearsOfExperience = data[i].yearsOfExperience;
           this.info.category = data[i].category;
           this.info.profilePic = data[i].profilePic;
+          if (this.info.profilePic != null) {
+            this.imgView2 = false;
+            this.imgView=true;
+          }
         }
       }
     })
@@ -121,7 +129,7 @@ export class PolicyAdvisorUpdateComponent implements OnInit {
     phoneNumber: new FormControl('',),
     aadharNo: new FormControl('', [Validators.maxLength(12)]),
     panNo: new FormControl('', [Validators.maxLength(10)]),
-    yearsOfExperience: new FormControl('', [Validators.pattern('^(0-9)*')]),
+    yearsOfExperience: new FormControl(''),
     gender: new FormControl(''),
     dateOfBirth: new FormControl(''),
     profilePic: new FormControl(''),
@@ -149,9 +157,9 @@ export class PolicyAdvisorUpdateComponent implements OnInit {
     this.info.aadharNo = this.PolicyAdvisorUpdate.get('aadharNo')?.value;
     this.info.panNo = this.PolicyAdvisorUpdate.get('panNo')?.value;
     this.info.yearsOfExperience = this.PolicyAdvisorUpdate.get('yearsOfExperience')?.value;
-
+    this.info.profilePic = this.PolicyAdvisorUpdate.get('profilePic')?.value;
     // this.info.category = this.fruits;
-    if (this.info.profilePic != null) {
+    if (this.info.profilePic == null) {
       this.policyadvisorService.updateAdvisorWithoutImage(this.info, this.info.emailId).subscribe(
         (res) => console.log(res),
       );
@@ -175,13 +183,21 @@ export class PolicyAdvisorUpdateComponent implements OnInit {
   }
 
   onImgSelected(e: any) {
+    
     if (e.target.files) {
       var reader = new FileReader();
       this.file = e.target.files[0];
       console.log(this.file.size);
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
+
+         this.imageFlag=true;
+
         this.Imgurl = event.target.result;
+        if (this.info.profilePic != null) {
+          this.imgView2 = false;
+          this.imgView=true;
+        }
       }
     }
   }

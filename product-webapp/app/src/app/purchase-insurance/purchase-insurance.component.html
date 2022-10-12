@@ -221,11 +221,18 @@
                 </mat-card>
             </div>
 
-            <div fxLayout="row">
-                <h2 style="margin-left:auto">
-                    Total premium Rs {{premium}}
-                </h2>
-                <button mat-button matStepperNext style="margin-left: auto;">Next</button>
+            <div fxLayout="row" style="display: flex;justify-content:space-between">
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                </div>
+                <div>
+                    <h2 style="margin-left:auto">
+                        Total premium Rs {{premium}}
+                    </h2>
+                </div>
+                <div>
+                    <button mat-button matStepperNext style="margin-left: auto;">Next</button>
+                </div>
             </div>
         </form>
     </mat-step>
@@ -423,8 +430,8 @@
 
                 <div fxLayout="row">
                     <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
-                    <button mat-button (click)="print()">Print object</button>
+                    <!-- <button mat-button (click)="stepper.reset()">Reset</button>
+                    <button mat-button (click)="print()">Print object</button> -->
                     <button mat-raised-button [disabled]="check_validity()" color="primary" (click)="purchase_insurance()" fxFlex="30%" style="margin-left: auto;">Buy</button>
                 </div>
                 <!-- <div fxLayout="row">
@@ -463,9 +470,8 @@
                             </mat-form-field>
                             <mat-form-field appearance="outline" fxFlex="33%">
                                 <mat-label>Date of Birth</mat-label>
-                                <input placeholder="Insured Date Of Birth" type="date" matInput
-                                    formControlName="insuredDOB" required>
-                            </mat-form-field> 
+                                <input placeholder="Insured Date Of Birth" type="date" matInput formControlName="insuredDOB" required>
+                            </mat-form-field>
                         </div>
                         <div fxLayout="row" fxLayoutGap="2%">
                             <mat-form-field appearance="outline" fxFlex="33%">

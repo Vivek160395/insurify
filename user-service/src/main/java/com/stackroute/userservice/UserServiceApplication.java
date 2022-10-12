@@ -12,13 +12,13 @@ import org.springframework.web.filter.CorsFilter;
 
 //import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //
+
 //@EnableSwagger2
 @SpringBootApplication
 public class UserServiceApplication {
 
-
     public static void main(String[] args) {
         SpringApplication.run(UserServiceApplication.class, args);
     }
-}
 
+}

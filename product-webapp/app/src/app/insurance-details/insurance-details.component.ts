@@ -42,6 +42,10 @@ export class InsuranceDetailsComponent implements OnInit {
   dataSource2: any = [];
   demo: any = [];
   demo1: any = [];
+
+  isCar:boolean=false;
+  isBike:boolean=false;
+
   // dialog: any;
   buyPolicy() {
 
@@ -55,7 +59,7 @@ export class InsuranceDetailsComponent implements OnInit {
     if (this.userType == "insuranceprovider") {
       this.edit = false;
       this.buy = true;
-    } else if (this.userType == "customer") {
+    } else {
       this.edit = true;
       this.buy = false;
     }

@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
     public User updateUser(User user, String emailId) throws UserNotRegisteredException {
         if (userRepository.findById(emailId).isPresent()) {
             User user1 = userRepository.findById(emailId).get();
-
+            System.out.println(user);
             user1.setName(user.getName());
             user1.setAge(user.getAge());
             user1.setGender(user.getGender());

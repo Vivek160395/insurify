@@ -86,11 +86,13 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService {
             policyAdvisor1.setPhoneNumber(policyAdvisor.getPhoneNumber());
             policyAdvisor1.setAadharNo(policyAdvisor.getAadharNo());
             policyAdvisor1.setPanNo(policyAdvisor.getPanNo());
+            policyAdvisor1.setDateOfBirth(policyAdvisor.getDateOfBirth());
             policyAdvisor1.setYearsOfExperience(policyAdvisor.getYearsOfExperience());
             policyAdvisor1.setCategory(policyAdvisor.getCategory());
             policyAdvisor1.setRatings(policyAdvisor.getRatings());
 
             policyAdvisorRepository.save(policyAdvisor1);
+            System.out.println(policyAdvisor.getYearsOfExperience());
             return policyAdvisor1;
         } else {
             throw new PolicyAdvisorNotRegisteredException();
@@ -110,9 +112,12 @@ public class PolicyAdvisorServiceImpl implements PolicyAdvisorService {
             policyAdvisor1.setPhoneNumber(policyAdvisor.getPhoneNumber());
             policyAdvisor1.setAadharNo(policyAdvisor.getAadharNo());
             policyAdvisor1.setPanNo(policyAdvisor.getPanNo());
+            policyAdvisor1.setDateOfBirth(policyAdvisor.getDateOfBirth());
             policyAdvisor1.setYearsOfExperience(policyAdvisor.getYearsOfExperience());
             policyAdvisor1.setCategory(policyAdvisor.getCategory());
             policyAdvisor1.setRatings(policyAdvisor.getRatings());
+
+            System.out.println(policyAdvisor.getYearsOfExperience());
 
             policyAdvisorRepository.save(policyAdvisor1);
             return policyAdvisor1;
